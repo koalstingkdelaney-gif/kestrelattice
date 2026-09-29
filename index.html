@@ -16,14 +16,30 @@
 <meta name="twitter:title" content="Kestrelattice · The Governed Agent Mesh Playbook">
 <meta name="twitter:description" content="Identity, spend limits, approval gates, audit trails — for teams shipping AI agents to production. Free playbook + $29 Studio Edition.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 26 26'%3E%3Ccircle cx='5' cy='6' r='2.4' fill='%23e07a5f'/%3E%3Ccircle cx='21' cy='6' r='2.4' fill='%23e07a5f'/%3E%3Ccircle cx='13' cy='13' r='2.4' fill='%23e07a5f'/%3E%3Ccircle cx='5' cy='20' r='2.4' fill='%23e07a5f'/%3E%3Ccircle cx='21' cy='20' r='2.4' fill='%23e07a5f'/%3E%3C/svg%3E">
-<!-- Google Analytics 4 — replace GA_MEASUREMENT_ID with your real GA4 measurement ID (e.g. G-ABC123DEF4) from analytics.google.com, then delete this comment. -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=GA_MEASUREMENT_ID"></script>
+<!-- Google Analytics 4 -->
+<script>
+  // Owner self-exclusion: visit https://koalstingkdelaney-gif.github.io/kestrelattice/?admin=1
+  // once on each of your devices to stop your own visits being counted.
+  (function(){
+    try {
+      if (new URLSearchParams(location.search).get('admin') === '1') {
+        localStorage.setItem('kestrelattice_admin', '1');
+      }
+      if (localStorage.getItem('kestrelattice_admin') === '1') {
+        window.__klExcludeSelf = true;
+      }
+    } catch(e){}
+  })();
+</script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-541TCHWW98"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'GA_MEASUREMENT_ID');
-  function track(name, params){ try { gtag('event', name, params || {}); } catch(e){} }
+  if (!window.__klExcludeSelf) {
+    gtag('js', new Date());
+    gtag('config', 'G-541TCHWW98');
+  }
+  function track(name, params){ try { if (!window.__klExcludeSelf) gtag('event', name, params || {}); } catch(e){} }
 </script>
 <script type="application/ld+json">
 {
