@@ -194,21 +194,34 @@
   </div>
 </footer>
 <script>
-  // Paste your Wix Payments checkout link here once created in the Payments dashboard.
-  // Example: const CHECKOUT_URL = "https://your-store.wixapps.net/...";
-  const CHECKOUT_URL = "";
+  // Buy flow: create a fresh Wix checkout session server-side, then redirect.
+  const CHECKOUT_ENDPOINT = "https://superagent-a0804521.base44.app/functions/create-checkout";
   document.addEventListener("DOMContentLoaded", function(){
     const btn = document.getElementById("buy-btn");
     const note = document.getElementById("buy-note");
-    if (CHECKOUT_URL) {
-      btn.href = CHECKOUT_URL;
-      btn.target = "_blank";
-    } else {
-      btn.addEventListener("click", function(e){
-        e.preventDefault();
-        note.innerHTML = "Checkout is being connected right now — check back within the hour, or grab the <a href=\"playbook.md\">free playbook</a> in the meantime.";
-      });
-    }
+    btn.addEventListener("click", async function(e){
+      e.preventDefault();
+      const label = btn.textContent;
+      btn.textContent = "Opening secure checkout…";
+      btn.style.opacity = "0.7";
+      try {
+        const res = await fetch(CHECKOUT_ENDPOINT, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ productId: "studio-edition" })
+        });
+        const data = await res.json();
+        if (data.redirectUrl) {
+          window.location.href = data.redirectUrl;
+        } else {
+          throw new Error(data.error || "checkout unavailable");
+        }
+      } catch (err) {
+        btn.textContent = label;
+        btn.style.opacity = "1";
+        note.innerHTML = "Checkout hiccup — <a href=\"mailto:koalstin.g.k.delaney@gmail.com\">email us</a> and we'll send a direct link. The <a href=\"playbook.md\">free playbook</a> is always here.";
+      }
+    });
   });
 </script>
 
