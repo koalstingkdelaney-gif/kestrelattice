@@ -6,6 +6,7 @@ This repository is the open-source home of the project:
 
 - **The product site** (`index.html`) — live on GitHub Pages, free hosting
 - **[The Governed Agent Mesh Playbook](playbook.md)** — our original downloadable guide: run multi-agent AI operations with identity, spend limits, approval gates, and audit trails
+- **The Playbook — Studio Edition** ($29) — the premium PDF: policy templates, JSON schemas, vendor matrix, rollout acceptance criteria, first-customer kit. Sold via secure checkout; deliberately not committed to this public repo
 - **[Buyer-demand evidence ledger](evidence/buyer-demand-ledger.md)** — 25 verified public sources behind every demand claim
 - **[Pricing & $0-stack economics](evidence/pricing-and-economics.md)** — willingness-to-pay benchmarks, conversion rates, and free-tier channel limits
 - **[Full research reports](docs/)** — the complete demand and pricing research
