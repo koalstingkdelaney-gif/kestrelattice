@@ -3,31 +3,92 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Kestrelattice · Governed Agent Mesh — by GhostCorp</title>
-<meta name="description" content="A governed mesh of specialized AI agents that finds ventures, wins customers, and executes approved work — with identity, spend limits, approval gates, and hash-linked audit trails.">
+<title>Kestrelattice · The Governed Agent Mesh Playbook — Free + $29 Studio Edition</title>
+<meta name="description" content="Run multi-agent AI operations with identity, spend limits, approval gates, and audit trails. Get the free MIT-licensed Governed Agent Mesh Playbook, or the $29 Studio Edition with fill-in policy templates, JSON schemas, vendor matrix, and a 14-day rollout.">
+<link rel="canonical" href="https://koalstingkdelaney-gif.github.io/kestrelattice/">
+<meta name="theme-color" content="#121212">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Kestrelattice by GhostCorp">
+<meta property="og:title" content="Kestrelattice · The Governed Agent Mesh Playbook">
+<meta property="og:description" content="AI swarms are useful until nobody can tell what they did, spent, or were allowed to do. Free playbook + $29 Studio Edition with production-ready governance templates.">
+<meta property="og:url" content="https://koalstingkdelaney-gif.github.io/kestrelattice/">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Kestrelattice · The Governed Agent Mesh Playbook">
+<meta name="twitter:description" content="Identity, spend limits, approval gates, audit trails — for teams shipping AI agents to production. Free playbook + $29 Studio Edition.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 26 26'%3E%3Ccircle cx='5' cy='6' r='2.4' fill='%23e07a5f'/%3E%3Ccircle cx='21' cy='6' r='2.4' fill='%23e07a5f'/%3E%3Ccircle cx='13' cy='13' r='2.4' fill='%23e07a5f'/%3E%3Ccircle cx='5' cy='20' r='2.4' fill='%23e07a5f'/%3E%3Ccircle cx='21' cy='20' r='2.4' fill='%23e07a5f'/%3E%3C/svg%3E">
+<!-- Google Analytics 4 — replace GA_MEASUREMENT_ID with your real GA4 measurement ID (e.g. G-ABC123DEF4) from analytics.google.com, then delete this comment. -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=GA_MEASUREMENT_ID"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'GA_MEASUREMENT_ID');
+  function track(name, params){ try { gtag('event', name, params || {}); } catch(e){} }
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Product",
+  "name": "The Governed Agent Mesh Playbook — Studio Edition",
+  "description": "20-page premium companion to the free Governed Agent Mesh Playbook: fill-in policy templates, plan-bound and audit-row JSON schemas, an 8-vendor pricing and governance matrix, a risk-tier worksheet, a day-by-day 14-day rollout, and a first-customer kit.",
+  "brand": { "@type": "Brand", "name": "GhostCorp" },
+  "offers": {
+    "@type": "Offer",
+    "price": "29",
+    "priceCurrency": "USD",
+    "availability": "https://schema.org/InStock",
+    "url": "https://koalstingkdelaney-gif.github.io/kestrelattice/#buy"
+  }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {"@type":"Question","name":"Is the free playbook really free?","acceptedAnswer":{"@type":"Answer","text":"Yes. The Governed Agent Mesh Playbook is MIT-licensed open source. Download it with no email signup, no account, and no upsell required to read it."}},
+    {"@type":"Question","name":"What do I get in the Studio Edition?","acceptedAnswer":{"@type":"Answer","text":"A 20-page PDF: six fill-in policy templates, plan-bound and audit-row JSON schemas with validation rules, an 8-vendor pricing and governance matrix, a risk-tier classification worksheet, a day-by-day 14-day rollout with acceptance criteria, and a first-customer kit with outreach templates."}},
+    {"@type":"Question","name":"How do I receive the Studio Edition after paying?","acceptedAnswer":{"@type":"Answer","text":"Checkout is handled through a secure payment session. After payment completes you get an instant download link for the PDF."}},
+    {"@type":"Question","name":"What if the Studio Edition doesn't help me?","acceptedAnswer":{"@type":"Answer","text":"Email us within 30 days of purchase and we'll refund you, no questions asked."}},
+    {"@type":"Question","name":"Who is this for?","acceptedAnswer":{"@type":"Answer","text":"Venture studios, AI-native founders, and platform teams shipping multi-agent systems to production — anyone whose agents touch money, data, or external systems."}},
+    {"@type":"Question","name":"Do I need to read the free playbook first?","acceptedAnswer":{"@type":"Answer","text":"No. The Studio Edition is self-contained. The free playbook is a good preview of the approach if you want to try before you buy."}}
+  ]
+}
+</script>
 <style>
   :root{
     --bg:#121212; --panel:#1c1a18; --panel2:#232019; --line:#332e26;
     --text:#e8e2d8; --muted:#9a917f; --accent:#e07a5f; --accent-dim:#b9634b; --ok:#7fbf7f;
   }
   *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
   body{background:var(--bg);color:var(--text);font-family:ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;line-height:1.6}
   .wrap{max-width:1080px;margin:0 auto;padding:0 24px}
   a{color:var(--accent);text-decoration:none}
   a:hover{text-decoration:underline}
-  header{border-bottom:1px solid var(--line);padding:20px 0}
+  a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:4px}
+  .skip{position:absolute;left:-9999px;top:0;background:var(--accent);color:#161210;padding:10px 18px;font-weight:700;z-index:200;border-radius:0 0 8px 0}
+  .skip:focus{left:0}
+  header{border-bottom:1px solid var(--line);padding:14px 0;position:sticky;top:0;background:rgba(18,18,18,.94);backdrop-filter:blur(8px);z-index:100}
   header .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px}
-  .logo{display:flex;align-items:center;gap:10px;font-weight:700;font-size:1.15rem;letter-spacing:.02em}
+  .logo{display:flex;align-items:center;gap:10px;font-weight:700;font-size:1.15rem;letter-spacing:.02em;color:var(--text)}
+  .logo:hover{text-decoration:none}
   .logo svg{flex:0 0 auto}
-  nav a{color:var(--muted);margin-left:22px;font-size:.95rem}
+  nav{display:flex;align-items:center;gap:22px}
+  nav a{color:var(--muted);font-size:.92rem;white-space:nowrap}
   nav a:hover{color:var(--accent)}
+  .nav-cta{background:var(--accent);color:#161210!important;font-weight:600;padding:8px 16px;border-radius:7px;font-size:.88rem}
+  .nav-cta:hover{background:var(--accent-dim);text-decoration:none}
   .hero{padding:88px 0 64px;text-align:center}
   .pill{display:inline-block;border:1px solid var(--accent-dim);color:var(--accent);border-radius:999px;padding:5px 16px;font-size:.8rem;letter-spacing:.12em;text-transform:uppercase;margin-bottom:22px}
   h1{font-size:clamp(2rem,5vw,3.4rem);font-weight:800;line-height:1.12;letter-spacing:-.02em}
   h1 em{color:var(--accent);font-style:normal}
-  .sub{color:var(--muted);font-size:1.15rem;max-width:640px;margin:20px auto 32px}
+  .sub{color:var(--muted);font-size:1.15rem;max-width:640px;margin:20px auto 28px}
+  .proof-row{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-bottom:30px}
+  .proof{display:inline-flex;align-items:center;gap:7px;font-size:.82rem;color:var(--muted);border:1px solid var(--line);border-radius:999px;padding:6px 14px}
+  .proof b{color:var(--ok);font-weight:700}
   .cta-row{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
-  .btn{display:inline-block;border-radius:8px;padding:13px 26px;font-weight:600;font-size:1rem}
+  .btn{display:inline-block;border-radius:8px;padding:13px 26px;font-weight:600;font-size:1rem;cursor:pointer}
   .btn.primary{background:var(--accent);color:#161210}
   .btn.primary:hover{background:var(--accent-dim);text-decoration:none}
   .btn.ghost{border:1px solid var(--line);color:var(--text)}
@@ -52,35 +113,81 @@
   ul.features{list-style:none;max-width:620px;margin:18px auto 26px;text-align:left}
   ul.features li{padding:8px 0 8px 28px;position:relative;color:var(--text)}
   ul.features li::before{content:"✓";position:absolute;left:0;color:var(--ok);font-weight:700}
+  .compare{max-width:760px;margin:0 auto;overflow-x:auto}
+  .compare td:first-child{color:var(--text)}
+  .yes{color:var(--ok);font-weight:700}
+  .no{color:var(--muted)}
+  .guarantee{max-width:760px;margin:26px auto 0;background:var(--panel);border:1px dashed var(--accent-dim);border-radius:10px;padding:20px 26px;text-align:center;color:var(--muted);font-size:.92rem}
+  .guarantee b{color:var(--text)}
+  details.faq{max-width:760px;margin:0 auto 12px;background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:18px 22px}
+  details.faq summary{cursor:pointer;font-weight:600;color:var(--text);list-style:none;display:flex;justify-content:space-between;align-items:center;gap:12px}
+  details.faq summary::-webkit-details-marker{display:none}
+  details.faq summary::after{content:"+";color:var(--accent);font-size:1.3rem;font-weight:700;flex:0 0 auto}
+  details.faq[open] summary::after{content:"–"}
+  details.faq p{color:var(--muted);margin-top:12px;font-size:.95rem}
+  .inside-list{columns:2;column-gap:32px;max-width:760px;margin:0 auto;text-align:left}
+  .inside-list li{break-inside:avoid;list-style:none;padding:10px 0 10px 30px;position:relative;color:var(--muted);font-size:.93rem}
+  .inside-list li::before{content:attr(data-n);position:absolute;left:0;color:var(--accent);font-weight:700;font-size:.85rem}
+  .inside-list li b{color:var(--text);font-weight:600}
+  .peek{max-width:760px;margin:0 auto;background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:8px 8px 28px;text-align:center}
+  .peek pre{text-align:left;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:.82rem;line-height:1.65;color:var(--muted);background:#141210;border:1px solid var(--line);border-radius:8px;padding:22px 24px;overflow-x:auto;white-space:pre-wrap;margin-bottom:24px}
+  .share-row{display:flex;gap:12px;justify-content:center;align-items:center;flex-wrap:wrap;margin-top:30px;font-size:.85rem;color:var(--muted)}
+  .share-row a,.share-row button{color:var(--muted);border:1px solid var(--line);border-radius:999px;padding:6px 14px;font-size:.82rem;background:transparent;cursor:pointer;font-family:inherit}
+  .share-row a:hover,.share-row button:hover{color:var(--accent);border-color:var(--accent-dim);text-decoration:none}
   footer{border-top:1px solid var(--line);padding:40px 0 60px;color:var(--muted);font-size:.85rem}
   footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px}
-  @media(max-width:640px){.hero{padding:56px 0 40px}}
+  .sticky-buy{display:none}
+  @media(max-width:720px){
+    .hero{padding:56px 0 40px}
+    nav a:not(.nav-cta){display:none}
+    .inside-list{columns:1}
+    .sticky-buy{display:flex;position:fixed;bottom:0;left:0;right:0;z-index:100;background:rgba(28,26,24,.97);border-top:1px solid var(--line);padding:10px 16px;align-items:center;justify-content:space-between;gap:12px;backdrop-filter:blur(8px)}
+    .sticky-buy span{font-size:.85rem;color:var(--muted)}
+    .sticky-buy span b{color:var(--text)}
+    .sticky-buy .btn{padding:10px 20px;font-size:.9rem}
+    body{padding-bottom:64px}
+  }
+  @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
 </style>
 </head>
 <body>
+<a class="skip" href="#main">Skip to content</a>
 <header>
   <div class="wrap">
-    <div class="logo">
-      <svg width="26" height="26" viewBox="0 0 26 26" fill="none"><circle cx="5" cy="6" r="2.4" fill="#e07a5f"/><circle cx="21" cy="6" r="2.4" fill="#e07a5f"/><circle cx="13" cy="13" r="2.4" fill="#e07a5f"/><circle cx="5" cy="20" r="2.4" fill="#e07a5f"/><circle cx="21" cy="20" r="2.4" fill="#e07a5f"/><path d="M6.6 7.4L11.2 11.8M19.4 7.4L14.8 11.8M6.6 18.6L11.2 14.2M19.4 18.6L14.8 14.2" stroke="#e07a5f" stroke-width="1.4"/></svg>
+    <a class="logo" href="#top" aria-label="Kestrelattice home">
+      <svg width="26" height="26" viewBox="0 0 26 26" fill="none" aria-hidden="true"><circle cx="5" cy="6" r="2.4" fill="#e07a5f"/><circle cx="21" cy="6" r="2.4" fill="#e07a5f"/><circle cx="13" cy="13" r="2.4" fill="#e07a5f"/><circle cx="5" cy="20" r="2.4" fill="#e07a5f"/><circle cx="21" cy="20" r="2.4" fill="#e07a5f"/><path d="M6.6 7.4L11.2 11.8M19.4 7.4L14.8 11.8M6.6 18.6L11.2 14.2M19.4 18.6L14.8 14.2" stroke="#e07a5f" stroke-width="1.4"/></svg>
       Kestrelattice
-    </div>
-    <nav>
+    </a>
+    <nav aria-label="Primary">
       <a href="#problem">Why</a>
       <a href="#product">Product</a>
       <a href="#evidence">Evidence</a>
-      <a href="#offer">Playbook</a>
-      <a href="#stack">The $0 Stack</a>
+      <a href="#offer">Free playbook</a>
+      <a href="#faq">FAQ</a>
+      <a class="nav-cta" href="#buy" data-track="nav_buy_click">Studio Edition · $29</a>
     </nav>
   </div>
 </header>
 
-<div class="hero wrap">
+<main id="main">
+<div class="hero wrap" id="top">
   <span class="pill">Governed agent mesh · by GhostCorp</span>
   <h1>AI swarms are useful until nobody can tell<br>what they <em>did</em>, <em>spent</em>, or were <em>allowed</em> to do.</h1>
   <p class="sub">Kestrelattice is a governed mesh of specialized agents that finds ventures, wins customers, and executes approved work — with identity, spend limits, approval gates, and hash-linked audit trails on every action.</p>
+  <div class="proof-row" aria-label="Key facts">
+    <span class="proof"><b>✓</b> 25 cited public sources</span>
+    <span class="proof"><b>✓</b> Free playbook, MIT licensed</span>
+    <span class="proof"><b>✓</b> Secure checkout, verified live</span>
+  </div>
   <div class="cta-row">
-    <a class="btn primary" href="playbook.md">Get the free playbook</a>
-    <a class="btn ghost" href="#evidence">See the buyer evidence</a>
+    <a class="btn primary" href="playbook.md" data-track="playbook_download">Get the free playbook</a>
+    <a class="btn ghost" href="#buy" data-track="hero_buy_click">Studio Edition · $29</a>
+  </div>
+  <div class="share-row" aria-label="Share this page">
+    <span>Know someone shipping agents?</span>
+    <a href="https://twitter.com/intent/tweet?text=AI%20swarms%20are%20useful%20until%20nobody%20can%20tell%20what%20they%20did%2C%20spent%2C%20or%20were%20allowed%20to%20do.&url=https%3A%2F%2Fkoalstingkdelaney-gif.github.io%2Fkestrelattice%2F" target="_blank" rel="noopener" data-track="share_x">Post on X</a>
+    <a href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Fkoalstingkdelaney-gif.github.io%2Fkestrelattice%2F" target="_blank" rel="noopener" data-track="share_linkedin">Share on LinkedIn</a>
+    <button type="button" id="copy-link" data-track="share_copy_click">Copy link</button>
   </div>
 </div>
 
@@ -121,14 +228,28 @@
   <div class="wrap">
     <h2>Buyer evidence: the money is already moving</h2>
     <p class="lede">Highlights from our 25-source, verified public ledger. Full citations with URLs live in <a href="evidence/buyer-demand-ledger.md">the ledger</a>.</p>
+    <div style="overflow-x:auto">
     <table>
       <tr><th>Signal</th><th>Evidence</th><th>Source</th></tr>
-      <tr><td>Capital validation</td><td>LangChain/LangSmith raised $125M at a $1.25B valuation on enterprise adoption; Arize AI raised a $70M Series C; AgentOps and Langfuse raised early rounds for agent monitoring</td><td class="tag">Funding records</td></tr>
-      <tr><td>Proven willingness to pay</td><td>LangSmith $39/seat/mo; Langfuse up to $2,499/mo; AgentOps enterprise from $2,000/mo; Braintrust $249/mo platform fee</td><td class="tag">Public pricing pages</td></tr>
-      <tr><td>Market growth</td><td>Gartner: $86.4B (2025) → $206.5B (2026) agent software spend. IDC: $38B direct enterprise agent spend in 2026</td><td class="tag">Analyst forecasts</td></tr>
-      <tr><td>Funded buyer segment</td><td>1,000+ venture studios; median budgets $1.36M–$2.49M/yr; studios procuring €18k/mo multi-agent stacks</td><td class="tag">Studio market research</td></tr>
-      <tr><td>Unmet need</td><td>Practitioners documenting agent cost overruns, missing audit trails, absent permissioning, and fear of ungoverned production</td><td class="tag">Reddit / Hacker News</td></tr>
+      <tr><td>Capital validation</td><td>LangChain/LangSmith raised $125M at a $1.25B valuation on enterprise adoption; Arize AI raised a $70M Series C; AgentOps and Langfuse raised early rounds for agent monitoring</td><td><span class="tag">Funding records</span></td></tr>
+      <tr><td>Proven willingness to pay</td><td>LangSmith $39/seat/mo; Langfuse up to $2,499/mo; AgentOps enterprise from $2,000/mo; Braintrust $249/mo platform fee</td><td><span class="tag">Public pricing pages</span></td></tr>
+      <tr><td>Market growth</td><td>Gartner: $86.4B (2025) → $206.5B (2026) agent software spend. IDC: $38B direct enterprise agent spend in 2026</td><td><span class="tag">Analyst forecasts</span></td></tr>
+      <tr><td>Funded buyer segment</td><td>1,000+ venture studios; median budgets $1.36M–$2.49M/yr; studios procuring €18k/mo multi-agent stacks</td><td><span class="tag">Studio market research</span></td></tr>
+      <tr><td>Unmet need</td><td>Practitioners documenting agent cost overruns, missing audit trails, absent permissioning, and fear of ungoverned production</td><td><span class="tag">Reddit / Hacker News</span></td></tr>
     </table>
+    </div>
+  </div>
+</section>
+
+<section id="who" aria-label="Who it's for">
+  <div class="wrap">
+    <h2>Built for the people shipping agents</h2>
+    <p class="lede">Three buyers, one problem: agents with no leash. The Studio Edition meets each of them where they are.</p>
+    <div class="grid">
+      <div class="card"><h3>Venture studios</h3><p>You run shared agent tooling across a portfolio. One governance pack — identity, spend ceilings, audit rows — that every build inherits on day one instead of reinventing it per company.</p></div>
+      <div class="card"><h3>AI-native founders</h3><p>Your agents touch customer data and real money before you have a compliance team. Get production-grade guardrails in an afternoon, not a quarter.</p></div>
+      <div class="card"><h3>Platform teams</h3><p>You own the mesh everyone else builds on. Hand every team the same approval tiers and audit format, and stop being the bottleneck for every launch review.</p></div>
+    </div>
   </div>
 </section>
 
@@ -146,7 +267,71 @@
         <li>Every claim cited to a verifiable public source</li>
       </ul>
       <p class="price">Free<span style="font-size:.95rem;color:var(--muted);font-weight:400"> · open source · MIT licensed</span></p>
-      <a class="btn primary" href="playbook.md" download>Download the playbook</a>
+      <a class="btn primary" href="playbook.md" download data-track="playbook_download">Download the playbook</a>
+    </div>
+  </div>
+</section>
+
+<section id="inside" aria-label="What's inside the Studio Edition">
+  <div class="wrap">
+    <h2 style="text-align:center">Inside the Studio Edition</h2>
+    <p class="lede" style="text-align:center;margin-left:auto;margin-right:auto">Twenty pages. Zero theory-only filler. Everything below is a template, schema, matrix, or day plan you can use the same afternoon.</p>
+    <ol class="inside-list">
+      <li data-n="01"><b>How to use this edition</b> — the 3-pass method: read, fill, ship.</li>
+      <li data-n="02"><b>Six fill-in policy templates</b> — approval gates, spend limits, identity grants, external outreach, credential handling, incident response.</li>
+      <li data-n="03"><b>Plan-bound JSON schema</b> — the exact shape of a bounded execution plan, with validation rules.</li>
+      <li data-n="04"><b>Audit-row JSON schema</b> — hash-linked rows for every request, approval, block, and outcome.</li>
+      <li data-n="05"><b>8-vendor pricing &amp; governance matrix</b> — verified pricing and capability comparison.</li>
+      <li data-n="06"><b>Risk-tier worksheet</b> — classify your whole stack with worked examples and blank rows.</li>
+      <li data-n="07"><b>14-day rollout</b> — day-by-day plan, each day with a checkable acceptance criterion.</li>
+      <li data-n="08"><b>First-customer kit</b> — evidence-grounded pricing, funnel math, and outreach templates.</li>
+      <li data-n="09"><b>Final acceptance checklist</b> — prove your mesh is governed before it touches production.</li>
+    </ol>
+  </div>
+</section>
+
+<section id="compare" aria-label="Free versus Studio Edition">
+  <div class="wrap">
+    <h2 style="text-align:center">Free vs. Studio Edition</h2>
+    <p class="lede" style="text-align:center;margin-left:auto;margin-right:auto">Start free. Upgrade when you're ready to implement instead of just read.</p>
+    <div class="compare">
+    <table>
+      <tr><th></th><th>Free playbook</th><th>Studio Edition · $29</th></tr>
+      <tr><td>The 8-layer governance stack</td><td class="yes">✓</td><td class="yes">✓</td></tr>
+      <tr><td>Fail-closed design patterns</td><td class="yes">✓</td><td class="yes">✓</td></tr>
+      <tr><td>Fill-in policy templates (6)</td><td class="no">—</td><td class="yes">✓</td></tr>
+      <tr><td>Plan-bound &amp; audit-row JSON schemas</td><td class="no">—</td><td class="yes">✓</td></tr>
+      <tr><td>8-vendor pricing &amp; governance matrix</td><td class="no">—</td><td class="yes">✓</td></tr>
+      <tr><td>Risk-tier worksheet</td><td class="no">—</td><td class="yes">✓</td></tr>
+      <tr><td>14-day rollout with acceptance criteria</td><td class="no">—</td><td class="yes">✓</td></tr>
+      <tr><td>First-customer kit (pricing, funnel math, outreach)</td><td class="no">—</td><td class="yes">✓</td></tr>
+      <tr><td>MIT license</td><td class="yes">✓</td><td class="no">Personal/team use</td></tr>
+    </table>
+    </div>
+  </div>
+</section>
+
+<section id="peek" aria-label="Sneak peek inside the Studio Edition">
+  <div class="wrap">
+    <h2 style="text-align:center">Steal a look inside</h2>
+    <p class="lede" style="text-align:center;margin-left:auto;margin-right:auto">One of the six fill-in templates, exactly as it appears in the Studio Edition. The other five — plus the schemas, matrix, and rollout — are behind the $29.</p>
+    <div class="peek">
+<pre>HARD-GATED ACTION POLICY — [TEAM NAME]
+Version [VERSION] · Effective [DATE] · Owner: [POLICY OWNER]
+
+The following actions ALWAYS require a recorded human approval.
+No auto-grant path exists for them, ever:
+
+1. Moving money or committing spend above [THRESHOLD].
+2. Accepting contracts, terms of service, or legal agreements.
+3. External outreach: emails, messages, posts, or calls to anyone
+   outside [TEAM NAME].
+4. Accessing, reading, or transmitting credentials or secrets.
+5. Changing agent permissions or grants.
+
+…plus the approval rules, recording requirements, and block
+handling — every bracket fill-in, ready to adopt as-is.</pre>
+      <a class="btn primary" href="#buy" data-track="peek_buy_click">Get all 6 templates · $29</a>
     </div>
   </div>
 </section>
@@ -156,7 +341,7 @@
     <div class="offer">
       <span class="pill">For teams shipping agents to production</span>
       <h2>The Playbook — Studio Edition</h2>
-      <p style="color:var(--muted);max-width:580px;margin:0 auto">The premium companion to the free playbook: 11 PDF pages of fill-in policy templates, JSON schemas, the priced vendor matrix, a 14-day rollout with acceptance criteria, and a first-customer kit with outreach templates.</p>
+      <p style="color:var(--muted);max-width:580px;margin:0 auto">The premium companion to the free playbook: 20 PDF pages of fill-in policy templates, JSON schemas, the priced vendor matrix, a 14-day rollout with acceptance criteria, and a first-customer kit with outreach templates.</p>
       <ul class="features">
         <li>Approval &amp; spend-limit policy templates — fill brackets, adopt as-is</li>
         <li>Plan-bound and audit-row JSON schemas with validation rules</li>
@@ -166,9 +351,41 @@
         <li>First-customer kit: pricing guidance, funnel math, cold-email template</li>
       </ul>
       <p class="price">$29<span style="font-size:.95rem;color:var(--muted);font-weight:400"> · one-time · instant PDF download</span></p>
-      <a class="btn primary" id="buy-btn" href="#buy">Buy the Studio Edition</a>
+      <a class="btn primary" id="buy-btn" href="#buy" data-track="begin_checkout">Buy the Studio Edition</a>
       <p id="buy-note" style="font-size:.8rem;color:var(--muted);margin-top:12px">Secure checkout · lifetime access · <a href="playbook.md">the core playbook stays free</a></p>
     </div>
+    <div class="guarantee"><b>30-day guarantee.</b> If the Studio Edition doesn't save you at least a day of policy-writing, email us within 30 days for a full refund — no questions asked.</div>
+  </div>
+</section>
+
+<section id="faq" aria-label="Frequently asked questions">
+  <div class="wrap">
+    <h2 style="text-align:center">Questions, answered</h2>
+    <p class="lede" style="text-align:center;margin-left:auto;margin-right:auto">The short version of everything buyers ask before the $29.</p>
+    <details class="faq" data-track="faq_open">
+      <summary>Is the free playbook really free?</summary>
+      <p>Yes. It's MIT-licensed open source. Download it with no email signup, no account, and no upsell required to read every word.</p>
+    </details>
+    <details class="faq" data-track="faq_open">
+      <summary>What exactly do I get in the Studio Edition?</summary>
+      <p>A 20-page PDF: six fill-in policy templates, plan-bound and audit-row JSON schemas with validation rules, an 8-vendor pricing and governance matrix, a risk-tier classification worksheet, a day-by-day 14-day rollout with acceptance criteria, and a first-customer kit with outreach templates.</p>
+    </details>
+    <details class="faq" data-track="faq_open">
+      <summary>How do I receive it after paying?</summary>
+      <p>Checkout runs through a secure payment session. After payment completes, you get an instant download link for the PDF — no waiting, no account needed.</p>
+    </details>
+    <details class="faq" data-track="faq_open">
+      <summary>What if it doesn't help me?</summary>
+      <p>Email us within 30 days of purchase and we'll refund you in full, no questions asked.</p>
+    </details>
+    <details class="faq" data-track="faq_open">
+      <summary>Who is this for?</summary>
+      <p>Venture studios, AI-native founders, and platform teams shipping multi-agent systems to production — anyone whose agents touch money, data, or external systems.</p>
+    </details>
+    <details class="faq" data-track="faq_open">
+      <summary>Do I need to read the free playbook first?</summary>
+      <p>No. The Studio Edition is self-contained. The free playbook is a good preview of the approach if you want to try before you buy.</p>
+    </details>
   </div>
 </section>
 
@@ -176,6 +393,7 @@
   <div class="wrap">
     <h2>Shipped on a $0 open-source stack</h2>
     <p class="lede">This entire site — hosting, analytics, link tracking, outreach — runs on free tiers. The plan and its limits are in <a href="evidence/pricing-and-economics.md">the economics</a>.</p>
+    <div style="overflow-x:auto">
     <table>
       <tr><th>Layer</th><th>Tool</th><th>Free limits</th></tr>
       <tr><td>Hosting</td><td>GitHub Pages</td><td>Static site, unlimited public repos, free TLS</td></tr>
@@ -184,16 +402,46 @@
       <tr><td>Outbound email</td><td>Gmail</td><td>500 emails / 24 hrs</td></tr>
       <tr><td>Community</td><td>LinkedIn / Reddit</td><td>~100 connections/week · 9:1 content ratio</td></tr>
     </table>
+    </div>
   </div>
 </section>
+</main>
 
 <footer>
   <div class="wrap">
-    <span>© 2026 GhostCorp · Kestrelattice</span>
-    <span><a href="LICENSE">MIT License</a> · <a href="https://github.com/koalstingkdelaney-gif/kestrelattice">Source on GitHub</a> · <a href="evidence/buyer-demand-ledger.md">Evidence ledger</a></span>
+    <span>© 2026 GhostCorp · Kestrelattice · Updated September 2026</span>
+    <span><a href="LICENSE">MIT License</a> · <a href="https://github.com/koalstingkdelaney-gif/kestrelattice">Source on GitHub</a> · <a href="evidence/buyer-demand-ledger.md">Evidence ledger</a> · <a href="sitemap.xml">Sitemap</a></span>
   </div>
 </footer>
+
+<div class="sticky-buy" aria-label="Quick purchase">
+  <span><b>Studio Edition</b> · $29 · 20 pages</span>
+  <a class="btn primary" href="#buy" data-track="sticky_buy_click">Get it</a>
+</div>
+
 <script>
+  // Analytics: lightweight click tracking (no-ops until a real GA4 ID is installed).
+  document.addEventListener("click", function(e){
+    const el = e.target.closest("[data-track]");
+    if (el) track(el.getAttribute("data-track"), { link_text: (el.textContent || "").trim().slice(0, 80) });
+  }, { passive: true });
+
+  // Copy-link share button.
+  document.addEventListener("DOMContentLoaded", function(){
+    const copyBtn = document.getElementById("copy-link");
+    if (copyBtn) copyBtn.addEventListener("click", function(){
+      const url = "https://koalstingkdelaney-gif.github.io/kestrelattice/";
+      const done = function(ok){
+        copyBtn.textContent = ok ? "Copied ✓" : "Copy failed";
+        if (ok) track("share_copy_link");
+        setTimeout(function(){ copyBtn.textContent = "Copy link"; }, 2000);
+      };
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(url).then(function(){ done(true); }, function(){ done(false); });
+      } else { done(false); }
+    });
+  });
+
   // Buy flow: create a fresh Wix checkout session server-side, then redirect.
   const CHECKOUT_ENDPOINT = "https://superagent-a0804521.base44.app/functions/create-checkout";
   document.addEventListener("DOMContentLoaded", function(){
@@ -201,6 +449,7 @@
     const note = document.getElementById("buy-note");
     btn.addEventListener("click", async function(e){
       e.preventDefault();
+      track("begin_checkout_attempt");
       const label = btn.textContent;
       btn.textContent = "Opening secure checkout…";
       btn.style.opacity = "0.7";
@@ -212,11 +461,13 @@
         });
         const data = await res.json();
         if (data.redirectUrl) {
+          track("begin_checkout_success");
           window.location.href = data.redirectUrl;
         } else {
           throw new Error(data.error || "checkout unavailable");
         }
       } catch (err) {
+        track("begin_checkout_error");
         btn.textContent = label;
         btn.style.opacity = "1";
         note.innerHTML = "Checkout hiccup — <a href=\"mailto:koalstin.g.k.delaney@gmail.com\">email us</a> and we'll send a direct link. The <a href=\"playbook.md\">free playbook</a> is always here.";

@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://koalstingkdelaney-gif.github.io/kestrelattice/sitemap.xml

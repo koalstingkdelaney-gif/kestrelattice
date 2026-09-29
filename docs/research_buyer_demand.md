@@ -1,7 +1,6 @@
 # Kestrelattice Buyer Demand Evidence Research Report
 **Product Category:** Governed Agent Mesh Platform (Multi-Agent Orchestration, Human Approval Gates, Identity & Authorization Controls, Spend Limits, Audit Trails)  
-**Target Buyers:** Venture Studios, AI-Native Founders, Startup Accelerators, Enterprise Innovation Teams  
-**Target Workspace Path:** `/app/conversations/6abbee9737af6a2cf1093de7/research_buyer_demand.md`
+**Target Buyers:** Venture Studios, AI-Native Founders, Startup Accelerators, Enterprise Innovation Teams
 
 ---
 
