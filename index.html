@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kestrelattice · Governed Agent Mesh — by GhostCorp</title>
+<meta name="description" content="A governed mesh of specialized AI agents that finds ventures, wins customers, and executes approved work — with identity, spend limits, approval gates, and hash-linked audit trails.">
+<style>
+  :root{
+    --bg:#121212; --panel:#1c1a18; --panel2:#232019; --line:#332e26;
+    --text:#e8e2d8; --muted:#9a917f; --accent:#e07a5f; --accent-dim:#b9634b; --ok:#7fbf7f;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{background:var(--bg);color:var(--text);font-family:ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;line-height:1.6}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 24px}
+  a{color:var(--accent);text-decoration:none}
+  a:hover{text-decoration:underline}
+  header{border-bottom:1px solid var(--line);padding:20px 0}
+  header .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px}
+  .logo{display:flex;align-items:center;gap:10px;font-weight:700;font-size:1.15rem;letter-spacing:.02em}
+  .logo svg{flex:0 0 auto}
+  nav a{color:var(--muted);margin-left:22px;font-size:.95rem}
+  nav a:hover{color:var(--accent)}
+  .hero{padding:88px 0 64px;text-align:center}
+  .pill{display:inline-block;border:1px solid var(--accent-dim);color:var(--accent);border-radius:999px;padding:5px 16px;font-size:.8rem;letter-spacing:.12em;text-transform:uppercase;margin-bottom:22px}
+  h1{font-size:clamp(2rem,5vw,3.4rem);font-weight:800;line-height:1.12;letter-spacing:-.02em}
+  h1 em{color:var(--accent);font-style:normal}
+  .sub{color:var(--muted);font-size:1.15rem;max-width:640px;margin:20px auto 32px}
+  .cta-row{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+  .btn{display:inline-block;border-radius:8px;padding:13px 26px;font-weight:600;font-size:1rem}
+  .btn.primary{background:var(--accent);color:#161210}
+  .btn.primary:hover{background:var(--accent-dim);text-decoration:none}
+  .btn.ghost{border:1px solid var(--line);color:var(--text)}
+  .btn.ghost:hover{border-color:var(--accent);text-decoration:none}
+  section{padding:64px 0;border-top:1px solid var(--line)}
+  h2{font-size:1.7rem;font-weight:700;letter-spacing:-.01em;margin-bottom:10px}
+  .lede{color:var(--muted);max-width:680px;margin-bottom:36px}
+  .grid{display:grid;gap:18px;grid-template-columns:repeat(auto-fit,minmax(240px,1fr))}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:24px}
+  .card h3{font-size:1.05rem;margin-bottom:8px}
+  .card p{color:var(--muted);font-size:.93rem}
+  .stat{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:22px;text-align:center}
+  .stat b{display:block;font-size:1.9rem;color:var(--accent)}
+  .stat span{color:var(--muted);font-size:.85rem}
+  .cite{font-size:.78rem;color:var(--muted);margin-top:10px}
+  table{width:100%;border-collapse:collapse;font-size:.9rem}
+  th,td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+  th{color:var(--muted);font-weight:600;font-size:.78rem;text-transform:uppercase;letter-spacing:.08em}
+  .tag{display:inline-block;border:1px solid var(--line);border-radius:6px;padding:2px 8px;font-size:.75rem;color:var(--muted)}
+  .offer{background:var(--panel2);border:1px solid var(--accent-dim);border-radius:12px;padding:36px;max-width:760px;margin:0 auto;text-align:center}
+  .offer .price{font-size:2rem;font-weight:800;color:var(--accent)}
+  ul.features{list-style:none;max-width:620px;margin:18px auto 26px;text-align:left}
+  ul.features li{padding:8px 0 8px 28px;position:relative;color:var(--text)}
+  ul.features li::before{content:"✓";position:absolute;left:0;color:var(--ok);font-weight:700}
+  footer{border-top:1px solid var(--line);padding:40px 0 60px;color:var(--muted);font-size:.85rem}
+  footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px}
+  @media(max-width:640px){.hero{padding:56px 0 40px}}
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap">
+    <div class="logo">
+      <svg width="26" height="26" viewBox="0 0 26 26" fill="none"><circle cx="5" cy="6" r="2.4" fill="#e07a5f"/><circle cx="21" cy="6" r="2.4" fill="#e07a5f"/><circle cx="13" cy="13" r="2.4" fill="#e07a5f"/><circle cx="5" cy="20" r="2.4" fill="#e07a5f"/><circle cx="21" cy="20" r="2.4" fill="#e07a5f"/><path d="M6.6 7.4L11.2 11.8M19.4 7.4L14.8 11.8M6.6 18.6L11.2 14.2M19.4 18.6L14.8 14.2" stroke="#e07a5f" stroke-width="1.4"/></svg>
+      Kestrelattice
+    </div>
+    <nav>
+      <a href="#problem">Why</a>
+      <a href="#product">Product</a>
+      <a href="#evidence">Evidence</a>
+      <a href="#offer">Playbook</a>
+      <a href="#stack">The $0 Stack</a>
+    </nav>
+  </div>
+</header>
+
+<div class="hero wrap">
+  <span class="pill">Governed agent mesh · by GhostCorp</span>
+  <h1>AI swarms are useful until nobody can tell<br>what they <em>did</em>, <em>spent</em>, or were <em>allowed</em> to do.</h1>
+  <p class="sub">Kestrelattice is a governed mesh of specialized agents that finds ventures, wins customers, and executes approved work — with identity, spend limits, approval gates, and hash-linked audit trails on every action.</p>
+  <div class="cta-row">
+    <a class="btn primary" href="playbook.md">Get the free playbook</a>
+    <a class="btn ghost" href="#evidence">See the buyer evidence</a>
+  </div>
+</div>
+
+<section id="problem">
+  <div class="wrap">
+    <h2>The pain is real, documented, and expensive</h2>
+    <p class="lede">These aren't marketing claims — every number below is a cited, public source in our <a href="evidence/buyer-demand-ledger.md">buyer-evidence ledger</a>.</p>
+    <div class="grid">
+      <div class="stat"><b>$700+</b><span>burned by one runaway agent in 72 hours — no budget controls, no watchdog</span><p class="cite">r/IndieDev, 2025</p></div>
+      <div class="stat"><b>40%</b><span>of enterprise apps will embed task-specific AI agents by end of 2026 (up from &lt;5%)</span><p class="cite">Gartner</p></div>
+      <div class="stat"><b>$206.5B</b><span>projected AI-agent software spend in 2026</span><p class="cite">Gartner</p></div>
+      <div class="stat"><b>1,000+</b><span>active venture studios globally, with 40–60% of year-1 engineering burn going to shared tooling</span><p class="cite">Inniches, 2023–26</p></div>
+    </div>
+    <div class="grid" style="margin-top:18px">
+      <div class="card"><h3>Runaway costs</h3><p>Developers report infinite-loop agents racking up unauthorized API spend with no audit trail and no spend limit. Frameworks ship neither by default.</p><p class="cite">r/AI_Agents, r/IndieDev</p></div>
+      <div class="card"><h3>No authority model</h3><p>"Who gave your AI agent authority?" Practitioners are asking for identity controls and PreToolUse/PostToolUse human approval gates. None exist in most stacks.</p><p class="cite">r/AI_Agents; Hacker News 47064122</p></div>
+      <div class="card"><h3>Unsafe production</h3><p>Orchestration is solved. Governance isn't. Builders say the missing pieces are kill switches, policy guardrails, and a centralized safety mesh — not better prompts.</p><p class="cite">r/AgentsOfAI; Hacker News 46683661</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="product">
+  <div class="wrap">
+    <h2>What a governed mesh actually gives you</h2>
+    <p class="lede">Kestrelattice's design principles, extracted from everything we learned shipping it — and now written down in <a href="playbook.md">the playbook</a>.</p>
+    <div class="grid">
+      <div class="card"><h3>Identity &amp; authority</h3><p>Every agent action is attributable. No action runs without an owner-scoped identity and an explicit grant. Unverified actors are rejected, not warned about.</p></div>
+      <div class="card"><h3>Approval gates</h3><p>Risk-tiered approvals: low-risk work auto-runs inside bounded policies; money, external outreach, contracts, and permissions always require a human decision.</p></div>
+      <div class="card"><h3>Spend limits</h3><p>Hard budget ceilings per plan, per workload, per expiry window. A fail-closed posture means blocked — not billed — when a limit is hit.</p></div>
+      <div class="card"><h3>Audit trails</h3><p>Hash-linked audit rows for every request, approval, block, and outcome. If a claim can't point at a row, it didn't happen.</p></div>
+      <div class="card"><h3>Fail-closed runtime</h3><p>No host, account, credential, or term is used before it's recorded and evaluated. Missing evidence doesn't degrade to a warning — it blocks the dispatch.</p></div>
+      <div class="card"><h3>Owner control</h3><p>Secrets never enter records. Terms are never auto-accepted. The owner is the only authority for anything that touches the outside world.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="evidence">
+  <div class="wrap">
+    <h2>Buyer evidence: the money is already moving</h2>
+    <p class="lede">Highlights from our 25-source, verified public ledger. Full citations with URLs live in <a href="evidence/buyer-demand-ledger.md">the ledger</a>.</p>
+    <table>
+      <tr><th>Signal</th><th>Evidence</th><th>Source</th></tr>
+      <tr><td>Capital validation</td><td>LangChain/LangSmith raised $125M at a $1.25B valuation on enterprise adoption; Arize AI raised a $70M Series C; AgentOps and Langfuse raised early rounds for agent monitoring</td><td class="tag">Funding records</td></tr>
+      <tr><td>Proven willingness to pay</td><td>LangSmith $39/seat/mo; Langfuse up to $2,499/mo; AgentOps enterprise from $2,000/mo; Braintrust $249/mo platform fee</td><td class="tag">Public pricing pages</td></tr>
+      <tr><td>Market growth</td><td>Gartner: $86.4B (2025) → $206.5B (2026) agent software spend. IDC: $38B direct enterprise agent spend in 2026</td><td class="tag">Analyst forecasts</td></tr>
+      <tr><td>Funded buyer segment</td><td>1,000+ venture studios; median budgets $1.36M–$2.49M/yr; studios procuring €18k/mo multi-agent stacks</td><td class="tag">Studio market research</td></tr>
+      <tr><td>Unmet need</td><td>Practitioners documenting agent cost overruns, missing audit trails, absent permissioning, and fear of ungoverned production</td><td class="tag">Reddit / Hacker News</td></tr>
+    </table>
+  </div>
+</section>
+
+<section id="offer">
+  <div class="wrap">
+    <div class="offer">
+      <span class="pill">The digital product</span>
+      <h2>The Governed Agent Mesh Playbook</h2>
+      <p style="color:var(--muted);max-width:560px;margin:0 auto">An original, practical guide for venture studios and AI-native founders: how to run multi-agent operations with identity, spend limits, approval gates, and audit trails — built from our own architecture and grounded in cited public evidence.</p>
+      <ul class="features">
+        <li>The 8-layer governance stack, from identity to audit</li>
+        <li>Fail-closed design patterns you can copy into any agent stack</li>
+        <li>Approval policies mapped to real risk tiers</li>
+        <li>A complete $0 open-source distribution stack</li>
+        <li>Every claim cited to a verifiable public source</li>
+      </ul>
+      <p class="price">Free<span style="font-size:.95rem;color:var(--muted);font-weight:400"> · open source · MIT licensed</span></p>
+      <a class="btn primary" href="playbook.md" download>Download the playbook</a>
+    </div>
+  </div>
+</section>
+
+<section id="stack">
+  <div class="wrap">
+    <h2>Shipped on a $0 open-source stack</h2>
+    <p class="lede">This entire site — hosting, analytics, link tracking, outreach — runs on free tiers. The plan and its limits are in <a href="evidence/pricing-and-economics.md">the economics</a>.</p>
+    <table>
+      <tr><th>Layer</th><th>Tool</th><th>Free limits</th></tr>
+      <tr><td>Hosting</td><td>GitHub Pages</td><td>Static site, unlimited public repos, free TLS</td></tr>
+      <tr><td>Analytics</td><td>Google Analytics 4</td><td>Unlimited standard event tracking</td></tr>
+      <tr><td>Link tracking</td><td>Dub.co / Short.io</td><td>25 links/mo · 1,000 branded links/mo</td></tr>
+      <tr><td>Outbound email</td><td>Gmail</td><td>500 emails / 24 hrs</td></tr>
+      <tr><td>Community</td><td>LinkedIn / Reddit</td><td>~100 connections/week · 9:1 content ratio</td></tr>
+    </table>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <span>© 2026 GhostCorp · Kestrelattice</span>
+    <span><a href="LICENSE">MIT License</a> · <a href="https://github.com/koalstingkdelaney-gif/kestrelattice">Source on GitHub</a> · <a href="evidence/buyer-demand-ledger.md">Evidence ledger</a></span>
+  </div>
+</footer>
+</body>
+</html>
