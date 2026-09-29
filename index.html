@@ -351,7 +351,7 @@ handling — every bracket fill-in, ready to adopt as-is.</pre>
         <li>First-customer kit: pricing guidance, funnel math, cold-email template</li>
       </ul>
       <p class="price">$29<span style="font-size:.95rem;color:var(--muted);font-weight:400"> · one-time · instant PDF download</span></p>
-      <a class="btn primary" id="buy-btn" href="#buy" data-track="begin_checkout">Buy the Studio Edition</a>
+      <a class="btn primary" id="buy-btn" href="https://koalstin.gumroad.com/l/hdigmr" data-track="begin_checkout">Buy the Studio Edition</a>
       <p id="buy-note" style="font-size:.8rem;color:var(--muted);margin-top:12px">Secure checkout · lifetime access · <a href="playbook.md">the core playbook stays free</a></p>
     </div>
     <div class="guarantee"><b>30-day guarantee.</b> If the Studio Edition doesn't save you at least a day of policy-writing, email us within 30 days for a full refund — no questions asked.</div>
@@ -443,38 +443,7 @@ handling — every bracket fill-in, ready to adopt as-is.</pre>
     });
   });
 
-  // Buy flow: create a fresh Wix checkout session server-side, then redirect.
-  const CHECKOUT_ENDPOINT = "https://superagent-a0804521.base44.app/functions/create-checkout";
-  document.addEventListener("DOMContentLoaded", function(){
-    const btn = document.getElementById("buy-btn");
-    const note = document.getElementById("buy-note");
-    btn.addEventListener("click", async function(e){
-      e.preventDefault();
-      track("begin_checkout_attempt");
-      const label = btn.textContent;
-      btn.textContent = "Opening secure checkout…";
-      btn.style.opacity = "0.7";
-      try {
-        const res = await fetch(CHECKOUT_ENDPOINT, {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ productId: "studio-edition" })
-        });
-        const data = await res.json();
-        if (data.redirectUrl) {
-          track("begin_checkout_success");
-          window.location.href = data.redirectUrl;
-        } else {
-          throw new Error(data.error || "checkout unavailable");
-        }
-      } catch (err) {
-        track("begin_checkout_error");
-        btn.textContent = label;
-        btn.style.opacity = "1";
-        note.innerHTML = "Checkout hiccup — <a href=\"mailto:koalstin.g.k.delaney@gmail.com\">email us</a> and we'll send a direct link. The <a href=\"playbook.md\">free playbook</a> is always here.";
-      }
-    });
-  });
+  // Buy flow: direct link to the live Gumroad checkout (replaces the retired Base44/Wix flow).
 </script>
 
 </body>
