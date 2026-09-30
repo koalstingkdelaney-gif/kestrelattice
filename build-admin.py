@@ -35,21 +35,50 @@ CATALOG = [
 ]
 
 FLEET = [
-    ("Site health", "daily"),
-    ("Micro-forge (products)", "daily"),
-    ("Lead scout", "weekly"),
-    ("Content drafts", "weekly"),
-    ("SEO article", "weekly"),
-    ("Competitor watch", "weekly"),
-    ("Mention watch", "weekly"),
-    ("FAQ miner", "weekly"),
-    ("Site improver", "weekly"),
-    ("Product forge", "weekly"),
-    ("Partner scout", "monthly"),
-    ("Pricing experimenter", "monthly"),
-    ("AI model refresh", "weekly"),
-    ("AI provider scout", "monthly"),
+    # (bot name, schedule, signal path in hidden_files showing its latest output)
+    ("Site health", "daily", "health.log"),
+    ("Micro-forge (products)", "daily", "products/micro"),
+    ("Lead scout", "weekly", "leads"),
+    ("Content drafts", "weekly", "drafts"),
+    ("SEO writer", "3× / week", "articles"),
+    ("Competitor watch", "weekly", "competitors"),
+    ("Mention watch", "weekly", "mentions/log.md"),
+    ("FAQ miner", "weekly", "faq-drafts"),
+    ("Site improver", "weekly", "proposals"),
+    ("Product forge", "weekly", "products"),
+    ("Partner scout", "monthly", "partners"),
+    ("Pricing experimenter", "monthly", "experiments"),
+    ("Marketplace scout", "weekly", "distribution"),
+    ("AI model refresh", "weekly", "open-models/calls.log"),
+    ("AI provider scout", "monthly", "open-models/drafts"),
 ]
+
+
+def newest_mtime(rel):
+    """Newest file modification time under a hidden_files path (file or dir)."""
+    p = os.path.join(HF, rel)
+    try:
+        if os.path.isfile(p):
+            return os.path.getmtime(p)
+        best = 0.0
+        for root, dirs, files in os.walk(p):
+            dirs[:] = [d for d in dirs
+                       if not d.startswith(".") and d != "__pycache__"]
+            for f in files:
+                fp = os.path.join(root, f)
+                try:
+                    best = max(best, os.path.getmtime(fp))
+                except OSError:
+                    pass
+        return best or None
+    except OSError:
+        return None
+
+
+def fmt_time(ts):
+    if not ts:
+        return "—"
+    return datetime.fromtimestamp(ts).strftime("%b %d, %H:%M")
 
 
 def esc(s):
@@ -180,7 +209,25 @@ def fleet_section():
     calls = read_file(os.path.join(HF, "open-models/calls.log")).strip().splitlines()
     last_ai = esc(calls[-1][:120]) if calls else "no AI calls logged yet"
     bots = "".join(
-        f"<tr><td>{esc(n)}</td><td>{esc(s)}</td></tr>" for n, s in FLEET)
+        f"<tr><td>{esc(n)}</td><td>{esc(s)}</td>"
+        f"<td class='mono'>{esc(fmt_time(newest_mtime(sig)))}</td></tr>"
+        for n, s, sig in FLEET)
+    # Activity feed: most recently touched files across the fleet workspace.
+    seen = []
+    for root, dirs, files in os.walk(HF):
+        dirs[:] = [d for d in dirs
+                   if not d.startswith(".") and d != "__pycache__"]
+        for f in files:
+            fp = os.path.join(root, f)
+            try:
+                seen.append((os.path.getmtime(fp),
+                             os.path.relpath(fp, HF)))
+            except OSError:
+                pass
+    seen.sort(reverse=True)
+    feed = "".join(
+        f"<li><span class='mono'>{esc(fmt_time(ts))}</span> — {esc(rel)}</li>"
+        for ts, rel in seen[:12]) or "<li>—</li>"
     props = ""
     try:
         pdir = os.path.join(HF, "proposals")
@@ -193,8 +240,14 @@ def fleet_section():
     except OSError:
         pass
     return (
+        '<div class="card"><h3>Talk to your bots</h3>'
+        "<p>Open the <b>Talk to the bots</b> chat in your Muse app and tell the "
+        "fleet what to do in plain words — e.g. “run the lead scout now”, "
+        "“pause the pricing bot”, “what did the SEO writer publish this week?”. "
+        "Muse coordinates them for you; nothing goes public without your say-so.</p></div>"
         f'<p><b>Last fleet AI activity:</b> <span class="mono">{last_ai}</span></p>'
-        f"<table><tr><th>Bot</th><th>Schedule</th></tr>{bots}</table>"
+        f"<table><tr><th>Bot</th><th>Schedule</th><th>Last output</th></tr>{bots}</table>"
+        f"<h3>Latest fleet activity</h3><ul>{feed}</ul>"
         f"<h3>Recently shipped site improvements</h3><ul>{props or '<li>—</li>'}</ul>"
     )
 
