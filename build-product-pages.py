@@ -120,6 +120,15 @@ PAGE = """<!DOCTYPE html>
 <title>{title} — Kestrelattice</title>
 <meta name="description" content="{meta}">
 <link rel="canonical" href="{page_url}">
+<meta property="og:type" content="product">
+<meta property="og:title" content="{title} — Kestrelattice">
+<meta property="og:description" content="{meta}">
+<meta property="og:url" content="{page_url}">
+<meta property="og:image" content="https://koalstingkdelaney-gif.github.io/kestrelattice/assets/covers/{gid}.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="{title} — Kestrelattice">
+<meta name="twitter:description" content="{meta}">
+<meta name="twitter:image" content="https://koalstingkdelaney-gif.github.io/kestrelattice/assets/covers/{gid}.png">
 <script type="application/ld+json">
 {jsonld}
 </script>
