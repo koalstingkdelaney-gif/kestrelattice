@@ -21,8 +21,24 @@
  *                            Wrong/missing key -> 403. This is the human's
  *                            private bookmark; the public site has no admin page.
  *
- * KV binding: APPROVALS (keys: "queue" -> JSON array, "admin_html" -> string).
+ * KV binding: APPROVALS (keys: "queue" -> JSON array, "admin_html" -> string,
+ *                     "directory_submissions" -> JSON array).
  * Secrets (wrangler secret put): WRITE_KEY, SERVER_KEY.
+ *
+ * Third-party pack directory:
+ *   POST /submit               -> public, rate-limited. Body: {pack_name, author,
+ *                              author_email, pack_url, description,
+ *                              manifest_url, license}. Validates fields, then
+ *                              APPENDS to the "directory_submissions" KV array
+ *                              (read-modify-write; never overwrites history).
+ *   GET  /directory-submissions -> server key (x-server-key) OR write key as
+ *                              ?key=. Full submissions incl. emails, for the
+ *                              human's private review UI and the fleet watcher.
+ *   POST /directory-review     -> body {id, status, key}; key must match
+ *                              WRITE_KEY. Only flips pending -> approved/rejected.
+ *                              Blast radius: status of one pre-seeded submission.
+ *   GET  /directory-approved  -> public. Approved entries only, no emails —
+ *                              feeds the static directory page.
  */
 
 const CORS = {
@@ -102,6 +118,121 @@ export default {
       item.updated_at = new Date().toISOString();
       await writeQueue(env, q);
       return json({ ok: true, item });
+    }
+
+    // ---- Third-party pack directory ------------------------------------
+    const DIR_KEY = "directory_submissions";
+
+    const readDir = async () => {
+      const raw = await env.APPROVALS.get(DIR_KEY);
+      return raw ? JSON.parse(raw) : [];
+    };
+    const writeDir = (arr) => env.APPROVALS.put(DIR_KEY, JSON.stringify(arr));
+    const cleanUrl = (u) => {
+      if (!u) return "";
+      u = String(u).trim().slice(0, 500);
+      return /^https?:\/\//i.test(u) ? u : "";
+    };
+    const publicEntry = (e) => ({
+      id: e.id,
+      pack_name: e.pack_name,
+      author: e.author,
+      pack_url: e.pack_url,
+      description: e.description,
+      manifest_url: e.manifest_url || "",
+      license: e.license,
+      approved_at: e.reviewed_at || e.submitted_at,
+    });
+
+    if (req.method === "POST" && url.pathname === "/submit") {
+      const ip = req.headers.get("cf-connecting-ip") || "unknown";
+      if (!(await checkRateLimit(env, ip))) {
+        return json({ ok: false, error: "rate_limited" }, 429);
+      }
+      let body;
+      try {
+        body = await req.json();
+      } catch {
+        return json({ ok: false, error: "bad_json" }, 400);
+      }
+      const pick = (k) => String(body[k] || "").trim();
+      const errors = [];
+      const pack_name = pick("pack_name").slice(0, 120);
+      if (!pack_name) errors.push("pack_name");
+      const author = pick("author").slice(0, 120);
+      if (!author) errors.push("author");
+      const author_email = pick("author_email").slice(0, 200);
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(author_email)) errors.push("author_email");
+      const pack_url = cleanUrl(body.pack_url);
+      if (!pack_url) errors.push("pack_url");
+      const description = pick("description").slice(0, 2000);
+      if (description.length < 20) errors.push("description_too_short");
+      const manifest_url = cleanUrl(body.manifest_url);
+      if (body.manifest_url && !manifest_url) errors.push("manifest_url");
+      const license = pick("license").slice(0, 80);
+      if (!license) errors.push("license");
+      if (errors.length) {
+        return json({ ok: false, error: "invalid_fields", fields: errors }, 400);
+      }
+      // Append-only: read the array, push, write back. Never overwrite history.
+      const subs = await readDir();
+      const id =
+        "ds-" +
+        Date.now().toString(36) +
+        "-" +
+        Math.floor(Math.random() * 46656).toString(36);
+      subs.push({
+        id,
+        pack_name,
+        author,
+        author_email,
+        pack_url,
+        description,
+        manifest_url,
+        license,
+        status: "pending",
+        submitted_at: new Date().toISOString(),
+      });
+      await writeDir(subs);
+      return json({ ok: true, id });
+    }
+
+    if (req.method === "GET" && url.pathname === "/directory-submissions") {
+      const qkey = url.searchParams.get("key");
+      if (!(isServer || (qkey && qkey === env.WRITE_KEY))) {
+        return json({ ok: false, error: "forbidden" }, 403);
+      }
+      return json(await readDir());
+    }
+
+    if (req.method === "POST" && url.pathname === "/directory-review") {
+      let body;
+      try {
+        body = await req.json();
+      } catch {
+        return json({ ok: false, error: "bad_json" }, 400);
+      }
+      if (!body.key || body.key !== env.WRITE_KEY) {
+        return json({ ok: false, error: "forbidden" }, 403);
+      }
+      if (body.status !== "approved" && body.status !== "rejected") {
+        return json({ ok: false, error: "bad_status" }, 400);
+      }
+      const subs = await readDir();
+      const entry = subs.find((e) => e.id === body.id);
+      if (!entry) return json({ ok: false, error: "unknown_id" }, 404);
+      if (entry.status !== "pending") {
+        return json({ ok: false, error: "not_pending" }, 409);
+      }
+      entry.status = body.status;
+      entry.reviewed_at = new Date().toISOString();
+      await writeDir(subs);
+      return json({ ok: true, id: entry.id, status: entry.status });
+    }
+
+    if (req.method === "GET" && url.pathname === "/directory-approved") {
+      const subs = await readDir();
+      return json(subs.filter((e) => e.status === "approved").map(publicEntry));
     }
 
     if (req.method === "POST" && url.pathname === "/seed" && isServer) {

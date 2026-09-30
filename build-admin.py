@@ -437,6 +437,74 @@ def _gumroad_link(p):
     return u.replace("https://", "").replace("http://", "")
 
 
+def directory_section():
+    """Third-party pack submissions. Lists pending directory entries from the
+    worker's KV (via the write key, same as approvals) with Approve / Reject
+    buttons that flip each entry's status in KV. Entries are append-only —
+    nothing is ever deleted."""
+    js = (
+        '<div id="dirsub"><p class="muted">Loading submissions…</p></div>\n'
+        '<script>\n'
+        'const escH = s => String(s == null ? "" : s).replace(/[&<>"\\\']/g, c => '
+        '({"&":"&amp;","<":"&lt;",">":"&gt;","\\"":"&quot;","\\\'":"&#39;"}[c]));\n'
+        'async function reviewDir(id, st, btn) {\n'
+        '  btn.disabled = true; btn.textContent = "Working…";\n'
+        '  try {\n'
+        '    const r = await fetch(WURL + "/directory-review", {method: "POST",\n'
+        '      headers: {"Content-Type": "application/json"},\n'
+        '      body: JSON.stringify({id: id, status: st, key: WKEY})});\n'
+        '    const d = await r.json();\n'
+        '    if (d.ok) { btn.textContent = st === "approved" ? "Approved ✓" : "Rejected ✓"; loadDir(); return; }\n'
+        '  } catch (e) {}\n'
+        '  btn.disabled = false; btn.textContent = "Retry";\n'
+        '}\n'
+        'async function loadDir() {\n'
+        '  const el = document.getElementById("dirsub");\n'
+        '  if (!WURL || !WKEY) { el.innerHTML = "<p class=\'muted\'>Backend not connected.</p>"; return; }\n'
+        '  try {\n'
+        '    const r = await fetch(WURL + "/directory-submissions?key=" + encodeURIComponent(WKEY), {cache: "no-store"});\n'
+        '    const subs = await r.json();\n'
+        '    const pend = subs.filter(s => s.status === "pending");\n'
+        '    const decided = subs.filter(s => s.status !== "pending");\n'
+        '    const live = subs.filter(s => s.status === "approved").length;\n'
+        '    const pEl = document.getElementById("dir-pend"); if (pEl) pEl.textContent = pend.length;\n'
+        '    const lEl = document.getElementById("dir-live"); if (lEl) lEl.textContent = live;\n'
+        '    if (!subs.length) { el.innerHTML = "<p class=\'muted\'>No submissions yet — builders use the form at yoursite/directory/submit/.</p>"; return; }\n'
+        '    const row = s => `<tr><td><b>${escH(s.pack_name)}</b> by ${escH(s.author)}<br>` +\n'
+        '      `<span class=\'muted\'>${escH(s.description || "").slice(0, 180)}${(s.description || "").length > 180 ? "…" : ""}</span><br>` +\n'
+        '      `<span class=\'mono\'>${escH(s.pack_url || "")}${s.manifest_url ? " · <a href=\'" + escH(s.manifest_url) + "\' target=\'_blank\' rel=\'noopener\'>manifest</a>" : ""}</span><br>` +\n'
+        '      `<span class=\'muted\'>${escH(s.author_email || "")} · ${escH(s.license || "")} · ${escH((s.submitted_at || "").slice(0, 10))}</span></td>` +\n'
+        '      `<td><button class="btn" onclick="reviewDir(\\\'${escH(s.id)}\\\', \\\'approved\\\', this)">Approve</button> ` +\n'
+        '      `<button class="btn" style="background:#3a352d;color:var(--muted)" onclick="reviewDir(\\\'${escH(s.id)}\\\', \\\'rejected\\\', this)">Reject</button></td></tr>`;\n'
+        '    let html = "";\n'
+        '    if (pend.length) {\n'
+        '      html += "<h3>Pending review (" + pend.length + ")</h3>" +\n'
+        '        "<div class=\'table-wrap\'><table><tr><th>Submission</th><th></th></tr>" +\n'
+        '        pend.map(row).join("") + "</table></div>";\n'
+        '    }\n'
+        '    if (decided.length) {\n'
+        '      html += "<details class=\'fold\'><summary>Decided (" + decided.length + ")</summary>" +\n'
+        '        "<div class=\'table-wrap\'><table><tr><th>Pack</th><th>Status</th></tr>" +\n'
+        '        decided.map(s => `<tr><td><b>${escH(s.pack_name)}</b> by ${escH(s.author)}</td>` +\n'
+        '          `<td><span class=\'pill ${s.status === "approved" ? "ok" : "blocked"}\'>${escH(s.status)}</span></td></tr>`).join("") +\n'
+        '        "</table></div></details>";\n'
+        '    }\n'
+        '    el.innerHTML = html;\n'
+        '  } catch (e) {\n'
+        '    el.innerHTML = "<p class=\'muted\'>Submission service unreachable — try again shortly.</p>";\n'
+        '  }\n'
+        '}\n'
+        'loadDir();\n'
+        '</script>'
+    )
+    return (
+        '<div class="statrow">'
+        '<div class="stat"><b id="dir-pend">…</b><span>pending review</span></div>'
+        '<div class="stat"><b id="dir-live">…</b><span>live in directory</span></div>'
+        '</div>' + js
+    )
+
+
 def site_section():
     health = read_file(os.path.join(HF, "health.log")).strip().splitlines()
     last = esc(health[-1]) if health else "no checks logged yet"
@@ -652,6 +720,7 @@ def build():
       <a href="#outreach">Outreach</a>
       <a href="#pipeline">Pipeline</a>
       <a href="#drafts">Drafts</a>
+      <a href="#directory">Directory</a>
       <a href="#site">Site &amp; catalog</a>
       <a href="#fleet">Fleet</a>
       <a href="#traffic">Traffic</a>
@@ -698,6 +767,13 @@ def build():
     <h2>Drafts</h2>
     <p class="lede">Everything the bots drafted. <b>Put to work</b> moves a group into the pipeline; <b>Forget</b> archives it.</p>
     {drafts_section()}
+  </section>
+
+  <section class="dash" id="directory">
+    <div class="eyebrow">Platform</div>
+    <h2>Directory submissions</h2>
+    <p class="lede">Third-party packs submitted via the public form. <b>Approve</b> lists a pack in the directory; <b>Reject</b> archives it. Listing is free — approvals never move money.</p>
+    {directory_section()}
   </section>
 
   <section class="dash" id="site">
