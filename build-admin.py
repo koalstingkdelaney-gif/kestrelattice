@@ -39,17 +39,17 @@ FLEET = [
     # (bot name, schedule, signal path in hidden_files showing its latest output)
     ("Site health", "daily", "health.log"),
     ("Micro-forge (products)", "daily", "products/micro"),
-    ("Lead scout", "weekly", "leads"),
-    ("Content drafts", "weekly", "drafts"),
+    ("Lead scout", "daily", "leads"),
+    ("Content drafts", "daily", "drafts"),
     ("SEO writer", "3× / week", "articles"),
     ("Competitor watch", "weekly", "competitors"),
-    ("Mention watch", "weekly", "mentions/log.md"),
+    ("Mention watch", "daily", "mentions/log.md"),
     ("FAQ miner", "weekly", "faq-drafts"),
     ("Site improver", "weekly", "proposals"),
     ("Product forge", "weekly", "products"),
-    ("Partner scout", "monthly", "partners"),
+    ("Partner scout", "weekly", "partners"),
     ("Pricing experimenter", "monthly", "experiments"),
-    ("Marketplace scout", "weekly", "distribution"),
+    ("Marketplace scout", "daily", "distribution"),
     ("AI model refresh", "weekly", "open-models/calls.log"),
     ("AI provider scout", "monthly", "open-models/drafts"),
 ]
@@ -309,33 +309,50 @@ def approvals_section():
     return js
 
 
+def _gumroad_link(p):
+    """Prefer short_url; fall back to permalink. Returns display text."""
+    u = (p.get("short_url") or p.get("permalink") or "").rstrip("/")
+    return u.replace("https://", "").replace("http://", "")
+
+
 def site_section():
     health = read_file(os.path.join(HF, "health.log")).strip().splitlines()
     last = esc(health[-1]) if health else "no checks logged yet"
     items = gumroad_all_products() or []
     live = [p for p in items if p.get("published")]
-    rows = []
-    for p in items:
-        name = p.get("name", "?")
-        cents = p.get("price") or 0
-        link = (p.get("permalink") or "").split("/l/")[-1].rstrip("/")
-        if not p.get("published"):
-            name = f"{name} (draft)"
-        rows.append(
-            f"<tr><td>{esc(name)}</td><td>${cents/100:,.0f}</td>"
-            f"<td class='mono'>koalstin.gumroad.com/l/{esc(link)}</td></tr>"
-        )
-    cat_rows = "".join(rows) or (
+    drafts = [p for p in items if not p.get("published")]
+
+    def rows(prods):
+        out = []
+        for p in prods:
+            name = p.get("name", "?")
+            cents = p.get("price") or 0
+            out.append(
+                f"<tr><td>{esc(name)}</td><td>${cents/100:,.0f}</td>"
+                f"<td class='mono'>{esc(_gumroad_link(p))}</td></tr>"
+            )
+        return "".join(out)
+
+    cat_rows = rows(live) or (
         "<tr><td colspan='3'>Could not reach Gumroad — showing last static catalog.</td></tr>"
         + "".join(
             f"<tr><td>{esc(n)}</td><td>${p}</td><td class='mono'>koalstin.gumroad.com/l/{g}</td></tr>"
             for n, p, g in CATALOG
         )
     )
+    draft_rows = rows(drafts)
+    draft_html = (
+        f"<h4>Unpublished drafts ({len(drafts)})</h4>"
+        f'<div class="table-wrap"><table><tr><th>Product</th><th>Price</th><th>Gumroad link</th></tr>{draft_rows}</table></div>'
+        if draft_rows else ""
+    )
     return (
         f'<p><b>Last health check:</b> <span class="mono">{last}</span></p>'
-        f'<p><b>Live products:</b> {len(live)} (plus {len(items) - len(live)} unpublished drafts)</p>'
+        f'<p><b>Live products:</b> {len(live)}'
+        + (f" (plus {len(drafts)} unpublished drafts)" if drafts else "")
+        + "</p>"
         f'<div class="table-wrap"><table><tr><th>Product</th><th>Price</th><th>Gumroad link</th></tr>{cat_rows}</table></div>'
+        + draft_html
     )
 
 
