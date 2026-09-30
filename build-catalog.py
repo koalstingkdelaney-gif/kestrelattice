@@ -44,41 +44,55 @@ PAGE = """<!DOCTYPE html>
 <title>Product Catalog — Kestrelattice</title>
 <meta name="description" content="Every Kestrelattice self-serve PDF: agent governance checklists, runbooks, worksheets and kits. Instant download.">
 <style>
-:root{--bg:#121212;--panel:#1c1a18;--panel2:#232019;--line:#332e26;--text:#e8e2d8;--muted:#9a917f;--accent:#e07a5f;--accent-dim:#b9634b;--ok:#7fbf7f}
+:root{--bg:#0f0e0d;--bg-soft:#141210;--panel:#1a1714;--panel2:#211c17;--line:#2c261e;--text:#f1ebdd;--muted:#a89d89;--faint:#7d7461;--accent:#e07a5f;--accent-bright:#f09474;--accent-dim:#c06a4e;--accent-ink:#1a0f08;--accent-soft:rgba(224,122,95,.1);--radius:12px;--radius-sm:8px;--ease:cubic-bezier(.2,.7,.25,1)}
 *{margin:0;padding:0;box-sizing:border-box}
-body{background:var(--bg);color:var(--text);font-family:ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;line-height:1.6}
-.wrap{max-width:1080px;margin:0 auto;padding:0 24px}
-a{color:var(--accent);text-decoration:none}
-header{border-bottom:1px solid var(--line);padding:14px 0;position:sticky;top:0;background:rgba(18,18,18,.94);z-index:100}
-header .wrap{display:flex;align-items:center;justify-content:space-between}
-.logo{font-weight:700;font-size:1.15rem;color:var(--text)}
-nav a{margin-left:18px;color:var(--muted);font-size:.95rem}
-nav a:hover{color:var(--text)}
-.hero{padding:56px 0 24px;text-align:center}
-.hero h1{font-size:2.2rem;margin-bottom:8px}
-.lede{color:var(--muted);max-width:640px;margin:0 auto}
-.filters{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin:28px 0}
-.chip{border:1px solid var(--line);background:var(--panel);color:var(--muted);border-radius:999px;padding:6px 14px;font-size:.85rem;cursor:pointer}
-.chip.active{background:var(--accent);border-color:var(--accent);color:#161210;font-weight:600}
-.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:20px;padding:8px 0 64px}
-.card{background:var(--panel);border:1px solid var(--line);border-radius:12px;overflow:hidden;display:flex;flex-direction:column}
-.card img{width:100%;aspect-ratio:3/4;object-fit:cover;display:block;background:#0c0c0c}
-.card .body{padding:16px;display:flex;flex-direction:column;gap:8px;flex:1}
-.card h3{font-size:1.02rem;line-height:1.35}
-.price{color:var(--accent);font-weight:700}
-.card p.desc{color:var(--muted);font-size:.88rem;flex:1}
-.btn{display:inline-block;background:var(--accent);color:#161210;font-weight:700;padding:10px 18px;border-radius:8px;text-align:center}
-.btn:hover{background:var(--accent-dim);text-decoration:none}
-.btn.ghost{background:transparent;color:var(--accent);border:1px solid var(--accent)}
-.btn.ghost:hover{background:var(--panel)}
-footer{border-top:1px solid var(--line);padding:28px 0;color:var(--muted);font-size:.85rem;text-align:center}
+body{background:radial-gradient(900px 420px at 50% -6%, rgba(224,122,95,.06), transparent 62%),var(--bg);color:var(--text);font-family:ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;line-height:1.6;-webkit-font-smoothing:antialiased}
+.wrap{max-width:1040px;margin:0 auto;padding:0 24px}
+a{color:var(--accent);text-decoration:none;transition:color .16s var(--ease)}
+a:hover{text-decoration:underline}
+a:focus-visible,button:focus-visible{outline:2px solid var(--accent-bright);outline-offset:3px;border-radius:4px}
+header.site{border-bottom:1px solid var(--line);position:sticky;top:0;background:rgba(15,14,13,.92);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);z-index:100}
+header.site .wrap{display:flex;align-items:center;justify-content:space-between;min-height:58px}
+.logo{display:flex;align-items:center;gap:9px;font-weight:700;font-size:1.05rem;color:var(--text)}
+.logo:hover{text-decoration:none;color:var(--accent-bright)}
+nav.main{display:flex;align-items:center;gap:20px}
+nav.main a{color:var(--muted);font-size:.88rem;font-weight:500}
+nav.main a:hover{color:var(--accent-bright)}
+.hero{padding:44px 0 8px;text-align:center}
+.hero h1{font-size:clamp(1.7rem,3.4vw + .8rem,2.4rem);font-weight:800;letter-spacing:-.02em;margin-bottom:10px}
+.lede{color:var(--muted);max-width:620px;margin:0 auto;font-size:.98rem}
+.filters{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin:26px 0}
+.chip{border:1px solid var(--line);background:var(--panel);color:var(--muted);border-radius:999px;padding:7px 15px;font-size:.84rem;cursor:pointer;font-family:inherit;transition:all .16s var(--ease)}
+.chip:hover{border-color:var(--accent-dim);color:var(--text)}
+.chip.active{background:var(--accent);border-color:var(--accent);color:var(--accent-ink);font-weight:700}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:18px;padding:8px 0 64px}
+.card{background:linear-gradient(180deg,var(--panel),var(--bg-soft));border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;display:flex;flex-direction:column;transition:border-color .18s var(--ease),transform .18s var(--ease),box-shadow .18s var(--ease)}
+.card:hover{border-color:var(--accent-dim);transform:translateY(-3px);box-shadow:0 14px 34px rgba(0,0,0,.4)}
+.card img{width:100%;aspect-ratio:4/3;object-fit:cover;display:block;background:#0b0a09}
+.card .body{padding:16px;display:flex;flex-direction:column;gap:7px;flex:1}
+.card h3{font-size:.98rem;line-height:1.35;font-weight:700}
+.price{color:var(--text);font-weight:800}
+.card p.desc{color:var(--muted);font-size:.85rem;flex:1}
+.card .row{display:flex;gap:10px;padding:0 16px 16px}
+.btn{display:inline-block;background:linear-gradient(180deg,var(--accent-bright),var(--accent));color:var(--accent-ink);font-weight:700;padding:10px 18px;border-radius:var(--radius-sm);text-align:center;font-size:.88rem;flex:1;transition:transform .16s var(--ease)}
+.btn:hover{transform:translateY(-1px);text-decoration:none}
+.btn.ghost{background:transparent;color:var(--accent);border:1px solid var(--line)}
+.btn.ghost:hover{border-color:var(--accent-dim);color:var(--accent-bright)}
+footer.site{border-top:1px solid var(--line);background:var(--bg-soft);padding:24px 0;color:var(--muted);font-size:.82rem}
+footer.site .wrap{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px 16px}
+footer.site a{color:var(--faint);margin-left:14px}
+footer.site a:hover{color:var(--accent-bright)}
 .hidden{display:none!important}
+@media(max-width:640px){nav.main a:not(:last-child){display:none}footer.site .wrap{justify-content:center;text-align:center}footer.site a{margin:0 7px}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{transition:none!important;animation:none!important}}
 </style>
 </head>
 <body>
-<header><div class="wrap">
-<a class="logo" href="../">Kestrelattice</a>
-<nav><a href="../">Home</a><a href="../articles/">Articles</a><a href="../#products">Products</a></nav>
+<header class="site"><div class="wrap">
+<a class="logo" href="../">
+<svg width="24" height="24" viewBox="0 0 26 26" fill="none" aria-hidden="true"><circle cx="5" cy="6" r="2.4" fill="#e07a5f"/><circle cx="21" cy="6" r="2.4" fill="#e07a5f"/><circle cx="13" cy="13" r="2.4" fill="#e07a5f"/><circle cx="5" cy="20" r="2.4" fill="#e07a5f"/><circle cx="21" cy="20" r="2.4" fill="#e07a5f"/><path d="M6.6 7.4L11.2 11.8M19.4 7.4L14.8 11.8M6.6 18.6L11.2 14.2M19.4 18.6L14.8 14.2" stroke="#e07a5f" stroke-width="1.4"/></svg>
+Kestrelattice</a>
+<nav class="main" aria-label="Primary"><a href="../">Home</a><a href="../articles/">Articles</a><a href="../#faq">FAQ</a></nav>
 </div></header>
 <div class="wrap hero">
 <h1>The Catalog</h1>
@@ -88,7 +102,10 @@ footer{border-top:1px solid var(--line);padding:28px 0;color:var(--muted);font-s
 <div class="wrap"><div class="grid" id="grid">
 __CARDS__
 </div></div>
-<footer><div class="wrap">Kestrelattice · independent studio · secure checkout via Gumroad · instant delivery</div></footer>
+<footer class="site"><div class="wrap">
+<span>© 2026 GhostCorp · Kestrelattice · An independent studio</span>
+<span><a href="mailto:koalstin.g.k.delaney@gmail.com">Contact</a><a href="../articles/">Articles</a><a href="../admin-login.html">Admin</a></span>
+</div></footer>
 <script>
 const grid=document.getElementById('grid'),filters=document.getElementById('filters');
 const tags=[...new Set([...grid.querySelectorAll('.card')].flatMap(c=>c.dataset.tags.split('|').filter(Boolean)))].sort();
@@ -103,7 +120,7 @@ tags.forEach(t=>filters.appendChild(mk(t.replace(/-/g,' '),t)));
 CARD = """<div class="card" data-tags="{tags}">
 <a href="{slug}/" style="text-decoration:none;color:inherit;display:block"><img src="../assets/covers/{pid}.png" alt="{title} cover" loading="lazy">
 <div class="body"><h3>{title}</h3><p class="desc">{tagline}</p><p class="price">${price} <span style="color:var(--muted);font-weight:400;font-size:.85rem">one-time</span></p></div></a>
-<div class="body" style="padding-top:0;display:flex;gap:10px"><a class="btn" href="{url}">Get it</a><a class="btn ghost" href="{slug}/">Details</a></div>
+<div class="row"><a class="btn" href="{url}">Get it</a><a class="btn ghost" href="{slug}/">Details</a></div>
 </div>
 """
 
