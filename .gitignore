@@ -1,0 +1,4 @@
+*.pyc
+.worker-url
+__pycache__/
+worker/.secrets.json

@@ -194,45 +194,80 @@ def pipeline_section():
 
 
 def approvals_section():
-    qpath = os.path.join(HF, "approvals/queue.jsonl")
-    items = []
-    for line in read_file(qpath).splitlines():
-        line = line.strip()
-        if line:
-            try:
-                items.append(json.loads(line))
-            except json.JSONDecodeError:
-                pass
-    if not items:
-        return '<p class="muted">Nothing waiting for approval.</p>'
-    rows = []
-    for it in items:
-        code = it.get("code", "?")
-        status = it.get("status", "pending")
-        pill = ("<span class='pill ok'>done</span>" if status == "done"
-                else "<span class='pill warn'>approved</span>" if status == "approved"
-                else "<span class='pill blocked'>blocked</span>" if status.startswith("blocked")
-                else "<span class='pill'>waiting</span>")
-        subject = urllib.parse.quote(f"APPROVE {code}")
-        body = urllib.parse.quote(
-            f"I approve {code}: {it.get('title', '')}. Execute when ready.")
-        mailto = (f"mailto:koalstin.g.k.delaney@gmail.com"
-                  f"?subject={subject}&body={body}")
-        btn = (f"<a class='btn' href='{mailto}'>Approve</a>"
-               if status in ("pending", "blocked") or status.startswith("blocked")
-               else "<span class='muted'>—</span>")
-        rows.append(
-            f"<tr><td class='mono'>{esc(code)}</td>"
-            f"<td><b>{esc(it.get('title', ''))}</b><br>"
-            f"<span class='muted'>{esc(it.get('detail', ''))}</span><br>"
-            f"<span class='muted'>Needs: {esc(it.get('prereq', '—'))}</span></td>"
-            f"<td>{pill}</td><td>{btn}</td></tr>")
-    return (
-        "<table><tr><th>Code</th><th>Item</th><th>Status</th><th></th></tr>"
-        + "".join(rows) + "</table>"
-        "<p class='muted'>Tapping <b>Approve</b> opens an email — hit send and "
-        "the fleet picks it up within ~30 minutes. Or paste the code (e.g. "
-        "“approve AP-0001”) in the Talk to the bots chat.</p>")
+    """Live approval queue. The buttons talk directly to the approvals backend
+    (Cloudflare Worker); no email round-trip. Worker URL comes from the
+    gitignored .worker-url file; until the backend is deployed we show the
+    queue statically without buttons."""
+    wdir = os.path.join(HOME, "workspace/kestrelattice")
+    wurl = read_file(os.path.join(wdir, ".worker-url")).strip().rstrip("/")
+    if not wurl:
+        items = []
+        for line in read_file(os.path.join(HF, "approvals/queue.jsonl")).splitlines():
+            line = line.strip()
+            if line:
+                try:
+                    items.append(json.loads(line))
+                except json.JSONDecodeError:
+                    pass
+        rows = "".join(
+            f"<tr><td><b>{esc(it.get('title', ''))}</b><br>"
+            f"<span class='muted'>{esc(it.get('detail', ''))}</span></td>"
+            f"<td><span class='pill'>waiting</span></td><td></td></tr>"
+            for it in items)
+        return (
+            "<table><tr><th>Item</th><th>Status</th><th></th></tr>" + rows + "</table>"
+            "<p class='muted'>One-tap approvals are activating — the backend "
+            "finishes deploying shortly. Meanwhile you can paste a code (e.g. "
+            "“approve AP-0001”) in the Talk to the bots chat.</p>")
+    try:
+        wkey = json.loads(read_file(os.path.join(wdir, "worker/.secrets.json")))["write_key"]
+    except (OSError, KeyError, json.JSONDecodeError):
+        wkey = ""
+    js = (
+        '<div id="appr"><p class="muted">Loading approvals…</p></div>\n'
+        '<script>\n'
+        'const WURL = ' + json.dumps(wurl) + ';\n'
+        'const WKEY = ' + json.dumps(wkey) + ';\n'
+        'const pill = s => s === "done" ? "<span class=\'pill ok\'>done</span>"'
+        ' : s === "approved" ? "<span class=\'pill warn\'>approved ✓</span>"'
+        ' : s.indexOf("blocked") === 0 ? "<span class=\'pill blocked\'>blocked</span>"'
+        ' : "<span class=\'pill\'>waiting</span>";\n'
+        'const doneCodes = JSON.parse(localStorage.getItem("apprDone") || "[]");\n'
+        'async function loadApprovals() {\n'
+        '  const el = document.getElementById("appr");\n'
+        '  try {\n'
+        '    const q = await (await fetch(WURL + "/queue")).json();\n'
+        '    if (!q.length) { el.innerHTML = "<p class=\'muted\'>Nothing waiting for approval.</p>"; return; }\n'
+        '    el.innerHTML = "<table><tr><th>Item</th><th>Status</th><th></th></tr>" + q.map(it => {\n'
+        '      const st = doneCodes.includes(it.code) && it.status === "pending" ? "approved" : it.status;\n'
+        '      const btn = (st === "pending")\n'
+        '        ? `<button class="btn" onclick="approve(\\\'${it.code}\\\', this)">Approve</button>`\n'
+        '        : "<span class=\'muted\'>—</span>";\n'
+        '      return `<tr><td><b>${it.title}</b><br><span class=\'muted\'>${it.detail || ""}</span><br><span class=\'muted\'>Needs: ${it.prereq || "—"}</span></td><td>${pill(st)}</td><td>${btn}</td></tr>`;\n'
+        '    }).join("") + "</table>"\n'
+        '      + "<p class=\'muted\'>Tap <b>Approve</b> — the fleet picks it up within ~15 minutes and does the work. Or paste the code (e.g. “approve AP-0001”) in the Talk to the bots chat.</p>";\n'
+        '  } catch (e) {\n'
+        '    el.innerHTML = "<p class=\'muted\'>Approval service unreachable — try again shortly.</p>";\n'
+        '  }\n'
+        '}\n'
+        'async function approve(code, btn) {\n'
+        '  btn.disabled = true; btn.textContent = "Approving…";\n'
+        '  try {\n'
+        '    const r = await fetch(WURL + "/approve", {method: "POST",\n'
+        '      headers: {"Content-Type": "application/json"},\n'
+        '      body: JSON.stringify({code, key: WKEY})});\n'
+        '    const d = await r.json();\n'
+        '    if (d.ok) {\n'
+        '      doneCodes.push(code);\n'
+        '      localStorage.setItem("apprDone", JSON.stringify(doneCodes));\n'
+        '      loadApprovals();\n'
+        '    } else { btn.disabled = false; btn.textContent = "Retry"; }\n'
+        '  } catch (e) { btn.disabled = false; btn.textContent = "Retry"; }\n'
+        '}\n'
+        'loadApprovals();\n'
+        '</script>'
+    )
+    return js
 
 
 def site_section():
