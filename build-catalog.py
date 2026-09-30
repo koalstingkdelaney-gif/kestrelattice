@@ -51,6 +51,9 @@ PAGE = """<!DOCTYPE html>
 <meta property="og:url" content="https://koalstingkdelaney-gif.github.io/kestrelattice/products/">
 <meta property="og:image" content="https://koalstingkdelaney-gif.github.io/kestrelattice/assets/studio-edition-cover.jpg">
 <meta property="og:image:alt" content="ghostcorpnet product catalog — governed agent mesh playbooks and kits">
+<meta property="og:image:width" content="1600">
+<meta property="og:image:height" content="1600">
+<meta property="og:site_name" content="ghostcorpnet by GhostCorp">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Product Catalog — ghostcorpnet">
 <meta name="twitter:description" content="Every ghostcorpnet self-serve PDF: agent governance checklists, runbooks, worksheets and kits. Instant download.">
