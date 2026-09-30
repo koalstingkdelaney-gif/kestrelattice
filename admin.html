@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Admin — Kestrelattice</title>
+<style>
+  :root{ --bg:#121212; --panel:#1c1a18; --line:#332e26; --text:#e8e2d8; --muted:#9a917f; --accent:#e07a5f; }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{background:var(--bg);color:var(--text);font-family:ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;line-height:1.6}
+  .wrap{max-width:720px;margin:0 auto;padding:48px 24px}
+  h1{font-size:1.6rem;margin-bottom:8px}
+  p.note{color:var(--muted);margin-bottom:28px;font-size:.95rem}
+  .grid{display:grid;gap:12px}
+  a.card{display:block;background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:16px 18px;color:var(--text);text-decoration:none}
+  a.card:hover{border-color:var(--accent)}
+  a.card b{display:block;font-size:1.05rem}
+  a.card span{color:var(--muted);font-size:.88rem}
+  .back{margin-top:32px;display:inline-block;color:var(--accent);text-decoration:none}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>Site admin</h1>
+  <p class="note">This page has no login of its own — the site is static, so there are no site accounts to sign into. Each link below takes you to the service itself, where you sign in with your own account.</p>
+  <div class="grid">
+    <a class="card" href="https://gumroad.com/dashboard"><b>Gumroad dashboard</b><span>Sales, payouts, and your seller account</span></a>
+    <a class="card" href="https://gumroad.com/products"><b>Gumroad products</b><span>Edit listings, prices, and files</span></a>
+    <a class="card" href="https://github.com/koalstingkdelaney-gif/kestrelattice"><b>GitHub repo</b><span>Site source — edit pages here</span></a>
+    <a class="card" href="https://analytics.google.com"><b>Google Analytics</b><span>Traffic reports (property: Kestrelattice)</span></a>
+    <a class="card" href="https://search.google.com/search-console"><b>Search Console</b><span>Indexing and sitemap status</span></a>
+  </div>
+  <a class="back" href="./">← Back to site</a>
+</div>
+</body>
+</html>
