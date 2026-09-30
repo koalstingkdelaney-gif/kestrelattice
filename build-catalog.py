@@ -85,7 +85,7 @@ nav.main a:hover{color:var(--accent-bright)}
 .card:hover{border-color:var(--accent-dim);transform:translateY(-3px);box-shadow:0 14px 34px rgba(0,0,0,.4)}
 .card img{width:100%;aspect-ratio:4/3;object-fit:cover;display:block;background:#0b0a09}
 .card .body{padding:16px;display:flex;flex-direction:column;gap:7px;flex:1}
-.card h3{font-size:.98rem;line-height:1.35;font-weight:700}
+.card h2{font-size:.98rem;line-height:1.35;font-weight:700}
 .price{color:var(--text);font-weight:800}
 .card p.desc{color:var(--muted);font-size:.85rem;flex:1}
 .card .row{display:flex;gap:10px;padding:0 16px 16px}
@@ -119,7 +119,7 @@ __CARDS__
 </div></div>
 <footer class="site"><div class="wrap">
 <span>© 2026 GhostCorp · Kestrelattice · An independent studio</span>
-<span><a href="mailto:koalstin.g.k.delaney@gmail.com">Contact</a><a href="../articles/">Articles</a><a href="../admin-login.html">Admin</a></span>
+<span><a href="mailto:koalstin.g.k.delaney@gmail.com">Contact</a><a href="../articles/">Articles</a><a href="../sitemap.xml">Sitemap</a><a href="../admin-login.html">Admin</a></span>
 </div></footer>
 <script>
 const grid=document.getElementById('grid'),filters=document.getElementById('filters');
@@ -134,7 +134,7 @@ tags.forEach(t=>filters.appendChild(mk(t.replace(/-/g,' '),t)));
 
 CARD = """<div class="card" data-tags="{tags}">
 <a href="{slug}/" style="text-decoration:none;color:inherit;display:block"><img src="../assets/covers/{pid}.png" alt="{title} cover" loading="lazy">
-<div class="body"><h3>{title}</h3><p class="desc">{tagline}</p><p class="price">${price} <span style="color:var(--muted);font-weight:400;font-size:.85rem">one-time</span></p></div></a>
+<div class="body"><h2>{title}</h2><p class="desc">{tagline}</p><p class="price">${price} <span style="color:var(--muted);font-weight:400;font-size:.85rem">one-time</span></p></div></a>
 <div class="row"><a class="btn" href="{url}">Get it</a><a class="btn ghost" href="{slug}/">Details</a></div>
 </div>
 """
