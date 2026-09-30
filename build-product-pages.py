@@ -70,12 +70,18 @@ def slugify(t):
     return re.sub(r"-+", "-", s)
 
 def load_packs():
+    """Micro-product records: pending-listings.jsonl + pending-packs.jsonl (merged,
+    same as build-covers.products()). pending-packs.jsonl may not exist yet."""
     packs = []
-    with open(os.path.join(HIDDEN, "marketplace", "pending-listings.jsonl")) as f:
-        for line in f:
-            line = line.strip()
-            if line:
-                packs.append(json.loads(line))
+    for fname in ("pending-listings.jsonl", "pending-packs.jsonl"):
+        path = os.path.join(HIDDEN, "marketplace", fname)
+        if not os.path.exists(path):
+            continue
+        with open(path) as f:
+            for line in f:
+                line = line.strip()
+                if line:
+                    packs.append(json.loads(line))
     return packs
 
 def manuscripts():
