@@ -158,11 +158,18 @@
   .share-row a:hover,.share-row button:hover{color:var(--accent);border-color:var(--accent-dim);text-decoration:none}
   footer{border-top:1px solid var(--line);padding:40px 0 60px;color:var(--muted);font-size:.85rem}
   footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px}
+  .offer-split{display:flex;gap:40px;align-items:center;text-align:left;max-width:920px}
+  .offer-cover{width:280px;max-width:38%;height:auto;border-radius:10px;box-shadow:0 16px 48px rgba(0,0,0,.5);flex:0 0 auto;border:1px solid var(--line)}
+  .offer-body{flex:1;min-width:0}
+  .offer-split ul.features{margin:18px 0 26px}
   .sticky-buy{display:none}
   @media(max-width:720px){
     .hero{padding:56px 0 40px}
-    nav a:not(.nav-cta){display:none}
+    nav a:not(.nav-cta):not(.nav-signin){display:none}
     .inside-list{columns:1}
+    .offer-split{flex-direction:column;text-align:center;gap:28px}
+    .offer-cover{width:210px;max-width:62%}
+    .offer-split ul.features{text-align:left}
     .sticky-buy{display:flex;position:fixed;bottom:0;left:0;right:0;z-index:100;background:rgba(28,26,24,.97);border-top:1px solid var(--line);padding:10px 16px;align-items:center;justify-content:space-between;gap:12px;backdrop-filter:blur(8px)}
     .sticky-buy span{font-size:.85rem;color:var(--muted)}
     .sticky-buy span b{color:var(--text)}
@@ -186,7 +193,7 @@
       <a href="#evidence">Evidence</a>
       <a href="#offer">Free playbook</a>
       <a href="#faq">FAQ</a>
-      <a href="https://gumroad.com/library" data-track="nav_signin_click">Sign in</a>
+      <a href="https://gumroad.com/library" class="nav-signin" data-track="nav_signin_click">Sign in</a>
       <a class="nav-cta" href="#buy" data-track="nav_buy_click">Studio Edition · $29</a>
     </nav>
   </div>
@@ -200,7 +207,7 @@
   <div class="proof-row" aria-label="Key facts">
     <span class="proof"><b>✓</b> 25 cited public sources</span>
     <span class="proof"><b>✓</b> Free playbook, MIT licensed</span>
-    <span class="proof"><b>✓</b> Secure checkout, verified live</span>
+    <span class="proof"><b>✓</b> Instant delivery via Gumroad</span>
   </div>
   <div class="cta-row">
     <a class="btn primary" href="playbook.md" data-track="playbook_download">Get the free playbook</a>
@@ -361,10 +368,12 @@ handling — every bracket fill-in, ready to adopt as-is.</pre>
 
 <section id="buy">
   <div class="wrap">
-    <div class="offer">
+    <div class="offer offer-split">
+      <img class="offer-cover" src="assets/studio-edition-cover.jpg" alt="The Governed Agent Mesh Playbook — Studio Edition cover" width="560" height="560" loading="lazy">
+      <div class="offer-body">
       <span class="pill">For teams shipping agents to production</span>
       <h2>The Playbook — Studio Edition</h2>
-      <p style="color:var(--muted);max-width:580px;margin:0 auto">The premium companion to the free playbook: 20 PDF pages of fill-in policy templates, JSON schemas, the priced vendor matrix, a 14-day rollout with acceptance criteria, and a first-customer kit with outreach templates.</p>
+      <p style="color:var(--muted);max-width:580px">The premium companion to the free playbook: 20 PDF pages of fill-in policy templates, JSON schemas, the priced vendor matrix, a 14-day rollout with acceptance criteria, and a first-customer kit with outreach templates.</p>
       <ul class="features">
         <li>Approval &amp; spend-limit policy templates — fill brackets, adopt as-is</li>
         <li>Plan-bound and audit-row JSON schemas with validation rules</li>
@@ -376,6 +385,7 @@ handling — every bracket fill-in, ready to adopt as-is.</pre>
       <p class="price">$29<span style="font-size:.95rem;color:var(--muted);font-weight:400"> · one-time · instant PDF download</span></p>
       <a class="btn primary" id="buy-btn" href="https://koalstin.gumroad.com/l/hdigmr" data-track="begin_checkout">Buy the Studio Edition</a>
       <p id="buy-note" style="font-size:.8rem;color:var(--muted);margin-top:12px">Secure checkout · lifetime access · <a href="playbook.md">the core playbook stays free</a></p>
+      </div>
     </div>
     <div class="guarantee"><b>Instant delivery.</b> Checkout runs through a secure payment session, and your download link arrives the moment payment completes — no waiting, no account needed.</div>
   </div>
@@ -387,7 +397,7 @@ handling — every bracket fill-in, ready to adopt as-is.</pre>
     <h2 style="text-align:center">Go deeper on each piece</h2>
     <p class="lede" style="text-align:center;margin-left:auto;margin-right:auto">Short, practical companions to the Studio Edition. Each one solves a single problem, completely.</p>
     <div class="grid">
-      <div class="card" style="border-color:var(--accent)"><h3>📚 The Complete Kestrelattice Library <span style="font-size:.75rem;color:var(--accent);font-weight:600">BEST VALUE</span></h3><p class="price" style="margin:8px 0">$79 <span style="font-size:.85rem;color:var(--muted);font-weight:400">one-time · 8 PDFs · <s>$143</s> save $64</span></p><p>Every playbook and kit in one download, plus a bundle-exclusive Quick-Start Roadmap that tells you which kit to read first. One purchase, instant delivery, everything self-serve.</p><p><a class="btn primary" href="https://koalstin.gumroad.com/l/yzbumc" data-track="product_bundle_click">Get the library</a></p></div>
+      <div class="card" style="border-color:var(--accent)"><h3>The Complete Kestrelattice Library <span style="font-size:.75rem;color:var(--accent);font-weight:600">BEST VALUE</span></h3><p class="price" style="margin:8px 0">$79 <span style="font-size:.85rem;color:var(--muted);font-weight:400">one-time · 8 PDFs · <s>$143</s> save $64</span></p><p>Every playbook and kit in one download, plus a bundle-exclusive Quick-Start Roadmap that tells you which kit to read first. One purchase, instant delivery, everything self-serve.</p><p><a class="btn primary" href="https://koalstin.gumroad.com/l/yzbumc" data-track="product_bundle_click">Get the library</a></p></div>
       <div class="card"><h3>AI Agent Risk Audit Kit</h3><p class="price" style="margin:8px 0">$19 <span style="font-size:.85rem;color:var(--muted);font-weight:400">one-time · 16 pages</span></p><p>Scored risk-tier self-assessment, 40-point audit checklist, red-flag catalog, and remediation priority matrix.</p><p><a class="btn primary" href="https://koalstin.gumroad.com/l/sahva" data-track="product_audit_kit_click">Get it</a></p></div>
       <div class="card"><h3>Agent Incident Response Runbook</h3><p class="price" style="margin:8px 0">$19 <span style="font-size:.85rem;color:var(--muted);font-weight:400">one-time · 13 pages</span></p><p>Severity levels, triage procedures, kill-switch and rollback checklists, blameless postmortem template, first-30-minutes card.</p><p><a class="btn primary" href="https://koalstin.gumroad.com/l/jbngbu" data-track="product_runbook_click">Get it</a></p></div>
       <div class="card"><h3>100 Agent Use Cases, Pre-Tiered</h3><p class="price" style="margin:8px 0">$19 <span style="font-size:.85rem;color:var(--muted);font-weight:400">one-time · 12 pages</span></p><p>100 concrete use cases across six functions, each pre-tiered with rationale and key controls — plus a blank worksheet.</p><p><a class="btn primary" href="https://koalstin.gumroad.com/l/slexhv" data-track="product_use_cases_click">Get it</a></p></div>
@@ -429,29 +439,13 @@ handling — every bracket fill-in, ready to adopt as-is.</pre>
   </div>
 </section>
 
-<section id="stack">
-  <div class="wrap">
-    <h2>Shipped on a $0 open-source stack</h2>
-    <p class="lede">This entire operation — hosting, analytics, link tracking, outreach, and the AI bot fleet — runs on free tiers and open-source models. The plan and its limits are in <a href="evidence/pricing-and-economics.md">the economics</a>.</p>
-    <div style="overflow-x:auto">
-    <table>
-      <tr><th>Layer</th><th>Tool</th><th>Free limits</th></tr>
-      <tr><td>Hosting</td><td>GitHub Pages</td><td>Static site, unlimited public repos, free TLS</td></tr>
-      <tr><td>Analytics</td><td>Google Analytics 4</td><td>Unlimited standard event tracking</td></tr>
-      <tr><td>Link tracking</td><td>Dub.co / Short.io</td><td>25 links/mo · 1,000 branded links/mo</td></tr>
-      <tr><td>Outbound email</td><td>Gmail</td><td>500 emails / 24 hrs</td></tr>
-      <tr><td>Community</td><td>LinkedIn / Reddit</td><td>~100 connections/week · 9:1 content ratio</td></tr>
-      <tr><td>AI models</td><td>Groq · Mistral · Google AI Studio</td><td>Open-weight models only (Llama, Mistral, Gemma, Qwen) · ~30K requests/day free · auto-failover between providers</td></tr>
-    </table>
-    </div>
-  </div>
-</section>
+
 </main>
 
 <footer>
   <div class="wrap">
-    <span>© 2026 GhostCorp · Kestrelattice · Updated September 2026</span>
-    <span><a href="LICENSE">MIT License</a> · <a href="https://github.com/koalstingkdelaney-gif/kestrelattice">Source on GitHub</a> · <a href="evidence/buyer-demand-ledger.md">Evidence ledger</a> · <a href="sitemap.xml">Sitemap</a> · <a href="admin.html">Admin</a></span>
+    <span>© 2026 GhostCorp · Kestrelattice · An independent studio</span>
+    <span><a href="mailto:koalstin.g.k.delaney@gmail.com">Contact</a> · <a href="LICENSE">MIT License</a> · <a href="https://github.com/koalstingkdelaney-gif/kestrelattice">Source on GitHub</a> · <a href="evidence/buyer-demand-ledger.md">Evidence ledger</a> · <a href="sitemap.xml">Sitemap</a> · <a href="admin.html">Admin</a></span>
   </div>
 </footer>
 
@@ -461,7 +455,7 @@ handling — every bracket fill-in, ready to adopt as-is.</pre>
 </div>
 
 <script>
-  // Analytics: lightweight click tracking (no-ops until a real GA4 ID is installed).
+  // Analytics: lightweight click tracking for key conversion events.
   document.addEventListener("click", function(e){
     const el = e.target.closest("[data-track]");
     if (el) track(el.getAttribute("data-track"), { link_text: (el.textContent || "").trim().slice(0, 80) });
