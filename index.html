@@ -81,8 +81,10 @@
   :root{
     --bg:#121212; --panel:#1c1a18; --panel2:#232019; --line:#332e26;
     --text:#e8e2d8; --muted:#9a917f; --accent:#e07a5f; --accent-dim:#b9634b; --ok:#7fbf7f;
+    --glow:rgba(224,122,95,.12);
   }
   *{margin:0;padding:0;box-sizing:border-box}
+  ::selection{background:var(--accent);color:#161210}
   html{scroll-behavior:smooth}
   body{background:var(--bg);color:var(--text);font-family:ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;line-height:1.6}
   .wrap{max-width:1080px;margin:0 auto;padding:0 24px}
@@ -101,7 +103,15 @@
   nav a:hover{color:var(--accent)}
   .nav-cta{background:var(--accent);color:#161210!important;font-weight:600;padding:8px 16px;border-radius:7px;font-size:.88rem}
   .nav-cta:hover{background:var(--accent-dim);text-decoration:none}
-  .hero{padding:88px 0 64px;text-align:center}
+  .hero{padding:88px 0 64px;text-align:center;position:relative;overflow:hidden}
+  .hero::before{content:"";position:absolute;inset:0;pointer-events:none;background:
+    radial-gradient(560px 340px at 50% -60px, var(--glow), transparent 70%),
+    radial-gradient(660px 400px at 88% 6%, rgba(224,122,95,.06), transparent 70%),
+    radial-gradient(660px 400px at 12% 6%, rgba(224,122,95,.05), transparent 70%),
+    radial-gradient(2px 2px at 22% 30%, rgba(224,122,95,.35), transparent 100%),
+    radial-gradient(2px 2px at 78% 42%, rgba(224,122,95,.28), transparent 100%),
+    radial-gradient(2px 2px at 50% 18%, rgba(224,122,95,.32), transparent 100%)}
+  .hero>*{position:relative;z-index:1}
   .pill{display:inline-block;border:1px solid var(--accent-dim);color:var(--accent);border-radius:999px;padding:5px 16px;font-size:.8rem;letter-spacing:.12em;text-transform:uppercase;margin-bottom:22px}
   h1{font-size:clamp(2rem,5vw,3.4rem);font-weight:800;line-height:1.12;letter-spacing:-.02em}
   h1 em{color:var(--accent);font-style:normal}
@@ -110,16 +120,17 @@
   .proof{display:inline-flex;align-items:center;gap:7px;font-size:.82rem;color:var(--muted);border:1px solid var(--line);border-radius:999px;padding:6px 14px}
   .proof b{color:var(--ok);font-weight:700}
   .cta-row{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
-  .btn{display:inline-block;border-radius:8px;padding:13px 26px;font-weight:600;font-size:1rem;cursor:pointer}
-  .btn.primary{background:var(--accent);color:#161210}
-  .btn.primary:hover{background:var(--accent-dim);text-decoration:none}
+  .btn{display:inline-block;border-radius:8px;padding:13px 26px;font-weight:600;font-size:1rem;cursor:pointer;transition:background .16s ease,border-color .16s ease,transform .16s ease,box-shadow .16s ease}
+  .btn.primary{background:var(--accent);color:#161210;box-shadow:0 6px 22px rgba(224,122,95,.22)}
+  .btn.primary:hover{background:var(--accent-dim);text-decoration:none;box-shadow:0 8px 26px rgba(224,122,95,.30)}
   .btn.ghost{border:1px solid var(--line);color:var(--text)}
   .btn.ghost:hover{border-color:var(--accent);text-decoration:none}
   section{padding:64px 0;border-top:1px solid var(--line)}
   h2{font-size:1.7rem;font-weight:700;letter-spacing:-.01em;margin-bottom:10px}
   .lede{color:var(--muted);max-width:680px;margin-bottom:36px}
   .grid{display:grid;gap:18px;grid-template-columns:repeat(auto-fit,minmax(240px,1fr))}
-  .card{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:24px}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:24px;transition:transform .18s ease,border-color .18s ease,box-shadow .18s ease}
+  .card:hover{transform:translateY(-3px);border-color:var(--accent-dim);box-shadow:0 12px 32px rgba(0,0,0,.38)}
   .card h3{font-size:1.05rem;margin-bottom:8px}
   .card p{color:var(--muted);font-size:.93rem}
   .stat{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:22px;text-align:center}
@@ -176,7 +187,7 @@
     .sticky-buy .btn{padding:10px 20px;font-size:.9rem}
     body{padding-bottom:64px}
   }
-  @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+  @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.card,.btn{transition:none}.card:hover{transform:none}.hero::before{display:none}}
 </style>
 </head>
 <body>
