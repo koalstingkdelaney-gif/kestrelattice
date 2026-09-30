@@ -6,7 +6,7 @@ renders a 1200x1600 cover per product in assets/covers/<gumroad_id>.png
 using the ghostcorpnet dark-slate/terracotta brand. Idempotent: skips
 covers that already exist unless --force is passed.
 """
-import json, os, sys, textwrap
+import json, os, re, sys, textwrap
 from PIL import Image, ImageDraw, ImageFont
 
 BASE = os.path.expanduser("~/workspace/goals/kestrelattice-autonomous-growth/hidden_files")
@@ -48,24 +48,32 @@ def products():
     for pid, title, price, tag in ORIGINALS:
         out.append({"id": pid, "title": title, "price": price, "tagline": tag})
         seen.add(pid)
-    path = os.path.join(BASE, "marketplace", "pending-listings.jsonl")
-    if os.path.exists(path):
-        with open(path) as f:
-            for line in f:
-                line = line.strip()
-                if not line:
-                    continue
-                try:
-                    p = json.loads(line)
-                except json.JSONDecodeError:
-                    continue
-                pid = p["gumroad_url"].rstrip("/").split("/")[-1]
-                if pid in seen:
-                    continue
-                seen.add(pid)
-                out.append({"id": pid, "title": p["product_title"],
-                            "price": p.get("price_usd", 19),
-                            "tagline": p.get("tagline", "")})
+    for fname in ("pending-listings.jsonl", "pending-packs.jsonl"):
+        path = os.path.join(BASE, "marketplace", fname)
+        if os.path.exists(path):
+            with open(path) as f:
+                for line in f:
+                    line = line.strip()
+                    if not line:
+                        continue
+                    try:
+                        p = json.loads(line)
+                    except json.JSONDecodeError:
+                        continue
+                    url = p.get("gumroad_url") or ""
+                    m = re.search(r"/l/([a-z0-9-]+)", url)
+                    if m:
+                        pid = m.group(1)
+                    elif str(p.get("item_code", "")).upper().startswith("PACK-"):
+                        pid = p["item_code"].lower().replace("_", "-")
+                    else:
+                        continue
+                    if pid in seen:
+                        continue
+                    seen.add(pid)
+                    out.append({"id": pid, "title": p["product_title"],
+                                "price": p.get("price_usd", 19),
+                                "tagline": p.get("tagline", "")})
     return out
 
 def render(title, price, tagline):
