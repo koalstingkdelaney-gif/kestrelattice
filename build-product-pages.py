@@ -12,6 +12,23 @@ SITE = os.path.expanduser("~/workspace/kestrelattice")
 HIDDEN = os.path.expanduser("~/workspace/goals/kestrelattice-autonomous-growth/hidden_files")
 BASE_URL = "https://koalstingkdelaney-gif.github.io/kestrelattice"
 
+_BOILER = ("A complete, zero-placeholder template for teams governing AI agents in production: "
+           "policy gates, audit trails, cost controls.")
+
+def fix_tagline(t):
+    """Repair truncated boilerplate taglines (micro-forge sometimes cuts them mid-word)."""
+    t = t or ""
+    if "A complete, zero-placeholder" in t and "cost controls." not in t:
+        t = re.sub(r"A complete, zero-placeholder.*$", _BOILER, t)
+    t = t.replace(
+        "A complete, zero-placeholder draft for teams governing AI agents in production: policy gates, audit trails, cost controls.",
+        _BOILER)
+    return t.replace(" -- ", " \u2014 ")
+
+def fmt_price(p):
+    f = float(p)
+    return str(int(f)) if f.is_integer() else str(f)
+
 ORIGINALS = [
     ("hdigmr", "the-playbook-studio-edition", "The Playbook \u2014 Studio Edition", 29,
      "The governed-agent playbook: policies, schemas, and rollout in one PDF.",
@@ -208,8 +225,8 @@ def main():
     mans = manuscripts()
     products = []
     for gid, slug, title, price, tagline, inside in ORIGINALS:
-        products.append(dict(gid=gid, slug=slug, title=title, price=price,
-                             tagline=tagline, description=tagline, inside=inside,
+        products.append(dict(gid=gid, slug=slug, title=title, price=fmt_price(price),
+                             tagline=fix_tagline(tagline), description=fix_tagline(tagline), inside=inside,
                              gumroad_url=f"https://koalstin.gumroad.com/l/{gid}"))
     for p in packs:
         url = p.get("gumroad_url", "")
@@ -226,8 +243,8 @@ def main():
             inside = ["Complete, zero-placeholder document", "Ready to adopt as-is",
                       "Grounded in production agent-governance practice"]
         products.append(dict(gid=gid, slug=slugify(title), title=title,
-                             price=p.get("price_usd", 19),
-                             tagline=p.get("tagline", ""), description=p.get("description", ""),
+                             price=fmt_price(p.get("price_usd", 19)),
+                             tagline=fix_tagline(p.get("tagline", "")), description=p.get("description", ""),
                              inside=inside, gumroad_url=url))
 
     # render pages

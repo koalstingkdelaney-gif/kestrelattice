@@ -18,6 +18,24 @@ products = _mod.products
 SITE = os.path.expanduser("~/workspace/kestrelattice")
 BASE_URL = "https://koalstingkdelaney-gif.github.io/kestrelattice"
 
+_BOILER = ("A complete, zero-placeholder template for teams governing AI agents in production: "
+           "policy gates, audit trails, cost controls.")
+
+def fix_tagline(t):
+    """Repair truncated boilerplate taglines (micro-forge sometimes cuts them mid-word)."""
+    import re as _re
+    t = t or ""
+    if "A complete, zero-placeholder" in t and "cost controls." not in t:
+        t = _re.sub(r"A complete, zero-placeholder.*$", _BOILER, t)
+    t = t.replace(
+        "A complete, zero-placeholder draft for teams governing AI agents in production: policy gates, audit trails, cost controls.",
+        _BOILER)
+    return t.replace(" -- ", " \u2014 ")
+
+def fmt_price(p):
+    f = float(p)
+    return str(int(f)) if f.is_integer() else str(f)
+
 PAGE = """<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -126,8 +144,8 @@ def main():
         cards.append(CARD.format(
             pid=html.escape(pid),
             title=html.escape(p["title"]),
-            tagline=html.escape(p.get("tagline", "")),
-            price=p["price"],
+            tagline=html.escape(fix_tagline(p.get("tagline", ""))),
+            price=fmt_price(p["price"]),
             url=f"https://koalstin.gumroad.com/l/{html.escape(pid)}",
             tags=html.escape(tags),
             slug=ORIGINAL_SLUGS.get(pid, slugify(p["title"])),
@@ -178,10 +196,10 @@ def main():
     # homepage bundle card (keep file count + savings math fresh, data-driven)
     import re as _re2
     indiv = [p for p in prods if p["id"] != "yzbumc"]
-    _n, _val = len(indiv), int(sum(p["price"] for p in indiv))
+    _n, _val = len(indiv), int(sum(float(p["price"]) for p in indiv))
     _save = _val - 79
-    h = _re2.sub(r"one-time · \d+ (?:PDFs|files) · <s>\$\d+(?:\.\d+)?</s> save \$\d+(?:\.\d+)?",
-                 f"one-time · {_n} files · <s>${_val}</s> save ${_save}", h)
+    h = _re2.sub(r"one-time · \d+ (?:PDFs|files) · <s>\$[\d,.]+</s> save \$[\d,.]+",
+                 f"one-time · {_n} files · <s>${_val:,}</s> save ${_save:,}", h)
     with open(idx, "w") as f:
         f.write(h)
     print(f"catalog: {len(prods)} products -> products/index.html")
