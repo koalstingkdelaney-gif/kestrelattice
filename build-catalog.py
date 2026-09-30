@@ -45,6 +45,8 @@ PAGE = """<!DOCTYPE html>
 <meta name="description" content="Every ghostcorpnet self-serve PDF: agent governance checklists, runbooks, worksheets and kits. Instant download.">
 <meta name="theme-color" content="#1a1f2e">
 <link rel="canonical" href="https://koalstingkdelaney-gif.github.io/kestrelattice/products/">
+<link rel="preconnect" href="https://koalstin.gumroad.com">
+<link rel="dns-prefetch" href="https://koalstin.gumroad.com">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Product Catalog — ghostcorpnet">
 <meta property="og:description" content="Every ghostcorpnet self-serve PDF: agent governance checklists, runbooks, worksheets and kits. Instant download.">
@@ -80,7 +82,7 @@ nav.main a:hover{color:var(--accent-bright)}
 .hero h1{font-size:clamp(1.7rem,3.4vw + .8rem,2.4rem);font-weight:800;letter-spacing:-.02em;margin-bottom:10px}
 .lede{color:var(--muted);max-width:620px;margin:0 auto;font-size:.98rem}
 .filters{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin:26px 0}
-.chip{border:1px solid var(--line);background:var(--panel);color:var(--muted);border-radius:999px;padding:7px 15px;font-size:.84rem;cursor:pointer;font-family:inherit;transition:all .16s var(--ease)}
+.chip{border:1px solid var(--line);background:var(--panel);color:var(--muted);border-radius:999px;padding:7px 15px;font-size:.84rem;letter-spacing:.06em;cursor:pointer;font-family:inherit;transition:all .16s var(--ease)}
 .chip:hover{border-color:var(--accent-dim);color:var(--text)}
 .chip.active{background:var(--accent);border-color:var(--accent);color:var(--accent-ink);font-weight:700}
 .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:18px;padding:8px 0 64px}
@@ -88,7 +90,7 @@ nav.main a:hover{color:var(--accent-bright)}
 .card:hover{border-color:var(--accent-dim);transform:translateY(-3px);box-shadow:0 14px 34px rgba(0,0,0,.4)}
 .card img{width:100%;aspect-ratio:4/3;object-fit:cover;display:block;background:#0b0a09}
 .card .body{padding:16px;display:flex;flex-direction:column;gap:7px;flex:1}
-.card h2{font-size:.98rem;line-height:1.35;font-weight:700}
+.card h2{font-size:.98rem;line-height:1.35;font-weight:700;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
 .price{color:var(--text);font-weight:800}
 .card p.desc{color:var(--muted);font-size:.85rem;flex:1}
 .card .row{display:flex;gap:10px;padding:0 16px 16px}
@@ -100,6 +102,10 @@ footer.site{border-top:1px solid var(--line);background:var(--bg-soft);padding:2
 footer.site .wrap{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px 16px}
 footer.site a{color:var(--faint);margin-left:14px}
 footer.site a:hover{color:var(--accent-bright)}
+.skip{position:absolute;left:-9999px;top:0;background:var(--accent);color:var(--accent-ink);padding:10px 18px;font-weight:700;z-index:200;border-radius:0 0 8px 0}
+.skip:focus{left:0}
+.trust{color:var(--faint);font-size:.78rem;text-align:center;margin:-8px 0 14px}
+.result-count{color:var(--muted);font-size:.86rem;text-align:center;margin:4px 0 0}
 .hidden{display:none!important}
 @media(max-width:640px){nav.main a:not(:last-child){display:none}footer.site .wrap{justify-content:center;text-align:center}footer.site a{margin:0 7px}}
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{transition:none!important;animation:none!important}}
@@ -108,28 +114,32 @@ footer.site a:hover{color:var(--accent-bright)}
 </style>
 </head>
 <body>
+<a class="skip" href="#main">Skip to content</a>
 <header class="site"><div class="wrap">
 <a class="logo" href="../">
 <svg width="24" height="24" viewBox="0 0 26 26" fill="none" aria-hidden="true"><circle cx="5" cy="6" r="2.4" fill="#e07a5f"/><circle cx="21" cy="6" r="2.4" fill="#e07a5f"/><circle cx="13" cy="13" r="2.4" fill="#e07a5f"/><circle cx="5" cy="20" r="2.4" fill="#e07a5f"/><circle cx="21" cy="20" r="2.4" fill="#e07a5f"/><path d="M6.6 7.4L11.2 11.8M19.4 7.4L14.8 11.8M6.6 18.6L11.2 14.2M19.4 18.6L14.8 14.2" stroke="#e07a5f" stroke-width="1.4"/></svg>
 ghostcorpnet</a>
 <nav class="main" aria-label="Primary"><a href="../">Home</a><a href="../articles/">Articles</a><a href="../#faq">FAQ</a></nav>
 </div></header>
+<main id="main">
 <div class="wrap hero">
 <h1>The Catalog</h1>
 <p class="lede">Every self-serve PDF in the ghostcorpnet library — checklists, runbooks, worksheets, and kits for governing AI agents. Buy once, download instantly, yours forever.</p>
 </div>
-<div class="wrap"><div class="filters" id="filters"></div></div>
+<div class="wrap"><p class="result-count" id="result-count" aria-live="polite">__COUNT__</p><div class="filters" id="filters"></div></div>
 <div class="wrap"><div class="grid" id="grid">
 __CARDS__
 </div></div>
+</main>
 <footer class="site"><div class="wrap">
 <span>© 2026 GhostCorp · ghostcorpnet · An independent studio</span>
 <span><a href="mailto:koalstin.g.k.delaney@gmail.com">Contact</a><a href="../articles/">Articles</a><a href="../sitemap.xml">Sitemap</a><a href="../admin-login.html">Admin</a></span>
 </div></footer>
 <script>
-const grid=document.getElementById('grid'),filters=document.getElementById('filters');
+const grid=document.getElementById('grid'),filters=document.getElementById('filters'),rc=document.getElementById('result-count');
+const updateCount=()=>{const v=[...grid.querySelectorAll('.card')].filter(c=>!c.classList.contains('hidden')).length;rc.textContent=v===0?'No products match':(v===1?'1 product':v+' products')};
 const tags=[...new Set([...grid.querySelectorAll('.card')].flatMap(c=>c.dataset.tags.split('|').filter(Boolean)))].sort();
-const mk=(label,tag)=>{const b=document.createElement('button');b.className='chip'+(tag===''?' active':'');b.textContent=label;b.onclick=()=>{document.querySelectorAll('.chip').forEach(x=>x.classList.remove('active'));b.classList.add('active');document.querySelectorAll('.card').forEach(c=>{c.classList.toggle('hidden',tag!==''&&!c.dataset.tags.split('|').includes(tag))})};return b};
+const mk=(label,tag)=>{const b=document.createElement('button');b.className='chip'+(tag===''?' active':'');b.textContent=label;b.onclick=()=>{document.querySelectorAll('.chip').forEach(x=>x.classList.remove('active'));b.classList.add('active');document.querySelectorAll('.card').forEach(c=>{c.classList.toggle('hidden',tag!==''&&!c.dataset.tags.split('|').includes(tag))});updateCount()};return b};
 filters.appendChild(mk('All',''));
 tags.forEach(t=>filters.appendChild(mk(t.replace(/-/g,' '),t)));
 </script>
@@ -141,6 +151,7 @@ CARD = """<div class="card" data-tags="{tags}">
 <a href="{slug}/" style="text-decoration:none;color:inherit;display:block"><img src="../assets/covers/{pid}.png" alt="{title} cover" loading="lazy">
 <div class="body"><h2>{title}</h2><p class="desc">{tagline}</p><p class="price">${price} <span style="color:var(--muted);font-weight:400;font-size:.85rem">one-time</span></p></div></a>
 <div class="row"><a class="btn" href="{url}">Get it</a><a class="btn ghost" href="{slug}/">Details</a></div>
+<p class="trust">Instant delivery via Gumroad</p>
 </div>
 """
 
@@ -204,7 +215,7 @@ def main():
     }
     page = PAGE.replace("__ITEMLIST__", json.dumps(itemlist, ensure_ascii=False, indent=2))
     with open(os.path.join(outdir, "index.html"), "w") as f:
-        f.write(page.replace("__CARDS__", "\n".join(cards)))
+        f.write(page.replace("__CARDS__", "\n".join(cards)).replace("__COUNT__", f"{len(prods)} products"))
 
     # sitemap entry
     sm = os.path.join(SITE, "sitemap.xml")
