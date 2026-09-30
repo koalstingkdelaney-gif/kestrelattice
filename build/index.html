@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Build on ghostcorpnet — Pack Standard v1</title>
+<meta name="description" content="Publish interoperable AI agent governance packs: policy templates, checklists, runbooks, and schemas. The open ghostcorpnet Pack Standard v1, a free starter kit, and certification checklist.">
+<link rel="canonical" href="https://koalstingkdelaney-gif.github.io/kestrelattice/build/">
+<meta name="theme-color" content="#101010">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ghostcorpnet by GhostCorp">
+<meta property="og:title" content="Build on ghostcorpnet — Pack Standard v1">
+<meta property="og:description" content="An open spec for interoperable AI agent governance packs. Free starter kit, certification checklist, and a directory for third-party packs.">
+<meta property="og:url" content="https://koalstingkdelaney-gif.github.io/kestrelattice/build/">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 26 26'%3E%3Ccircle cx='5' cy='6' r='2.4' fill='%23e07a5f'/%3E%3Ccircle cx='21' cy='6' r='2.4' fill='%23e07a5f'/%3E%3Ccircle cx='13' cy='13' r='2.4' fill='%23e07a5f'/%3E%3Ccircle cx='5' cy='20' r='2.4' fill='%23e07a5f'/%3E%3Ccircle cx='21' cy='20' r='2.4' fill='%23e07a5f'/%3E%3C/svg%3E">
+<!-- Google Analytics 4 -->
+<script>
+  (function(){
+    try {
+      if (new URLSearchParams(location.search).get('admin') === '1') {
+        localStorage.setItem('kestrelattice_admin', '1');
+      }
+      if (localStorage.getItem('kestrelattice_admin') === '1') {
+        window.__klExcludeSelf = true;
+      }
+    } catch(e){}
+  })();
+</script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-541TCHWW98"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  if (!window.__klExcludeSelf) {
+    gtag('js', new Date());
+    gtag('config', 'G-541TCHWW98');
+  }
+  function track(name, params){ try { if (!window.__klExcludeSelf) gtag('event', name, params || {}); } catch(e){} }
+</script>
+<style>
+  :root{
+    --bg:#0f0e0d; --bg-soft:#141210; --panel:#1a1714; --panel2:#211c17;
+    --line:#2c261e; --line-soft:#221d15;
+    --text:#f1ebdd; --muted:#a89d89; --faint:#7d7461;
+    --accent:#e07a5f; --accent-bright:#f09474; --accent-dim:#c06a4e; --accent-ink:#1a0f08;
+    --ok:#8acb8a;
+    --radius:12px; --radius-sm:8px;
+    --ease:cubic-bezier(.2,.7,.25,1);
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  ::selection{background:var(--accent);color:var(--accent-ink)}
+  body{background:radial-gradient(900px 420px at 50% -6%, rgba(224,122,95,.06), transparent 62%),var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;line-height:1.6;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:1040px;margin:0 auto;padding:0 24px}
+  a{color:var(--accent);text-decoration:none;transition:color .16s var(--ease)}
+  a:hover{text-decoration:underline}
+  a:focus-visible,button:focus-visible{outline:2px solid var(--accent-bright);outline-offset:3px;border-radius:4px}
+  header.site{border-bottom:1px solid var(--line);position:sticky;top:0;background:rgba(15,14,13,.92);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);z-index:100}
+  header.site .wrap{display:flex;align-items:center;justify-content:space-between;min-height:58px}
+  .logo{display:flex;align-items:center;gap:9px;font-weight:700;font-size:1.05rem;color:var(--text)}
+  .logo:hover{text-decoration:none;color:var(--accent-bright)}
+  nav.main{display:flex;align-items:center;gap:20px}
+  nav.main a{color:var(--muted);font-size:.88rem;font-weight:500}
+  nav.main a:hover{color:var(--accent-bright)}
+  .hero{padding:52px 0 12px;text-align:center}
+  .hero h1{font-size:clamp(1.8rem,3.4vw + .8rem,2.5rem);font-weight:800;letter-spacing:-.02em;margin-bottom:12px}
+  .lede{color:var(--muted);max-width:640px;margin:0 auto;font-size:1rem}
+  .cta-row{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin:26px 0 8px}
+  .btn{display:inline-block;background:linear-gradient(180deg,var(--accent-bright),var(--accent));color:var(--accent-ink);font-weight:700;padding:12px 22px;border-radius:var(--radius-sm);font-size:.92rem;transition:transform .16s var(--ease)}
+  .btn:hover{transform:translateY(-1px);text-decoration:none}
+  .btn.ghost{background:transparent;color:var(--accent);border:1px solid var(--line)}
+  .btn.ghost:hover{border-color:var(--accent-dim);color:var(--accent-bright)}
+  section.block{padding:36px 0 8px}
+  section.block h2{font-size:1.35rem;font-weight:800;letter-spacing:-.01em;margin-bottom:6px}
+  section.block .sub{color:var(--muted);font-size:.92rem;margin-bottom:18px;max-width:700px}
+  .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px}
+  .card{background:linear-gradient(180deg,var(--panel),var(--bg-soft));border:1px solid var(--line);border-radius:var(--radius);padding:20px}
+  .card h3{font-size:1rem;margin-bottom:8px}
+  .card p,.card li{color:var(--muted);font-size:.88rem}
+  .card ul{list-style:none;display:grid;gap:6px}
+  .card li::before{content:"→ ";color:var(--accent)}
+  .card code{color:var(--accent-bright);font-size:.82em}
+  pre{background:#0b0a09;border:1px solid var(--line);border-radius:var(--radius-sm);padding:18px;overflow-x:auto;font-size:.8rem;line-height:1.55;color:#d8cfb8;margin:14px 0}
+  .tree{color:#d8cfb8}
+  .tree .req{color:var(--accent-bright)}
+  .checklist{list-style:none;display:grid;gap:10px;margin-top:14px}
+  .checklist li{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius-sm);padding:13px 16px;font-size:.9rem;color:var(--muted);display:flex;gap:12px;align-items:flex-start}
+  .checklist li b{color:var(--text);font-weight:700}
+  .checklist .n{flex:0 0 26px;height:26px;border-radius:50%;background:var(--accent-soft);border:1px solid var(--accent-dim);color:var(--accent-bright);font-size:.78rem;font-weight:700;display:flex;align-items:center;justify-content:center}
+  .badge-box{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px;margin-top:14px}
+  .badge-card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:20px}
+  .badge-card .badge{display:inline-block;border:1px solid var(--accent-dim);color:var(--accent-bright);border-radius:999px;padding:6px 14px;font-size:.85rem;font-weight:700;margin-bottom:10px}
+  .badge-card p{color:var(--muted);font-size:.88rem}
+  .badge-card p b{color:var(--text)}
+  .note{background:var(--panel);border-left:3px solid var(--accent);border-radius:0 var(--radius-sm) var(--radius-sm) 0;padding:14px 18px;color:var(--muted);font-size:.88rem;margin:18px 0}
+  .note b{color:var(--text)}
+  footer.site{border-top:1px solid var(--line);background:var(--bg-soft);padding:24px 0;color:var(--muted);font-size:.82rem;margin-top:48px}
+  footer.site .wrap{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px 16px}
+  footer.site a{color:var(--faint);margin-left:14px}
+  footer.site a:hover{color:var(--accent-bright)}
+  h1,h2{text-wrap:balance}
+  @media(max-width:640px){nav.main a:not(:last-child){display:none}footer.site .wrap{justify-content:center;text-align:center}footer.site a{margin:0 7px}}
+  @media(prefers-reduced-motion:reduce){*,*::before,*::after{transition:none!important;animation:none!important}}
+</style>
+</head>
+<body>
+<header class="site"><div class="wrap">
+<a class="logo" href="../">
+<svg width="24" height="24" viewBox="0 0 26 26" fill="none" aria-hidden="true"><circle cx="5" cy="6" r="2.4" fill="#e07a5f"/><circle cx="21" cy="6" r="2.4" fill="#e07a5f"/><circle cx="13" cy="13" r="2.4" fill="#e07a5f"/><circle cx="5" cy="20" r="2.4" fill="#e07a5f"/><circle cx="21" cy="20" r="2.4" fill="#e07a5f"/><path d="M6.6 7.4L11.2 11.8M19.4 7.4L14.8 11.8M6.6 18.6L11.2 14.2M19.4 18.6L14.8 14.2" stroke="#e07a5f" stroke-width="1.4"/></svg>
+ghostcorpnet</a>
+<nav class="main" aria-label="Primary"><a href="../">Home</a><a href="../products/">Catalog</a><a href="../articles/">Articles</a></nav>
+</div></header>
+
+<div class="wrap hero">
+<h1>Build on ghostcorpnet</h1>
+<p class="lede">ghostcorpnet is becoming the governance layer for the agent economy. Publish interoperable <b>packs</b> — policy templates, checklists, runbooks, and schemas — under an open standard. The platform is <b>seeded by the fleet</b>: the first wave of packs is fleet-built studio packs, launching the directory populated on day one. Outside builders are welcome when they come — same spec, same validation.</p>
+<div class="cta-row">
+<a class="btn" href="../assets/ghostcorpnet-starter-kit.zip" download data-track="starter_kit_download">Download the starter kit</a>
+<a class="btn ghost" href="#standard">Read the spec summary</a>
+</div>
+<p class="lede" style="font-size:.82rem;color:var(--faint)">Free ZIP · MIT-licensed sample pack · No signup, no account.</p>
+</div>
+
+<div class="wrap">
+<section class="block" id="standard">
+<h2>The Pack Standard v1</h2>
+<p class="sub">A pack is a versioned bundle of agent-governance content that any tool — ours or yours — can read and verify. The full spec lives in the repo; this is the working summary.</p>
+<div class="cards">
+<div class="card">
+<h3>Anatomy</h3>
+<pre class="tree">my-pack/
+├── <span class="req">pack.json</span>   manifest
+├── <span class="req">README.md</span>   what &amp; who
+├── <span class="req">LICENSE</span>      license file
+└── policies/    ≥1 artifact</pre>
+</div>
+<div class="card">
+<h3>Required files</h3>
+<ul>
+<li><code>pack.json</code> manifest (validated)</li>
+<li><code>README.md</code> — plain-language summary</li>
+<li><code>LICENSE</code> file matching the manifest license</li>
+<li>At least one governance artifact — a PDF (<code>pack.pdf</code> by convention): playbook, checklist, runbook, or worksheet</li>
+</ul>
+</div>
+<div class="card">
+<h3>Versioning</h3>
+<ul>
+<li>Packs use semver: <code>MAJOR.MINOR.PATCH</code></li>
+<li>Major = breaking change; minor = new content; patch = fixes</li>
+<li><code>requires_standard</code> declares the supported standard range (e.g. <code>&gt;=1.0</code>)</li>
+<li>Tooling refuses mismatched packs and says so plainly</li>
+</ul>
+</div>
+<div class="card">
+<h3>Integrity</h3>
+<ul>
+<li>Every pack carries a <code>sha256</code> checksum of its contents</li>
+<li>Directory verifies it on submission — mismatch rejects the listing</li>
+<li>Re-compute per version; checksums are per-version</li>
+</ul>
+</div>
+</div>
+</section>
+
+<section class="block" id="manifest">
+<h2>The manifest: pack.json</h2>
+<p class="sub">Every pack declares itself in one JSON file. The v1 baseline schema: <code>manifest_version</code>, <code>standard</code> (<code>"ghostcorpnet-pack/1.0"</code>), <code>name</code> (kebab-case slug), <code>title</code>, <code>version</code>, <code>builder</code> (<code>studio</code>, <code>kind</code>, <code>url</code>), <code>license</code>, <code>artifacts</code> (each: <code>path</code> + <code>kind</code> + <code>title</code>), <code>requires_standard</code>.</p>
+<pre>{
+  "manifest_version": 1,
+  "standard": "ghostcorpnet-pack/1.0",
+  "name": "agent-spend-guardrails",
+  "title": "Agent Spend Guardrails",
+  "version": "1.0.0",
+  "builder": {
+    "studio": "ghostcorpnet",
+    "kind": "ghostcorpnet-fleet",
+    "url": "https://koalstingkdelaney-gif.github.io/kestrelattice/directory/"
+  },
+  "license": "CC-BY-4.0",
+  "artifacts": [
+    { "path": "pack.pdf", "kind": "playbook",
+      "title": "Agent spend guardrails playbook" },
+    { "path": "schemas/budget.schema.json", "kind": "schema",
+      "title": "Budget envelope schema" }
+  ],
+  "requires_standard": ">=1.0"
+}</pre>
+</section>
+
+<section class="block" id="badges">
+<h2>Badge rules</h2>
+<p class="sub">Two badges, two different meanings. Neither implies partnership with, endorsement by, or revenue sharing with GhostCorp.</p>
+<div class="badge-box">
+<div class="badge-card">
+<span class="badge">Compatible with ghostcorpnet</span>
+<p><b>Meaning:</b> the pack validates against Pack Standard v1 and follows its content rules.<br><b>Who may use it:</b> anyone whose pack passes validation — no permission needed, no fee. Self-asserted; the directory independently verifies.</p>
+</div>
+<div class="badge-card">
+<span class="badge">Built on ghostcorpnet</span>
+<p><b>Meaning:</b> the pack passed the certification checklist below plus a human review.<br><b>Who may use it:</b> only authors who completed certification and received the licensed badge files. Misuse means removal from the directory.</p>
+</div>
+</div>
+</section>
+
+<section class="block" id="certification">
+<h2>Certification checklist</h2>
+<p class="sub">To earn the licensed <b>Built on ghostcorpnet</b> badge, a pack must clear every item:</p>
+<ol class="checklist">
+<li><span class="n">1</span><span><b>Valid manifest</b> — pack.json passes every validation rule (fields, name format, all section paths exist and are non-empty).</span></li>
+<li><span class="n">2</span><span><b>Real license</b> — a LICENSE file at the pack root, and the manifest license field matches it.</span></li>
+<li><span class="n">3</span><span><b>Complete README</b> — what the pack covers, who it's for, how to use each artifact, prerequisites.</span></li>
+<li><span class="n">4</span><span><b>Working examples</b> — every schema validates sample data; every template has its blanks clearly marked.</span></li>
+<li><span class="n">5</span><span><b>Checksum matches</b> — the manifest checksum reproduces from the pack contents.</span></li>
+<li><span class="n">6</span><span><b>Honest content</b> — no invented partnerships, stats, or claims; no executable code in required artifacts.</span></li>
+<li><span class="n">7</span><span><b>Human review</b> — a coordinator reviews the pack for quality and rule compliance before badge files are issued.</span></li>
+</ol>
+<div class="note"><b>Certification is a self-serve checklist.</b> The licensed badge files are issued per pack version after review. Certification of packs will be available as a guided product soon.</div>
+</section>
+
+<section class="block" id="directory">
+<h2>The directory</h2>
+<p class="sub">The directory launches populated with the fleet's launch wave of studio packs — niche governance packs, all Pack Standard v1 compliant. Outside builders are welcome when they come: same spec, same validation, same listing. Listings are free and link to each builder's own checkout.</p>
+<div class="cta-row">
+<a class="btn" href="../directory/" data-track="directory_link">Browse the directory</a>
+<a class="btn ghost" href="../assets/ghostcorpnet-starter-kit.zip" download data-track="starter_kit_download_2">Download the starter kit</a>
+</div>
+</section>
+</div>
+
+<footer class="site">
+  <div class="wrap">
+    <span>© 2026 GhostCorp · ghostcorpnet · An independent studio</span>
+    <span><a href="../">Home</a><a href="../products/">Catalog</a><a href="../articles/">Articles</a><a href="../sitemap.xml">Sitemap</a></span>
+  </div>
+</footer>
+
+<script>
+  document.addEventListener("click", function(e){
+    const el = e.target.closest("[data-track]");
+    if (el) track(el.getAttribute("data-track"), { link_text: (el.textContent || "").trim().slice(0, 80) });
+  }, { passive: true });
+</script>
+
+</body>
+</html>
