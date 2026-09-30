@@ -43,6 +43,20 @@ PAGE = """<!DOCTYPE html>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Product Catalog — Kestrelattice</title>
 <meta name="description" content="Every Kestrelattice self-serve PDF: agent governance checklists, runbooks, worksheets and kits. Instant download.">
+<link rel="canonical" href="https://koalstingkdelaney-gif.github.io/kestrelattice/products/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Product Catalog — Kestrelattice">
+<meta property="og:description" content="Every Kestrelattice self-serve PDF: agent governance checklists, runbooks, worksheets and kits. Instant download.">
+<meta property="og:url" content="https://koalstingkdelaney-gif.github.io/kestrelattice/products/">
+<meta property="og:image" content="https://koalstingkdelaney-gif.github.io/kestrelattice/assets/studio-edition-cover.jpg">
+<meta property="og:image:alt" content="Kestrelattice product catalog — governed agent mesh playbooks and kits">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Product Catalog — Kestrelattice">
+<meta name="twitter:description" content="Every Kestrelattice self-serve PDF: agent governance checklists, runbooks, worksheets and kits. Instant download.">
+<meta name="twitter:image" content="https://koalstingkdelaney-gif.github.io/kestrelattice/assets/studio-edition-cover.jpg">
+<script type="application/ld+json">
+__ITEMLIST__
+</script>
 <style>
 :root{--bg:#0f0e0d;--bg-soft:#141210;--panel:#1a1714;--panel2:#211c17;--line:#2c261e;--text:#f1ebdd;--muted:#a89d89;--faint:#7d7461;--accent:#e07a5f;--accent-bright:#f09474;--accent-dim:#c06a4e;--accent-ink:#1a0f08;--accent-soft:rgba(224,122,95,.1);--radius:12px;--radius-sm:8px;--ease:cubic-bezier(.2,.7,.25,1)}
 *{margin:0;padding:0;box-sizing:border-box}
@@ -169,8 +183,22 @@ def main():
         ))
     outdir = os.path.join(SITE, "products")
     os.makedirs(outdir, exist_ok=True)
+    itemlist = {
+        "@context": "https://schema.org",
+        "@type": "ItemList",
+        "name": "Kestrelattice product catalog",
+        "itemListElement": [
+            {"@type": "ListItem", "position": n, "item": {
+                "@type": "Product",
+                "name": p["title"],
+                "url": f"{BASE_URL}/products/{ORIGINAL_SLUGS.get(p['id'], slugify(p['title']))}/",
+                "offers": {"@type": "Offer", "price": fmt_price(p["price"]), "priceCurrency": "USD"},
+            }} for n, p in enumerate(sorted(prods, key=lambda x: (x["price"], x["title"])), 1)
+        ],
+    }
+    page = PAGE.replace("__ITEMLIST__", json.dumps(itemlist, ensure_ascii=False, indent=2))
     with open(os.path.join(outdir, "index.html"), "w") as f:
-        f.write(PAGE.replace("__CARDS__", "\n".join(cards)))
+        f.write(page.replace("__CARDS__", "\n".join(cards)))
 
     # sitemap entry
     sm = os.path.join(SITE, "sitemap.xml")
