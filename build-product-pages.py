@@ -29,6 +29,14 @@ def fmt_price(p):
     f = float(p)
     return str(int(f)) if f.is_integer() else str(f)
 
+def trunc_meta(text, limit=160):
+    """Truncate a meta description at a word boundary so it never cuts mid-word."""
+    text = text or ""
+    if len(text) <= limit:
+        return text
+    cut = text[:limit].rsplit(" ", 1)[0]
+    return cut + "\u2026"
+
 ORIGINALS = [
     ("hdigmr", "the-playbook-studio-edition", "The Playbook \u2014 Studio Edition", 29,
      "The governed-agent playbook: policies, schemas, and rollout in one PDF.",
@@ -54,7 +62,7 @@ ORIGINALS = [
      ["Access review runbook", "Re-tiering worksheet", "Grant inventory template", "Review sign-off pack"]),
     ("yzbumc", "complete-kestrelattice-library", "The Complete Kestrelattice Library", 79,
      "Every Kestrelattice PDF in one bundle.",
-     ["The Playbook \u2014 Studio Edition ($29)", "All seven $19 kits and guides", "Every micro-product released to date", "Free updates as the library grows"]),
+     ["The Playbook \u2014 Studio Edition ($29)", "All the $19 kits and guides", "Every micro-product released to date", "Free updates as the library grows"]),
 ]
 
 def slugify(t):
@@ -266,7 +274,7 @@ def main():
             "offers": {"@type": "Offer", "priceCurrency": "USD", "price": str(pr["price"]),
                        "availability": "https://schema.org/InStock",
                        "url": pr["gumroad_url"]}}, indent=2)
-        page = PAGE.format(title=esc(pr["title"]), meta=esc((pr["tagline"] or pr["description"])[:160]),
+        page = PAGE.format(title=esc(pr["title"]), meta=esc(trunc_meta(pr["tagline"] or pr["description"])),
                            page_url=page_url, jsonld=jsonld, gid=pr["gid"],
                            tagline=esc(pr["tagline"]), price=pr["price"],
                            gumroad_url=pr["gumroad_url"], description=esc(pr["description"]),
