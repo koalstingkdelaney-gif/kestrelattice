@@ -566,15 +566,39 @@ def build():
     Say the word and I'll walk you through it; after that, traffic charts appear here.</p></div>
   </section>
 
-  <div class="foot">Private page: unlinked and hidden from search engines, but anyone who
-  guesses the URL could open it — it shows real revenue figures. Say the word if you want
-  it hardened further.</div>
+  <div class="foot">Private: this panel is served only from your key-gated worker URL — it is not
+  on the public site and is never indexed. Bookmark your private link and don't share it.</div>
 </div>
 </body>
 </html>"""
     with open(OUT, "w") as f:
         f.write(body)
     print("wrote", OUT)
+    upload_private(body)
+
+
+def upload_private(html):
+    """Publish the dashboard to the key-gated worker route (not the public site)."""
+    import subprocess, tempfile
+    try:
+        sec = json.loads(read_file(os.path.join(HOME, "workspace/kestrelattice/worker/.secrets.json")))
+        wurl, skey = sec.get("worker_url", ""), sec.get("server_key", "")
+        if not wurl or not skey:
+            print("upload skipped: worker secrets missing")
+            return
+        # NOTE: Cloudflare WAF blocks python urllib — use curl.
+        with tempfile.NamedTemporaryFile("w", suffix=".html", delete=False) as f:
+            f.write(html)
+            tmp = f.name
+        r = subprocess.run(
+            ["curl", "-s", "-X", "POST", "-H", "x-server-key: " + skey,
+             "-H", "Content-Type: text/html; charset=utf-8",
+             "--data-binary", "@" + tmp, wurl.rstrip("/") + "/admin-upload"],
+            capture_output=True, text=True, timeout=90)
+        os.unlink(tmp)
+        print("private upload:", r.stdout.strip()[:120] or r.stderr.strip()[:120])
+    except Exception as e:
+        print("private upload failed:", e)
 
 
 if __name__ == "__main__":

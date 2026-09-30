@@ -14,7 +14,14 @@
  *   POST /seed             -> header x-server-key; body = full queue array
  *                            (one-time seed after deploy)
  *
- * KV binding: APPROVALS (single key "queue" -> JSON array).
+ * The private admin panel (key-gated, not on the public site):
+ *   POST /admin-upload     -> header x-server-key; body = raw HTML string.
+ *                            Stores the latest admin dashboard HTML in KV.
+ *   GET  /admin?key=<WRITE_KEY> -> serves the stored admin HTML (text/html).
+ *                            Wrong/missing key -> 403. This is the human's
+ *                            private bookmark; the public site has no admin page.
+ *
+ * KV binding: APPROVALS (keys: "queue" -> JSON array, "admin_html" -> string).
  * Secrets (wrangler secret put): WRITE_KEY, SERVER_KEY.
  */
 
@@ -102,6 +109,27 @@ export default {
       if (!Array.isArray(body)) return json({ ok: false, error: "bad_seed" }, 400);
       await writeQueue(env, body);
       return json({ ok: true, count: body.length });
+    }
+
+    if (req.method === "POST" && url.pathname === "/admin-upload" && isServer) {
+      const html = await req.text();
+      if (!html || html.length < 1000 || !html.includes("<html")) {
+        return json({ ok: false, error: "bad_html" }, 400);
+      }
+      await env.APPROVALS.put("admin_html", html);
+      return json({ ok: true, bytes: html.length });
+    }
+
+    if (req.method === "GET" && url.pathname === "/admin") {
+      const key = url.searchParams.get("key");
+      if (!key || key !== env.WRITE_KEY) {
+        return new Response("Not found", { status: 404 });
+      }
+      const html = await env.APPROVALS.get("admin_html");
+      if (!html) return new Response("Admin panel not uploaded yet", { status: 503 });
+      return new Response(html, {
+        headers: { "Content-Type": "text/html; charset=utf-8", "Cache-Control": "no-store" },
+      });
     }
 
     return json({ ok: false, error: "not_found" }, 404);
