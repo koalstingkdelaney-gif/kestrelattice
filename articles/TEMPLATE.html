@@ -2,6 +2,8 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
+<link rel="preconnect" href="https://gumroad.com">
+<link rel="preconnect" href="https://www.googletagmanager.com">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>{{TITLE}} — ghostcorpnet</title>
 <meta name="description" content="{{META_DESCRIPTION}}">
@@ -83,6 +85,10 @@ gtag('config', 'G-541TCHWW98');
   footer.site a{color:var(--faint);text-decoration:none;margin-left:14px}
   footer.site a:hover{color:var(--accent-bright)}
   @media(max-width:640px){nav.main a:not(:last-child){display:none}footer.site .wrap{justify-content:center;text-align:center}footer.site a{margin:0 7px}}
+
+  :focus-visible{outline:2px solid #e07a5f;outline-offset:2px}
+  @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
+  h1,h2{text-wrap:balance}
 </style>
 </head>
 <body>
@@ -97,11 +103,14 @@ gtag('config', 'G-541TCHWW98');
   <p class="crumb"><a href="../">Home</a> · <a href="./">Articles</a></p>
 
   <h1>{{TITLE}}</h1>
-  <p class="date">{{DATE_ISO}}</p>
+  <p class="date">{{DATE_ISO}} · <span class="reading-time" id="reading-time"></span></p>
 
   <article>
 {{BODY_HTML}}
   </article>
+<script>
+(function(){var t=document.querySelector('article').innerText||'';var w=t.trim().split(/\s+/).length;var m=Math.max(1,Math.ceil(w/200));document.getElementById('reading-time').textContent=m+' min read';})();
+</script>
 
   <div class="cta">
     <h2>Put this into practice</h2>

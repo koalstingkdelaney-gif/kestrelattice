@@ -199,6 +199,7 @@ gtag('config', 'G-541TCHWW98');
       <p class="price">${price}</p>
       <p class="instant">One-time · Instant PDF download via Gumroad</p>
       <a class="btn" href="{gumroad_url}">Get it now — ${price}</a>
+      <p class="trust">Instant delivery via Gumroad</p>
     </div>
   </div>
 
