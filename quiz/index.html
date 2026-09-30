@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>What's Your Agent Risk Tier? — Kestrelattice</title>
+<meta name="description" content="Answer 5 questions and get your AI agent risk tier plus the exact governance products that fix your biggest gaps. Free, 60 seconds.">
+<link rel="canonical" href="https://koalstingkdelaney-gif.github.io/kestrelattice/quiz/">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-541TCHWW98"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-541TCHWW98');
+</script>
+<style>
+  :root{--bg:#121212;--panel:#1c1a18;--line:#332e26;--text:#e8e2d8;--muted:#9a917f;--accent:#e07a5f;--accent-dim:#b9634b}
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{background:var(--bg);color:var(--text);font-family:ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;line-height:1.7}
+  .wrap{max-width:720px;margin:0 auto;padding:40px 24px 64px}
+  .brand{display:flex;align-items:center;gap:10px;font-weight:700;color:var(--text);text-decoration:none;margin-bottom:32px}
+  h1{font-size:1.8rem;margin-bottom:8px}
+  .sub{color:var(--muted);margin-bottom:32px}
+  .q{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:24px;margin-bottom:20px}
+  .q h3{font-size:1.05rem;margin-bottom:14px}
+  .opt{display:block;width:100%;text-align:left;background:var(--bg);border:1px solid var(--line);color:var(--text);
+       border-radius:8px;padding:12px 16px;margin:8px 0;cursor:pointer;font-size:.95rem}
+  .opt:hover{border-color:var(--accent)}
+  .opt.sel{border-color:var(--accent);background:#241f1a}
+  .prog{height:6px;background:var(--line);border-radius:3px;margin-bottom:24px;overflow:hidden}
+  .prog div{height:100%;background:var(--accent);width:0;transition:width .3s}
+  #result{display:none}
+  .tier{font-size:1.4rem;font-weight:700;color:var(--accent);margin:12px 0}
+  .rec{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:18px;margin:12px 0}
+  .rec a{color:var(--text);text-decoration:none;font-weight:700}
+  .rec a:hover{color:var(--accent)}
+  .rec .p{color:var(--accent);font-weight:700;margin-top:6px}
+  .btn{display:inline-block;background:var(--accent);color:#121212;font-weight:700;padding:12px 28px;border-radius:8px;text-decoration:none;margin-top:8px}
+  .btn:hover{background:var(--accent-dim)}
+  .note{color:var(--muted);font-size:.85rem;margin-top:24px}
+  footer{border-top:1px solid var(--line);margin-top:48px;padding-top:20px;color:var(--muted);font-size:.82rem}
+  footer a{color:var(--muted);text-decoration:none} footer a:hover{color:var(--accent)}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <a class="brand" href="../">
+    <svg width="24" height="24" viewBox="0 0 26 26" fill="none" aria-hidden="true"><circle cx="5" cy="6" r="2.4" fill="#e07a5f"/><circle cx="21" cy="6" r="2.4" fill="#e07a5f"/><circle cx="13" cy="13" r="2.4" fill="#e07a5f"/><circle cx="5" cy="20" r="2.4" fill="#e07a5f"/><circle cx="21" cy="20" r="2.4" fill="#e07a5f"/><path d="M6.6 7.4L11.2 11.8M19.4 7.4L14.8 11.8M6.6 18.6L11.2 14.2M19.4 18.6L14.8 14.2" stroke="#e07a5f" stroke-width="1.4"/></svg>
+    Kestrelattice
+  </a>
+  <div id="quiz">
+    <h1>What's your agent risk tier?</h1>
+    <p class="sub">5 questions, 60 seconds. Get your tier and the exact products that close your biggest gaps.</p>
+    <div class="prog"><div id="bar"></div></div>
+    <div id="qbox"></div>
+  </div>
+  <div id="result">
+    <h1>Your result</h1>
+    <div class="tier" id="tier"></div>
+    <p id="blurb" style="color:var(--muted)"></p>
+    <h3 style="margin:24px 0 8px">Start here</h3>
+    <div id="recs"></div>
+    <p class="note">Every Kestrelattice product is a complete, zero-placeholder PDF — instant download via Gumroad, ready to adopt as-is.</p>
+  </div>
+  <footer><a href="../">Home</a> · <a href="../products/">Catalog</a> · © 2026 Kestrelattice</footer>
+</div>
+<script>
+const Q = [
+  {t:"How many AI agents do you have in production (or close to it)?",
+   o:[["Just exploring / none yet",0],["1–2 agents",1],["3–10 agents",2],["More than 10",3]]},
+  {t:"What's the most sensitive thing an agent can touch today?",
+   o:[["Read-only internal data",0],["Internal tools and APIs",1],["Customer or employee data",2],["Money, payments, or external systems",3]]},
+  {t:"Has an agent ever done something you didn't expect?",
+   o:[["No, all quiet",0],["Small surprises, caught in time",1],["A real near-miss",2],["Yes — a genuine incident",3]]},
+  {t:"Who reviews what your agents are allowed to do?",
+   o:[["Just me, informally",1],["Our team, ad hoc",1],["A defined review process",0],["Nobody really",3]]},
+  {t:"What's your biggest worry right now?",
+   o:[["Permissions sprawl — agents can touch too much","perm"],["Runaway API / compute costs","cost"],
+       ["Prompt injection / manipulation","inject"],["Passing an audit or review","audit"],["I don't know where to start","start"]]}
+];
+const PROD = {
+  studio:  {n:"The Playbook — Studio Edition", s:"the-playbook-studio-edition", p:29,
+            d:"The full governed-agent system: policies, schemas, rollout plan."},
+  risk:    {n:"AI Agent Risk Audit Kit", s:"ai-agent-risk-audit-kit", p:19,
+            d:"Scored risk-tier self-assessment and 40-point audit checklist."},
+  runbook: {n:"Agent Incident Response Runbook", s:"agent-incident-response-runbook", p:19,
+            d:"Severity levels, triage procedures, kill-switch checklists."},
+  inject:  {n:"Prompt Injection Defense Field Guide", s:"prompt-injection-defense-field-guide", p:19,
+            d:"15 attack scenarios, 6 layered defenses, 20 test prompts."},
+  cost:    {n:"Agent Cost Control Workbook", s:"agent-cost-control-workbook", p:19,
+            d:"Budget worksheets, metering setup, kill-on-overspend rules."},
+  access:  {n:"Quarterly Access Review Kit", s:"quarterly-access-review-kit", p:19,
+            d:"Re-tier every agent against what it can actually touch today."},
+  rollout: {n:"14-Day Governance Rollout Checklist", s:"14-day-governance-rollout-checklist", p:19,
+            d:"The fourteen-day governed-agent rollout, day by day."},
+  quarantine:{n:"Compromised Agent Quarantine Runbook Excerpt", s:"compromised-agent-quarantine-runbook-excerpt", p:19,
+            d:"Isolate a compromised agent in minutes, not hours."},
+  usecases:{n:"100 Agent Use Cases, Pre-Tiered", s:"100-agent-use-cases-pre-tiered", p:19,
+            d:"100 concrete use cases, each pre-tiered with key controls."}
+};
+const WORRY = {
+  perm:["access","risk"], cost:["cost","risk"], inject:["inject","runbook"],
+  audit:["risk","studio"], start:["rollout","studio"]
+};
+const TIERS = [
+  {t:"Low — but don't drift", b:"Your exposure is contained today. Lock in the basics now so growth doesn't create surprises later."},
+  {t:"Moderate — tighten the screws", b:"You have real agents touching real systems. A few targeted controls will cut most of your risk."},
+  {t:"High — act this quarter", b:"Agents with broad access and no formal review is how incidents happen. Prioritize permissions and response."},
+  {t:"Critical — act this month", b:"Broad agent access plus incident history is the highest-risk combination. Start with the full playbook."}
+];
+let qi = 0, score = 0, worry = "start";
+const qbox = document.getElementById('qbox'), bar = document.getElementById('bar');
+function render(){
+  bar.style.width = (qi/Q.length*100)+'%';
+  if(qi >= Q.length){ finish(); return; }
+  const q = Q[qi];
+  qbox.innerHTML = '<div class="q"><h3>'+(qi+1)+'. '+q.t+'</h3>'+
+    q.o.map((o,i)=>'<button class="opt" data-i="'+i+'">'+o[0]+'</button>').join('')+'</div>';
+  qbox.querySelectorAll('.opt').forEach(b=>b.onclick=()=>{
+    const v = q.o[+b.dataset.i][1];
+    if(typeof v === 'number') score += v; else worry = v;
+    qi++; render();
+  });
+}
+function finish(){
+  document.getElementById('quiz').style.display='none';
+  const r = document.getElementById('result');
+  r.style.display='block';
+  const tier = score<=2?0:score<=5?1:score<=8?2:3;
+  document.getElementById('tier').textContent = TIERS[tier].t;
+  document.getElementById('blurb').textContent = TIERS[tier].b;
+  let picks = WORRY[worry].slice();
+  if(tier>=2 && !picks.includes('studio')) picks.unshift('studio');
+  if(tier>=3 && !picks.includes('quarantine')) picks.push('quarantine');
+  picks = [...new Set(picks)].slice(0,3);
+  document.getElementById('recs').innerHTML = picks.map(k=>{
+    const p = PROD[k];
+    return '<div class="rec"><a href="../products/'+p.s+'/">'+p.n+'</a><p style="color:var(--muted);font-size:.9rem">'+p.d+'</p><div class="p">$'+p.p+' — <a href="../products/'+p.s+'/" style="color:var(--accent)">Get it</a></div></div>';
+  }).join('');
+  if(typeof gtag==='function') gtag('event','quiz_complete',{tier:TIERS[tier].t});
+}
+render();
+</script>
+</body>
+</html>
