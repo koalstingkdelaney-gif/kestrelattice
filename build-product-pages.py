@@ -112,6 +112,51 @@ def headings_of(path):
 def esc(s):
     return html.escape(s or "")
 
+
+def load_ladder():
+    """gumroad_id -> {title, tier, site_page, gumroad_url, next_step_up{...}|None, note}"""
+    path = os.path.expanduser(
+        "~/workspace/goals/kestrelattice-autonomous-growth/ecosystem/ladder-map.json")
+    if not os.path.exists(path):
+        return {}
+    with open(path) as f:
+        m = json.load(f)
+    return {p["gumroad_id"]: p for p in m.get("products", [])}
+
+
+def next_step_block(pr, ladder):
+    """HTML for the 'Next step up the ladder' cross-sell block (ecosystem layer 1).
+    Reads from ladder-map.json. Never alters buy links, prices, or checkout."""
+    info = ladder.get(pr["gid"]) if ladder else None
+    if not info:
+        return ""  # not in the ladder map: render nothing rather than guess
+    nxt = info.get("next_step_up")
+    if nxt:
+        title, gurl = esc(nxt["title"]), nxt["gumroad_url"]
+        up_slug = nxt["site_page"].rstrip("/").split("/")[-1]
+        price = nxt["price_usd"]
+        ptxt = f"${int(price)}" if float(price).is_integer() else f"${price}"
+        return (
+            '  <section style="border:1px solid var(--line);border-radius:12px;'
+            'padding:24px;background:#1b1916">\n'
+            '    <h2 style="margin-top:0">Next step up the ladder</h2>\n'
+            f'    <p>Done with this one? <strong>{title}</strong> ({ptxt}) takes '
+            'it one rung further — the next step up in the ghostcorpnet ladder.</p>\n'
+            f'    <p><a class="btn" href="../{up_slug}/">'
+            f'See {title} — {ptxt}</a></p>\n'
+            f'    <p style="color:var(--muted);font-size:.9rem">Or go straight to checkout: '
+            f'<a style="color:var(--accent)" href="{gurl}">Buy {title} on Gumroad</a></p>\n'
+            '  </section>')
+    # top rung ($299): point to the ecosystem ladder + Layer 3 preview
+    return (
+        '  <section style="border:1px solid var(--accent);border-radius:12px;'
+        'padding:24px;background:#1e1a16">\n'
+        '    <h2 style="margin-top:0">You\'re at the top of the ladder</h2>\n'
+        '    <p>This is the top rung of the ghostcorpnet product ladder. Coming next: '
+        'the "Built on ghostcorpnet" certification and the third-party pack directory — '
+        '<a style="color:var(--accent)" href="../../ecosystem/">see the whole ecosystem</a>.</p>\n'
+        '  </section>')
+
 PAGE = """<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -230,6 +275,7 @@ gtag('config', 'G-541TCHWW98');
   </section>
 
 {bundle_upsell}
+{next_step}
   <footer>
     <span>© 2026 ghostcorpnet · An independent studio</span>
     <span><a href="../../">Home</a> · <a href="../">Catalog</a> · <a href="mailto:koalstin.g.k.delaney@gmail.com">Contact</a></span>
@@ -241,6 +287,7 @@ gtag('config', 'G-541TCHWW98');
 
 def main():
     packs = load_packs()
+    ladder = load_ladder()
     mans = manuscripts()
     products = []
     for gid, slug, title, price, tagline, inside in ORIGINALS:
@@ -298,7 +345,8 @@ def main():
                            page_url=page_url, jsonld=jsonld, gid=pr["gid"],
                            tagline=esc(pr["tagline"]), price=pr["price"],
                            gumroad_url=pr["gumroad_url"], description=esc(pr["description"]),
-                           inside_items=inside_items, related=related, bundle_upsell=upsell)
+                           inside_items=inside_items, related=related, bundle_upsell=upsell,
+                           next_step=next_step_block(pr, ladder))
         with open(os.path.join(d, "index.html"), "w") as f:
             f.write(page)
         sm_entries.append(f'  <url><loc>{page_url}</loc><lastmod>2026-09-30</lastmod></url>')
