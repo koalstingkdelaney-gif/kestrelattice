@@ -295,7 +295,7 @@ def site_section():
     rows = []
     for p in items:
         name = p.get("name", "?")
-        cents = p.get("price_cents") or 0
+        cents = p.get("price") or 0
         link = (p.get("permalink") or "").split("/l/")[-1].rstrip("/")
         if not p.get("published"):
             name = f"{name} (draft)"
