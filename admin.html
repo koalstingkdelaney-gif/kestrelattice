@@ -54,7 +54,7 @@
     Kestrelattice
   </div>
   <h1>Admin dashboard</h1>
-  <p class="gen">Generated 2026-09-30 01:22  · refreshes daily with the site-health check</p>
+  <p class="gen">Generated 2026-09-30 01:37  · refreshes daily with the site-health check</p>
 
   <h2>Money</h2>
   <div class="card warn"><h3>Sales data not connected yet</h3><p>One-time setup: generate an API token at Gumroad → Settings → Advanced → Applications, then save it in Muse's Secure Vault as the <b>custom.gumroad</b> connector. After that, live sales numbers appear here automatically.</p></div>
@@ -78,7 +78,7 @@ async function loadApprovals() {
         : "<span class='muted'>—</span>";
       return `<tr><td><b>${it.title}</b><br><span class='muted'>${it.detail || ""}</span><br><span class='muted'>Needs: ${it.prereq || "—"}</span></td><td>${pill(st)}</td><td>${btn}</td></tr>`;
     }).join("") + "</table>"
-      + "<p class='muted'>Tap <b>Approve</b> — the fleet picks it up within ~15 minutes and does the work. Or paste the code (e.g. “approve AP-0001”) in the Talk to the bots chat.</p>";
+      + "<p class='muted'>Tap <b>Approve</b> — the fleet picks it up within ~15 minutes and does the work. Or paste the code (e.g. “approve AP-0001”) in the Talk to the bots chat.<br>Routine site development auto-approves by policy — only items that move money, change prices, or send messages wait for your tap.</p>";
   } catch (e) {
     el.innerHTML = "<p class='muted'>Approval service unreachable — try again shortly.</p>";
   }

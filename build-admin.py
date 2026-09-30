@@ -245,7 +245,7 @@ def approvals_section():
         '        : "<span class=\'muted\'>—</span>";\n'
         '      return `<tr><td><b>${it.title}</b><br><span class=\'muted\'>${it.detail || ""}</span><br><span class=\'muted\'>Needs: ${it.prereq || "—"}</span></td><td>${pill(st)}</td><td>${btn}</td></tr>`;\n'
         '    }).join("") + "</table>"\n'
-        '      + "<p class=\'muted\'>Tap <b>Approve</b> — the fleet picks it up within ~15 minutes and does the work. Or paste the code (e.g. “approve AP-0001”) in the Talk to the bots chat.</p>";\n'
+        '      + "<p class=\'muted\'>Tap <b>Approve</b> — the fleet picks it up within ~15 minutes and does the work. Or paste the code (e.g. “approve AP-0001”) in the Talk to the bots chat.<br>Routine site development auto-approves by policy — only items that move money, change prices, or send messages wait for your tap.</p>";\n'
         '  } catch (e) {\n'
         '    el.innerHTML = "<p class=\'muted\'>Approval service unreachable — try again shortly.</p>";\n'
         '  }\n'
