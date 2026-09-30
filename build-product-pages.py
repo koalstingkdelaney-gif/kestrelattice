@@ -93,6 +93,34 @@ def manuscripts():
                 out[fn[:-3]] = os.path.join(d, fn)
     return out
 
+def pack_slug_by_title():
+    """pack.json title -> manifest name (matches directory site_path)."""
+    d = os.path.join(HIDDEN, "products", "packs-2026-09-30")
+    out = {}
+    if os.path.isdir(d):
+        for slug in os.listdir(d):
+            pj = os.path.join(d, slug, "pack.json")
+            if os.path.isfile(pj):
+                try:
+                    m = json.load(open(pj))
+                    out[m.get("title", "")] = m.get("name", slug)
+                except Exception:
+                    pass
+    return out
+
+
+def pack_manuscripts():
+    """manifest name slug -> manuscript.md path for the pack-builder wave."""
+    d = os.path.join(HIDDEN, "products", "packs-2026-09-30")
+    out = {}
+    if os.path.isdir(d):
+        for slug in os.listdir(d):
+            mp = os.path.join(d, slug, "manuscript.md")
+            if os.path.isfile(mp):
+                out[slug] = mp
+    return out
+
+
 def best_manuscript(title, mans):
     tw = set(re.findall(r"[a-z0-9]+", title.lower())) - {"the", "a", "an", "for", "and", "of", "to"}
     best, best_score = None, 0
@@ -138,10 +166,14 @@ def next_step_block(pr, ladder):
         return ""  # not in the ladder map: render nothing rather than guess
     nxt = info.get("next_step_up")
     if nxt:
-        title, gurl = esc(nxt["title"]), nxt["gumroad_url"]
+        title, gurl = esc(nxt["title"]), nxt.get("gumroad_url")
         up_slug = nxt["site_page"].rstrip("/").split("/")[-1]
         price = nxt["price_usd"]
         ptxt = f"${int(price)}" if float(price).is_integer() else f"${price}"
+        checkout = (f'    <p style="color:var(--muted);font-size:.9rem">Or go straight to checkout: '
+                    f'<a style="color:var(--accent)" href="{gurl}">Buy {title} on Gumroad</a></p>\n'
+                    if gurl else
+                    f'    <p style="color:var(--muted);font-size:.9rem">{title} is publishing now — check back shortly.</p>\n')
         return (
             '  <section style="border:1px solid var(--line);border-radius:12px;'
             'padding:24px;background:#1b1916">\n'
@@ -150,8 +182,7 @@ def next_step_block(pr, ladder):
             'it one rung further — the next step up in the ghostcorpnet ladder.</p>\n'
             f'    <p><a class="btn" href="../{up_slug}/">'
             f'See {title} — {ptxt}</a></p>\n'
-            f'    <p style="color:var(--muted);font-size:.9rem">Or go straight to checkout: '
-            f'<a style="color:var(--accent)" href="{gurl}">Buy {title} on Gumroad</a></p>\n'
+            f'{checkout}'
             '  </section>')
     # top rung ($299): point to the ecosystem ladder + Layer 3 preview
     return (
@@ -243,14 +274,12 @@ gtag('config', 'G-541TCHWW98');
   <p class="crumb"><a href="../../">Home</a> · <a href="../">Catalog</a> · {title}</p>
 
   <div class="hero">
-    <img src="../../assets/covers/{gid}.png" alt="{title} cover">
+    {cover_img}
     <div>
       <h1>{title}</h1>
       <p class="tagline">{tagline}</p>
       <p class="price">${price}</p>
-      <p class="instant">One-time · Instant PDF download via Gumroad</p>
-      <a class="btn" href="{gumroad_url}">Get it now — ${price}</a>
-      <p class="trust">Instant delivery via Gumroad</p>
+      {buy_html}
     </div>
   </div>
 
@@ -302,22 +331,33 @@ def main():
                              gumroad_url=f"https://koalstin.gumroad.com/l/{gid}"))
     for p in packs:
         url = p.get("gumroad_url", "")
-        m = re.search(r"/l/([a-z0-9-]+)", url)
-        if not m:
+        m = re.search(r"/l/([a-z0-9-]+)", url or "")
+        item_code = p.get("item_code", "")
+        is_pack = item_code.upper().startswith("PACK-")
+        if m:
+            gid = m.group(1)
+        elif is_pack:
+            gid = item_code.lower().replace("_", "-")
+        else:
             continue
-        gid = m.group(1)
         if any(x["gid"] == gid for x in products):
             continue
         title = p.get("product_title", "")
-        mp = best_manuscript(title, mans)
+        if is_pack:
+            base = title.split(" — ")[0].strip()
+            slug = pack_slug_by_title().get(base, slugify(title))
+            mp = pack_manuscripts().get(slug)
+        else:
+            slug = slugify(title)
+            mp = best_manuscript(title, mans)
         inside = headings_of(mp) if mp else []
         if not inside:
             inside = ["Complete, zero-placeholder document", "Ready to adopt as-is",
                       "Grounded in production agent-governance practice"]
-        products.append(dict(gid=gid, slug=slugify(title), title=title,
+        products.append(dict(gid=gid, slug=slug, title=title,
                              price=fmt_price(p.get("price_usd", 19)),
                              tagline=fix_tagline(p.get("tagline", "")), description=p.get("description", ""),
-                             inside=inside, gumroad_url=url))
+                             inside=inside, gumroad_url=url or None))
 
     # render pages
     sm_entries = []
@@ -330,14 +370,26 @@ def main():
         related = "\n".join(
             f'      <a href="../{r["slug"]}/"><strong>{esc(r["title"])}</strong><div class="rp">${r["price"]}</div></a>'
             for r in rels)
+        is_live = bool(pr["gumroad_url"])
+        cover_path = os.path.join(SITE, "assets", "covers", f"{pr['gid']}.png")
+        cover_img = (f'<img src="../../assets/covers/{pr["gid"]}.png" alt="{esc(pr["title"])} cover">'
+                     if os.path.isfile(cover_path) else "")
+        if is_live:
+            buy_html = (f'<p class="instant">One-time · Instant PDF download via Gumroad</p>\n'
+                        f'      <a class="btn" href="{pr["gumroad_url"]}">Get it now — ${pr["price"]}</a>\n'
+                        f'      <p class="trust">Instant delivery via Gumroad</p>')
+        else:
+            buy_html = ('<p class="instant">Publishing now — available shortly</p>\n'
+                        '      <span class="btn" style="opacity:.7;cursor:default">Publishing — live soon</span>\n'
+                        '      <p class="trust">This ghostcorpnet studio pack is moving through our publish queue</p>')
         jsonld = json.dumps({
             "@context": "https://schema.org", "@type": "Product",
             "name": pr["title"], "description": pr["tagline"] or pr["description"],
             "image": f"{BASE_URL}/assets/covers/{pr['gid']}.png",
             "brand": {"@type": "Brand", "name": "ghostcorpnet"},
             "offers": {"@type": "Offer", "priceCurrency": "USD", "price": str(pr["price"]),
-                       "availability": "https://schema.org/InStock",
-                       "url": pr["gumroad_url"]}}, indent=2)
+                       "availability": "https://schema.org/InStock" if is_live else "https://schema.org/PreOrder",
+                       "url": pr["gumroad_url"] or page_url}}, indent=2)
         upsell = ""
         if pr["gid"] != "yzbumc":
             upsell = ('  <section style="border:1px solid var(--accent);border-radius:12px;'
@@ -348,9 +400,9 @@ def main():
                       '    <p><a class="btn" href="../complete-kestrelattice-library/">Get the full library — $79</a></p>\n'
                       '  </section>')
         page = PAGE.format(title=esc(pr["title"]), meta=esc(trunc_meta(pr["tagline"] or pr["description"])),
-                           page_url=page_url, jsonld=jsonld, gid=pr["gid"],
-                           tagline=esc(pr["tagline"]), price=pr["price"],
-                           gumroad_url=pr["gumroad_url"], description=esc(pr["description"]),
+                           page_url=page_url, jsonld=jsonld, gid=pr["gid"], cover_img=cover_img,
+                           tagline=esc(pr["tagline"]), price=pr["price"], buy_html=buy_html,
+                           gumroad_url=pr["gumroad_url"] or "", description=esc(pr["description"]),
                            inside_items=inside_items, related=related, bundle_upsell=upsell,
                            next_step=next_step_block(pr, ladder))
         with open(os.path.join(d, "index.html"), "w") as f:
