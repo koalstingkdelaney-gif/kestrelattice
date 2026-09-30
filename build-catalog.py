@@ -51,6 +51,8 @@ nav a:hover{color:var(--text)}
 .card p.desc{color:var(--muted);font-size:.88rem;flex:1}
 .btn{display:inline-block;background:var(--accent);color:#161210;font-weight:700;padding:10px 18px;border-radius:8px;text-align:center}
 .btn:hover{background:var(--accent-dim);text-decoration:none}
+.btn.ghost{background:transparent;color:var(--accent);border:1px solid var(--accent)}
+.btn.ghost:hover{background:var(--panel)}
 footer{border-top:1px solid var(--line);padding:28px 0;color:var(--muted);font-size:.85rem;text-align:center}
 .hidden{display:none!important}
 </style>
@@ -81,10 +83,27 @@ tags.forEach(t=>filters.appendChild(mk(t.replace(/-/g,' '),t)));
 """
 
 CARD = """<div class="card" data-tags="{tags}">
-<img src="../assets/covers/{pid}.png" alt="{title} cover" loading="lazy">
-<div class="body"><h3>{title}</h3><p class="desc">{tagline}</p><p class="price">${price} <span style="color:var(--muted);font-weight:400;font-size:.85rem">one-time</span></p><a class="btn" href="{url}">Get it</a></div>
+<a href="{slug}/" style="text-decoration:none;color:inherit;display:block"><img src="../assets/covers/{pid}.png" alt="{title} cover" loading="lazy">
+<div class="body"><h3>{title}</h3><p class="desc">{tagline}</p><p class="price">${price} <span style="color:var(--muted);font-weight:400;font-size:.85rem">one-time</span></p></div></a>
+<div class="body" style="padding-top:0;display:flex;gap:10px"><a class="btn" href="{url}">Get it</a><a class="btn ghost" href="{slug}/">Details</a></div>
 </div>
 """
+
+ORIGINAL_SLUGS = {
+    "hdigmr": "the-playbook-studio-edition",
+    "sahva": "ai-agent-risk-audit-kit",
+    "jbngbu": "agent-incident-response-runbook",
+    "slexhv": "100-agent-use-cases-pre-tiered",
+    "cjdkuu": "prompt-injection-defense-field-guide",
+    "ilxccs": "agent-cost-control-workbook",
+    "fdtkdd": "quarterly-access-review-kit",
+    "yzbumc": "complete-kestrelattice-library",
+}
+
+def slugify(t):
+    import re as _re
+    s = _re.sub(r"[^a-z0-9]+", "-", t.lower()).strip("-")
+    return _re.sub(r"-+", "-", s)
 
 def main():
     prods = products()
@@ -111,6 +130,7 @@ def main():
             price=p["price"],
             url=f"https://koalstin.gumroad.com/l/{html.escape(pid)}",
             tags=html.escape(tags),
+            slug=ORIGINAL_SLUGS.get(pid, slugify(p["title"])),
         ))
     outdir = os.path.join(SITE, "products")
     os.makedirs(outdir, exist_ok=True)
