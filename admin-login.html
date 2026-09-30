@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Admin sign in · Kestrelattice</title>
+<style>
+  :root{
+    --bg:#121212; --panel:#1c1a18; --line:#352e24;
+    --text:#ece6d9; --muted:#a79c88; --faint:#857a66;
+    --accent:#e07a5f; --accent-bright:#f09474; --accent-ink:#1a0f08;
+    --radius:12px;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,"Segoe UI",sans-serif;min-height:100vh;display:flex;align-items:center;justify-content:center;padding:24px}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:36px 32px;max-width:400px;width:100%;box-shadow:0 14px 36px rgba(0,0,0,.38)}
+  .card h1{font-size:1.25rem;margin-bottom:6px}
+  .card p{color:var(--muted);font-size:.9rem;margin-bottom:20px;line-height:1.5}
+  label{display:block;font-size:.8rem;color:var(--muted);margin-bottom:8px}
+  input[type=password]{width:100%;background:#121212;border:1px solid var(--line);border-radius:8px;color:var(--text);padding:12px 14px;font-size:1rem;margin-bottom:14px}
+  input[type=password]:focus{outline:none;border-color:var(--accent)}
+  .row{display:flex;align-items:center;gap:8px;margin-bottom:18px;font-size:.85rem;color:var(--muted)}
+  .row input{accent-color:var(--accent)}
+  button{width:100%;background:var(--accent);color:var(--accent-ink);border:0;border-radius:8px;padding:13px;font-size:1rem;font-weight:700;cursor:pointer}
+  button:hover{background:var(--accent-bright)}
+  .err{color:#e07a5f;font-size:.85rem;margin-top:12px;min-height:1.2em}
+  .fine{margin-top:18px;font-size:.78rem;color:var(--faint);line-height:1.5}
+  .fine a{color:var(--faint);text-decoration:underline;cursor:pointer}
+  .brand{text-align:center;margin-bottom:24px;color:var(--faint);font-size:.8rem;letter-spacing:.14em;text-transform:uppercase}
+</style>
+</head>
+<body>
+<div class="card">
+  <div class="brand">Kestrelattice</div>
+  <h1>Admin sign in</h1>
+  <p>Enter your private admin key to open the control panel. Nothing here works without it.</p>
+  <form id="f">
+    <label for="key">Admin key</label>
+    <input type="password" id="key" autocomplete="off" placeholder="Paste your admin key" autofocus>
+    <div class="row"><input type="checkbox" id="remember" checked> <label for="remember" style="margin:0">Remember on this device</label></div>
+    <button type="submit">Open admin panel</button>
+    <div class="err" id="err"></div>
+  </form>
+  <div class="fine">The key is checked against the private admin service — a wrong key gets a 404, same as a stranger would. This page stores nothing except on this device, and only if you tick the box. <a id="forget">Forget this device</a></div>
+</div>
+<script>
+(function(){
+  var WORKER = "https://kestrelattice-approvals.koalstin-g-k-delaney.workers.dev";
+  var LS = "kestrelattice_admin_remember";
+  function extractKey(v){
+    v = (v || "").trim();
+    if (!v) return "";
+    var m = v.match(/[?&]key=([^&]+)/);
+    if (m) return decodeURIComponent(m[1]);
+    return v;
+  }
+  function go(key){
+    location.href = WORKER + "/admin?key=" + encodeURIComponent(key);
+  }
+  try {
+    var saved = localStorage.getItem(LS);
+    if (saved) { go(saved); return; }
+  } catch(e){}
+  document.getElementById("f").addEventListener("submit", function(e){
+    e.preventDefault();
+    var key = extractKey(document.getElementById("key").value);
+    var err = document.getElementById("err");
+    if (!key) { err.textContent = "Enter your admin key first."; return; }
+    if (document.getElementById("remember").checked) {
+      try { localStorage.setItem(LS, key); } catch(e){}
+    }
+    go(key);
+  });
+  document.getElementById("forget").addEventListener("click", function(){
+    try { localStorage.removeItem(LS); } catch(e){}
+    document.getElementById("key").value = "";
+    document.getElementById("err").textContent = "This device will no longer remember the key.";
+  });
+})();
+</script>
+</body>
+</html>
