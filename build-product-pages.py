@@ -213,7 +213,7 @@ def main():
                              gumroad_url=f"https://koalstin.gumroad.com/l/{gid}"))
     for p in packs:
         url = p.get("gumroad_url", "")
-        m = re.search(r"/l/([a-z0-9]+)", url)
+        m = re.search(r"/l/([a-z0-9-]+)", url)
         if not m:
             continue
         gid = m.group(1)
