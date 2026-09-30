@@ -180,7 +180,7 @@ def main():
     indiv = [p for p in prods if p["id"] != "yzbumc"]
     _n, _val = len(indiv), int(sum(p["price"] for p in indiv))
     _save = _val - 79
-    h = _re2.sub(r"one-time · \d+ (?:PDFs|files) · <s>\$\d+</s> save \$\d+",
+    h = _re2.sub(r"one-time · \d+ (?:PDFs|files) · <s>\$\d+(?:\.\d+)?</s> save \$\d+(?:\.\d+)?",
                  f"one-time · {_n} files · <s>${_val}</s> save ${_save}", h)
     with open(idx, "w") as f:
         f.write(h)
