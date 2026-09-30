@@ -1,6 +1,6 @@
 # Guided Implementation Sprint — Scope of Work
 
-**Price: $6,000 one-time · Timeline: 4 weeks · Delivered by Kestrelattice (GhostCorp)**
+**Price: $6,000 one-time · Timeline: 4 weeks · Delivered by ghostcorpnet (GhostCorp)**
 
 We install the governed agent mesh in your stack with you: the 14-day rollout from the Studio Edition, executed against your real agents, with weekly working sessions and async support. You end with governance that's live, verified, and signed off — not a plan in a doc.
 

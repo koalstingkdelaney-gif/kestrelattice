@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Build the Kestrelattice product catalog page (products/index.html).
+"""Build the ghostcorpnet product catalog page (products/index.html).
 
 Reads every live product (originals + pending-listings.jsonl via build-covers.products()),
 renders a branded catalog grid with covers, and updates sitemap.xml.
@@ -41,19 +41,19 @@ PAGE = """<!DOCTYPE html>
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Product Catalog — Kestrelattice</title>
-<meta name="description" content="Every Kestrelattice self-serve PDF: agent governance checklists, runbooks, worksheets and kits. Instant download.">
+<title>Product Catalog — ghostcorpnet</title>
+<meta name="description" content="Every ghostcorpnet self-serve PDF: agent governance checklists, runbooks, worksheets and kits. Instant download.">
 <meta name="theme-color" content="#1a1f2e">
 <link rel="canonical" href="https://koalstingkdelaney-gif.github.io/kestrelattice/products/">
 <meta property="og:type" content="website">
-<meta property="og:title" content="Product Catalog — Kestrelattice">
-<meta property="og:description" content="Every Kestrelattice self-serve PDF: agent governance checklists, runbooks, worksheets and kits. Instant download.">
+<meta property="og:title" content="Product Catalog — ghostcorpnet">
+<meta property="og:description" content="Every ghostcorpnet self-serve PDF: agent governance checklists, runbooks, worksheets and kits. Instant download.">
 <meta property="og:url" content="https://koalstingkdelaney-gif.github.io/kestrelattice/products/">
 <meta property="og:image" content="https://koalstingkdelaney-gif.github.io/kestrelattice/assets/studio-edition-cover.jpg">
-<meta property="og:image:alt" content="Kestrelattice product catalog — governed agent mesh playbooks and kits">
+<meta property="og:image:alt" content="ghostcorpnet product catalog — governed agent mesh playbooks and kits">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Product Catalog — Kestrelattice">
-<meta name="twitter:description" content="Every Kestrelattice self-serve PDF: agent governance checklists, runbooks, worksheets and kits. Instant download.">
+<meta name="twitter:title" content="Product Catalog — ghostcorpnet">
+<meta name="twitter:description" content="Every ghostcorpnet self-serve PDF: agent governance checklists, runbooks, worksheets and kits. Instant download.">
 <meta name="twitter:image" content="https://koalstingkdelaney-gif.github.io/kestrelattice/assets/studio-edition-cover.jpg">
 <script type="application/ld+json">
 __ITEMLIST__
@@ -106,19 +106,19 @@ footer.site a:hover{color:var(--accent-bright)}
 <header class="site"><div class="wrap">
 <a class="logo" href="../">
 <svg width="24" height="24" viewBox="0 0 26 26" fill="none" aria-hidden="true"><circle cx="5" cy="6" r="2.4" fill="#e07a5f"/><circle cx="21" cy="6" r="2.4" fill="#e07a5f"/><circle cx="13" cy="13" r="2.4" fill="#e07a5f"/><circle cx="5" cy="20" r="2.4" fill="#e07a5f"/><circle cx="21" cy="20" r="2.4" fill="#e07a5f"/><path d="M6.6 7.4L11.2 11.8M19.4 7.4L14.8 11.8M6.6 18.6L11.2 14.2M19.4 18.6L14.8 14.2" stroke="#e07a5f" stroke-width="1.4"/></svg>
-Kestrelattice</a>
+ghostcorpnet</a>
 <nav class="main" aria-label="Primary"><a href="../">Home</a><a href="../articles/">Articles</a><a href="../#faq">FAQ</a></nav>
 </div></header>
 <div class="wrap hero">
 <h1>The Catalog</h1>
-<p class="lede">Every self-serve PDF in the Kestrelattice library — checklists, runbooks, worksheets, and kits for governing AI agents. Buy once, download instantly, yours forever.</p>
+<p class="lede">Every self-serve PDF in the ghostcorpnet library — checklists, runbooks, worksheets, and kits for governing AI agents. Buy once, download instantly, yours forever.</p>
 </div>
 <div class="wrap"><div class="filters" id="filters"></div></div>
 <div class="wrap"><div class="grid" id="grid">
 __CARDS__
 </div></div>
 <footer class="site"><div class="wrap">
-<span>© 2026 GhostCorp · Kestrelattice · An independent studio</span>
+<span>© 2026 GhostCorp · ghostcorpnet · An independent studio</span>
 <span><a href="mailto:koalstin.g.k.delaney@gmail.com">Contact</a><a href="../articles/">Articles</a><a href="../sitemap.xml">Sitemap</a><a href="../admin-login.html">Admin</a></span>
 </div></footer>
 <script>
@@ -187,7 +187,7 @@ def main():
     itemlist = {
         "@context": "https://schema.org",
         "@type": "ItemList",
-        "name": "Kestrelattice product catalog",
+        "name": "ghostcorpnet product catalog",
         "itemListElement": [
             {"@type": "ListItem", "position": n, "item": {
                 "@type": "Product",

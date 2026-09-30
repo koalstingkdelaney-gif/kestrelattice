@@ -1,4 +1,4 @@
-# Kestrelattice — Governed Agent Mesh
+# ghostcorpnet — Governed Agent Mesh
 
 **By GhostCorp.** A governed mesh of specialized AI agents that finds ventures, wins customers, and executes approved work — with identity, spend limits, approval gates, and hash-linked audit trails on every action.
 

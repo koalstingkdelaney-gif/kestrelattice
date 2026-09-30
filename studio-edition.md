@@ -2,7 +2,7 @@
 
 **The $29 companion to the free playbook: policies, schemas, worksheets, and rollout plans you can adopt as-is.**
 
-By GhostCorp · Kestrelattice · September 2026
+By GhostCorp · ghostcorpnet · September 2026
 
 ---
 

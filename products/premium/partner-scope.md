@@ -1,6 +1,6 @@
 # Embedded Governance Partner — Scope of Work
 
-**Price: $18,000 · Timeline: 3 months · Delivered by Kestrelattice (GhostCorp)**
+**Price: $18,000 · Timeline: 3 months · Delivered by ghostcorpnet (GhostCorp)**
 
 For venture studios and teams running agent fleets across products: we embed as your governance function for a quarter. We design the mesh, implement it with your teams, run the audit rhythm, and hand over a self-sustaining practice — across up to 3 business units or portfolio companies.
 

@@ -2,7 +2,7 @@
 
 **Running multi-agent AI operations with identity, spend limits, approval gates, and audit trails.**
 
-By GhostCorp · Kestrelattice · September 2026 · MIT License
+By GhostCorp · ghostcorpnet · September 2026 · MIT License
 
 ---
 
@@ -18,7 +18,7 @@ Practitioners feel this daily. A developer on r/IndieDev documented an infinite-
 
 Meanwhile the market is not waiting. Gartner forecasts **40% of enterprise applications embedding task-specific AI agents by end-2026** (up from <5% in 2025) and **$206.5B in AI-agent software spend in 2026** ([source](https://medium.com/@olikhatib/the-next-era-of-saas-the-enterprise-execution-fabric-97d3c8b7f123)). Enterprises are already paying for this class of control: LangSmith at **$39/seat/mo**, Langfuse up to **$2,499/mo**, AgentOps enterprise from **$2,000/mo** ([ledger](evidence/buyer-demand-ledger.md)).
 
-This playbook is the governance layer we built for Kestrelattice, written down so you can apply it to any agent stack.
+This playbook is the governance layer we built for ghostcorpnet, written down so you can apply it to any agent stack.
 
 ## 2. The 8-layer governance stack
 
@@ -75,7 +75,7 @@ An audit row records: actor, action, target, outcome, timestamp — and a hash c
 
 The discipline that makes trails useful:
 
-- **Every claim points at a row.** In Kestrelattice, a demand claim with no attributable source record is not a claim. Apply the same standard to your own reporting: no revenue, cost, or demand number exists without a link to its evidence.
+- **Every claim points at a row.** In ghostcorpnet, a demand claim with no attributable source record is not a claim. Apply the same standard to your own reporting: no revenue, cost, or demand number exists without a link to its evidence.
 - **Normalize, don't invent.** The audit feed normalizes stored events; it never invents runtime activity. If your logs imply something happened, log the implication — don't write it as fact.
 - **Synthetic data is labeled.** Demo records say "synthetic demo" in the row. Unlabeled fake telemetry is how teams stop trusting their logs entirely.
 

@@ -1,6 +1,6 @@
 # Agent Governance Audit — Scope of Work
 
-**Price: $1,500 one-time · Timeline: 2 weeks · Delivered by Kestrelattice (GhostCorp)**
+**Price: $1,500 one-time · Timeline: 2 weeks · Delivered by ghostcorpnet (GhostCorp)**
 
 A professional audit of your AI agent stack against the governed-agent-mesh framework: eight layers, three risk tiers, fail-closed controls. You get a written findings report and a prioritized remediation roadmap — not a slide deck of generic advice.
 

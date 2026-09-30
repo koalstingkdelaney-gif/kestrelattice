@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Generalized builder: render any Kestrelattice product manuscript -> polished PDF (Letter).
+"""Generalized builder: render any ghostcorpnet product manuscript -> polished PDF (Letter).
 Usage: build_product_pdf.py <src.md> <out.pdf> <title> <subtitle> <description> <footer_label>
 """
 import sys
@@ -22,7 +22,7 @@ class ProductPDF(PDF):
         self.set_y(-15)
         self.set_font(SANS, "", 8)
         self.set_text_color(*MUTED)
-        self.cell(0, 5, "Kestrelattice  ·  " + self.footer_label, align="L")
+        self.cell(0, 5, "ghostcorpnet  ·  " + self.footer_label, align="L")
         self.set_xy(-30, -15)
         self.cell(20, 5, str(self.page_no()), align="R")
 
@@ -98,7 +98,7 @@ def main():
     src, out, title, subtitle, description, footer_label = sys.argv[1:7]
     lines = open(src, encoding="utf-8").read().split("\n")
     pdf = ProductPDF(title, subtitle, description, footer_label)
-    pdf.set_title("Kestrelattice — " + title)
+    pdf.set_title("ghostcorpnet — " + title)
     pdf.set_author("GhostCorp")
     pdf.cover()
 

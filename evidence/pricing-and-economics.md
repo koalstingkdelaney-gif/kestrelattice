@@ -53,7 +53,7 @@
 | Reddit | 1 post/10 min; 9:1 non-promo ratio; 50–100 karma gates | Build karma before posting |
 | Discord | 50 req/sec bot limit; 2,000 chars/message | Community channel |
 
-## 5. What this means for Kestrelattice's offer
+## 5. What this means for ghostcorpnet's offer
 
 1. **Under-$100/mo is the honest early ceiling** for small-team adoption; the comparables that scale ($199–$2,499/mo) sell to funded studios and enterprises, which matches our venture-studio segment (1,000+ studios, $1.36M–$2.49M median budgets, 40–60% into shared tooling).
 2. **Lead with the downloadable playbook at $0** (10% median visitor→signup for dev tools; 5% free→paid within 6 months gives a realistic upgrade path once a paid tier exists).

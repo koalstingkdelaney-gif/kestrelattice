@@ -1,11 +1,11 @@
-# Kestrelattice Buyer Demand Evidence Research Report
+# ghostcorpnet Buyer Demand Evidence Research Report
 **Product Category:** Governed Agent Mesh Platform (Multi-Agent Orchestration, Human Approval Gates, Identity & Authorization Controls, Spend Limits, Audit Trails)  
 **Target Buyers:** Venture Studios, AI-Native Founders, Startup Accelerators, Enterprise Innovation Teams
 
 ---
 
 ## Executive Summary
-This research report compiles public, citable buyer-demand evidence for governed and observable multi-agent orchestration platforms (the category in which Ghostcorpnet's **Kestrelattice** competes).
+This research report compiles public, citable buyer-demand evidence for governed and observable multi-agent orchestration platforms (the category in which Ghostcorpnet's **ghostcorpnet** competes).
 
 Across **24 verified primary sources** (covering venture funding, pricing benchmarks, analyst forecasts, venture studio market metrics, and practitioner complaints), the evidence strongly demonstrates:
 1. **Capital Allocation & Enterprise Valuation:** Massive capital investment is flowing into agent orchestration and observability platforms (e.g., LangChain/LangSmith's $125M Series B at $1.25B valuation, Arize AI's $70M Series C, CrewAI's $15M+ funding, and AgentOps's $2.6M pre-seed).
@@ -50,9 +50,9 @@ Across **24 verified primary sources** (covering venture funding, pricing benchm
 
 ---
 
-## Direct Mapping to Kestrelattice Product Capabilities
+## Direct Mapping to ghostcorpnet Product Capabilities
 
-| Kestrelattice Feature | Public Market Demand Evidence | Verified URL / Source |
+| ghostcorpnet Feature | Public Market Demand Evidence | Verified URL / Source |
 | :--- | :--- | :--- |
 | **Spend Limits & Cost Guardrails** | Developers report $700+ API budget burns from infinite loops in 72h; complain frameworks lack budget caps. | [Reddit r/IndieDev](https://www.reddit.com/r/IndieDev/comments/1qv922m/trusting_my_ai_agent_cost_me_over_usd_700/) |
 | **Human Approval Gates & Kill Switches** | Enterprise builders cite fear of governance and call for mandatory human approval loops & kill switches. | [Reddit r/AgentsOfAI](https://www.reddit.com/r/AgentsOfAI/comments/1wdg3tu/practical_strategies_for_governing_multi_agent_ai/) |
@@ -62,7 +62,7 @@ Across **24 verified primary sources** (covering venture funding, pricing benchm
 
 ---
 
-## Conclusion & Strategic Recommendations for Kestrelattice
-1. **Positioning:** Kestrelattice addresses the exact "governance void" currently causing friction in multi-agent deployments. Messaging should directly highlight **financial loss prevention (spend caps)**, **permissioned access (identity controls)**, and **foolproof human approval gates**.
-2. **Targeting Venture Studios:** Venture studios represent a turnkey, high-leverage buyer segment—landing Kestrelattice at the studio level enables multi-tenant governance across 5–20 portfolio startups simultaneously.
-3. **Pricing Alignment:** Kestrelattice can capture high willingness-to-pay by structuring pricing around a Developer tier, a Pro tier ($49–$199/mo for startups), and a Studio/Enterprise tier ($1,500–$2,500/mo) matching incumbents like Langfuse and AgentOps.
+## Conclusion & Strategic Recommendations for ghostcorpnet
+1. **Positioning:** ghostcorpnet addresses the exact "governance void" currently causing friction in multi-agent deployments. Messaging should directly highlight **financial loss prevention (spend caps)**, **permissioned access (identity controls)**, and **foolproof human approval gates**.
+2. **Targeting Venture Studios:** Venture studios represent a turnkey, high-leverage buyer segment—landing ghostcorpnet at the studio level enables multi-tenant governance across 5–20 portfolio startups simultaneously.
+3. **Pricing Alignment:** ghostcorpnet can capture high willingness-to-pay by structuring pricing around a Developer tier, a Pro tier ($49–$199/mo for startups), and a Studio/Enterprise tier ($1,500–$2,500/mo) matching incumbents like Langfuse and AgentOps.

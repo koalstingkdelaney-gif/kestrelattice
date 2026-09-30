@@ -1,5 +1,5 @@
 /**
- * Kestrelattice approval backend — Cloudflare Worker + KV.
+ * ghostcorpnet approval backend — Cloudflare Worker + KV.
  *
  * The static admin page (GitHub Pages) calls this directly:
  *   GET  /queue            -> public, current approval queue

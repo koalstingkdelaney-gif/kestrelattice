@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
-"""Generate branded Gumroad cover PNGs for Kestrelattice products.
+"""Generate branded Gumroad cover PNGs for ghostcorpnet products.
 
 Reads pending-listings.jsonl (plus the original 8 catalog products) and
 renders a 1200x1600 cover per product in assets/covers/<gumroad_id>.png
-using the Kestrelattice dark-slate/terracotta brand. Idempotent: skips
+using the ghostcorpnet dark-slate/terracotta brand. Idempotent: skips
 covers that already exist unless --force is passed.
 """
 import json, os, sys, textwrap
@@ -39,7 +39,7 @@ ORIGINALS = [
     ("cjdkuu", "Prompt Injection Defense Field Guide", 19, "15 attack scenarios, 6 layered defenses, 20 test prompts."),
     ("ilxccs", "Agent Cost Control Workbook", 19, "Budget worksheets, metering setup, kill-on-overspend rules."),
     ("fdtkdd", "Quarterly Access Review Kit", 19, "Grant inventory, re-certification sign-off, 90-day calendar."),
-    ("yzbumc", "The Complete Kestrelattice Library", 79, "Every playbook and kit in one download."),
+    ("yzbumc", "The Complete ghostcorpnet Library", 79, "Every playbook and kit in one download."),
 ]
 
 def products():

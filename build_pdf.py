@@ -61,7 +61,7 @@ class PDF(FPDF):
         self.set_y(-15)
         self.set_font(SANS, "", 8)
         self.set_text_color(*MUTED)
-        self.cell(0, 5, "Kestrelattice  ·  Studio Edition", align="L")
+        self.cell(0, 5, "ghostcorpnet  ·  Studio Edition", align="L")
         self.set_xy(-30, -15)
         self.cell(20, 5, str(self.page_no()), align="R")
 

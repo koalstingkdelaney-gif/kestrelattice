@@ -60,8 +60,8 @@ ORIGINALS = [
     ("fdtkdd", "quarterly-access-review-kit", "Quarterly Access Review Kit", 19,
      "Re-tier every agent against what it can actually touch today.",
      ["Access review runbook", "Re-tiering worksheet", "Grant inventory template", "Review sign-off pack"]),
-    ("yzbumc", "complete-kestrelattice-library", "The Complete Kestrelattice Library", 79,
-     "Every Kestrelattice PDF in one bundle.",
+    ("yzbumc", "complete-kestrelattice-library", "The Complete ghostcorpnet Library", 79,
+     "Every ghostcorpnet PDF in one bundle.",
      ["The Playbook \u2014 Studio Edition ($29)", "All the $19 kits and guides", "Every micro-product released to date", "Free updates as the library grows"]),
 ]
 
@@ -117,16 +117,16 @@ PAGE = """<!DOCTYPE html>
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>{title} — Kestrelattice</title>
+<title>{title} — ghostcorpnet</title>
 <meta name="description" content="{meta}">
 <link rel="canonical" href="{page_url}">
 <meta property="og:type" content="product">
-<meta property="og:title" content="{title} — Kestrelattice">
+<meta property="og:title" content="{title} — ghostcorpnet">
 <meta property="og:description" content="{meta}">
 <meta property="og:url" content="{page_url}">
 <meta property="og:image" content="https://koalstingkdelaney-gif.github.io/kestrelattice/assets/covers/{gid}.png">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="{title} — Kestrelattice">
+<meta name="twitter:title" content="{title} — ghostcorpnet">
 <meta name="twitter:description" content="{meta}">
 <meta name="twitter:image" content="https://koalstingkdelaney-gif.github.io/kestrelattice/assets/covers/{gid}.png">
 <script type="application/ld+json">
@@ -187,7 +187,7 @@ gtag('config', 'G-541TCHWW98');
 <div class="wrap">
   <a class="brand" href="../../">
     <svg width="24" height="24" viewBox="0 0 26 26" fill="none" aria-hidden="true"><circle cx="5" cy="6" r="2.4" fill="#e07a5f"/><circle cx="21" cy="6" r="2.4" fill="#e07a5f"/><circle cx="13" cy="13" r="2.4" fill="#e07a5f"/><circle cx="5" cy="20" r="2.4" fill="#e07a5f"/><circle cx="21" cy="20" r="2.4" fill="#e07a5f"/><path d="M6.6 7.4L11.2 11.8M19.4 7.4L14.8 11.8M6.6 18.6L11.2 14.2M19.4 18.6L14.8 14.2" stroke="#e07a5f" stroke-width="1.4"/></svg>
-    Kestrelattice
+    ghostcorpnet
   </a>
   <p class="crumb"><a href="../../">Home</a> · <a href="../">Catalog</a> · {title}</p>
 
@@ -217,7 +217,7 @@ gtag('config', 'G-541TCHWW98');
   <section class="faq">
     <h2>How it works</h2>
     <p><strong>How do I receive it?</strong><br>Checkout is handled by Gumroad. The PDF is available for instant download the moment you pay — no account setup on our side, no waiting.</p>
-    <p><strong>Is it really ready to use?</strong><br>Yes. Every Kestrelattice product is written with zero placeholders — adopt it as-is, no "insert your policy here" gaps.</p>
+    <p><strong>Is it really ready to use?</strong><br>Yes. Every ghostcorpnet product is written with zero placeholders — adopt it as-is, no "insert your policy here" gaps.</p>
     <p><strong>Who is it for?</strong><br>Teams shipping AI agents to production — founders, platform engineers, and anyone whose agents touch money, data, or external systems.</p>
   </section>
 
@@ -230,7 +230,7 @@ gtag('config', 'G-541TCHWW98');
 
 {bundle_upsell}
   <footer>
-    <span>© 2026 Kestrelattice · An independent studio</span>
+    <span>© 2026 ghostcorpnet · An independent studio</span>
     <span><a href="../../">Home</a> · <a href="../">Catalog</a> · <a href="mailto:koalstin.g.k.delaney@gmail.com">Contact</a></span>
   </footer>
 </div>
@@ -280,7 +280,7 @@ def main():
             "@context": "https://schema.org", "@type": "Product",
             "name": pr["title"], "description": pr["tagline"] or pr["description"],
             "image": f"{BASE_URL}/assets/covers/{pr['gid']}.png",
-            "brand": {"@type": "Brand", "name": "Kestrelattice"},
+            "brand": {"@type": "Brand", "name": "ghostcorpnet"},
             "offers": {"@type": "Offer", "priceCurrency": "USD", "price": str(pr["price"]),
                        "availability": "https://schema.org/InStock",
                        "url": pr["gumroad_url"]}}, indent=2)
@@ -289,7 +289,7 @@ def main():
             upsell = ('  <section style="border:1px solid var(--accent);border-radius:12px;'
                       'padding:24px;background:#1e1a16">\n'
                       '    <h2 style="margin-top:0">Want the whole library?</h2>\n'
-                      '    <p><strong>The Complete Kestrelattice Library</strong> — every Kestrelattice product '
+                      '    <p><strong>The Complete ghostcorpnet Library</strong> — every ghostcorpnet product '
                       'in one bundle for $79. One purchase, everything we have shipped.</p>\n'
                       '    <p><a class="btn" href="../complete-kestrelattice-library/">Get the full library — $79</a></p>\n'
                       '  </section>')

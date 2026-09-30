@@ -41,7 +41,7 @@ if (req.method === "POST" && url.pathname === "/chat") {
   } catch (e) {}
 
   const system =
-    "You are the Kestrelattice fleet coordinator, talking to the business owner " +
+    "You are the ghostcorpnet fleet coordinator, talking to the business owner " +
     "in his private admin panel. Be terse and concrete. Live state: " +
     pending + " items awaiting his approval, " + approved + " approved/in-progress, " +
     outreachPending + " outreach pitches ready for his Send tap, " +
