@@ -97,7 +97,7 @@ def read_file(path, default=""):
 def gumroad(path, query=""):
     """Return parsed JSON from the Gumroad API, or None on any failure."""
     try:
-        cmd = [GUMROAD_CLI, path]
+        cmd = [sys.executable, GUMROAD_CLI, path]
         if query:
             cmd.append(query)
         r = subprocess.run(cmd, capture_output=True, text=True, timeout=60)
@@ -109,9 +109,27 @@ def gumroad(path, query=""):
         return None
 
 
+def gumroad_all_products():
+    """All products across every API page, or None on failure."""
+    items, page_key, seen = [], None, set()
+    for _ in range(15):
+        q = f"page_key={urllib.parse.quote(page_key)}" if page_key else ""
+        data = gumroad("products", q)
+        if not data:
+            return None if not items else items
+        for p in data.get("products", []):
+            if p.get("id") not in seen:
+                seen.add(p.get("id"))
+                items.append(p)
+        page_key = data.get("next_page_key")
+        if not page_key:
+            break
+    return items
+
+
 def money_section():
-    products = gumroad("products")
-    if not products:
+    items = gumroad_all_products()
+    if not items:
         return (
             '<div class="card warn"><h3>Sales data not connected yet</h3>'
             "<p>One-time setup: generate an API token at Gumroad → Settings → "
@@ -119,7 +137,6 @@ def money_section():
             "<b>custom.gumroad</b> connector. After that, live sales numbers "
             "appear here automatically.</p></div>"
         )
-    items = products.get("products", [])
     total_cents = 0
     total_n = 0
     rows = []
@@ -273,12 +290,29 @@ def approvals_section():
 def site_section():
     health = read_file(os.path.join(HF, "health.log")).strip().splitlines()
     last = esc(health[-1]) if health else "no checks logged yet"
-    cat_rows = "".join(
-        f"<tr><td>{esc(n)}</td><td>${p}</td><td class='mono'>koalstin.gumroad.com/l/{g}</td></tr>"
-        for n, p, g in CATALOG
+    items = gumroad_all_products() or []
+    live = [p for p in items if p.get("published")]
+    rows = []
+    for p in items:
+        name = p.get("name", "?")
+        cents = p.get("price_cents") or 0
+        link = (p.get("permalink") or "").split("/l/")[-1].rstrip("/")
+        if not p.get("published"):
+            name = f"{name} (draft)"
+        rows.append(
+            f"<tr><td>{esc(name)}</td><td>${cents/100:,.0f}</td>"
+            f"<td class='mono'>koalstin.gumroad.com/l/{esc(link)}</td></tr>"
+        )
+    cat_rows = "".join(rows) or (
+        "<tr><td colspan='3'>Could not reach Gumroad — showing last static catalog.</td></tr>"
+        + "".join(
+            f"<tr><td>{esc(n)}</td><td>${p}</td><td class='mono'>koalstin.gumroad.com/l/{g}</td></tr>"
+            for n, p, g in CATALOG
+        )
     )
     return (
         f'<p><b>Last health check:</b> <span class="mono">{last}</span></p>'
+        f'<p><b>Live products:</b> {len(live)} (plus {len(items) - len(live)} unpublished drafts)</p>'
         f"<table><tr><th>Product</th><th>Price</th><th>Gumroad link</th></tr>{cat_rows}</table>"
     )
 
