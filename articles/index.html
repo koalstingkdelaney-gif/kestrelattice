@@ -68,6 +68,10 @@ gtag('config', 'G-541TCHWW98');
   :focus-visible{outline:2px solid #e07a5f;outline-offset:2px}
   @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
   h1,h2{text-wrap:balance}
+  #backtop{position:fixed;right:22px;bottom:22px;width:46px;height:46px;border-radius:50%;border:1px solid var(--line);background:var(--panel);color:var(--accent);font-size:1.3rem;cursor:pointer;opacity:0;pointer-events:none;transition:opacity .2s;z-index:150}
+  #backtop.show{opacity:1;pointer-events:auto}
+  #backtop:hover{color:var(--text)}
+  @media (prefers-reduced-motion:reduce){#backtop{display:none}}
   .skip{position:absolute;left:-9999px;top:0;background:#e07a5f;color:#1a0f08;padding:10px 18px;font-weight:700;z-index:200;border-radius:0 0 8px 0}
   .skip:focus{left:0}
 </style>
@@ -138,6 +142,13 @@ gtag('config', 'G-541TCHWW98');
     <span>© 2026 ghostcorpnet · An independent studio</span>
     <span><a href="../">Home</a> · <a href="mailto:koalstin.g.k.delaney@gmail.com">Contact</a> · <a href="../sitemap.xml">Sitemap</a></span>
   </footer>
+<button id="backtop" aria-label="Back to top">↑</button>
 </main>
+<script>
+(function(){var b=document.getElementById('backtop');if(!b)return;
+function onScroll(){b.classList.toggle('show',window.scrollY>1200)}
+window.addEventListener('scroll',onScroll,{passive:true});onScroll();
+b.addEventListener('click',function(){window.scrollTo({top:0,behavior:'smooth'})});})();
+</script>
 </body>
 </html>

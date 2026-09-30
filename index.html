@@ -121,6 +121,9 @@
   nav.main{display:flex;align-items:center;gap:20px}
   nav.main a{color:var(--muted);font-size:.88rem;font-weight:500}
   nav.main a:hover{color:var(--accent-bright)}
+  nav.main a:not(.nav-cta){position:relative}
+  nav.main a:not(.nav-cta)::after{content:"";position:absolute;left:0;bottom:-4px;height:2px;width:100%;background:var(--accent);transform:scaleX(0);transform-origin:left;transition:transform .22s var(--ease)}
+  nav.main a:not(.nav-cta):hover::after{transform:scaleX(1)}
   .nav-cta{background:var(--accent);color:var(--accent-ink)!important;font-weight:700;padding:8px 16px;border-radius:var(--radius-sm);
     font-size:.84rem;transition:background .16s var(--ease),transform .16s var(--ease)}
   .nav-cta:hover{background:var(--accent-bright);text-decoration:none;transform:translateY(-1px)}

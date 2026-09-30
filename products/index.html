@@ -1559,7 +1559,13 @@ footer.site a:hover{color:var(--accent-bright)}
 .trust{color:var(--faint);font-size:.78rem;text-align:center;margin:-8px 0 14px}
 .result-count{color:var(--muted);font-size:.86rem;text-align:center;margin:4px 0 0}
 .hidden{display:none!important}
-@media(max-width:640px){nav.main a:not(:last-child){display:none}footer.site .wrap{justify-content:center;text-align:center}footer.site a{margin:0 7px}}
+#backtop{position:fixed;right:22px;bottom:22px;width:46px;height:46px;border-radius:50%;border:1px solid var(--line);background:var(--panel);color:var(--accent);font-size:1.3rem;cursor:pointer;opacity:0;pointer-events:none;transition:opacity .2s var(--ease);z-index:150}
+#backtop.show{opacity:1;pointer-events:auto}
+#backtop:hover{border-color:var(--accent-dim)}
+@media(prefers-reduced-motion:reduce){#backtop{display:none}}
+@media(max-width:640px){.filters{overflow-x:auto;flex-wrap:nowrap;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+.filters::-webkit-scrollbar{display:none}
+nav.main a:not(:last-child){display:none}footer.site .wrap{justify-content:center;text-align:center}footer.site a{margin:0 7px}}
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{transition:none!important;animation:none!important}}
 
   h1,h2{text-wrap:balance}
@@ -2323,6 +2329,7 @@ ghostcorpnet</a>
 </div>
 
 </div></div>
+<button id="backtop" aria-label="Back to top">↑</button>
 </main>
 <footer class="site"><div class="wrap">
 <span>© 2026 GhostCorp · ghostcorpnet · An independent studio</span>
@@ -2335,6 +2342,13 @@ const tags=[...new Set([...grid.querySelectorAll('.card')].flatMap(c=>c.dataset.
 const mk=(label,tag)=>{const b=document.createElement('button');b.className='chip'+(tag===''?' active':'');b.textContent=label;b.onclick=()=>{document.querySelectorAll('.chip').forEach(x=>x.classList.remove('active'));b.classList.add('active');document.querySelectorAll('.card').forEach(c=>{c.classList.toggle('hidden',tag!==''&&!c.dataset.tags.split('|').includes(tag))});updateCount()};return b};
 filters.appendChild(mk('All',''));
 tags.forEach(t=>filters.appendChild(mk(t.replace(/-/g,' '),t)));
+
+<script>
+(function(){var b=document.getElementById('backtop');if(!b)return;
+function onScroll(){b.classList.toggle('show',window.scrollY>1200)}
+window.addEventListener('scroll',onScroll,{passive:true});onScroll();
+b.addEventListener('click',function(){window.scrollTo({top:0,behavior:'smooth'})});})();
+</script>
 </script>
 </body>
 </html>
