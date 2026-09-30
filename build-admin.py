@@ -53,6 +53,7 @@ FLEET = [
     ("Marketplace scout", "daily", "distribution"),
     ("AI model refresh", "weekly", "open-models/calls.log"),
     ("AI provider scout", "monthly", "open-models/drafts"),
+    ("TikTok studio", "daily", "tiktok"),
 ]
 
 # (ok age, warn age) in hours, keyed by schedule label.
@@ -505,6 +506,50 @@ def directory_section():
     )
 
 
+def tiktok_section():
+    """Staged TikTok videos: brand, caption, and posting status."""
+    entries = []
+    for line in read_file(os.path.join(HF, "tiktok/log.jsonl")).splitlines():
+        line = line.strip()
+        if line:
+            try:
+                entries.append(json.loads(line))
+            except json.JSONDecodeError:
+                pass
+    staged = [e for e in entries if e.get("status") == "staged"]
+    week_ago = (datetime.now(timezone.utc) - timedelta(days=7)).date().isoformat()
+    recent = [e for e in staged if e.get("date", "") >= week_ago]
+    try:
+        ch = json.loads(read_file(os.path.join(HF, "outreach/channels.json")) or "{}")
+        tt = ch.get("tiktok", {})
+    except json.JSONDecodeError:
+        tt = {}
+    uname = tt.get("username") or "—"
+    cards = (
+        f'<div class="stat"><b>{len(staged)}</b><span>videos staged</span></div>'
+        f'<div class="stat"><b>{len(recent)}</b><span>staged this week</span></div>'
+        f'<div class="stat"><b>@{esc(uname)}</b><span>TikTok account</span></div>'
+    )
+    if not staged:
+        body = "<p class='muted'>No videos yet — the TikTok studio bot makes one every morning.</p>"
+    else:
+        body = "".join(
+            "<div class='card'><h3>" + esc(e.get("brand", "?")) +
+            " <span class='muted'>· " + esc(e.get("date", "")) + "</span></h3>"
+            "<p class='mono'>" + esc(e.get("video", "")) + "</p>"
+            "<p>" + esc(e.get("caption", "")) + "</p>"
+            "<p class='muted'>Angle: " + esc(e.get("angle", "")) + "</p></div>"
+            for e in reversed(staged[-10:])
+        )
+    return (
+        f'<div class="statrow">{cards}</div>' + body +
+        "<p class='muted'>Account <b>@ghostcorpnetai</b> is live (created on your phone). "
+        "Bots make the videos; you post from the TikTok app — TikTok blocks bot logins. "
+        "Each video has a matching .txt file in the staged folder with the exact "
+        "caption, hashtags, and script to copy-paste.</p>"
+    )
+
+
 def site_section():
     health = read_file(os.path.join(HF, "health.log")).strip().splitlines()
     last = esc(health[-1]) if health else "no checks logged yet"
@@ -721,6 +766,7 @@ def build():
       <a href="#pipeline">Pipeline</a>
       <a href="#drafts">Drafts</a>
       <a href="#directory">Directory</a>
+      <a href="#tiktok">TikTok</a>
       <a href="#site">Site &amp; catalog</a>
       <a href="#fleet">Fleet</a>
       <a href="#traffic">Traffic</a>
@@ -774,6 +820,13 @@ def build():
     <h2>Directory submissions</h2>
     <p class="lede">Third-party packs submitted via the public form. <b>Approve</b> lists a pack in the directory; <b>Reject</b> archives it. Listing is free — approvals never move money.</p>
     {directory_section()}
+  </section>
+
+  <section class="dash" id="tiktok">
+    <div class="eyebrow">Video</div>
+    <h2>TikTok studio</h2>
+    <p class="lede">One video a day, staged and ready. Copy the caption from its .txt file and post from your phone.</p>
+    {tiktok_section()}
   </section>
 
   <section class="dash" id="site">

@@ -125,6 +125,7 @@
   nav.main a:not(.nav-cta){position:relative}
   nav.main a:not(.nav-cta)::after{content:"";position:absolute;left:0;bottom:-4px;height:2px;width:100%;background:var(--accent);transform:scaleX(0);transform-origin:left;transition:transform .22s var(--ease)}
   nav.main a:not(.nav-cta):hover::after{transform:scaleX(1)}
+  .nav-toggle{display:none}
   .nav-cta{background:var(--accent);color:var(--accent-ink)!important;font-weight:700;padding:8px 16px;border-radius:var(--radius-sm);
     font-size:.84rem;transition:background .16s var(--ease),transform .16s var(--ease)}
   .nav-cta:hover{background:var(--accent-bright);text-decoration:none;transform:translateY(-1px)}
@@ -213,7 +214,7 @@
   details.faq:hover{border-color:var(--accent-dim)}
   details.faq[open]{border-color:var(--accent-dim);background:var(--bg-soft)}
   details.faq summary{cursor:pointer;font-weight:650;list-style:none;display:flex;justify-content:space-between;
-    align-items:center;gap:12px;font-size:.95rem}
+    align-items:center;gap:12px;font-size:.95rem;padding:12px 4px;min-height:44px}
   details.faq summary::-webkit-details-marker{display:none}
   details.faq summary::after{content:"+";color:var(--accent);font-size:1.3rem;font-weight:700;line-height:1}
   details.faq[open] summary::after{content:"–"}
@@ -250,7 +251,13 @@
   }
   @media(max-width:640px){
     .featured{grid-template-columns:1fr}
-    nav.main a:not(.nav-cta):not(.nav-signin){display:none}
+    .nav-toggle{display:inline-flex;align-items:center;justify-content:center;width:44px;height:44px;
+      background:none;border:1px solid var(--line);border-radius:8px;color:var(--text);font-size:1.25rem;cursor:pointer}
+    nav.main{display:none}
+    nav.main.open{display:flex;position:absolute;top:100%;left:0;right:0;flex-direction:column;align-items:stretch;
+      background:var(--bg-soft);border-bottom:1px solid var(--line);padding:8px 20px 16px;gap:2px;z-index:60}
+    nav.main.open a{display:flex;align-items:center;min-height:44px;padding:10px 0}
+    header.site .wrap{position:relative}
     .hero{padding:40px 0 28px}
     section.block{padding:36px 0}
     .sticky-buy{display:flex;position:fixed;bottom:0;left:0;right:0;z-index:100;background:rgba(26,23,20,.97);
@@ -277,7 +284,8 @@
       <svg width="24" height="24" viewBox="0 0 26 26" fill="none" aria-hidden="true"><circle cx="5" cy="6" r="2.4" fill="#e07a5f"/><circle cx="21" cy="6" r="2.4" fill="#e07a5f"/><circle cx="13" cy="13" r="2.4" fill="#e07a5f"/><circle cx="5" cy="20" r="2.4" fill="#e07a5f"/><circle cx="21" cy="20" r="2.4" fill="#e07a5f"/><path d="M6.6 7.4L11.2 11.8M19.4 7.4L14.8 11.8M6.6 18.6L11.2 14.2M19.4 18.6L14.8 14.2" stroke="#e07a5f" stroke-width="1.4"/></svg>
       ghostcorpnet
     </a>
-    <nav class="main" aria-label="Primary">
+    <button class="nav-toggle" aria-expanded="false" aria-controls="primary-nav" aria-label="Open menu">&#9776;</button>
+    <nav class="main" id="primary-nav" aria-label="Primary">
       <a href="products/">Catalog</a>
       <a href="articles/">Articles</a>
       <a href="ecosystem/">Ecosystem</a><a href="brands/">Micro-brands</a>
@@ -493,7 +501,7 @@
 <footer class="site">
   <div class="wrap">
     <span>© 2026 GhostCorp · ghostcorpnet · An independent studio</span>
-    <span><a href="mailto:koalstin.g.k.delaney@gmail.com">Contact</a><a href="LICENSE">MIT License</a><a href="https://github.com/koalstingkdelaney-gif/kestrelattice">Source</a><a href="evidence/buyer-demand-ledger.md">Evidence</a><a href="articles/">Articles</a><a href="ecosystem/">Ecosystem</a><a href="brands/">Micro-brands</a><a href="directory/">Directory</a><a href="affiliates/">Affiliates</a><a href="build/">Build on ghostcorpnet</a><a href="sitemap.xml">Sitemap</a><a href="admin-login.html">Admin</a></span>
+    <span><a href="mailto:koalstin.g.k.delaney@gmail.com?subject=Question%20about%20ghostcorpnet">Contact</a><a href="LICENSE">MIT License</a><a href="https://github.com/koalstingkdelaney-gif/kestrelattice">Source</a><a href="evidence/buyer-demand-ledger.md">Evidence</a><a href="articles/">Articles</a><a href="ecosystem/">Ecosystem</a><a href="brands/">Micro-brands</a><a href="directory/">Directory</a><a href="affiliates/">Affiliates</a><a href="build/">Build on ghostcorpnet</a><a href="sitemap.xml">Sitemap</a><a href="admin-login.html">Admin</a></span>
   </div>
 </footer>
 
@@ -503,6 +511,10 @@
 </div>
 
 <script>
+  // Mobile nav: hamburger toggle with aria-expanded.
+  (function(){var t=document.querySelector('.nav-toggle'),n=document.getElementById('primary-nav');
+  if(t&&n){t.addEventListener('click',function(){var open=n.classList.toggle('open');
+  t.setAttribute('aria-expanded',open);t.setAttribute('aria-label',open?'Close menu':'Open menu');});}})();
   // Analytics: lightweight click tracking for key conversion events.
   document.addEventListener("click", function(e){
     const el = e.target.closest("[data-track]");

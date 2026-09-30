@@ -240,6 +240,8 @@ gtag('config', 'G-541TCHWW98');
   .tagline{{color:var(--muted);font-size:1.05rem;margin-bottom:20px}}
   .price{{font-size:1.6rem;color:var(--accent);font-weight:700;margin-bottom:6px}}
   .instant{{color:var(--muted);font-size:.85rem;margin-bottom:20px}}
+  a:focus-visible,button:focus-visible{{outline:2px solid var(--accent);outline-offset:3px;border-radius:4px}}
+  @media (prefers-reduced-motion:reduce){{*,*::before,*::after{{transition:none!important;animation:none!important}}}}
   .btn{{display:inline-block;background:var(--accent);color:#121212;font-weight:700;
        padding:14px 32px;border-radius:8px;text-decoration:none;font-size:1.05rem}}
   .btn:hover{{background:var(--accent-dim)}}
@@ -355,9 +357,21 @@ def main():
             inside = ["Complete, zero-placeholder document", "Ready to adopt as-is",
                       "Grounded in production agent-governance practice"]
         products.append(dict(gid=gid, slug=slug, title=title,
-                             price=fmt_price(p.get("price_usd", 19)),
+                             price=fmt_price(p.get("price_usd", 19)), is_pack=is_pack,
                              tagline=fix_tagline(p.get("tagline", "")), description=p.get("description", ""),
                              inside=inside, gumroad_url=url or None))
+
+    # Pack Standard v1 aliases: the live /products/ catalog links the 10 studio
+    # packs under slugified full titles (e.g. healthcare-ai-agent-governance-pack-meridian-studio).
+    # Emit the same page under that slug so those links resolve (canonical PDP).
+    aliases = []
+    for pr in products:
+        if pr.get("is_pack"):
+            ps_slug = slugify(pr["title"])
+            if ps_slug != pr["slug"] and not any(x["slug"] == ps_slug for x in products):
+                alias = dict(pr); alias["slug"] = ps_slug
+                aliases.append(alias)
+    products.extend(aliases)
 
     # render pages
     sm_entries = []
