@@ -66,7 +66,7 @@ gtag('config', 'G-541TCHWW98');
     <p id="blurb" style="color:var(--muted)"></p>
     <h3 style="margin:24px 0 8px">Start here</h3>
     <div id="recs"></div>
-    <p class="note">Every Kestrelattice product is a complete, zero-placeholder PDF — instant download via Gumroad, ready to adopt as-is.</p>
+    <p class="note">Every Kestrelattice product is complete and ready to use — instant download via Gumroad, no placeholders.</p>
   </div>
   <footer><a href="../">Home</a> · <a href="../products/">Catalog</a> · © 2026 Kestrelattice</footer>
 </div>
@@ -101,12 +101,14 @@ const PROD = {
             d:"The fourteen-day governed-agent rollout, day by day."},
   quarantine:{n:"Compromised Agent Quarantine Runbook Excerpt", s:"compromised-agent-quarantine-runbook-excerpt", p:19,
             d:"Isolate a compromised agent in minutes, not hours."},
+  free:    {n:"AI Agent Governance Starter Kit", s:"ai-agent-governance-starter-kit", p:0,
+            d:"The essential checklists to begin governing agents today. Free instant download."},
   usecases:{n:"100 Agent Use Cases, Pre-Tiered", s:"100-agent-use-cases-pre-tiered", p:19,
             d:"100 concrete use cases, each pre-tiered with key controls."}
 };
 const WORRY = {
   perm:["access","risk"], cost:["cost","risk"], inject:["inject","runbook"],
-  audit:["risk","studio"], start:["rollout","studio"]
+  audit:["risk","studio"], start:["free","rollout","studio"]
 };
 const TIERS = [
   {t:"Low — but don't drift", b:"Your exposure is contained today. Lock in the basics now so growth doesn't create surprises later."},
@@ -141,7 +143,8 @@ function finish(){
   picks = [...new Set(picks)].slice(0,3);
   document.getElementById('recs').innerHTML = picks.map(k=>{
     const p = PROD[k];
-    return '<div class="rec"><a href="../products/'+p.s+'/">'+p.n+'</a><p style="color:var(--muted);font-size:.9rem">'+p.d+'</p><div class="p">$'+p.p+' — <a href="../products/'+p.s+'/" style="color:var(--accent)">Get it</a></div></div>';
+    const price = p.p === 0 ? 'Free' : '$'+p.p;
+    return '<div class="rec"><a href="../products/'+p.s+'/">'+p.n+'</a><p style="color:var(--muted);font-size:.9rem">'+p.d+'</p><div class="p">'+price+' — <a href="../products/'+p.s+'/" style="color:var(--accent)">Get it</a></div></div>';
   }).join('');
   if(typeof gtag==='function') gtag('event','quiz_complete',{tier:TIERS[tier].t});
 }
