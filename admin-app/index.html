@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#121212">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="ghostcorpnet">
+<link rel="manifest" href="./manifest.webmanifest">
+<link rel="icon" type="image/png" sizes="192x192" href="./assets/admin-icon-192.png">
+<link rel="apple-touch-icon" href="./assets/admin-icon-512.png">
+<title>ghostcorpnet Admin</title>
+<style>
+  :root{
+    --bg:#121212; --panel:#1c1a18; --line:#352e24;
+    --text:#ece6d9; --muted:#a79c88; --faint:#857a66;
+    --accent:#e07a5f; --accent-bright:#f09474; --accent-ink:#1a0f08;
+    --radius:12px;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,"Segoe UI",sans-serif;min-height:100vh;display:flex;align-items:center;justify-content:center;padding:24px}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:32px 28px;max-width:400px;width:100%;box-shadow:0 14px 36px rgba(0,0,0,.38)}
+  .brand{text-align:center;margin-bottom:20px;color:var(--faint);font-size:.8rem;letter-spacing:.14em;text-transform:uppercase}
+  .icon{display:block;margin:0 auto 18px;width:72px;height:72px;border-radius:16px}
+  .card h1{font-size:1.2rem;margin-bottom:6px;text-align:center}
+  .card p{color:var(--muted);font-size:.9rem;margin-bottom:18px;line-height:1.55}
+  .card p.center{text-align:center}
+  label{display:block;font-size:.8rem;color:var(--muted);margin-bottom:8px}
+  input[type=password]{width:100%;background:#121212;border:1px solid var(--line);border-radius:8px;color:var(--text);padding:12px 14px;font-size:1rem;margin-bottom:14px}
+  input[type=password]:focus{outline:none;border-color:var(--accent)}
+  button{width:100%;background:var(--accent);color:var(--accent-ink);border:0;border-radius:8px;padding:13px;font-size:1rem;font-weight:700;cursor:pointer}
+  button:hover{background:var(--accent-bright)}
+  .err{color:var(--accent);font-size:.85rem;margin-top:12px;min-height:1.2em}
+  .install{margin-top:22px;border-top:1px solid var(--line);padding-top:18px}
+  .install h2{font-size:.95rem;margin-bottom:10px}
+  .install ol{color:var(--muted);font-size:.87rem;line-height:1.65;padding-left:20px}
+  .install b{color:var(--text)}
+  .fine{margin-top:16px;font-size:.78rem;color:var(--faint);line-height:1.5;text-align:center}
+  .spinner{width:40px;height:40px;margin:8px auto;border:3px solid var(--line);border-top-color:var(--accent);border-radius:50%;animation:spin 1s linear infinite}
+  @keyframes spin{to{transform:rotate(360deg)}}
+</style>
+</head>
+<body>
+<div class="card" id="app">
+  <div class="brand">ghostcorpnet</div>
+  <img class="icon" src="./assets/admin-icon-192.png" alt="ghostcorpnet admin icon">
+  <div id="loading"><div class="spinner"></div><p class="center">Opening your admin panel…</p></div>
+  <div id="setup" style="display:none">
+    <h1>Admin key needed</h1>
+    <p>This device hasn't saved your private admin key yet. Enter it once — it's stored only on this phone, then the app opens your panel directly from now on.</p>
+    <form id="f">
+      <label for="key">Admin key</label>
+      <input type="password" id="key" autocomplete="off" placeholder="Paste your admin key">
+      <button type="submit">Save key &amp; open panel</button>
+      <div class="err" id="err"></div>
+    </form>
+  </div>
+  <div class="install" id="installbox">
+    <h2>Install on Android</h2>
+    <ol>
+      <li>Open this page in <b>Chrome</b> on your phone.</li>
+      <li>Tap the <b>⋮ menu</b> → <b>"Add to Home screen"</b> (or <b>"Install app"</b>).</li>
+      <li>Launch <b>ghostcorpnet</b> from your home screen — it opens full-screen like a real app.</li>
+    </ol>
+  </div>
+  <div class="fine">Private. Nothing here is indexed or linked from the public site.</div>
+</div>
+<script>
+(function(){
+  var WORKER = "https://kestrelattice-approvals.koalstin-g-k-delaney.workers.dev";
+  var LS = "kestrelattice_admin_remember";
+  function extractKey(v){
+    v = (v || "").trim();
+    if (!v) return "";
+    var m = v.match(/[?&]key=([^&]+)/);
+    if (m) return decodeURIComponent(m[1]);
+    return v;
+  }
+  function go(key){
+    location.replace(WORKER + "/admin?key=" + encodeURIComponent(key));
+  }
+  try {
+    var saved = localStorage.getItem(LS);
+    if (saved) { go(saved); return; }
+  } catch(e){}
+  document.getElementById("loading").style.display = "none";
+  document.getElementById("setup").style.display = "block";
+  document.getElementById("f").addEventListener("submit", function(e){
+    e.preventDefault();
+    var key = extractKey(document.getElementById("key").value);
+    var err = document.getElementById("err");
+    if (!key) { err.textContent = "Enter your admin key first."; return; }
+    try { localStorage.setItem(LS, key); } catch(e){}
+    go(key);
+  });
+  if ("serviceWorker" in navigator) {
+    navigator.serviceWorker.register("./admin-sw.js").catch(function(){});
+  }
+})();
+</script>
+</body>
+</html>
