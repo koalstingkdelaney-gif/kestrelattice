@@ -54,6 +54,27 @@ FLEET = [
     ("AI provider scout", "monthly", "open-models/drafts"),
 ]
 
+# (ok age, warn age) in hours, keyed by schedule label.
+HEALTH_WINDOWS = {
+    "daily": (36, 72),
+    "3× / week": (96, 192),
+    "weekly": (240, 408),
+    "monthly": (1080, 1800),
+}
+
+
+def health_of(schedule, ts):
+    """Status dot class + label from a bot's schedule and last-output time."""
+    if not ts:
+        return "never", "no data"
+    age_h = (time.time() - ts) / 3600.0
+    ok_h, warn_h = HEALTH_WINDOWS.get(schedule, (240, 408))
+    if age_h <= ok_h:
+        return "ok", "active"
+    if age_h <= warn_h:
+        return "warn", "quiet"
+    return "stale", "stale"
+
 
 def newest_mtime(rel):
     """Newest file modification time under a hidden_files path (file or dir)."""
@@ -163,8 +184,8 @@ def money_section():
         f'<div class="stat"><b>${week_cents/100:,.0f}</b><span>last 7 days ({len(week_sales)} sales)</span></div>'
     )
     table = (
-        "<table><tr><th>Product</th><th>Revenue</th><th>Sales</th></tr>"
-        + "".join(rows) + "</table>"
+        '<div class="table-wrap"><table><tr><th>Product</th><th>Revenue</th><th>Sales</th></tr>'
+        + "".join(rows) + "</table></div>"
     )
     return f'<div class="statrow">{cards}</div>{table}'
 
@@ -232,7 +253,8 @@ def approvals_section():
             f"<td><span class='pill'>waiting</span></td><td></td></tr>"
             for it in items)
         return (
-            "<table><tr><th>Item</th><th>Status</th><th></th></tr>" + rows + "</table>"
+            '<div class="table-wrap"><table><tr><th>Item</th><th>Status</th><th></th></tr>'
+            + rows + "</table></div>"
             "<p class='muted'>One-tap approvals are activating — the backend "
             "finishes deploying shortly. Meanwhile you can paste a code (e.g. "
             "“approve AP-0001”) in the Talk to the bots chat.</p>")
@@ -255,13 +277,13 @@ def approvals_section():
         '  try {\n'
         '    const q = await (await fetch(WURL + "/queue")).json();\n'
         '    if (!q.length) { el.innerHTML = "<p class=\'muted\'>Nothing waiting for approval.</p>"; return; }\n'
-        '    el.innerHTML = "<table><tr><th>Item</th><th>Status</th><th></th></tr>" + q.map(it => {\n'
+        '    el.innerHTML = "<div class=\'table-wrap\'><table><tr><th>Item</th><th>Status</th><th></th></tr>" + q.map(it => {\n'
         '      const st = doneCodes.includes(it.code) && it.status === "pending" ? "approved" : it.status;\n'
         '      const btn = (st === "pending")\n'
         '        ? `<button class="btn" onclick="approve(\\\'${it.code}\\\', this)">Approve</button>`\n'
         '        : "<span class=\'muted\'>—</span>";\n'
         '      return `<tr><td><b>${it.title}</b><br><span class=\'muted\'>${it.detail || ""}</span><br><span class=\'muted\'>Needs: ${it.prereq || "—"}</span></td><td>${pill(st)}</td><td>${btn}</td></tr>`;\n'
-        '    }).join("") + "</table>"\n'
+        '    }).join("") + "</table></div>"\n'
         '      + "<p class=\'muted\'>Tap <b>Approve</b> — the fleet picks it up within ~15 minutes and does the work. Or paste the code (e.g. “approve AP-0001”) in the Talk to the bots chat.<br>Routine site development auto-approves by policy — only items that move money, change prices, or send messages wait for your tap.</p>";\n'
         '  } catch (e) {\n'
         '    el.innerHTML = "<p class=\'muted\'>Approval service unreachable — try again shortly.</p>";\n'
@@ -313,17 +335,23 @@ def site_section():
     return (
         f'<p><b>Last health check:</b> <span class="mono">{last}</span></p>'
         f'<p><b>Live products:</b> {len(live)} (plus {len(items) - len(live)} unpublished drafts)</p>'
-        f"<table><tr><th>Product</th><th>Price</th><th>Gumroad link</th></tr>{cat_rows}</table>"
+        f'<div class="table-wrap"><table><tr><th>Product</th><th>Price</th><th>Gumroad link</th></tr>{cat_rows}</table></div>'
     )
 
 
 def fleet_section():
     calls = read_file(os.path.join(HF, "open-models/calls.log")).strip().splitlines()
     last_ai = esc(calls[-1][:120]) if calls else "no AI calls logged yet"
-    bots = "".join(
-        f"<tr><td>{esc(n)}</td><td>{esc(s)}</td>"
-        f"<td class='mono'>{esc(fmt_time(newest_mtime(sig)))}</td></tr>"
-        for n, s, sig in FLEET)
+    rows = []
+    for n, s, sig in FLEET:
+        ts = newest_mtime(sig)
+        cls, label = health_of(s, ts)
+        rows.append(
+            f"<tr><td><span class='health'><span class='dot {cls}'></span>{esc(n)}</span></td>"
+            f"<td><span class='sched'>{esc(s)}</span></td>"
+            f"<td class='mono'>{esc(fmt_time(ts))}</td>"
+            f"<td><span class='pill {cls}'>{label}</span></td></tr>")
+    bots = "".join(rows)
     # Activity feed: most recently touched files across the fleet workspace.
     seen = []
     for root, dirs, files in os.walk(HF):
@@ -358,7 +386,11 @@ def fleet_section():
         "“pause the pricing bot”, “what did the SEO writer publish this week?”. "
         "Muse coordinates them for you; nothing goes public without your say-so.</p></div>"
         f'<p><b>Last fleet AI activity:</b> <span class="mono">{last_ai}</span></p>'
-        f"<table><tr><th>Bot</th><th>Schedule</th><th>Last output</th></tr>{bots}</table>"
+        f'<div class="table-wrap"><table><tr><th>Bot</th><th>Schedule</th><th>Last output</th><th>Status</th></tr>{bots}</table></div>'
+        '<p class="legend"><span class="dot ok"></span>active — produced within its schedule window &nbsp;'
+        '<span class="dot warn"></span>quiet — overdue once &nbsp;'
+        '<span class="dot stale"></span>stale — well overdue &nbsp;'
+        '<span class="dot never"></span>no data — never produced output</p>'
         f"<h3>Latest fleet activity</h3><ul>{feed}</ul>"
         f"<h3>Recently shipped site improvements</h3><ul>{props or '<li>—</li>'}</ul>"
     )
@@ -375,75 +407,164 @@ def build():
 <title>Admin Dashboard — Kestrelattice</title>
 <!-- GENERATED by build-admin.py — do not hand-edit. Regenerates daily. -->
 <style>
-  :root{{--bg:#121212; --panel:#1c1a18; --line:#332e26; --text:#e8e2d8;
-        --muted:#9a917f; --accent:#e07a5f; --accent-dim:#b9634b; --ok:#7fbf7f;}}
+  :root{{--bg:#121212; --panel:#1c1a18; --panel2:#232019; --line:#332e26;
+        --text:#e8e2d8; --muted:#9a917f; --accent:#e07a5f; --accent-dim:#b9634b;
+        --ok:#7fbf7f; --warn:#e0a75f; --bad:#e08a7f; --radius:12px;}}
   *{{margin:0;padding:0;box-sizing:border-box}}
+  html{{scroll-behavior:smooth;scroll-padding-top:76px}}
   body{{background:var(--bg);color:var(--text);
        font-family:ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
-       line-height:1.6}}
-  .wrap{{max-width:960px;margin:0 auto;padding:40px 24px 64px}}
-  .brand{{display:flex;align-items:center;gap:10px;font-weight:700;margin-bottom:4px}}
-  h1{{font-size:1.6rem}} h2{{font-size:1.2rem;margin:34px 0 12px}}
-  h3{{font-size:1rem;margin:22px 0 8px}}
-  .gen{{color:var(--muted);font-size:.85rem;margin-bottom:8px}}
-  .statrow{{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin:14px 0}}
-  .stat{{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:16px;text-align:center}}
-  .stat b{{display:block;font-size:1.7rem;color:var(--accent)}}
-  .stat span{{color:var(--muted);font-size:.82rem}}
-  .card{{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:20px 22px;margin:14px 0}}
-  .card.warn{{border-color:var(--accent-dim)}}
-  .card h3{{margin:0 0 8px}} .card p{{color:var(--muted);font-size:.92rem}}
+       line-height:1.6;-webkit-text-size-adjust:100%}}
+  header.top{{position:sticky;top:0;z-index:100;background:rgba(18,18,18,.95);
+       backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}}
+  header.top .inner{{max-width:1080px;margin:0 auto;padding:12px 24px;
+       display:flex;align-items:center;gap:16px}}
+  .brand{{display:flex;align-items:center;gap:10px;font-weight:700;font-size:1.05rem;
+       color:var(--text);text-decoration:none;flex:0 0 auto}}
+  .admin-tag{{font-size:.68rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;
+       color:var(--accent);border:1px solid var(--accent-dim);border-radius:999px;padding:3px 10px}}
+  nav.dash{{display:flex;gap:2px;margin-left:auto;overflow-x:auto;scrollbar-width:none}}
+  nav.dash::-webkit-scrollbar{{display:none}}
+  nav.dash a{{color:var(--muted);font-size:.85rem;padding:7px 11px;border-radius:7px;
+       text-decoration:none;white-space:nowrap}}
+  nav.dash a:hover{{color:var(--accent);background:var(--panel)}}
+  .wrap{{max-width:1080px;margin:0 auto;padding:0 24px 80px}}
+  .hero{{padding:44px 0 6px}}
+  .hero h1{{font-size:clamp(1.7rem,4vw,2.3rem);font-weight:800;letter-spacing:-.02em}}
+  .gen{{color:var(--muted);font-size:.88rem;margin-top:6px}}
+  section.dash{{padding:30px 0 6px;border-top:1px solid var(--line);margin-top:30px}}
+  .eyebrow{{font-size:.7rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;
+       color:var(--accent);margin-bottom:6px}}
+  section.dash h2{{font-size:1.4rem;font-weight:700;letter-spacing:-.01em}}
+  section.dash .lede{{color:var(--muted);font-size:.92rem;margin:4px 0 14px;max-width:720px}}
+  .statrow{{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:14px;margin:16px 0}}
+  .stat{{background:var(--panel);border:1px solid var(--line);border-top:3px solid var(--accent-dim);
+       border-radius:var(--radius);padding:20px 14px;text-align:center}}
+  .stat b{{display:block;font-size:1.9rem;color:var(--accent);line-height:1.25}}
+  .stat span{{color:var(--muted);font-size:.85rem}}
+  .card{{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);
+       padding:22px 24px;margin:14px 0}}
+  .card.warn{{border-color:var(--accent-dim);border-left:4px solid var(--accent)}}
+  .card h3{{margin:0 0 8px;font-size:1.05rem}}
+  .card p{{color:var(--muted);font-size:.92rem}}
   .card b{{color:var(--text)}}
-  table{{width:100%;border-collapse:collapse;font-size:.88rem;margin:12px 0}}
-  th,td{{text-align:left;padding:8px 10px;border-bottom:1px solid var(--line);vertical-align:top}}
-  th{{color:var(--muted);font-size:.75rem;text-transform:uppercase;letter-spacing:.08em}}
+  .table-wrap{{overflow-x:auto;margin:14px 0;border:1px solid var(--line);
+       border-radius:var(--radius);background:var(--panel)}}
+  .table-wrap table{{margin:0}}
+  table{{width:100%;border-collapse:collapse;font-size:.88rem;margin:14px 0;min-width:600px}}
+  th,td{{text-align:left;padding:10px 14px;border-bottom:1px solid var(--line);vertical-align:top}}
+  th{{color:var(--muted);font-size:.72rem;font-weight:600;text-transform:uppercase;
+       letter-spacing:.08em;background:var(--panel2)}}
+  tr:nth-child(even) td{{background:rgba(255,255,255,.018)}}
+  tr:hover td{{background:rgba(224,122,95,.05)}}
+  .table-wrap tr:last-child td,.table-wrap tr:last-child th{{border-bottom:0}}
   .mono{{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:.82rem;color:var(--muted)}}
   .muted{{color:var(--muted);font-size:.88rem}}
-  details.fold{{background:var(--panel);border:1px solid var(--line);border-radius:10px;
-                padding:14px 18px;margin:12px 0}}
+  .legend{{color:var(--muted);font-size:.82rem;margin:8px 2px 0;line-height:2}}
+  details.fold{{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);
+       padding:16px 20px;margin:14px 0}}
   details.fold summary{{cursor:pointer;font-weight:600}}
   details.fold ol{{margin:10px 0 0 20px;color:var(--muted);font-size:.9rem}}
   details.fold li{{margin:3px 0}}
   ul{{margin:8px 0 8px 20px;color:var(--muted);font-size:.92rem}}
-  .foot{{margin-top:40px;color:var(--muted);font-size:.8rem;border-top:1px solid var(--line);padding-top:16px}}
-  .pill{{display:inline-block;padding:2px 10px;border-radius:20px;font-size:.75rem;font-weight:600;
-        background:#332e26;color:var(--muted)}}
+  .health{{display:inline-flex;align-items:center;font-size:.92rem;color:var(--text);white-space:nowrap}}
+  .dot{{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:9px;flex:0 0 auto}}
+  .dot.ok{{background:var(--ok);box-shadow:0 0 7px rgba(127,191,127,.8)}}
+  .dot.warn{{background:var(--warn);box-shadow:0 0 7px rgba(224,167,95,.6)}}
+  .dot.stale{{background:var(--bad)}}
+  .dot.never{{background:#5a544a}}
+  .sched{{display:inline-block;font-size:.8rem;color:var(--muted);border:1px solid var(--line);
+       border-radius:6px;padding:3px 9px;white-space:nowrap}}
+  .pill{{display:inline-block;padding:3px 11px;border-radius:20px;font-size:.75rem;font-weight:600;
+        background:#332e26;color:var(--muted);white-space:nowrap}}
   .pill.ok{{background:#2a3d2a;color:var(--ok)}}
-  .pill.warn{{background:#3d3121;color:#e0a75f}}
+  .pill.warn{{background:#3d3121;color:var(--warn)}}
+  .pill.stale{{background:#3d2421;color:var(--bad)}}
+  .pill.never{{background:#2c2823;color:var(--muted)}}
   .pill.blocked{{background:#3d2421;color:#e08a7f}}
-  .btn{{display:inline-block;padding:8px 18px;border-radius:8px;background:var(--accent);
-       color:#121212;font-weight:700;font-size:.85rem;text-decoration:none;white-space:nowrap}}
+  .btn{{display:inline-block;padding:8px 18px;border:0;border-radius:8px;background:var(--accent);
+       color:#161210;font-weight:700;font-size:.85rem;cursor:pointer;white-space:nowrap;font-family:inherit}}
+  .btn:hover{{background:var(--accent-dim)}}
+  .btn:disabled{{opacity:.6;cursor:default}}
+  .foot{{margin-top:44px;color:var(--muted);font-size:.8rem;border-top:1px solid var(--line);padding-top:18px}}
+  @media (max-width:640px){{
+    header.top .inner{{padding:10px 16px;gap:10px}}
+    .wrap{{padding:0 16px 64px}}
+    .hero{{padding-top:32px}}
+    nav.dash a{{padding:6px 8px;font-size:.8rem}}
+    .statrow{{grid-template-columns:repeat(2,1fr);gap:10px}}
+    .stat{{padding:14px 8px}}
+    .stat b{{font-size:1.45rem}}
+    .card{{padding:16px 18px}}
+    table{{min-width:520px}}
+  }}
 </style>
 </head>
 <body>
-<div class="wrap">
-  <div class="brand">
-    <svg width="24" height="24" viewBox="0 0 26 26" fill="none" aria-hidden="true"><circle cx="5" cy="6" r="2.4" fill="#e07a5f"/><circle cx="21" cy="6" r="2.4" fill="#e07a5f"/><circle cx="13" cy="13" r="2.4" fill="#e07a5f"/><circle cx="5" cy="20" r="2.4" fill="#e07a5f"/><circle cx="21" cy="20" r="2.4" fill="#e07a5f"/><path d="M6.6 7.4L11.2 11.8M19.4 7.4L14.8 11.8M6.6 18.6L11.2 14.2M19.4 18.6L14.8 14.2" stroke="#e07a5f" stroke-width="1.4"/></svg>
-    Kestrelattice
+<header class="top">
+  <div class="inner">
+    <a class="brand" href="https://koalstingkdelaney-gif.github.io/kestrelattice/">
+      <svg width="22" height="22" viewBox="0 0 26 26" fill="none" aria-hidden="true"><circle cx="5" cy="6" r="2.4" fill="#e07a5f"/><circle cx="21" cy="6" r="2.4" fill="#e07a5f"/><circle cx="13" cy="13" r="2.4" fill="#e07a5f"/><circle cx="5" cy="20" r="2.4" fill="#e07a5f"/><circle cx="21" cy="20" r="2.4" fill="#e07a5f"/><path d="M6.6 7.4L11.2 11.8M19.4 7.4L14.8 11.8M6.6 18.6L11.2 14.2M19.4 18.6L14.8 14.2" stroke="#e07a5f" stroke-width="1.4"/></svg>
+      Kestrelattice <span class="admin-tag">admin</span>
+    </a>
+    <nav class="dash">
+      <a href="#money">Money</a>
+      <a href="#approvals">Approvals</a>
+      <a href="#pipeline">Pipeline</a>
+      <a href="#site">Site &amp; catalog</a>
+      <a href="#fleet">Fleet</a>
+      <a href="#traffic">Traffic</a>
+    </nav>
   </div>
-  <h1>Admin dashboard</h1>
-  <p class="gen">Generated {esc(now)} · refreshes daily with the site-health check</p>
+</header>
+<div class="wrap">
+  <div class="hero">
+    <h1>Admin dashboard</h1>
+    <p class="gen">Generated {esc(now)} · refreshes daily with the site-health check</p>
+  </div>
 
-  <h2>Money</h2>
-  {money_section()}
+  <section class="dash" id="money">
+    <div class="eyebrow">Revenue</div>
+    <h2>Money</h2>
+    <p class="lede">Live Gumroad sales figures, refreshed every time this page regenerates.</p>
+    {money_section()}
+  </section>
 
-  <h2>Needs your approval</h2>
-  {approvals_section()}
+  <section class="dash" id="approvals">
+    <div class="eyebrow">Your call</div>
+    <h2>Needs your approval</h2>
+    <p class="lede">One tap approves — the fleet picks it up within ~15 minutes.</p>
+    {approvals_section()}
+  </section>
 
-  <h2>Review pipeline</h2>
-  {pipeline_section()}
+  <section class="dash" id="pipeline">
+    <div class="eyebrow">In progress</div>
+    <h2>Review pipeline</h2>
+    <p class="lede">Drafts waiting in the fleet workspace. Nothing here is public.</p>
+    {pipeline_section()}
+  </section>
 
-  <h2>Site &amp; catalog</h2>
-  {site_section()}
+  <section class="dash" id="site">
+    <div class="eyebrow">Storefront</div>
+    <h2>Site &amp; catalog</h2>
+    {site_section()}
+  </section>
 
-  <h2>Fleet</h2>
-  {fleet_section()}
+  <section class="dash" id="fleet">
+    <div class="eyebrow">Bots</div>
+    <h2>Fleet</h2>
+    <p class="lede">Health is judged against each bot's schedule and when it last produced output.</p>
+    {fleet_section()}
+  </section>
 
-  <h2>Traffic</h2>
-  <div class="card"><h3>Google Analytics needs a one-time setup</h3>
-  <p>Live visitor numbers can't be pulled with just a key — Google requires an
-  OAuth client you create in Google Cloud Console (about 10 minutes at a computer).
-  Say the word and I'll walk you through it; after that, traffic charts appear here.</p></div>
+  <section class="dash" id="traffic">
+    <div class="eyebrow">Visitors</div>
+    <h2>Traffic</h2>
+    <div class="card"><h3>Google Analytics needs a one-time setup</h3>
+    <p>Live visitor numbers can't be pulled with just a key — Google requires an
+    OAuth client you create in Google Cloud Console (about 10 minutes at a computer).
+    Say the word and I'll walk you through it; after that, traffic charts appear here.</p></div>
+  </section>
 
   <div class="foot">Private page: unlinked and hidden from search engines, but anyone who
   guesses the URL could open it — it shows real revenue figures. Say the word if you want
