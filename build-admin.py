@@ -10,6 +10,7 @@ Regenerate: python3 ~/workspace/kestrelattice/build-admin.py
 (The daily site-health cron regenerates it automatically.)
 """
 import html
+import glob
 import json
 import os
 import re
@@ -265,8 +266,6 @@ def approvals_section():
     js = (
         '<div id="appr"><p class="muted">Loading approvals…</p></div>\n'
         '<script>\n'
-        'const WURL = ' + json.dumps(wurl) + ';\n'
-        'const WKEY = ' + json.dumps(wkey) + ';\n'
         'const pill = s => s === "done" ? "<span class=\'pill ok\'>done</span>"'
         ' : s === "approved" ? "<span class=\'pill warn\'>approved ✓</span>"'
         ' : s.indexOf("blocked") === 0 ? "<span class=\'pill blocked\'>blocked</span>"'
@@ -275,7 +274,7 @@ def approvals_section():
         'async function loadApprovals() {\n'
         '  const el = document.getElementById("appr");\n'
         '  try {\n'
-        '    const q = await (await fetch(WURL + "/queue")).json();\n'
+        '    const q = (await (await fetch(WURL + "/queue")).json()).filter(it => it.group !== "outreach" && it.group !== "drafts");\n'
         '    if (!q.length) { el.innerHTML = "<p class=\'muted\'>Nothing waiting for approval.</p>"; return; }\n'
         '    el.innerHTML = "<div class=\'table-wrap\'><table><tr><th>Item</th><th>Status</th><th></th></tr>" + q.map(it => {\n'
         '      const st = doneCodes.includes(it.code) && it.status === "pending" ? "approved" : it.status;\n'
@@ -307,6 +306,129 @@ def approvals_section():
         '</script>'
     )
     return js
+
+
+def backend_js():
+    """Shared worker credentials + one generic approve helper, emitted once near
+    the top of the page so every section's buttons can use it."""
+    wdir = os.path.join(HOME, "workspace/kestrelattice")
+    wurl = read_file(os.path.join(wdir, ".worker-url")).strip().rstrip("/")
+    try:
+        wkey = json.loads(read_file(os.path.join(wdir, "worker/.secrets.json")))["write_key"]
+    except (OSError, KeyError, json.JSONDecodeError):
+        wkey = ""
+    return (
+        '<script>\n'
+        'const WURL = ' + json.dumps(wurl) + ';\n'
+        'const WKEY = ' + json.dumps(wkey) + ';\n'
+        'async function approveCode(code, btn, doneLabel) {\n'
+        '  if (!WURL || !WKEY) { alert("Approval backend unreachable."); return false; }\n'
+        '  if (btn) { btn.disabled = true; btn.textContent = "Working…"; }\n'
+        '  try {\n'
+        '    const r = await fetch(WURL + "/approve", {method: "POST",\n'
+        '      headers: {"Content-Type": "application/json"},\n'
+        '      body: JSON.stringify({code: code, key: WKEY})});\n'
+        '    const d = await r.json();\n'
+        '    if (d.ok) { if (btn) btn.textContent = doneLabel || "Done ✓"; return true; }\n'
+        '  } catch (e) {}\n'
+        '  if (btn) { btn.disabled = false; btn.textContent = "Retry"; }\n'
+        '  return false;\n'
+        '}\n'
+        '</script>'
+    )
+
+
+def outreach_section():
+    """Per-lead pitch cards. Send = approve the pre-seeded outreach_send item;
+    the watcher sends it from the human's Gmail within ~15 minutes."""
+    items = []
+    for line in read_file(os.path.join(HF, "outreach/queue.jsonl")).splitlines():
+        line = line.strip()
+        if line:
+            try:
+                items.append(json.loads(line))
+            except json.JSONDecodeError:
+                pass
+    ready = [i for i in items if i.get("status") == "ready"]
+    needc = [i for i in items if i.get("status") == "needs-contact"]
+    sent = [i for i in items if i.get("status") == "sent"]
+    stats = (
+        f'<div class="statrow">'
+        f'<div class="stat"><b>{len(ready)}</b><span>ready to send</span></div>'
+        f'<div class="stat"><b>{len(needc)}</b><span>finding contact</span></div>'
+        f'<div class="stat"><b>{len(sent)}</b><span>pitches sent</span></div>'
+        f'</div>'
+    )
+    if not ready and not needc and not sent:
+        return stats + ("<p class='muted'>No outreach yet — the sync bot drafts pitches "
+                        "from every lead scout run, around the clock.</p>")
+    cards = []
+    for it in ready:
+        qid = it.get("id", "")
+        cards.append(
+            '<div class="card"><h3>' + esc(it.get("lead", "?")) + '</h3>'
+            '<p>' + esc(it.get("why", "")) + '</p>'
+            '<p class="muted">To: <b>' + esc(it.get("contact_email", "")) + '</b> '
+            '<span class="mono">(' + esc(it.get("email_source", "")) + ')</span></p>'
+            '<details class="fold"><summary>Pitch — ' + esc(it.get("subject", "")) + '</summary>'
+            '<p style="white-space:pre-wrap">' + esc(it.get("pitch", "")) + '</p></details>'
+            '<button class="btn" onclick="approveCode(\'OS-' + esc(qid) + '\', this, \'Queued ✓\')">Send pitch</button> '
+            '<button class="btn" style="background:#3a352d;color:var(--muted)" '
+            'onclick="approveCode(\'OF-' + esc(qid) + '\', this, \'Forgotten\')">Forget</button>'
+            '<p class="muted" style="margin-top:8px">Your tap sends exactly this pitch from your Gmail '
+            'within ~15 minutes. A short opt-out footer is appended.</p></div>'
+        )
+    need_html = ""
+    if needc:
+        rows = "".join(
+            "<li><b>" + esc(i.get("lead", "?")) + "</b> — " + esc(i.get("why", "")) +
+            ' <span class="muted">(still looking for a public contact email)</span></li>'
+            for i in needc)
+        need_html = ('<details class="fold"><summary>Finding a contact (' + str(len(needc)) +
+                     ')</summary><ul>' + rows + '</ul></details>')
+    return stats + "".join(cards) + need_html
+
+
+def drafts_section():
+    """Every draft group the bots produced, with Put to work / Forget triage."""
+    try:
+        resolved = json.loads(read_file(os.path.join(HF, "outreach/drafts-resolved.json")) or "{}")
+    except json.JSONDecodeError:
+        resolved = {}
+    groups = []
+    for fn in ("2026-09-29.md", "2026-09-30.md"):
+        p = os.path.join(HF, "drafts", fn)
+        if os.path.exists(p):
+            n = read_file(p).count("## ")
+            groups.append(("content-" + fn[:-3], "Content drafts · " + fn[:-3],
+                           str(n) + " pieces", "Each piece becomes an article on your site."))
+    ld = glob.glob(os.path.join(HF, "distribution/listing-drafts/**/*.md"), recursive=True)
+    if ld:
+        groups.append(("listings", "Marketplace listing drafts", str(len(ld)) + " drafts",
+                       "Staged as ready for your manual paste — marketplace accounts still need you."))
+    if os.path.exists(os.path.join(HF, "catalog/tag-drafts-2026-09-30.md")):
+        groups.append(("tags", "Gumroad tag sweep", "60 products",
+                       "Applies the drafted tags to your live products."))
+    fq = glob.glob(os.path.join(HF, "faq-drafts/*"))
+    if fq:
+        groups.append(("faq", "FAQ drafts", str(len(fq)) + " files",
+                       "Published as articles on your site."))
+    open_groups = [g for g in groups
+                   if resolved.get("DA-" + g[0]) not in ("done", "forgotten")
+                   and resolved.get("DD-" + g[0]) != "forgotten"]
+    if not open_groups:
+        return ("<p class='muted'>Nothing waiting — every draft the bots produced has been "
+                "triaged. New drafts appear here automatically.</p>")
+    cards = []
+    for g, label, count, meaning in open_groups:
+        cards.append(
+            '<div class="card"><h3>' + esc(label) + '</h3>'
+            '<p><b>' + esc(count) + '</b> · ' + esc(meaning) + '</p>'
+            '<button class="btn" onclick="approveCode(\'DA-' + esc(g) + '\', this, \'Working ✓\')">Put to work</button> '
+            '<button class="btn" style="background:#3a352d;color:var(--muted)" '
+            'onclick="approveCode(\'DD-' + esc(g) + '\', this, \'Forgotten\')">Forget</button></div>'
+        )
+    return "".join(cards)
 
 
 def _gumroad_link(p):
@@ -527,7 +649,9 @@ def build():
     <nav class="dash">
       <a href="#money">Money</a>
       <a href="#approvals">Approvals</a>
+      <a href="#outreach">Outreach</a>
       <a href="#pipeline">Pipeline</a>
+      <a href="#drafts">Drafts</a>
       <a href="#site">Site &amp; catalog</a>
       <a href="#fleet">Fleet</a>
       <a href="#traffic">Traffic</a>
@@ -537,8 +661,9 @@ def build():
 <div class="wrap">
   <div class="hero">
     <h1>Admin dashboard</h1>
-    <p class="gen">Generated {esc(now)} · refreshes daily with the site-health check</p>
+    <p class="gen">Generated {esc(now)} · refreshes automatically</p>
   </div>
+  {backend_js()}
 
   <section class="dash" id="money">
     <div class="eyebrow">Revenue</div>
@@ -554,11 +679,25 @@ def build():
     {approvals_section()}
   </section>
 
+  <section class="dash" id="outreach">
+    <div class="eyebrow">Sales</div>
+    <h2>Outreach</h2>
+    <p class="lede">Bots find leads and draft pitches around the clock. Read each pitch and tap <b>Send pitch</b> — nothing goes out without your tap.</p>
+    {outreach_section()}
+  </section>
+
   <section class="dash" id="pipeline">
     <div class="eyebrow">In progress</div>
     <h2>Review pipeline</h2>
     <p class="lede">Drafts waiting in the fleet workspace. Nothing here is public.</p>
     {pipeline_section()}
+  </section>
+
+  <section class="dash" id="drafts">
+    <div class="eyebrow">Triage</div>
+    <h2>Drafts</h2>
+    <p class="lede">Everything the bots drafted. <b>Put to work</b> moves a group into the pipeline; <b>Forget</b> archives it.</p>
+    {drafts_section()}
   </section>
 
   <section class="dash" id="site">

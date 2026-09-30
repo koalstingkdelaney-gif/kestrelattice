@@ -1,0 +1,56 @@
+<!-- STAGED panel chat UI — wire into build-admin.py once /chat is deployed.
+     Add a "Chat" section + nav link. Requires WURL/WKEY globals (backend_js). -->
+<section class="dash" id="chat">
+  <div class="eyebrow">Bots</div>
+  <h2>Talk to the bots</h2>
+  <p class="lede">Ask about leads, drafts, the queue, or what the fleet is doing. The chat answers — actions still need your one-tap buttons.</p>
+  <div class="card">
+    <div id="botchat" style="max-height:320px;overflow-y:auto;margin-bottom:12px"></div>
+    <div style="display:flex;gap:8px">
+      <input id="chatbox" type="text" placeholder="Ask the fleet…" autocomplete="off"
+             style="flex:1;background:#121212;border:1px solid var(--line);border-radius:8px;color:var(--text);padding:10px 14px;font-size:.95rem">
+      <button class="btn" id="chatsend">Send</button>
+    </div>
+  </div>
+</section>
+<script>
+(function(){
+  const log = document.getElementById("botchat");
+  const box = document.getElementById("chatbox");
+  const hist = [];
+  function bubble(role, text){
+    const d = document.createElement("div");
+    d.style.cssText = "margin:8px 0;padding:10px 14px;border-radius:10px;font-size:.92rem;line-height:1.5;" +
+      (role === "user" ? "background:var(--accent-soft);margin-left:15%" : "background:var(--panel2);margin-right:15%");
+    d.textContent = text;
+    log.appendChild(d);
+    log.scrollTop = log.scrollHeight;
+  }
+  async function send(){
+    const msg = box.value.trim();
+    if (!msg) return;
+    box.value = "";
+    bubble("user", msg);
+    bubble("assistant", "…");
+    try {
+      const r = await fetch(WURL + "/chat", {method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify({key: WKEY, message: msg, history: hist})});
+      const d = await r.json();
+      log.lastChild.remove();
+      if (d.ok && d.reply) {
+        bubble("assistant", d.reply);
+        hist.push({role:"user", content:msg}, {role:"assistant", content:d.reply});
+      } else {
+        bubble("assistant", "The bots aren't reachable right now — try again shortly.");
+      }
+    } catch (e) {
+      log.lastChild.remove();
+      bubble("assistant", "The bots aren't reachable right now — try again shortly.");
+    }
+  }
+  document.getElementById("chatsend").addEventListener("click", send);
+  box.addEventListener("keydown", e => { if (e.key === "Enter") send(); });
+  bubble("assistant", "Fleet online. Ask me about leads, drafts, or what's running.");
+})();
+</script>
