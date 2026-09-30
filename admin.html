@@ -54,13 +54,51 @@
     Kestrelattice
   </div>
   <h1>Admin dashboard</h1>
-  <p class="gen">Generated 2026-09-29 22:50  · refreshes daily with the site-health check</p>
+  <p class="gen">Generated 2026-09-29 23:33  · refreshes daily with the site-health check</p>
 
   <h2>Money</h2>
   <div class="card warn"><h3>Sales data not connected yet</h3><p>One-time setup: generate an API token at Gumroad → Settings → Advanced → Applications, then save it in Muse's Secure Vault as the <b>custom.gumroad</b> connector. After that, live sales numbers appear here automatically.</p></div>
 
   <h2>Needs your approval</h2>
-  <table><tr><th>Item</th><th>Status</th><th></th></tr><tr><td><b>Publish the 5 strongest micro-products to Gumroad at $19 each</b><br><span class='muted'>Tool-Permission Inventory Checklist, Shadow Agent Discovery Checklist, Fail-Closed Block Response Runbook Excerpt, Spend-Ceiling Raise Approval Flow, 14-Day Governance Rollout Checklist. Manuscripts in hidden_files/products/micro/2026-09-29/.</span></td><td><span class='pill'>waiting</span></td><td></td></tr><tr><td><b>Publish the remaining 45 micro-products to Gumroad at $19 each</b><br><span class='muted'>Full batch from the 2026-09-30 micro-forge run, after batch 1 proves the pipeline.</span></td><td><span class='pill'>waiting</span></td><td></td></tr><tr><td><b>Build and publish &#x27;The Boardroom Briefing Pack&#x27; at $19</b><br><span class='muted'>Product-forge draft: AI Agent Governance for Executives &amp; Boards. Manuscript at hidden_files/products/2026-09-29-boardroom-briefing-pack.md.</span></td><td><span class='pill'>waiting</span></td><td></td></tr><tr><td><b>Add $99 Studio Edition Team License (up to 20 seats) to the catalog</b><br><span class='muted'>Pricing experimenter proposal from 2026-09-29. Means a new Gumroad product + site catalog update.</span></td><td><span class='pill'>waiting</span></td><td></td></tr><tr><td><b>Submit drafted marketplace listings (AppSumo / Product Hunt / Etsy)</b><br><span class='muted'>Marketplace scout drafts listings weekly; submissions need your marketplace accounts.</span></td><td><span class='pill'>waiting</span></td><td></td></tr></table><p class='muted'>One-tap approvals are activating — the backend finishes deploying shortly. Meanwhile you can paste a code (e.g. “approve AP-0001”) in the Talk to the bots chat.</p>
+  <div id="appr"><p class="muted">Loading approvals…</p></div>
+<script>
+const WURL = "https://kestrelattice-approvals.koalstin-g-k-delaney.workers.dev";
+const WKEY = "48f56507ea763d500a69ff38f8aaa3e7c8277ed201442411";
+const pill = s => s === "done" ? "<span class='pill ok'>done</span>" : s === "approved" ? "<span class='pill warn'>approved ✓</span>" : s.indexOf("blocked") === 0 ? "<span class='pill blocked'>blocked</span>" : "<span class='pill'>waiting</span>";
+const doneCodes = JSON.parse(localStorage.getItem("apprDone") || "[]");
+async function loadApprovals() {
+  const el = document.getElementById("appr");
+  try {
+    const q = await (await fetch(WURL + "/queue")).json();
+    if (!q.length) { el.innerHTML = "<p class='muted'>Nothing waiting for approval.</p>"; return; }
+    el.innerHTML = "<table><tr><th>Item</th><th>Status</th><th></th></tr>" + q.map(it => {
+      const st = doneCodes.includes(it.code) && it.status === "pending" ? "approved" : it.status;
+      const btn = (st === "pending")
+        ? `<button class="btn" onclick="approve(\'${it.code}\', this)">Approve</button>`
+        : "<span class='muted'>—</span>";
+      return `<tr><td><b>${it.title}</b><br><span class='muted'>${it.detail || ""}</span><br><span class='muted'>Needs: ${it.prereq || "—"}</span></td><td>${pill(st)}</td><td>${btn}</td></tr>`;
+    }).join("") + "</table>"
+      + "<p class='muted'>Tap <b>Approve</b> — the fleet picks it up within ~15 minutes and does the work. Or paste the code (e.g. “approve AP-0001”) in the Talk to the bots chat.</p>";
+  } catch (e) {
+    el.innerHTML = "<p class='muted'>Approval service unreachable — try again shortly.</p>";
+  }
+}
+async function approve(code, btn) {
+  btn.disabled = true; btn.textContent = "Approving…";
+  try {
+    const r = await fetch(WURL + "/approve", {method: "POST",
+      headers: {"Content-Type": "application/json"},
+      body: JSON.stringify({code, key: WKEY})});
+    const d = await r.json();
+    if (d.ok) {
+      doneCodes.push(code);
+      localStorage.setItem("apprDone", JSON.stringify(doneCodes));
+      loadApprovals();
+    } else { btn.disabled = false; btn.textContent = "Retry"; }
+  } catch (e) { btn.disabled = false; btn.textContent = "Retry"; }
+}
+loadApprovals();
+</script>
 
   <h2>Review pipeline</h2>
   <div class="statrow"><div class="stat"><b>51</b><span>product drafts</span></div><div class="stat"><b>9</b><span>content drafts</span></div><div class="stat"><b>71</b><span>lead outreach drafts</span></div><div class="stat"><b>4</b><span>FAQ drafts</span></div></div><details class="fold"><summary>Micro-product draft titles (50)</summary><ol><li>Tool-Permission Inventory Checklist</li><li>Agent Identity Registry Worksheet</li><li>Grant-Expiry Enforcement Template Pack</li><li>AI Model Rotation Policy One-Pager</li><li>Grant-Issuance Audit Template</li><li>Fail-Closed Block Response Runbook Excerpt</li><li>Per-Plan Token Budget Calculator</li><li>Hard-Gated Action Approval Flow</li><li>AI Model Provider Vendor Scorecard</li><li>Policy Exception Request Template Pack</li><li>API-Key Lifecycle Checklist</li><li>Agent Onboarding Gate Worksheet</li><li>Data-Handling Policy Template Pack</li><li>Human-in-the-Loop Policy One-Pager</li><li>Agent Decommissioning Audit Template</li><li>Secret-Leak Containment Runbook Excerpt</li><li>Monthly Fleet Spend Forecast Calculator</li><li>New Model Version Approval Flow</li><li>Observability Tool Vendor Scorecard</li><li>Emergency Override Exception Template</li><li>Pre-Deploy Safety Checklist</li><li>Blast-Radius Mapping Worksheet</li><li>Denied-Action Log Template Pack</li><li>Data Residency Policy One-Pager</li><li>Tool-Scope Audit Template</li><li>Compromised Agent Quarantine Runbook Excerpt</li><li>Human Review Time Budget Calculator</li><li>Vendor Change Approval Flow</li><li>Agent Framework Vendor Scorecard</li><li>Temporary Grant Extension Exception Template</li><li>14-Day Governance Rollout Checklist</li><li>Risk-Tiering Worksheet</li><li>Incident Communication Template Pack</li><li>External Outreach Policy One-Pager</li><li>Audit-Trail Completeness Audit Template</li><li>Runaway Cost Response Runbook Excerpt</li><li>Cost-Per-Resolved-Task Calculator</li><li>Spend-Ceiling Raise Approval Flow</li><li>Audit-Logging Tool Vendor Scorecard</li><li>Auto-Grant Prohibition Waiver Template</li><li>Shadow Agent Discovery Checklist</li><li>Permission Review Meeting Worksheet</li><li>Revocation Notice Template Pack</li><li>Credential Handling Policy One-Pager</li><li>Prompt Firebreak Audit Template</li><li>Customer-Facing Incident Runbook Excerpt</li><li>Plan Ceiling Sizing Calculator</li><li>Agent Decommissioning Approval Flow</li><li>Agent Sandboxing Vendor Scorecard</li><li>Tier Re-Classification Exception Template</li></ol></details><p class="muted">Full manuscripts live in the fleet workspace; say the word and I'll publish the approved ones to Gumroad.</p>
