@@ -228,6 +228,7 @@ gtag('config', 'G-541TCHWW98');
     </div>
   </section>
 
+{bundle_upsell}
   <footer>
     <span>© 2026 Kestrelattice · An independent studio</span>
     <span><a href="../../">Home</a> · <a href="../">Catalog</a> · <a href="mailto:koalstin.g.k.delaney@gmail.com">Contact</a></span>
@@ -283,11 +284,20 @@ def main():
             "offers": {"@type": "Offer", "priceCurrency": "USD", "price": str(pr["price"]),
                        "availability": "https://schema.org/InStock",
                        "url": pr["gumroad_url"]}}, indent=2)
+        upsell = ""
+        if pr["gid"] != "yzbumc":
+            upsell = ('  <section style="border:1px solid var(--accent);border-radius:12px;'
+                      'padding:24px;background:#1e1a16">\n'
+                      '    <h2 style="margin-top:0">Want the whole library?</h2>\n'
+                      '    <p><strong>The Complete Kestrelattice Library</strong> — every Kestrelattice product '
+                      'in one bundle for $79. One purchase, everything we have shipped.</p>\n'
+                      '    <p><a class="btn" href="../complete-kestrelattice-library/">Get the full library — $79</a></p>\n'
+                      '  </section>')
         page = PAGE.format(title=esc(pr["title"]), meta=esc(trunc_meta(pr["tagline"] or pr["description"])),
                            page_url=page_url, jsonld=jsonld, gid=pr["gid"],
                            tagline=esc(pr["tagline"]), price=pr["price"],
                            gumroad_url=pr["gumroad_url"], description=esc(pr["description"]),
-                           inside_items=inside_items, related=related)
+                           inside_items=inside_items, related=related, bundle_upsell=upsell)
         with open(os.path.join(d, "index.html"), "w") as f:
             f.write(page)
         sm_entries.append(f'  <url><loc>{page_url}</loc><lastmod>2026-09-30</lastmod></url>')
