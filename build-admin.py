@@ -16,6 +16,7 @@ import re
 import subprocess
 import sys
 import time
+import urllib.parse
 from datetime import datetime, timezone, timedelta
 
 HOME = os.path.expanduser("~")
@@ -192,6 +193,48 @@ def pipeline_section():
     )
 
 
+def approvals_section():
+    qpath = os.path.join(HF, "approvals/queue.jsonl")
+    items = []
+    for line in read_file(qpath).splitlines():
+        line = line.strip()
+        if line:
+            try:
+                items.append(json.loads(line))
+            except json.JSONDecodeError:
+                pass
+    if not items:
+        return '<p class="muted">Nothing waiting for approval.</p>'
+    rows = []
+    for it in items:
+        code = it.get("code", "?")
+        status = it.get("status", "pending")
+        pill = ("<span class='pill ok'>done</span>" if status == "done"
+                else "<span class='pill warn'>approved</span>" if status == "approved"
+                else "<span class='pill blocked'>blocked</span>" if status.startswith("blocked")
+                else "<span class='pill'>waiting</span>")
+        subject = urllib.parse.quote(f"APPROVE {code}")
+        body = urllib.parse.quote(
+            f"I approve {code}: {it.get('title', '')}. Execute when ready.")
+        mailto = (f"mailto:koalstin.g.k.delaney@gmail.com"
+                  f"?subject={subject}&body={body}")
+        btn = (f"<a class='btn' href='{mailto}'>Approve</a>"
+               if status in ("pending", "blocked") or status.startswith("blocked")
+               else "<span class='muted'>—</span>")
+        rows.append(
+            f"<tr><td class='mono'>{esc(code)}</td>"
+            f"<td><b>{esc(it.get('title', ''))}</b><br>"
+            f"<span class='muted'>{esc(it.get('detail', ''))}</span><br>"
+            f"<span class='muted'>Needs: {esc(it.get('prereq', '—'))}</span></td>"
+            f"<td>{pill}</td><td>{btn}</td></tr>")
+    return (
+        "<table><tr><th>Code</th><th>Item</th><th>Status</th><th></th></tr>"
+        + "".join(rows) + "</table>"
+        "<p class='muted'>Tapping <b>Approve</b> opens an email — hit send and "
+        "the fleet picks it up within ~30 minutes. Or paste the code (e.g. "
+        "“approve AP-0001”) in the Talk to the bots chat.</p>")
+
+
 def site_section():
     health = read_file(os.path.join(HF, "health.log")).strip().splitlines()
     last = esc(health[-1]) if health else "no checks logged yet"
@@ -294,6 +337,13 @@ def build():
   details.fold li{{margin:3px 0}}
   ul{{margin:8px 0 8px 20px;color:var(--muted);font-size:.92rem}}
   .foot{{margin-top:40px;color:var(--muted);font-size:.8rem;border-top:1px solid var(--line);padding-top:16px}}
+  .pill{{display:inline-block;padding:2px 10px;border-radius:20px;font-size:.75rem;font-weight:600;
+        background:#332e26;color:var(--muted)}}
+  .pill.ok{{background:#2a3d2a;color:var(--ok)}}
+  .pill.warn{{background:#3d3121;color:#e0a75f}}
+  .pill.blocked{{background:#3d2421;color:#e08a7f}}
+  .btn{{display:inline-block;padding:8px 18px;border-radius:8px;background:var(--accent);
+       color:#121212;font-weight:700;font-size:.85rem;text-decoration:none;white-space:nowrap}}
 </style>
 </head>
 <body>
@@ -307,6 +357,9 @@ def build():
 
   <h2>Money</h2>
   {money_section()}
+
+  <h2>Needs your approval</h2>
+  {approvals_section()}
 
   <h2>Review pipeline</h2>
   {pipeline_section()}
