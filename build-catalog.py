@@ -44,6 +44,7 @@ PAGE = """<!DOCTYPE html>
 <title>Product Catalog — ghostcorpnet</title>
 <meta name="description" content="Every ghostcorpnet self-serve PDF: agent governance checklists, runbooks, worksheets and kits. Instant download.">
 <meta name="theme-color" content="#1a1f2e">
+<meta name="robots" content="index,follow,max-image-preview:large">
 <link rel="canonical" href="https://koalstingkdelaney-gif.github.io/kestrelattice/products/">
 <link rel="preconnect" href="https://koalstin.gumroad.com">
 <link rel="dns-prefetch" href="https://koalstin.gumroad.com">
@@ -82,7 +83,7 @@ nav.main a:hover{color:var(--accent-bright)}
 .hero h1{font-size:clamp(1.7rem,3.4vw + .8rem,2.4rem);font-weight:800;letter-spacing:-.02em;margin-bottom:10px}
 .lede{color:var(--muted);max-width:620px;margin:0 auto;font-size:.98rem}
 .filters{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin:26px 0}
-.chip{border:1px solid var(--line);background:var(--panel);color:var(--muted);border-radius:999px;padding:7px 15px;font-size:.84rem;letter-spacing:.06em;cursor:pointer;font-family:inherit;transition:all .16s var(--ease)}
+.chip{border:1px solid var(--line);background:var(--panel);color:var(--muted);border-radius:999px;padding:7px 15px;font-size:.84rem;letter-spacing:.1em;cursor:pointer;font-family:inherit;transition:all .16s var(--ease)}
 .chip:hover{border-color:var(--accent-dim);color:var(--text)}
 .chip.active{background:var(--accent);border-color:var(--accent);color:var(--accent-ink);font-weight:700}
 .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:18px;padding:8px 0 64px}
