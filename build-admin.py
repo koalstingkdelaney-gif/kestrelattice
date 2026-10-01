@@ -1184,11 +1184,15 @@ def _captain_html():
     except Exception:
         soul_ex = "Soul not written yet."
 
-    jars = []
+    money = []
     for b in BRANDS:
-        j = _sent_json(os.path.join(SENT_DIR, "brands", b["slug"], "JAR.json"), None)
-        if j:
-            jars.append((b["name"], j))
+        earned = 0.0
+        for ln in _sent_lines(os.path.join(SENT_DIR, "brands", b["slug"], "income.jsonl")):
+            try:
+                earned += float(json.loads(ln).get("amount", 0) or 0)
+            except Exception:
+                pass
+        money.append((b["name"], earned))
 
     def ago(ts):
         return esc(str(ts)) if ts else "<span class='muted'>not yet</span>"
@@ -1217,19 +1221,16 @@ def _captain_html():
     else:
         needs_html = ('<div class="card"><h3>Needs your tap</h3>'
                       "<p class='muted'>Nothing waiting. It handles the rest on its own.</p></div>")
-    if jars:
-        jrows = "".join(
-            f"<tr><td><b>{esc(name)}</b></td><td>${j.get('allocation_usd', 0):,.0f}</td>"
-            f"<td>${j.get('income_usd', 0):,.0f}</td><td>${j.get('spent_usd', 0):,.0f}</td>"
-            f"<td><b>${j.get('balance_usd', 0):,.0f}</b></td></tr>" for name, j in jars)
-        jars_html = ('<div class="card"><h3>Brand money jars</h3>'
-                     '<div class="table-wrap"><table><tr><th>Brand</th><th>Allocated</th>'
-                     "<th>Earned</th><th>Spent</th><th>Balance</th></tr>"
-                     + jrows + "</table></div>"
-                     "<p class='muted'>Jars are budget ledgers backed by real allocations you approve. "
-                     "Real funds always flow through your accounts.</p></div>")
-    else:
-        jars_html = ""
+    total_earned = sum(e for _, e in money)
+    mrows = "".join(
+        f"<tr><td><b>{esc(name)}</b></td><td>${e:,.0f}</td></tr>" for name, e in money)
+    money_html = ('<div class="card"><h3>Money — straight to you</h3>'
+                  f"<p>Empire total earned: <b>${total_earned:,.0f}</b></p>"
+                  '<div class="table-wrap"><table><tr><th>Brand</th><th>Earned</th></tr>'
+                  + mrows + "</table></div>"
+                  "<p class='muted'>Every dollar flows automatically to your "
+                  "Gumroad → Cash App. No jars, no allocations — sales land with you, "
+                  "and any spend is your one tap.</p></div>")
     cmd_html = (
         '<div class="card"><h3>Command it</h3>'
         "<p>Talk to Sentience in the <b>Talk to the bots</b> chat — it reads its inbox, "
@@ -1237,7 +1238,7 @@ def _captain_html():
         "A tap-to-command box right here in the panel ships with the pending "
         "Cloudflare re-auth.</p></div>"
     )
-    return status_card + soul_card + needs_html + jars_html + cmd_html
+    return status_card + soul_card + needs_html + money_html + cmd_html
 
 
 def _all_panes(products, queue, entries, title_map, omap):
