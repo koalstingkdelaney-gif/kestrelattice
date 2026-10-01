@@ -21,6 +21,7 @@ if(!window.__klExcludeSelf){gtag('js',new Date());gtag('config','G-541TCHWW98');
 :root{--bg:#101010;--panel:#181818;--panel2:#1e1a16;--line:#2a2a2a;--text:#ece7df;
 --muted:#a8a29a;--accent:#e07a5f;--accent-soft:rgba(224,122,95,.14);--radius:12px}
 *{box-sizing:border-box;margin:0}
+.visually-hidden{position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
 body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;line-height:1.6;padding:0 16px 64px}
 .wrap{max-width:760px;margin:0 auto}
 .brand{display:flex;align-items:center;gap:10px;padding:20px 0;color:var(--text);text-decoration:none;font-weight:700;font-size:1.05rem}
@@ -88,6 +89,7 @@ footer a{color:var(--muted);text-decoration:none}footer a:hover{color:var(--acce
     <p class="prodline" id="prodline"></p>
     <div id="log" aria-live="polite"></div>
     <div class="row">
+      <label for="box" class="visually-hidden">Ask the code bot</label>
       <input type="text" id="box" placeholder="Paste an error, or ask how the code works…" autocomplete="off">
       <button class="btn" id="send" style="margin-top:0">Ask</button>
     </div>

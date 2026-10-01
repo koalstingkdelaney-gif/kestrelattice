@@ -73,7 +73,7 @@ body{background:radial-gradient(900px 420px at 50% -6%, rgba(224,122,95,.06), tr
 .wrap{max-width:1040px;margin:0 auto;padding:0 24px}
 a{color:var(--accent);text-decoration:none;transition:color .16s var(--ease)}
 a:hover{text-decoration:underline}
-a:focus-visible,button:focus-visible{outline:2px solid var(--accent-bright);outline-offset:3px;border-radius:4px}@media (prefers-reduced-motion:no-preference){a:focus-visible,button:focus-visible{transition:transform .15s ease}a:focus-visible{transform:scale(1.03)}}
+a:focus-visible,button:focus-visible{outline:2px solid var(--accent-bright);outline-offset:3px;border-radius:4px}@media (prefers-reduced-motion:no-preference){a:focus-visible,button:focus-visible{transition:transform .15s ease}a:focus-visible{transform:scale(1.03)}.btn:focus-visible,.chip:focus-visible,nav.main a:focus-visible{transform:scale(1.02)}}
 header.site{border-bottom:1px solid var(--line);position:sticky;top:0;background:rgba(15,14,13,.92);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);z-index:100}
 header.site .wrap{display:flex;align-items:center;justify-content:space-between;min-height:58px}
 .logo{display:flex;align-items:center;gap:9px;font-weight:700;font-size:1.05rem;color:var(--text)}
@@ -85,10 +85,12 @@ nav.main a:hover{color:var(--accent-bright)}
 .hero h1{font-size:clamp(1.7rem,3.4vw + .8rem,2.4rem);font-weight:800;letter-spacing:-.02em;margin-bottom:10px}
 .lede{color:var(--muted);max-width:620px;margin:0 auto;font-size:.98rem}
 .filters{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin:26px 0;position:sticky;top:58px;z-index:40;background:var(--bg);padding:10px 4px}
+#filters{scroll-margin-top:76px}
 .tier-legend{color:var(--muted);font-size:.85rem;text-align:center;margin:0 0 14px}
 .visually-hidden{position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
-.catalog-search-row{display:flex;justify-content:center;margin:0 0 4px}
+.catalog-search-row{display:flex;justify-content:center;align-items:center;gap:8px;margin:0 0 4px}
 #catalog-search{width:min(440px,92%);padding:10px 16px;border:1px solid var(--line);border-radius:999px;background:var(--panel);color:var(--text);font-size:.92rem}
+.search-kbd{display:inline-flex;align-items:center;justify-content:center;min-width:26px;height:26px;padding:0 7px;border:1px solid var(--line);border-bottom-width:2px;border-radius:6px;background:var(--panel2);color:var(--muted);font-size:.78rem;font-family:inherit;flex:none}
 #catalog-search:focus{border-color:var(--accent);outline:none}
 .chip{border:1px solid var(--line);background:var(--panel);color:var(--muted);border-radius:999px;padding:7px 15px;min-height:44px;display:inline-flex;align-items:center;justify-content:center;font-size:.84rem;letter-spacing:.1em;cursor:pointer;font-family:inherit;transition:all .16s var(--ease)}
 .chip:hover{border-color:var(--accent-dim);color:var(--text)}
@@ -135,7 +137,7 @@ footer.site a:hover{color:var(--accent-bright)}
 @media(max-width:640px){.filters{overflow-x:auto;flex-wrap:nowrap;-webkit-overflow-scrolling:touch;scrollbar-width:none}
 .filters::-webkit-scrollbar{display:none}
 nav.main a:not(:last-child){display:none}footer.site .wrap{justify-content:center;text-align:center}footer.site a{margin:0 7px}}
-@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{transition:none!important;animation:none!important}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{transition:none!important;animation:none!important}a:focus-visible,.btn:focus-visible,.chip:focus-visible,nav.main a:focus-visible{transform:none!important}}
 
   h1,h2{text-wrap:balance}
 </style>
@@ -153,7 +155,7 @@ ghostcorpnet</a>
 <h1>The Catalog</h1>
 <p class="lede">Every self-serve product in the ghostcorpnet library — playbooks, checklists, runbooks, kits, and working code for governing AI agents. Buy once, download instantly, yours forever.</p>
 </div>
-<div class="wrap"><p class="result-count" id="result-count" aria-live="polite">__COUNT__</p><div class="catalog-search-row"><label for="catalog-search" class="visually-hidden">Search products</label><input id="catalog-search" type="search" placeholder="Search products… ( / )"></div><div class="sort-row"><label for="catalog-sort" class="visually-hidden">Sort products</label><select id="catalog-sort" aria-label="Sort products"><option value="new">Newest</option><option value="lo">Price: low to high</option><option value="hi">Price: high to low</option></select></div><p class="tier-legend">9 Starter · 9 Core · 9–99 Premium</p><div class="filters" id="filters" role="region" aria-label="Filter products"></div></div>
+<div class="wrap"><p class="result-count" id="result-count" aria-live="polite">__COUNT__</p><div class="catalog-search-row"><label for="catalog-search" class="visually-hidden">Search products</label><input id="catalog-search" type="search" aria-keyshortcuts="/" placeholder="Search products… ( / )"><kbd class="search-kbd" aria-hidden="true">/</kbd></div><div class="sort-row"><label for="catalog-sort" class="visually-hidden">Sort products</label><select id="catalog-sort" aria-label="Sort products"><option value="new">Newest</option><option value="lo">Price: low to high</option><option value="hi">Price: high to low</option></select></div><p class="tier-legend">9 Starter · 9 Core · 9–99 Premium</p><div class="filters" id="filters" role="region" aria-label="Filter products"></div></div>
 <div class="wrap"><div class="grid" id="grid">
 __CARDS__
 </div><div id="no-results" role="status"><p>No products match — try different keywords or filters</p><p><button class="chip" id="clear-filters" type="button" style="margin-top:12px">Clear filters</button></p></div></div>

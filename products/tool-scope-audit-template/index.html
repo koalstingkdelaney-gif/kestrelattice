@@ -11,8 +11,8 @@
 <meta property="og:description" content="Audit whether each agent&#x27;s tool permissions still match what it actually needs. A complete, zero-placeholder template for teams governing AI agents in…">
 <meta property="og:url" content="https://koalstingkdelaney-gif.github.io/kestrelattice/products/tool-scope-audit-template/">
 <meta property="og:image" content="https://koalstingkdelaney-gif.github.io/kestrelattice/assets/covers/pkvqgx.png">
-<meta property="og:image:width" content="1200">
-<meta property="og:image:height" content="1600">
+<meta property="og:image:width" content="960">
+<meta property="og:image:height" content="1280">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Tool-Scope Audit Template — ghostcorpnet">
 <meta name="twitter:description" content="Audit whether each agent&#x27;s tool permissions still match what it actually needs. A complete, zero-placeholder template for teams governing AI agents in…">
@@ -98,13 +98,12 @@ gtag('config', 'G-541TCHWW98');
   .fact{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:8px 14px;font-size:.86rem;color:var(--muted)}
   .fact b{color:var(--text)}
   a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:4px}
-  .pdp-sticky{display:flex;position:fixed;bottom:0;left:0;right:0;z-index:120;background:rgba(26,23,20,.97);border-top:1px solid var(--line);padding:10px 16px calc(10px + env(safe-area-inset-bottom));align-items:center;justify-content:space-between;gap:12px;transform:translateY(110%);transition:transform .25s ease}
-  .pdp-sticky.show{transform:none}
+  .pdp-sticky{display:none}
   .pdp-sticky span{font-size:.85rem;color:var(--muted)}
   .pdp-sticky span b{color:var(--text)}
   .pdp-sticky .btn{padding:10px 20px;font-size:.88rem}
   .pdp-sticky .soon{color:var(--muted);font-size:.85rem}
-  body.has-sticky{padding-bottom:76px}
+  @media(max-width:640px){.pdp-sticky{display:flex;position:sticky;bottom:0;z-index:120;background:rgba(26,23,20,.97);border-top:1px solid var(--line);padding:10px 16px calc(10px + env(safe-area-inset-bottom));align-items:center;justify-content:space-between;gap:12px}}
   @media (prefers-reduced-motion:reduce){.pdp-sticky{transition:none}}@media (prefers-reduced-motion:no-preference){a:focus-visible,button:focus-visible{transition:transform .15s ease}a:focus-visible{transform:scale(1.03)}}
   @media (prefers-reduced-motion:reduce){*,*::before,*::after{transition:none!important;animation:none!important}}
   .btn{display:inline-block;background:var(--accent);color:#121212;font-weight:700;
@@ -143,7 +142,7 @@ gtag('config', 'G-541TCHWW98');
   <nav aria-label="Breadcrumb" class="crumb"><ol><li><a href="../../">Home</a></li><li><a id="pdp-back" href="../../products/" aria-keyshortcuts="Escape" aria-label="Back to all 205 products">Catalog</a><kbd class="esc-hint">Esc</kbd></li><li aria-current="page">Tool-Scope Audit Template</li></ol></nav>
 
   <div class="hero">
-    <img src="../../assets/covers/pkvqgx.png" alt="Tool-Scope Audit Template cover" fetchpriority="high" decoding="async" width="1200" height="1600">
+    <img src="../../assets/covers/pkvqgx.png" alt="Tool-Scope Audit Template cover" fetchpriority="high" decoding="async" width="960" height="1280">
     <div>
       <h1>Tool-Scope Audit Template</h1>
       <p class="tagline">Audit whether each agent&#x27;s tool permissions still match what it actually needs. A complete, zero-placeholder template for teams governing AI agents in production: policy gates, audit trails, cost controls.</p>
@@ -224,7 +223,6 @@ gtag('config', 'G-541TCHWW98');
 <div class="pdp-sticky" id="pdp-sticky" role="region" aria-label="Quick buy: Tool-Scope Audit Template"><span><b>Tool-Scope Audit Template</b> · $19</span><a class="btn" href="https://koalstin.gumroad.com/l/pkvqgx">Buy now</a></div>
 <script>
 document.addEventListener('keydown',function(e){if(e.key==='Escape'&&!e.defaultPrevented&&!/INPUT|TEXTAREA|SELECT/.test(document.activeElement.tagName)){var b=document.getElementById('pdp-back');if(b&&b.href){location.href=b.href;}}});
-(function(){var b=document.getElementById('pdp-sticky');if(!b){return;}function onS(){var show=window.scrollY>600;b.classList.toggle('show',show);document.body.classList.toggle('has-sticky',show);}window.addEventListener('scroll',onS,{passive:true});onS();})();
 </script>
 </body>
 </html>
