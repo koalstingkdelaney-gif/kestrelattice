@@ -703,9 +703,67 @@ def _extras_html():
     )
 
 
-# ------------------------------------------------------------- hive tab
+# ---------------------------------------------------------------- hive tab
 
 HIVE_DIR = os.path.expanduser("~/workspace/goals/kestrelattice-autonomous-growth/hive")
+
+# Curated role -> group map. 103 roles total. Anything not listed lands in "Other".
+_HIVE_ROLE_GROUPS = [
+    ("Product forge", [
+        "assessment-builder", "audit-tool-builder", "benchmark-compiler",
+        "board-deck-outliner", "bundle-optimizer", "calculator-builder",
+        "catalog-architect", "checklist-designer", "control-matrix-mapper",
+        "evidence-checklist-writer", "exec-summary-writer", "glossary-builder",
+        "incident-report-template-writer", "incident-to-playbook-writer",
+        "manuscript-writer", "maturity-model-writer", "micro-forge-runner",
+        "one-pager-writer", "policy-template-writer", "price-integrity-auditor",
+        "product-brief-writer", "product-forge-runner", "quiz-builder",
+        "regulation-brief-writer", "research-synthesizer", "risk-register-builder",
+        "runbook-writer", "scorecard-designer", "sop-writer",
+        "template-pack-assembler", "trend-to-product-translator",
+        "vendor-questionnaire-builder", "whitepaper-drafter", "worksheet-designer",
+        "workshop-kit-builder",
+    ]),
+    ("Publishing & catalog", [
+        "catalog-builder", "cover-uploader", "gumroad-publisher",
+        "marketplace-lister", "marketplace-scout", "publisher", "tag-sweeper",
+        "thumbnail-maker",
+    ]),
+    ("Outreach & acquisition", [
+        "affiliate-recruiter", "cart-abandon-email-writer",
+        "email-deliverability-guard", "inbox-responder", "lead-deduplicator",
+        "lead-scout", "outreach-analyst", "outreach-sender", "outreach-sync-runner",
+        "partner-scout", "pitch-drafter", "pitch-personalizer",
+        "testimonial-collector", "winback-email-writer",
+    ]),
+    ("Content & SEO", [
+        "article-illustrator", "brand-content-writer", "content-drafter",
+        "content-refresher", "content-repurposer", "faq-expander",
+        "internal-link-strategist", "medium-republisher", "newsletter-compiler",
+        "seo-meta-writer", "seo-writer", "transcript-writer",
+    ]),
+    ("Social & video", [
+        "pinterest-publisher", "shorts-syndicator", "social-formatter",
+        "thread-spotter", "tiktok-studio-runner", "video-caption-writer",
+        "video-scripter",
+    ]),
+    ("Site ops", [
+        "accessibility-auditor", "broken-embed-fixer", "image-alt-writer",
+        "link-rot-hunter", "og-image-designer", "performance-auditor",
+        "redirect-mapper", "schema-markup-writer", "site-health-checker",
+        "site-improver", "site-updater", "sitemap-surgeon", "stale-date-sweeper",
+    ]),
+    ("Analytics & intel", [
+        "competitor-price-tracker", "competitor-watch", "mention-watch",
+        "review-miner", "sales-reporter", "sales-watch", "trend-radar",
+    ]),
+    ("Brain ops", [
+        "approval-watcher-runner", "business-foundry-runner",
+        "dashboard-refresh-runner", "ecosystem-expansion-runner", "model-refresh",
+        "provider-scout", "watchdog",
+    ]),
+]
+
 
 def _hive_read(name):
     """Read a hive live file at build time; None on any failure."""
@@ -715,6 +773,7 @@ def _hive_read(name):
     except Exception:
         return None
 
+
 def _hive_json(name):
     raw = _hive_read(name)
     if raw is None:
@@ -723,6 +782,67 @@ def _hive_json(name):
         return json.loads(raw)
     except Exception:
         return None
+
+
+def _hive_ago(ts):
+    """'12m ago' for an ISO UTC timestamp; '?' when unparseable."""
+    try:
+        dt = datetime.fromisoformat(str(ts).replace("Z", "+00:00"))
+        s = max(0, int((datetime.now(timezone.utc) - dt).total_seconds()))
+        if s < 60:
+            return "just now"
+        if s < 3600:
+            return "%dm ago" % (s // 60)
+        if s < 86400:
+            return "%dh ago" % (s // 3600)
+        return "%dd ago" % (s // 86400)
+    except Exception:
+        return "?"
+
+
+def _hive_stale_dot(ts, warn_min=20, stale_min=60):
+    try:
+        dt = datetime.fromisoformat(str(ts).replace("Z", "+00:00"))
+        s = (datetime.now(timezone.utc) - dt).total_seconds()
+        if s < warn_min * 60:
+            return '<span class="dot ok"></span>'
+        if s < stale_min * 60:
+            return '<span class="dot warn"></span>'
+        return '<span class="dot stale"></span>'
+    except Exception:
+        return '<span class="dot never"></span>'
+
+
+def _hive_role_meta():
+    """Parse roles/*.md -> {stem: {title, cost, purpose}}. Empty dict on failure."""
+    meta = {}
+    try:
+        files = sorted(f for f in os.listdir(os.path.join(HIVE_DIR, "roles"))
+                       if f.endswith(".md"))
+    except Exception:
+        return meta
+    for f in files:
+        stem = f[:-3]
+        try:
+            with open(os.path.join(HIVE_DIR, "roles", f), encoding="utf-8") as fh:
+                txt = fh.read()
+        except Exception:
+            continue
+        m = re.search(r"^# Role:\s*(.+)$", txt, re.M)
+        title = m.group(1).strip() if m else stem
+        m = re.search(r"^Cost class:\s*\*\*([a-z]+)\*\*", txt, re.M)
+        cost = m.group(1) if m else "?"
+        purpose = ""
+        m = re.search(r"## Purpose\s*\n(.+?)(?:\n## |\Z)", txt, re.S)
+        if m:
+            for ln in m.group(1).splitlines():
+                ln = ln.strip()
+                if ln:
+                    purpose = ln[:150]
+                    break
+        meta[stem] = {"title": title, "cost": cost, "purpose": purpose}
+    return meta
+
 
 def _hive_html():
     st = _hive_json("state.json") or {}
@@ -739,63 +859,211 @@ def _hive_html():
                 continue
     mig = _hive_json("migration.json") or {}
     blog_lines = (_hive_read("brain.log") or "").splitlines()
-    try:
-        role_files = [f for f in os.listdir(os.path.join(HIVE_DIR, "roles"))
-                      if f.endswith(".md")]
-    except Exception:
-        role_files = None
+    role_meta = _hive_role_meta()
 
-    # --- brain status card ---
+    # ---------------- queue depth ----------------
+    from collections import Counter
+    qdepth = Counter(t.get("status") or "unknown" for t in tasks)
+    depth_html = (
+        '<div class="statrow">'
+        + "".join(
+            f'<div class="stat"><b>{qdepth.get(s, 0)}</b><span>{s}</span></div>'
+            for s in ("pending", "claimed", "running", "done", "failed", "parked")
+            if qdepth.get(s, 0) or s in ("pending", "done"))
+        + "</div>"
+        + f'<p class="muted">{len(tasks)} tasks total in tasks.jsonl</p>')
+
+    # ---------------- brain status + worker pool ----------------
     mode = "unavailable"
-    for ln in reversed(blog_lines[-8:]):
+    for ln in reversed(blog_lines[-12:]):
         if "LIVE" in ln:
-            mode = "LIVE"; break
+            mode = "LIVE"
+            break
         if "SHADOW" in ln:
-            mode = "SHADOW"; break
+            mode = "SHADOW"
+            break
     hb = st.get("brain_heartbeat") or "unavailable"
     dag = st.get("active_dag") or "unavailable"
+
+    # per-worker completed/failed from tasks.jsonl claimed_by
+    wstats = {}
+    for t in tasks:
+        cb = t.get("claimed_by")
+        if not cb:
+            continue
+        wstats.setdefault(cb, Counter())[t.get("status") or "unknown"] += 1
+
     workers = st.get("workers") or {}
+    wrows = ""
+    for w in sorted(workers.keys()):
+        v = workers.get(w) or {}
+        whb = v.get("heartbeat") or "no heartbeat"
+        cur = v.get("task")
+        cur_html = (f'<span class="mono">{esc(str(cur))}</span>' if cur
+                    else '<span class="muted">idle</span>')
+        ws = wstats.get(w, Counter())
+        done_n = ws.get("done", 0)
+        fail_n = ws.get("failed", 0) + ws.get("parked", 0)
+        wrows += (
+            f"<tr><td>{_hive_stale_dot(whb)}<span class='mono'>{esc(w)}</span></td>"
+            f"<td><span class='mono'>{esc(str(whb))}</span><br>"
+            f"<span class='muted'>{esc(_hive_ago(whb))}</span></td>"
+            f"<td>{cur_html}</td>"
+            f"<td><b>{done_n}</b> done<br><span class='muted'>{fail_n} failed/parked</span></td></tr>")
+    if not wrows:
+        wrows = '<tr><td colspan="4" class="muted">worker info unavailable</td></tr>'
+    worker_card = (
+        '<div class="card"><h3>Brain status</h3>'
+        f'<p>{_hive_stale_dot(hb)}<span class="pill ok">{esc(mode)}</span> '
+        f'<span class="muted">heartbeat</span> <span class="mono">{esc(hb)}</span> '
+        f'<span class="muted">({esc(_hive_ago(hb))})</span></p>'
+        f'<p><span class="muted">Active DAG</span> '
+        f'<span class="mono">{esc(dag)}</span></p>'
+        '<h3 style="margin-top:14px">Queue depth</h3>' + depth_html
+        + '<h3 style="margin-top:14px">Worker pool — 6 slots</h3>'
+        '<div class="table-wrap"><table><thead><tr>'
+        '<th>Worker</th><th>Last heartbeat</th><th>Current task</th>'
+        '<th>Completed / failed</th>'
+        "</tr></thead><tbody>" + wrows + "</tbody></table></div>"
+        '<p class="legend"><span class="dot ok"></span>fresh (&lt;20m) '
+        '<span class="dot warn"></span>aging (&lt;60m) '
+        '<span class="dot stale"></span>stale</p></div>')
+
+    # ---------------- budget ----------------
     budget = st.get("budget") or {}
     spent = budget.get("usd_est") or 0
     cap = budget.get("daily_cap_usd") or 0
-    pct = (spent / cap * 100) if cap else 0
     try:
-        spent = float(spent); cap = float(cap)
+        spent = float(spent)
+        cap = float(cap)
+        pct = (spent / cap * 100) if cap else 0
         budget_bar = (
             '<div style="background:var(--panel2);border:1px solid var(--line);'
             'border-radius:8px;height:14px;overflow:hidden;margin:8px 0 4px">'
             f'<div style="height:100%;width:{min(100, pct):.2f}%;'
             'background:linear-gradient(90deg,var(--accent),#ef9278)"></div></div>'
             f'<p class="muted">${spent:.4f} of ${cap:.2f} daily cap'
-            f' &middot; {pct:.2f}% used</p>')
+            f' &middot; {pct:.2f}% used &middot; cycle {esc(str(budget.get("cycle", "?")))}'
+            + (" &middot; <b>THROTTLED</b>" if budget.get("throttled") else "")
+            + '</p>')
     except Exception:
         budget_bar = '<p class="muted">Budget unavailable</p>'
-    wrows = ""
-    if workers:
-        for w, v in sorted(workers.items()):
-            whb = (v or {}).get("heartbeat") or "no heartbeat"
-            cur = (v or {}).get("task")
-            cur_html = (f'<span class="mono">{esc(str(cur))}</span>' if cur
-                        else '<span class="muted">idle</span>')
-            wrows += (f'<tr><td><span class="mono">{esc(w)}</span></td>'
-                      f'<td><span class="mono">{esc(str(whb))}</span></td>'
-                      f'<td>{cur_html}</td></tr>')
-        wtable = (f'<div class="table-wrap"><table><thead><tr>'
-                  f'<th>Worker</th><th>Heartbeat</th><th>Current task</th>'
-                  f'</tr></thead><tbody>{wrows}</tbody></table></div>')
-    else:
-        wtable = '<p class="muted">Worker info unavailable</p>'
-    brain_card = (
-        '<div class="card"><h3>Brain status</h3>'
-        f'<p><span class="pill ok">{esc(mode)}</span> '
-        f'<span class="muted">heartbeat</span> <span class="mono">{esc(hb)}</span></p>'
-        f'<p><span class="muted">Active DAG</span> '
-        f'<span class="mono">{esc(dag)}</span> &middot; '
-        f'<b>{len(tasks)}</b> tasks in queue</p>'
-        '<h3 style="margin-top:14px">Workers</h3>' + wtable
-        + '<h3 style="margin-top:14px">Budget</h3>' + budget_bar + '</div>')
+    by_task = budget.get("by_task") or {}
+    bt_rows = "".join(
+        f"<tr><td><span class='mono'>{esc(str(k))}</span></td>"
+        f"<td>~{esc(str(v))} tokens</td></tr>"
+        for k, v in sorted(by_task.items(), key=lambda kv: -(kv[1] or 0)))
+    per_cycle = budget.get("per_cycle") or []
+    pc_rows = "".join(
+        f"<tr><td><span class='mono'>{esc(str(e.get('ts', '')))}</span></td>"
+        f"<td><span class='mono'>{esc(str(e.get('actor', '')))}</span></td>"
+        f"<td><span class='mono'>{esc(str(e.get('task_id') or '—'))}</span></td>"
+        f"<td>{e.get('tokens_est') or 0}</td>"
+        f"<td>${(e.get('usd_est') or 0):.6f}</td>"
+        f"<td class='muted'>{esc(str(e.get('note', ''))[:80])}</td></tr>"
+        for e in per_cycle[-6:])
+    budget_card = (
+        '<div class="card"><h3>Budget — daily AI spend</h3>' + budget_bar
+        + ('<h3 style="margin-top:14px">Spend by task</h3>'
+           '<div class="table-wrap"><table><thead><tr><th>Task</th>'
+           '<th>Tokens (est)</th></tr></thead><tbody>' + bt_rows +
+           '</tbody></table></div>' if bt_rows else
+           '<p class="muted">No task-level spend recorded yet.</p>')
+        + ('<h3 style="margin-top:14px">Recent ledger entries</h3>'
+           '<div class="table-wrap"><table><thead><tr><th>Time</th><th>Actor</th>'
+           '<th>Task</th><th>Tokens</th><th>USD</th><th>Note</th></tr></thead>'
+           '<tbody>' + pc_rows + '</tbody></table></div>' if pc_rows else '')
+        + '</div>')
 
-    # --- tasks table with status filter ---
+    # ---------------- migration board ----------------
+    migrations = mig.get("migrations") or []
+    active = [m for m in migrations if m.get("status") == "legacy-active"]
+    retired = [m for m in migrations if m.get("status") not in ("legacy-active", None)]
+
+    def _mig_row(m):
+        cs = m.get("consecutive_successes") or 0
+        pct3 = min(100, cs / 3 * 100)
+        hold = m.get("execution_hold")
+        pill = ('<span class="pill warn">eligible</span>' if cs >= 3
+                else '<span class="pill">legacy-active</span>')
+        lr = m.get("last_run") or {}
+        lr_txt = (f"{lr.get('ts', '')} · {lr.get('task_id', '')} · {lr.get('status', '')}"
+                  if lr else "no hive run yet")
+        bar = ('<div class="bar" style="margin:6px 0 2px"><div class="bar-fill" '
+               f'style="width:{pct3:.0f}%"></div></div>')
+        return (
+            f"<tr><td><span class='mono'>{esc(m.get('cron_id', ''))}</span>"
+            + (f"<br><span class='muted' style='font-size:.76rem'>⏸ {esc(str(hold)[:90])}</span>"
+               if hold else "")
+            + "</td>"
+            f"<td><span class='mono' style='font-size:.78rem'>"
+            + ", ".join(esc(str(r)) for r in (m.get("absorbing_roles") or []))
+            + "</span></td>"
+            f"<td>{bar}<span class='muted'>{cs}/3 consecutive successes</span></td>"
+            f"<td>{pill}</td>"
+            f"<td class='muted' style='font-size:.78rem'>{esc(lr_txt[:90])}</td></tr>")
+
+    active_sorted = sorted(active,
+                           key=lambda m: (-(m.get("consecutive_successes") or 0),
+                                          m.get("cron_id", "")))
+    mig_table = (
+        '<div class="table-wrap"><table><thead><tr><th>Legacy cron</th>'
+        '<th>Absorbing role(s)</th><th>Retirement progress</th><th>Status</th>'
+        '<th>Last hive run</th></tr></thead><tbody>'
+        + "".join(_mig_row(m) for m in active_sorted)
+        + "</tbody></table></div>")
+    n_elig = sum(1 for m in active if (m.get("consecutive_successes") or 0) >= 3)
+    mig_card = (
+        '<div class="card"><h3>Migration — legacy crons → hive roles</h3>'
+        '<div class="statrow">'
+        f'<div class="stat"><b>{len(active)}</b><span>legacy-active</span></div>'
+        f'<div class="stat"><b>{len(retired)}</b><span>retired</span></div>'
+        f'<div class="stat"><b>{n_elig}</b><span>eligible to retire (3+ consecutive successes)</span></div>'
+        "</div>"
+        + ("<p class='muted'>Retired: " + ", ".join(
+               f'<span class="mono">{esc(m.get("cron_id", ""))}</span>' for m in retired)
+           + "</p>" if retired else
+           '<p class="muted">No legacy cron retired yet — none has 3 consecutive '
+           'successful hive runs absorbing its job. Legacy crons are DISABLED, never deleted.</p>')
+        + f'<details class="fold"><summary>All {len(active)} legacy-active crons '
+           f'with retirement progress</summary>{mig_table}</details>'
+        + f'<p class="muted">Snapshot: {esc(str(mig.get("generated_at") or "unavailable"))}</p></div>')
+
+    # ---------------- role roster ----------------
+    mapped = set()
+    for _g, _names in _HIVE_ROLE_GROUPS:
+        mapped.update(_names)
+    unmapped = sorted(s for s in role_meta if s not in mapped)
+    groups = list(_HIVE_ROLE_GROUPS)
+    if unmapped:
+        groups.append(("Other", unmapped))
+    roster = ""
+    total_roles = len(role_meta)
+    for gname, names in groups:
+        items = []
+        for stem in sorted(names):
+            meta = role_meta.get(stem)
+            if not meta:
+                items.append(f"<li><span class='mono'>{esc(stem)}</span> "
+                             "<span class='muted'>(role file missing)</span></li>")
+                continue
+            items.append(
+                f"<li><b>{esc(meta['title'])}</b> "
+                f"<span class='pill'>{esc(meta['cost'])}</span><br>"
+                f"<span class='muted'>{esc(meta['purpose'])}</span></li>")
+        roster += (
+            f'<details class="fold"><summary><b>{esc(gname)}</b> '
+            f'— {len(names)} roles</summary><ul class="feed">'
+            + "".join(items) + "</ul></details>")
+    roles_card = (
+        '<div class="card ok-card"><h3>Role roster — 103 specialist roles</h3>'
+        f'<p><b>{total_roles}</b> substantive role files on disk '
+        '(the plan said 100; the real count is 103 — shown honestly).</p>'
+        '<p class="muted">Cost classes: cheap = dispatcher text · standard = '
+        'dispatcher + file writes · browser = needs browser task · heavy = long builds.</p>'
+        + (roster or '<p class="muted">Roles directory unavailable</p>') + '</div>')
+
+    # ---------------- tasks table ----------------
     pill_cls = {"done": "ok", "parked": "warn", "failed": "blocked"}
     trows = ""
     for t in tasks:
@@ -832,61 +1100,51 @@ def _hive_html():
         "r.style.display=(s==='all'||r.getAttribute('data-status')===s)?'':'none';}}</script>"
         '</div>')
 
-    # --- parked subsection ---
-    parked_card = ""
+    # ---------------- parked + retry queue ----------------
+    def _task_reason(t):
+        res = t.get("result") or {}
+        if isinstance(res, dict):
+            return res.get("reason") or res.get("error") or ""
+        return str(res)[:200]
+
     parked = [t for t in tasks if t.get("status") == "parked"]
-    if parked:
-        prows = ""
-        for t in parked:
-            res = t.get("result") or {}
-            reason = res.get("reason") or "no reason recorded"
-            prows += (f"<tr><td><span class='mono'>{esc(t.get('id') or '')}</span></td>"
-                      f"<td>{esc(t.get('title') or '')}</td>"
-                      f"<td>{esc(reason)}</td>"
-                      f"<td>{t.get('attempts') or 0}</td></tr>")
-        parked_card = (
-            '<div class="card warn"><h3>Parked tasks — needs attention</h3>'
-            f'<div class="table-wrap"><table><thead><tr><th>Task</th><th>Title</th>'
+    retrying = [t for t in tasks
+                if (t.get("status") in ("failed", "pending", "claimed", "running"))
+                and (t.get("attempts") or 0) > 0]
+    pq_rows = "".join(
+        f"<tr><td><span class='mono'>{esc(t.get('id') or '')}</span></td>"
+        f"<td>{esc(t.get('title') or '')}</td>"
+        f"<td>{esc(_task_reason(t) or 'no reason recorded')}</td>"
+        f"<td>{t.get('attempts') or 0}</td></tr>" for t in parked)
+    rq_rows = "".join(
+        f"<tr><td><span class='mono'>{esc(t.get('id') or '')}</span></td>"
+        f"<td><span class='mono'>{esc(t.get('role') or '')}</span></td>"
+        f"<td><span class='pill'>{esc(t.get('status') or '')}</span></td>"
+        f"<td>{esc(_task_reason(t) or 'retrying')}</td>"
+        f"<td>{t.get('attempts') or 0}/3</td></tr>" for t in retrying)
+    parked_card = (
+        '<div class="card warn"><h3>Parked tasks — needs attention</h3>'
+        + (f'<div class="table-wrap"><table><thead><tr><th>Task</th><th>Title</th>'
             f'<th>Parked reason</th><th>Attempts</th></tr></thead>'
-            f'<tbody>{prows}</tbody></table></div></div>')
+            f'<tbody>{pq_rows}</tbody></table></div>' if pq_rows else
+            '<p class="muted">Nothing parked.</p>') + '</div>')
+    retry_card = (
+        '<div class="card"><h3>Retry queue</h3>'
+        + (f'<div class="table-wrap"><table><thead><tr><th>Task</th><th>Role</th>'
+            f'<th>Status</th><th>Reason</th><th>Attempts</th></tr></thead>'
+            f'<tbody>{rq_rows}</tbody></table></div>'
+            '<p class="muted">Max 3 attempts — then the brain parks the task.</p>'
+            if rq_rows else
+            '<p class="muted">No tasks currently retrying.</p>') + '</div>')
 
-    # --- brain log ---
+    # ---------------- brain log ----------------
     log_card = (
-        '<div class="card"><h3>Brain log — last 8 lines</h3>'
+        '<div class="card"><h3>Brain log — last 12 lines</h3>'
         '<pre class="mono" style="white-space:pre-wrap;overflow-x:auto">'
-        + esc("\n".join(blog_lines[-8:]) or "log unavailable") + '</pre></div>')
+        + esc("\n".join(blog_lines[-12:]) or "log unavailable") + '</pre></div>')
 
-    # --- migration card ---
-    migrations = mig.get("migrations") or []
-    n_active = sum(1 for m in migrations if m.get("status") == "legacy-active")
-    retired = [m.get("cron_id") for m in migrations if m.get("status") not in ("legacy-active", None)]
-    n_elig = sum(1 for m in migrations
-                 if m.get("status") == "legacy-active"
-                 and (m.get("consecutive_successes") or 0) >= 3)
-    n_hold = sum(1 for m in migrations if "hold" in str(m.get("status") or ""))
-    mig_card = (
-        '<div class="card"><h3>Migration — legacy crons → hive roles</h3>'
-        '<div class="statrow">'
-        f'<div class="stat"><b>{n_active}</b><span>legacy-active</span></div>'
-        f'<div class="stat"><b>{len(retired)}</b><span>retired</span></div>'
-        f'<div class="stat"><b>{n_elig}</b><span>eligible to retire (3+ consecutive successes)</span></div>'
-        f'<div class="stat"><b>{n_hold}</b><span>on execution hold</span></div>'
-        '</div>'
-        + (f'<p class="muted">Retired cron ids: '
-           + ", ".join(f'<span class="mono">{esc(c)}</span>' for c in retired)
-           + '</p>' if retired else
-           '<p class="muted">No legacy cron retired yet — none has 3 consecutive '
-           'successful hive runs absorbing its job.</p>')
-        + f'<p class="muted">Snapshot: {esc(str(mig.get("generated_at") or "unavailable"))}</p></div>')
-
-    # --- roles card ---
-    roles_card = (
-        '<div class="card ok-card"><h3>Roles</h3>'
-        + (f'<p><b>{len(role_files)}</b> / 100 roles installed</p>'
-           if role_files is not None else
-           '<p class="muted">Roles directory unavailable</p>') + '</div>')
-
-    return brain_card + roles_card + mig_card + tasks_card + parked_card + log_card
+    return (worker_card + budget_card + roles_card + mig_card + tasks_card
+            + parked_card + retry_card + log_card)
 
 
 def _all_panes(products, queue, entries, title_map, omap):
