@@ -945,49 +945,90 @@ def _hive_html():
         '<span class="dot warn"></span>aging (&lt;60m) '
         '<span class="dot stale"></span>stale</p></div>')
 
-    # ---------------- budget ----------------
-    budget = st.get("budget") or {}
-    spent = budget.get("usd_est") or 0
-    cap = budget.get("daily_cap_usd") or 0
+    # ---------------- free-tier quotas ----------------
+    def _hive_lane_caps():
+        try:
+            import importlib.util as _ilu
+            _spec = _ilu.spec_from_file_location(
+                "hive_worker_consts", os.path.join(HIVE_DIR, "worker.py"))
+            _mod = _ilu.module_from_spec(_spec)
+            _spec.loader.exec_module(_mod)
+            return (dict(_mod.FREE_LANE_DAILY_TOKENS),
+                    int(_mod.FLEET_DAILY_TOKENS_CAP))
+        except Exception:
+            return {}, 0
+
+    quotas = st.get("quotas") or {}
+    lane_caps, fleet_cap = _hive_lane_caps()
+    used = quotas.get("fleet_tokens") or 0
     try:
-        spent = float(spent)
-        cap = float(cap)
-        pct = (spent / cap * 100) if cap else 0
-        budget_bar = (
+        used = int(used)
+        pct = (used / fleet_cap * 100) if fleet_cap else 0
+        quota_bar = (
             '<div style="background:var(--panel2);border:1px solid var(--line);'
             'border-radius:8px;height:14px;overflow:hidden;margin:8px 0 4px">'
             f'<div style="height:100%;width:{min(100, pct):.2f}%;'
             'background:linear-gradient(90deg,var(--accent),#ef9278)"></div></div>'
-            f'<p class="muted">${spent:.4f} of ${cap:.2f} daily cap'
-            f' &middot; {pct:.2f}% used &middot; cycle {esc(str(budget.get("cycle", "?")))}'
-            + (" &middot; <b>THROTTLED</b>" if budget.get("throttled") else "")
-            + '</p>')
+            f'<p class="muted">{used:,} of {fleet_cap:,} free-tier tokens/day'
+            f' &middot; {pct:.2f}% used &middot; cycle {esc(str(quotas.get("cycle", "?")))}'
+            f' &middot; <b>$0.00 actually spent</b>'
+            + (" &middot; <b>THROTTLED</b>" if quotas.get("throttled") else "")
+            + '</p>'
+            '<p class="muted">Token counts are estimates — the dispatcher reports no '
+            'usage. Paid inference is structurally disabled fleet-wide, so actual '
+            'spend is always $0.</p>')
     except Exception:
-        budget_bar = '<p class="muted">Budget unavailable</p>'
-    by_task = budget.get("by_task") or {}
+        quota_bar = '<p class="muted">Quota data unavailable</p>'
+    lanes = quotas.get("lanes") or {}
+    exhausted = set(quotas.get("lanes_exhausted") or [])
+    lane_rows = ""
+    for lane in list(lane_caps) + [l for l in lanes if l not in lane_caps]:
+        lcap = lane_caps.get(lane)
+        lu = int(lanes.get(lane, 0) or 0)
+        lpct = (lu / lcap * 100) if lcap else 0
+        cap_txt = f"{lcap:,}" if lcap else "fleet-governed"
+        ex = " <b>EXHAUSTED</b>" if lane in exhausted else ""
+        lane_rows += (
+            f"<tr><td><span class='mono'>{esc(str(lane))}</span></td>"
+            f"<td>{lu:,} / {cap_txt}</td><td>{lpct:.1f}%{ex}</td></tr>")
+    by_task = quotas.get("by_task") or {}
     bt_rows = "".join(
         f"<tr><td><span class='mono'>{esc(str(k))}</span></td>"
         f"<td>~{esc(str(v))} tokens</td></tr>"
         for k, v in sorted(by_task.items(), key=lambda kv: -(kv[1] or 0)))
-    per_cycle = budget.get("per_cycle") or []
+
+    def _pc_cost(e):
+        # Historical rows (pre-2026-10-01) carry usd_est: label as estimate.
+        if e.get("lane"):
+            return esc(str(e["lane"]))
+        if e.get("usd_est") is not None:
+            return f"~${float(e.get('usd_est') or 0):.6f} est."
+        return "—"
+
+    per_cycle = quotas.get("per_cycle") or []
     pc_rows = "".join(
         f"<tr><td><span class='mono'>{esc(str(e.get('ts', '')))}</span></td>"
         f"<td><span class='mono'>{esc(str(e.get('actor', '')))}</span></td>"
         f"<td><span class='mono'>{esc(str(e.get('task_id') or '—'))}</span></td>"
         f"<td>{e.get('tokens_est') or 0}</td>"
-        f"<td>${(e.get('usd_est') or 0):.6f}</td>"
+        f"<td>{_pc_cost(e)}</td>"
         f"<td class='muted'>{esc(str(e.get('note', ''))[:80])}</td></tr>"
         for e in per_cycle[-6:])
     budget_card = (
-        '<div class="card"><h3>Budget — daily AI spend</h3>' + budget_bar
-        + ('<h3 style="margin-top:14px">Spend by task</h3>'
+        '<div class="card"><h3>Free-tier quotas — daily AI usage</h3>' + quota_bar
+        + ('<h3 style="margin-top:14px">Usage by lane</h3>'
+           '<div class="table-wrap"><table><thead><tr><th>Lane</th>'
+           '<th>Tokens used / daily cap</th><th>%</th></tr></thead><tbody>'
+           + lane_rows + '</tbody></table></div>' if lane_rows else
+           '<p class="muted">No lane usage recorded yet today.</p>')
+        + ('<h3 style="margin-top:14px">Usage by task</h3>'
            '<div class="table-wrap"><table><thead><tr><th>Task</th>'
            '<th>Tokens (est)</th></tr></thead><tbody>' + bt_rows +
            '</tbody></table></div>' if bt_rows else
-           '<p class="muted">No task-level spend recorded yet.</p>')
+           '<p class="muted">No task-level usage recorded yet.</p>')
         + ('<h3 style="margin-top:14px">Recent ledger entries</h3>'
            '<div class="table-wrap"><table><thead><tr><th>Time</th><th>Actor</th>'
-           '<th>Task</th><th>Tokens</th><th>USD</th><th>Note</th></tr></thead>'
+           '<th>Task</th><th>Tokens</th><th>Lane / cost</th><th>Note</th></tr></thead>'
            '<tbody>' + pc_rows + '</tbody></table></div>' if pc_rows else '')
         + '</div>')
 
@@ -1321,7 +1362,7 @@ def _all_panes(products, queue, entries, title_map, omap):
                        "Every bot, its health, its last run. Red = stuck.")
                   + S.fleet_section())
     p["hive"] = (_sec("Swarm control", "Hive",
-                      "The 103-role HiveBrain: live task queue, workers, budget, migration.")
+                      "The 103-role HiveBrain: live task queue, workers, free-tier quotas, migration.")
                  + _hive_html())
     p["extras"] = (_sec("Everything else", "Extras",
                         "Directory, TikTok, traffic, and the policies the bots live by.")
