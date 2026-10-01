@@ -268,6 +268,26 @@ def alerts_section(queue, products):
             '</span></h3>' + items + '</div>')
 
 
+def money_latest_sale_html():
+    """Latest-sale callout, fed by the approval watcher's sale watch (read-only).
+    Shows only what the Gumroad API actually returned — never invented."""
+    latest = None
+    for line in read_file(os.path.join(HF, "money/sales-alerts.jsonl")).splitlines():
+        line = line.strip()
+        if line:
+            try:
+                latest = json.loads(line)
+            except json.JSONDecodeError:
+                continue
+    if not latest:
+        return ""
+    price = (latest.get("price_cents") or 0) / 100.0
+    return (
+        '<div class="alert"><span class="pill ok">new sale</span> '
+        f'<b>${price:,.0f}</b> — {esc(latest.get("product_name") or "a product")}'
+        f' <span class="muted">{esc(str(latest.get("at") or "")[:16]).replace("T", " ")}</span></div>')
+
+
 def revenue_section(products):
     week_ago = (datetime.now(timezone.utc) - timedelta(days=7)).strftime("%Y-%m-%d")
     sales = gumroad("sales", f"after={week_ago}") or {}
@@ -293,13 +313,19 @@ def revenue_section(products):
                   f'<span class="ms-l">{esc(label)}</span>'
                   f'<span class="ms-a">${amt:,}</span></div>')
     pct = min(100.0, (total / 6000.0) * 100.0)
+    payouts = gumroad("payouts") or {}
+    payout_list = payouts.get("payouts", []) if isinstance(payouts, dict) else []
+    payout_note = (f"{len(payout_list)} payout(s) recorded"
+                   if payout_list else "no payouts yet — weekly, $100 minimum")
     return (
         '<div class="card"><h3>Revenue</h3>'
-        '<div class="statrow">'
+        + money_latest_sale_html()
+        + '<div class="statrow">'
         f'<div class="stat"><b>${total:,.0f}</b><span>all-time revenue</span></div>'
         f'<div class="stat"><b>{total_n}</b><span>all-time sales</span></div>'
         f'<div class="stat"><b>${week_cents/100:,.0f}</b><span>last 7 days ({len(week_sales)} sales)</span></div>'
         '</div>'
+        f'<p class="muted">Gumroad payouts: {esc(payout_note)} (read-only — payouts themselves are never automated).</p>'
         + ("" if total_n else
            '<p class="muted">No sales yet — shown honestly. Every number here comes '
            'straight from the Gumroad API; nothing is estimated or projected.</p>')
@@ -583,14 +609,20 @@ def inbox_section(queue=None):
         '</div>')
     esc_html = ""
     if escs:
-        rows = "".join(
-            '<div class="alert"><span class="pill blocked">needs human</span> '
-            '<b>' + esc(i.get("title", i.get("code", ""))) + '</b>'
-            + ('<br><span class="muted">' + esc((i.get("detail") or "")[:220]) + '</span>'
-               if i.get("detail") else "") +
-            '<br><button class="btn" onclick="approveCode(\'' + esc(i.get("code", "")) +
-            '\', this, \'Handled ✓\')">Mark handled</button></div>'
-            for i in escs)
+        rows = ""
+        for i in escs:
+            title = i.get("title", i.get("code", ""))
+            detail = i.get("detail") or ""
+            money_btn = (
+                ' <a class="btn ghost" href="https://app.gumroad.com/" target="_blank" '
+                'rel="noopener">Open Gumroad dashboard</a>'
+                if "refund" in (title + " " + detail).lower() else "")
+            rows += (
+                '<div class="alert"><span class="pill blocked">needs human</span> '
+                '<b>' + esc(title) + '</b>'
+                + ('<br><span class="muted">' + esc(detail[:220]) + '</span>' if detail else "")
+                + '<br><button class="btn" onclick="approveCode(\'' + esc(i.get("code", "")) +
+                '\', this, \'Handled ✓\')">Mark handled</button>' + money_btn + '</div>')
         esc_html = ('<div class="card warn"><h3>Waiting on you</h3>' + rows + '</div>')
     threat_html = ""
     threats = state.get("threat_fyi", []) or []

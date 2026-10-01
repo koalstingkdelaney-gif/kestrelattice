@@ -147,6 +147,39 @@ def esc(s):
     return html.escape(s or "")
 
 
+def load_brand_title_map():
+    """Exact launch-title (lowercased) -> brand dict, from brands.json.
+
+    Same rule as admin panel v2: exact-title match only, no guessing."""
+    path = os.path.join(HIDDEN, "brands", "brands.json")
+    if not os.path.exists(path):
+        return {}
+    m = {}
+    for b in json.load(open(path)):
+        for p in b.get("products", []):
+            m[str(p.get("title", "")).strip().lower()] = b
+    return m
+
+
+def studio_block(pr, title_map):
+    """'More from this studio' cross-link to the brand's store page.
+
+    Only when the product title exactly matches a brand launch title.
+    No match -> no block, never guess."""
+    b = title_map.get((pr["title"] or "").strip().lower()) if title_map else None
+    if not b:
+        return ""
+    return (
+        '  <section style="border:1px solid var(--line);border-radius:12px;'
+        'padding:24px;background:#1c1a18">\n'
+        '    <h2 style="margin-top:0">More from this studio</h2>\n'
+        f'    <p>This product is part of <strong>{esc(b["display"])}</strong> — '
+        f'{esc(b["tagline"])} A bot-run micro-brand of the ghostcorpnet fleet.</p>\n'
+        f'    <p><a class="btn" href="../../brands/{b["name"]}/">'
+        f'Browse the {esc(b["display"])} store</a></p>\n'
+        '  </section>')
+
+
 def load_ladder():
     """gumroad_id -> {title, tier, site_page, gumroad_url, next_step_up{...}|None, note}"""
     path = os.path.expanduser(
@@ -312,6 +345,7 @@ gtag('config', 'G-541TCHWW98');
   </section>
 
 {bundle_upsell}
+{studio}
 {next_step}
   <footer>
     <span>© 2026 ghostcorpnet · An independent studio</span>
@@ -325,6 +359,7 @@ gtag('config', 'G-541TCHWW98');
 def main():
     packs = load_packs()
     ladder = load_ladder()
+    title_map = load_brand_title_map()
     mans = manuscripts()
     products = []
     for gid, slug, title, price, tagline, inside in ORIGINALS:
@@ -418,6 +453,7 @@ def main():
                            tagline=esc(pr["tagline"]), price=pr["price"], buy_html=buy_html,
                            gumroad_url=pr["gumroad_url"] or "", description=esc(pr["description"]),
                            inside_items=inside_items, related=related, bundle_upsell=upsell,
+                           studio=studio_block(pr, title_map),
                            next_step=next_step_block(pr, ladder))
         with open(os.path.join(d, "index.html"), "w") as f:
             f.write(page)

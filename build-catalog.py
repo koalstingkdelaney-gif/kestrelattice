@@ -127,7 +127,7 @@ nav.main a:not(:last-child){display:none}footer.site .wrap{justify-content:cente
 <a class="logo" href="../">
 <svg width="24" height="24" viewBox="0 0 26 26" fill="none" aria-hidden="true"><circle cx="5" cy="6" r="2.4" fill="#e07a5f"/><circle cx="21" cy="6" r="2.4" fill="#e07a5f"/><circle cx="13" cy="13" r="2.4" fill="#e07a5f"/><circle cx="5" cy="20" r="2.4" fill="#e07a5f"/><circle cx="21" cy="20" r="2.4" fill="#e07a5f"/><path d="M6.6 7.4L11.2 11.8M19.4 7.4L14.8 11.8M6.6 18.6L11.2 14.2M19.4 18.6L14.8 14.2" stroke="#e07a5f" stroke-width="1.4"/></svg>
 ghostcorpnet</a>
-<nav class="main" aria-label="Primary"><a href="../">Home</a><a href="../articles/">Articles</a><a href="../#faq">FAQ</a></nav>
+<nav class="main" aria-label="Primary"><a href="../">Home</a><a href="../brands/">Stores</a><a href="../ecosystem/">Ecosystem</a><a href="../directory/">Directory</a><a href="../build/">Build</a><a href="../articles/">Articles</a><a href="../#faq">FAQ</a></nav>
 </div></header>
 <main id="main">
 <div class="wrap hero">
@@ -142,7 +142,7 @@ __CARDS__
 </main>
 <footer class="site"><div class="wrap">
 <span>© 2026 GhostCorp · ghostcorpnet · An independent studio</span>
-<span><a href="mailto:koalstin.g.k.delaney@gmail.com">Contact</a><a href="../articles/">Articles</a><a href="../sitemap.xml">Sitemap</a><a href="../admin-login.html">Admin</a></span>
+<span><a href="mailto:koalstin.g.k.delaney@gmail.com">Contact</a><a href="../articles/">Articles</a><a href="../brands/">Stores</a><a href="../ecosystem/">Ecosystem</a><a href="../directory/">Directory</a><a href="../build/">Build</a><a href="../sitemap.xml">Sitemap</a><a href="../admin-login.html">Admin</a></span>
 </div></footer>
 <script>
 const grid=document.getElementById('grid'),filters=document.getElementById('filters'),rc=document.getElementById('result-count');
