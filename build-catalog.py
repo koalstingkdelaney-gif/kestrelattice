@@ -42,7 +42,7 @@ PAGE = """<!DOCTYPE html>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Product Catalog — ghostcorpnet</title>
-<meta name="description" content="Every ghostcorpnet self-serve PDF: agent governance checklists, runbooks, worksheets and kits. Instant download.">
+<meta name="description" content="Every ghostcorpnet self-serve product: agent governance playbooks, checklists, runbooks, kits, and working code. Instant download.">
 <meta name="theme-color" content="#1a1f2e">
 <meta name="robots" content="index,follow,max-image-preview:large">
 <link rel="canonical" href="https://koalstingkdelaney-gif.github.io/kestrelattice/products/">
@@ -50,7 +50,7 @@ PAGE = """<!DOCTYPE html>
 <link rel="dns-prefetch" href="https://koalstin.gumroad.com">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Product Catalog — ghostcorpnet">
-<meta property="og:description" content="Every ghostcorpnet self-serve PDF: agent governance checklists, runbooks, worksheets and kits. Instant download.">
+<meta property="og:description" content="Every ghostcorpnet self-serve product: agent governance playbooks, checklists, runbooks, kits, and working code. Instant download.">
 <meta property="og:url" content="https://koalstingkdelaney-gif.github.io/kestrelattice/products/">
 <meta property="og:image" content="https://koalstingkdelaney-gif.github.io/kestrelattice/assets/studio-edition-cover.jpg">
 <meta property="og:image:alt" content="ghostcorpnet product catalog — governed agent mesh playbooks and kits">
@@ -59,7 +59,7 @@ PAGE = """<!DOCTYPE html>
 <meta property="og:site_name" content="ghostcorpnet by GhostCorp">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Product Catalog — ghostcorpnet">
-<meta name="twitter:description" content="Every ghostcorpnet self-serve PDF: agent governance checklists, runbooks, worksheets and kits. Instant download.">
+<meta name="twitter:description" content="Every ghostcorpnet self-serve product: agent governance playbooks, checklists, runbooks, kits, and working code. Instant download.">
 <meta name="twitter:image" content="https://koalstingkdelaney-gif.github.io/kestrelattice/assets/studio-edition-cover.jpg">
 <script type="application/ld+json">
 __ITEMLIST__
@@ -91,6 +91,7 @@ nav.main a:hover{color:var(--accent-bright)}
 .card:hover{border-color:var(--accent-dim);transform:translateY(-3px);box-shadow:0 14px 34px rgba(0,0,0,.4)}
 .card img{width:100%;aspect-ratio:4/3;object-fit:cover;display:block;background:#0b0a09}
 .card .body{padding:16px;display:flex;flex-direction:column;gap:7px;flex:1}
+.codebadge{display:inline-block;align-self:flex-start;background:var(--accent-soft);border:1px solid var(--accent-dim);color:var(--accent-bright);font-size:.68rem;font-weight:700;letter-spacing:.08em;padding:2px 8px;border-radius:999px}
 .card h2{font-size:.98rem;line-height:1.35;font-weight:700;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
 .price{color:var(--text);font-weight:800}
 .card p.desc{color:var(--muted);font-size:.85rem;flex:1}
@@ -131,7 +132,7 @@ ghostcorpnet</a>
 <main id="main">
 <div class="wrap hero">
 <h1>The Catalog</h1>
-<p class="lede">Every self-serve PDF in the ghostcorpnet library — checklists, runbooks, worksheets, and kits for governing AI agents. Buy once, download instantly, yours forever.</p>
+<p class="lede">Every self-serve product in the ghostcorpnet library — playbooks, checklists, runbooks, kits, and working code for governing AI agents. Buy once, download instantly, yours forever.</p>
 </div>
 <div class="wrap"><p class="result-count" id="result-count" aria-live="polite">__COUNT__</p><div class="filters" id="filters"></div></div>
 <div class="wrap"><div class="grid" id="grid">
@@ -164,7 +165,7 @@ b.addEventListener('click',function(){window.scrollTo({top:0,behavior:'smooth'})
 
 CARD = """<div class="card" data-tags="{tags}">
 <a href="{slug}/" style="text-decoration:none;color:inherit;display:block"><img src="../assets/covers/{pid}.png" alt="{title} cover" loading="lazy">
-<div class="body"><h2>{title}</h2><p class="desc">{tagline}</p><p class="price">${price} <span style="color:var(--muted);font-weight:400;font-size:.85rem">one-time</span></p></div></a>
+<div class="body">{badge}<h2>{title}</h2><p class="desc">{tagline}</p><p class="price">${price} <span style="color:var(--muted);font-weight:400;font-size:.85rem">one-time</span></p></div></a>
 <div class="row"><a class="btn" href="{url}">Get it</a><a class="btn ghost" href="{slug}/">Details</a></div>
 <p class="trust">Instant delivery via Gumroad</p>
 </div>
@@ -203,7 +204,9 @@ def main():
     cards = []
     for p in sorted(prods, key=lambda x: (x["price"], x["title"])):
         pid = p["id"]
-        tags = "|".join(tagmap.get(pid, ["governance"]))
+        ptaglist = tagmap.get(pid, ["governance"])
+        tags = "|".join(ptaglist)
+        badge = '<span class="codebadge">CODE</span>' if "code" in ptaglist else ""
         cards.append(CARD.format(
             pid=html.escape(pid),
             title=html.escape(p["title"]),
@@ -212,6 +215,7 @@ def main():
             url=f"https://koalstin.gumroad.com/l/{html.escape(pid)}",
             tags=html.escape(tags),
             slug=ORIGINAL_SLUGS.get(pid, slugify(p["title"])),
+            badge=badge,
         ))
     outdir = os.path.join(SITE, "products")
     os.makedirs(outdir, exist_ok=True)
@@ -257,7 +261,7 @@ def main():
         card = ('      <div class="card" id="catalog-link-card" style="border-color:var(--accent)">'
                 '<h3>Browse the full catalog</h3>'
                 f'<p class="price" style="margin:8px 0">{len(prods)} products <span style="font-size:.85rem;color:var(--muted);font-weight:400">and growing</span></p>'
-                '<p>Every checklist, runbook, worksheet, and kit — filterable, with covers, in one place.</p>'
+                '<p>Every playbook, checklist, runbook, kit, and code tool — filterable, with covers, in one place.</p>'
                 '<p><a class="btn primary" href="products/">Open the catalog</a></p></div>\n')
         h = h.replace('<div class="grid">\n', '<div class="grid">\n' + card, 1)
         with open(idx, "w") as f:
