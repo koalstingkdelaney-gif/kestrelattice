@@ -48,6 +48,7 @@ PAGE = """<!DOCTYPE html>
 <link rel="canonical" href="https://koalstingkdelaney-gif.github.io/kestrelattice/products/">
 <link rel="preconnect" href="https://koalstin.gumroad.com">
 <link rel="dns-prefetch" href="https://koalstin.gumroad.com">
+__PRELOAD__
 <meta property="og:type" content="website">
 <meta property="og:title" content="Product Catalog — ghostcorpnet">
 <meta property="og:description" content="Every ghostcorpnet self-serve product: agent governance playbooks, checklists, runbooks, kits, and working code. Instant download.">
@@ -150,7 +151,7 @@ ghostcorpnet</a>
 <h1>The Catalog</h1>
 <p class="lede">Every self-serve product in the ghostcorpnet library — playbooks, checklists, runbooks, kits, and working code for governing AI agents. Buy once, download instantly, yours forever.</p>
 </div>
-<div class="wrap"><p class="result-count" id="result-count" aria-live="polite">__COUNT__</p><div class="catalog-search-row"><label for="catalog-search" class="visually-hidden">Search products</label><input id="catalog-search" type="search" placeholder="Search products… ( / )"></div><div class="sort-row"><label for="catalog-sort" class="visually-hidden">Sort products</label><select id="catalog-sort" aria-label="Sort products"><option value="new">Newest</option><option value="lo">Price: low to high</option><option value="hi">Price: high to low</option></select></div><div class="filters" id="filters"></div></div>
+<div class="wrap"><p class="result-count" id="result-count" aria-live="polite">__COUNT__</p><div class="catalog-search-row"><label for="catalog-search" class="visually-hidden">Search products</label><input id="catalog-search" type="search" placeholder="Search products… ( / )"></div><div class="sort-row"><label for="catalog-sort" class="visually-hidden">Sort products</label><select id="catalog-sort" aria-label="Sort products"><option value="new">Newest</option><option value="lo">Price: low to high</option><option value="hi">Price: high to low</option></select></div><div class="filters" id="filters" role="region" aria-label="Filter products"></div></div>
 <div class="wrap"><div class="grid" id="grid">
 __CARDS__
 </div><div id="no-results" role="status"><p>No products match — try different keywords or filters</p><p><button class="chip" id="clear-filters" type="button" style="margin-top:12px">Clear filters</button></p></div></div>
@@ -303,7 +304,11 @@ def main():
             }} for n, p in enumerate(ordered, 1)
         ],
     }
-    page = PAGE.replace("__ITEMLIST__", json.dumps(itemlist, ensure_ascii=False, indent=2))
+    first_pid = ordered[0]["id"] if ordered else ""
+    preload = (f'<link rel="preload" as="image" href="../assets/covers/{html.escape(first_pid)}.webp" '
+               f'imagesrcset="../assets/covers/{html.escape(first_pid)}.webp" '
+               f'imagesizes="(max-width:640px) 100vw, (max-width:1100px) 50vw, 320px">') if first_pid else ""
+    page = PAGE.replace("__PRELOAD__", preload).replace("__ITEMLIST__", json.dumps(itemlist, ensure_ascii=False, indent=2))
     with open(os.path.join(outdir, "index.html"), "w") as f:
         f.write(page.replace("__CARDS__", "\n".join(cards)).replace("__COUNT__", f"{len(prods)} products"))
 

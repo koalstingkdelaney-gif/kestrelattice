@@ -260,6 +260,9 @@ PAGE = """<!DOCTYPE html>
 <script type="application/ld+json">
 {jsonld}
 </script>
+<script type="application/ld+json">
+{breadcrumblist}
+</script>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-541TCHWW98"></script>
 <script>
 window.dataLayer = window.dataLayer || [];
@@ -317,7 +320,8 @@ gtag('config', 'G-541TCHWW98');
          flex-wrap:wrap;gap:8px}}
   footer a{{color:var(--muted);text-decoration:none}}
   footer a:hover{{color:var(--accent)}}
-</style>
+
+.currency-note{{font-size:.72rem;font-weight:400;color:var(--muted, #a89d89);margin-left:6px;vertical-align:middle}}</style>
 </head>
 <body>
 <div class="wrap">
@@ -332,7 +336,7 @@ gtag('config', 'G-541TCHWW98');
     <div>
       <h1>{title}</h1>
       <p class="tagline">{tagline}</p>
-      <p class="price">${price}</p>
+      <p class="price">${price} <span class="currency-note">Prices in USD</span></p>
       {buy_html}
       <div class="facts">{facts_row}</div>
     </div>
@@ -470,6 +474,12 @@ def main():
             buy_html = ('<p class="instant">Publishing now — available shortly</p>\n'
                         '      <span class="btn" style="opacity:.7;cursor:default">Publishing — live soon</span>\n'
                         '      <p class="trust">This ghostcorpnet studio pack is moving through our publish queue</p>')
+        breadcrumblist = json.dumps({
+            "@context": "https://schema.org", "@type": "BreadcrumbList",
+            "itemListElement": [
+                {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://koalstingkdelaney-gif.github.io/kestrelattice/"},
+                {"@type": "ListItem", "position": 2, "name": "Products", "item": "https://koalstingkdelaney-gif.github.io/kestrelattice/products/"},
+                {"@type": "ListItem", "position": 3, "name": pr["title"], "item": page_url}]}, indent=2)
         jsonld = json.dumps({
             "@context": "https://schema.org", "@type": "Product",
             "name": pr["title"], "description": pr["tagline"] or pr["description"],
@@ -488,7 +498,7 @@ def main():
                       '    <p><a class="btn" href="../complete-kestrelattice-library/">Get the full library — $79</a></p>\n'
                       '  </section>')
         page = PAGE.format(title=esc(pr["title"]), meta=esc(trunc_meta(pr["tagline"] or pr["description"])),
-                           page_url=page_url, jsonld=jsonld, gid=pr["gid"], cover_img=cover_img,
+                           page_url=page_url, jsonld=jsonld, breadcrumblist=breadcrumblist, gid=pr["gid"], cover_img=cover_img,
                            tagline=esc(pr["tagline"]), price=pr["price"], buy_html=buy_html,
                            facts_row=facts_row,
                            gumroad_url=pr["gumroad_url"] or "", description=esc(pr["description"]),

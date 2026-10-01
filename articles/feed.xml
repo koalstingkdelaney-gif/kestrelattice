@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0">
+<channel>
+  <title>ghostcorpnet articles</title>
+  <link>https://koalstingkdelaney-gif.github.io/kestrelattice/articles/</link>
+  <description>Agent governance playbooks, checklists, and field notes from ghostcorpnet.</description>
+  <language>en</language>
+  <item>
+    <title>AI Agent Vendor Risk Assessment: 20 Questions to Ask Before You Buy a Third-Party Agent — ghostcorpnet</title>
+    <link>https://koalstingkdelaney-gif.github.io/kestrelattice/articles/ai-agent-vendor-risk-assessment.html</link>
+    <guid isPermaLink="true">https://koalstingkdelaney-gif.github.io/kestrelattice/articles/ai-agent-vendor-risk-assessment.html</guid>
+    <pubDate>Thu, 01 Oct 2026 00:00:00 GMT</pubDate>
+    <description>20 due-diligence questions to ask before buying a third-party AI agent: identity, approvals, spend controls, audit logs, data handling, exit terms.</description>
+  </item>
+  <item>
+    <title>AI Agent Incident Response Plan: The Complete Runbook — ghostcorpnet</title>
+    <link>https://koalstingkdelaney-gif.github.io/kestrelattice/articles/ai-agent-incident-response-plan.html</link>
+    <guid isPermaLink="true">https://koalstingkdelaney-gif.github.io/kestrelattice/articles/ai-agent-incident-response-plan.html</guid>
+    <pubDate>Thu, 01 Oct 2026 00:00:00 GMT</pubDate>
+    <description>Build a robust AI agent incident response plan to stop runaway loops, prompt injections, and unauthorized actions before they break production.</description>
+  </item>
+  <item>
+    <title>AI Agent Audit Logs: What to Record, How Long to Keep It, and the Schema That Holds Up Under Review — ghostcorpnet</title>
+    <link>https://koalstingkdelaney-gif.github.io/kestrelattice/articles/ai-agent-audit-log-schema-retention.html</link>
+    <guid isPermaLink="true">https://koalstingkdelaney-gif.github.io/kestrelattice/articles/ai-agent-audit-log-schema-retention.html</guid>
+    <pubDate>Thu, 01 Oct 2026 00:00:00 GMT</pubDate>
+    <description>What belongs in an AI agent audit log: the minimum schema, tamper-evident storage, retention tiers, and what reviewers actually ask for.</description>
+  </item>
+  <item>
+    <title>What Belongs in an AI Agent Policy: The Template Pack Checklist — ghostcorpnet</title>
+    <link>https://koalstingkdelaney-gif.github.io/kestrelattice/articles/ai-agent-policy-templates-what-to-include.html</link>
+    <guid isPermaLink="true">https://koalstingkdelaney-gif.github.io/kestrelattice/articles/ai-agent-policy-templates-what-to-include.html</guid>
+    <pubDate>Wed, 30 Sep 2026 00:00:00 GMT</pubDate>
+    <description>Writing AI agent policies from scratch wastes weeks. Here is exactly what a complete agent policy pack contains — and the ready-made templates that cover each piece.</description>
+  </item>
+  <item>
+    <title>US State AI Laws Are Live in 2026: What AI Agent Deployers Must Do — ghostcorpnet</title>
+    <link>https://koalstingkdelaney-gif.github.io/kestrelattice/articles/us-state-ai-laws-agents-2026.html</link>
+    <guid isPermaLink="true">https://koalstingkdelaney-gif.github.io/kestrelattice/articles/us-state-ai-laws-agents-2026.html</guid>
+    <pubDate>Wed, 30 Sep 2026 00:00:00 GMT</pubDate>
+    <description>Texas TRAIGA, California&#x27;s AI transparency laws, and shifting Colorado rules — the 2026 US state AI law landscape for teams running AI agents, and the practical playbook.</description>
+  </item>
+  <item>
+    <title>The EU AI Act Is Enforcing Now: The AI Agent Evidence Checklist for Deployers — ghostcorpnet</title>
+    <link>https://koalstingkdelaney-gif.github.io/kestrelattice/articles/eu-ai-act-agent-evidence-checklist.html</link>
+    <guid isPermaLink="true">https://koalstingkdelaney-gif.github.io/kestrelattice/articles/eu-ai-act-agent-evidence-checklist.html</guid>
+    <pubDate>Wed, 30 Sep 2026 00:00:00 GMT</pubDate>
+    <description>EU AI Act enforcement began August 2, 2026. If your company deploys AI agents that touch EU users, here is the evidence checklist regulators and enterprise customers expect.</description>
+  </item>
+  <item>
+    <title>The AI Agent Permissions Audit: 12 Questions to Ask Before Your Agents Touch Production — ghostcorpnet</title>
+    <link>https://koalstingkdelaney-gif.github.io/kestrelattice/articles/ai-agent-permissions-audit.html</link>
+    <guid isPermaLink="true">https://koalstingkdelaney-gif.github.io/kestrelattice/articles/ai-agent-permissions-audit.html</guid>
+    <pubDate>Wed, 30 Sep 2026 00:00:00 GMT</pubDate>
+    <description>A practical permissions audit for AI agents in production: 12 questions covering grants, credential handling, spend ceilings, and audit trails — before something breaks.</description>
+  </item>
+  <item>
+    <title>Stop Runaway Agent Costs: Spend Ceilings That Fail Closed — ghostcorpnet</title>
+    <link>https://koalstingkdelaney-gif.github.io/kestrelattice/articles/runaway-agent-costs-spend-ceilings.html</link>
+    <guid isPermaLink="true">https://koalstingkdelaney-gif.github.io/kestrelattice/articles/runaway-agent-costs-spend-ceilings.html</guid>
+    <pubDate>Wed, 30 Sep 2026 00:00:00 GMT</pubDate>
+    <description>A dev watched an AI agent burn $700+ in 72 hours. The fix is not a better dashboard — it is per-plan spend ceilings that fail closed, plus three more controls that cost $0.</description>
+  </item>
+  <item>
+    <title>Selling AI Products to Europe? Enterprise Buyers Will Ask for Agent Audit Trails — ghostcorpnet</title>
+    <link>https://koalstingkdelaney-gif.github.io/kestrelattice/articles/selling-ai-products-to-europe.html</link>
+    <guid isPermaLink="true">https://koalstingkdelaney-gif.github.io/kestrelattice/articles/selling-ai-products-to-europe.html</guid>
+    <pubDate>Wed, 30 Sep 2026 00:00:00 GMT</pubDate>
+    <description>EU AI Act enforcement is pushing audit-trail requirements into B2B procurement. How AI vendors can build a governance evidence pack that shortens enterprise sales cycles.</description>
+  </item>
+  <item>
+    <title>Scoped, Expiring Grants: How to Give AI Agents Credentials Without Losing Control — ghostcorpnet</title>
+    <link>https://koalstingkdelaney-gif.github.io/kestrelattice/articles/scoped-expiring-grants-agents.html</link>
+    <guid isPermaLink="true">https://koalstingkdelaney-gif.github.io/kestrelattice/articles/scoped-expiring-grants-agents.html</guid>
+    <pubDate>Wed, 30 Sep 2026 00:00:00 GMT</pubDate>
+    <description>Never hand an agent your raw production key. Issue a grant instead — a record with five explicit fields, three rules, and no auto-grant path, ever.</description>
+  </item>
+  <item>
+    <title>Observability Answers “What Did It Do.” Governance Answers “Was It Allowed To.” — ghostcorpnet</title>
+    <link>https://koalstingkdelaney-gif.github.io/kestrelattice/articles/observability-vs-governance.html</link>
+    <guid isPermaLink="true">https://koalstingkdelaney-gif.github.io/kestrelattice/articles/observability-vs-governance.html</guid>
+    <pubDate>Wed, 30 Sep 2026 00:00:00 GMT</pubDate>
+    <description>Teams buy observability and call it governance. But dashboards show what happened; only fail-closed controls stop what should not happen. The $0 spend ceiling that does it.</description>
+  </item>
+  <item>
+    <title>Ley de IA de la UE: lista de verificación para equipos con agentes de IA — ghostcorpnet</title>
+    <link>https://koalstingkdelaney-gif.github.io/kestrelattice/articles/ley-ia-ue-lista-verificacion-agentes.html</link>
+    <guid isPermaLink="true">https://koalstingkdelaney-gif.github.io/kestrelattice/articles/ley-ia-ue-lista-verificacion-agentes.html</guid>
+    <pubDate>Wed, 30 Sep 2026 00:00:00 GMT</pubDate>
+    <description>La Ley de IA de la UE entró en aplicación el 2 de agosto de 2026. Si tu empresa usa agentes de IA que llegan a usuarios europeos, esta es tu lista de verificación práctica.</description>
+  </item>
+  <item>
+    <title>Governance Economics: Stop Paying for the Wrong Layer — ghostcorpnet</title>
+    <link>https://koalstingkdelaney-gif.github.io/kestrelattice/articles/governance-economics-paying-wrong-layer.html</link>
+    <guid isPermaLink="true">https://koalstingkdelaney-gif.github.io/kestrelattice/articles/governance-economics-paying-wrong-layer.html</guid>
+    <pubDate>Wed, 30 Sep 2026 00:00:00 GMT</pubDate>
+    <description>LangSmith is $39/seat/month. AgentOps runs $49–$199/month. Both sell observability. The layer that actually stops incidents — policy and enforcement — costs $0 to own.</description>
+  </item>
+  <item>
+    <title>Buy the Observability, Build the Governance — ghostcorpnet</title>
+    <link>https://koalstingkdelaney-gif.github.io/kestrelattice/articles/buy-observability-build-governance.html</link>
+    <guid isPermaLink="true">https://koalstingkdelaney-gif.github.io/kestrelattice/articles/buy-observability-build-governance.html</guid>
+    <pubDate>Wed, 30 Sep 2026 00:00:00 GMT</pubDate>
+    <description>Prompt engineering cannot enforce boundaries on multi-agent systems. Score vendors against the governance gap — then build the kill switch yourself.</description>
+  </item>
+  <item>
+    <title>Agent Permissions and Identity: Tier by Consequence, Not Frequency — ghostcorpnet</title>
+    <link>https://koalstingkdelaney-gif.github.io/kestrelattice/articles/agent-permissions-tier-by-consequence.html</link>
+    <guid isPermaLink="true">https://koalstingkdelaney-gif.github.io/kestrelattice/articles/agent-permissions-tier-by-consequence.html</guid>
+    <pubDate>Wed, 30 Sep 2026 00:00:00 GMT</pubDate>
+    <description>Who can use which agent? What can each agent access? A three-tier permission model — hard-gated, bounded auto, draft-only — plus the heuristics for tiering reads with write-grade consequences.</description>
+  </item>
+  <item>
+    <title>AI Agent Governance FAQ: Permission Prompts, Costs, Identity, and Payments — ghostcorpnet</title>
+    <link>https://koalstingkdelaney-gif.github.io/kestrelattice/articles/agent-governance-faq.html</link>
+    <guid isPermaLink="true">https://koalstingkdelaney-gif.github.io/kestrelattice/articles/agent-governance-faq.html</guid>
+    <pubDate>Wed, 30 Sep 2026 00:00:00 GMT</pubDate>
+    <description>Straight answers to the most-asked agent governance questions from practitioner communities: prompt fatigue, runaway costs, agent inventory, and payment permissions.</description>
+  </item>
+</channel>
+</rss>

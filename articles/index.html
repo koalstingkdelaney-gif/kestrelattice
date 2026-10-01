@@ -80,6 +80,7 @@ gtag('config', 'G-541TCHWW98');
 <script type="application/ld+json">
 {"@context": "https://schema.org", "@type": "ItemList", "itemListElement": [{"@type": "ListItem", "position": 1, "item": {"@type": "Article", "name": "AI Agent Audit Logs: What to Record, How Long to Keep It, and the Schema That Holds Up Under Review", "url": "https://koalstingkdelaney-gif.github.io/kestrelattice/articles/ai-agent-audit-log-schema-retention.html"}}, {"@type": "ListItem", "position": 2, "item": {"@type": "Article", "name": "AI Agent Incident Response Plan: The Complete Runbook", "url": "https://koalstingkdelaney-gif.github.io/kestrelattice/articles/ai-agent-incident-response-plan.html"}}, {"@type": "ListItem", "position": 3, "item": {"@type": "Article", "name": "AI Agent Vendor Risk Assessment: 20 Questions to Ask Before You Buy a Third-Party Agent", "url": "https://koalstingkdelaney-gif.github.io/kestrelattice/articles/ai-agent-vendor-risk-assessment.html"}}, {"@type": "ListItem", "position": 4, "item": {"@type": "Article", "name": "Stop Runaway Agent Costs: Spend Ceilings That Fail Closed", "url": "https://koalstingkdelaney-gif.github.io/kestrelattice/articles/runaway-agent-costs-spend-ceilings.html"}}, {"@type": "ListItem", "position": 5, "item": {"@type": "Article", "name": "Agent Permissions and Identity: Tier by Consequence, Not Frequency", "url": "https://koalstingkdelaney-gif.github.io/kestrelattice/articles/agent-permissions-tier-by-consequence.html"}}, {"@type": "ListItem", "position": 6, "item": {"@type": "Article", "name": "Observability Answers “What Did It Do.” Governance Answers “Was It Allowed To.”", "url": "https://koalstingkdelaney-gif.github.io/kestrelattice/articles/observability-vs-governance.html"}}, {"@type": "ListItem", "position": 7, "item": {"@type": "Article", "name": "Scoped, Expiring Grants: How to Give AI Agents Credentials Without Losing Control", "url": "https://koalstingkdelaney-gif.github.io/kestrelattice/articles/scoped-expiring-grants-agents.html"}}, {"@type": "ListItem", "position": 8, "item": {"@type": "Article", "name": "Buy the Observability, Build the Governance", "url": "https://koalstingkdelaney-gif.github.io/kestrelattice/articles/buy-observability-build-governance.html"}}, {"@type": "ListItem", "position": 9, "item": {"@type": "Article", "name": "Governance Economics: Stop Paying for the Wrong Layer", "url": "https://koalstingkdelaney-gif.github.io/kestrelattice/articles/governance-economics-paying-wrong-layer.html"}}, {"@type": "ListItem", "position": 10, "item": {"@type": "Article", "name": "AI Agent Governance FAQ: Permission Prompts, Costs, Identity, and Payments", "url": "https://koalstingkdelaney-gif.github.io/kestrelattice/articles/agent-governance-faq.html"}}, {"@type": "ListItem", "position": 11, "item": {"@type": "Article", "name": "The AI Agent Permissions Audit: 12 Questions to Ask Before Your Agents Touch Production", "url": "https://koalstingkdelaney-gif.github.io/kestrelattice/articles/ai-agent-permissions-audit.html"}}, {"@type": "ListItem", "position": 12, "item": {"@type": "Article", "name": "What Belongs in an AI Agent Policy: The Template Pack Checklist", "url": "https://koalstingkdelaney-gif.github.io/kestrelattice/articles/ai-agent-policy-templates-what-to-include.html"}}, {"@type": "ListItem", "position": 13, "item": {"@type": "Article", "name": "The EU AI Act Is Enforcing Now: The AI Agent Evidence Checklist for Deployers", "url": "https://koalstingkdelaney-gif.github.io/kestrelattice/articles/eu-ai-act-agent-evidence-checklist.html"}}, {"@type": "ListItem", "position": 14, "item": {"@type": "Article", "name": "Ley de IA de la UE: lista de verificación para equipos con agentes de IA", "url": "https://koalstingkdelaney-gif.github.io/kestrelattice/articles/ley-ia-ue-lista-verificacion-agentes.html"}}, {"@type": "ListItem", "position": 15, "item": {"@type": "Article", "name": "Selling AI Products to Europe? Enterprise Buyers Will Ask for Agent Audit Trails", "url": "https://koalstingkdelaney-gif.github.io/kestrelattice/articles/selling-ai-products-to-europe.html"}}, {"@type": "ListItem", "position": 16, "item": {"@type": "Article", "name": "US State AI Laws Are Live in 2026: What AI Agent Deployers Must Do", "url": "https://koalstingkdelaney-gif.github.io/kestrelattice/articles/us-state-ai-laws-agents-2026.html"}}]}
 </script>
+<link rel="alternate" type="application/rss+xml" title="ghostcorpnet articles" href="feed.xml">
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -91,6 +92,7 @@ gtag('config', 'G-541TCHWW98');
   <h1>Articles</h1>
   <p class="sub">Practical guides on governing AI agents in production. New pieces publish every week.</p>
 
+  <div class="sort-row"><button id="sort-toggle" aria-pressed="true" data-sort="new">Newest first</button></div>
   <ul class="article-list" id="article-list">
     <li><h2 class="title"><a href="ai-agent-audit-log-schema-retention.html">AI Agent Audit Logs: What to Record, How Long to Keep It, and the Schema That Holds Up Under Review</a></h2><div class="date">2026-10-01 · <span class="reading-time">6 min read</span></div><div class="desc">What belongs in an AI agent audit log: the minimum 11-field schema, tamper-evident hash-chained storage, risk-tiered retention guidance, and the four questions reviewers actually ask.</div></li>
     <li><h2 class="title"><a href="ai-agent-incident-response-plan.html">AI Agent Incident Response Plan: The Complete Runbook</a></h2><div class="date">2026-10-01 · <span class="reading-time">5 min read</span></div><div class="desc">A complete runbook for AI agent incidents: runaway cost loops, prompt injection, unauthorized actions, kill-switch containment, audit-trail logging, and a one-page response checklist.</div></li>
@@ -150,6 +152,21 @@ gtag('config', 'G-541TCHWW98');
 <button id="backtop" aria-label="Back to top">↑</button>
 </main>
 <script>
+(function(){var t=document.getElementById('sort-toggle'),ul=document.getElementById('article-list');
+if(!t||!ul)return;
+var feat=ul.querySelector('.featured');
+var items=[].slice.call(ul.querySelectorAll('li'));
+var dateOf=function(li){var d=li.querySelector('.date');var m=d&&d.textContent.match(/(\d{4}-\d{2}-\d{2})/);return m?m[1]:'';};
+var apply=function(mode){
+  items.sort(function(a,b){var da=dateOf(a),db=dateOf(b);return mode==='new'?(db<da?-1:db>da?1:0):(da<db?-1:da>db?1:0);});
+  items.forEach(function(li){ul.appendChild(li);});
+  if(feat)ul.insertBefore(feat,ul.firstChild);
+  t.textContent=mode==='new'?'Newest first':'Oldest first';
+  t.setAttribute('data-sort',mode);t.setAttribute('aria-pressed',mode==='new'?'true':'false');
+};
+t.addEventListener('click',function(){apply(t.getAttribute('data-sort')==='new'?'old':'new');});
+apply('new');})();
+</script>
 (function(){var b=document.getElementById('backtop');if(!b)return;
 function onScroll(){b.classList.toggle('show',window.scrollY>1200)}
 window.addEventListener('scroll',onScroll,{passive:true});onScroll();
