@@ -285,7 +285,7 @@ gtag('config', 'G-541TCHWW98');
   .hero{{display:grid;grid-template-columns:280px 1fr;gap:32px;margin:8px 0 40px}}
   @media(max-width:640px){{.hero{{grid-template-columns:1fr}}}}
   .hero img{{width:100%;border-radius:12px;border:1px solid var(--line)}}
-  h1{{font-size:1.9rem;line-height:1.25;margin-bottom:8px}}
+  h1{{font-size:1.9rem;line-height:1.25;margin-bottom:8px;text-wrap:balance}}
   .tagline{{color:var(--muted);font-size:1.05rem;margin-bottom:20px}}
   .price{{font-size:1.6rem;color:var(--accent);font-weight:700;margin-bottom:6px}}
   .instant{{color:var(--muted);font-size:.85rem;margin-bottom:20px}}
