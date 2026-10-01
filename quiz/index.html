@@ -70,6 +70,7 @@ gtag('config', 'G-541TCHWW98');
     <h3 style="margin:24px 0 8px">Start here</h3>
     <div id="recs"></div>
     <p class="note">Every ghostcorpnet product is complete and ready to use — instant download via Gumroad, no placeholders.</p>
+    <p><button id="restart" class="opt" type="button" style="max-width:280px;text-align:center;margin:8px auto 0" onclick="restart()">↻ Restart quiz</button></p>
   </div>
   <footer><a href="../">Home</a> · <a href="../products/">Catalog</a> · © 2026 ghostcorpnet · <a href="../terms.html">Terms</a> · <a href="../privacy.html">Privacy</a></footer>
 </div>
@@ -134,6 +135,15 @@ function render(){
     if(typeof v === 'number') score += v; else worry = v;
     qi++; render();
   });
+}
+function restart(){
+  qi = 0; score = 0; worry = "start";
+  document.getElementById('result').style.display='none';
+  document.getElementById('quiz').style.display='block';
+  try{history.replaceState(null,'',location.pathname);}catch(e){}
+  render();
+  var h = document.querySelector('#qbox h3');
+  if(h){ h.setAttribute('tabindex','-1'); h.focus(); }
 }
 function finish(tierOverride){
   document.getElementById('quiz').style.display='none';
