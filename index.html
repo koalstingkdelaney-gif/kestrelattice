@@ -91,6 +91,7 @@
   /* ============ ghostcorpnet — compact redesign, 2026-09-30 ============
      Dark slate + terracotta. System type. Compact sections, slim footer. */
   :root{
+    color-scheme:dark;
     --bg:#0f0e0d; --bg-soft:#141210; --panel:#1a1714; --panel2:#211c17;
     --line:#2c261e; --line-soft:#221d15;
     --text:#f1ebdd; --muted:#a89d89; --faint:#7d7461;
@@ -218,6 +219,7 @@
 
   /* ---- FAQ ---- */
   details.faq{max-width:720px;margin:0 auto 10px;background:var(--panel);border:1px solid var(--line);
+    scroll-margin-top:70px;
     border-radius:var(--radius);padding:16px 20px;transition:border-color .16s var(--ease)}
   details.faq:hover{border-color:var(--accent-dim)}
   details.faq[open]{border-color:var(--accent-dim);background:var(--bg-soft)}
