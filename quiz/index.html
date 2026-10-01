@@ -29,6 +29,7 @@ gtag('config', 'G-541TCHWW98');
   .sub{color:var(--muted);margin-bottom:32px}
   .q{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:24px;margin-bottom:20px}
   .q h3{font-size:1.05rem;margin-bottom:14px}
+  fieldset.q legend{padding:0;border:0}
   .opt{display:block;width:100%;text-align:left;background:var(--bg);border:1px solid var(--line);color:var(--text);
        border-radius:8px;padding:12px 16px;margin:8px 0;cursor:pointer;font-size:.95rem}
   .opt:hover{border-color:var(--accent)}
@@ -128,8 +129,8 @@ function render(){
   if(prog) prog.setAttribute('aria-valuenow', Math.min(qi, Q.length));
   if(qi >= Q.length){ finish(); return; }
   const q = Q[qi];
-  qbox.innerHTML = '<div class="q"><h3>'+(qi+1)+'. '+q.t+'</h3>'+
-    q.o.map((o,i)=>'<button class="opt" data-i="'+i+'">'+o[0]+'</button>').join('')+'</div>';
+  qbox.innerHTML = '<fieldset class="q"><legend><h3>'+(qi+1)+'. '+q.t+'</h3></legend>'+
+    q.o.map((o,i)=>'<button class="opt" data-i="'+i+'">'+o[0]+'</button>').join('')+'</fieldset>';
   qbox.querySelectorAll('.opt').forEach(b=>b.onclick=()=>{
     const v = q.o[+b.dataset.i][1];
     if(typeof v === 'number') score += v; else worry = v;
