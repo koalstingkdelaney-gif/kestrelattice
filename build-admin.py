@@ -235,6 +235,10 @@ def alerts_section(queue, products):
         if st.startswith("blocked"):
             alerts.append(
                 ("blocked", i.get("title", i.get("code", "")), st, i.get("detail", "")))
+        if i.get("kind") == "inbox_escalation" and st == "pending":
+            alerts.append(
+                ("escalation", i.get("title", i.get("code", "")),
+                 "needs human", "A customer thread needs your personal reply."))
     try:
         prog = json.loads(read_file(os.path.join(HF, "approvals/progress.json")) or "{}")
     except json.JSONDecodeError:
@@ -544,6 +548,62 @@ def outreach_section():
         need_html = ('<details class="fold"><summary>Finding a contact (' + str(len(needc)) +
                      ')</summary><ul>' + rows + '</ul></details>')
     return stats + "".join(cards) + need_html
+
+
+def inbox_section(queue=None):
+    """Customer inbox loop: replies received, auto-replies sent, opt-outs, escalations."""
+    try:
+        state = json.loads(read_file(os.path.join(HF, "inbox/state.json")) or "{}")
+    except json.JSONDecodeError:
+        state = {}
+    queue = queue if queue is not None else get_queue()
+    escs = [i for i in queue if i.get("kind") == "inbox_escalation"
+            and i.get("status") == "pending"]
+    recent = []
+    for line in read_file(os.path.join(HF, "inbox/replied.jsonl")).splitlines():
+        line = line.strip()
+        if line:
+            try:
+                recent.append(json.loads(line))
+            except json.JSONDecodeError:
+                pass
+    recent = recent[-6:]
+    stats = (
+        '<div class="statrow">'
+        f'<div class="stat"><b>{state.get("unread_customer_threads", 0)}</b>'
+        '<span>unread customer threads</span></div>'
+        f'<div class="stat"><b>{state.get("replies_sent_today", 0)}</b>'
+        '<span>auto-replies today</span></div>'
+        f'<div class="stat"><b>{state.get("optouts_total", 0)}</b>'
+        '<span>opt-outs honored</span></div>'
+        f'<div class="stat"><b>{len(escs)}</b><span>need your reply</span></div>'
+        '</div>')
+    esc_html = ""
+    if escs:
+        rows = "".join(
+            '<div class="alert"><span class="pill blocked">needs human</span> '
+            '<b>' + esc(i.get("title", i.get("code", ""))) + '</b>'
+            + ('<br><span class="muted">' + esc((i.get("detail") or "")[:220]) + '</span>'
+               if i.get("detail") else "") +
+            '<br><button class="btn" onclick="approveCode(\'' + esc(i.get("code", "")) +
+            '\', this, \'Handled ✓\')">Mark handled</button></div>'
+            for i in escs)
+        esc_html = ('<div class="card warn"><h3>Waiting on you</h3>' + rows + '</div>')
+    hist = ""
+    if recent:
+        items = "".join(
+            '<li><b>' + esc(r.get("action", "?")) + '</b> — ' +
+            esc((r.get("subject") or r.get("to") or "")[:70]) +
+            ' <span class="muted">' + esc(r.get("at", ""))[:16] + '</span></li>'
+            for r in reversed(recent))
+        hist = ('<details class="fold"><summary>Recent inbox activity (' + str(len(recent)) +
+                ')</summary><ul>' + items + '</ul></details>')
+    last = state.get("last_run", "")
+    return (stats + esc_html + hist +
+            ('<p class="muted">Inbox watcher checks the business Gmail every ~10 minutes '
+             'and replies to genuine questions automatically. Money, refund, legal, or '
+             'complex threads come here instead. Last check: ' + esc(last.replace("T", " ").replace("Z", "Z")) +
+             '.</p>' if last else '<p class="muted">Inbox watcher has not run yet.</p>'))
 
 
 def drafts_section():
@@ -945,6 +1005,9 @@ def build():
     <div class="sec-title"><div class="eyebrow">Sales</div><h2>Outreach</h2>
     <p class="lede">Bots find leads and draft pitches around the clock. Read each pitch and tap <b>Send pitch</b> — it goes out from your business Gmail within ~15 minutes. Cap: 20/day.</p></div>
     {outreach_section()}
+    <div class="sec-title"><div class="eyebrow">Customers</div><h2>Inbox replies</h2>
+    <p class="lede">When customers write back, the bots answer genuine questions on their own. Money, refund, legal, or complex threads wait here for your personal reply.</p></div>
+    {inbox_section(queue)}
   </div>
 
   <div class="tabpane" id="tab-products">
