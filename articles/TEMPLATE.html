@@ -148,6 +148,11 @@ gtag('config', 'G-541TCHWW98');
 {{BODY_HTML}}
   </article>
   <nav class="article-back" aria-label="Article navigation" style="max-width:720px;margin:28px auto 0"><a href="../articles/" aria-label="All 16 articles" style="color:var(--accent)">&larr; All articles</a></nav>
+  <!-- PREVNEXT: replace {{PREV_URL}}/{{PREV_TITLE}}/{{NEXT_URL}}/{{NEXT_TITLE}} when generating; omit the whole <a> for a missing side -->
+  <nav aria-label="More articles" class="prevnext" style="max-width:720px;margin:24px auto 0;display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap">
+    <a href="{{PREV_URL}}" rel="prev" style="color:var(--accent)">&larr; {{PREV_TITLE}}</a>
+    <a href="{{NEXT_URL}}" rel="next" style="color:var(--accent)">{{NEXT_TITLE}} &rarr;</a>
+  </nav>
 <script>
 (function(){var t=document.querySelector('article').innerText||'';var w=t.trim().split(/\s+/).length;var m=Math.max(1,Math.ceil(w/200));document.getElementById('reading-time').textContent=m+' min read';})();
 </script>
