@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Product Catalog — ghostcorpnet</title>
 <meta name="description" content="Every ghostcorpnet self-serve product: agent governance playbooks, checklists, runbooks, kits, and working code. Instant download.">
 <meta name="theme-color" content="#1a1f2e">
@@ -2911,7 +2911,7 @@ body{background:radial-gradient(900px 420px at 50% -6%, rgba(224,122,95,.06), tr
 .wrap{max-width:1040px;margin:0 auto;padding:0 24px}
 a{color:var(--accent);text-decoration:none;transition:color .16s var(--ease)}
 a:hover{text-decoration:underline}
-a:focus-visible,button:focus-visible{outline:2px solid var(--accent-bright);outline-offset:3px;border-radius:4px}
+a:focus-visible,button:focus-visible{outline:2px solid var(--accent-bright);outline-offset:3px;border-radius:4px}@media (prefers-reduced-motion:no-preference){a:focus-visible,button:focus-visible{transition:transform .15s ease}a:focus-visible{transform:scale(1.03)}}
 header.site{border-bottom:1px solid var(--line);position:sticky;top:0;background:rgba(15,14,13,.92);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);z-index:100}
 header.site .wrap{display:flex;align-items:center;justify-content:space-between;min-height:58px}
 .logo{display:flex;align-items:center;gap:9px;font-weight:700;font-size:1.05rem;color:var(--text)}
@@ -4442,7 +4442,8 @@ const updateCount=()=>{const v=[...grid.querySelectorAll('.card')].filter(c=>!c.
 const tags=[...new Set([...grid.querySelectorAll('.card')].flatMap(c=>(c.dataset.tags||'').split('|').filter(Boolean)))].sort();
 let activeTag='',searchQ='';
 const applyFilters=()=>{document.querySelectorAll('.card').forEach(c=>{const t=(c.dataset.tags||'').split('|').filter(Boolean);const okT=activeTag===''||t.includes(activeTag);const h2=c.querySelector('h2');const okQ=searchQ===''||(h2&&h2.textContent.toLowerCase().includes(searchQ));c.classList.toggle('hidden',!(okT&&okQ))});updateCount()};
-const mk=(label,tag)=>{const b=document.createElement('button');b.className='chip'+(tag===''?' active':'');b.textContent=label;b.setAttribute('aria-pressed',String(tag===''));b.onclick=()=>{activeTag=tag;document.querySelectorAll('.chip').forEach(x=>{x.classList.remove('active');x.setAttribute('aria-pressed','false')});b.classList.add('active');b.setAttribute('aria-pressed','true');applyFilters()};return b};
+const tagCounts={};[...grid.querySelectorAll('.card')].forEach(c=>{(c.dataset.tags||'').split('|').filter(Boolean).forEach(t=>{tagCounts[t]=(tagCounts[t]||0)+1})});
+const mk=(label,tag)=>{const b=document.createElement('button');b.className='chip'+(tag===''?' active':'');b.textContent=label;b.setAttribute('aria-pressed',String(tag===''));if(tag===''){b.setAttribute('aria-label','Show all '+grid.querySelectorAll('.card').length+' products')}else{const n=tagCounts[tag]||0;b.setAttribute('aria-label','Show '+n+' '+label+(n===1?'':'s'))}b.onclick=()=>{activeTag=tag;document.querySelectorAll('.chip').forEach(x=>{x.classList.remove('active');x.setAttribute('aria-pressed','false')});b.classList.add('active');b.setAttribute('aria-pressed','true');applyFilters()};return b};
 filters.appendChild(mk('All',''));
 tags.forEach(t=>filters.appendChild(mk(t.replace(/-/g,' '),t)));
 const sq=document.getElementById('catalog-search');

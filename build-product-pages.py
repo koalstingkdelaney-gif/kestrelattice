@@ -6,6 +6,7 @@ extracts "What's inside" from the matching manuscript's ## headings,
 renders a branded page with Product JSON-LD, buy CTA, related products,
 and registers every page in sitemap.xml. Idempotent.
 """
+import datetime
 import html, json, os, re, struct
 
 
@@ -243,7 +244,7 @@ PAGE = """<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>{title} — ghostcorpnet</title>
 <meta name="description" content="{meta}">
 <link rel="canonical" href="{page_url}">
@@ -298,6 +299,14 @@ gtag('config', 'G-541TCHWW98');
   .fact{{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:8px 14px;font-size:.86rem;color:var(--muted)}}
   .fact b{{color:var(--text)}}
   a:focus-visible,button:focus-visible{{outline:2px solid var(--accent);outline-offset:3px;border-radius:4px}}
+  .pdp-sticky{{display:flex;position:fixed;bottom:0;left:0;right:0;z-index:120;background:rgba(26,23,20,.97);border-top:1px solid var(--line);padding:10px 16px calc(10px + env(safe-area-inset-bottom));align-items:center;justify-content:space-between;gap:12px;transform:translateY(110%);transition:transform .25s ease}}
+  .pdp-sticky.show{{transform:none}}
+  .pdp-sticky span{{font-size:.85rem;color:var(--muted)}}
+  .pdp-sticky span b{{color:var(--text)}}
+  .pdp-sticky .btn{{padding:10px 20px;font-size:.88rem}}
+  .pdp-sticky .soon{{color:var(--muted);font-size:.85rem}}
+  body.has-sticky{{padding-bottom:76px}}
+  @media (prefers-reduced-motion:reduce){{.pdp-sticky{{transition:none}}}}@media (prefers-reduced-motion:no-preference){{a:focus-visible,button:focus-visible{{transition:transform .15s ease}}a:focus-visible{{transform:scale(1.03)}}}}
   @media (prefers-reduced-motion:reduce){{*,*::before,*::after{{transition:none!important;animation:none!important}}}}
   .btn{{display:inline-block;background:var(--accent);color:#121212;font-weight:700;
        padding:14px 32px;border-radius:8px;text-decoration:none;font-size:1.05rem}}
@@ -332,7 +341,7 @@ gtag('config', 'G-541TCHWW98');
     <svg width="24" height="24" viewBox="0 0 26 26" fill="none" aria-hidden="true"><circle cx="5" cy="6" r="2.4" fill="#e07a5f"/><circle cx="21" cy="6" r="2.4" fill="#e07a5f"/><circle cx="13" cy="13" r="2.4" fill="#e07a5f"/><circle cx="5" cy="20" r="2.4" fill="#e07a5f"/><circle cx="21" cy="20" r="2.4" fill="#e07a5f"/><path d="M6.6 7.4L11.2 11.8M19.4 7.4L14.8 11.8M6.6 18.6L11.2 14.2M19.4 18.6L14.8 14.2" stroke="#e07a5f" stroke-width="1.4"/></svg>
     ghostcorpnet
   </a>
-  <nav aria-label="Breadcrumb" class="crumb"><ol><li><a href="../../">Home</a></li><li><a id="pdp-back" href="../../products/" aria-keyshortcuts="Escape">Catalog</a><kbd class="esc-hint">Esc</kbd></li><li aria-current="page">{title}</li></ol></nav>
+  <nav aria-label="Breadcrumb" class="crumb"><ol><li><a href="../../">Home</a></li><li><a id="pdp-back" href="../../products/" aria-keyshortcuts="Escape" aria-label="Back to all {n_products} products">Catalog</a><kbd class="esc-hint">Esc</kbd></li><li aria-current="page">{title}</li></ol></nav>
 
   <div class="hero">
     {cover_img}
@@ -378,6 +387,7 @@ gtag('config', 'G-541TCHWW98');
   </section>
 
 {bundle_upsell}
+{fbt}
 {studio}
 {next_step}
   <footer>
@@ -385,12 +395,41 @@ gtag('config', 'G-541TCHWW98');
     <span><a href="../../">Home</a> · <a href="../">Catalog</a> · <a href="../../changelog.html">Changelog</a> · <a href="mailto:koalstin.g.k.delaney@gmail.com">Contact</a></span>
   </footer>
 </div>
+{sticky_bar}
 <script>
 document.addEventListener('keydown',function(e){{if(e.key==='Escape'&&!e.defaultPrevented&&!/INPUT|TEXTAREA|SELECT/.test(document.activeElement.tagName)){{var b=document.getElementById('pdp-back');if(b&&b.href){{location.href=b.href;}}}}}});
+(function(){{var b=document.getElementById('pdp-sticky');if(!b){{return;}}function onS(){{var show=window.scrollY>600;b.classList.toggle('show',show);document.body.classList.toggle('has-sticky',show);}}window.addEventListener('scroll',onS,{{passive:true}});onS();}})();
 </script>
 </body>
 </html>
 """
+
+
+def fbt_block(pr, products):
+    """'Frequently bought together' block: up to 3 real bundle products.
+
+    Bundles are identified from the actual product list (title keywords);
+    links are internal site links with real prices. Never invents products.
+    Empty when no bundles exist (never guess)."""
+    kw = ("bundle", "library", "collection", "mega-kit", "complete", "vault")
+    seen, picks = set(), []
+    cands = [x for x in products
+             if x["gid"] != pr["gid"] and x.get("slug")
+             and any(k in (x.get("title") or "").lower() for k in kw)]
+    def price_num(x):
+        try: return float(x.get("price") or 0)
+        except (TypeError, ValueError): return 0
+    for x in sorted(cands, key=price_num, reverse=True):
+        if x["slug"] not in seen:
+            seen.add(x["slug"]); picks.append(x)
+        if len(picks) == 3: break
+    if not picks: return ""
+    items = "".join(
+        '<a href="../' + x["slug"] + '/"><strong>' + esc(x["title"]) + '</strong>'
+        '<div class="rp">$' + x["price"] + '</div></a>' for x in picks)
+    return ('  <section>\n    <h2>Frequently bought together</h2>\n'
+            '    <div class="rel">\n' + items + '\n    </div>\n  </section>\n')
+
 
 def main():
     packs = load_packs()
@@ -478,7 +517,7 @@ def main():
         if is_live:
             buy_html = (f'<p class="instant">One-time · Instant PDF download via Gumroad</p>\n'
                         f'      <a class="btn" href="{pr["gumroad_url"]}" aria-label="Buy {esc(pr["title"])} for ${pr["price"]}">Get it now — ${pr["price"]}</a>\n'
-                        f'      <p class="trust">Secure checkout via Gumroad · Single-user license · Instant delivery</p>\n'
+                        f'      <p class="trust">Secure checkout via Gumroad · <a style="color:var(--accent)" href="https://help.gumroad.com">buyer protection</a> · Single-user license · Instant delivery</p>\n'
                         f'      <p class="notready">Not ready? <a href="../../playbook.md">Get the free MIT playbook</a> first.</p>')
         else:
             buy_html = ('<p class="instant">Publishing now — available shortly</p>\n'
@@ -507,6 +546,14 @@ def main():
                       'in one bundle for $79. One purchase, everything we have shipped.</p>\n'
                       '    <p><a class="btn" href="../complete-kestrelattice-library/">Get the full library — $79</a></p>\n'
                       '  </section>')
+        if is_live:
+            sticky_bar = (f'<div class="pdp-sticky" id="pdp-sticky" role="region" aria-label="Quick buy: {esc(pr["title"])}">'
+                          f'<span><b>{esc(pr["title"])}</b> \u00b7 ${pr["price"]}</span>'
+                          f'<a class="btn" href="{pr["gumroad_url"]}">Buy now</a></div>')
+        else:
+            sticky_bar = (f'<div class="pdp-sticky" id="pdp-sticky" role="region" aria-label="Availability: {esc(pr["title"])}">'
+                          f'<span><b>{esc(pr["title"])}</b> \u00b7 ${pr["price"]}</span>'
+                          '<span class="soon">Publishing soon</span></div>')
         page = PAGE.format(title=esc(pr["title"]), meta=esc(trunc_meta(pr["tagline"] or pr["description"])),
                            page_url=page_url, jsonld=jsonld, breadcrumblist=breadcrumblist, gid=pr["gid"], cover_img=cover_img,
                            tagline=esc(pr["tagline"]), price=pr["price"], buy_html=buy_html,
@@ -514,10 +561,11 @@ def main():
                            gumroad_url=pr["gumroad_url"] or "", description=esc(pr["description"]),
                            inside_items=inside_items, related=related, bundle_upsell=upsell,
                            studio=studio_block(pr, title_map), og_dims=og_dims,
-                           next_step=next_step_block(pr, ladder))
+                           next_step=next_step_block(pr, ladder), n_products=len(products),
+                           sticky_bar=sticky_bar, fbt=fbt_block(pr, products))
         with open(os.path.join(d, "index.html"), "w") as f:
             f.write(page)
-        sm_entries.append(f'  <url><loc>{page_url}</loc><lastmod>2026-09-30</lastmod></url>')
+        sm_entries.append(f'  <url><loc>{page_url}</loc><lastmod>{datetime.date.today().isoformat()}</lastmod><changefreq>monthly</changefreq></url>')
 
     # sitemap
     sm_path = os.path.join(SITE, "sitemap.xml")

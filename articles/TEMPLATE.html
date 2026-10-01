@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <link rel="preconnect" href="https://gumroad.com">
 <link rel="preconnect" href="https://www.googletagmanager.com">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>{{TITLE}} — ghostcorpnet</title>
 <meta name="description" content="{{META_DESCRIPTION}}">
 <meta name="robots" content="index,follow,max-image-preview:large">
@@ -56,7 +56,7 @@ gtag('config', 'G-541TCHWW98');
   body{background:var(--bg);color:var(--text);
        font-family:ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
        line-height:1.7;-webkit-font-smoothing:antialiased}
-  a:focus-visible{outline:2px solid var(--accent-bright);outline-offset:3px;border-radius:4px}
+  a:focus-visible{outline:2px solid var(--accent-bright);outline-offset:3px;border-radius:4px}@media (prefers-reduced-motion:no-preference){a:focus-visible{transition:transform .15s ease}a:focus-visible{transform:scale(1.03)}}
   header.site{border-bottom:1px solid var(--line);position:sticky;top:0;z-index:100;
     background:rgba(15,14,13,.92);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
   header.site .wrap{display:flex;align-items:center;justify-content:space-between;min-height:56px;max-width:1040px;margin:0 auto;padding:0 24px}
@@ -81,6 +81,13 @@ gtag('config', 'G-541TCHWW98');
               padding:16px;overflow-x:auto;margin:0 0 16px}
   article blockquote{border-left:3px solid var(--accent);padding-left:16px;
                      color:var(--muted);margin:0 0 16px}
+  .related-articles{margin:40px 0}
+  .related-articles h2{font-size:1.25rem;margin-bottom:14px;letter-spacing:-.01em}
+  .related-articles ul{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+  .related-articles a{display:block;border:1px solid var(--line);border-radius:10px;padding:14px 18px;color:var(--text);text-decoration:none}
+  .related-articles a:hover{border-color:var(--accent-dim)}
+  .related-articles a:hover strong{color:var(--accent-bright)}
+  .related-articles .rd{color:var(--muted);font-size:.85rem;margin-top:4px}
   .cta{background:linear-gradient(180deg,var(--panel2),var(--panel));border:1px solid var(--accent-dim);border-radius:var(--radius);
        padding:28px;margin:40px 0;text-align:center;box-shadow:0 16px 40px rgba(0,0,0,.35)}
   .cta h2{margin:0 0 10px;font-size:1.3rem}
@@ -136,6 +143,7 @@ gtag('config', 'G-541TCHWW98');
 (function(){var t=document.querySelector('article').innerText||'';var w=t.trim().split(/\s+/).length;var m=Math.max(1,Math.ceil(w/200));document.getElementById('reading-time').textContent=m+' min read';})();
 </script>
 
+{{RELATED_BLOCK}}
   <div class="cta">
     <h2>Put this into practice</h2>
     <p>The Governed Agent Mesh Playbook — Studio Edition ($29) gives you the full system: tiering, approvals, spend controls, and incident response, ready to run.</p>
