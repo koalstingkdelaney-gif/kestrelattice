@@ -207,7 +207,7 @@ form.addEventListener("submit", async function(ev){
   check("license", v.license.length > 0);
   if (!ok) return;
 
-  go.disabled = true; go.textContent = "Submitting…";
+  go.disabled = true; go.textContent = "Submitting…"; go.setAttribute("aria-busy", "true");
   try {
     const r = await fetch(WORKER + "/submit", {
       method: "POST",
@@ -228,7 +228,7 @@ form.addEventListener("submit", async function(ev){
     status.className = "bad";
     status.textContent = "Submission failed: " + e.message + ". Please try again in a moment.";
   }
-  go.disabled = false; go.textContent = "Submit for review";
+  go.disabled = false; go.textContent = "Submit for review"; go.removeAttribute("aria-busy");
 });
 </script>
 </body>
