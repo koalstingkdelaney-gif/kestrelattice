@@ -119,6 +119,12 @@ gtag('config', 'G-541TCHWW98');
   .copy-link-row{margin:0 0 8px}
   .copy-link{position:relative;border:1px solid var(--line);background:var(--panel);color:var(--muted);border-radius:999px;padding:8px 16px;min-height:44px;font-size:.82rem;cursor:pointer;font-family:inherit}
   .copy-link:hover{border-color:var(--accent-dim);color:var(--text)}
+  .toc{border:1px solid var(--line);border-radius:var(--radius);background:var(--panel);padding:14px 20px;margin:0 0 20px;max-width:720px}
+  .toc p{font-size:.72rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);margin:0 0 8px}
+  .toc ul{list-style:none;margin:0;padding:0;display:grid;gap:4px}
+  .toc li{font-size:.9rem}
+  .toc a{color:var(--muted)}
+  .toc a:hover{color:var(--accent-bright)}
   .copy-link.copied::after{content:"Copied";position:absolute;top:-30px;left:50%;transform:translateX(-50%);background:var(--accent);color:var(--accent-ink);font-size:.72rem;font-weight:700;padding:3px 10px;border-radius:6px;white-space:nowrap}
   @media (prefers-reduced-motion:reduce){.copy-link.copied::after{transition:none}}
   .skip{position:absolute;left:-9999px;top:0;background:var(--accent);color:var(--accent-ink);padding:10px 18px;font-weight:700;z-index:200;border-radius:0 0 8px 0}
@@ -144,6 +150,11 @@ gtag('config', 'G-541TCHWW98');
   <p class="updated">Updated <time datetime="{{DATE_ISO}}">{{DATE_ISO}}</time></p>
   <div class="copy-link-row"><button class="copy-link" id="copy-link" type="button" aria-label="Copy link to this article">Copy link</button></div>
 
+  <nav class="toc" aria-label="Table of contents">
+    <p>On this page</p>
+    <ul id="toc-list"></ul>
+  </nav>
+
   <article>
 {{BODY_HTML}}
   </article>
@@ -155,6 +166,10 @@ gtag('config', 'G-541TCHWW98');
   </nav>
 <script>
 (function(){var t=document.querySelector('article').innerText||'';var w=t.trim().split(/\s+/).length;var m=Math.max(1,Math.ceil(w/200));document.getElementById('reading-time').textContent=m+' min read';})();
+</script>
+<script>
+/* TOC: build the 'On this page' list from section anchors inside the article */
+(function(){var ul=document.getElementById('toc-list');if(!ul)return;ul.parentElement.style.display='none';var h2s=document.querySelectorAll('article h2[id]');for(var i=0;i<h2s.length;i++){var h=h2s[i],t=(h.textContent||'').replace(/¶/g,'').trim();if(!t)continue;var li=document.createElement('li'),a=document.createElement('a');a.href='#'+h.id;a.textContent=t;li.appendChild(a);ul.appendChild(li);}if(ul.children.length)ul.parentElement.style.display='';})();
 </script>
 
 {{RELATED_BLOCK}}

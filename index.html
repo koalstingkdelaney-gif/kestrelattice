@@ -395,10 +395,19 @@
 /* Defer non-critical homepage JS (nav, header shrink, FAQ accordions, click tracking) via requestIdleCallback */
 (function(){
   var run=function(){
-  // Mobile nav: hamburger toggle with aria-expanded.
+  // Mobile nav: hamburger toggle with aria-expanded, focus trap while open, Escape closes.
   (function(){var t=document.querySelector('.nav-toggle'),n=document.getElementById('primary-nav');
-  if(t&&n){t.addEventListener('click',function(){var open=n.classList.toggle('open');
-  t.setAttribute('aria-expanded',open);t.setAttribute('aria-label',open?'Close menu':'Open menu');});}})();
+  if(!t||!n)return;
+  function onKey(e){if(e.key==='Escape'){closeMenu();t.focus();return;}
+  if(e.key!=='Tab')return;var f=n.querySelectorAll('a[href],button:not([disabled])');if(!f.length)return;
+  var first=f[0],last=f[f.length-1];
+  if(e.shiftKey&&document.activeElement===first){e.preventDefault();last.focus();}
+  else if(!e.shiftKey&&document.activeElement===last){e.preventDefault();first.focus();}}
+  function closeMenu(){n.classList.remove('open');t.setAttribute('aria-expanded','false');t.setAttribute('aria-label','Open menu');document.removeEventListener('keydown',onKey,true);}
+  t.addEventListener('click',function(){var open=n.classList.toggle('open');
+  t.setAttribute('aria-expanded',String(open));t.setAttribute('aria-label',open?'Close menu':'Open menu');
+  if(open){document.addEventListener('keydown',onKey,true);var f=n.querySelector('a[href],button');if(f)f.focus();}
+  else{closeMenu();}});})();
   // Sticky header shrink: toggle `compact` class on the site header past ~80px scroll (passive).
   (function(){var h=document.querySelector('header.site');if(!h)return;
   var onScroll=function(){h.classList.toggle('compact',window.scrollY>80);};

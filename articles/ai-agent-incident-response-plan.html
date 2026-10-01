@@ -113,6 +113,12 @@ gtag('config', 'G-541TCHWW98');
   .copy-link-row{margin:0 0 8px}
   .copy-link{position:relative;border:1px solid var(--line);background:var(--panel);color:var(--muted);border-radius:999px;padding:8px 16px;min-height:44px;font-size:.82rem;cursor:pointer;font-family:inherit}
   .copy-link:hover{border-color:var(--accent-dim);color:var(--text)}
+  .toc{border:1px solid var(--line);border-radius:var(--radius);background:var(--panel);padding:14px 20px;margin:0 0 20px;max-width:720px}
+  .toc p{font-size:.72rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);margin:0 0 8px}
+  .toc ul{list-style:none;margin:0;padding:0;display:grid;gap:4px}
+  .toc li{font-size:.9rem}
+  .toc a{color:var(--muted)}
+  .toc a:hover{color:var(--accent-bright)}
   .copy-link.copied::after{content:"Copied";position:absolute;top:-30px;left:50%;transform:translateX(-50%);background:var(--accent);color:var(--accent-ink);font-size:.72rem;font-weight:700;padding:3px 10px;border-radius:6px;white-space:nowrap}
 </style>
 </head>
@@ -133,6 +139,18 @@ gtag('config', 'G-541TCHWW98');
   <p class="reviewed">Last reviewed <time datetime="2026-10-01">October 1, 2026</time></p> · <span class="reading-time" id="reading-time"></span></p>
   <p class="updated">Updated <time datetime="2026-10-01">October 1, 2026</time></p>
   <div class="copy-link-row"><button class="copy-link" id="copy-link" type="button" aria-label="Copy link to this article">Copy link</button></div>
+
+  <nav class="toc" aria-label="Table of contents">
+    <p>On this page</p>
+    <ul>
+      <li><a href="#what-counts-as-an-ai-agent-incident">What Counts as an AI Agent Incident?</a></li>
+      <li><a href="#roles-and-escalation-tiers">Roles and Escalation Tiers</a></li>
+      <li><a href="#the-ai-agent-incident-response-runbook">The AI Agent Incident Response Runbook</a></li>
+      <li><a href="#what-to-log-for-an-audit-trail">What to Log for an Audit Trail</a></li>
+      <li><a href="#one-page-incident-response-checklist">One-Page Incident Response Checklist</a></li>
+      <li><a href="#put-this-into-practice">Put this into practice</a></li>
+    </ul>
+  </nav>
 
   <article>
 <p>Deploying autonomous LLM agents to production changes your system's threat model entirely. Unlike deterministic code that fails predictably, multi-agent swarms can hallucinate API calls, misinterpret user input, or trigger catastrophic feedback loops. Without a codified AI agent incident response plan, your team is flying blind when an agent goes rogue. As Gartner notes, enterprise AI-agent software spend is projected to reach $206.5B in 2026, meaning the surface area for agentic failures is expanding rapidly across every industry.</p>
