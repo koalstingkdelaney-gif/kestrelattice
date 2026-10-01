@@ -87,6 +87,17 @@
   ]
 }
 </script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://koalstingkdelaney-gif.github.io/kestrelattice/"},
+    {"@type": "ListItem", "position": 2, "name": "Products", "item": "https://koalstingkdelaney-gif.github.io/kestrelattice/products/"},
+    {"@type": "ListItem", "position": 3, "name": "Articles", "item": "https://koalstingkdelaney-gif.github.io/kestrelattice/articles/"}
+  ]
+}
+</script>
 <style>
   /* ============ ghostcorpnet — compact redesign, 2026-09-30 ============
      Dark slate + terracotta. System type. Compact sections, slim footer. */
@@ -149,6 +160,7 @@
     -webkit-background-clip:text;background-clip:text;color:transparent}
   .sub{color:var(--muted);font-size:clamp(.98rem,1.3vw,1.08rem);max-width:60ch;margin:16px auto 24px;text-wrap:pretty}
   .cta-row{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+  .microtrust{color:var(--faint);font-size:.8rem;margin:14px 0 0;text-align:center}
   .btn{display:inline-block;border-radius:var(--radius-sm);padding:13px 26px;font-weight:700;font-size:.96rem;line-height:1.25;
     transition:transform .16s var(--ease),box-shadow .16s var(--ease),background .16s var(--ease),border-color .16s var(--ease)}
   .btn.primary{background:linear-gradient(180deg,var(--accent-bright),var(--accent));color:var(--accent-ink);
@@ -339,6 +351,7 @@
       <a class="btn primary" href="playbook.md" data-track="playbook_download">Get the free playbook</a>
       <a class="btn ghost" href="#buy" data-track="hero_buy_click">Studio Edition · $29</a>
     </div>
+    <p class="microtrust">One-time prices from $19 · Instant download · Free MIT playbook included</p>
   </div>
 
   <!-- Proof strip -->

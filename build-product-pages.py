@@ -6,7 +6,19 @@ extracts "What's inside" from the matching manuscript's ## headings,
 renders a branded page with Product JSON-LD, buy CTA, related products,
 and registers every page in sitemap.xml. Idempotent.
 """
-import html, json, os, re
+import html, json, os, re, struct
+
+
+def png_dims(path):
+    """Return (width, height) of a PNG via its IHDR chunk; None on failure."""
+    try:
+        with open(path, "rb") as f:
+            head = f.read(24)
+        if len(head) < 24 or head[:8] != b"\x89PNG\r\n\x1a\n":
+            return None
+        return struct.unpack(">II", head[16:24])
+    except OSError:
+        return None
 
 SITE = os.path.expanduser("~/workspace/kestrelattice")
 HIDDEN = os.path.expanduser("~/workspace/goals/kestrelattice-autonomous-growth/hidden_files")
@@ -240,6 +252,7 @@ PAGE = """<!DOCTYPE html>
 <meta property="og:description" content="{meta}">
 <meta property="og:url" content="{page_url}">
 <meta property="og:image" content="https://koalstingkdelaney-gif.github.io/kestrelattice/assets/covers/{gid}.png">
+{og_dims}
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="{title} — ghostcorpnet">
 <meta name="twitter:description" content="{meta}">
@@ -426,10 +439,14 @@ def main():
         cover_path = os.path.join(SITE, "assets", "covers", f"{pr['gid']}.png")
         cover_img = (f'<img src="../../assets/covers/{pr["gid"]}.png" alt="{esc(pr["title"])} cover">'
                      if os.path.isfile(cover_path) else "")
+        dims = png_dims(cover_path) if os.path.isfile(cover_path) else None
+        og_dims = (f'<meta property="og:image:width" content="{dims[0]}">\n'
+                   f'<meta property="og:image:height" content="{dims[1]}">') if dims else ""
         if is_live:
             buy_html = (f'<p class="instant">One-time · Instant PDF download via Gumroad</p>\n'
                         f'      <a class="btn" href="{pr["gumroad_url"]}">Get it now — ${pr["price"]}</a>\n'
-                        f'      <p class="trust">Instant delivery via Gumroad</p>')
+                        f'      <p class="trust">Secure checkout via Gumroad · Single-user license · Instant delivery</p>\n'
+                        f'      <p class="notready">Not ready? <a href="../../playbook.md">Get the free MIT playbook</a> first.</p>')
         else:
             buy_html = ('<p class="instant">Publishing now — available shortly</p>\n'
                         '      <span class="btn" style="opacity:.7;cursor:default">Publishing — live soon</span>\n'
@@ -456,7 +473,7 @@ def main():
                            tagline=esc(pr["tagline"]), price=pr["price"], buy_html=buy_html,
                            gumroad_url=pr["gumroad_url"] or "", description=esc(pr["description"]),
                            inside_items=inside_items, related=related, bundle_upsell=upsell,
-                           studio=studio_block(pr, title_map),
+                           studio=studio_block(pr, title_map), og_dims=og_dims,
                            next_step=next_step_block(pr, ladder))
         with open(os.path.join(d, "index.html"), "w") as f:
             f.write(page)
