@@ -60,7 +60,7 @@ gtag('config', 'G-541TCHWW98');
   <div id="quiz">
     <h1>What's your agent risk tier?</h1>
     <p class="sub">5 questions, 60 seconds. Get your tier and the exact products that close your biggest gaps.</p>
-    <div class="prog"><div id="bar"></div></div>
+    <div class="prog" role="progressbar" aria-label="Quiz progress" aria-valuemin="0" aria-valuemax="5" aria-valuenow="0"><div id="bar"></div></div>
     <div id="qbox"></div>
   </div>
   <div id="result">
@@ -121,8 +121,10 @@ const TIERS = [
 ];
 let qi = 0, score = 0, worry = "start";
 const qbox = document.getElementById('qbox'), bar = document.getElementById('bar');
+const prog = document.querySelector('.prog');
 function render(){
   bar.style.width = (qi/Q.length*100)+'%';
+  if(prog) prog.setAttribute('aria-valuenow', Math.min(qi, Q.length));
   if(qi >= Q.length){ finish(); return; }
   const q = Q[qi];
   qbox.innerHTML = '<div class="q"><h3>'+(qi+1)+'. '+q.t+'</h3>'+
@@ -133,11 +135,11 @@ function render(){
     qi++; render();
   });
 }
-function finish(){
+function finish(tierOverride){
   document.getElementById('quiz').style.display='none';
   const r = document.getElementById('result');
   r.style.display='block';
-  const tier = score<=2?0:score<=5?1:score<=8?2:3;
+  const tier = (typeof tierOverride==='number'&&tierOverride>=0&&tierOverride<4)?tierOverride:(score<=2?0:score<=5?1:score<=8?2:3);
   document.getElementById('tier').textContent = TIERS[tier].t;
   document.getElementById('blurb').textContent = TIERS[tier].b;
   let picks = WORRY[worry].slice();
@@ -150,8 +152,10 @@ function finish(){
     return '<div class="rec"><a href="../products/'+p.s+'/">'+p.n+'</a><p style="color:var(--muted);font-size:.9rem">'+p.d+'</p><div class="p">'+price+' — <a href="../products/'+p.s+'/" style="color:var(--accent)">Get it</a></div></div>';
   }).join('');
   if(typeof gtag==='function') gtag('event','quiz_complete',{tier:TIERS[tier].t});
+  try{history.replaceState(null,'','#result='+tier);}catch(e){}
 }
-render();
+// Deep-linkable results: #result=<tier index> restores that result on load.
+(function(){var m=/^#result=([0-3])$/.exec(location.hash||'');if(m){qi=Q.length;finish(+m[1]);}else{render();}})();
 </script>
 </body>
 </html>
