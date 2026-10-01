@@ -41,7 +41,7 @@ PAGE = """<!DOCTYPE html>
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Product Catalog — ghostcorpnet</title>
+<title>AI Agent Governance Products — Catalog | ghostcorpnet</title>
 <meta name="description" content="Every ghostcorpnet self-serve product: agent governance playbooks, checklists, runbooks, kits, and working code. Instant download.">
 <meta name="theme-color" content="#0f0e0d">
 <meta name="robots" content="index,follow,max-image-preview:large">
@@ -59,7 +59,7 @@ PAGE = """<!DOCTYPE html>
 </script>
 __PRELOAD__
 <meta property="og:type" content="website">
-<meta property="og:title" content="Product Catalog — ghostcorpnet">
+<meta property="og:title" content="AI Agent Governance Products — Catalog | ghostcorpnet">
 <meta property="og:description" content="Every ghostcorpnet self-serve product: agent governance playbooks, checklists, runbooks, kits, and working code. Instant download.">
 <meta property="og:url" content="https://koalstingkdelaney-gif.github.io/kestrelattice/products/">
 <meta property="og:locale" content="en_US">
@@ -69,7 +69,7 @@ __PRELOAD__
 <meta property="og:image:height" content="1600">
 <meta property="og:site_name" content="ghostcorpnet by GhostCorp">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Product Catalog — ghostcorpnet">
+<meta name="twitter:title" content="AI Agent Governance Products — Catalog | ghostcorpnet">
 <meta name="twitter:description" content="Every ghostcorpnet self-serve product: agent governance playbooks, checklists, runbooks, kits, and working code. Instant download.">
 <meta name="twitter:image" content="https://koalstingkdelaney-gif.github.io/kestrelattice/assets/studio-edition-cover.jpg">
 <script type="application/ld+json">
@@ -164,6 +164,7 @@ ghostcorpnet</a>
 <main id="main">
 <div class="wrap hero">
 <h1>The Catalog</h1>
+<p class="lede sub">Agent governance playbooks, kits and runbooks</p>
 <p class="lede">Every self-serve product in the ghostcorpnet library — playbooks, checklists, runbooks, kits, and working code for governing AI agents. Buy once, download instantly, yours forever.</p>
 </div>
 <div class="wrap"><p class="result-count" id="result-count" aria-live="polite">__COUNT__</p><div class="catalog-search-row"><label for="catalog-search" class="visually-hidden">Search products</label><input id="catalog-search" type="search" autocomplete="off" spellcheck="false" enterkeyhint="search" aria-keyshortcuts="/" placeholder="Search products… ( / )"><kbd class="search-kbd" aria-hidden="true">/</kbd></div><div class="sort-row"><label for="catalog-sort" class="sort-label">Sort:</label><select id="catalog-sort" aria-label="Sort products"><option value="new">Newest</option><option value="lo">Price: low to high</option><option value="hi">Price: high to low</option></select></div><p class="tier-legend">9 Starter · 9 Core · 9–99 Premium</p><div class="filters" id="filters" role="region" aria-label="Filter products" aria-describedby="filters-note" data-collapsed="false"><button type="button" class="filters-toggle" aria-expanded="true" aria-controls="filters-list"><span>Filter products</span><span class="ft-chev" aria-hidden="true">▾</span></button><div class="filters-list" id="filters-list"></div></div><p class="visually-hidden" id="filters-note">Choosing filters updates the product count announced by the results region.</p></div>
