@@ -102,6 +102,7 @@ nav.main a:hover{color:var(--accent-bright)}
 .card .body{padding:16px;display:flex;flex-direction:column;gap:7px;flex:1}
 .codebadge{display:inline-block;align-self:flex-start;background:var(--accent-soft);border:1px solid var(--accent-dim);color:var(--accent-bright);font-size:.68rem;font-weight:700;letter-spacing:.08em;padding:2px 8px;border-radius:999px}
 .badge-new{display:inline-block;background:var(--accent);color:var(--accent-ink);font-size:.68rem;font-weight:700;letter-spacing:.08em;padding:2px 8px;border-radius:999px;margin-left:6px}
+.dlbadge{display:inline-block;background:transparent;border:1px solid var(--line);color:var(--muted);font-size:.66rem;font-weight:700;letter-spacing:.08em;padding:2px 8px;border-radius:999px;margin-left:6px}
 .sort-row{display:flex;justify-content:center;margin:0 0 10px}
 #catalog-sort{padding:9px 14px;min-height:44px;border:1px solid var(--line);border-radius:999px;background:var(--panel);color:var(--text);font-size:.86rem;font-family:inherit;cursor:pointer}
 #catalog-sort:focus{border-color:var(--accent);outline:none}
@@ -207,7 +208,7 @@ b.addEventListener('click',function(){window.scrollTo({top:0,behavior:'smooth'})
 
 CARD = """<div class="card" data-tags="{tags}" data-price="{price_num}" data-date="{pdate}">
 <a href="{slug}/" style="text-decoration:none;color:inherit;display:block"><picture><source type="image/webp" srcset="../assets/covers/{pid}.webp"><img src="../assets/covers/{pid}.png" alt="{title} cover" loading="lazy" decoding="async" sizes="(max-width:640px) 100vw, (max-width:1100px) 50vw, 320px"></picture>
-<div class="body">{badge}{newbadge}<h2 translate="no">{title}</h2><p class="desc">{tagline}</p><p class="price"><span translate="no">${price}</span> <span style="color:var(--muted);font-weight:400;font-size:.85rem">one-time</span></p></div></a>
+<div class="body">{badge}{newbadge}<span class="dlbadge">DIGITAL DOWNLOAD</span><h2 translate="no">{title}</h2><p class="desc">{tagline}</p><p class="price"><span translate="no">${price}</span> <span style="color:var(--muted);font-weight:400;font-size:.85rem">one-time</span></p></div></a>
 <div class="row"><a class="btn" href="{url}">Get it</a><a class="btn ghost" href="{slug}/">Details</a></div>
 <p class="trust">Instant delivery via Gumroad</p>
 </div>

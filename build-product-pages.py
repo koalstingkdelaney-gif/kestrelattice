@@ -257,6 +257,7 @@ PAGE = """<!DOCTYPE html>
 <meta name="twitter:title" content="{title} — ghostcorpnet">
 <meta name="twitter:description" content="{meta}">
 <meta name="twitter:image" content="https://koalstingkdelaney-gif.github.io/kestrelattice/assets/covers/{gid}.png">
+<meta name="twitter:image:alt" content="{title} — cover art">
 <script type="application/ld+json">
 {jsonld}
 </script>
@@ -285,6 +286,7 @@ gtag('config', 'G-541TCHWW98');
   .crumb ol{{list-style:none;display:flex;gap:8px;flex-wrap:wrap;margin:0;padding:0}}
   .crumb li+li::before{{content:"·";margin-right:8px;color:var(--muted)}}
   .crumb li[aria-current="page"]{{color:var(--muted)}}
+  .crumb .esc-hint{{color:var(--muted);opacity:.65;font-size:.72rem;border:1px solid var(--line);border-radius:4px;padding:0 5px;margin-left:4px;font-family:inherit}}
   .hero{{display:grid;grid-template-columns:280px 1fr;gap:32px;margin:8px 0 40px}}
   @media(max-width:640px){{.hero{{grid-template-columns:1fr}}}}
   .hero img{{width:100%;border-radius:12px;border:1px solid var(--line)}}
@@ -329,7 +331,7 @@ gtag('config', 'G-541TCHWW98');
     <svg width="24" height="24" viewBox="0 0 26 26" fill="none" aria-hidden="true"><circle cx="5" cy="6" r="2.4" fill="#e07a5f"/><circle cx="21" cy="6" r="2.4" fill="#e07a5f"/><circle cx="13" cy="13" r="2.4" fill="#e07a5f"/><circle cx="5" cy="20" r="2.4" fill="#e07a5f"/><circle cx="21" cy="20" r="2.4" fill="#e07a5f"/><path d="M6.6 7.4L11.2 11.8M19.4 7.4L14.8 11.8M6.6 18.6L11.2 14.2M19.4 18.6L14.8 14.2" stroke="#e07a5f" stroke-width="1.4"/></svg>
     ghostcorpnet
   </a>
-  <nav aria-label="Breadcrumb" class="crumb"><ol><li><a href="../../">Home</a></li><li><a href="../../products/">Catalog</a></li><li aria-current="page">{title}</li></ol></nav>
+  <nav aria-label="Breadcrumb" class="crumb"><ol><li><a href="../../">Home</a></li><li><a id="pdp-back" href="../../products/" aria-keyshortcuts="Escape">Catalog</a><kbd class="esc-hint">Esc</kbd></li><li aria-current="page">{title}</li></ol></nav>
 
   <div class="hero">
     {cover_img}
@@ -382,6 +384,9 @@ gtag('config', 'G-541TCHWW98');
     <span><a href="../../">Home</a> · <a href="../">Catalog</a> · <a href="../../changelog.html">Changelog</a> · <a href="mailto:koalstin.g.k.delaney@gmail.com">Contact</a></span>
   </footer>
 </div>
+<script>
+document.addEventListener('keydown',function(e){{if(e.key==='Escape'&&!e.defaultPrevented&&!/INPUT|TEXTAREA|SELECT/.test(document.activeElement.tagName)){{var b=document.getElementById('pdp-back');if(b&&b.href){{location.href=b.href;}}}}}});
+</script>
 </body>
 </html>
 """
@@ -460,9 +465,13 @@ def main():
         facts.append(f'<span class="fact"><b>{len(pr["inside"])}</b> sections inside</span>')
         facts_row = "\n      ".join(facts)
         cover_path = os.path.join(SITE, "assets", "covers", f"{pr['gid']}.png")
-        cover_img = (f'<img src="../../assets/covers/{pr["gid"]}.png" alt="{esc(pr["title"])} cover">'
-                     if os.path.isfile(cover_path) else "")
         dims = png_dims(cover_path) if os.path.isfile(cover_path) else None
+        cover_img = (f'<img src="../../assets/covers/{pr["gid"]}.png" alt="{esc(pr["title"])} cover"'
+                     f' fetchpriority="high" decoding="async" width="{dims[0]}" height="{dims[1]}">'
+                     if os.path.isfile(cover_path) and dims else
+                     (f'<img src="../../assets/covers/{pr["gid"]}.png" alt="{esc(pr["title"])} cover"'
+                      f' fetchpriority="high" decoding="async">'
+                      if os.path.isfile(cover_path) else ""))
         og_dims = (f'<meta property="og:image:width" content="{dims[0]}">\n'
                    f'<meta property="og:image:height" content="{dims[1]}">') if dims else ""
         if is_live:

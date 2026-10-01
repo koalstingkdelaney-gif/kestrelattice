@@ -17,6 +17,7 @@
 <meta name="twitter:title" content="AI Governance Board Briefing — ghostcorpnet">
 <meta name="twitter:description" content="15-slide board-ready AI governance deck.">
 <meta name="twitter:image" content="https://koalstingkdelaney-gif.github.io/kestrelattice/assets/covers/ai-governance-board-briefing.png">
+<meta name="twitter:image:alt" content="AI Governance Board Briefing — cover art">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -85,6 +86,7 @@ gtag('config', 'G-541TCHWW98');
   .crumb ol{list-style:none;display:flex;gap:8px;flex-wrap:wrap;margin:0;padding:0}
   .crumb li+li::before{content:"·";margin-right:8px;color:var(--muted)}
   .crumb li[aria-current="page"]{color:var(--muted)}
+  .crumb .esc-hint{color:var(--muted);opacity:.65;font-size:.72rem;border:1px solid var(--line);border-radius:4px;padding:0 5px;margin-left:4px;font-family:inherit}
   .hero{display:grid;grid-template-columns:280px 1fr;gap:32px;margin:8px 0 40px}
   @media(max-width:640px){.hero{grid-template-columns:1fr}}
   .hero img{width:100%;border-radius:12px;border:1px solid var(--line)}
@@ -129,10 +131,10 @@ gtag('config', 'G-541TCHWW98');
     <svg width="24" height="24" viewBox="0 0 26 26" fill="none" aria-hidden="true"><circle cx="5" cy="6" r="2.4" fill="#e07a5f"/><circle cx="21" cy="6" r="2.4" fill="#e07a5f"/><circle cx="13" cy="13" r="2.4" fill="#e07a5f"/><circle cx="5" cy="20" r="2.4" fill="#e07a5f"/><circle cx="21" cy="20" r="2.4" fill="#e07a5f"/><path d="M6.6 7.4L11.2 11.8M19.4 7.4L14.8 11.8M6.6 18.6L11.2 14.2M19.4 18.6L14.8 14.2" stroke="#e07a5f" stroke-width="1.4"/></svg>
     ghostcorpnet
   </a>
-  <nav aria-label="Breadcrumb" class="crumb"><ol><li><a href="../../">Home</a></li><li><a href="../../products/">Catalog</a></li><li aria-current="page">AI Governance Board Briefing</li></ol></nav>
+  <nav aria-label="Breadcrumb" class="crumb"><ol><li><a href="../../">Home</a></li><li><a id="pdp-back" href="../../products/" aria-keyshortcuts="Escape">Catalog</a><kbd class="esc-hint">Esc</kbd></li><li aria-current="page">AI Governance Board Briefing</li></ol></nav>
 
   <div class="hero">
-    <img src="../../assets/covers/ai-governance-board-briefing.png" alt="AI Governance Board Briefing cover">
+    <img src="../../assets/covers/ai-governance-board-briefing.png" alt="AI Governance Board Briefing cover" fetchpriority="high" decoding="async" width="1200" height="1600">
     <div>
       <h1>AI Governance Board Briefing</h1>
       <p class="tagline">15-slide board-ready AI governance deck.</p>
@@ -200,5 +202,8 @@ gtag('config', 'G-541TCHWW98');
     <span><a href="../../">Home</a> · <a href="../">Catalog</a> · <a href="../../changelog.html">Changelog</a> · <a href="mailto:koalstin.g.k.delaney@gmail.com">Contact</a></span>
   </footer>
 </div>
+<script>
+document.addEventListener('keydown',function(e){if(e.key==='Escape'&&!e.defaultPrevented&&!/INPUT|TEXTAREA|SELECT/.test(document.activeElement.tagName)){var b=document.getElementById('pdp-back');if(b&&b.href){location.href=b.href;}}});
+</script>
 </body>
 </html>
