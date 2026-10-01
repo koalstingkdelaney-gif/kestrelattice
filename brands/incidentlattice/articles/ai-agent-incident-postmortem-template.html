@@ -110,24 +110,20 @@ gtag('config', 'G-541TCHWW98');
     <svg width="22" height="22" viewBox="0 0 26 26" fill="none" aria-hidden="true"><circle cx="5" cy="6" r="2.4" fill="#e07a5f"/><circle cx="21" cy="6" r="2.4" fill="#e07a5f"/><circle cx="13" cy="13" r="2.4" fill="#e07a5f"/><circle cx="5" cy="20" r="2.4" fill="#e07a5f"/><circle cx="21" cy="20" r="2.4" fill="#e07a5f"/><path d="M6.6 7.4L11.2 11.8M19.4 7.4L14.8 11.8M6.6 18.6L11.2 14.2M19.4 18.6L14.8 14.2" stroke="#e07a5f" stroke-width="1.4"/></svg>
     ghostcorpnet
   </a>
-  <nav class="main" aria-label="Primary"><a href="../../">Home</a><a href="../../products/">Catalog</a><a href="../../brands/">Stores</a><a href="../../ecosystem/">Ecosystem</a><a href="../../">IncidentLattice</a></nav>
+  <nav class="main" aria-label="Primary"><a href="../../">Home</a><a href="../../products/">Catalog</a><a href="../../brands/">Stores</a><a href="../../ecosystem/">Ecosystem</a><a href="../">IncidentLattice</a></nav>
 </div></header>
 <main class="wrap" id="main">
-  <p class="crumb"><a href="../../">Home</a> · <a href="../../">IncidentLattice</a></p>
+  <p class="crumb"><a href="../../">Home</a> · <a href="../">IncidentLattice</a></p>
 
   <h1>How to write an AI agent incident postmortem</h1>
   <p class="date"><time datetime="2026-10-01">Published 2026-10-01</time> · <span class="reading-time" id="reading-time"></span></p>
 
   <article>
-**Introduction**
-
-At IncidentLattice, we understand the importance of incident response and postmortem analysis for AI agents. By properly documenting and learning from past incidents, engineering teams can identify patterns, improve processes, and prevent future issues. In this field manual, we will guide you through writing an effective incident postmortem for AI agents, focusing on the key aspects, reviewing the incident without blame, and turning findings into guardrails for your team.
-
-**Capture Key Details in Your AI Agent Incident Postmortem**
-
-1. **Timeline:** Start by documenting the timeline of events leading up to the incident, including the AI agent's actions and the actions of other systems involved. This will provide a clear overview of the incident's progression, which will be crucial during the review process.
-
-```html
+<h3>Introduction</h3>
+<p>At IncidentLattice, we understand the importance of incident response and postmortem analysis for AI agents. By properly documenting and learning from past incidents, engineering teams can identify patterns, improve processes, and prevent future issues. In this field manual, we will guide you through writing an effective incident postmortem for AI agents, focusing on the key aspects, reviewing the incident without blame, and turning findings into guardrails for your team.</p>
+<h3>Capture Key Details in Your AI Agent Incident Postmortem</h3>
+<h2>Timeline</h2>
+<p>Start by documenting the timeline of events leading up to the incident, including the AI agent&#x27;s actions and the actions of other systems involved. This will provide a clear overview of the incident&#x27;s progression, which will be crucial during the review process.</p>
 <h2>Timeline</h2>
 <ul>
 <li>AI agent <strong>the agent</strong> was deployed at 09:00 (UTC)</li>
@@ -138,11 +134,8 @@ At IncidentLattice, we understand the importance of incident response and postmo
 <li>System stabilizes, and the team begins analyzing data (12:00)</li>
 <li>Incident resolution announced at 14:00, and <strong>the agent</strong> is re-enabled</li>
 </ul>
-```
-
-2. **Blast Radius:** Document the impact of the incident, including any affected systems, services, or users. This information will help identify potential dependencies or side effects caused by the AI agent incident, enabling your team to proactively address these in future incidents.
-
-```html
+<h2>Blast Radius</h2>
+<p>Document the impact of the incident, including any affected systems, services, or users. This information will help identify potential dependencies or side effects caused by the AI agent incident, enabling your team to proactively address these in future incidents.</p>
 <h2>Blast Radius</h2>
 <p>When developing AI agents, it is crucial to carefully consider their potential blast radius – the scope of systems and services that may be impacted by their actions.</p>
 <ul>
@@ -159,11 +152,8 @@ At IncidentLattice, we understand the importance of incident response and postmo
 </ul>
 </ul>
 <p>By documenting the blast radius, you can identify potential risks and dependencies early on, ensuring that you can address them effectively during development and testing stages.</p>
-```
-
-3. **Root Cause Analysis:** Use the incident timeline and blast radius to identify the root cause of the incident. In this step, focus on the key decisions, configurations, or incorrect assumptions made by your team that led to the incident. This analysis will help your team learn from the incident and prevent future issues.
-
-```html
+<h2>Root Cause Analysis</h2>
+<p>Use the incident timeline and blast radius to identify the root cause of the incident. In this step, focus on the key decisions, configurations, or incorrect assumptions made by your team that led to the incident. This analysis will help your team learn from the incident and prevent future issues.</p>
 <h2>Root Cause Analysis</h2>
 <p>To effectively analyze the root cause, break down the incident into key aspects:</p>
 <ul>
@@ -184,17 +174,8 @@ At IncidentLattice, we understand the importance of incident response and postmo
 </ul>
 </ul>
 <p>By examining these aspects, you can gain insights into the root causes of the incident and identify potential opportunities for improvement in your AI agent development process.</p>
-```
-4. **Findings and Lessons Learned:** In this section, summarize the findings of your investigation and the lessons your team can take away from the incident. This will help ensure that similar incidents are mitigated in the future.
-
-```html
 <h2>Findings and Lessons Learned</h2>
-<p>After investigating the incident, we identified the following findings and lessons:</p>
-<ul>
-<li>The integration of <strong>the agent</strong> with the chatbot system needs thorough testing prior to deployment</li>
-<li>The team should have considered the potential impact on other AI agents and systems before resolving the incident</li>
-<li>The incorrect assumption about <strong>the agent</strong>'s incident resolution being unrelated to the chatbot system performance</li>
-<li>The team should have reviewed and updated the <strong>the agent</strong>'s development process to ensure a more thorough testing phase</
+<p>In this section, summarize the findings of your investigation and the lessons your team can take away from the incident. This will help ensure that similar incidents are mitigated in the future.</p>
   </article>
   <nav class="article-back" aria-label="Article navigation" style="max-width:720px;margin:28px auto 0"><a href="../" style="color:var(--accent)">&larr; Back to the IncidentLattice store</a></nav>
 <script>
