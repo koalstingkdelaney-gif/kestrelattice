@@ -444,4 +444,10 @@
   <url><loc>https://koalstingkdelaney-gif.github.io/kestrelattice/glossary/incidentlattice/containment.html</loc><lastmod>2026-10-01</lastmod></url>
   <url><loc>https://koalstingkdelaney-gif.github.io/kestrelattice/glossary/incidentlattice/forensic-log-capture.html</loc><lastmod>2026-10-01</lastmod></url>
   <url><loc>https://koalstingkdelaney-gif.github.io/kestrelattice/glossary/</loc><lastmod>2026-10-01</lastmod></url>
+  <url>
+    <loc>https://koalstingkdelaney-gif.github.io/kestrelattice/changelog.html</loc>
+    <lastmod>2026-10-01</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
 </urlset>

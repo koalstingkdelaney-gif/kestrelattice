@@ -289,6 +289,9 @@ gtag('config', 'G-541TCHWW98');
   .tagline{{color:var(--muted);font-size:1.05rem;margin-bottom:20px}}
   .price{{font-size:1.6rem;color:var(--accent);font-weight:700;margin-bottom:6px}}
   .instant{{color:var(--muted);font-size:.85rem;margin-bottom:20px}}
+  .facts{{display:flex;flex-wrap:wrap;gap:10px;margin:20px 0 4px}}
+  .fact{{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:8px 14px;font-size:.86rem;color:var(--muted)}}
+  .fact b{{color:var(--text)}}
   a:focus-visible,button:focus-visible{{outline:2px solid var(--accent);outline-offset:3px;border-radius:4px}}
   @media (prefers-reduced-motion:reduce){{*,*::before,*::after{{transition:none!important;animation:none!important}}}}
   .btn{{display:inline-block;background:var(--accent);color:#121212;font-weight:700;
@@ -331,6 +334,7 @@ gtag('config', 'G-541TCHWW98');
       <p class="tagline">{tagline}</p>
       <p class="price">${price}</p>
       {buy_html}
+      <div class="facts">{facts_row}</div>
     </div>
   </div>
 
@@ -371,7 +375,7 @@ gtag('config', 'G-541TCHWW98');
 {next_step}
   <footer>
     <span>© 2026 ghostcorpnet · An independent studio</span>
-    <span><a href="../../">Home</a> · <a href="../">Catalog</a> · <a href="mailto:koalstin.g.k.delaney@gmail.com">Contact</a></span>
+    <span><a href="../../">Home</a> · <a href="../">Catalog</a> · <a href="../../changelog.html">Changelog</a> · <a href="mailto:koalstin.g.k.delaney@gmail.com">Contact</a></span>
   </footer>
 </div>
 </body>
@@ -442,6 +446,15 @@ def main():
             f'      <a href="../{r["slug"]}/"><strong>{esc(r["title"])}</strong><div class="rp">${r["price"]}</div></a>'
             for r in rels)
         is_live = bool(pr["gumroad_url"])
+        # Facts row: real metadata only — price, delivery (live products only),
+        # pack type, and the count of "What's inside" sections. Never invented.
+        facts = [f'<span class="fact"><b>${pr["price"]}</b> one-time</span>']
+        if is_live:
+            facts.append('<span class="fact">Instant download via Gumroad</span>')
+        if pr.get("is_pack"):
+            facts.append('<span class="fact">Studio pack</span>')
+        facts.append(f'<span class="fact"><b>{len(pr["inside"])}</b> sections inside</span>')
+        facts_row = "\n      ".join(facts)
         cover_path = os.path.join(SITE, "assets", "covers", f"{pr['gid']}.png")
         cover_img = (f'<img src="../../assets/covers/{pr["gid"]}.png" alt="{esc(pr["title"])} cover">'
                      if os.path.isfile(cover_path) else "")
@@ -477,6 +490,7 @@ def main():
         page = PAGE.format(title=esc(pr["title"]), meta=esc(trunc_meta(pr["tagline"] or pr["description"])),
                            page_url=page_url, jsonld=jsonld, gid=pr["gid"], cover_img=cover_img,
                            tagline=esc(pr["tagline"]), price=pr["price"], buy_html=buy_html,
+                           facts_row=facts_row,
                            gumroad_url=pr["gumroad_url"] or "", description=esc(pr["description"]),
                            inside_items=inside_items, related=related, bundle_upsell=upsell,
                            studio=studio_block(pr, title_map), og_dims=og_dims,

@@ -67,6 +67,7 @@ __ITEMLIST__
 <style>
 :root{color-scheme:dark;--bg:#0f0e0d;--bg-soft:#141210;--panel:#1a1714;--panel2:#211c17;--line:#2c261e;--text:#f1ebdd;--muted:#a89d89;--faint:#7d7461;--accent:#e07a5f;--accent-bright:#f09474;--accent-dim:#c06a4e;--accent-ink:#1a0f08;--accent-soft:rgba(224,122,95,.1);--radius:12px;--radius-sm:8px;--ease:cubic-bezier(.2,.7,.25,1)}
 *{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
 body{background:radial-gradient(900px 420px at 50% -6%, rgba(224,122,95,.06), transparent 62%),var(--bg);color:var(--text);font-family:ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;line-height:1.6;-webkit-font-smoothing:antialiased}
 .wrap{max-width:1040px;margin:0 auto;padding:0 24px}
 a{color:var(--accent);text-decoration:none;transition:color .16s var(--ease)}
@@ -87,7 +88,7 @@ nav.main a:hover{color:var(--accent-bright)}
 .catalog-search-row{display:flex;justify-content:center;margin:0 0 4px}
 #catalog-search{width:min(440px,92%);padding:10px 16px;border:1px solid var(--line);border-radius:999px;background:var(--panel);color:var(--text);font-size:.92rem}
 #catalog-search:focus{border-color:var(--accent);outline:none}
-.chip{border:1px solid var(--line);background:var(--panel);color:var(--muted);border-radius:999px;padding:7px 15px;font-size:.84rem;letter-spacing:.1em;cursor:pointer;font-family:inherit;transition:all .16s var(--ease)}
+.chip{border:1px solid var(--line);background:var(--panel);color:var(--muted);border-radius:999px;padding:7px 15px;min-height:44px;display:inline-flex;align-items:center;justify-content:center;font-size:.84rem;letter-spacing:.1em;cursor:pointer;font-family:inherit;transition:all .16s var(--ease)}
 .chip:hover{border-color:var(--accent-dim);color:var(--text)}
 .chip.active{background:var(--accent);border-color:var(--accent);color:var(--accent-ink);font-weight:700}
 .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:18px;padding:8px 0 64px}
@@ -99,6 +100,14 @@ nav.main a:hover{color:var(--accent-bright)}
 .card img{width:100%;aspect-ratio:4/3;object-fit:cover;display:block;background:#0b0a09}
 .card .body{padding:16px;display:flex;flex-direction:column;gap:7px;flex:1}
 .codebadge{display:inline-block;align-self:flex-start;background:var(--accent-soft);border:1px solid var(--accent-dim);color:var(--accent-bright);font-size:.68rem;font-weight:700;letter-spacing:.08em;padding:2px 8px;border-radius:999px}
+.badge-new{display:inline-block;background:var(--accent);color:var(--accent-ink);font-size:.68rem;font-weight:700;letter-spacing:.08em;padding:2px 8px;border-radius:999px;margin-left:6px}
+.sort-row{display:flex;justify-content:center;margin:0 0 10px}
+#catalog-sort{padding:9px 14px;min-height:44px;border:1px solid var(--line);border-radius:999px;background:var(--panel);color:var(--text);font-size:.86rem;font-family:inherit;cursor:pointer}
+#catalog-sort:focus{border-color:var(--accent);outline:none}
+#no-results{display:none;text-align:center;padding:48px 16px;color:var(--muted)}
+#no-results.show{display:block}
+#no-results p{margin-bottom:6px}
+.card picture{display:block}
 .card h2{font-size:.98rem;line-height:1.35;font-weight:700;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
 .price{color:var(--text);font-weight:800;font-variant-numeric:tabular-nums}
 .card p.desc{color:var(--muted);font-size:.85rem;flex:1}
@@ -123,7 +132,7 @@ footer.site a:hover{color:var(--accent-bright)}
 @media(max-width:640px){.filters{overflow-x:auto;flex-wrap:nowrap;-webkit-overflow-scrolling:touch;scrollbar-width:none}
 .filters::-webkit-scrollbar{display:none}
 nav.main a:not(:last-child){display:none}footer.site .wrap{justify-content:center;text-align:center}footer.site a{margin:0 7px}}
-@media(prefers-reduced-motion:reduce){*,*::before,*::after{transition:none!important;animation:none!important}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{transition:none!important;animation:none!important}}
 
   h1,h2{text-wrap:balance}
 </style>
@@ -134,26 +143,27 @@ nav.main a:not(:last-child){display:none}footer.site .wrap{justify-content:cente
 <a class="logo" href="../">
 <svg width="24" height="24" viewBox="0 0 26 26" fill="none" aria-hidden="true"><circle cx="5" cy="6" r="2.4" fill="#e07a5f"/><circle cx="21" cy="6" r="2.4" fill="#e07a5f"/><circle cx="13" cy="13" r="2.4" fill="#e07a5f"/><circle cx="5" cy="20" r="2.4" fill="#e07a5f"/><circle cx="21" cy="20" r="2.4" fill="#e07a5f"/><path d="M6.6 7.4L11.2 11.8M19.4 7.4L14.8 11.8M6.6 18.6L11.2 14.2M19.4 18.6L14.8 14.2" stroke="#e07a5f" stroke-width="1.4"/></svg>
 ghostcorpnet</a>
-<nav class="main" aria-label="Primary"><a href="../">Home</a><a href="../brands/">Stores</a><a href="../ecosystem/">Ecosystem</a><a href="../directory/">Directory</a><a href="../build/">Build</a><a href="../articles/">Articles</a><a href="../#faq">FAQ</a></nav>
+<nav class="main" aria-label="Primary"><a href="../">Home</a><a href="../brands/">Stores</a><a href="../ecosystem/">Ecosystem</a><a href="../directory/">Directory</a><a href="../build/">Build</a><a href="../articles/">Articles</a><a href="../changelog.html">Changelog</a><a href="../#faq">FAQ</a></nav>
 </div></header>
 <main id="main">
 <div class="wrap hero">
 <h1>The Catalog</h1>
 <p class="lede">Every self-serve product in the ghostcorpnet library — playbooks, checklists, runbooks, kits, and working code for governing AI agents. Buy once, download instantly, yours forever.</p>
 </div>
-<div class="wrap"><p class="result-count" id="result-count" aria-live="polite">__COUNT__</p><div class="catalog-search-row"><label for="catalog-search" class="visually-hidden">Search products</label><input id="catalog-search" type="search" placeholder="Search products… ( / )"></div><div class="filters" id="filters"></div></div>
+<div class="wrap"><p class="result-count" id="result-count" aria-live="polite">__COUNT__</p><div class="catalog-search-row"><label for="catalog-search" class="visually-hidden">Search products</label><input id="catalog-search" type="search" placeholder="Search products… ( / )"></div><div class="sort-row"><label for="catalog-sort" class="visually-hidden">Sort products</label><select id="catalog-sort" aria-label="Sort products"><option value="new">Newest</option><option value="lo">Price: low to high</option><option value="hi">Price: high to low</option></select></div><div class="filters" id="filters"></div></div>
 <div class="wrap"><div class="grid" id="grid">
 __CARDS__
-</div></div>
+</div><div id="no-results" role="status"><p>No products match — try different keywords or filters</p><p><button class="chip" id="clear-filters" type="button" style="margin-top:12px">Clear filters</button></p></div></div>
 <button id="backtop" aria-label="Back to top">↑</button>
 </main>
 <footer class="site"><div class="wrap">
 <span>© 2026 GhostCorp · ghostcorpnet · An independent studio</span>
-<span><a href="mailto:koalstin.g.k.delaney@gmail.com">Contact</a><a href="../articles/">Articles</a><a href="../brands/">Stores</a><a href="../ecosystem/">Ecosystem</a><a href="../directory/">Directory</a><a href="../build/">Build</a><a href="../sitemap.xml">Sitemap</a><a href="../admin-login.html">Admin</a></span>
+<span><a href="mailto:koalstin.g.k.delaney@gmail.com">Contact</a><a href="../articles/">Articles</a><a href="../changelog.html">Changelog</a><a href="../brands/">Stores</a><a href="../ecosystem/">Ecosystem</a><a href="../directory/">Directory</a><a href="../build/">Build</a><a href="../sitemap.xml">Sitemap</a><a href="../admin-login.html">Admin</a></span>
 </div></footer>
 <script>
 const grid=document.getElementById('grid'),filters=document.getElementById('filters'),rc=document.getElementById('result-count');
-const updateCount=()=>{const v=[...grid.querySelectorAll('.card')].filter(c=>!c.classList.contains('hidden')).length;rc.textContent=v===0?'No products match':(v===1?'1 product':v+' products')};
+const noResults=document.getElementById('no-results');
+const updateCount=()=>{const v=[...grid.querySelectorAll('.card')].filter(c=>!c.classList.contains('hidden')).length;rc.textContent=v===0?'No products match':(v===1?'1 product':v+' products');if(noResults)noResults.classList.toggle('show',v===0)};
 const tags=[...new Set([...grid.querySelectorAll('.card')].flatMap(c=>(c.dataset.tags||'').split('|').filter(Boolean)))].sort();
 let activeTag='',searchQ='';
 const applyFilters=()=>{document.querySelectorAll('.card').forEach(c=>{const t=(c.dataset.tags||'').split('|').filter(Boolean);const okT=activeTag===''||t.includes(activeTag);const h2=c.querySelector('h2');const okQ=searchQ===''||(h2&&h2.textContent.toLowerCase().includes(searchQ));c.classList.toggle('hidden',!(okT&&okQ))});updateCount()};
@@ -166,6 +176,24 @@ document.addEventListener('keydown',e=>{if(e.key==='/'&&document.activeElement!=
 sq.addEventListener('keydown',e=>{if(e.key==='Escape')sq.blur()});}
 applyFilters();
 
+// Sort control: re-order cards by data-price / data-date.
+const sortSel=document.getElementById('catalog-sort');
+const applySort=()=>{if(!sortSel)return;const v=sortSel.value;const cards=[...grid.querySelectorAll('.card')];
+cards.sort((a,b)=>{const pa=parseFloat(a.dataset.price||'0'),pb=parseFloat(b.dataset.price||'0');
+if(v==='lo')return pa-pb;if(v==='hi')return pb-pa;
+const da=a.dataset.date||'',db=b.dataset.date||'';
+if(da&&!db)return -1;if(!da&&db)return 1;return db.localeCompare(da)});
+cards.forEach(c=>grid.appendChild(c))};
+if(sortSel){sortSel.addEventListener('change',applySort);applySort()}
+
+// Clear filters button in the empty state.
+const clearBtn=document.getElementById('clear-filters');
+if(clearBtn){clearBtn.addEventListener('click',()=>{activeTag='';searchQ='';sq.value='';
+if(sortSel){sortSel.value='new';applySort()}
+document.querySelectorAll('#filters .chip').forEach(x=>{x.classList.remove('active');x.setAttribute('aria-pressed','false')});
+const all=document.querySelector('#filters .chip');if(all){all.classList.add('active');all.setAttribute('aria-pressed','true')}
+applyFilters();sq.focus()})};
+
 // Back-to-top button.
 (function(){var b=document.getElementById('backtop');if(!b)return;
 function onScroll(){b.classList.toggle('show',window.scrollY>1200)}
@@ -176,9 +204,9 @@ b.addEventListener('click',function(){window.scrollTo({top:0,behavior:'smooth'})
 </html>
 """
 
-CARD = """<div class="card" data-tags="{tags}">
-<a href="{slug}/" style="text-decoration:none;color:inherit;display:block"><img src="../assets/covers/{pid}.png" alt="{title} cover" loading="lazy" decoding="async" sizes="(max-width:640px) 100vw, (max-width:1100px) 50vw, 320px">
-<div class="body">{badge}<h2 translate="no">{title}</h2><p class="desc">{tagline}</p><p class="price"><span translate="no">${price}</span> <span style="color:var(--muted);font-weight:400;font-size:.85rem">one-time</span></p></div></a>
+CARD = """<div class="card" data-tags="{tags}" data-price="{price_num}" data-date="{pdate}">
+<a href="{slug}/" style="text-decoration:none;color:inherit;display:block"><picture><source type="image/webp" srcset="../assets/covers/{pid}.webp"><img src="../assets/covers/{pid}.png" alt="{title} cover" loading="lazy" decoding="async" sizes="(max-width:640px) 100vw, (max-width:1100px) 50vw, 320px"></picture>
+<div class="body">{badge}{newbadge}<h2 translate="no">{title}</h2><p class="desc">{tagline}</p><p class="price"><span translate="no">${price}</span> <span style="color:var(--muted);font-weight:400;font-size:.85rem">one-time</span></p></div></a>
 <div class="row"><a class="btn" href="{url}">Get it</a><a class="btn ghost" href="{slug}/">Details</a></div>
 <p class="trust">Instant delivery via Gumroad</p>
 </div>
@@ -200,10 +228,32 @@ def slugify(t):
     s = _re.sub(r"[^a-z0-9]+", "-", t.lower()).strip("-")
     return _re.sub(r"-+", "-", s)
 
+ORIGINALS_DATE = "2026-09-29"  # flagship launch date (publish records); micros carry created_at per listing
+
+def pdate(p, datemap):
+    """Product publish date (YYYY-MM-DD) from listing created_at, or ORIGINALS_DATE
+    for the 8 flagships, or '' when unknown."""
+    if p["id"] in datemap:
+        return datemap[p["id"]]
+    if p["id"] in ORIGINALS_SLUGS:
+        return ORIGINALS_DATE
+    return ""
+
+def is_new(p, datemap):
+    """True when the product published <14 days ago (real date field only)."""
+    d = pdate(p, datemap)
+    if not d:
+        return False
+    try:
+        return (date.today() - date.fromisoformat(d)).days < 14
+    except ValueError:
+        return False
+
 def main():
     prods = products()
     # tag lookup from pending-listings for filtering
     tagmap = {}
+    datemap = {}
     pj = os.path.expanduser("~/workspace/goals/kestrelattice-autonomous-growth/hidden_files/marketplace/pending-listings.jsonl")
     if os.path.exists(pj):
         with open(pj) as f:
@@ -212,23 +262,31 @@ def main():
                     p = json.loads(line)
                     pid = p["gumroad_url"].rstrip("/").split("/")[-1]
                     tagmap[pid] = [t.lower().replace(" ", "-") for t in p.get("tags", [])[:6]]
+                    datemap[pid] = str(p.get("created_at", ""))[:10]
                 except Exception:
                     pass
+    # default card order = newest first (matches the sort control's default)
+    ordered = sorted(sorted(prods, key=lambda x: (float(x["price"]), x["title"])),
+                     key=lambda x: pdate(x, datemap), reverse=True)
     cards = []
-    for p in sorted(prods, key=lambda x: (x["price"], x["title"])):
+    for p in ordered:
         pid = p["id"]
         ptaglist = tagmap.get(pid, ["governance"])
         tags = "|".join(ptaglist)
         badge = '<span class="codebadge">CODE</span>' if "code" in ptaglist else ""
+        newbadge = '<span class="badge-new">New</span>' if is_new(p, datemap) else ""
         cards.append(CARD.format(
             pid=html.escape(pid),
             title=html.escape(p["title"]),
             tagline=html.escape(fix_tagline(p.get("tagline", ""))),
             price=fmt_price(p["price"]),
+            price_num=float(p["price"]),
+            pdate=html.escape(pdate(p, datemap)),
             url=f"https://koalstin.gumroad.com/l/{html.escape(pid)}",
             tags=html.escape(tags),
             slug=ORIGINAL_SLUGS.get(pid, slugify(p["title"])),
             badge=badge,
+            newbadge=newbadge,
         ))
     outdir = os.path.join(SITE, "products")
     os.makedirs(outdir, exist_ok=True)
@@ -242,7 +300,7 @@ def main():
                 "name": p["title"],
                 "url": f"{BASE_URL}/products/{ORIGINAL_SLUGS.get(p['id'], slugify(p['title']))}/",
                 "offers": {"@type": "Offer", "price": fmt_price(p["price"]), "priceCurrency": "USD"},
-            }} for n, p in enumerate(sorted(prods, key=lambda x: (x["price"], x["title"])), 1)
+            }} for n, p in enumerate(ordered, 1)
         ],
     }
     page = PAGE.replace("__ITEMLIST__", json.dumps(itemlist, ensure_ascii=False, indent=2))

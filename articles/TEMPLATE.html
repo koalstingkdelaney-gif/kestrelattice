@@ -50,6 +50,7 @@ gtag('config', 'G-541TCHWW98');
         --ease:cubic-bezier(.2,.7,.25,1)}
   *{margin:0;padding:0;box-sizing:border-box}
   html,body{overflow-x:clip}
+  html{scroll-behavior:smooth}
   body{background:var(--bg);color:var(--text);
        font-family:ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
        line-height:1.7;-webkit-font-smoothing:antialiased}
@@ -93,12 +94,17 @@ gtag('config', 'G-541TCHWW98');
   @media(max-width:640px){nav.main a:not(:last-child){display:none}footer.site .wrap{justify-content:center;text-align:center}footer.site a{margin:0 7px}}
 
   :focus-visible{outline:2px solid #e07a5f;outline-offset:2px}
-  @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
+  @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{animation:none!important;transition:none!important}}
   h1,h2{text-wrap:balance}
   #backtop{position:fixed;right:22px;bottom:22px;width:46px;height:46px;border-radius:50%;border:1px solid var(--line);background:var(--panel);color:var(--accent);font-size:1.3rem;cursor:pointer;opacity:0;pointer-events:none;transition:opacity .2s var(--ease);z-index:150}
   #backtop.show{opacity:1;pointer-events:auto}
   #backtop:hover{border-color:var(--accent-dim)}
   @media (prefers-reduced-motion:reduce){#backtop{display:none}}
+  .copy-link-row{margin:0 0 8px}
+  .copy-link{position:relative;border:1px solid var(--line);background:var(--panel);color:var(--muted);border-radius:999px;padding:8px 16px;min-height:44px;font-size:.82rem;cursor:pointer;font-family:inherit}
+  .copy-link:hover{border-color:var(--accent-dim);color:var(--text)}
+  .copy-link.copied::after{content:"Copied";position:absolute;top:-30px;left:50%;transform:translateX(-50%);background:var(--accent);color:var(--accent-ink);font-size:.72rem;font-weight:700;padding:3px 10px;border-radius:6px;white-space:nowrap}
+  @media (prefers-reduced-motion:reduce){.copy-link.copied::after{transition:none}}
   .skip{position:absolute;left:-9999px;top:0;background:var(--accent);color:var(--accent-ink);padding:10px 18px;font-weight:700;z-index:200;border-radius:0 0 8px 0}
   .skip:focus{left:0}
 </style>
@@ -110,13 +116,14 @@ gtag('config', 'G-541TCHWW98');
     <svg width="22" height="22" viewBox="0 0 26 26" fill="none" aria-hidden="true"><circle cx="5" cy="6" r="2.4" fill="#e07a5f"/><circle cx="21" cy="6" r="2.4" fill="#e07a5f"/><circle cx="13" cy="13" r="2.4" fill="#e07a5f"/><circle cx="5" cy="20" r="2.4" fill="#e07a5f"/><circle cx="21" cy="20" r="2.4" fill="#e07a5f"/><path d="M6.6 7.4L11.2 11.8M19.4 7.4L14.8 11.8M6.6 18.6L11.2 14.2M19.4 18.6L14.8 14.2" stroke="#e07a5f" stroke-width="1.4"/></svg>
     ghostcorpnet
   </a>
-  <nav class="main" aria-label="Primary"><a href="../">Home</a><a href="../products/">Catalog</a><a href="../brands/">Stores</a><a href="../ecosystem/">Ecosystem</a><a href="./">Articles</a></nav>
+  <nav class="main" aria-label="Primary"><a href="../">Home</a><a href="../products/">Catalog</a><a href="../brands/">Stores</a><a href="../ecosystem/">Ecosystem</a><a href="./">Articles</a><a href="../changelog.html">Changelog</a></nav>
 </div></header>
 <main class="wrap" id="main">
   <p class="crumb"><a href="../">Home</a> · <a href="./">Articles</a></p>
 
   <h1>{{TITLE}}</h1>
   <p class="date"><time datetime="{{DATE_ISO}}">Published {{DATE_ISO}}</time> · <span class="reading-time" id="reading-time"></span></p>
+  <div class="copy-link-row"><button class="copy-link" id="copy-link" type="button" aria-label="Copy link to this article">Copy link</button></div>
 
   <article>
 {{BODY_HTML}}
@@ -135,7 +142,7 @@ gtag('config', 'G-541TCHWW98');
   <footer class="site">
     <div class="wrap">
       <span>© 2026 ghostcorpnet · An independent studio</span>
-      <span><a href="../">Home</a><a href="../products/">Catalog</a><a href="../brands/">Stores</a><a href="../ecosystem/">Ecosystem</a><a href="mailto:koalstin.g.k.delaney@gmail.com">Contact</a><a href="../terms.html">Terms</a><a href="../privacy.html">Privacy</a></span>
+      <span><a href="../">Home</a><a href="../products/">Catalog</a><a href="../brands/">Stores</a><a href="../ecosystem/">Ecosystem</a><a href="../changelog.html">Changelog</a><a href="mailto:koalstin.g.k.delaney@gmail.com">Contact</a><a href="../terms.html">Terms</a><a href="../privacy.html">Privacy</a></span>
     </div>
   </footer>
 <button id="backtop" aria-label="Back to top">↑</button>
@@ -145,6 +152,15 @@ gtag('config', 'G-541TCHWW98');
 function onScroll(){b.classList.toggle('show',window.scrollY>1200)}
 window.addEventListener('scroll',onScroll,{passive:true});onScroll();
 b.addEventListener('click',function(){window.scrollTo({top:0,behavior:'smooth'})});})();
+</script>
+<script>
+// Copy-link button: clipboard API with "copied" tooltip, legacy fallback.
+(function(){var b=document.getElementById('copy-link');if(!b)return;
+function done(){b.classList.add('copied');setTimeout(function(){b.classList.remove('copied')},2000)}
+function fallback(url){var i=document.createElement('input');i.value=url;i.setAttribute('readonly','');document.body.appendChild(i);i.select();try{document.execCommand('copy');done()}catch(e){}document.body.removeChild(i)}
+b.addEventListener('click',function(){var url=window.location.href;
+if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(url).then(done,function(){fallback(url)})}
+else{fallback(url)}});})();
 </script>
 </body>
 </html>

@@ -116,15 +116,19 @@ def render(title, price, tagline):
 def main():
     force = "--force" in sys.argv
     os.makedirs(OUT, exist_ok=True)
-    made, skipped = 0, 0
+    made, skipped, webps = 0, 0, 0
     for p in products():
         dest = os.path.join(OUT, f"{p['id']}.png")
+        wdest = os.path.join(OUT, f"{p['id']}.webp")
         if os.path.exists(dest) and not force:
             skipped += 1
-            continue
-        render(p["title"], p["price"], p["tagline"]).save(dest)
-        made += 1
-    print(f"covers: {made} generated, {skipped} already existed -> {OUT}")
+        else:
+            render(p["title"], p["price"], p["tagline"]).save(dest)
+            made += 1
+        if not os.path.exists(wdest):
+            Image.open(dest).save(wdest, "WEBP", method=6)
+            webps += 1
+    print(f"covers: {made} generated, {skipped} already existed, {webps} webp emitted -> {OUT}")
 
 if __name__ == "__main__":
     main()
