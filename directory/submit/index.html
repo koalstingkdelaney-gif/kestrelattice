@@ -91,59 +91,63 @@ gtag('config', 'G-541TCHWW98');
   <form id="submit-form" novalidate>
     <fieldset>
       <legend>Pack info</legend>
-    <label for="pack_name">Pack name
-      <input id="pack_name" aria-describedby="e-pack_name" name="pack_name" type="text" maxlength="120" required autocomplete="name"
-             placeholder="e.g. EU AI Act Evidence Pack for Startups">
-    </label>
+      <label for="pack_name">Pack name
+        <input id="pack_name" aria-describedby="e-pack_name" name="pack_name" type="text" maxlength="120" required autocomplete="name"
+               placeholder="e.g. EU AI Act Evidence Pack for Startups">
+      </label>
       <div class="err" id="e-pack_name">Give your pack a name.</div>
 
-    <fieldset>
-      <legend>Contact info</legend>
-      <label for="author">Author / studio
-      <input id="author" aria-describedby="e-author" name="author" type="text" maxlength="120" required autocomplete="organization"
-             placeholder="Your name or studio name">
-    </label>
-      <div class="err" id="e-author">Tell us who built it.</div>
-
-      <label for="author_email">Contact email
-      <span class="hint">Only used for review questions. Never published.</span>
-      <input id="author_email" aria-describedby="e-author_email" name="author_email" type="email" maxlength="200" required autocomplete="email" inputmode="email"
-             placeholder="you@example.com">
-    </label>
-      <div class="err" id="e-author_email">A valid email is required.</div>
-
-    </fieldset>
 
       <label for="pack_url">Pack URL
-      <span class="hint">Where people get your pack — your own site, Gumroad, GitHub, etc.</span>
-      <input id="pack_url" aria-describedby="e-pack_url" name="pack_url" type="url" maxlength="500" required inputmode="url" autocomplete="url"
-             placeholder="https://example.com/my-pack">
-    </label>
+        <span class="hint">Where people get your pack — your own site, Gumroad, GitHub, etc.</span>
+        <input id="pack_url" aria-describedby="e-pack_url" name="pack_url" type="url" maxlength="500" required inputmode="url" autocomplete="url"
+               placeholder="https://example.com/my-pack">
+      </label>
       <div class="err" id="e-pack_url">A valid http(s) URL is required.</div>
 
+
       <label for="description">Description
-      <span class="hint">At least a sentence or two — what problem does the pack solve?</span>
-      <textarea id="description" aria-describedby="e-description" name="description" maxlength="2000" enterkeyhint="send" required
-                placeholder="What the pack contains, who it's for, and how it fits the ghostcorpnet Pack Standard."></textarea>
-      <div class="char-count" id="description-count">0 / 2000</div>
-    </label>
+        <span class="hint">At least a sentence or two — what problem does the pack solve?</span>
+        <textarea id="description" aria-describedby="e-description" name="description" maxlength="2000" enterkeyhint="send" required
+                  placeholder="What the pack contains, who it's for, and how it fits the ghostcorpnet Pack Standard."></textarea>
+        <div class="char-count" id="description-count">0 / 2000</div>
+      </label>
       <div class="err" id="e-description">Give at least a sentence (20+ characters).</div>
 
     </fieldset>
 
     <fieldset>
+      <legend>Contact info</legend>
+      <label for="author">Author / studio
+        <input id="author" aria-describedby="e-author" name="author" type="text" maxlength="120" required autocomplete="organization"
+               placeholder="Your name or studio name">
+      </label>
+      <div class="err" id="e-author">Tell us who built it.</div>
+
+
+      <label for="author_email">Contact email
+        <span class="hint">Only used for review questions. Never published.</span>
+        <input id="author_email" aria-describedby="e-author_email" name="author_email" type="email" maxlength="200" required autocomplete="email" inputmode="email"
+               placeholder="you@example.com">
+      </label>
+      <div class="err" id="e-author_email">A valid email is required.</div>
+
+    </fieldset>
+
+    <fieldset>
       <legend>Pack Standard declaration</legend>
-    <label for="manifest_url">pack.json manifest URL
-      <span class="hint">Optional, but speeds up review. A machine-readable manifest of your pack.</span>
-      <input id="manifest_url" aria-describedby="e-manifest_url" name="manifest_url" type="url" maxlength="500" autocomplete="url"
-             placeholder="https://example.com/my-pack/pack.json">
-    </label>
+      <label for="manifest_url">pack.json manifest URL
+        <span class="hint">Optional, but speeds up review. A machine-readable manifest of your pack.</span>
+        <input id="manifest_url" aria-describedby="e-manifest_url" name="manifest_url" type="url" maxlength="500" autocomplete="url"
+               placeholder="https://example.com/my-pack/pack.json">
+      </label>
       <div class="err" id="e-manifest_url">Must be a valid http(s) URL, or leave blank.</div>
 
+
       <label for="license">License
-      <input id="license" aria-describedby="e-license" name="license" type="text" maxlength="80" required autocomplete="off"
-             placeholder="e.g. MIT, Apache-2.0, Commercial">
-    </label>
+        <input id="license" aria-describedby="e-license" name="license" type="text" maxlength="80" required autocomplete="off"
+               placeholder="e.g. MIT, Apache-2.0, Commercial">
+      </label>
       <div class="err" id="e-license">Name the license.</div>
 
     </fieldset>
