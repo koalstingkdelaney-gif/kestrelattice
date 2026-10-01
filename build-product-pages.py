@@ -450,7 +450,7 @@ def main():
                    f'<meta property="og:image:height" content="{dims[1]}">') if dims else ""
         if is_live:
             buy_html = (f'<p class="instant">One-time · Instant PDF download via Gumroad</p>\n'
-                        f'      <a class="btn" href="{pr["gumroad_url"]}">Get it now — ${pr["price"]}</a>\n'
+                        f'      <a class="btn" href="{pr["gumroad_url"]}" aria-label="Buy {esc(pr["title"])} for ${pr["price"]}">Get it now — ${pr["price"]}</a>\n'
                         f'      <p class="trust">Secure checkout via Gumroad · Single-user license · Instant delivery</p>\n'
                         f'      <p class="notready">Not ready? <a href="../../playbook.md">Get the free MIT playbook</a> first.</p>')
         else:
