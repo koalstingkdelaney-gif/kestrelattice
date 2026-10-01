@@ -344,7 +344,7 @@ gtag('config', 'G-541TCHWW98');
   .facts{{display:flex;flex-wrap:wrap;gap:10px;margin:20px 0 4px}}
   .fact{{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:8px 14px;font-size:.86rem;color:var(--muted)}}
   .fact b{{color:var(--text)}}
-  a:focus-visible,button:focus-visible{{outline:2px solid var(--accent);outline-offset:3px;border-radius:4px}}
+  a:focus-visible,button:focus-visible{{outline:3px solid var(--accent);outline-offset:3px;border-radius:4px}}
   .pdp-sticky{{display:none}}
   .pdp-sticky span{{font-size:.85rem;color:var(--muted)}}
   .pdp-sticky span b{{color:var(--text)}}

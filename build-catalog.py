@@ -83,7 +83,7 @@ body{background:radial-gradient(900px 420px at 50% -6%, rgba(224,122,95,.06), tr
 .wrap{max-width:1040px;margin:0 auto;padding:0 24px}
 a{color:var(--accent);text-decoration:none;transition:color .16s var(--ease)}
 a:hover{text-decoration:underline}
-a:focus-visible,button:focus-visible{outline:2px solid var(--accent-bright);outline-offset:3px;border-radius:4px}@media (prefers-reduced-motion:no-preference){a:focus-visible,button:focus-visible{transition:transform .15s ease}a:focus-visible{transform:scale(1.03)}.btn:focus-visible,.chip:focus-visible,nav.main a:focus-visible{transform:scale(1.02)}.btn:active{transform:scale(.98)}}
+a:focus-visible,button:focus-visible{outline:3px solid var(--accent-bright);outline-offset:3px;border-radius:4px}@media (prefers-reduced-motion:no-preference){a:focus-visible,button:focus-visible{transition:transform .15s ease}a:focus-visible{transform:scale(1.03)}.btn:focus-visible,.chip:focus-visible,nav.main a:focus-visible{transform:scale(1.02)}.btn:active{transform:scale(.98)}}
 header.site{border-bottom:1px solid var(--line);position:sticky;top:0;background:rgba(15,14,13,.92);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);z-index:100}
 header.site .wrap{display:flex;align-items:center;justify-content:space-between;min-height:58px}
 .logo{display:flex;align-items:center;gap:9px;font-weight:700;font-size:1.05rem;color:var(--text)}
