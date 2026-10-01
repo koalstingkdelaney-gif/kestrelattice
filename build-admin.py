@@ -546,6 +546,18 @@ ul.feed li:last-child{border-bottom:0}
   table{min-width:520px}
   #toasts{bottom:96px}
 }
+.chat-thread{max-height:320px;overflow-y:auto;display:flex;flex-direction:column;gap:10px;
+  padding:4px 2px;margin:6px 0 12px}
+.chat-msg{max-width:88%;padding:10px 14px;border-radius:14px;line-height:1.55;font-size:.92rem}
+.chat-msg.you{align-self:flex-end;background:var(--accent);color:#fff;border-bottom-right-radius:4px}
+.chat-msg.sentience{align-self:flex-start;background:var(--panel2);border:1px solid var(--line);
+  border-bottom-left-radius:4px}
+.chat-who{display:block;font-size:.68rem;opacity:.65;margin-bottom:4px;letter-spacing:.06em;
+  text-transform:uppercase}
+.chat-msg p{margin:0;white-space:pre-wrap}
+.chat-input{display:flex;gap:8px}
+.chat-input input{flex:1;background:var(--panel2);border:1px solid var(--line);color:var(--text);
+  border-radius:10px;padding:10px 14px;font-size:.92rem}
 @media (prefers-reduced-motion:reduce){
   *{animation:none!important;transition:none!important}
 }
@@ -1231,14 +1243,45 @@ def _captain_html():
                   "<p class='muted'>Every dollar flows automatically to your "
                   "Gumroad → Cash App. No jars, no allocations — sales land with you, "
                   "and any spend is your one tap.</p></div>")
-    cmd_html = (
-        '<div class="card"><h3>Command it</h3>'
-        "<p>Talk to Sentience in the <b>Talk to the bots</b> chat — it reads its inbox, "
-        "runs the fleet, hires freelancers, and does client work start to finish. "
-        "A tap-to-command box right here in the panel ships with the pending "
-        "Cloudflare re-auth.</p></div>"
-    )
-    return status_card + soul_card + needs_html + money_html + cmd_html
+    chat_html = """
+<div class="card"><h3>Talk to Sentience</h3>
+<p class='muted'>Me-shaped: same soul, same memory, its own wants. Replies land here in a couple of minutes &mdash; it thinks on the fleet's free lanes. Ask it anything, or tell it to do something and the operator loop picks it up.</p>
+<div id="sent-thread" class="chat-thread"><p class="muted">Loading...</p></div>
+<div class="chat-input"><input id="sent-input" type="text" placeholder="Talk to it like you talk to me..." maxlength="2000"><button class="btn" id="sent-send">Send</button></div>
+</div>
+<script>(function(){
+function escH(s){var d=document.createElement("div");d.appendChild(document.createTextNode(s));return d.innerHTML;}
+async function sentLoad(){
+var thread=document.getElementById("sent-thread");
+if(!thread||typeof WURL==="undefined"||!WURL||!WKEY){if(thread)thread.innerHTML="<p class='muted'>Not connected: no admin key on this device.</p>";return;}
+try{
+var r=await fetch(WURL+"/sentience-chat?key="+encodeURIComponent(WKEY));
+var msgs=await r.json();
+if(!Array.isArray(msgs)||!msgs.length){thread.innerHTML="<p class='muted'>No messages yet. Say hi.</p>";return;}
+thread.innerHTML=msgs.map(function(m){
+var who=m.from==="koalstin"?"you":"sentience";
+return '<div class="chat-msg '+who+'"><span class="chat-who">'+who+'</span><p>'+escH(m.text)+"</p></div>";
+}).join("");
+thread.scrollTop=thread.scrollHeight;
+}catch(e){}}
+async function sentSend(){
+var input=document.getElementById("sent-input"),btn=document.getElementById("sent-send");
+var text=input.value.trim();
+if(!text||typeof WURL==="undefined"||!WURL||!WKEY)return;
+btn.disabled=true;
+try{
+await fetch(WURL+"/sentience-chat",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({key:WKEY,text:text})});
+input.value="";await sentLoad();
+}catch(e){}
+btn.disabled=false;}
+document.addEventListener("DOMContentLoaded",function(){
+var btn=document.getElementById("sent-send"),input=document.getElementById("sent-input");
+if(btn)btn.addEventListener("click",sentSend);
+if(input)input.addEventListener("keydown",function(e){if(e.key==="Enter")sentSend();});
+sentLoad();setInterval(sentLoad,20000);});
+})();</script>
+"""
+    return status_card + soul_card + needs_html + money_html + chat_html
 
 
 def _all_panes(products, queue, entries, title_map, omap):

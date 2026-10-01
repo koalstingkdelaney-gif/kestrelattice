@@ -104,6 +104,58 @@ export default {
     const serverKey = req.headers.get("x-server-key");
     const isServer = serverKey && serverKey === env.SERVER_KEY;
 
+    // ---- Sentience chat (private, key-gated) -------------------------------
+    // Thread between koalstin and Sentience, living in the private admin
+    // panel. GET ?key=WRITE_KEY reads. POST {key, text} appends his message.
+    // The VM reply cron appends Sentience's replies with the server key.
+    const CHAT_KEY = "sentience_chat";
+    const readChat = async () => {
+      const raw = await env.APPROVALS.get(CHAT_KEY);
+      return raw ? JSON.parse(raw) : [];
+    };
+    const writeChat = (arr) =>
+      env.APPROVALS.put(CHAT_KEY, JSON.stringify(arr.slice(-200)));
+
+    if (url.pathname === "/sentience-chat") {
+      const qkey = url.searchParams.get("key");
+      if (req.method === "GET") {
+        if (!(isServer || (qkey && qkey === env.WRITE_KEY))) {
+          return json({ ok: false, error: "forbidden" }, 403);
+        }
+        return json(await readChat());
+      }
+      if (req.method === "POST") {
+        let body;
+        try {
+          body = await req.json();
+        } catch {
+          body = {};
+        }
+        const fromHuman = body.key && body.key === env.WRITE_KEY;
+        const fromServer = isServer && body.from === "sentience";
+        if (!fromHuman && !fromServer) {
+          return json({ ok: false, error: "forbidden" }, 403);
+        }
+        if (fromHuman) {
+          const ip = req.headers.get("cf-connecting-ip") || "unknown";
+          if (!(await checkRateLimit(env, ip))) {
+            return json({ ok: false, error: "rate_limited" }, 429);
+          }
+        }
+        const text = String(body.text || "").trim().slice(0, 2000);
+        if (!text) return json({ ok: false, error: "empty" }, 400);
+        const thread = await readChat();
+        thread.push({
+          ts: new Date().toISOString(),
+          from: fromHuman ? "koalstin" : "sentience",
+          text,
+        });
+        await writeChat(thread);
+        return json({ ok: true });
+      }
+      return json({ ok: false, error: "not_found" }, 404);
+    }
+
     if (url.pathname === "/pending" && isServer) {
       const q = await readQueue(env);
       return json(q.filter((i) => i.status === "approved"));
