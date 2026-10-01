@@ -2837,6 +2837,10 @@ nav.main a:hover{color:var(--accent-bright)}
 .hero h1{font-size:clamp(1.7rem,3.4vw + .8rem,2.4rem);font-weight:800;letter-spacing:-.02em;margin-bottom:10px}
 .lede{color:var(--muted);max-width:620px;margin:0 auto;font-size:.98rem}
 .filters{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin:26px 0}
+.visually-hidden{position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+.catalog-search-row{display:flex;justify-content:center;margin:0 0 4px}
+#catalog-search{width:min(440px,92%);padding:10px 16px;border:1px solid var(--line);border-radius:999px;background:var(--panel);color:var(--text);font-size:.92rem}
+#catalog-search:focus{border-color:var(--accent);outline:none}
 .chip{border:1px solid var(--line);background:var(--panel);color:var(--muted);border-radius:999px;padding:7px 15px;font-size:.84rem;letter-spacing:.1em;cursor:pointer;font-family:inherit;transition:all .16s var(--ease)}
 .chip:hover{border-color:var(--accent-dim);color:var(--text)}
 .chip.active{background:var(--accent);border-color:var(--accent);color:var(--accent-ink);font-weight:700}
@@ -2891,7 +2895,7 @@ ghostcorpnet</a>
 <h1>The Catalog</h1>
 <p class="lede">Every self-serve product in the ghostcorpnet library — playbooks, checklists, runbooks, kits, and working code for governing AI agents. Buy once, download instantly, yours forever.</p>
 </div>
-<div class="wrap"><p class="result-count" id="result-count" aria-live="polite">199 products</p><div class="filters" id="filters"></div></div>
+<div class="wrap"><p class="result-count" id="result-count" aria-live="polite">199 products</p><div class="catalog-search-row"><label for="catalog-search" class="visually-hidden">Search products</label><input id="catalog-search" type="search" placeholder="Search products… ( / )"></div><div class="filters" id="filters"></div></div>
 <div class="wrap"><div class="grid" id="grid">
 <div class="card" data-tags="">
 <a href="ai-agent-governance-starter-kit/" style="text-decoration:none;color:inherit;display:block"><img src="../assets/covers/ivrpk.png" alt="AI Agent Governance Starter Kit cover" loading="lazy" decoding="async" sizes="(max-width:640px) 100vw, (max-width:1100px) 50vw, 320px">
@@ -4296,17 +4300,23 @@ ghostcorpnet</a>
 <script>
 const grid=document.getElementById('grid'),filters=document.getElementById('filters'),rc=document.getElementById('result-count');
 const updateCount=()=>{const v=[...grid.querySelectorAll('.card')].filter(c=>!c.classList.contains('hidden')).length;rc.textContent=v===0?'No products match':(v===1?'1 product':v+' products')};
-const tags=[...new Set([...grid.querySelectorAll('.card')].flatMap(c=>c.dataset.tags.split('|').filter(Boolean)))].sort();
-const mk=(label,tag)=>{const b=document.createElement('button');b.className='chip'+(tag===''?' active':'');b.textContent=label;b.setAttribute('aria-pressed',String(tag===''));b.onclick=()=>{document.querySelectorAll('.chip').forEach(x=>{x.classList.remove('active');x.setAttribute('aria-pressed','false')});b.classList.add('active');b.setAttribute('aria-pressed','true');document.querySelectorAll('.card').forEach(c=>{c.classList.toggle('hidden',tag!==''&&!c.dataset.tags.split('|').includes(tag))});updateCount()};return b};
+const tags=[...new Set([...grid.querySelectorAll('.card')].flatMap(c=>(c.dataset.tags||'').split('|').filter(Boolean)))].sort();
+let activeTag='',searchQ='';
+const applyFilters=()=>{document.querySelectorAll('.card').forEach(c=>{const t=(c.dataset.tags||'').split('|').filter(Boolean);const okT=activeTag===''||t.includes(activeTag);const h2=c.querySelector('h2');const okQ=searchQ===''||(h2&&h2.textContent.toLowerCase().includes(searchQ));c.classList.toggle('hidden',!(okT&&okQ))});updateCount()};
+const mk=(label,tag)=>{const b=document.createElement('button');b.className='chip'+(tag===''?' active':'');b.textContent=label;b.setAttribute('aria-pressed',String(tag===''));b.onclick=()=>{activeTag=tag;document.querySelectorAll('.chip').forEach(x=>{x.classList.remove('active');x.setAttribute('aria-pressed','false')});b.classList.add('active');b.setAttribute('aria-pressed','true');applyFilters()};return b};
 filters.appendChild(mk('All',''));
 tags.forEach(t=>filters.appendChild(mk(t.replace(/-/g,' '),t)));
+const sq=document.getElementById('catalog-search');
+if(sq){sq.addEventListener('input',()=>{searchQ=sq.value.trim().toLowerCase();applyFilters()});
+document.addEventListener('keydown',e=>{if(e.key==='/'&&document.activeElement!==sq&&!/^(INPUT|TEXTAREA|SELECT)$/.test(document.activeElement.tagName)){e.preventDefault();sq.focus()}});
+sq.addEventListener('keydown',e=>{if(e.key==='Escape')sq.blur()});}
+applyFilters();
 
-<script>
+// Back-to-top button.
 (function(){var b=document.getElementById('backtop');if(!b)return;
 function onScroll(){b.classList.toggle('show',window.scrollY>1200)}
 window.addEventListener('scroll',onScroll,{passive:true});onScroll();
 b.addEventListener('click',function(){window.scrollTo({top:0,behavior:'smooth'})});})();
-</script>
 </script>
 </body>
 </html>
