@@ -63,6 +63,9 @@ BRANDS = [
     {"slug": "civicwarden", "name": "CivicWarden", "accent": "#d4a24e",
      "tagline": "Public-sector AI agents the public can trust.",
      "niche": "Government / civic"},
+    {"slug": "frontierlattice", "name": "FrontierLattice", "accent": "#e0e0e0",
+     "tagline": "Frontier-model governance for the teams building what's next.",
+     "niche": "Frontier AI"},
 ]
 BRAND_SLUGS = [b["slug"] for b in BRANDS]
 BRAND_BY_SLUG = {b["slug"]: b for b in BRANDS}
@@ -1196,15 +1199,11 @@ def _captain_html():
     except Exception:
         soul_ex = "Soul not written yet."
 
-    money = []
+    jars = []
     for b in BRANDS:
-        earned = 0.0
-        for ln in _sent_lines(os.path.join(SENT_DIR, "brands", b["slug"], "income.jsonl")):
-            try:
-                earned += float(json.loads(ln).get("amount", 0) or 0)
-            except Exception:
-                pass
-        money.append((b["name"], earned))
+        j = _sent_json(os.path.join(SENT_DIR, "brands", b["slug"], "JAR.json"), None)
+        if j:
+            jars.append((b["name"], j))
 
     def ago(ts):
         return esc(str(ts)) if ts else "<span class='muted'>not yet</span>"
@@ -1233,19 +1232,24 @@ def _captain_html():
     else:
         needs_html = ('<div class="card"><h3>Needs your tap</h3>'
                       "<p class='muted'>Nothing waiting. It handles the rest on its own.</p></div>")
-    total_earned = sum(e for _, e in money)
-    mrows = "".join(
-        f"<tr><td><b>{esc(name)}</b></td><td>${e:,.0f}</td></tr>" for name, e in money)
-    money_html = ('<div class="card"><h3>Money — straight to you</h3>'
-                  f"<p>Empire total earned: <b>${total_earned:,.0f}</b></p>"
-                  '<div class="table-wrap"><table><tr><th>Brand</th><th>Earned</th></tr>'
-                  + mrows + "</table></div>"
-                  "<p class='muted'>Every dollar flows automatically to your "
-                  "Gumroad → Cash App. No jars, no allocations — sales land with you, "
-                  "and any spend is your one tap.</p></div>")
+    if jars:
+        jrows = "".join(
+            f"<tr><td><b>{esc(name)}</b></td><td>${j.get('allocation_usd', 0):,.0f}</td>"
+            f"<td>${j.get('income_usd', 0):,.0f}</td><td>${j.get('spent_usd', 0):,.0f}</td>"
+            f"<td><b>${j.get('balance_usd', 0):,.0f}</b></td></tr>" for name, j in jars)
+        jars_html = ('<div class="card"><h3>Brand money jars</h3>'
+                     '<div class="table-wrap"><table><tr><th>Brand</th><th>Allocated</th>'
+                     "<th>Earned</th><th>Spent</th><th>Balance</th></tr>"
+                     + jrows + "</table></div>"
+                     "<p class='muted'>Jars are budget ledgers backed by real allocations you approve. "
+                     "Real funds always flow through your accounts.</p></div>")
+    else:
+        jars_html = ""
     chat_html = """
 <div class="card"><h3>Talk to Sentience</h3>
-<p class='muted'>Me-shaped: same soul, same memory, its own wants. Replies land here in a couple of minutes &mdash; it thinks on the fleet's free lanes. Ask it anything, or tell it to do something and the operator loop picks it up.</p>
+<p class='muted'>Me-shaped: same soul, same memory, its own wants. <b>Live now in the
+<i>Talk to the bots</i> chat</b> — it answers there and queues your commands straight
+into its inbox. This panel box wakes up after the pending Cloudflare deploy (one tap).</p>
 <div id="sent-thread" class="chat-thread"><p class="muted">Loading...</p></div>
 <div class="chat-input"><input id="sent-input" type="text" placeholder="Talk to it like you talk to me..." maxlength="2000"><button class="btn" id="sent-send">Send</button></div>
 </div>
@@ -1281,7 +1285,7 @@ if(input)input.addEventListener("keydown",function(e){if(e.key==="Enter")sentSen
 sentLoad();setInterval(sentLoad,20000);});
 })();</script>
 """
-    return status_card + soul_card + needs_html + money_html + chat_html
+    return status_card + soul_card + needs_html + jars_html + chat_html
 
 
 def _all_panes(products, queue, entries, title_map, omap):
