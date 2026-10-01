@@ -43,7 +43,7 @@ PAGE = """<!DOCTYPE html>
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Product Catalog — ghostcorpnet</title>
 <meta name="description" content="Every ghostcorpnet self-serve product: agent governance playbooks, checklists, runbooks, kits, and working code. Instant download.">
-<meta name="theme-color" content="#1a1f2e">
+<meta name="theme-color" content="#0f0e0d">
 <meta name="robots" content="index,follow,max-image-preview:large">
 <link rel="canonical" href="https://koalstingkdelaney-gif.github.io/kestrelattice/products/">
 <link rel="preconnect" href="https://koalstin.gumroad.com">
