@@ -7,7 +7,7 @@ renders a branded page with Product JSON-LD, buy CTA, related products,
 and registers every page in sitemap.xml. Idempotent.
 """
 import datetime
-import html, json, os, re, struct
+import html, json, os, re, struct, subprocess
 
 
 def png_dims(path):
@@ -20,6 +20,52 @@ def png_dims(path):
         return struct.unpack(">II", head[16:24])
     except OSError:
         return None
+
+
+def page_lastmod(path):
+    """Last-mod date (YYYY-MM-DD) for a site file: real git commit date, mtime fallback."""
+    try:
+        d = subprocess.run(["git", "log", "-1", "--format=%cs", "--", path],
+                           cwd=SITE, capture_output=True, text=True,
+                           timeout=20).stdout.strip()
+        if re.match(r"^\d{4}-\d{2}-\d{2}$", d):
+            return d
+    except Exception:
+        pass
+    try:
+        return datetime.date.fromtimestamp(os.path.getmtime(path)).isoformat()
+    except OSError:
+        return datetime.date.today().isoformat()
+
+
+def loc_to_file(loc):
+    """Map a sitemap <loc> to its local file path; None if unknown."""
+    if not loc.startswith(BASE_URL):
+        return None
+    rel = loc[len(BASE_URL):].lstrip("/")
+    if not rel:
+        return os.path.join(SITE, "index.html")
+    if rel.endswith("/"):
+        return os.path.join(SITE, rel, "index.html")
+    return os.path.join(SITE, rel)
+
+
+def refresh_sitemap_lastmods():
+    """Rewrite every <lastmod> in sitemap.xml from real git/mtime dates. Never touches <loc>."""
+    sm_path = os.path.join(SITE, "sitemap.xml")
+    sm = open(sm_path).read()
+    def repl(m):
+        loc = m.group(1)
+        f = loc_to_file(loc)
+        if f and os.path.exists(f):
+            return f"<loc>{loc}</loc><lastmod>{page_lastmod(f)}</lastmod>"
+        return m.group(0)
+    new = re.sub(r"<loc>([^<]+)</loc>\s*<lastmod>[^<]*</lastmod>",
+                 lambda m: repl(m), sm)
+    if new != sm:
+        open(sm_path, "w").write(new)
+        print("sitemap: lastmod refreshed from real file dates")
+    return new != sm
 
 SITE = os.path.expanduser("~/workspace/kestrelattice")
 HIDDEN = os.path.expanduser("~/workspace/goals/kestrelattice-autonomous-growth/hidden_files")
@@ -565,7 +611,7 @@ def main():
                            sticky_bar=sticky_bar, fbt=fbt_block(pr, products))
         with open(os.path.join(d, "index.html"), "w") as f:
             f.write(page)
-        sm_entries.append(f'  <url><loc>{page_url}</loc><lastmod>{datetime.date.today().isoformat()}</lastmod><changefreq>monthly</changefreq></url>')
+        sm_entries.append(f'  <url><loc>{page_url}</loc><lastmod>{page_lastmod(d)}</lastmod><changefreq>monthly</changefreq></url>')
 
     # sitemap
     sm_path = os.path.join(SITE, "sitemap.xml")
@@ -577,6 +623,7 @@ def main():
             sm = sm.replace("</urlset>", e + "\n</urlset>")
             added += 1
     open(sm_path, "w").write(sm)
+    refresh_sitemap_lastmods()
     print(f"product pages: {len(products)} written, sitemap +{added}")
 
 if __name__ == "__main__":

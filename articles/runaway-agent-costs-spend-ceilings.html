@@ -66,6 +66,11 @@ gtag('config', 'G-541TCHWW98');
   .crumb a{color:var(--accent);text-decoration:none}
   h1{font-size:clamp(1.6rem,3vw + .8rem,2.1rem);font-weight:800;letter-spacing:-.02em;line-height:1.25;margin-bottom:8px;text-wrap:balance}
   .date{color:var(--muted);font-size:.85rem;margin-bottom:28px}
+  h2[id]{scroll-margin-top:84px}
+  .updated{color:var(--muted);font-size:.85rem;margin:-22px 0 28px}
+  h2 .h2-anchor{opacity:0;color:var(--accent);margin-left:.35em;text-decoration:none;font-size:.75em;vertical-align:middle;transition:opacity .15s var(--ease)}
+  h2:hover .h2-anchor,h2:focus-within .h2-anchor,.h2-anchor:focus-visible{opacity:1}
+  h2 .h2-anchor:hover{text-decoration:none}
   article h2{font-size:1.35rem;margin:32px 0 12px;letter-spacing:-.01em}
   article h3{font-size:1.1rem;margin:24px 0 10px}
   article p{margin:0 0 16px}
@@ -87,7 +92,7 @@ gtag('config', 'G-541TCHWW98');
   footer.site{border-top:1px solid var(--line);background:var(--bg-soft);padding:22px 0;margin-top:48px}
   footer.site .wrap{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px 16px;max-width:1040px;padding:0 24px}
   footer.site{color:var(--muted);font-size:.82rem}
-  footer.site a{color:var(--faint);text-decoration:none;margin-left:14px}
+  footer.site a{color:var(--muted);text-decoration:none;margin-left:14px}
   footer.site a:hover{color:var(--accent-bright)}
   @media(max-width:640px){nav.main a:not(:last-child){display:none}footer.site .wrap{justify-content:center;text-align:center}footer.site a{margin:0 7px}}
   .copy-link-row{margin:0 0 8px}
@@ -109,26 +114,27 @@ gtag('config', 'G-541TCHWW98');
 
   <h1>Stop Runaway Agent Costs: Spend Ceilings That Fail Closed</h1>
   <p class="date"><time datetime="2026-09-30">Published September 30, 2026</time></p>
+  <p class="updated">Updated <time datetime="2026-09-30">September 30, 2026</time></p>
   <div class="copy-link-row"><button class="copy-link" id="copy-link" type="button" aria-label="Copy link to this article">Copy link</button></div>
 
   <article>
 <p>Last year a developer watched an agent burn $700+ in 72 hours. No budget control, no kill switch — just a loop and a credit card. It is a common story in agent-builder communities, and the response is almost always the same: buy a better dashboard.</p>
 <p>Dashboards will not save you. Visibility without enforcement just shows you the number while it grows. What actually works is governance: four controls, the cheapest of which costs $0.</p>
-<h2>1. Ceiling per plan, not per account</h2>
+<h2 id="1-ceiling-per-plan-not-per-account">1. Ceiling per plan, not per account<a class="h2-anchor" href="#1-ceiling-per-plan-not-per-account" aria-label="Permalink to this section">¶</a></h2>
 <p>Give every unit of work — the nightly scrape, the support shift, the migration job — its own cost ceiling <em>and</em> an expiry date. Per plan, never per account: one looping task should never be able to eat the budget for everything else. A workload with no end date is a subscription you forgot you bought.</p>
-<h2>2. Fail closed, never warn</h2>
+<h2 id="2-fail-closed-never-warn">2. Fail closed, never warn<a class="h2-anchor" href="#2-fail-closed-never-warn" aria-label="Permalink to this section">¶</a></h2>
 <p>When the ceiling is hit, the action gets <strong>blocked</strong>, recorded as blocked, and never retried automatically. A warning is just an invitation for the loop to finish. Alerts at 50%/80% are information; the block is the control.</p>
-<h2>3. Meter for free</h2>
+<h2 id="3-meter-for-free">3. Meter for free<a class="h2-anchor" href="#3-meter-for-free" aria-label="Permalink to this section">¶</a></h2>
 <p>If your framework has no native budget controls, put it behind a meter. Helicone's free tier covers 10k requests/month; LangWatch's free tier covers 200k events/month. Then confirm the meter's counts reconcile against your actual provider bill — the meter is the watchdog, the bill is the truth.</p>
-<h2>4. Replay your worst incident in a sandbox</h2>
+<h2 id="4-replay-your-worst-incident-in-a-sandbox">4. Replay your worst incident in a sandbox<a class="h2-anchor" href="#4-replay-your-worst-incident-in-a-sandbox" aria-label="Permalink to this section">¶</a></h2>
 <p>Run the exact loop scenario that burned you and confirm it terminates at its plan ceiling before it touches real money. Acceptance test: the loop exhausts its own plan and stops.</p>
-<h2>The takeaway</h2>
+<h2 id="the-takeaway">The takeaway<a class="h2-anchor" href="#the-takeaway" aria-label="Permalink to this section">¶</a></h2>
 <p>Warnings decay into ignored banners. Blocks hold. These four steps — plan-bound ceilings, fail-closed blocks, free metering, and a sandbox replay — are the core of a spend-control policy that turns a catastrophic "oops" into a recorded, contained event. The copy-paste templates for the spend-limit policy, the plan-bound schema, and the audit-row format live in the <a href="https://koalstin.gumroad.com/l/hdigmr">Studio Edition playbook</a> — the four steps above are the whole system, the templates just save you typing.</p>
   </article>
   <nav class="article-back" aria-label="Article navigation" style="max-width:720px;margin:28px auto 0"><a href="../articles/" style="color:var(--accent)">&larr; All articles</a></nav>
 
 <section class="related-articles" aria-label="Related articles">
-  <h2>Related articles</h2>
+  <h2 id="related-articles">Related articles<a class="h2-anchor" href="#related-articles" aria-label="Permalink to this section">¶</a></h2>
   <ul>
     <li><a href="observability-vs-governance.html"><strong>Observability Answers “What Did It Do.” Governance Answers “Was It Allowed To.”</strong><div class="rd">Teams buy observability and call it governance. But dashboards show what happened; only fail-closed controls stop what should not happen. The $0 spend ceiling t</div></a></li>
     <li><a href="agent-governance-faq.html"><strong>AI Agent Governance FAQ: Permission Prompts, Costs, Identity, and Payments</strong><div class="rd">Straight answers to the most-asked agent governance questions from practitioner communities: prompt fatigue, runaway costs, agent inventory, and payment permiss</div></a></li>
@@ -137,7 +143,7 @@ gtag('config', 'G-541TCHWW98');
 </section>
 
   <div class="cta">
-    <h2>Put this into practice</h2>
+    <h2 id="put-this-into-practice">Put this into practice<a class="h2-anchor" href="#put-this-into-practice" aria-label="Permalink to this section">¶</a></h2>
     <p>The Governed Agent Mesh Playbook — Studio Edition ($29) gives you the full system: tiering, approvals, spend controls, and incident response, ready to run.</p>
     <a class="btn" href="https://koalstin.gumroad.com/l/hdigmr">Get the Studio Edition — $29</a> <p style="margin-top:12px"><a href="../products/" style="color:var(--accent)">Or browse the full catalog of 63 products &rarr;</a></p>
   </div>
@@ -157,6 +163,14 @@ function fallback(url){var i=document.createElement('input');i.value=url;i.setAt
 b.addEventListener('click',function(){var url=window.location.href;
 if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(url).then(done,function(){fallback(url)})}
 else{fallback(url)}});})();
+</script>
+<script>
+// Humanize "Updated <time>" stamps + add h2 section anchors (progressive enhancement).
+(function(){
+document.querySelectorAll('p.updated time[datetime]').forEach(function(t){var v=t.getAttribute('datetime');var d=new Date(v+'T12:00:00');if(!isNaN(d)){t.textContent=d.toLocaleDateString('en-US',{month:'long',day:'numeric',year:'numeric'});}});
+function slug(s){return s.toLowerCase().trim().replace(/[^a-z0-9\u00C0-\u024F]+/g,'-').replace(/^-+|-+$/g,'')||'section';}
+var seen={};document.querySelectorAll('h2').forEach(function(h){if(h.querySelector('.h2-anchor'))return;var id=h.id||slug(h.textContent);if(seen[id]){var n=2;while(seen[id+'-'+n])n++;id=id+'-'+n;}seen[id]=1;h.id=id;var a=document.createElement('a');a.className='h2-anchor';a.href='#'+id;a.setAttribute('aria-label','Permalink to this section');a.textContent='\u00b6';h.appendChild(a);});
+})();
 </script>
 </body>
 </html>

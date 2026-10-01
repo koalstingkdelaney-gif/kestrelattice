@@ -66,6 +66,11 @@ gtag('config', 'G-541TCHWW98');
   .crumb a{color:var(--accent);text-decoration:none}
   h1{font-size:clamp(1.6rem,3vw + .8rem,2.1rem);font-weight:800;letter-spacing:-.02em;line-height:1.25;margin-bottom:8px;text-wrap:balance}
   .date{color:var(--muted);font-size:.85rem;margin-bottom:28px}
+  h2[id]{scroll-margin-top:84px}
+  .updated{color:var(--muted);font-size:.85rem;margin:-22px 0 28px}
+  h2 .h2-anchor{opacity:0;color:var(--accent);margin-left:.35em;text-decoration:none;font-size:.75em;vertical-align:middle;transition:opacity .15s var(--ease)}
+  h2:hover .h2-anchor,h2:focus-within .h2-anchor,.h2-anchor:focus-visible{opacity:1}
+  h2 .h2-anchor:hover{text-decoration:none}
   article h2{font-size:1.35rem;margin:32px 0 12px;letter-spacing:-.01em}
   article h3{font-size:1.1rem;margin:24px 0 10px}
   article p{margin:0 0 16px}
@@ -87,7 +92,7 @@ gtag('config', 'G-541TCHWW98');
   footer.site{border-top:1px solid var(--line);background:var(--bg-soft);padding:22px 0;margin-top:48px}
   footer.site .wrap{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px 16px;max-width:1040px;padding:0 24px}
   footer.site{color:var(--muted);font-size:.82rem}
-  footer.site a{color:var(--faint);text-decoration:none;margin-left:14px}
+  footer.site a{color:var(--muted);text-decoration:none;margin-left:14px}
   footer.site a:hover{color:var(--accent-bright)}
   @media(max-width:640px){nav.main a:not(:last-child){display:none}footer.site .wrap{justify-content:center;text-align:center}footer.site a{margin:0 7px}}
   .copy-link-row{margin:0 0 8px}
@@ -109,15 +114,16 @@ gtag('config', 'G-541TCHWW98');
 
   <h1>Buy the Observability, Build the Governance</h1>
   <p class="date"><time datetime="2026-09-30">Published September 30, 2026</time></p>
+  <p class="updated">Updated <time datetime="2026-09-30">September 30, 2026</time></p>
   <div class="copy-link-row"><button class="copy-link" id="copy-link" type="button" aria-label="Copy link to this article">Copy link</button></div>
 
   <article>
 <p>We are hitting the wall where prompt engineering stops being a solution and starts being a liability. In production, multi-agent systems do not fail because the LLM is "dumb"; they fail because there is no control plane enforcing boundaries. You cannot prompt your way out of a race condition or a privilege escalation.</p>
-<h2>Score vendors against the governance gap</h2>
+<h2 id="score-vendors-against-the-governance-gap">Score vendors against the governance gap<a class="h2-anchor" href="#score-vendors-against-the-governance-gap" aria-label="Permalink to this section">¶</a></h2>
 <p>The pattern that worked for us: buy the observability, build the governance. When we evaluated tools we ignored the feature lists and scored them against the governance gap. LangSmith at $39/seat/mo is excellent for trace-level debugging; AgentOps at $49–$199/mo gives you session replay and cost tracking; Helicone's free tier (10k requests/mo) handles proxy metering. All good tools. All of them answer "what happened," not "was it allowed to."</p>
-<h2>The missing control layer</h2>
+<h2 id="the-missing-control-layer">The missing control layer<a class="h2-anchor" href="#the-missing-control-layer" aria-label="Permalink to this section">¶</a></h2>
 <p>None sells the actual control layer as one plane: identity-scoped grants, hard-gated human approvals, per-plan spend ceilings that fail closed, hash-linked audit rows. That absence is the product gap — and it is also why the layer is cheap to own: six policies, two schemas, about a 14-day rollout.</p>
-<h2>Our rules</h2>
+<h2 id="our-rules">Our rules<a class="h2-anchor" href="#our-rules" aria-label="Permalink to this section">¶</a></h2>
 <ul>
 <li>Do not pay for a platform until we have metered real spend on the free tiers.</li>
 <li>Build the kill switch ourselves.</li>
@@ -129,7 +135,7 @@ gtag('config', 'G-541TCHWW98');
   <nav class="article-back" aria-label="Article navigation" style="max-width:720px;margin:28px auto 0"><a href="../articles/" style="color:var(--accent)">&larr; All articles</a></nav>
 
 <section class="related-articles" aria-label="Related articles">
-  <h2>Related articles</h2>
+  <h2 id="related-articles">Related articles<a class="h2-anchor" href="#related-articles" aria-label="Permalink to this section">¶</a></h2>
   <ul>
     <li><a href="agent-governance-faq.html"><strong>AI Agent Governance FAQ: Permission Prompts, Costs, Identity, and Payments</strong><div class="rd">Straight answers to the most-asked agent governance questions from practitioner communities: prompt fatigue, runaway costs, agent inventory, and payment permiss</div></a></li>
     <li><a href="ai-agent-incident-response-plan.html"><strong>AI Agent Incident Response Plan: The Complete Runbook</strong><div class="rd">Build a robust AI agent incident response plan to stop runaway loops, prompt injections, and unauthorized actions before they break production.</div></a></li>
@@ -138,7 +144,7 @@ gtag('config', 'G-541TCHWW98');
 </section>
 
   <div class="cta">
-    <h2>Put this into practice</h2>
+    <h2 id="put-this-into-practice">Put this into practice<a class="h2-anchor" href="#put-this-into-practice" aria-label="Permalink to this section">¶</a></h2>
     <p>The Governed Agent Mesh Playbook — Studio Edition ($29) gives you the full system: tiering, approvals, spend controls, and incident response, ready to run.</p>
     <a class="btn" href="https://koalstin.gumroad.com/l/hdigmr">Get the Studio Edition — $29</a> <p style="margin-top:12px"><a href="../products/" style="color:var(--accent)">Or browse the full catalog of 63 products &rarr;</a></p>
   </div>
@@ -158,6 +164,14 @@ function fallback(url){var i=document.createElement('input');i.value=url;i.setAt
 b.addEventListener('click',function(){var url=window.location.href;
 if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(url).then(done,function(){fallback(url)})}
 else{fallback(url)}});})();
+</script>
+<script>
+// Humanize "Updated <time>" stamps + add h2 section anchors (progressive enhancement).
+(function(){
+document.querySelectorAll('p.updated time[datetime]').forEach(function(t){var v=t.getAttribute('datetime');var d=new Date(v+'T12:00:00');if(!isNaN(d)){t.textContent=d.toLocaleDateString('en-US',{month:'long',day:'numeric',year:'numeric'});}});
+function slug(s){return s.toLowerCase().trim().replace(/[^a-z0-9\u00C0-\u024F]+/g,'-').replace(/^-+|-+$/g,'')||'section';}
+var seen={};document.querySelectorAll('h2').forEach(function(h){if(h.querySelector('.h2-anchor'))return;var id=h.id||slug(h.textContent);if(seen[id]){var n=2;while(seen[id+'-'+n])n++;id=id+'-'+n;}seen[id]=1;h.id=id;var a=document.createElement('a');a.className='h2-anchor';a.href='#'+id;a.setAttribute('aria-label','Permalink to this section');a.textContent='\u00b6';h.appendChild(a);});
+})();
 </script>
 </body>
 </html>

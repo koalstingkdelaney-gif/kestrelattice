@@ -55,6 +55,11 @@ gtag('config', 'G-541TCHWW98');
   .crumb a{color:var(--accent);text-decoration:none}
   h1{font-size:2rem;line-height:1.25;margin-bottom:8px}
   .date{color:var(--muted);font-size:.85rem;margin-bottom:28px}
+  h2[id]{scroll-margin-top:84px}
+  .updated{color:var(--muted);font-size:.85rem;margin:-22px 0 28px}
+  h2 .h2-anchor{opacity:0;color:var(--accent);margin-left:.35em;text-decoration:none;font-size:.75em;vertical-align:middle;transition:opacity .15s var(--ease)}
+  h2:hover .h2-anchor,h2:focus-within .h2-anchor,.h2-anchor:focus-visible{opacity:1}
+  h2 .h2-anchor:hover{text-decoration:none}
   article h2{font-size:1.35rem;margin:32px 0 12px}
   article h3{font-size:1.1rem;margin:24px 0 10px}
   article p{margin:0 0 16px}
@@ -94,13 +99,14 @@ gtag('config', 'G-541TCHWW98');
 
   <h1>Selling AI Products to Europe? Enterprise Buyers Will Ask for Agent Audit Trails</h1>
   <p class="date"><time datetime="2026-09-30">Published September 30, 2026</time></p>
+  <p class="updated">Updated <time datetime="2026-09-30">September 30, 2026</time></p>
   <div class="copy-link-row"><button class="copy-link" id="copy-link" type="button" aria-label="Copy link to this article">Copy link</button></div>
 
   <article>
 <p>Here's a sales dynamic most AI vendors haven't priced in yet: your enterprise buyers in the EU now have live AI Act obligations &mdash; and they're passing the evidence burden up the chain to you.</p>
 <p>A European bank, insurer, or manufacturer deploying your AI agent needs to show its regulator (and its own auditors) that the system is logged, overseen, and transparent. They can't evidence what you won't give them. So procurement questionnaires that used to ask about SOC 2 and data residency now ask: <em>show us the agent's audit trail. Show us the human oversight design. Show us the incident process.</em></p>
 <p>Vendors who can answer in a week close deals. Vendors who scramble for a quarter lose them.</p>
-<h2>What enterprise buyers actually ask for</h2>
+<h2 id="what-enterprise-buyers-actually-ask-for">What enterprise buyers actually ask for<a class="h2-anchor" href="#what-enterprise-buyers-actually-ask-for" aria-label="Permalink to this section">¶</a></h2>
 <p>Across RFPs and security reviews, the requests cluster into five artifacts:</p>
 <ol>
 <li><strong>Architecture and data-flow documentation</strong> &mdash; what the agent does, what data it touches, where that data goes, which models and tools are involved.</li>
@@ -109,7 +115,7 @@ gtag('config', 'G-541TCHWW98');
 <li><strong>An incident response runbook</strong> &mdash; what happens when the agent misbehaves, who is notified, how containment works, how the customer is informed.</li>
 <li><strong>Transparency and disclosure design</strong> &mdash; how end users are told they're interacting with AI, how synthetic content is marked (Article 50 is live as of August 2026).</li>
 </ol>
-<h2>Build a governance evidence pack</h2>
+<h2 id="build-a-governance-evidence-pack">Build a governance evidence pack<a class="h2-anchor" href="#build-a-governance-evidence-pack" aria-label="Permalink to this section">¶</a></h2>
 <p>Don't wait for the questionnaire. Assemble a standing evidence pack:</p>
 <ul>
 <li><strong>One architecture document</strong>, kept current with each release. Include a diagram even a non-technical buyer can follow.</li>
@@ -119,15 +125,15 @@ gtag('config', 'G-541TCHWW98');
 <li><strong>A short AI governance addendum</strong> for your DPA/MSA: who is provider vs. deployer for each component, what logging you retain and for how long, how you support the customer's own Article 12/14/50 duties.</li>
 </ul>
 <p>Update the pack every release. Date-stamp everything. Buyers trust maintained documents; they discount documents that smell like they were written the night before the review.</p>
-<h2>This is a global pattern, not just EU</h2>
+<h2 id="this-is-a-global-pattern-not-just-eu">This is a global pattern, not just EU<a class="h2-anchor" href="#this-is-a-global-pattern-not-just-eu" aria-label="Permalink to this section">¶</a></h2>
 <p>The EU is the strictest, but the direction is universal: Texas's TRAIGA (in force January 2026) lets the Attorney General demand system documentation; California's transparency laws require provenance; enterprise buyers everywhere are converging on &ldquo;prove your agents are governed.&rdquo; Build the evidence pack once and it serves every market.</p>
-<h2>Shorten your next security review</h2>
+<h2 id="shorten-your-next-security-review">Shorten your next security review<a class="h2-anchor" href="#shorten-your-next-security-review" aria-label="Permalink to this section">¶</a></h2>
 <p>If you're building the pack from scratch, start with proven templates rather than blank pages: our <a href="https://koalstin.gumroad.com/l/bvnnn">Audit-Trail Completeness Audit Template</a> ($19) tells you what a defensible trail contains, the <a href="https://koalstin.gumroad.com/l/incident-communication-templates">Incident Communication Template Pack</a> ($19) covers customer notification, and the <a href="https://koalstin.gumroad.com/l/hdigmr">Studio Edition playbook</a> ($29) is the full governance system your buyers want to see behind the product.</p>
   </article>
   <nav class="article-back" aria-label="Article navigation" style="max-width:720px;margin:28px auto 0"><a href="../articles/" style="color:var(--accent)">&larr; All articles</a> <span style="color:var(--muted)">·</span> <a href="../changelog.html" style="color:var(--accent)">Changelog</a></nav>
 
 <section class="related-articles" aria-label="Related articles">
-  <h2>Related articles</h2>
+  <h2 id="related-articles">Related articles<a class="h2-anchor" href="#related-articles" aria-label="Permalink to this section">¶</a></h2>
   <ul>
     <li><a href="eu-ai-act-agent-evidence-checklist.html"><strong>The EU AI Act Is Enforcing Now: The AI Agent Evidence Checklist for Deployers</strong><div class="rd">EU AI Act enforcement began August 2, 2026. If your company deploys AI agents that touch EU users, here is the evidence checklist regulators and enterprise cust</div></a></li>
     <li><a href="ai-agent-permissions-audit.html"><strong>The AI Agent Permissions Audit: 12 Questions to Ask Before Your Agents Touch Production</strong><div class="rd">A practical permissions audit for AI agents in production: 12 questions covering grants, credential handling, spend ceilings, and audit trails — before somethin</div></a></li>
@@ -136,7 +142,7 @@ gtag('config', 'G-541TCHWW98');
 </section>
 
   <div class="cta">
-    <h2>Put this into practice</h2>
+    <h2 id="put-this-into-practice">Put this into practice<a class="h2-anchor" href="#put-this-into-practice" aria-label="Permalink to this section">¶</a></h2>
     <p>The Governed Agent Mesh Playbook — Studio Edition ($29) gives you the full system: tiering, approvals, spend controls, and incident response, ready to run.</p>
     <a class="btn" href="https://koalstin.gumroad.com/l/hdigmr">Get the Studio Edition — $29</a> <p style="margin-top:12px"><a href="../products/" style="color:var(--accent)">Or browse the full catalog of 63 products &rarr;</a></p>
   </div>
@@ -154,6 +160,14 @@ function fallback(url){var i=document.createElement('input');i.value=url;i.setAt
 b.addEventListener('click',function(){var url=window.location.href;
 if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(url).then(done,function(){fallback(url)})}
 else{fallback(url)}});})();
+</script>
+<script>
+// Humanize "Updated <time>" stamps + add h2 section anchors (progressive enhancement).
+(function(){
+document.querySelectorAll('p.updated time[datetime]').forEach(function(t){var v=t.getAttribute('datetime');var d=new Date(v+'T12:00:00');if(!isNaN(d)){t.textContent=d.toLocaleDateString('en-US',{month:'long',day:'numeric',year:'numeric'});}});
+function slug(s){return s.toLowerCase().trim().replace(/[^a-z0-9\u00C0-\u024F]+/g,'-').replace(/^-+|-+$/g,'')||'section';}
+var seen={};document.querySelectorAll('h2').forEach(function(h){if(h.querySelector('.h2-anchor'))return;var id=h.id||slug(h.textContent);if(seen[id]){var n=2;while(seen[id+'-'+n])n++;id=id+'-'+n;}seen[id]=1;h.id=id;var a=document.createElement('a');a.className='h2-anchor';a.href='#'+id;a.setAttribute('aria-label','Permalink to this section');a.textContent='\u00b6';h.appendChild(a);});
+})();
 </script>
 </body>
 </html>

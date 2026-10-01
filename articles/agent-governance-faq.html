@@ -66,6 +66,11 @@ gtag('config', 'G-541TCHWW98');
   .crumb a{color:var(--accent);text-decoration:none}
   h1{font-size:clamp(1.6rem,3vw + .8rem,2.1rem);font-weight:800;letter-spacing:-.02em;line-height:1.25;margin-bottom:8px;text-wrap:balance}
   .date{color:var(--muted);font-size:.85rem;margin-bottom:28px}
+  h2[id]{scroll-margin-top:84px}
+  .updated{color:var(--muted);font-size:.85rem;margin:-22px 0 28px}
+  h2 .h2-anchor{opacity:0;color:var(--accent);margin-left:.35em;text-decoration:none;font-size:.75em;vertical-align:middle;transition:opacity .15s var(--ease)}
+  h2:hover .h2-anchor,h2:focus-within .h2-anchor,.h2-anchor:focus-visible{opacity:1}
+  h2 .h2-anchor:hover{text-decoration:none}
   article h2{font-size:1.35rem;margin:32px 0 12px;letter-spacing:-.01em}
   article h3{font-size:1.1rem;margin:24px 0 10px}
   article p{margin:0 0 16px}
@@ -87,7 +92,7 @@ gtag('config', 'G-541TCHWW98');
   footer.site{border-top:1px solid var(--line);background:var(--bg-soft);padding:22px 0;margin-top:48px}
   footer.site .wrap{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px 16px;max-width:1040px;padding:0 24px}
   footer.site{color:var(--muted);font-size:.82rem}
-  footer.site a{color:var(--faint);text-decoration:none;margin-left:14px}
+  footer.site a{color:var(--muted);text-decoration:none;margin-left:14px}
   footer.site a:hover{color:var(--accent-bright)}
   @media(max-width:640px){nav.main a:not(:last-child){display:none}footer.site .wrap{justify-content:center;text-align:center}footer.site a{margin:0 7px}}
   .copy-link-row{margin:0 0 8px}
@@ -109,23 +114,24 @@ gtag('config', 'G-541TCHWW98');
 
   <h1>AI Agent Governance FAQ: Permission Prompts, Costs, Identity, and Payments</h1>
   <p class="date"><time datetime="2026-09-30">Published September 30, 2026</time></p>
+  <p class="updated">Updated <time datetime="2026-09-30">September 30, 2026</time></p>
   <div class="copy-link-row"><button class="copy-link" id="copy-link" type="button" aria-label="Copy link to this article">Copy link</button></div>
 
   <article>
 <p>These are the agent governance questions that keep surfacing in practitioner communities. Straight answers, grounded in the <a href="https://koalstin.gumroad.com/l/hdigmr">governed agent mesh playbook</a>.</p>
-<h2>Does anyone actually read the agent permission prompts anymore? I just click approve now.</h2>
+<h2 id="does-anyone-actually-read-the-agent-permission-prompts-anymore-i-just-click-approve-now">Does anyone actually read the agent permission prompts anymore? I just click approve now.<a class="h2-anchor" href="#does-anyone-actually-read-the-agent-permission-prompts-anymore-i-just-click-approve-now" aria-label="Permalink to this section">¶</a></h2>
 <p>You are describing prompt fatigue, and the fix is not more discipline — it is fewer prompts. The playbook recommends risk-tiered approval gates instead of a prompt for every action: automate low-risk steps and reserve human intervention for high-stakes actions like money, contracts, outreach, or permission changes. Follow the rollout order — identity first, then spend caps, then gates on consequential actions — so each human decision actually means something.</p>
-<h2>How are people keeping long-running AI agent costs under control?</h2>
+<h2 id="how-are-people-keeping-long-running-ai-agent-costs-under-control">How are people keeping long-running AI agent costs under control?<a class="h2-anchor" href="#how-are-people-keeping-long-running-ai-agent-costs-under-control" aria-label="Permalink to this section">¶</a></h2>
 <p>Set hard budget ceilings per plan, workload, and expiry window, and fail closed when a limit is hit: the run is blocked and recorded as blocked — not retried, warned, or billed. If your framework has no native budget controls, put a proxy or meter in front of it as a watchdog; free tiers like Helicone's (10k requests/mo) or LangWatch's (200k events/mo) cover most teams starting out.</p>
-<h2>How are you tracking which agents you have and who owns them?</h2>
+<h2 id="how-are-you-tracking-which-agents-you-have-and-who-owns-them">How are you tracking which agents you have and who owns them?<a class="h2-anchor" href="#how-are-you-tracking-which-agents-you-have-and-who-owns-them" aria-label="Permalink to this section">¶</a></h2>
 <p>Assign every agent a stable, owner-scoped identity and reject anonymous or shared actors, so every action is attributable to a specific owner. That identity is what the audit trail joins to: requests, approvals, blocks, and outcomes are all recorded against it. "Who gave it authority" should be a query, not an incident review.</p>
-<h2>AI agents are going to need their own payment permissions. How should that work?</h2>
+<h2 id="ai-agents-are-going-to-need-their-own-payment-permissions-how-should-that-work">AI agents are going to need their own payment permissions. How should that work?<a class="h2-anchor" href="#ai-agents-are-going-to-need-their-own-payment-permissions-how-should-that-work" aria-label="Permalink to this section">¶</a></h2>
 <p>The playbook handles this with explicit capability grants evaluated against a grant store — every grant decision recorded and linked to the acting identity — plus risk-tiered approval gates on money actions. A capability request with no recorded identity cannot auto-grant and parks as REQUIRES_OWNER_ACTION. One caveat: the playbook does not give specific integration instructions for payment providers or banking APIs (Stripe virtual cards, etc.) — the mechanics of issuing spend-capped instruments to agents need to be designed for your stack. The full grant and approval-gate system is in the <a href="https://koalstin.gumroad.com/l/hdigmr">Studio Edition playbook</a>.</p>
   </article>
   <nav class="article-back" aria-label="Article navigation" style="max-width:720px;margin:28px auto 0"><a href="../articles/" style="color:var(--accent)">&larr; All articles</a></nav>
 
 <section class="related-articles" aria-label="Related articles">
-  <h2>Related articles</h2>
+  <h2 id="related-articles">Related articles<a class="h2-anchor" href="#related-articles" aria-label="Permalink to this section">¶</a></h2>
   <ul>
     <li><a href="agent-permissions-tier-by-consequence.html"><strong>Agent Permissions and Identity: Tier by Consequence, Not Frequency</strong><div class="rd">Who can use which agent? What can each agent access? A three-tier permission model — hard-gated, bounded auto, draft-only — plus the heuristics for tiering read</div></a></li>
     <li><a href="ai-agent-incident-response-plan.html"><strong>AI Agent Incident Response Plan: The Complete Runbook</strong><div class="rd">Build a robust AI agent incident response plan to stop runaway loops, prompt injections, and unauthorized actions before they break production.</div></a></li>
@@ -134,7 +140,7 @@ gtag('config', 'G-541TCHWW98');
 </section>
 
   <div class="cta">
-    <h2>Put this into practice</h2>
+    <h2 id="put-this-into-practice">Put this into practice<a class="h2-anchor" href="#put-this-into-practice" aria-label="Permalink to this section">¶</a></h2>
     <p>The Governed Agent Mesh Playbook — Studio Edition ($29) gives you the full system: tiering, approvals, spend controls, and incident response, ready to run.</p>
     <a class="btn" href="https://koalstin.gumroad.com/l/hdigmr">Get the Studio Edition — $29</a> <p style="margin-top:12px"><a href="../products/" style="color:var(--accent)">Or browse the full catalog of 63 products &rarr;</a></p>
   </div>
@@ -154,6 +160,14 @@ function fallback(url){var i=document.createElement('input');i.value=url;i.setAt
 b.addEventListener('click',function(){var url=window.location.href;
 if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(url).then(done,function(){fallback(url)})}
 else{fallback(url)}});})();
+</script>
+<script>
+// Humanize "Updated <time>" stamps + add h2 section anchors (progressive enhancement).
+(function(){
+document.querySelectorAll('p.updated time[datetime]').forEach(function(t){var v=t.getAttribute('datetime');var d=new Date(v+'T12:00:00');if(!isNaN(d)){t.textContent=d.toLocaleDateString('en-US',{month:'long',day:'numeric',year:'numeric'});}});
+function slug(s){return s.toLowerCase().trim().replace(/[^a-z0-9\u00C0-\u024F]+/g,'-').replace(/^-+|-+$/g,'')||'section';}
+var seen={};document.querySelectorAll('h2').forEach(function(h){if(h.querySelector('.h2-anchor'))return;var id=h.id||slug(h.textContent);if(seen[id]){var n=2;while(seen[id+'-'+n])n++;id=id+'-'+n;}seen[id]=1;h.id=id;var a=document.createElement('a');a.className='h2-anchor';a.href='#'+id;a.setAttribute('aria-label','Permalink to this section');a.textContent='\u00b6';h.appendChild(a);});
+})();
 </script>
 </body>
 </html>

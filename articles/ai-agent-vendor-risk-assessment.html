@@ -69,6 +69,11 @@ gtag('config', 'G-541TCHWW98');
   .crumb a{color:var(--accent);text-decoration:none}
   h1{font-size:clamp(1.6rem,3vw + .8rem,2.1rem);font-weight:800;letter-spacing:-.02em;line-height:1.25;margin-bottom:8px;text-wrap:balance}
   .date{color:var(--muted);font-size:.85rem;margin-bottom:28px}
+  h2[id]{scroll-margin-top:84px}
+  .updated{color:var(--muted);font-size:.85rem;margin:-22px 0 28px}
+  h2 .h2-anchor{opacity:0;color:var(--accent);margin-left:.35em;text-decoration:none;font-size:.75em;vertical-align:middle;transition:opacity .15s var(--ease)}
+  h2:hover .h2-anchor,h2:focus-within .h2-anchor,.h2-anchor:focus-visible{opacity:1}
+  h2 .h2-anchor:hover{text-decoration:none}
   article h2{font-size:1.35rem;margin:32px 0 12px;letter-spacing:-.01em}
   article h3{font-size:1.1rem;margin:24px 0 10px}
   article p{margin:0 0 16px}
@@ -90,7 +95,7 @@ gtag('config', 'G-541TCHWW98');
   footer.site{border-top:1px solid var(--line);background:var(--bg-soft);padding:22px 0;margin-top:48px}
   footer.site .wrap{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px 16px;max-width:1040px;padding:0 24px}
   footer.site{color:var(--muted);font-size:.82rem}
-  footer.site a{color:var(--faint);text-decoration:none;margin-left:14px}
+  footer.site a{color:var(--muted);text-decoration:none;margin-left:14px}
   footer.site a:hover{color:var(--accent-bright)}
   @media(max-width:640px){nav.main a:not(:last-child){display:none}footer.site .wrap{justify-content:center;text-align:center}footer.site a{margin:0 7px}}
 
@@ -123,16 +128,17 @@ gtag('config', 'G-541TCHWW98');
 
   <h1>AI Agent Vendor Risk Assessment: 20 Questions to Ask Before You Buy a Third-Party Agent</h1>
   <p class="date"><time datetime="2026-10-01">Published 2026-10-01</time> · <span class="reading-time" id="reading-time"></span></p>
+  <p class="updated">Updated <time datetime="2026-10-01">October 1, 2026</time></p>
   <div class="copy-link-row"><button class="copy-link" id="copy-link" type="button" aria-label="Copy link to this article">Copy link</button></div>
 
   <article>
-<h2>The Four-Percent Problem: Why Speed Kills Governance</h2>
+<h2 id="the-four-percent-problem-why-speed-kills-governance">The Four-Percent Problem: Why Speed Kills Governance<a class="h2-anchor" href="#the-four-percent-problem-why-speed-kills-governance" aria-label="Permalink to this section">¶</a></h2>
 
 <p>Gartner projects that 40% of enterprise applications will embed task-specific AI agents by the end of 2026, a dramatic leap from less than 5% adoption in 2025. This surge is not just a trend; it is a structural shift in how software operates. As teams scramble to integrate these autonomous capabilities, they are frequently bypassing the traditional software procurement rigor that governed SaaS rollouts for the last decade. The result is a growing inventory of third-party AI agents that operate with permissions, data access, and financial exposure that few stakeholders fully understand.</p>
 
 <p>When you buy a tool, you inherit its governance gaps. Unlike a static API, an AI agent makes decisions. It interprets intent, selects tools, and executes actions. If the vendor's architecture lacks robust identity management or spend controls, your organization absorbs the risk. This is not a hypothetical concern. The market is moving faster than the legal and security teams can keep up. You need a standardized way to evaluate these vendors before you sign the contract. This checklist provides the due-diligence questions you must ask to ensure the agent you deploy is governed, observable, and safe.</p>
 
-<h2>Identity and Permission Architecture</h2>
+<h2 id="identity-and-permission-architecture">Identity and Permission Architecture<a class="h2-anchor" href="#identity-and-permission-architecture" aria-label="Permalink to this section">¶</a></h2>
 
 <p>Agents are not users, but they must act as users. The first failure point in most agent deployments is identity management. If an agent uses a shared service account with broad permissions, you have created a single point of failure. You need to know how the vendor handles the digital identity of the agent itself.</p>
 
@@ -145,7 +151,7 @@ gtag('config', 'G-541TCHWW98');
 
 <p>If a vendor cannot demonstrate granular, per-agent identity control, you are effectively giving a robot your root password. This is a non-negotiable baseline for any enterprise deployment.</p>
 
-<h2>Human Approval Gates and Kill Switches</h2>
+<h2 id="human-approval-gates-and-kill-switches">Human Approval Gates and Kill Switches<a class="h2-anchor" href="#human-approval-gates-and-kill-switches" aria-label="Permalink to this section">¶</a></h2>
 
 <p>Autonomy is a spectrum, but your tolerance for error is likely at the conservative end. You must define which actions are allowed to proceed without human intervention. The most dangerous agents are those that can execute high-stakes actions — such as transferring funds, deleting records, or sending external communications — without a checkpoint.</p>
 
@@ -158,7 +164,7 @@ gtag('config', 'G-541TCHWW98');
 
 <p>Ask your vendor to demonstrate the kill switch in a live environment. Do not take their word for it. If they cannot show you how to stop the bleeding in under ten seconds, they are not ready for production traffic.</p>
 
-<h2>Spend Controls and Financial Liability</h2>
+<h2 id="spend-controls-and-financial-liability">Spend Controls and Financial Liability<a class="h2-anchor" href="#spend-controls-and-financial-liability" aria-label="Permalink to this section">¶</a></h2>
 
 <p>AI agents consume resources. They make API calls, process tokens, and interact with paid services. Without strict financial guardrails, a logical error in the agent's reasoning can lead to catastrophic costs. There are reported cases of developers facing a single-incident API burn of over $700 due to infinite loops where the agent repeatedly called an external service without a termination condition. While $700 may seem manageable for a large enterprise, it represents a failure of control. Multiply that by the volume of agents you deploy, and the exposure becomes significant.</p>
 
@@ -171,7 +177,7 @@ gtag('config', 'G-541TCHWW98');
 
 <p>Financial control is not just about saving money; it is about stability. A system that can halt itself when costs exceed a threshold is a safer system than one that relies on human monitoring to catch errors.</p>
 
-<h2>Audit Trails and Evidence Posture</h2>
+<h2 id="audit-trails-and-evidence-posture">Audit Trails and Evidence Posture<a class="h2-anchor" href="#audit-trails-and-evidence-posture" aria-label="Permalink to this section">¶</a></h2>
 
 <p>In the event of an incident, you will need to reconstruct what the agent did, when it did it, and why. The vendor's logging capabilities determine whether you can perform a meaningful post-incident review. Vague or incomplete logs are a liability.</p>
 
@@ -184,7 +190,7 @@ gtag('config', 'G-541TCHWW98');
 
 <p>Do not assume that because the vendor provides a dashboard, you have sufficient evidence. Dashboards are for human consumption; logs are for forensic analysis. Ensure you have access to the raw data.</p>
 
-<h2>Data Handling and Privacy</h2>
+<h2 id="data-handling-and-privacy">Data Handling and Privacy<a class="h2-anchor" href="#data-handling-and-privacy" aria-label="Permalink to this section">¶</a></h2>
 
 <p>Agents need context to function. They may process customer data, internal documents, or proprietary code. You need to understand how this data is handled, stored, and potentially used for model improvement.</p>
 
@@ -197,7 +203,7 @@ gtag('config', 'G-541TCHWW98');
 
 <p>Data privacy is not just a legal issue; it is a trust issue. If your customers or employees know their data is being processed by an opaque third-party agent, you risk reputational damage. Transparency is key.</p>
 
-<h2>Commercial Terms and Exit Strategy</h2>
+<h2 id="commercial-terms-and-exit-strategy">Commercial Terms and Exit Strategy<a class="h2-anchor" href="#commercial-terms-and-exit-strategy" aria-label="Permalink to this section">¶</a></h2>
 
 <p>The vendor landscape is fragmented. You will see pricing structures ranging from a $29/month Core plan for individual developers to Enterprise tiers costing $2,000 to $2,499/month for advanced observability and support. This wide spread reflects different levels of service and capability. However, the cost is only part of the equation. You must consider the terms of engagement and your ability to leave.</p>
 
@@ -210,7 +216,7 @@ gtag('config', 'G-541TCHWW98');
 
 <p>Your exit strategy is as important as your entry strategy. A vendor that makes it difficult to leave is a vendor that has less incentive to maintain high service levels after you have signed.</p>
 
-<h2>The One-Week Assessment Plan</h2>
+<h2 id="the-one-week-assessment-plan">The One-Week Assessment Plan<a class="h2-anchor" href="#the-one-week-assessment-plan" aria-label="Permalink to this section">¶</a></h2>
 
 <p>You do not need months to evaluate a vendor. You need a structured, one-week process that forces clarity. Here is a practical plan to execute this due diligence efficiently.</p>
 
@@ -223,7 +229,7 @@ gtag('config', 'G-541TCHWW98');
 
 <p>This process is designed to be rigorous but fast. It shifts the burden of proof to the vendor. They must demonstrate that they have solved the governance problems, not just the AI problem.</p>
 
-<h2>Conclusion: The Governed Agent Mesh Playbook</h2>
+<h2 id="conclusion-the-governed-agent-mesh-playbook">Conclusion: The Governed Agent Mesh Playbook<a class="h2-anchor" href="#conclusion-the-governed-agent-mesh-playbook" aria-label="Permalink to this section">¶</a></h2>
 
 <p>Implementing this checklist is the first step, but you need a framework to manage the agents you deploy. The <a href="https://koalstin.gumroad.com/l/hdigmr"><strong>Governed Agent Mesh Playbook — Studio Edition</strong></a> ($29) provides the operational structure to keep you honest. It includes a vendor matrix that helps you track what each tool does and does not provide, ensuring you are not relying on a vendor that lacks critical safety features. Additionally, it offers approval and spend-limit policy templates that you can adopt immediately with your winning vendor. These templates translate your due diligence findings into enforceable internal policies. Do not leave governance to chance.</p>
 
@@ -236,7 +242,7 @@ gtag('config', 'G-541TCHWW98');
 </script>
 
 <section class="related-articles" aria-label="Related articles">
-  <h2>Related articles</h2>
+  <h2 id="related-articles">Related articles<a class="h2-anchor" href="#related-articles" aria-label="Permalink to this section">¶</a></h2>
   <ul>
     <li><a href="ai-agent-permissions-audit.html"><strong>The AI Agent Permissions Audit: 12 Questions to Ask Before Your Agents Touch Production</strong><div class="rd">A practical permissions audit for AI agents in production: 12 questions covering grants, credential handling, spend ceilings, and audit trails — before somethin</div></a></li>
     <li><a href="ai-agent-audit-log-schema-retention.html"><strong>AI Agent Audit Logs: What to Record, How Long to Keep It, and the Schema That Holds Up Under Review</strong><div class="rd">What belongs in an AI agent audit log: the minimum schema, tamper-evident storage, retention tiers, and what reviewers actually ask for.</div></a></li>
@@ -245,7 +251,7 @@ gtag('config', 'G-541TCHWW98');
 </section>
 
   <div class="cta">
-    <h2>Put this into practice</h2>
+    <h2 id="put-this-into-practice">Put this into practice<a class="h2-anchor" href="#put-this-into-practice" aria-label="Permalink to this section">¶</a></h2>
     <p>The Governed Agent Mesh Playbook — Studio Edition ($29) gives you the full system: tiering, approvals, spend controls, and incident response, ready to run.</p>
     <a class="btn" href="https://koalstin.gumroad.com/l/hdigmr">Get the Studio Edition — $29</a> <p style="margin-top:12px"><a href="../products/" style="color:var(--accent)">Or browse the full catalog of 63 products &rarr;</a></p>
   </div>
@@ -272,6 +278,14 @@ function fallback(url){var i=document.createElement('input');i.value=url;i.setAt
 b.addEventListener('click',function(){var url=window.location.href;
 if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(url).then(done,function(){fallback(url)})}
 else{fallback(url)}});})();
+</script>
+<script>
+// Humanize "Updated <time>" stamps + add h2 section anchors (progressive enhancement).
+(function(){
+document.querySelectorAll('p.updated time[datetime]').forEach(function(t){var v=t.getAttribute('datetime');var d=new Date(v+'T12:00:00');if(!isNaN(d)){t.textContent=d.toLocaleDateString('en-US',{month:'long',day:'numeric',year:'numeric'});}});
+function slug(s){return s.toLowerCase().trim().replace(/[^a-z0-9\u00C0-\u024F]+/g,'-').replace(/^-+|-+$/g,'')||'section';}
+var seen={};document.querySelectorAll('h2').forEach(function(h){if(h.querySelector('.h2-anchor'))return;var id=h.id||slug(h.textContent);if(seen[id]){var n=2;while(seen[id+'-'+n])n++;id=id+'-'+n;}seen[id]=1;h.id=id;var a=document.createElement('a');a.className='h2-anchor';a.href='#'+id;a.setAttribute('aria-label','Permalink to this section');a.textContent='\u00b6';h.appendChild(a);});
+})();
 </script>
 </body>
 </html>

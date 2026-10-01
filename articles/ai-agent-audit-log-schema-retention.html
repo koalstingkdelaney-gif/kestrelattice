@@ -69,6 +69,11 @@ gtag('config', 'G-541TCHWW98');
   .crumb a{color:var(--accent);text-decoration:none}
   h1{font-size:clamp(1.6rem,3vw + .8rem,2.1rem);font-weight:800;letter-spacing:-.02em;line-height:1.25;margin-bottom:8px;text-wrap:balance}
   .date{color:var(--muted);font-size:.85rem;margin-bottom:28px}
+  h2[id]{scroll-margin-top:84px}
+  .updated{color:var(--muted);font-size:.85rem;margin:-22px 0 28px}
+  h2 .h2-anchor{opacity:0;color:var(--accent);margin-left:.35em;text-decoration:none;font-size:.75em;vertical-align:middle;transition:opacity .15s var(--ease)}
+  h2:hover .h2-anchor,h2:focus-within .h2-anchor,.h2-anchor:focus-visible{opacity:1}
+  h2 .h2-anchor:hover{text-decoration:none}
   article h2{font-size:1.35rem;margin:32px 0 12px;letter-spacing:-.01em}
   article h3{font-size:1.1rem;margin:24px 0 10px}
   article p{margin:0 0 16px}
@@ -90,7 +95,7 @@ gtag('config', 'G-541TCHWW98');
   footer.site{border-top:1px solid var(--line);background:var(--bg-soft);padding:22px 0;margin-top:48px}
   footer.site .wrap{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px 16px;max-width:1040px;padding:0 24px}
   footer.site{color:var(--muted);font-size:.82rem}
-  footer.site a{color:var(--faint);text-decoration:none;margin-left:14px}
+  footer.site a{color:var(--muted);text-decoration:none;margin-left:14px}
   footer.site a:hover{color:var(--accent-bright)}
   @media(max-width:640px){nav.main a:not(:last-child){display:none}footer.site .wrap{justify-content:center;text-align:center}footer.site a{margin:0 7px}}
 
@@ -123,16 +128,17 @@ gtag('config', 'G-541TCHWW98');
 
   <h1>AI Agent Audit Logs: What to Record, How Long to Keep It, and the Schema That Holds Up Under Review</h1>
   <p class="date"><time datetime="2026-10-01">Published 2026-10-01</time> · <span class="reading-time" id="reading-time"></span></p>
+  <p class="updated">Updated <time datetime="2026-10-01">October 1, 2026</time></p>
   <div class="copy-link-row"><button class="copy-link" id="copy-link" type="button" aria-label="Copy link to this article">Copy link</button></div>
 
   <article>
-<h2>Why AI Agent Audit Logs Are the Non-Negotiable Evidence Layer</h2>
+<h2 id="why-ai-agent-audit-logs-are-the-non-negotiable-evidence-layer">Why AI Agent Audit Logs Are the Non-Negotiable Evidence Layer<a class="h2-anchor" href="#why-ai-agent-audit-logs-are-the-non-negotiable-evidence-layer" aria-label="Permalink to this section">¶</a></h2>
 
 <p>When deploying autonomous AI systems into production, teams quickly discover that standard application logging is entirely inadequate for autonomous workloads. Traditional web servers record predictable request-response cycles, but AI agents execute non-deterministic loops, chain iterative reasoning steps, call external APIs autonomously, and make hundreds of micro-decisions per task. Without an explicit, dedicated evidence layer, debugging a misbehaving agent becomes an exercise in guesswork. Builders on Hacker News (2026) have pointed out that multi-agent orchestration makes permissions and identity intensely critical, raising fundamental questions about who can use which agent and what each agent can access.</p>
 
 <p>The operational risks of running agents blind are no longer theoretical. Developers on Reddit (r/IndieDev, 2025) report significant API budget burns from runaway agents looping uncontrollably through recursive tool calls. At the same time, maintaining visibility across complex architectures is exceptionally difficult; developers on Reddit (r/aiagents, 2026) note that tracing multi-agent swarms is a nightmare without dedicated observability and auditing tooling. As enterprise adoption accelerates &mdash; Gartner forecasts that 40% of enterprise applications will embed task-specific AI agents by the end of 2026, up from less than 5% in 2025 &mdash; the pressure to maintain strict operational control has never been higher. Audit logs are the foundational data layer required to prove compliance, debug failures, control costs, and maintain security in production.</p>
 
-<h2>The Minimum Viable Audit Schema for AI Agents</h2>
+<h2 id="the-minimum-viable-audit-schema-for-ai-agents">The Minimum Viable Audit Schema for AI Agents<a class="h2-anchor" href="#the-minimum-viable-audit-schema-for-ai-agents" aria-label="Permalink to this section">¶</a></h2>
 
 <p>To withstand technical review, security investigations, and regulatory scrutiny, every agentic action must be recorded using a standardized schema. Relying on unstructured text logs or scattered console outputs makes automated analysis and forensics nearly impossible. Every single execution step taken by an agent &mdash; from a simple database query to a high-risk financial transaction &mdash; must emit a structured log row capturing both the operational context and the deterministic inputs and outputs.</p>
 
@@ -207,7 +213,7 @@ gtag('config', 'G-541TCHWW98');
 
 <p>Using cryptographic hashes for inputs and outputs (such as SHA-256) allows engineering teams to prove precisely what data the model received and generated without bloating log storage with raw Personally Identifiable Information (PII) or massive prompt payloads. Storing the exact prompt and response externally in a secure object store while referencing only their hashes in the audit table creates a secure, efficient, and review-ready architecture.</p>
 
-<h2>Retention Policy Guidance by Risk Tier</h2>
+<h2 id="retention-policy-guidance-by-risk-tier">Retention Policy Guidance by Risk Tier<a class="h2-anchor" href="#retention-policy-guidance-by-risk-tier" aria-label="Permalink to this section">¶</a></h2>
 
 <p>Deciding how long to keep AI audit logs requires balancing legal compliance, security forensics requirements, and cloud storage overhead. Because different autonomous workflows carry vastly different operational and financial risks, applying a single blanket retention window across all agents is inefficient and risky. Organizations should segment their agent deployments into distinct risk tiers.</p>
 
@@ -222,7 +228,7 @@ gtag('config', 'G-541TCHWW98');
   Includes agents authorized to execute financial transactions, manage healthcare data, issue automated refunds, or deploy infrastructure code without mandatory human intervention. These agents demand long-term log retention matching strict regulatory obligations and financial audit cycles, establishing a 3-to-7-year baseline to ensure complete historical accountability.</li>
 </ul>
 
-<h2>Tamper-Evident Logging Mechanisms</h2>
+<h2 id="tamper-evident-logging-mechanisms">Tamper-Evident Logging Mechanisms<a class="h2-anchor" href="#tamper-evident-logging-mechanisms" aria-label="Permalink to this section">¶</a></h2>
 
 <p>Standard log files stored on local disk or default cloud buckets can be quietly altered, deleted, or corrupted by malicious actors or compromised container processes. To satisfy rigorous technical audits, AI agent audit trails must be verifiably tamper-evident. Implementing basic cryptographic guarantees ensures that any unauthorized modification or deletion of log entries is immediately detectable.</p>
 
@@ -232,7 +238,7 @@ gtag('config', 'G-541TCHWW98');
 
 <p><strong>Cryptographic Hash Chaining:</strong> To detect even single-byte alterations within historical log streams, implement cryptographic hash chaining similar to a lightweight blockchain structure. Each audit log entry calculates its hash based on its own payload data combined with the cryptographic hash of the immediately preceding log entry (H&#8346; = SHA256(data&#8346; &#8741; H&#8346;&#8320;&#8321;)). If an attacker attempts to alter a log row from three weeks ago, every subsequent hash in the chain becomes mathematically invalid, providing instant and unmistakable proof of tampering during a security review.</p>
 
-<h2>What Reviewers and Auditors Actually Ask For</h2>
+<h2 id="what-reviewers-and-auditors-actually-ask-for">What Reviewers and Auditors Actually Ask For<a class="h2-anchor" href="#what-reviewers-and-auditors-actually-ask-for" aria-label="Permalink to this section">¶</a></h2>
 
 <p>When external auditors, internal compliance officers, or regulatory bodies examine an enterprise AI deployment, they rarely look at raw source code. Instead, they examine the evidence of governance in action. Reflecting global regulatory themes &mdash; such as the transparency, human oversight, and record-keeping mandates found in the EU AI Act and emerging US state AI legislation &mdash; reviewers systematically request proof that the organization maintains total operational oversight over its autonomous systems.</p>
 
@@ -256,7 +262,7 @@ gtag('config', 'G-541TCHWW98');
 </script>
 
 <section class="related-articles" aria-label="Related articles">
-  <h2>Related articles</h2>
+  <h2 id="related-articles">Related articles<a class="h2-anchor" href="#related-articles" aria-label="Permalink to this section">¶</a></h2>
   <ul>
     <li><a href="ai-agent-vendor-risk-assessment.html"><strong>AI Agent Vendor Risk Assessment: 20 Questions to Ask Before You Buy a Third-Party Agent</strong><div class="rd">20 due-diligence questions to ask before buying a third-party AI agent: identity, approvals, spend controls, audit logs, data handling, exit terms.</div></a></li>
     <li><a href="ai-agent-permissions-audit.html"><strong>The AI Agent Permissions Audit: 12 Questions to Ask Before Your Agents Touch Production</strong><div class="rd">A practical permissions audit for AI agents in production: 12 questions covering grants, credential handling, spend ceilings, and audit trails — before somethin</div></a></li>
@@ -265,7 +271,7 @@ gtag('config', 'G-541TCHWW98');
 </section>
 
   <div class="cta">
-    <h2>Put this into practice</h2>
+    <h2 id="put-this-into-practice">Put this into practice<a class="h2-anchor" href="#put-this-into-practice" aria-label="Permalink to this section">¶</a></h2>
     <p>The Governed Agent Mesh Playbook — Studio Edition ($29) gives you the full system: tiering, approvals, spend controls, and incident response, ready to run.</p>
     <a class="btn" href="https://koalstin.gumroad.com/l/hdigmr">Get the Studio Edition — $29</a> <p style="margin-top:12px"><a href="../products/" style="color:var(--accent)">Or browse the full catalog of 63 products &rarr;</a></p>
   </div>
@@ -292,6 +298,14 @@ function fallback(url){var i=document.createElement('input');i.value=url;i.setAt
 b.addEventListener('click',function(){var url=window.location.href;
 if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(url).then(done,function(){fallback(url)})}
 else{fallback(url)}});})();
+</script>
+<script>
+// Humanize "Updated <time>" stamps + add h2 section anchors (progressive enhancement).
+(function(){
+document.querySelectorAll('p.updated time[datetime]').forEach(function(t){var v=t.getAttribute('datetime');var d=new Date(v+'T12:00:00');if(!isNaN(d)){t.textContent=d.toLocaleDateString('en-US',{month:'long',day:'numeric',year:'numeric'});}});
+function slug(s){return s.toLowerCase().trim().replace(/[^a-z0-9\u00C0-\u024F]+/g,'-').replace(/^-+|-+$/g,'')||'section';}
+var seen={};document.querySelectorAll('h2').forEach(function(h){if(h.querySelector('.h2-anchor'))return;var id=h.id||slug(h.textContent);if(seen[id]){var n=2;while(seen[id+'-'+n])n++;id=id+'-'+n;}seen[id]=1;h.id=id;var a=document.createElement('a');a.className='h2-anchor';a.href='#'+id;a.setAttribute('aria-label','Permalink to this section');a.textContent='\u00b6';h.appendChild(a);});
+})();
 </script>
 </body>
 </html>

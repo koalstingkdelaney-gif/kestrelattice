@@ -66,6 +66,11 @@ gtag('config', 'G-541TCHWW98');
   .crumb a{color:var(--accent);text-decoration:none}
   h1{font-size:clamp(1.6rem,3vw + .8rem,2.1rem);font-weight:800;letter-spacing:-.02em;line-height:1.25;margin-bottom:8px;text-wrap:balance}
   .date{color:var(--muted);font-size:.85rem;margin-bottom:28px}
+  h2[id]{scroll-margin-top:84px}
+  .updated{color:var(--muted);font-size:.85rem;margin:-22px 0 28px}
+  h2 .h2-anchor{opacity:0;color:var(--accent);margin-left:.35em;text-decoration:none;font-size:.75em;vertical-align:middle;transition:opacity .15s var(--ease)}
+  h2:hover .h2-anchor,h2:focus-within .h2-anchor,.h2-anchor:focus-visible{opacity:1}
+  h2 .h2-anchor:hover{text-decoration:none}
   article h2{font-size:1.35rem;margin:32px 0 12px;letter-spacing:-.01em}
   article h3{font-size:1.1rem;margin:24px 0 10px}
   article p{margin:0 0 16px}
@@ -87,7 +92,7 @@ gtag('config', 'G-541TCHWW98');
   footer.site{border-top:1px solid var(--line);background:var(--bg-soft);padding:22px 0;margin-top:48px}
   footer.site .wrap{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px 16px;max-width:1040px;padding:0 24px}
   footer.site{color:var(--muted);font-size:.82rem}
-  footer.site a{color:var(--faint);text-decoration:none;margin-left:14px}
+  footer.site a{color:var(--muted);text-decoration:none;margin-left:14px}
   footer.site a:hover{color:var(--accent-bright)}
   @media(max-width:640px){nav.main a:not(:last-child){display:none}footer.site .wrap{justify-content:center;text-align:center}footer.site a{margin:0 7px}}
   .copy-link-row{margin:0 0 8px}
@@ -109,22 +114,23 @@ gtag('config', 'G-541TCHWW98');
 
   <h1>Observability Answers “What Did It Do.” Governance Answers “Was It Allowed To.”</h1>
   <p class="date"><time datetime="2026-09-30">Published September 30, 2026</time></p>
+  <p class="updated">Updated <time datetime="2026-09-30">September 30, 2026</time></p>
   <div class="copy-link-row"><button class="copy-link" id="copy-link" type="button" aria-label="Copy link to this article">Copy link</button></div>
 
   <article>
 <p>Last year a dev watched an agent burn $700+ in 72 hours. No budget control, no kill switch — just a loop and a credit card.</p>
 <p>Here is what most teams get wrong about agent governance: <strong>they buy observability and call it governance</strong>. Observability answers "what did it do." Governance answers "was it allowed to" — and stops it when the answer is no.</p>
-<h2>The cheapest control costs $0</h2>
+<h2 id="the-cheapest-control-costs-0">The cheapest control costs $0<a class="h2-anchor" href="#the-cheapest-control-costs-0" aria-label="Permalink to this section">¶</a></h2>
 <p>Give every plan a spend ceiling and an expiry date, and fail closed when the ceiling hits. Blocked, recorded, never retried automatically. Then replay your worst incident in a sandbox and confirm the loop dies at its ceiling before it touches real money.</p>
-<h2>Warnings decay; blocks hold</h2>
+<h2 id="warnings-decay-blocks-hold">Warnings decay; blocks hold<a class="h2-anchor" href="#warnings-decay-blocks-hold" aria-label="Permalink to this section">¶</a></h2>
 <p>Alerts at 50% and 80% are information — useful, but they are not the control. A warning is an invitation for the loop to finish. The block is the control. The run that gets blocked and recorded is a cheap lesson; the run that gets warned is a future incident.</p>
-<h2>From insight to enforcement</h2>
+<h2 id="from-insight-to-enforcement">From insight to enforcement<a class="h2-anchor" href="#from-insight-to-enforcement" aria-label="Permalink to this section">¶</a></h2>
 <p>Observability is not worthless — it is the evidence layer that governance needs to make decisions. But without an enforcement layer on top (spend ceilings, identity-scoped grants, hard-gated approvals, hash-linked audit rows), the dashboard is a post-mortem tool, not a control. The <a href="https://koalstin.gumroad.com/l/hdigmr">Studio Edition playbook</a> lays out the full six-policy, two-schema system with copy-paste templates. And the question to take back to your team: <strong>what would a runaway loop cost you before anything stopped it?</strong></p>
   </article>
   <nav class="article-back" aria-label="Article navigation" style="max-width:720px;margin:28px auto 0"><a href="../articles/" style="color:var(--accent)">&larr; All articles</a></nav>
 
 <section class="related-articles" aria-label="Related articles">
-  <h2>Related articles</h2>
+  <h2 id="related-articles">Related articles<a class="h2-anchor" href="#related-articles" aria-label="Permalink to this section">¶</a></h2>
   <ul>
     <li><a href="runaway-agent-costs-spend-ceilings.html"><strong>Stop Runaway Agent Costs: Spend Ceilings That Fail Closed</strong><div class="rd">A dev watched an AI agent burn $700+ in 72 hours. The fix is not a better dashboard — it is per-plan spend ceilings that fail closed, plus three more controls t</div></a></li>
     <li><a href="ai-agent-vendor-risk-assessment.html"><strong>AI Agent Vendor Risk Assessment: 20 Questions to Ask Before You Buy a Third-Party Agent</strong><div class="rd">20 due-diligence questions to ask before buying a third-party AI agent: identity, approvals, spend controls, audit logs, data handling, exit terms.</div></a></li>
@@ -133,7 +139,7 @@ gtag('config', 'G-541TCHWW98');
 </section>
 
   <div class="cta">
-    <h2>Put this into practice</h2>
+    <h2 id="put-this-into-practice">Put this into practice<a class="h2-anchor" href="#put-this-into-practice" aria-label="Permalink to this section">¶</a></h2>
     <p>The Governed Agent Mesh Playbook — Studio Edition ($29) gives you the full system: tiering, approvals, spend controls, and incident response, ready to run.</p>
     <a class="btn" href="https://koalstin.gumroad.com/l/hdigmr">Get the Studio Edition — $29</a> <p style="margin-top:12px"><a href="../products/" style="color:var(--accent)">Or browse the full catalog of 63 products &rarr;</a></p>
   </div>
@@ -153,6 +159,14 @@ function fallback(url){var i=document.createElement('input');i.value=url;i.setAt
 b.addEventListener('click',function(){var url=window.location.href;
 if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(url).then(done,function(){fallback(url)})}
 else{fallback(url)}});})();
+</script>
+<script>
+// Humanize "Updated <time>" stamps + add h2 section anchors (progressive enhancement).
+(function(){
+document.querySelectorAll('p.updated time[datetime]').forEach(function(t){var v=t.getAttribute('datetime');var d=new Date(v+'T12:00:00');if(!isNaN(d)){t.textContent=d.toLocaleDateString('en-US',{month:'long',day:'numeric',year:'numeric'});}});
+function slug(s){return s.toLowerCase().trim().replace(/[^a-z0-9\u00C0-\u024F]+/g,'-').replace(/^-+|-+$/g,'')||'section';}
+var seen={};document.querySelectorAll('h2').forEach(function(h){if(h.querySelector('.h2-anchor'))return;var id=h.id||slug(h.textContent);if(seen[id]){var n=2;while(seen[id+'-'+n])n++;id=id+'-'+n;}seen[id]=1;h.id=id;var a=document.createElement('a');a.className='h2-anchor';a.href='#'+id;a.setAttribute('aria-label','Permalink to this section');a.textContent='\u00b6';h.appendChild(a);});
+})();
 </script>
 </body>
 </html>

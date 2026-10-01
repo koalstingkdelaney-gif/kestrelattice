@@ -55,6 +55,11 @@ gtag('config', 'G-541TCHWW98');
   .crumb a{color:var(--accent);text-decoration:none}
   h1{font-size:2rem;line-height:1.25;margin-bottom:8px}
   .date{color:var(--muted);font-size:.85rem;margin-bottom:28px}
+  h2[id]{scroll-margin-top:84px}
+  .updated{color:var(--muted);font-size:.85rem;margin:-22px 0 28px}
+  h2 .h2-anchor{opacity:0;color:var(--accent);margin-left:.35em;text-decoration:none;font-size:.75em;vertical-align:middle;transition:opacity .15s var(--ease)}
+  h2:hover .h2-anchor,h2:focus-within .h2-anchor,.h2-anchor:focus-visible{opacity:1}
+  h2 .h2-anchor:hover{text-decoration:none}
   article h2{font-size:1.35rem;margin:32px 0 12px}
   article h3{font-size:1.1rem;margin:24px 0 10px}
   article p{margin:0 0 16px}
@@ -94,54 +99,55 @@ gtag('config', 'G-541TCHWW98');
 
   <h1>The AI Agent Permissions Audit: 12 Questions to Ask Before Your Agents Touch Production</h1>
   <p class="date"><time datetime="2026-09-30">Published September 30, 2026</time></p>
+  <p class="updated">Updated <time datetime="2026-09-30">September 30, 2026</time></p>
   <div class="copy-link-row"><button class="copy-link" id="copy-link" type="button" aria-label="Copy link to this article">Copy link</button></div>
 
   <article>
 <p>Most AI agent incidents aren't model failures. They're permission failures: an agent that could read the production database, a grant that never expired, a credential that lived in a prompt. If you're putting agents near production, run this audit first. Twelve questions, each with what "good" looks like.</p>
 
-<h2>1. Can you list every integration each agent can touch?</h2>
+<h2 id="1-can-you-list-every-integration-each-agent-can-touch">1. Can you list every integration each agent can touch?<a class="h2-anchor" href="#1-can-you-list-every-integration-each-agent-can-touch" aria-label="Permalink to this section">¶</a></h2>
 <p>If the answer is "roughly," you don't have an inventory — you have a hope. Good looks like a registry: one row per agent, one row per integration, with the exact scopes granted. This is the cheapest control you own and the one most teams skip.</p>
 
-<h2>2. Are grants time-boxed, or permanent?</h2>
+<h2 id="2-are-grants-time-boxed-or-permanent">2. Are grants time-boxed, or permanent?<a class="h2-anchor" href="#2-are-grants-time-boxed-or-permanent" aria-label="Permalink to this section">¶</a></h2>
 <p>Permanent grants are how a forgotten prototype becomes a breach six months later. Good: every grant carries an expiry date, and expiry is enforced by the system, not by someone remembering to clean up.</p>
 
-<h2>3. Who approved each grant — and where is the record?</h2>
+<h2 id="3-who-approved-each-grant-and-where-is-the-record">3. Who approved each grant — and where is the record?<a class="h2-anchor" href="#3-who-approved-each-grant-and-where-is-the-record" aria-label="Permalink to this section">¶</a></h2>
 <p>"The team decided" is not an approval record. Good: each grant names an approver, a date, and a reason, stored somewhere an auditor can read without asking you.</p>
 
-<h2>4. Can agents see credentials, or only use them?</h2>
+<h2 id="4-can-agents-see-credentials-or-only-use-them">4. Can agents see credentials, or only use them?<a class="h2-anchor" href="#4-can-agents-see-credentials-or-only-use-them" aria-label="Permalink to this section">¶</a></h2>
 <p>An agent that can <em>read</em> an API key can exfiltrate it. Good: credentials live in a vault or broker; the agent receives short-lived tokens scoped to the task, never the raw secret.</p>
 
-<h2>5. Is there a spend ceiling per agent, per workload?</h2>
+<h2 id="5-is-there-a-spend-ceiling-per-agent-per-workload">5. Is there a spend ceiling per agent, per workload?<a class="h2-anchor" href="#5-is-there-a-spend-ceiling-per-agent-per-workload" aria-label="Permalink to this section">¶</a></h2>
 <p>Agents don't get tired, and metered APIs don't get cheaper at 3 a.m. Good: every agent workload has a spend ceiling, and hitting it fails closed — the agent stops, it doesn't keep going on vibes.</p>
 
-<h2>6. What happens when an agent hits a limit?</h2>
+<h2 id="6-what-happens-when-an-agent-hits-a-limit">6. What happens when an agent hits a limit?<a class="h2-anchor" href="#6-what-happens-when-an-agent-hits-a-limit" aria-label="Permalink to this section">¶</a></h2>
 <p>The wrong answer is "it retries." Good: limits trigger a defined block response — stop, log, notify a human. The runbook for a blocked agent should exist before the first block, not after.</p>
 
-<h2>7. Are high-risk actions hard-gated on human approval?</h2>
+<h2 id="7-are-high-risk-actions-hard-gated-on-human-approval">7. Are high-risk actions hard-gated on human approval?<a class="h2-anchor" href="#7-are-high-risk-actions-hard-gated-on-human-approval" aria-label="Permalink to this section">¶</a></h2>
 <p>Money movement, external messages, permission changes, production writes: these should never be "bounded auto." Good: a hard-gated list exists, it's short, and bypassing it requires a recorded exception, not a config tweak.</p>
 
-<h2>8. Do denied actions produce evidence?</h2>
+<h2 id="8-do-denied-actions-produce-evidence">8. Do denied actions produce evidence?<a class="h2-anchor" href="#8-do-denied-actions-produce-evidence" aria-label="Permalink to this section">¶</a></h2>
 <p>A blocked action nobody logged is a near-miss nobody learned from. Good: every denial writes a structured log row — who, what, when, why denied — that your audit trail can show an auditor.</p>
 
-<h2>9. Can you reconstruct what an agent did last Tuesday?</h2>
+<h2 id="9-can-you-reconstruct-what-an-agent-did-last-tuesday">9. Can you reconstruct what an agent did last Tuesday?<a class="h2-anchor" href="#9-can-you-reconstruct-what-an-agent-did-last-tuesday" aria-label="Permalink to this section">¶</a></h2>
 <p>"It probably didn't run" is not an audit trail. Good: every agent action appends to a tamper-evident log with timestamps, inputs, and outcomes. If you can't replay the day, you can't prove anything about it.</p>
 
-<h2>10. Is there a quarantine path for a misbehaving agent?</h2>
+<h2 id="10-is-there-a-quarantine-path-for-a-misbehaving-agent">10. Is there a quarantine path for a misbehaving agent?<a class="h2-anchor" href="#10-is-there-a-quarantine-path-for-a-misbehaving-agent" aria-label="Permalink to this section">¶</a></h2>
 <p>Agents will misbehave — that's not pessimism, it's operations. Good: a one-page runbook exists for isolating an agent in the first hour without taking down the rest of the fleet.</p>
 
-<h2>11. When did you last re-tier your agents?</h2>
+<h2 id="11-when-did-you-last-re-tier-your-agents">11. When did you last re-tier your agents?<a class="h2-anchor" href="#11-when-did-you-last-re-tier-your-agents" aria-label="Permalink to this section">¶</a></h2>
 <p>Risk tiers drift: new integrations arrive, scopes widen, prototypes become load-bearing. Good: a quarterly access review re-tiers every agent against what it can actually touch today, not what the original design doc said.</p>
 
-<h2>12. Who owns decommissioning?</h2>
+<h2 id="12-who-owns-decommissioning">12. Who owns decommissioning?<a class="h2-anchor" href="#12-who-owns-decommissioning" aria-label="Permalink to this section">¶</a></h2>
 <p>Retired agents with live credentials are the most common zombie in the stack. Good: decommissioning is a checklist with an owner — revoke grants, rotate shared secrets, archive logs — run the day the agent retires, not "eventually."</p>
 
-<h2>How to run the audit</h2>
+<h2 id="how-to-run-the-audit">How to run the audit<a class="h2-anchor" href="#how-to-run-the-audit" aria-label="Permalink to this section">¶</a></h2>
 <p>Block ninety minutes. Pull your agent inventory, your grant list, and one recent incident (or near-miss). Score each question red/yellow/green. Anything red gets an owner and a date. Repeat quarterly — the first audit finds the gaps; the second one proves they're closing.</p>
   </article>
   <nav class="article-back" aria-label="Article navigation" style="max-width:720px;margin:28px auto 0"><a href="../articles/" style="color:var(--accent)">&larr; All articles</a> <span style="color:var(--muted)">·</span> <a href="../ecosystem/" style="color:var(--accent)">Ecosystem</a> <span style="color:var(--muted)">·</span> <a href="../brands/" style="color:var(--accent)">Stores</a> <span style="color:var(--muted)">·</span> <a href="../changelog.html" style="color:var(--accent)">Changelog</a></nav>
 
 <section class="related-articles" aria-label="Related articles">
-  <h2>Related articles</h2>
+  <h2 id="related-articles">Related articles<a class="h2-anchor" href="#related-articles" aria-label="Permalink to this section">¶</a></h2>
   <ul>
     <li><a href="ai-agent-vendor-risk-assessment.html"><strong>AI Agent Vendor Risk Assessment: 20 Questions to Ask Before You Buy a Third-Party Agent</strong><div class="rd">20 due-diligence questions to ask before buying a third-party AI agent: identity, approvals, spend controls, audit logs, data handling, exit terms.</div></a></li>
     <li><a href="eu-ai-act-agent-evidence-checklist.html"><strong>The EU AI Act Is Enforcing Now: The AI Agent Evidence Checklist for Deployers</strong><div class="rd">EU AI Act enforcement began August 2, 2026. If your company deploys AI agents that touch EU users, here is the evidence checklist regulators and enterprise cust</div></a></li>
@@ -150,7 +156,7 @@ gtag('config', 'G-541TCHWW98');
 </section>
 
   <div class="cta">
-    <h2>Put this into practice</h2>
+    <h2 id="put-this-into-practice">Put this into practice<a class="h2-anchor" href="#put-this-into-practice" aria-label="Permalink to this section">¶</a></h2>
     <p>The Governed Agent Mesh Playbook — Studio Edition ($29) gives you the full system: tiering, approvals, spend controls, and incident response, ready to run.</p>
     <a class="btn" href="https://koalstin.gumroad.com/l/hdigmr">Get the Studio Edition — $29</a> <p style="margin-top:12px"><a href="../products/" style="color:var(--accent)">Or browse the full catalog of 63 products &rarr;</a></p>
   </div>
@@ -168,6 +174,14 @@ function fallback(url){var i=document.createElement('input');i.value=url;i.setAt
 b.addEventListener('click',function(){var url=window.location.href;
 if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(url).then(done,function(){fallback(url)})}
 else{fallback(url)}});})();
+</script>
+<script>
+// Humanize "Updated <time>" stamps + add h2 section anchors (progressive enhancement).
+(function(){
+document.querySelectorAll('p.updated time[datetime]').forEach(function(t){var v=t.getAttribute('datetime');var d=new Date(v+'T12:00:00');if(!isNaN(d)){t.textContent=d.toLocaleDateString('en-US',{month:'long',day:'numeric',year:'numeric'});}});
+function slug(s){return s.toLowerCase().trim().replace(/[^a-z0-9\u00C0-\u024F]+/g,'-').replace(/^-+|-+$/g,'')||'section';}
+var seen={};document.querySelectorAll('h2').forEach(function(h){if(h.querySelector('.h2-anchor'))return;var id=h.id||slug(h.textContent);if(seen[id]){var n=2;while(seen[id+'-'+n])n++;id=id+'-'+n;}seen[id]=1;h.id=id;var a=document.createElement('a');a.className='h2-anchor';a.href='#'+id;a.setAttribute('aria-label','Permalink to this section');a.textContent='\u00b6';h.appendChild(a);});
+})();
 </script>
 </body>
 </html>

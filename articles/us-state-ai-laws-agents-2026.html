@@ -55,6 +55,11 @@ gtag('config', 'G-541TCHWW98');
   .crumb a{color:var(--accent);text-decoration:none}
   h1{font-size:2rem;line-height:1.25;margin-bottom:8px}
   .date{color:var(--muted);font-size:.85rem;margin-bottom:28px}
+  h2[id]{scroll-margin-top:84px}
+  .updated{color:var(--muted);font-size:.85rem;margin:-22px 0 28px}
+  h2 .h2-anchor{opacity:0;color:var(--accent);margin-left:.35em;text-decoration:none;font-size:.75em;vertical-align:middle;transition:opacity .15s var(--ease)}
+  h2:hover .h2-anchor,h2:focus-within .h2-anchor,.h2-anchor:focus-visible{opacity:1}
+  h2 .h2-anchor:hover{text-decoration:none}
   article h2{font-size:1.35rem;margin:32px 0 12px}
   article h3{font-size:1.1rem;margin:24px 0 10px}
   article p{margin:0 0 16px}
@@ -94,23 +99,24 @@ gtag('config', 'G-541TCHWW98');
 
   <h1>US State AI Laws Are Live in 2026: What AI Agent Deployers Must Do</h1>
   <p class="date"><time datetime="2026-09-30">Published September 30, 2026</time></p>
+  <p class="updated">Updated <time datetime="2026-09-30">September 30, 2026</time></p>
   <div class="copy-link-row"><button class="copy-link" id="copy-link" type="button" aria-label="Copy link to this article">Copy link</button></div>
 
   <article>
 <p>There is no federal AI law in the United States. Instead, 2026 is the year state AI laws started biting &mdash; and if you run AI agents that serve customers in Texas or California, you already have obligations. Here's the landscape and what to do about it.</p>
-<h2>Texas: TRAIGA is in force</h2>
+<h2 id="texas-traiga-is-in-force">Texas: TRAIGA is in force<a class="h2-anchor" href="#texas-traiga-is-in-force" aria-label="Permalink to this section">¶</a></h2>
 <p>The Texas Responsible AI Governance Act (HB 149) was signed on June 22, 2025 and took effect <strong>January 1, 2026</strong>. It applies to anyone developing or deploying AI systems in Texas or offering AI products to Texas residents &mdash; which, for internet businesses, effectively means everyone.</p>
 <p>What it prohibits: developing or deploying AI intended to incite self-harm, violence, or criminal activity; AI deployed with the intent to unlawfully discriminate against protected classes; AI-generated CSAM and certain sexually explicit content; and government social scoring. State agencies must disclose when consumers interact with AI.</p>
 <p>Enforcement sits exclusively with the Texas Attorney General &mdash; no private right of action &mdash; with a 60-day cure period and civil penalties scaling up to <strong>$200,000 per incident</strong> depending on curability and intent. The law also creates a 36-month regulatory sandbox.</p>
 <p><strong>Deployer takeaway:</strong> document what your agents are for, build content guardrails against the prohibited uses, and keep records showing your intent and controls. The AG can issue investigative demands for system documentation.</p>
-<h2>California: transparency laws in force</h2>
+<h2 id="california-transparency-laws-in-force">California: transparency laws in force<a class="h2-anchor" href="#california-transparency-laws-in-force" aria-label="Permalink to this section">¶</a></h2>
 <p>California's <strong>AB 2013</strong> (training-data transparency) took effect January 1, 2026: developers of generative AI systems must publicly document the datasets used for training. The <strong>AI Transparency Act (SB 942)</strong> requires provenance disclosures and a free AI-detection tool for content from large generative systems. And <strong>SB 53</strong>, the Transparency in Frontier AI Act signed in September 2025, requires frontier-model developers to publish safety frameworks addressing catastrophic risks.</p>
 <p><strong>Deployer takeaway:</strong> if your agents generate content for Californians, provenance and disclosure are your problem even if you didn't train the model &mdash; check what your providers give you and fill the gaps.</p>
-<h2>Utah: disclosure duties</h2>
+<h2 id="utah-disclosure-duties">Utah: disclosure duties<a class="h2-anchor" href="#utah-disclosure-duties" aria-label="Permalink to this section">¶</a></h2>
 <p>Utah's AI Policy Act requires clear disclosure when consumers interact with generative AI &mdash; proactively in regulated occupations, on request otherwise. Simple, but it means every customer-facing agent needs an &ldquo;you're talking to an AI&rdquo; path.</p>
-<h2>Colorado: verify before you rely</h2>
+<h2 id="colorado-verify-before-you-rely">Colorado: verify before you rely<a class="h2-anchor" href="#colorado-verify-before-you-rely" aria-label="Permalink to this section">¶</a></h2>
 <p>Colorado: the old AI Act never took effect &mdash; a narrower replacement starts January 2027. Colorado's original AI Act (SB 24-205) was repealed and replaced by SB 26-189, signed May 14, 2026 and effective January 1, 2027. The replacement is a narrower, notice-based regime for automated decision-making technology: notify consumers when AI is used, disclose details within 30 days of an adverse consequential decision, correct inaccurate personal data on request, and offer meaningful human review. The old law's risk-management programs, impact assessments, and reasonable-care duties are gone. <strong>Do not rely on summaries (including this one) for Colorado; read the current statute text</strong> before making compliance decisions.</p>
-<h2>The deployer playbook for state laws</h2>
+<h2 id="the-deployer-playbook-for-state-laws">The deployer playbook for state laws<a class="h2-anchor" href="#the-deployer-playbook-for-state-laws" aria-label="Permalink to this section">¶</a></h2>
 <p>State laws differ in detail but converge on the same operational controls:</p>
 <ol>
 <li><strong>Disclosure:</strong> every user-facing agent identifies itself as AI.</li>
@@ -124,7 +130,7 @@ gtag('config', 'G-541TCHWW98');
   <nav class="article-back" aria-label="Article navigation" style="max-width:720px;margin:28px auto 0"><a href="../articles/" style="color:var(--accent)">&larr; All articles</a> <span style="color:var(--muted)">·</span> <a href="../changelog.html" style="color:var(--accent)">Changelog</a></nav>
 
 <section class="related-articles" aria-label="Related articles">
-  <h2>Related articles</h2>
+  <h2 id="related-articles">Related articles<a class="h2-anchor" href="#related-articles" aria-label="Permalink to this section">¶</a></h2>
   <ul>
     <li><a href="eu-ai-act-agent-evidence-checklist.html"><strong>The EU AI Act Is Enforcing Now: The AI Agent Evidence Checklist for Deployers</strong><div class="rd">EU AI Act enforcement began August 2, 2026. If your company deploys AI agents that touch EU users, here is the evidence checklist regulators and enterprise cust</div></a></li>
     <li><a href="ai-agent-permissions-audit.html"><strong>The AI Agent Permissions Audit: 12 Questions to Ask Before Your Agents Touch Production</strong><div class="rd">A practical permissions audit for AI agents in production: 12 questions covering grants, credential handling, spend ceilings, and audit trails — before somethin</div></a></li>
@@ -133,7 +139,7 @@ gtag('config', 'G-541TCHWW98');
 </section>
 
   <div class="cta">
-    <h2>Put this into practice</h2>
+    <h2 id="put-this-into-practice">Put this into practice<a class="h2-anchor" href="#put-this-into-practice" aria-label="Permalink to this section">¶</a></h2>
     <p>The Governed Agent Mesh Playbook — Studio Edition ($29) gives you the full system: tiering, approvals, spend controls, and incident response, ready to run.</p>
     <a class="btn" href="https://koalstin.gumroad.com/l/hdigmr">Get the Studio Edition — $29</a> <p style="margin-top:12px"><a href="../products/" style="color:var(--accent)">Or browse the full catalog of 63 products &rarr;</a></p>
   </div>
@@ -151,6 +157,14 @@ function fallback(url){var i=document.createElement('input');i.value=url;i.setAt
 b.addEventListener('click',function(){var url=window.location.href;
 if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(url).then(done,function(){fallback(url)})}
 else{fallback(url)}});})();
+</script>
+<script>
+// Humanize "Updated <time>" stamps + add h2 section anchors (progressive enhancement).
+(function(){
+document.querySelectorAll('p.updated time[datetime]').forEach(function(t){var v=t.getAttribute('datetime');var d=new Date(v+'T12:00:00');if(!isNaN(d)){t.textContent=d.toLocaleDateString('en-US',{month:'long',day:'numeric',year:'numeric'});}});
+function slug(s){return s.toLowerCase().trim().replace(/[^a-z0-9\u00C0-\u024F]+/g,'-').replace(/^-+|-+$/g,'')||'section';}
+var seen={};document.querySelectorAll('h2').forEach(function(h){if(h.querySelector('.h2-anchor'))return;var id=h.id||slug(h.textContent);if(seen[id]){var n=2;while(seen[id+'-'+n])n++;id=id+'-'+n;}seen[id]=1;h.id=id;var a=document.createElement('a');a.className='h2-anchor';a.href='#'+id;a.setAttribute('aria-label','Permalink to this section');a.textContent='\u00b6';h.appendChild(a);});
+})();
 </script>
 </body>
 </html>

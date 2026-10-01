@@ -55,6 +55,11 @@ gtag('config', 'G-541TCHWW98');
   .crumb a{color:var(--accent);text-decoration:none}
   h1{font-size:2rem;line-height:1.25;margin-bottom:8px}
   .date{color:var(--muted);font-size:.85rem;margin-bottom:28px}
+  h2[id]{scroll-margin-top:84px}
+  .updated{color:var(--muted);font-size:.85rem;margin:-22px 0 28px}
+  h2 .h2-anchor{opacity:0;color:var(--accent);margin-left:.35em;text-decoration:none;font-size:.75em;vertical-align:middle;transition:opacity .15s var(--ease)}
+  h2:hover .h2-anchor,h2:focus-within .h2-anchor,.h2-anchor:focus-visible{opacity:1}
+  h2 .h2-anchor:hover{text-decoration:none}
   article h2{font-size:1.35rem;margin:32px 0 12px}
   article h3{font-size:1.1rem;margin:24px 0 10px}
   article p{margin:0 0 16px}
@@ -94,24 +99,25 @@ gtag('config', 'G-541TCHWW98');
 
   <h1>What Belongs in an AI Agent Policy: The Template Pack Checklist</h1>
   <p class="date"><time datetime="2026-09-30">Published September 30, 2026</time></p>
+  <p class="updated">Updated <time datetime="2026-09-30">September 30, 2026</time></p>
   <div class="copy-link-row"><button class="copy-link" id="copy-link" type="button" aria-label="Copy link to this article">Copy link</button></div>
 
   <article>
 <p>Every company running AI agents eventually needs written policies: what agents may do, who approves what, how data is handled, what happens in an incident. Writing them from scratch takes weeks and usually misses something. Here is what a complete policy pack actually contains.</p>
-<h2>The six policies every agent program needs</h2>
+<h2 id="the-six-policies-every-agent-program-needs">The six policies every agent program needs<a class="h2-anchor" href="#the-six-policies-every-agent-program-needs" aria-label="Permalink to this section">¶</a></h2>
 <p><strong>1. Data-handling policy.</strong> What data each agent may access, how PII is treated, retention rules, and where data may not go (personal accounts, unvetted third parties). This is the policy auditors ask for first.</p>
 <p><strong>2. Human-in-the-loop policy.</strong> Which actions need human approval, which can run freely, and who the approvers are. Tier it by blast radius: read-only actions flow freely; money, data deletion, and external messages need a gate.</p>
 <p><strong>3. Credential-handling policy.</strong> How API keys and secrets reach agents, rotation schedules, and what happens on suspected leak. One leaked key with broad scope is the most common agent incident pattern.</p>
 <p><strong>4. Tool-permission policy.</strong> Which tools each agent tier may use, how new tool grants get approved, and the ban on agents granting themselves permissions.</p>
 <p><strong>5. External-outreach policy.</strong> Rules for agents that contact customers, post publicly, or message third parties: approval chains, content boundaries, and disclosure that the sender is AI.</p>
 <p><strong>6. Exception policy.</strong> How to request a temporary exception (a grant extension, a tier re-classification, an emergency override) — with expiry dates, so exceptions don't become permanent.</p>
-<h2>Don't write them from scratch</h2>
+<h2 id="don-t-write-them-from-scratch">Don't write them from scratch<a class="h2-anchor" href="#don-t-write-them-from-scratch" aria-label="Permalink to this section">¶</a></h2>
 <p>Each of these exists as a complete, ready-to-adopt template: the <a href="https://koalstin.gumroad.com/l/jjgbw">Data-Handling Policy Template Pack</a> ($19), <a href="https://koalstin.gumroad.com/l/human-in-the-loop-policy">Human-in-the-Loop Policy One-Pager</a> ($19), <a href="https://koalstin.gumroad.com/l/fxgckt">Credential Handling Policy One-Pager</a> ($19), <a href="https://koalstin.gumroad.com/l/egdfrtd">Tool-Permission Inventory Checklist</a> ($19), and <a href="https://koalstin.gumroad.com/l/incident-communication-templates">Incident Communication Template Pack</a> ($19). Or get the full governance system in the <a href="https://koalstin.gumroad.com/l/hdigmr">Studio Edition</a> ($29).</p>
   </article>
   <nav class="article-back" aria-label="Article navigation" style="max-width:720px;margin:28px auto 0"><a href="../articles/" style="color:var(--accent)">&larr; All articles</a> <span style="color:var(--muted)">·</span> <a href="../ecosystem/" style="color:var(--accent)">Ecosystem</a> <span style="color:var(--muted)">·</span> <a href="../brands/" style="color:var(--accent)">Stores</a> <span style="color:var(--muted)">·</span> <a href="../changelog.html" style="color:var(--accent)">Changelog</a></nav>
 
 <section class="related-articles" aria-label="Related articles">
-  <h2>Related articles</h2>
+  <h2 id="related-articles">Related articles<a class="h2-anchor" href="#related-articles" aria-label="Permalink to this section">¶</a></h2>
   <ul>
     <li><a href="ai-agent-audit-log-schema-retention.html"><strong>AI Agent Audit Logs: What to Record, How Long to Keep It, and the Schema That Holds Up Under Review</strong><div class="rd">What belongs in an AI agent audit log: the minimum schema, tamper-evident storage, retention tiers, and what reviewers actually ask for.</div></a></li>
     <li><a href="eu-ai-act-agent-evidence-checklist.html"><strong>The EU AI Act Is Enforcing Now: The AI Agent Evidence Checklist for Deployers</strong><div class="rd">EU AI Act enforcement began August 2, 2026. If your company deploys AI agents that touch EU users, here is the evidence checklist regulators and enterprise cust</div></a></li>
@@ -120,7 +126,7 @@ gtag('config', 'G-541TCHWW98');
 </section>
 
   <div class="cta">
-    <h2>Put this into practice</h2>
+    <h2 id="put-this-into-practice">Put this into practice<a class="h2-anchor" href="#put-this-into-practice" aria-label="Permalink to this section">¶</a></h2>
     <p>The Governed Agent Mesh Playbook — Studio Edition ($29) gives you the full system: tiering, approvals, spend controls, and incident response, ready to run.</p>
     <a class="btn" href="https://koalstin.gumroad.com/l/hdigmr">Get the Studio Edition — $29</a> <p style="margin-top:12px"><a href="../products/" style="color:var(--accent)">Or browse the full catalog of 63 products &rarr;</a></p>
   </div>
@@ -138,6 +144,14 @@ function fallback(url){var i=document.createElement('input');i.value=url;i.setAt
 b.addEventListener('click',function(){var url=window.location.href;
 if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(url).then(done,function(){fallback(url)})}
 else{fallback(url)}});})();
+</script>
+<script>
+// Humanize "Updated <time>" stamps + add h2 section anchors (progressive enhancement).
+(function(){
+document.querySelectorAll('p.updated time[datetime]').forEach(function(t){var v=t.getAttribute('datetime');var d=new Date(v+'T12:00:00');if(!isNaN(d)){t.textContent=d.toLocaleDateString('en-US',{month:'long',day:'numeric',year:'numeric'});}});
+function slug(s){return s.toLowerCase().trim().replace(/[^a-z0-9\u00C0-\u024F]+/g,'-').replace(/^-+|-+$/g,'')||'section';}
+var seen={};document.querySelectorAll('h2').forEach(function(h){if(h.querySelector('.h2-anchor'))return;var id=h.id||slug(h.textContent);if(seen[id]){var n=2;while(seen[id+'-'+n])n++;id=id+'-'+n;}seen[id]=1;h.id=id;var a=document.createElement('a');a.className='h2-anchor';a.href='#'+id;a.setAttribute('aria-label','Permalink to this section');a.textContent='\u00b6';h.appendChild(a);});
+})();
 </script>
 </body>
 </html>
