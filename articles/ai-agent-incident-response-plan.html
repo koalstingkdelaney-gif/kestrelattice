@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<link rel="preconnect" href="https://gumroad.com">
+<link rel="preconnect" href="https://www.googletagmanager.com">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AI Agent Incident Response Plan: The Complete Runbook — ghostcorpnet</title>
+<meta name="description" content="Build a robust AI agent incident response plan to stop runaway loops, prompt injections, and unauthorized actions before they break production.">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<meta property="og:type" content="article">
+<meta property="og:title" content="AI Agent Incident Response Plan: The Complete Runbook — ghostcorpnet">
+<meta property="og:description" content="Build a robust AI agent incident response plan to stop runaway loops, prompt injections, and unauthorized actions before they break production.">
+<meta property="og:image" content="https://koalstingkdelaney-gif.github.io/kestrelattice/assets/studio-edition-cover.jpg">
+<meta property="og:image:alt" content="AI Agent Incident Response Plan: The Complete Runbook - ghostcorpnet">
+<meta property="og:image:width" content="1600">
+<meta property="og:image:height" content="1600">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="AI Agent Incident Response Plan: The Complete Runbook — ghostcorpnet">
+<meta name="twitter:description" content="Build a robust AI agent incident response plan to stop runaway loops, prompt injections, and unauthorized actions before they break production.">
+<meta name="twitter:image" content="https://koalstingkdelaney-gif.github.io/kestrelattice/assets/studio-edition-cover.jpg">
+<link rel="canonical" href="https://koalstingkdelaney-gif.github.io/kestrelattice/articles/ai-agent-incident-response-plan.html">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "AI Agent Incident Response Plan: The Complete Runbook",
+  "description": "Build a robust AI agent incident response plan to stop runaway loops, prompt injections, and unauthorized actions before they break production.",
+  "datePublished": "2026-10-01",
+  "dateModified": "2026-10-01",
+  "author": {"@type": "Organization", "name": "ghostcorpnet"},
+  "publisher": {"@type": "Organization", "name": "ghostcorpnet"},
+  "mainEntityOfPage": "https://koalstingkdelaney-gif.github.io/kestrelattice/articles/ai-agent-incident-response-plan.html"
+}
+</script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-541TCHWW98"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-541TCHWW98');
+</script>
+<style>
+  :root{color-scheme:dark;--bg:#0f0e0d; --bg-soft:#141210; --panel:#1a1714; --panel2:#211c17;
+        --line:#2c261e; --line-soft:#221d15; --text:#f1ebdd;
+        --muted:#a89d89; --faint:#7d7461; --accent:#e07a5f;
+        --accent-bright:#f09474; --accent-dim:#c06a4e; --accent-ink:#1a0f08;
+        --accent-soft:rgba(224,122,95,.1); --radius:12px;
+        --ease:cubic-bezier(.2,.7,.25,1)}
+  *{margin:0;padding:0;box-sizing:border-box}
+  html,body{overflow-x:clip}
+  body{background:var(--bg);color:var(--text);
+       font-family:ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+       line-height:1.7;-webkit-font-smoothing:antialiased}
+  a:focus-visible{outline:2px solid var(--accent-bright);outline-offset:3px;border-radius:4px}
+  header.site{border-bottom:1px solid var(--line);position:sticky;top:0;z-index:100;
+    background:rgba(15,14,13,.92);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
+  header.site .wrap{display:flex;align-items:center;justify-content:space-between;min-height:56px;max-width:1040px;margin:0 auto;padding:0 24px}
+  .brand{display:flex;align-items:center;gap:9px;font-weight:700;color:var(--text);text-decoration:none;font-size:1.02rem}
+  .brand:hover{color:var(--accent-bright)}
+  nav.main{display:flex;align-items:center;gap:20px}
+  nav.main a{color:var(--muted);font-size:.88rem;font-weight:500;text-decoration:none}
+  nav.main a:hover{color:var(--accent-bright)}
+  .wrap{max-width:720px;margin:0 auto;padding:40px 24px 64px}
+  .crumb{color:var(--muted);font-size:.85rem;margin-bottom:24px}
+  .crumb a{color:var(--accent);text-decoration:none}
+  h1{font-size:clamp(1.6rem,3vw + .8rem,2.1rem);font-weight:800;letter-spacing:-.02em;line-height:1.25;margin-bottom:8px;text-wrap:balance}
+  .date{color:var(--muted);font-size:.85rem;margin-bottom:28px}
+  article h2{font-size:1.35rem;margin:32px 0 12px;letter-spacing:-.01em}
+  article h3{font-size:1.1rem;margin:24px 0 10px}
+  article p{margin:0 0 16px}
+  article ul,article ol{margin:0 0 16px 24px}
+  article li{margin:6px 0}
+  article a{color:var(--accent)}
+  article code{background:var(--panel);padding:2px 6px;border-radius:4px;font-size:.88em}
+  article pre{background:var(--panel);border:1px solid var(--line);border-radius:8px;
+              padding:16px;overflow-x:auto;margin:0 0 16px}
+  article blockquote{border-left:3px solid var(--accent);padding-left:16px;
+                     color:var(--muted);margin:0 0 16px}
+  .cta{background:linear-gradient(180deg,var(--panel2),var(--panel));border:1px solid var(--accent-dim);border-radius:var(--radius);
+       padding:28px;margin:40px 0;text-align:center;box-shadow:0 16px 40px rgba(0,0,0,.35)}
+  .cta h2{margin:0 0 10px;font-size:1.3rem}
+  .cta p{color:var(--muted);margin-bottom:18px}
+  .btn{display:inline-block;background:linear-gradient(180deg,var(--accent-bright),var(--accent));color:var(--accent-ink);font-weight:700;
+       padding:12px 28px;border-radius:8px;text-decoration:none;transition:transform .16s var(--ease)}
+  .btn:hover{transform:translateY(-2px)}
+  footer.site{border-top:1px solid var(--line);background:var(--bg-soft);padding:22px 0;margin-top:48px}
+  footer.site .wrap{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px 16px;max-width:1040px;padding:0 24px}
+  footer.site{color:var(--muted);font-size:.82rem}
+  footer.site a{color:var(--faint);text-decoration:none;margin-left:14px}
+  footer.site a:hover{color:var(--accent-bright)}
+  @media(max-width:640px){nav.main a:not(:last-child){display:none}footer.site .wrap{justify-content:center;text-align:center}footer.site a{margin:0 7px}}
+
+  :focus-visible{outline:2px solid #e07a5f;outline-offset:2px}
+  @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
+  h1,h2{text-wrap:balance}
+  #backtop{position:fixed;right:22px;bottom:22px;width:46px;height:46px;border-radius:50%;border:1px solid var(--line);background:var(--panel);color:var(--accent);font-size:1.3rem;cursor:pointer;opacity:0;pointer-events:none;transition:opacity .2s var(--ease);z-index:150}
+  #backtop.show{opacity:1;pointer-events:auto}
+  #backtop:hover{border-color:var(--accent-dim)}
+  @media (prefers-reduced-motion:reduce){#backtop{display:none}}
+  .skip{position:absolute;left:-9999px;top:0;background:var(--accent);color:var(--accent-ink);padding:10px 18px;font-weight:700;z-index:200;border-radius:0 0 8px 0}
+  .skip:focus{left:0}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site"><div class="wrap">
+  <a class="brand" href="../">
+    <svg width="22" height="22" viewBox="0 0 26 26" fill="none" aria-hidden="true"><circle cx="5" cy="6" r="2.4" fill="#e07a5f"/><circle cx="21" cy="6" r="2.4" fill="#e07a5f"/><circle cx="13" cy="13" r="2.4" fill="#e07a5f"/><circle cx="5" cy="20" r="2.4" fill="#e07a5f"/><circle cx="21" cy="20" r="2.4" fill="#e07a5f"/><path d="M6.6 7.4L11.2 11.8M19.4 7.4L14.8 11.8M6.6 18.6L11.2 14.2M19.4 18.6L14.8 14.2" stroke="#e07a5f" stroke-width="1.4"/></svg>
+    ghostcorpnet
+  </a>
+  <nav class="main" aria-label="Primary"><a href="../">Home</a><a href="../products/">Catalog</a><a href="../brands/">Stores</a><a href="../ecosystem/">Ecosystem</a><a href="./">Articles</a></nav>
+</div></header>
+<main class="wrap" id="main">
+  <p class="crumb"><a href="../">Home</a> · <a href="./">Articles</a></p>
+
+  <h1>AI Agent Incident Response Plan: The Complete Runbook</h1>
+  <p class="date"><time datetime="2026-10-01">Published 2026-10-01</time> · <span class="reading-time" id="reading-time"></span></p>
+
+  <article>
+<p>Deploying autonomous LLM agents to production changes your system's threat model entirely. Unlike deterministic code that fails predictably, multi-agent swarms can hallucinate API calls, misinterpret user input, or trigger catastrophic feedback loops. Without a codified AI agent incident response plan, your team is flying blind when an agent goes rogue. As Gartner notes, enterprise AI-agent software spend is projected to reach $206.5B in 2026, meaning the surface area for agentic failures is expanding rapidly across every industry.</p>
+
+<h2>What Counts as an AI Agent Incident?</h2>
+<p>Traditional software incidents involve memory leaks, unhandled exceptions, or database timeouts. AI agent incidents are fundamentally different because agents possess agency&mdash;the ability to invoke tools, write data, spend budget, and interact with external APIs. When building your AI agent incident response runbook, you must categorize the following distinct failure modes:</p>
+<ul>
+    <li><strong>Runaway Cost Loops:</strong> Uncontrolled recursive logic or infinite planning loops that rapidly drain capital. For instance, community reports from developers highlight cases where an unmonitored infinite-loop agent burned over $700 in API costs in just 72 hours due to a complete lack of hard budget controls.</li>
+    <li><strong>Data Exfiltration:</strong> Agents tricked by indirect prompt injection into reading internal databases, proprietary documentation, or customer PII and leaking it to external endpoints.</li>
+    <li><strong>Unauthorized Actions:</strong> Autonomous agents executing destructive API mutations&mdash;such as deleting production records, sending unauthorized emails, or making financial transactions&mdash;without a human in the loop.</li>
+    <li><strong>Prompt-Injection Escalation:</strong> Attackers bypassing system prompts via malicious user payloads, causing the agent to ignore its safety boundaries and execute arbitrary tool commands.</li>
+    <li><strong>Permission Abuse:</strong> Agents accessing tools, databases, or third-party integrations that exceed their intended scope because role-based access control (RBAC) was never mapped to agent execution tokens.</li>
+</ul>
+
+<h2>Roles and Escalation Tiers</h2>
+<p>When an agent incident occurs at 2:00 AM, guessing who owns the fix wastes precious minutes. Your incident response framework must assign crystal-clear responsibilities:</p>
+<ul>
+    <li><strong>Tier 1 (AI Observability / On-Call Engineer):</strong> Monitors real-time telemetry dashboards to catch anomalous token usage spikes or evaluation failures. Responsible for initial triage.</li>
+    <li><strong>Tier 2 (Agentic Reliability Lead):</strong> Owns the execution graph and multi-agent coordination state. Responsible for isolating specific sub-agents, reviewing message history, and deciding whether to deploy global kill switches.</li>
+    <li><strong>Tier 3 (Security &amp; Compliance Officer):</strong> Steps in if the incident involves data leakage, unauthorized credential usage, or regulatory exposure. Coordinates stakeholder communication and forensic logging preservation.</li>
+</ul>
+
+<h2>The AI Agent Incident Response Runbook</h2>
+<p>A rigorous incident response runbook moves through five definitive phases. Follow these concrete steps when an alert triggers:</p>
+
+<h3>1. Detect</h3>
+<p>Identify anomalies through automated guardrails, latency spikes, or cost alerts. Look for abnormal tool-call frequency, unexpected error rates in retrieval-augmented generation (RAG) pipelines, or semantic drift flagged by observability tools.</p>
+
+<h3>2. Contain</h3>
+<p>Stop the bleeding immediately. Execute your pre-determined containment measures:</p>
+<ul>
+    <li>Trigger the system-wide or agent-specific <strong>kill switch</strong> to halt active runs.</li>
+    <li>Revoke API tokens, OAuth grants, and database credentials assigned to the offending agent profile.</li>
+    <li>Move downstream dependent agents into a degraded read-only state or manual-approval queue.</li>
+</ul>
+
+<h3>3. Assess</h3>
+<p>Determine the blast radius. Query your vector databases, state stores, and middleware logs to answer three critical questions: What data did the agent touch? What external systems were mutated? How many financial credits or API tokens were consumed during the event?</p>
+
+<h3>4. Remediate</h3>
+<p>Patch the underlying vulnerability before bringing agents back online. This may involve updating system prompts to patch indirect injection vectors, tightening tool-use schemas, enforcing stricter parameter validation, or implementing hard financial caps and spend ceilings that fail closed.</p>
+
+<h3>5. Post-Mortem</h3>
+<p>Document the failure path. Analyze why the deterministic guardrails failed to catch the agentic anomaly. Update your evaluation datasets with the malicious payload or edge-case scenario to prevent regression in future deployments.</p>
+
+<h2>What to Log for an Audit Trail</h2>
+<p>Debugging multi-agent swarms without structured telemetry is a common pain point cited by builders on Hacker News and Reddit. To satisfy compliance requirements and accelerate forensic debugging, your AI agent incident response plan must mandate immutable audit logs capturing:</p>
+<ul>
+    <li><strong>Full Message Lineage:</strong> Every prompt, system instruction, and tool output recorded sequentially.</li>
+    <li><strong>Tool-Call Payloads:</strong> Exact arguments passed to external APIs and databases, including timestamps and response codes.</li>
+    <li><strong>Spend &amp; Token Telemetry:</strong> Granular tracking of input tokens, output tokens, and direct dollar costs per agent node.</li>
+    <li><strong>Identity &amp; Context:</strong> The originating user session, tenant ID, and RBAC permission scope active during the execution window.</li>
+</ul>
+
+<h2>One-Page Incident Response Checklist</h2>
+<p>Keep this concise checklist accessible to your on-call engineers:</p>
+<ol>
+    <li>Is the agent actively leaking data or burning capital? If yes, trigger the <strong>kill switch</strong>.</li>
+    <li>Revoke API keys and token delegations tied to the failing agentic workflow.</li>
+    <li>Export the agent trace logs, memory states, and tool-call history to immutable storage.</li>
+    <li>Identify the injection vector, hallucination trigger, or loop condition.</li>
+    <li>Patch system prompts or tool schemas; verify the fix in a staging sandbox.</li>
+    <li>Schedule the engineering post-mortem and add the failure case to your automated eval suite.</li>
+</ol>
+
+<p>To implement production-grade governance frameworks, guardrails, and battle-tested execution topologies for your multi-agent architecture, check out the <a href="https://koalstin.gumroad.com/l/hdigmr">Governed Agent Mesh Playbook (Studio Edition)</a>.</p>
+
+  </article>
+  <nav class="article-back" aria-label="Article navigation" style="max-width:720px;margin:28px auto 0"><a href="../articles/" style="color:var(--accent)">&larr; All articles</a></nav>
+<script>
+(function(){var t=document.querySelector('article').innerText||'';var w=t.trim().split(/\s+/).length;var m=Math.max(1,Math.ceil(w/200));document.getElementById('reading-time').textContent=m+' min read';})();
+</script>
+
+  <div class="cta">
+    <h2>Put this into practice</h2>
+    <p>The Governed Agent Mesh Playbook — Studio Edition ($29) gives you the full system: tiering, approvals, spend controls, and incident response, ready to run.</p>
+    <a class="btn" href="https://koalstin.gumroad.com/l/hdigmr">Get the Studio Edition — $29</a> <p style="margin-top:12px"><a href="../products/" style="color:var(--accent)">Or browse the full catalog of 63 products &rarr;</a></p>
+  </div>
+
+  <footer class="site">
+    <div class="wrap">
+      <span>© 2026 ghostcorpnet · An independent studio</span>
+      <span><a href="../">Home</a><a href="../products/">Catalog</a><a href="../brands/">Stores</a><a href="../ecosystem/">Ecosystem</a><a href="mailto:koalstin.g.k.delaney@gmail.com">Contact</a><a href="../terms.html">Terms</a><a href="../privacy.html">Privacy</a></span>
+    </div>
+  </footer>
+<button id="backtop" aria-label="Back to top">↑</button>
+</main>
+<script>
+(function(){var b=document.getElementById('backtop');if(!b)return;
+function onScroll(){b.classList.toggle('show',window.scrollY>1200)}
+window.addEventListener('scroll',onScroll,{passive:true});onScroll();
+b.addEventListener('click',function(){window.scrollTo({top:0,behavior:'smooth'})});})();
+</script>
+</body>
+</html>
