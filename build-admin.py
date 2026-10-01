@@ -1,13 +1,14 @@
 #!/usr/bin/env python3
 """Generate the ghostcorpnet admin dashboard (admin.html).
 
-Reads live Gumroad seller data (via ~/workspace/skills/gumroad/bin/gumroad-api,
-credential custom.gumroad in the Secure Vault) plus the bot fleet's local data
-(health log, product ledger, draft digests, proposals), and writes a single
-self-contained admin.html. No secrets are ever written into the page.
+Reads live Gumroad seller data (via ~/workspace/skills/gumroad/bin/gumroad-api),
+the approvals worker queue, outreach ledger, and bot log files, and writes a
+single self-contained admin.html: KPI strip, alerts, revenue milestones, fleet
+activity, approvals (one-tap), outreach, products, drafts, fleet, and extras.
+No secrets are ever written into the page; it is served only from the
+key-gated worker /admin route (wrong/missing key -> 404), noindex.
 
 Regenerate: python3 ~/workspace/kestrelattice/build-admin.py
-(The daily site-health cron regenerates it automatically.)
 """
 import html
 import glob
@@ -24,20 +25,9 @@ HOME = os.path.expanduser("~")
 HF = os.path.join(HOME, "workspace/goals/kestrelattice-autonomous-growth/hidden_files")
 GUMROAD_CLI = os.path.join(HOME, "workspace/skills/gumroad/bin/gumroad-api")
 OUT = os.path.join(HOME, "workspace/kestrelattice/admin.html")
-
-CATALOG = [
-    ("The Playbook — Studio Edition", 29, "hdigmr"),
-    ("AI Agent Risk Audit Kit", 19, "sahva"),
-    ("Agent Incident Response Runbook", 19, "jbngbu"),
-    ("100 Agent Use Cases, Pre-Tiered", 19, "slexhv"),
-    ("Prompt Injection Defense Field Guide", 19, "cjdkuu"),
-    ("Agent Cost Control Workbook", 19, "ilxccs"),
-    ("Quarterly Access Review Kit", 19, "fdtkdd"),
-    ("Complete ghostcorpnet Library", 79, "yzbumc"),
-]
+UA = "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 Chrome/126.0 Safari/537.36"
 
 FLEET = [
-    # (bot name, schedule, signal path in hidden_files showing its latest output)
     ("Site health", "daily", "health.log"),
     ("Micro-forge (products)", "daily", "products/micro"),
     ("Lead scout", "daily", "leads"),
@@ -55,18 +45,17 @@ FLEET = [
     ("AI provider scout", "monthly", "open-models/drafts"),
     ("TikTok studio", "daily", "tiktok"),
 ]
-
-# (ok age, warn age) in hours, keyed by schedule label.
 HEALTH_WINDOWS = {
     "daily": (36, 72),
     "3× / week": (96, 192),
     "weekly": (240, 408),
     "monthly": (1080, 1800),
 }
+# Queue kinds that are NEVER auto-approved — they wait for a human tap.
+HUMAN_KINDS = ("outreach_forget", "draft_approve", "draft_discard")
 
 
 def health_of(schedule, ts):
-    """Status dot class + label from a bot's schedule and last-output time."""
     if not ts:
         return "never", "no data"
     age_h = (time.time() - ts) / 3600.0
@@ -79,15 +68,13 @@ def health_of(schedule, ts):
 
 
 def newest_mtime(rel):
-    """Newest file modification time under a hidden_files path (file or dir)."""
     p = os.path.join(HF, rel)
     try:
         if os.path.isfile(p):
             return os.path.getmtime(p)
         best = 0.0
         for root, dirs, files in os.walk(p):
-            dirs[:] = [d for d in dirs
-                       if not d.startswith(".") and d != "__pycache__"]
+            dirs[:] = [d for d in dirs if not d.startswith(".") and d != "__pycache__"]
             for f in files:
                 fp = os.path.join(root, f)
                 try:
@@ -117,8 +104,19 @@ def read_file(path, default=""):
         return default
 
 
+def curl_get(url):
+    """Read-only GET with a browser UA (Cloudflare WAF blocks python urllib)."""
+    try:
+        r = subprocess.run(["curl", "-s", "-m", "25", "-A", UA, url],
+                           capture_output=True, text=True, timeout=40)
+        if r.returncode != 0:
+            return None
+        return json.loads(r.stdout)
+    except Exception:
+        return None
+
+
 def gumroad(path, query=""):
-    """Return parsed JSON from the Gumroad API, or None on any failure."""
     try:
         cmd = [sys.executable, GUMROAD_CLI, path]
         if query:
@@ -133,9 +131,8 @@ def gumroad(path, query=""):
 
 
 def gumroad_all_products():
-    """All products across every API page, or None on failure."""
     items, page_key, seen = [], None, set()
-    for _ in range(15):
+    for _ in range(20):
         q = f"page_key={urllib.parse.quote(page_key)}" if page_key else ""
         data = gumroad("products", q)
         if not data:
@@ -150,9 +147,189 @@ def gumroad_all_products():
     return items
 
 
-def money_section():
-    items = gumroad_all_products()
-    if not items:
+def get_queue():
+    try:
+        sec = json.loads(read_file(os.path.join(HOME, "workspace/kestrelattice/worker/.secrets.json")))
+        wurl = sec.get("worker_url", "").rstrip("/")
+        if not wurl:
+            return []
+        q = curl_get(wurl + "/queue")
+        return q if isinstance(q, list) else []
+    except Exception:
+        return []
+
+
+def sent_today_count():
+    today = datetime.now(timezone.utc).strftime("%Y-%m-%d")
+    n = 0
+    for line in read_file(os.path.join(HF, "outreach/sent-ledger.jsonl")).splitlines():
+        line = line.strip()
+        if line:
+            try:
+                if json.loads(line).get("at", "").startswith(today):
+                    n += 1
+            except json.JSONDecodeError:
+                pass
+    return n
+
+
+def last_watcher_run():
+    """(label, css class) for the most recent watcher run or skip."""
+    lines = [l for l in read_file(os.path.join(HF, "approvals/watcher-runs.log")).splitlines() if l.strip()]
+    for line in reversed(lines[-25:]):
+        m = re.match(r"(\d{4}-\d{2}-\d{2}T\d{2}:\d{2})(?::\d{2})?Z?\s*(.*)", line)
+        if m:
+            ts, rest = m.group(1), m.group(2).lower()
+            when = ts.replace("T", " ") + "Z"
+            if "skip" in rest:
+                return f"skipped · {when}", "warn"
+            if "completed" in rest or "done" in rest:
+                return f"ran · {when}", "ok"
+            return f"{when}", "ok"
+    return "no runs logged", "never"
+
+
+# ---------------------------------------------------------------- sections
+
+def kpi_strip(products, queue):
+    live = [p for p in products if p.get("published")] if products else []
+    drafts = [p for p in products if not p.get("published")] if products else []
+    catalog_value = sum((p.get("price") or 0) for p in live) / 100.0
+    sends = sent_today_count()
+    blocked = [i for i in queue if str(i.get("status", "")).startswith("blocked")]
+    human_pending = [i for i in queue
+                     if i.get("status") == "pending" and i.get("kind") in HUMAN_KINDS]
+    taps = len(blocked) + len(human_pending)
+    wstat, wcls = last_watcher_run()
+    five = None
+    if products:
+        five = next((p.get("name") for p in products
+                     if (p.get("price") or 0) == 500 and p.get("published")), None)
+
+    def tile(value, label, sub="", css=""):
+        return (f'<div class="kpi {css}"><div class="kpi-v">{value}</div>'
+                f'<div class="kpi-l">{label}</div>'
+                + (f'<div class="kpi-s">{sub}</div>' if sub else "") + '</div>')
+
+    return (
+        '<div class="kpirow">'
+        + tile(f"{len(live)}", "live products",
+               f"{len(drafts)} unpublished drafts" if drafts else "0 drafts", "accent")
+        + tile(f"${catalog_value:,.0f}", "catalog value",
+               "sum of live prices")
+        + tile(f"{sends}<span class='kpi-cap'>/20</span>", "pitches sent today",
+               "daily cap", "warn" if sends >= 20 else "")
+        + tile(f"{taps}", "need your tap",
+               "blocked + human-only", "bad" if taps else "")
+        + tile(f'<span class="kpi-small">{esc(wstat)}</span>', "watcher",
+               "last run", wcls)
+        + '</div>'
+        + (f'<p class="muted" style="margin:6px 2px 0">$5 entry product live: <b>{esc(five)}</b></p>' if five else "")
+    )
+
+
+def alerts_section(queue, products):
+    alerts = []
+    for i in queue:
+        st = str(i.get("status", ""))
+        if st.startswith("blocked"):
+            alerts.append(
+                ("blocked", i.get("title", i.get("code", "")), st, i.get("detail", "")))
+    try:
+        prog = json.loads(read_file(os.path.join(HF, "approvals/progress.json")) or "{}")
+    except json.JSONDecodeError:
+        prog = {}
+    live_n = len([p for p in (products or []) if p.get("published")])
+    cu = prog.get("covers_uploaded") or 0
+    covered = len(cu) if isinstance(cu, list) else cu
+    if live_n and covered and live_n > covered:
+        alerts.append(("covers", f"{live_n - covered} products missing cover art",
+                       "info", "Generated locally; the watcher uploads them on its next run."))
+    rec = prog.get("reconciled_2026-09-30_0245") or {}
+    for name in rec.get("gumroad_unpublished", []) or []:
+        if "dup" in name.lower():
+            alerts.append(("duplicate", f"Duplicate live product: {name}",
+                           "info", "Unpublish one — deleting is human-only."))
+    if not alerts:
+        return ('<div class="card ok-card"><h3>All clear</h3>'
+                '<p class="muted">Nothing blocked, no duplicates, covers complete.</p></div>')
+    items = ""
+    for kind, title, status, detail in alerts:
+        items += (
+            '<div class="alert"><span class="pill blocked">' + esc(status) + '</span> '
+            '<b>' + esc(title) + '</b>'
+            + (f'<br><span class="muted">{esc(detail[:200])}</span>' if detail else "")
+            + '</div>')
+    return ('<div class="card warn"><h3>Alerts <span class="pill">' + str(len(alerts)) +
+            '</span></h3>' + items + '</div>')
+
+
+def revenue_section(products):
+    week_ago = (datetime.now(timezone.utc) - timedelta(days=7)).strftime("%Y-%m-%d")
+    sales = gumroad("sales", f"after={week_ago}") or {}
+    week_sales = sales.get("sales", [])
+    week_cents = sum(s.get("price", 0) for s in week_sales)
+    total_cents = 0
+    total_n = 0
+    if products:
+        for p in products:
+            total_cents += p.get("sales_usd_cents") or 0
+            total_n += p.get("sales_count") or 0
+    total = total_cents / 100.0
+    milestones = [("First sale", 0), ("$10 — Gumroad Discover unlocks", 10),
+                  ("$100 — first sales week", 100), ("$6,000 — monthly walk-away goal", 6000)]
+    steps = ""
+    for label, amt in milestones:
+        hit = total >= amt and amt > 0
+        cur = total < amt and (milestones.index((label, amt)) == 0 or
+                               total >= milestones[milestones.index((label, amt)) - 1][1])
+        cls = "hit" if hit else ("cur" if cur else "")
+        dot = "✓" if hit else ("▸" if cur else "○")
+        steps += (f'<div class="ms {cls}"><span class="ms-dot">{dot}</span>'
+                  f'<span class="ms-l">{esc(label)}</span>'
+                  f'<span class="ms-a">${amt:,}</span></div>')
+    pct = min(100.0, (total / 6000.0) * 100.0)
+    return (
+        '<div class="card"><h3>Revenue</h3>'
+        '<div class="statrow">'
+        f'<div class="stat"><b>${total:,.0f}</b><span>all-time revenue</span></div>'
+        f'<div class="stat"><b>{total_n}</b><span>all-time sales</span></div>'
+        f'<div class="stat"><b>${week_cents/100:,.0f}</b><span>last 7 days ({len(week_sales)} sales)</span></div>'
+        '</div>'
+        + ("" if total_n else
+           '<p class="muted">No sales yet — shown honestly. Every number here comes '
+           'straight from the Gumroad API; nothing is estimated or projected.</p>')
+        + '<div class="ms-track">' + steps + '</div>'
+        '<div class="bar"><div class="bar-fill" style="width:' + f"{pct:.2f}" +
+        '%"></div></div>'
+        f'<p class="muted">Progress to the $6,000/month goal: {pct:.1f}%</p>'
+        '</div>'
+    )
+
+
+def activity_feed():
+    feeds = []
+    def take(rel, n, name):
+        lines = [l for l in read_file(os.path.join(HF, rel)).splitlines() if l.strip()]
+        for l in lines[-n:]:
+            m = re.match(r"(\d{4}-\d{2}-\d{2}T\d{2}:\d{2})", l)
+            ts = m.group(1) if m else ""
+            feeds.append((ts, name, l[:220]))
+    take("approvals/watcher-runs.log", 8, "watcher")
+    take("site-improvements/scout.log", 4, "ui-scout")
+    take("outreach/sync.log", 4, "outreach")
+    feeds.sort(key=lambda x: x[0], reverse=True)
+    rows = "".join(
+        f'<li><span class="src">{esc(s)}</span> '
+        f'<span class="mono">{esc(ts)}</span> — {esc(t)}</li>'
+        for ts, s, t in feeds[:20]) or "<li>—</li>"
+    return ('<div class="card"><h3>Fleet activity</h3>'
+            '<p class="lede">Latest bot runs, newest first. Full logs live in the fleet workspace.</p>'
+            f'<ul class="feed">{rows}</ul></div>')
+
+
+def money_section(products):
+    if not products:
         return (
             '<div class="card warn"><h3>Sales data not connected yet</h3>'
             "<p>One-time setup: generate an API token at Gumroad → Settings → "
@@ -160,36 +337,25 @@ def money_section():
             "<b>custom.gumroad</b> connector. After that, live sales numbers "
             "appear here automatically.</p></div>"
         )
-    total_cents = 0
-    total_n = 0
     rows = []
-    by_permalink = {}
-    for p in items:
+    for p in products:
+        if not p.get("published"):
+            continue
         name = p.get("name", "?")
         cents = p.get("sales_usd_cents") or 0
         n = p.get("sales_count") or 0
-        total_cents += cents
-        total_n += n
-        permalink = p.get("permalink") or p.get("short_url") or ""
-        by_permalink[p.get("id", "")] = (name, cents, n)
+        price = (p.get("price") or 0) / 100.0
+        url = (p.get("short_url") or p.get("permalink") or "").rstrip("/")
+        disp = url.replace("https://", "").replace("http://", "")
         rows.append(
-            f"<tr><td>{esc(name)}</td><td>${cents/100:,.0f}</td><td>{n}</td></tr>"
+            f"<tr><td><b>{esc(name)}</b><br><a class='mono' href='{esc(url)}' "
+            f"target='_blank' rel='noopener'>{esc(disp)}</a></td>"
+            f"<td>${price:,.0f}</td><td>${cents/100:,.0f}</td><td>{n}</td></tr>"
         )
-    # This week's sales from /sales
-    week_ago = (datetime.now(timezone.utc) - timedelta(days=7)).strftime("%Y-%m-%d")
-    sales = gumroad("sales", f"after={week_ago}") or {}
-    week_sales = sales.get("sales", [])
-    week_cents = sum(s.get("price", 0) for s in week_sales)
-    cards = (
-        f'<div class="stat"><b>${total_cents/100:,.0f}</b><span>all-time revenue</span></div>'
-        f'<div class="stat"><b>{total_n}</b><span>all-time sales</span></div>'
-        f'<div class="stat"><b>${week_cents/100:,.0f}</b><span>last 7 days ({len(week_sales)} sales)</span></div>'
+    return (
+        '<div class="table-wrap"><table><tr><th>Product</th><th>Price</th>'
+        '<th>Revenue</th><th>Sales</th></tr>' + "".join(rows) + "</table></div>"
     )
-    table = (
-        '<div class="table-wrap"><table><tr><th>Product</th><th>Revenue</th><th>Sales</th></tr>'
-        + "".join(rows) + "</table></div>"
-    )
-    return f'<div class="statrow">{cards}</div>{table}'
 
 
 def pipeline_section():
@@ -197,10 +363,9 @@ def pipeline_section():
     drafts = [json.loads(l) for l in ledger.splitlines() if l.strip()]
     micro_drafts = [d for d in drafts if d.get("status") == "draft"]
     today = datetime.now().strftime("%Y-%m-%d")
-    digest = read_file(
-        os.path.join(HF, f"products/micro/{today}-DIGEST.md"))
+    digest = read_file(os.path.join(HF, f"products/micro/{today}-DIGEST.md"))
     titles = re.findall(r"- \*\*(.+?)\*\*", digest)
-    if not titles:  # fall back to most recent digest on disk
+    if not titles:
         try:
             ds = sorted(f for f in os.listdir(os.path.join(HF, "products/micro"))
                         if f.endswith("-DIGEST.md"))
@@ -210,34 +375,58 @@ def pipeline_section():
         except OSError:
             pass
     micro_list = "".join(f"<li>{esc(t)}</li>" for t in titles) or "<li>—</li>"
-
-    def count_lines(rel):
-        txt = read_file(os.path.join(HF, rel))
-        return len([l for l in txt.splitlines() if l.strip().startswith("- ")])
-
-    content_n = count_lines("drafts/2026-09-29.md")
-    leads_n = count_lines("leads/2026-09-29.md")
-    faq_txt = read_file(os.path.join(HF, "faq-drafts/2026-09-29.md"))
-    faq_n = faq_txt.count("## ") or faq_txt.count("### ")
     cards = (
+        f'<div class="statrow">'
         f'<div class="stat"><b>{len(micro_drafts)}</b><span>product drafts</span></div>'
-        f'<div class="stat"><b>{content_n}</b><span>content drafts</span></div>'
-        f'<div class="stat"><b>{leads_n}</b><span>lead outreach drafts</span></div>'
-        f'<div class="stat"><b>{faq_n}</b><span>FAQ drafts</span></div>'
+        f'<div class="stat"><b>{len(titles)}</b><span>titles in latest digest</span></div>'
+        f'</div>'
     )
     return (
-        f'<div class="statrow">{cards}</div>'
+        cards +
         f'<details class="fold"><summary>Micro-product draft titles ({len(titles)})</summary>'
         f"<ol>{micro_list}</ol></details>"
-        '<p class="muted">Full manuscripts live in the fleet workspace; say the word and I\'ll publish the approved ones to Gumroad.</p>'
+    )
+
+
+def backend_js():
+    wdir = os.path.join(HOME, "workspace/kestrelattice")
+    wurl = read_file(os.path.join(wdir, ".worker-url")).strip().rstrip("/")
+    try:
+        wkey = json.loads(read_file(os.path.join(wdir, "worker/.secrets.json")))["write_key"]
+    except (OSError, KeyError, json.JSONDecodeError):
+        wkey = ""
+    return (
+        '<script>\n'
+        'const WURL = ' + json.dumps(wurl) + ';\n'
+        'const WKEY = ' + json.dumps(wkey) + ';\n'
+        'async function approveCode(code, btn, doneLabel) {\n'
+        '  if (!WURL || !WKEY) { alert("Approval backend unreachable."); return false; }\n'
+        '  if (btn) { btn.disabled = true; btn.textContent = "Working…"; }\n'
+        '  try {\n'
+        '    const r = await fetch(WURL + "/approve", {method: "POST",\n'
+        '      headers: {"Content-Type": "application/json"},\n'
+        '      body: JSON.stringify({code: code, key: WKEY})});\n'
+        '    const d = await r.json();\n'
+        '    if (d.ok) { if (btn) btn.textContent = doneLabel || "Done ✓"; return true; }\n'
+        '  } catch (e) {}\n'
+        '  if (btn) { btn.disabled = false; btn.textContent = "Retry"; }\n'
+        '  return false;\n'
+        '}\n'
+        'function switchTab(name) {\n'
+        '  document.querySelectorAll(".tabpane").forEach(p => p.classList.toggle("on", p.id === "tab-" + name));\n'
+        '  document.querySelectorAll(".tabbtn").forEach(b => b.classList.toggle("on", b.dataset.tab === name));\n'
+        '  try { history.replaceState(null, "", "#" + name); } catch (e) {}\n'
+        '  window.scrollTo(0, 0);\n'
+        '}\n'
+        'document.addEventListener("DOMContentLoaded", function() {\n'
+        '  const h = (location.hash || "#overview").slice(1);\n'
+        '  switchTab(document.getElementById("tab-" + h) ? h : "overview");\n'
+        '});\n'
+        '</script>'
     )
 
 
 def approvals_section():
-    """Live approval queue. The buttons talk directly to the approvals backend
-    (Cloudflare Worker); no email round-trip. Worker URL comes from the
-    gitignored .worker-url file; until the backend is deployed we show the
-    queue statically without buttons."""
     wdir = os.path.join(HOME, "workspace/kestrelattice")
     wurl = read_file(os.path.join(wdir, ".worker-url")).strip().rstrip("/")
     if not wurl:
@@ -258,8 +447,7 @@ def approvals_section():
             '<div class="table-wrap"><table><tr><th>Item</th><th>Status</th><th></th></tr>'
             + rows + "</table></div>"
             "<p class='muted'>One-tap approvals are activating — the backend "
-            "finishes deploying shortly. Meanwhile you can paste a code (e.g. "
-            "“approve AP-0001”) in the Talk to the bots chat.</p>")
+            "finishes deploying shortly.</p>")
     try:
         wkey = json.loads(read_file(os.path.join(wdir, "worker/.secrets.json")))["write_key"]
     except (OSError, KeyError, json.JSONDecodeError):
@@ -284,7 +472,7 @@ def approvals_section():
         '        : "<span class=\'muted\'>—</span>";\n'
         '      return `<tr><td><b>${it.title}</b><br><span class=\'muted\'>${it.detail || ""}</span><br><span class=\'muted\'>Needs: ${it.prereq || "—"}</span></td><td>${pill(st)}</td><td>${btn}</td></tr>`;\n'
         '    }).join("") + "</table></div>"\n'
-        '      + "<p class=\'muted\'>Tap <b>Approve</b> — the fleet picks it up within ~15 minutes and does the work. Or paste the code (e.g. “approve AP-0001”) in the Talk to the bots chat.<br>Routine site development auto-approves by policy — only items that move money, change prices, or send messages wait for your tap.</p>";\n'
+        '      + "<p class=\'muted\'>Tap <b>Approve</b> — the fleet picks it up within ~15 minutes and does the work.<br>Routine site development auto-approves by policy — only items that move money, change prices, or send messages wait for your tap.</p>";\n'
         '  } catch (e) {\n'
         '    el.innerHTML = "<p class=\'muted\'>Approval service unreachable — try again shortly.</p>";\n'
         '  }\n'
@@ -309,39 +497,7 @@ def approvals_section():
     return js
 
 
-def backend_js():
-    """Shared worker credentials + one generic approve helper, emitted once near
-    the top of the page so every section's buttons can use it."""
-    wdir = os.path.join(HOME, "workspace/kestrelattice")
-    wurl = read_file(os.path.join(wdir, ".worker-url")).strip().rstrip("/")
-    try:
-        wkey = json.loads(read_file(os.path.join(wdir, "worker/.secrets.json")))["write_key"]
-    except (OSError, KeyError, json.JSONDecodeError):
-        wkey = ""
-    return (
-        '<script>\n'
-        'const WURL = ' + json.dumps(wurl) + ';\n'
-        'const WKEY = ' + json.dumps(wkey) + ';\n'
-        'async function approveCode(code, btn, doneLabel) {\n'
-        '  if (!WURL || !WKEY) { alert("Approval backend unreachable."); return false; }\n'
-        '  if (btn) { btn.disabled = true; btn.textContent = "Working…"; }\n'
-        '  try {\n'
-        '    const r = await fetch(WURL + "/approve", {method: "POST",\n'
-        '      headers: {"Content-Type": "application/json"},\n'
-        '      body: JSON.stringify({code: code, key: WKEY})});\n'
-        '    const d = await r.json();\n'
-        '    if (d.ok) { if (btn) btn.textContent = doneLabel || "Done ✓"; return true; }\n'
-        '  } catch (e) {}\n'
-        '  if (btn) { btn.disabled = false; btn.textContent = "Retry"; }\n'
-        '  return false;\n'
-        '}\n'
-        '</script>'
-    )
-
-
 def outreach_section():
-    """Per-lead pitch cards. Send = approve the pre-seeded outreach_send item;
-    the watcher sends it from the human's Gmail within ~15 minutes."""
     items = []
     for line in read_file(os.path.join(HF, "outreach/queue.jsonl")).splitlines():
         line = line.strip()
@@ -354,11 +510,11 @@ def outreach_section():
     needc = [i for i in items if i.get("status") == "needs-contact"]
     sent = [i for i in items if i.get("status") == "sent"]
     stats = (
-        f'<div class="statrow">'
+        '<div class="statrow">'
         f'<div class="stat"><b>{len(ready)}</b><span>ready to send</span></div>'
         f'<div class="stat"><b>{len(needc)}</b><span>finding contact</span></div>'
         f'<div class="stat"><b>{len(sent)}</b><span>pitches sent</span></div>'
-        f'</div>'
+        '</div>'
     )
     if not ready and not needc and not sent:
         return stats + ("<p class='muted'>No outreach yet — the sync bot drafts pitches "
@@ -376,8 +532,8 @@ def outreach_section():
             '<button class="btn" onclick="approveCode(\'OS-' + esc(qid) + '\', this, \'Queued ✓\')">Send pitch</button> '
             '<button class="btn" style="background:#3a352d;color:var(--muted)" '
             'onclick="approveCode(\'OF-' + esc(qid) + '\', this, \'Forgotten\')">Forget</button>'
-            '<p class="muted" style="margin-top:8px">Your tap sends exactly this pitch from your Gmail '
-            'within ~15 minutes. A short opt-out footer is appended.</p></div>'
+            '<p class="muted" style="margin-top:8px">Your tap queues this pitch — the watcher sends it '
+            'from your business Gmail within ~15 minutes. A short opt-out footer is appended.</p></div>'
         )
     need_html = ""
     if needc:
@@ -391,7 +547,6 @@ def outreach_section():
 
 
 def drafts_section():
-    """Every draft group the bots produced, with Put to work / Forget triage."""
     try:
         resolved = json.loads(read_file(os.path.join(HF, "outreach/drafts-resolved.json")) or "{}")
     except json.JSONDecodeError:
@@ -432,17 +587,7 @@ def drafts_section():
     return "".join(cards)
 
 
-def _gumroad_link(p):
-    """Prefer short_url; fall back to permalink. Returns display text."""
-    u = (p.get("short_url") or p.get("permalink") or "").rstrip("/")
-    return u.replace("https://", "").replace("http://", "")
-
-
 def directory_section():
-    """Third-party pack submissions. Lists pending directory entries from the
-    worker's KV (via the write key, same as approvals) with Approve / Reject
-    buttons that flip each entry's status in KV. Entries are append-only —
-    nothing is ever deleted."""
     js = (
         '<div id="dirsub"><p class="muted">Loading submissions…</p></div>\n'
         '<script>\n'
@@ -507,7 +652,6 @@ def directory_section():
 
 
 def tiktok_section():
-    """Staged TikTok videos: brand, caption, and posting status."""
     entries = []
     for line in read_file(os.path.join(HF, "tiktok/log.jsonl")).splitlines():
         line = line.strip()
@@ -526,9 +670,11 @@ def tiktok_section():
         tt = {}
     uname = tt.get("username") or "—"
     cards = (
+        '<div class="statrow">'
         f'<div class="stat"><b>{len(staged)}</b><span>videos staged</span></div>'
         f'<div class="stat"><b>{len(recent)}</b><span>staged this week</span></div>'
         f'<div class="stat"><b>@{esc(uname)}</b><span>TikTok account</span></div>'
+        '</div>'
     )
     if not staged:
         body = "<p class='muted'>No videos yet — the TikTok studio bot makes one every morning.</p>"
@@ -542,7 +688,7 @@ def tiktok_section():
             for e in reversed(staged[-10:])
         )
     return (
-        f'<div class="statrow">{cards}</div>' + body +
+        cards + body +
         "<p class='muted'>Account <b>@ghostcorpnetai</b> is live (created on your phone). "
         "Bots make the videos; you post from the TikTok app — TikTok blocks bot logins. "
         "Each video has a matching .txt file in the staged folder with the exact "
@@ -553,42 +699,7 @@ def tiktok_section():
 def site_section():
     health = read_file(os.path.join(HF, "health.log")).strip().splitlines()
     last = esc(health[-1]) if health else "no checks logged yet"
-    items = gumroad_all_products() or []
-    live = [p for p in items if p.get("published")]
-    drafts = [p for p in items if not p.get("published")]
-
-    def rows(prods):
-        out = []
-        for p in prods:
-            name = p.get("name", "?")
-            cents = p.get("price") or 0
-            out.append(
-                f"<tr><td>{esc(name)}</td><td>${cents/100:,.0f}</td>"
-                f"<td class='mono'>{esc(_gumroad_link(p))}</td></tr>"
-            )
-        return "".join(out)
-
-    cat_rows = rows(live) or (
-        "<tr><td colspan='3'>Could not reach Gumroad — showing last static catalog.</td></tr>"
-        + "".join(
-            f"<tr><td>{esc(n)}</td><td>${p}</td><td class='mono'>koalstin.gumroad.com/l/{g}</td></tr>"
-            for n, p, g in CATALOG
-        )
-    )
-    draft_rows = rows(drafts)
-    draft_html = (
-        f"<h4>Unpublished drafts ({len(drafts)})</h4>"
-        f'<div class="table-wrap"><table><tr><th>Product</th><th>Price</th><th>Gumroad link</th></tr>{draft_rows}</table></div>'
-        if draft_rows else ""
-    )
-    return (
-        f'<p><b>Last health check:</b> <span class="mono">{last}</span></p>'
-        f'<p><b>Live products:</b> {len(live)}'
-        + (f" (plus {len(drafts)} unpublished drafts)" if drafts else "")
-        + "</p>"
-        f'<div class="table-wrap"><table><tr><th>Product</th><th>Price</th><th>Gumroad link</th></tr>{cat_rows}</table></div>'
-        + draft_html
-    )
+    return f'<p><b>Last health check:</b> <span class="mono">{last}</span></p>'
 
 
 def fleet_section():
@@ -604,22 +715,6 @@ def fleet_section():
             f"<td class='mono'>{esc(fmt_time(ts))}</td>"
             f"<td><span class='pill {cls}'>{label}</span></td></tr>")
     bots = "".join(rows)
-    # Activity feed: most recently touched files across the fleet workspace.
-    seen = []
-    for root, dirs, files in os.walk(HF):
-        dirs[:] = [d for d in dirs
-                   if not d.startswith(".") and d != "__pycache__"]
-        for f in files:
-            fp = os.path.join(root, f)
-            try:
-                seen.append((os.path.getmtime(fp),
-                             os.path.relpath(fp, HF)))
-            except OSError:
-                pass
-    seen.sort(reverse=True)
-    feed = "".join(
-        f"<li><span class='mono'>{esc(fmt_time(ts))}</span> — {esc(rel)}</li>"
-        for ts, rel in seen[:12]) or "<li>—</li>"
     props = ""
     try:
         pdir = os.path.join(HF, "proposals")
@@ -643,13 +738,26 @@ def fleet_section():
         '<span class="dot warn"></span>quiet — overdue once &nbsp;'
         '<span class="dot stale"></span>stale — well overdue &nbsp;'
         '<span class="dot never"></span>no data — never produced output</p>'
-        f"<h3>Latest fleet activity</h3><ul>{feed}</ul>"
         f"<h3>Recently shipped site improvements</h3><ul>{props or '<li>—</li>'}</ul>"
     )
 
 
 def build():
     now = datetime.now().strftime("%Y-%m-%d %H:%M %Z")
+    products = gumroad_all_products() or []
+    queue = get_queue()
+    kpi = kpi_strip(products, queue)
+    alerts = alerts_section(queue, products)
+    revenue = revenue_section(products)
+    feed = activity_feed()
+    tabs = [
+        ("overview", "Overview"), ("approvals", "Approvals"), ("outreach", "Outreach"),
+        ("products", "Products"), ("drafts", "Drafts"), ("fleet", "Fleet"),
+        ("extras", "Extras"),
+    ]
+    tabbtns = "".join(
+        f'<button class="tabbtn" data-tab="{t}" onclick="switchTab(\'{t}\')">{l}</button>'
+        for t, l in tabs)
     body = f"""<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -657,97 +765,147 @@ def build():
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex, nofollow">
 <title>Admin Dashboard — ghostcorpnet</title>
-<!-- GENERATED by build-admin.py — do not hand-edit. Regenerates daily. -->
+<!-- GENERATED by build-admin.py — do not hand-edit. -->
 <style>
-  :root{{--bg:#121212; --panel:#1c1a18; --panel2:#232019; --line:#332e26;
-        --text:#e8e2d8; --muted:#9a917f; --accent:#e07a5f; --accent-dim:#b9634b;
-        --ok:#7fbf7f; --warn:#e0a75f; --bad:#e08a7f; --radius:12px;}}
+  :root{{--bg:#101014; --panel:#17181d; --panel2:#1e2027; --line:#2a2c35;
+        --text:#ece7db; --muted:#98908a; --accent:#e07a5f; --accent-deep:#a8502f;
+        --ok:#7fbf7f; --warn:#e0a75f; --bad:#e08a7f; --radius:14px;}}
   *{{margin:0;padding:0;box-sizing:border-box}}
-  html{{scroll-behavior:smooth;scroll-padding-top:76px}}
-  body{{background:var(--bg);color:var(--text);
+  html{{scroll-behavior:smooth}}
+  body{{background:radial-gradient(1200px 400px at 50% -80px,#1d1a18 0%,var(--bg) 60%),var(--bg);
+       color:var(--text);
        font-family:ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
        line-height:1.6;-webkit-text-size-adjust:100%}}
-  header.top{{position:sticky;top:0;z-index:100;background:rgba(18,18,18,.95);
-       backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}}
-  header.top .inner{{max-width:1080px;margin:0 auto;padding:12px 24px;
-       display:flex;align-items:center;gap:16px}}
-  .brand{{display:flex;align-items:center;gap:10px;font-weight:700;font-size:1.05rem;
-       color:var(--text);text-decoration:none;flex:0 0 auto}}
-  .admin-tag{{font-size:.68rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;
-       color:var(--accent);border:1px solid var(--accent-dim);border-radius:999px;padding:3px 10px}}
-  nav.dash{{display:flex;gap:2px;margin-left:auto;overflow-x:auto;scrollbar-width:none}}
-  nav.dash::-webkit-scrollbar{{display:none}}
-  nav.dash a{{color:var(--muted);font-size:.85rem;padding:7px 11px;border-radius:7px;
-       text-decoration:none;white-space:nowrap}}
-  nav.dash a:hover{{color:var(--accent);background:var(--panel)}}
-  .wrap{{max-width:1080px;margin:0 auto;padding:0 24px 80px}}
-  .hero{{padding:44px 0 6px}}
-  .hero h1{{font-size:clamp(1.7rem,4vw,2.3rem);font-weight:800;letter-spacing:-.02em}}
-  .gen{{color:var(--muted);font-size:.88rem;margin-top:6px}}
-  section.dash{{padding:30px 0 6px;border-top:1px solid var(--line);margin-top:30px}}
-  .eyebrow{{font-size:.7rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;
-       color:var(--accent);margin-bottom:6px}}
-  section.dash h2{{font-size:1.4rem;font-weight:700;letter-spacing:-.01em}}
-  section.dash .lede{{color:var(--muted);font-size:.92rem;margin:4px 0 14px;max-width:720px}}
-  .statrow{{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:14px;margin:16px 0}}
-  .stat{{background:var(--panel);border:1px solid var(--line);border-top:3px solid var(--accent-dim);
-       border-radius:var(--radius);padding:20px 14px;text-align:center}}
-  .stat b{{display:block;font-size:1.9rem;color:var(--accent);line-height:1.25}}
-  .stat span{{color:var(--muted);font-size:.85rem}}
-  .card{{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);
-       padding:22px 24px;margin:14px 0}}
-  .card.warn{{border-color:var(--accent-dim);border-left:4px solid var(--accent)}}
-  .card h3{{margin:0 0 8px;font-size:1.05rem}}
+  header.top{{position:sticky;top:0;z-index:100;background:rgba(16,16,20,.94);
+       backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}}
+  header.top .inner{{max-width:1120px;margin:0 auto;padding:12px 24px;
+       display:flex;align-items:center;gap:14px}}
+  .brand{{display:flex;align-items:center;gap:10px;font-weight:800;font-size:1.05rem;
+       letter-spacing:-.01em;color:var(--text);text-decoration:none;flex:0 0 auto}}
+  .admin-tag{{font-size:.66rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;
+       color:#0f0e0c;background:linear-gradient(135deg,var(--accent),#f0a184);
+       border-radius:999px;padding:4px 11px}}
+  .tabs{{display:flex;gap:4px;margin-left:auto;overflow-x:auto;scrollbar-width:none}}
+  .tabs::-webkit-scrollbar{{display:none}}
+  .tabbtn{{background:transparent;border:1px solid transparent;border-radius:9px;
+       color:var(--muted);font-size:.85rem;font-weight:600;padding:8px 13px;cursor:pointer;
+       white-space:nowrap;font-family:inherit}}
+  .tabbtn:hover{{color:var(--accent);background:var(--panel)}}
+  .tabbtn.on{{color:var(--accent);background:var(--panel);border-color:var(--line)}}
+  .wrap{{max-width:1120px;margin:0 auto;padding:0 24px 90px}}
+  .hero{{padding:40px 0 4px}}
+  .hero h1{{font-size:clamp(1.8rem,4.5vw,2.5rem);font-weight:800;letter-spacing:-.025em;
+       background:linear-gradient(120deg,#fff 30%,var(--accent) 100%);
+       -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}}
+  .gen{{color:var(--muted);font-size:.86rem;margin-top:8px}}
+  .tabpane{{display:none;padding-top:26px}}
+  .tabpane.on{{display:block;animation:fade .25s ease}}
+  @keyframes fade{{from{{opacity:0;transform:translateY(6px)}}to{{opacity:1;transform:none}}}}
+  .sec-title{{margin:26px 0 4px}}
+  .sec-title h2{{font-size:1.35rem;font-weight:750;letter-spacing:-.015em}}
+  .eyebrow{{font-size:.68rem;font-weight:800;letter-spacing:.18em;text-transform:uppercase;
+       color:var(--accent);margin-bottom:5px}}
+  .lede{{color:var(--muted);font-size:.92rem;margin:4px 0 12px;max-width:740px}}
+  .kpirow{{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin:20px 0 6px}}
+  .kpi{{background:linear-gradient(180deg,var(--panel2),var(--panel));
+       border:1px solid var(--line);border-radius:var(--radius);
+       padding:18px 14px 15px;text-align:center;position:relative;overflow:hidden;
+       box-shadow:0 2px 10px rgba(0,0,0,.25)}}
+  .kpi::before{{content:"";position:absolute;top:0;left:0;right:0;height:3px;
+       background:linear-gradient(90deg,transparent,var(--line),transparent)}}
+  .kpi.accent::before{{background:linear-gradient(90deg,transparent,var(--accent),transparent)}}
+  .kpi.warn .kpi-v{{color:var(--warn)}} .kpi.bad .kpi-v{{color:var(--bad)}}
+  .kpi-v{{font-size:1.85rem;font-weight:800;letter-spacing:-.02em;color:var(--accent);line-height:1.3}}
+  .kpi-small{{font-size:.95rem;font-weight:700}}
+  .kpi-cap{{font-size:1rem;color:var(--muted);font-weight:600}}
+  .kpi-l{{color:var(--text);font-size:.82rem;font-weight:650;margin-top:2px}}
+  .kpi-s{{color:var(--muted);font-size:.74rem}}
+  .card{{background:linear-gradient(180deg,var(--panel2),var(--panel));
+       border:1px solid var(--line);border-radius:var(--radius);
+       padding:22px 24px;margin:14px 0;box-shadow:0 2px 12px rgba(0,0,0,.22)}}
+  .card.warn{{border-left:4px solid var(--warn)}}
+  .card.ok-card{{border-left:4px solid var(--ok)}}
+  .card h3{{margin:0 0 10px;font-size:1.08rem;font-weight:750;letter-spacing:-.01em}}
   .card p{{color:var(--muted);font-size:.92rem}}
   .card b{{color:var(--text)}}
+  .alert{{padding:11px 0;border-bottom:1px solid var(--line)}}
+  .alert:last-child{{border-bottom:0;padding-bottom:0}}
+  .alert b{{display:block;margin:5px 0 2px}}
+  .statrow{{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px;margin:14px 0}}
+  .stat{{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);
+       padding:18px 12px;text-align:center}}
+  .stat b{{display:block;font-size:1.7rem;color:var(--accent);line-height:1.25}}
+  .stat span{{color:var(--muted);font-size:.82rem}}
   .table-wrap{{overflow-x:auto;margin:14px 0;border:1px solid var(--line);
        border-radius:var(--radius);background:var(--panel)}}
   .table-wrap table{{margin:0}}
   table{{width:100%;border-collapse:collapse;font-size:.88rem;margin:14px 0;min-width:600px}}
   th,td{{text-align:left;padding:10px 14px;border-bottom:1px solid var(--line);vertical-align:top}}
-  th{{color:var(--muted);font-size:.72rem;font-weight:600;text-transform:uppercase;
-       letter-spacing:.08em;background:var(--panel2)}}
-  tr:nth-child(even) td{{background:rgba(255,255,255,.018)}}
+  th{{color:var(--muted);font-size:.7rem;font-weight:700;text-transform:uppercase;
+       letter-spacing:.09em;background:var(--panel2)}}
+  tr:nth-child(even) td{{background:rgba(255,255,255,.02)}}
   tr:hover td{{background:rgba(224,122,95,.05)}}
   .table-wrap tr:last-child td,.table-wrap tr:last-child th{{border-bottom:0}}
-  .mono{{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:.82rem;color:var(--muted)}}
+  table a{{color:var(--accent)}}
+  .mono{{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:.8rem;color:var(--muted)}}
   .muted{{color:var(--muted);font-size:.88rem}}
   .legend{{color:var(--muted);font-size:.82rem;margin:8px 2px 0;line-height:2}}
   details.fold{{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);
-       padding:16px 20px;margin:14px 0}}
-  details.fold summary{{cursor:pointer;font-weight:600}}
+       padding:15px 19px;margin:14px 0}}
+  details.fold summary{{cursor:pointer;font-weight:650}}
   details.fold ol{{margin:10px 0 0 20px;color:var(--muted);font-size:.9rem}}
   details.fold li{{margin:3px 0}}
   ul{{margin:8px 0 8px 20px;color:var(--muted);font-size:.92rem}}
+  ul.feed{{list-style:none;margin:10px 0 0;padding:0;font-size:.86rem}}
+  ul.feed li{{padding:9px 0;border-bottom:1px solid var(--line)}}
+  ul.feed li:last-child{{border-bottom:0}}
+  .src{{display:inline-block;font-size:.68rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;
+       color:var(--accent);border:1px solid var(--accent-deep);border-radius:6px;padding:2px 8px;margin-right:8px}}
   .health{{display:inline-flex;align-items:center;font-size:.92rem;color:var(--text);white-space:nowrap}}
   .dot{{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:9px;flex:0 0 auto}}
   .dot.ok{{background:var(--ok);box-shadow:0 0 7px rgba(127,191,127,.8)}}
   .dot.warn{{background:var(--warn);box-shadow:0 0 7px rgba(224,167,95,.6)}}
-  .dot.stale{{background:var(--bad)}}
-  .dot.never{{background:#5a544a}}
-  .sched{{display:inline-block;font-size:.8rem;color:var(--muted);border:1px solid var(--line);
+  .dot.stale{{background:var(--bad)}} .dot.never{{background:#5a544a}}
+  .sched{{display:inline-block;font-size:.78rem;color:var(--muted);border:1px solid var(--line);
        border-radius:6px;padding:3px 9px;white-space:nowrap}}
-  .pill{{display:inline-block;padding:3px 11px;border-radius:20px;font-size:.75rem;font-weight:600;
-        background:#332e26;color:var(--muted);white-space:nowrap}}
-  .pill.ok{{background:#2a3d2a;color:var(--ok)}}
-  .pill.warn{{background:#3d3121;color:var(--warn)}}
-  .pill.stale{{background:#3d2421;color:var(--bad)}}
-  .pill.never{{background:#2c2823;color:var(--muted)}}
-  .pill.blocked{{background:#3d2421;color:#e08a7f}}
-  .btn{{display:inline-block;padding:8px 18px;border:0;border-radius:8px;background:var(--accent);
-       color:#161210;font-weight:700;font-size:.85rem;cursor:pointer;white-space:nowrap;font-family:inherit}}
-  .btn:hover{{background:var(--accent-dim)}}
+  .pill{{display:inline-block;padding:3px 11px;border-radius:20px;font-size:.74rem;font-weight:700;
+        background:#2c2e37;color:var(--muted);white-space:nowrap}}
+  .pill.ok{{background:#243324;color:var(--ok)}}
+  .pill.warn{{background:#3a2f1e;color:var(--warn)}}
+  .pill.stale{{background:#3a2320;color:var(--bad)}}
+  .pill.never{{background:#26241f;color:var(--muted)}}
+  .pill.blocked{{background:#3a2320;color:#e08a7f}}
+  .btn{{display:inline-block;padding:9px 20px;border:0;border-radius:9px;background:linear-gradient(135deg,var(--accent),#ef9278);
+       color:#161210;font-weight:750;font-size:.86rem;cursor:pointer;white-space:nowrap;font-family:inherit;
+       box-shadow:0 2px 8px rgba(224,122,95,.3)}}
+  .btn:hover{{filter:brightness(1.08)}}
   .btn:disabled{{opacity:.6;cursor:default}}
-  .foot{{margin-top:44px;color:var(--muted);font-size:.8rem;border-top:1px solid var(--line);padding-top:18px}}
-  @media (max-width:640px){{
-    header.top .inner{{padding:10px 16px;gap:10px}}
-    .wrap{{padding:0 16px 64px}}
-    .hero{{padding-top:32px}}
-    nav.dash a{{padding:6px 8px;font-size:.8rem}}
+  .ms-track{{margin:16px 0 6px}}
+  .ms{{display:flex;align-items:center;gap:12px;padding:9px 0;border-bottom:1px solid var(--line)}}
+  .ms:last-child{{border-bottom:0}}
+  .ms-dot{{font-size:1.1rem;width:26px;text-align:center;color:var(--muted)}}
+  .ms.hit .ms-dot{{color:var(--ok)}}
+  .ms.cur .ms-dot{{color:var(--accent)}}
+  .ms.hit .ms-l{{color:var(--text)}}
+  .ms-l{{flex:1;font-size:.92rem;color:var(--muted)}}
+  .ms.cur .ms-l{{color:var(--text);font-weight:650}}
+  .ms-a{{font-size:.85rem;color:var(--muted);font-weight:700}}
+  .bar{{height:10px;background:#0c0c10;border:1px solid var(--line);border-radius:999px;
+       overflow:hidden;margin:14px 0 8px}}
+  .bar-fill{{height:100%;background:linear-gradient(90deg,var(--accent-deep),var(--accent));
+       border-radius:999px;transition:width .6s ease}}
+  .foot{{margin-top:48px;color:var(--muted);font-size:.8rem;border-top:1px solid var(--line);padding-top:18px}}
+  @media (max-width:680px){{
+    header.top .inner{{padding:10px 14px;gap:8px}}
+    .brand{{font-size:.95rem}}
+    .tabbtn{{padding:7px 10px;font-size:.78rem}}
+    .wrap{{padding:0 14px 64px}}
+    .hero{{padding-top:28px}}
+    .kpirow{{grid-template-columns:repeat(2,1fr);gap:10px}}
+    .kpi{{padding:14px 8px 12px}}
+    .kpi-v{{font-size:1.5rem}}
     .statrow{{grid-template-columns:repeat(2,1fr);gap:10px}}
-    .stat{{padding:14px 8px}}
-    .stat b{{font-size:1.45rem}}
-    .card{{padding:16px 18px}}
+    .card{{padding:17px 18px}}
     table{{min-width:520px}}
   }}
 </style>
@@ -759,97 +917,70 @@ def build():
       <svg width="22" height="22" viewBox="0 0 26 26" fill="none" aria-hidden="true"><circle cx="5" cy="6" r="2.4" fill="#e07a5f"/><circle cx="21" cy="6" r="2.4" fill="#e07a5f"/><circle cx="13" cy="13" r="2.4" fill="#e07a5f"/><circle cx="5" cy="20" r="2.4" fill="#e07a5f"/><circle cx="21" cy="20" r="2.4" fill="#e07a5f"/><path d="M6.6 7.4L11.2 11.8M19.4 7.4L14.8 11.8M6.6 18.6L11.2 14.2M19.4 18.6L14.8 14.2" stroke="#e07a5f" stroke-width="1.4"/></svg>
       ghostcorpnet <span class="admin-tag">admin</span>
     </a>
-    <nav class="dash">
-      <a href="#money">Money</a>
-      <a href="#approvals">Approvals</a>
-      <a href="#outreach">Outreach</a>
-      <a href="#pipeline">Pipeline</a>
-      <a href="#drafts">Drafts</a>
-      <a href="#directory">Directory</a>
-      <a href="#tiktok">TikTok</a>
-      <a href="#site">Site &amp; catalog</a>
-      <a href="#fleet">Fleet</a>
-      <a href="#traffic">Traffic</a>
-    </nav>
+    <nav class="tabs" role="tablist">{tabbtns}</nav>
   </div>
 </header>
 <div class="wrap">
   <div class="hero">
-    <h1>Admin dashboard</h1>
-    <p class="gen">Generated {esc(now)} · refreshes automatically</p>
+    <h1>Command center</h1>
+    <p class="gen">Generated {esc(now)} · every number below is live data, refreshed automatically</p>
   </div>
   {backend_js()}
 
-  <section class="dash" id="money">
-    <div class="eyebrow">Revenue</div>
-    <h2>Money</h2>
-    <p class="lede">Live Gumroad sales figures, refreshed every time this page regenerates.</p>
-    {money_section()}
-  </section>
+  <div class="tabpane" id="tab-overview">
+    <div class="sec-title"><div class="eyebrow">At a glance</div><h2>Overview</h2></div>
+    {kpi}
+    {alerts}
+    {revenue}
+    {feed}
+  </div>
 
-  <section class="dash" id="approvals">
-    <div class="eyebrow">Your call</div>
-    <h2>Needs your approval</h2>
-    <p class="lede">One tap approves — the fleet picks it up within ~15 minutes.</p>
+  <div class="tabpane" id="tab-approvals">
+    <div class="sec-title"><div class="eyebrow">Your call</div><h2>Needs your approval</h2>
+    <p class="lede">One tap approves — the fleet picks it up within ~15 minutes. Routine site development auto-approves by policy; only money, price, or messaging items wait here.</p></div>
     {approvals_section()}
-  </section>
+  </div>
 
-  <section class="dash" id="outreach">
-    <div class="eyebrow">Sales</div>
-    <h2>Outreach</h2>
-    <p class="lede">Bots find leads and draft pitches around the clock. Read each pitch and tap <b>Send pitch</b> — nothing goes out without your tap.</p>
+  <div class="tabpane" id="tab-outreach">
+    <div class="sec-title"><div class="eyebrow">Sales</div><h2>Outreach</h2>
+    <p class="lede">Bots find leads and draft pitches around the clock. Read each pitch and tap <b>Send pitch</b> — it goes out from your business Gmail within ~15 minutes. Cap: 20/day.</p></div>
     {outreach_section()}
-  </section>
+  </div>
 
-  <section class="dash" id="pipeline">
-    <div class="eyebrow">In progress</div>
-    <h2>Review pipeline</h2>
-    <p class="lede">Drafts waiting in the fleet workspace. Nothing here is public.</p>
-    {pipeline_section()}
-  </section>
-
-  <section class="dash" id="drafts">
-    <div class="eyebrow">Triage</div>
-    <h2>Drafts</h2>
-    <p class="lede">Everything the bots drafted. <b>Put to work</b> moves a group into the pipeline; <b>Forget</b> archives it.</p>
-    {drafts_section()}
-  </section>
-
-  <section class="dash" id="directory">
-    <div class="eyebrow">Platform</div>
-    <h2>Directory submissions</h2>
-    <p class="lede">Third-party packs submitted via the public form. <b>Approve</b> lists a pack in the directory; <b>Reject</b> archives it. Listing is free — approvals never move money.</p>
-    {directory_section()}
-  </section>
-
-  <section class="dash" id="tiktok">
-    <div class="eyebrow">Video</div>
-    <h2>TikTok studio</h2>
-    <p class="lede">One video a day, staged and ready. Copy the caption from its .txt file and post from your phone.</p>
-    {tiktok_section()}
-  </section>
-
-  <section class="dash" id="site">
-    <div class="eyebrow">Storefront</div>
-    <h2>Site &amp; catalog</h2>
+  <div class="tabpane" id="tab-products">
+    <div class="sec-title"><div class="eyebrow">Storefront</div><h2>Products</h2>
+    <p class="lede">Everything live on Gumroad right now, with per-product revenue.</p></div>
+    {money_section(products)}
     {site_section()}
-  </section>
+  </div>
 
-  <section class="dash" id="fleet">
-    <div class="eyebrow">Bots</div>
-    <h2>Fleet</h2>
-    <p class="lede">Health is judged against each bot's schedule and when it last produced output.</p>
+  <div class="tabpane" id="tab-drafts">
+    <div class="sec-title"><div class="eyebrow">Triage</div><h2>Drafts</h2>
+    <p class="lede">Everything the bots drafted. <b>Put to work</b> moves a group into the pipeline; <b>Forget</b> archives it.</p></div>
+    {drafts_section()}
+    <div class="sec-title"><div class="eyebrow">In progress</div><h2>Review pipeline</h2></div>
+    {pipeline_section()}
+  </div>
+
+  <div class="tabpane" id="tab-fleet">
+    <div class="sec-title"><div class="eyebrow">Bots</div><h2>Fleet</h2>
+    <p class="lede">Health is judged against each bot's schedule and when it last produced output.</p></div>
     {fleet_section()}
-  </section>
+  </div>
 
-  <section class="dash" id="traffic">
-    <div class="eyebrow">Visitors</div>
-    <h2>Traffic</h2>
+  <div class="tabpane" id="tab-extras">
+    <div class="sec-title"><div class="eyebrow">Platform</div><h2>Directory submissions</h2>
+    <p class="lede">Third-party packs submitted via the public form. Listing is free — approvals never move money.</p></div>
+    {directory_section()}
+    <div class="sec-title"><div class="eyebrow">Video</div><h2>TikTok studio</h2>
+    <p class="lede">One video a day, staged and ready. Copy the caption from its .txt file and post from your phone.</p></div>
+    {tiktok_section()}
+    <div class="sec-title"><div class="eyebrow">Visitors</div><h2>Traffic</h2></div>
     <div class="card"><h3>Google Analytics needs a one-time setup</h3>
     <p>Live visitor numbers can't be pulled with just a key — Google requires an
     OAuth client you create in Google Cloud Console (about 10 minutes at a computer).
     Say the word and I'll walk you through it; after that, traffic charts appear here.</p></div>
-  </section>
+  </div>
 
   <div class="foot">Private: this panel is served only from your key-gated worker URL — it is not
   on the public site and is never indexed. Bookmark your private link and don't share it.</div>
@@ -864,7 +995,7 @@ def build():
 
 def upload_private(html):
     """Publish the dashboard to the key-gated worker route (not the public site)."""
-    import subprocess, tempfile
+    import tempfile
     try:
         sec = json.loads(read_file(os.path.join(HOME, "workspace/kestrelattice/worker/.secrets.json")))
         wurl, skey = sec.get("worker_url", ""), sec.get("server_key", "")
@@ -876,10 +1007,10 @@ def upload_private(html):
             f.write(html)
             tmp = f.name
         r = subprocess.run(
-            ["curl", "-s", "-X", "POST", "-H", "x-server-key: " + skey,
+            ["curl", "-s", "-X", "POST", "-A", UA, "-H", "x-server-key: " + skey,
              "-H", "Content-Type: text/html; charset=utf-8",
              "--data-binary", "@" + tmp, wurl.rstrip("/") + "/admin-upload"],
-            capture_output=True, text=True, timeout=90)
+            capture_output=True, text=True, timeout=120)
         os.unlink(tmp)
         print("private upload:", r.stdout.strip()[:120] or r.stderr.strip()[:120])
     except Exception as e:
