@@ -1,0 +1,50 @@
+<!-- CODE BOT panel section — for the admin-panel redesign coordinator to wire
+     into build-admin.py. Requires WURL/WKEY globals (same as other sections).
+     Fetches GET <worker>/codebot-stats?key=<WRITE_KEY> and renders usage tiles.
+     Wire as a new "Code bot" nav section AFTER the Outreach section. -->
+<section class="dash" id="codebot">
+  <div class="eyebrow">Buyers</div>
+  <h2>Code Bot</h2>
+  <p class="lede">The AI pair-programmer bundled with code products. License-key gated, 20 questions/day per buyer, 5,000/month globally.</p>
+  <div class="kpis" id="cb-kpis" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin-bottom:16px"></div>
+  <div class="card">
+    <h3 style="margin-top:0">Recent questions</h3>
+    <div id="cb-recent" style="font-size:.88rem"></div>
+  </div>
+  <div class="card">
+    <h3 style="margin-top:0">Top licenses today <span style="color:var(--muted);font-weight:400;font-size:.8rem">(hashed)</span></h3>
+    <div id="cb-top" style="font-size:.88rem"></div>
+  </div>
+</section>
+<script>
+(function(){
+  async function load(){
+    const k = document.getElementById("cb-kpis");
+    try {
+      const r = await fetch(WURL + "/codebot-stats?key=" + encodeURIComponent(WKEY));
+      const d = await r.json();
+      if (!d.ok) { k.innerHTML = "<p class='lede'>Code bot not deployed yet.</p>"; return; }
+      const t = (v,l)=>'<div class="card" style="margin:0;padding:14px"><div style="font-size:1.6rem;font-weight:800;color:var(--accent)">'+v+'</div><div style="font-size:.8rem;color:var(--muted)">'+l+'</div></div>';
+      k.innerHTML =
+        t(d.today.questions, "questions today") +
+        t(d.today.active_licenses, "active licenses today") +
+        t(d.month.questions + " / " + d.month.cap, "this month vs cap") +
+        t(d.per_key_daily_cap, "per-buyer daily cap");
+      const pct = Math.min(100, Math.round(100 * d.month.questions / d.month.cap));
+      k.innerHTML += '<div class="card" style="margin:0;padding:14px;grid-column:1/-1"><div style="font-size:.8rem;color:var(--muted);margin-bottom:6px">Monthly quota used</div><div style="background:var(--panel2);border-radius:6px;height:10px"><div style="width:'+pct+'%;height:100%;border-radius:6px;background:var(--accent)"></div></div></div>';
+      document.getElementById("cb-recent").innerHTML = (d.recent||[]).map(c =>
+        '<div style="padding:8px 0;border-bottom:1px solid var(--line)"><code style="color:var(--muted)">'+
+        (c.at||"").slice(11,16)+' · '+c.key_hash+'</code> <strong>'+(c.product||"")+
+        '</strong><br><span style="color:var(--muted)">'+
+        (c.question||"").replace(/</g,"&lt;")+'</span></div>').join("") || "<p class='lede'>No questions yet.</p>";
+      document.getElementById("cb-top").innerHTML = (d.top_licenses_today||[]).map(x =>
+        '<div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid var(--line)"><code>'+
+        x.key_hash+'</code><span>'+x.questions+' questions</span></div>').join("") || "<p class='lede'>—</p>";
+    } catch(e){
+      k.innerHTML = "<p class='lede'>Couldn't reach the code bot stats.</p>";
+    }
+  }
+  if (document.readyState === "complete") load();
+  else window.addEventListener("load", load);
+})();
+</script>

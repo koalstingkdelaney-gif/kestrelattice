@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Code Bot · ghostcorpnet — your AI pair-programmer</title>
+<meta name="description" content="Bought a ghostcorpnet code product? Enter your license key and get an AI pair-programmer that explains, debugs, and extends your code.">
+<link rel="canonical" href="https://koalstingkdelaney-gif.github.io/kestrelattice/code-bot/">
+<meta name="robots" content="index,follow">
+<meta name="theme-color" content="#101010">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 26 26'%3E%3Ccircle cx='5' cy='6' r='2.4' fill='%23e07a5f'/%3E%3Ccircle cx='21' cy='6' r='2.4' fill='%23e07a5f'/%3E%3Ccircle cx='13' cy='13' r='2.4' fill='%23e07a5f'/%3E%3Ccircle cx='5' cy='20' r='2.4' fill='%23e07a5f'/%3E%3Ccircle cx='21' cy='20' r='2.4' fill='%23e07a5f'/%3E%3C/svg%3E">
+<script>
+(function(){try{if(new URLSearchParams(location.search).get('admin')==='1'){localStorage.setItem('kestrelattice_admin','1');}if(localStorage.getItem('kestrelattice_admin')==='1'){window.__klExcludeSelf=true;}}catch(e){}})();
+</script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-541TCHWW98"></script>
+<script>
+window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}
+if(!window.__klExcludeSelf){gtag('js',new Date());gtag('config','G-541TCHWW98');}
+</script>
+<style>
+:root{--bg:#101010;--panel:#181818;--panel2:#1e1a16;--line:#2a2a2a;--text:#ece7df;
+--muted:#a8a29a;--accent:#e07a5f;--accent-soft:rgba(224,122,95,.14);--radius:12px}
+*{box-sizing:border-box;margin:0}
+body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;line-height:1.6;padding:0 16px 64px}
+.wrap{max-width:760px;margin:0 auto}
+.brand{display:flex;align-items:center;gap:10px;padding:20px 0;color:var(--text);text-decoration:none;font-weight:700;font-size:1.05rem}
+.crumb{font-size:.85rem;color:var(--muted);margin-bottom:8px}
+.crumb a{color:var(--muted);text-decoration:none}.crumb a:hover{color:var(--accent)}
+h1{font-size:clamp(1.7rem,5vw,2.4rem);line-height:1.15;margin:8px 0 12px}
+h1 .t{color:var(--accent)}
+.lede{color:var(--muted);font-size:1.02rem;margin-bottom:24px;max-width:60ch}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:24px;margin-bottom:20px}
+.eyebrow{font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);margin-bottom:6px}
+h2{font-size:1.15rem;margin-bottom:8px}
+.steps{display:grid;gap:10px;margin:14px 0}
+.step{display:flex;gap:12px;align-items:flex-start;background:var(--panel2);border:1px solid var(--line);border-radius:10px;padding:12px 14px}
+.step .n{flex:0 0 28px;height:28px;border-radius:50%;background:var(--accent-soft);color:var(--accent);font-weight:700;display:flex;align-items:center;justify-content:center;font-size:.85rem}
+.step p{font-size:.92rem;color:var(--muted)}.step p strong{color:var(--text)}
+label{display:block;font-size:.85rem;color:var(--muted);margin-bottom:6px}
+input[type=text]{width:100%;background:#0d0d0d;border:1px solid var(--line);border-radius:8px;color:var(--text);padding:12px 14px;font-size:1rem;font-family:ui-monospace,Menlo,Consolas,monospace}
+input[type=text]:focus{outline:none;border-color:var(--accent)}
+.btn{display:inline-block;background:var(--accent);color:#14100c;font-weight:700;border:none;border-radius:8px;padding:12px 22px;font-size:.95rem;cursor:pointer;text-decoration:none;margin-top:12px}
+.btn:hover{filter:brightness(1.08)}.btn:disabled{opacity:.55;cursor:default}
+.err{color:#ff9d8a;font-size:.88rem;margin-top:10px;display:none}
+#gate{display:block}#app{display:none}
+#log{max-height:420px;overflow-y:auto;margin-bottom:14px;display:flex;flex-direction:column;gap:10px}
+.bub{padding:11px 15px;border-radius:12px;font-size:.94rem;line-height:1.55;max-width:92%;white-space:pre-wrap;word-wrap:break-word}
+.bub.u{align-self:flex-end;background:var(--accent-soft);border:1px solid rgba(224,122,95,.35)}
+.bub.a{align-self:flex-start;background:var(--panel2);border:1px solid var(--line)}
+.bub.a pre{background:#0d0d0d;border:1px solid var(--line);border-radius:8px;padding:10px 12px;overflow-x:auto;font-size:.83rem;margin:8px 0}
+.row{display:flex;gap:8px}
+.row input{flex:1}
+.quota{font-size:.8rem;color:var(--muted);margin-top:10px}
+.prodline{font-size:.88rem;color:var(--muted);margin-bottom:12px}
+.prodline strong{color:var(--accent)}
+footer{border-top:1px solid var(--line);margin-top:48px;padding-top:20px;color:var(--muted);font-size:.82rem;display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
+footer a{color:var(--muted);text-decoration:none}footer a:hover{color:var(--accent)}
+@media(max-width:560px){.card{padding:18px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <a class="brand" href="../">
+    <svg width="24" height="24" viewBox="0 0 26 26" fill="none" aria-hidden="true"><circle cx="5" cy="6" r="2.4" fill="#e07a5f"/><circle cx="21" cy="6" r="2.4" fill="#e07a5f"/><circle cx="13" cy="13" r="2.4" fill="#e07a5f"/><circle cx="5" cy="20" r="2.4" fill="#e07a5f"/><circle cx="21" cy="20" r="2.4" fill="#e07a5f"/><path d="M6.6 7.4L11.2 11.8M19.4 7.4L14.8 11.8M6.6 18.6L11.2 14.2M19.4 18.6L14.8 14.2" stroke="#e07a5f" stroke-width="1.4"/></svg>
+    ghostcorpnet
+  </a>
+  <p class="crumb"><a href="../">Home</a> · <a href="../products/">Catalog</a> · Code Bot</p>
+  <h1>Your code, <span class="t">plus a bot</span> that helps you use it.</h1>
+  <p class="lede">Every ghostcorpnet code product ships with an AI pair-programmer. Paste your license key from your Gumroad receipt and ask it to explain the code, debug an error, or help you extend it.</p>
+
+  <div class="card" id="gate">
+    <div class="eyebrow">Step 1 · Unlock</div>
+    <h2>Enter your license key</h2>
+    <div class="steps">
+      <div class="step"><div class="n">1</div><p><strong>Buy any code product</strong> — Gumroad emails you a license key with your receipt.</p></div>
+      <div class="step"><div class="n">2</div><p><strong>Paste the key below</strong> — we verify it against your purchase. Nothing else is stored.</p></div>
+      <div class="step"><div class="n">3</div><p><strong>Ask away</strong> — 20 questions a day, free with your purchase, forever.</p></div>
+    </div>
+    <label for="lkey">License key</label>
+    <input type="text" id="lkey" placeholder="e.g. 8A3F2C1D-…" autocomplete="off" spellcheck="false">
+    <button class="btn" id="unlock">Unlock the bot</button>
+    <p class="err" id="gate-err"></p>
+  </div>
+
+  <div class="card" id="app">
+    <div class="eyebrow">Step 2 · Code together</div>
+    <h2>Code Bot</h2>
+    <p class="prodline" id="prodline"></p>
+    <div id="log" aria-live="polite"></div>
+    <div class="row">
+      <input type="text" id="box" placeholder="Paste an error, or ask how the code works…" autocomplete="off">
+      <button class="btn" id="send" style="margin-top:0">Ask</button>
+    </div>
+    <p class="quota" id="quota"></p>
+  </div>
+
+  <footer>
+    <span>© 2026 ghostcorpnet · An independent studio</span>
+    <span><a href="../">Home</a> · <a href="../products/">Catalog</a> · <a href="mailto:koalstin.g.k.delaney@gmail.com">Contact</a></span>
+  </footer>
+</div>
+<script>
+(function(){
+  const WURL = "https://kestrelattice-approvals.koalstin-g-k-delaney.workers.dev";
+  const gate = document.getElementById("gate"), app = document.getElementById("app");
+  const lkey = document.getElementById("lkey"), gateErr = document.getElementById("gate-err");
+  const log = document.getElementById("log"), box = document.getElementById("box");
+  const quota = document.getElementById("quota"), prodline = document.getElementById("prodline");
+  let token = sessionStorage.getItem("codebot_token") || "";
+  let product = sessionStorage.getItem("codebot_product") || "";
+  const hist = [];
+
+  function esc(s){return s.replace(/&/g,"&amp;").replace(/</g,"&lt;");}
+  function fmt(t){
+    // minimal markdown: fenced code blocks + inline code
+    const parts = esc(t).split("```");
+    let out = "";
+    for (let i=0;i<parts.length;i++){
+      if (i%2===1){ out += "<pre><code>"+parts[i].replace(/^\w+\n/,"")+"</code></pre>"; }
+      else { out += parts[i].replace(/`([^`]+)`/g,"<code>$1</code>").replace(/\n/g,"<br>"); }
+    }
+    return out;
+  }
+  function bubble(role, html){
+    const d = document.createElement("div");
+    d.className = "bub "+(role==="u"?"u":"a");
+    d.innerHTML = html;
+    log.appendChild(d); log.scrollTop = log.scrollHeight;
+    return d;
+  }
+  function showApp(){
+    gate.style.display = "none"; app.style.display = "block";
+    prodline.innerHTML = product ? ("Helping with <strong>"+esc(product)+"</strong>") : "";
+    bubble("a", "I'm in. Paste an error traceback, ask what a function does, or tell me what you want to build on top of your code.");
+  }
+  async function unlock(){
+    const k = lkey.value.trim();
+    if (!k) return;
+    gateErr.style.display = "none";
+    const btn = document.getElementById("unlock");
+    btn.disabled = true; btn.textContent = "Checking…";
+    try {
+      const r = await fetch(WURL+"/codebot-verify",{method:"POST",
+        headers:{"Content-Type":"application/json"},body:JSON.stringify({license_key:k})});
+      const d = await r.json();
+      if (d.ok && d.token){
+        token = d.token; product = d.product || "";
+        sessionStorage.setItem("codebot_token", token);
+        sessionStorage.setItem("codebot_product", product);
+        showApp();
+      } else {
+        gateErr.textContent = d.error==="not_ready"
+          ? "The bot isn't live yet — check back shortly."
+          : "That key didn't match a code-product purchase. Copy it exactly from your Gumroad receipt email.";
+        gateErr.style.display = "block";
+      }
+    } catch(e){
+      gateErr.textContent = "Couldn't reach the bot — check your connection and try again.";
+      gateErr.style.display = "block";
+    }
+    btn.disabled = false; btn.textContent = "Unlock the bot";
+  }
+  async function send(){
+    const msg = box.value.trim();
+    if (!msg || !token) return;
+    box.value = "";
+    bubble("u", esc(msg));
+    const thinking = bubble("a", "…");
+    try {
+      const r = await fetch(WURL+"/codebot-chat",{method:"POST",
+        headers:{"Content-Type":"application/json"},
+        body:JSON.stringify({token:token, message:msg, history:hist})});
+      const d = await r.json();
+      thinking.remove();
+      if (d.ok && d.reply){
+        bubble("a", fmt(d.reply));
+        hist.push({role:"user",content:msg},{role:"assistant",content:d.reply});
+        if (typeof d.remaining_today === "number")
+          quota.textContent = d.remaining_today + " questions left today";
+      } else if (d.error === "bad_session"){
+        sessionStorage.removeItem("codebot_token");
+        gate.style.display = "block"; app.style.display = "none";
+        gateErr.textContent = "Session expired — enter your license key again.";
+        gateErr.style.display = "block";
+      } else {
+        bubble("a", esc(d.message || "The bot hiccuped — try again in a moment."));
+      }
+    } catch(e){
+      thinking.remove();
+      bubble("a", "Couldn't reach the bot — check your connection and try again.");
+    }
+  }
+  document.getElementById("unlock").addEventListener("click", unlock);
+  lkey.addEventListener("keydown", e=>{ if(e.key==="Enter") unlock(); });
+  document.getElementById("send").addEventListener("click", send);
+  box.addEventListener("keydown", e=>{ if(e.key==="Enter") send(); });
+  if (token) showApp();
+  // pre-fill product context from ?product=<gid> links on product pages
+  const qp = new URLSearchParams(location.search).get("product");
+  if (qp && !token){
+    lkey.placeholder = "License key for your "+qp+" purchase…";
+  }
+})();
+</script>
+</body>
+</html>
