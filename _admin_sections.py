@@ -422,18 +422,21 @@ def pipeline_section():
 
 
 def backend_js():
+    """Keyless build: the admin write key is NEVER embedded in the HTML.
+    The browser-side code reads the key this device already has — the admin
+    login page stores it in localStorage under
+    "kestrelattice_admin_remember" when "Remember on this device" is ticked
+    (its default). When the key is absent, every action fails gracefully
+    with a "not connected" message instead of breaking."""
     wdir = os.path.join(HOME, "workspace/kestrelattice")
     wurl = read_file(os.path.join(wdir, ".worker-url")).strip().rstrip("/")
-    try:
-        wkey = json.loads(read_file(os.path.join(wdir, "worker/.secrets.json")))["write_key"]
-    except (OSError, KeyError, json.JSONDecodeError):
-        wkey = ""
     return (
         '<script>\n'
         'const WURL = ' + json.dumps(wurl) + ';\n'
-        'const WKEY = ' + json.dumps(wkey) + ';\n'
+        'let WKEY = "";\n'
+        'try { WKEY = localStorage.getItem("kestrelattice_admin_remember") || ""; } catch (e) {}\n'
         'async function approveCode(code, btn, doneLabel) {\n'
-        '  if (!WURL || !WKEY) { alert("Approval backend unreachable."); return false; }\n'
+        '  if (!WURL || !WKEY) { alert("Not connected: no admin key on this device. Open the admin login page again and tick \\"Remember on this device\\"."); return false; }\n'
         '  if (btn) { btn.disabled = true; btn.textContent = "Working…"; }\n'
         '  try {\n'
         '    const r = await fetch(WURL + "/approve", {method: "POST",\n'
@@ -481,10 +484,9 @@ def approvals_section():
             + rows + "</table></div>"
             "<p class='muted'>One-tap approvals are activating — the backend "
             "finishes deploying shortly.</p>")
-    try:
-        wkey = json.loads(read_file(os.path.join(wdir, "worker/.secrets.json")))["write_key"]
-    except (OSError, KeyError, json.JSONDecodeError):
-        wkey = ""
+    # NOTE: the write key is intentionally NEVER read here — it is not
+    # embedded in the page. The browser sends the key it already holds
+    # (see backend_js); without it the UI fails gracefully.
     js = (
         '<div id="appr"><p class="muted">Loading approvals…</p></div>\n'
         '<script>\n'
@@ -524,7 +526,10 @@ def approvals_section():
         '    } else { btn.disabled = false; btn.textContent = "Retry"; }\n'
         '  } catch (e) { btn.disabled = false; btn.textContent = "Retry"; }\n'
         '}\n'
-        'loadApprovals();\n'
+        '// WURL/WKEY are declared in the late backend_js block (end of body),\n'
+        '// so the first load must wait until they exist — DOMContentLoaded\n'
+        '// fires after all parser-inserted scripts have run.\n'
+        'document.addEventListener("DOMContentLoaded", loadApprovals);\n'
         '</script>'
     )
     return js
@@ -749,7 +754,10 @@ def directory_section():
         '    el.innerHTML = "<p class=\'muted\'>Submission service unreachable — try again shortly.</p>";\n'
         '  }\n'
         '}\n'
-        'loadDir();\n'
+        '// WURL/WKEY are declared in the late backend_js block (end of body),\n'
+        '// so the first load must wait until they exist — DOMContentLoaded\n'
+        '// fires after all parser-inserted scripts have run.\n'
+        'document.addEventListener("DOMContentLoaded", loadDir);\n'
         '</script>'
     )
     return (
@@ -1116,6 +1124,13 @@ def upload_private(html):
         wurl, skey = sec.get("worker_url", ""), sec.get("server_key", "")
         if not wurl or not skey:
             print("upload skipped: worker secrets missing")
+            return
+        # Defense in depth: the write key must NEVER be embedded in the page.
+        # Compare-only (never printed/logged); refuse to publish on any leak.
+        wkey = sec.get("write_key", "")
+        if wkey and wkey in html:
+            print("private upload BLOCKED: write key value found in generated "
+                  "HTML — refusing to publish. Fix the generator first.")
             return
         # NOTE: Cloudflare WAF blocks python urllib — use curl.
         with tempfile.NamedTemporaryFile("w", suffix=".html", delete=False) as f:

@@ -4478,13 +4478,13 @@ applyFilters();
 
 // Sort control: re-order cards by data-price / data-date.
 const sortSel=document.getElementById('catalog-sort');
-const applySort=()=>{if(!sortSel)return;const v=sortSel.value;const cards=[...grid.querySelectorAll('.card')];
+const applySort=()=>{if(!sortSel)return;try{localStorage.setItem('kl-catalog-sort',sortSel.value);}catch(e){}const v=sortSel.value;const cards=[...grid.querySelectorAll('.card')];
 cards.sort((a,b)=>{const pa=parseFloat(a.dataset.price||'0'),pb=parseFloat(b.dataset.price||'0');
 if(v==='lo')return pa-pb;if(v==='hi')return pb-pa;
 const da=a.dataset.date||'',db=b.dataset.date||'';
 if(da&&!db)return -1;if(!da&&db)return 1;return db.localeCompare(da)});
 cards.forEach(c=>grid.appendChild(c));applyFilters();syncHash()};
-if(sortSel){try{var _hs=new URLSearchParams(location.hash.slice(1)).get('sort');if(_hs&&['new','lo','hi'].indexOf(_hs)>=0)sortSel.value=_hs;}catch(e){}
+if(sortSel){try{var _hs=new URLSearchParams(location.hash.slice(1)).get('sort');if(_hs&&['new','lo','hi'].indexOf(_hs)>=0){sortSel.value=_hs;}else{var _ls=null;try{_ls=localStorage.getItem('kl-catalog-sort');}catch(e){}if(_ls&&['new','lo','hi'].indexOf(_ls)>=0)sortSel.value=_ls;}}catch(e){}
 sortSel.addEventListener('change',applySort);applySort()}
 
 // Clear filters button in the empty state.
