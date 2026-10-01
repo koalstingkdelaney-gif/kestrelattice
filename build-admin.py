@@ -351,8 +351,11 @@ def money_section(products):
         price = (p.get("price") or 0) / 100.0
         url = (p.get("short_url") or p.get("permalink") or "").rstrip("/")
         disp = url.replace("https://", "").replace("http://", "")
+        tags = p.get("tags") or []
+        code_badge = (" <span class='badge code'>CODE</span>"
+                      if any("code" in str(t).lower() for t in tags) else "")
         rows.append(
-            f"<tr><td><b>{esc(name)}</b><br><a class='mono' href='{esc(url)}' "
+            f"<tr><td><b>{esc(name)}</b>{code_badge}<br><a class='mono' href='{esc(url)}' "
             f"target='_blank' rel='noopener'>{esc(disp)}</a></td>"
             f"<td>${price:,.0f}</td><td>${cents/100:,.0f}</td><td>{n}</td></tr>"
         )
@@ -909,6 +912,9 @@ def build():
   table a{{color:var(--accent)}}
   .mono{{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:.8rem;color:var(--muted)}}
   .muted{{color:var(--muted);font-size:.88rem}}
+  .badge{{display:inline-block;font-size:.68rem;font-weight:700;letter-spacing:.06em;
+    padding:2px 8px;border-radius:999px;margin-left:8px;vertical-align:middle}}
+  .badge.code{{background:#1e3a5f;color:#7cc4ff;border:1px solid #2c5f8a}}
   .legend{{color:var(--muted);font-size:.82rem;margin:8px 2px 0;line-height:2}}
   details.fold{{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);
        padding:15px 19px;margin:14px 0}}
