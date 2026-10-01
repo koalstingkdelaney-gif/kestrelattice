@@ -8,6 +8,10 @@
 <title>ghostcorpnet · Governed Agent Mesh Playbook — Free + $29</title>
 <meta name="description" content="Run multi-agent AI ops with identity, spend limits, and approval gates. Free MIT playbook + $29 Studio Edition with policy templates and JSON schemas.">
 <link rel="canonical" href="https://koalstingkdelaney-gif.github.io/kestrelattice/">
+<link rel="alternate" hreflang="en" href="https://koalstingkdelaney-gif.github.io/kestrelattice/">
+<link rel="alternate" hreflang="es" href="https://koalstingkdelaney-gif.github.io/kestrelattice/es/">
+<link rel="alternate" hreflang="pt-BR" href="https://koalstingkdelaney-gif.github.io/kestrelattice/pt/">
+<link rel="alternate" hreflang="x-default" href="https://koalstingkdelaney-gif.github.io/kestrelattice/">
 <meta name="theme-color" content="#101010">
 <meta name="robots" content="index,follow,max-image-preview:large">
 <meta property="og:type" content="website">
@@ -515,6 +519,11 @@
   (function(){var t=document.querySelector('.nav-toggle'),n=document.getElementById('primary-nav');
   if(t&&n){t.addEventListener('click',function(){var open=n.classList.toggle('open');
   t.setAttribute('aria-expanded',open);t.setAttribute('aria-label',open?'Close menu':'Open menu');});}})();
+  // FAQ accordions: keep aria-expanded in sync with the open state.
+  (function(){document.querySelectorAll('details.faq').forEach(function(d){
+  var s=d.querySelector('summary');if(!s)return;
+  s.setAttribute('aria-expanded',d.open?'true':'false');
+  d.addEventListener('toggle',function(){s.setAttribute('aria-expanded',d.open?'true':'false');});});})();
   // Analytics: lightweight click tracking for key conversion events.
   document.addEventListener("click", function(e){
     const el = e.target.closest("[data-track]");
