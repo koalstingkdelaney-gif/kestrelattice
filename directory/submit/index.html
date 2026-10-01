@@ -90,7 +90,7 @@ gtag('config', 'G-541TCHWW98');
 
   <form id="submit-form" novalidate>
     <label for="pack_name">Pack name
-      <input id="pack_name" name="pack_name" type="text" maxlength="120" required autocomplete="off"
+      <input id="pack_name" name="pack_name" type="text" maxlength="120" required autocomplete="name"
              placeholder="e.g. EU AI Act Evidence Pack for Startups">
     </label>
     <div class="err" id="e-pack_name">Give your pack a name.</div>
@@ -110,7 +110,7 @@ gtag('config', 'G-541TCHWW98');
 
     <label for="pack_url">Pack URL
       <span class="hint">Where people get your pack — your own site, Gumroad, GitHub, etc.</span>
-      <input id="pack_url" name="pack_url" type="url" maxlength="500" required inputmode="url"
+      <input id="pack_url" name="pack_url" type="url" maxlength="500" required inputmode="url" autocomplete="url"
              placeholder="https://example.com/my-pack">
     </label>
     <div class="err" id="e-pack_url">A valid http(s) URL is required.</div>
@@ -124,7 +124,7 @@ gtag('config', 'G-541TCHWW98');
 
     <label for="manifest_url">pack.json manifest URL
       <span class="hint">Optional, but speeds up review. A machine-readable manifest of your pack.</span>
-      <input id="manifest_url" name="manifest_url" type="url" maxlength="500"
+      <input id="manifest_url" name="manifest_url" type="url" maxlength="500" autocomplete="url"
              placeholder="https://example.com/my-pack/pack.json">
     </label>
     <div class="err" id="e-manifest_url">Must be a valid http(s) URL, or leave blank.</div>
