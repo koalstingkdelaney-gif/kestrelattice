@@ -1,5 +1,5 @@
 /* ghostcorpnet admin app — minimal service worker (app shell cache-first). */
-var CACHE = "ghostcorpnet-admin-v1";
+var CACHE = "ghostcorpnet-admin-v2";
 var SHELL = [
   "./index.html",
   "./manifest.webmanifest",
