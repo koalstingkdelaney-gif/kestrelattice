@@ -62,6 +62,7 @@ __PRELOAD__
 <meta property="og:title" content="Product Catalog — ghostcorpnet">
 <meta property="og:description" content="Every ghostcorpnet self-serve product: agent governance playbooks, checklists, runbooks, kits, and working code. Instant download.">
 <meta property="og:url" content="https://koalstingkdelaney-gif.github.io/kestrelattice/products/">
+<meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://koalstingkdelaney-gif.github.io/kestrelattice/assets/studio-edition-cover.jpg">
 <meta property="og:image:alt" content="ghostcorpnet product catalog — governed agent mesh playbooks and kits">
 <meta property="og:image:width" content="1600">
@@ -82,7 +83,7 @@ body{background:radial-gradient(900px 420px at 50% -6%, rgba(224,122,95,.06), tr
 .wrap{max-width:1040px;margin:0 auto;padding:0 24px}
 a{color:var(--accent);text-decoration:none;transition:color .16s var(--ease)}
 a:hover{text-decoration:underline}
-a:focus-visible,button:focus-visible{outline:2px solid var(--accent-bright);outline-offset:3px;border-radius:4px}@media (prefers-reduced-motion:no-preference){a:focus-visible,button:focus-visible{transition:transform .15s ease}a:focus-visible{transform:scale(1.03)}.btn:focus-visible,.chip:focus-visible,nav.main a:focus-visible{transform:scale(1.02)}}
+a:focus-visible,button:focus-visible{outline:2px solid var(--accent-bright);outline-offset:3px;border-radius:4px}@media (prefers-reduced-motion:no-preference){a:focus-visible,button:focus-visible{transition:transform .15s ease}a:focus-visible{transform:scale(1.03)}.btn:focus-visible,.chip:focus-visible,nav.main a:focus-visible{transform:scale(1.02)}.btn:active{transform:scale(.98)}}
 header.site{border-bottom:1px solid var(--line);position:sticky;top:0;background:rgba(15,14,13,.92);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);z-index:100}
 header.site .wrap{display:flex;align-items:center;justify-content:space-between;min-height:58px}
 .logo{display:flex;align-items:center;gap:9px;font-weight:700;font-size:1.05rem;color:var(--text)}
@@ -94,7 +95,7 @@ nav.main a:hover{color:var(--accent-bright)}
 .hero h1{font-size:clamp(1.7rem,3.4vw + .8rem,2.4rem);font-weight:800;letter-spacing:-.02em;margin-bottom:10px}
 .lede{color:var(--muted);max-width:620px;margin:0 auto;font-size:.98rem}
 .filters{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin:26px 0;position:sticky;top:58px;z-index:40;background:var(--bg);padding:10px 4px}
-#filters{scroll-margin-top:76px}
+#filters{scroll-margin-top:76px}.filters-toggle{display:none}@media(max-width:640px){.filters{flex-direction:column;align-items:stretch;overflow:visible}.filters-toggle{display:inline-flex;align-items:center;justify-content:space-between;width:100%;background:var(--panel);border:1px solid var(--line);border-radius:8px;color:var(--text);padding:10px 14px;font:inherit;font-size:.9rem;font-weight:600;cursor:pointer}.filters-toggle .ft-chev{transition:transform .18s var(--ease);color:var(--accent)}#filters[data-collapsed="true"] .filters-list{display:none}#filters[data-collapsed="true"] .ft-chev{transform:rotate(-90deg)}.filters-list{display:flex;flex-wrap:wrap;gap:8px;justify-content:center}}
 .tier-legend{color:var(--muted);font-size:.85rem;text-align:center;margin:0 0 14px}
 .visually-hidden{position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
 .catalog-search-row{display:flex;justify-content:center;align-items:center;gap:8px;margin:0 0 4px}
@@ -122,7 +123,7 @@ nav.main a:hover{color:var(--accent-bright)}
 #no-results.show{display:block}
 #no-results p{margin-bottom:6px}
 .card picture{display:block}
-.card h2{font-size:.98rem;line-height:1.35;font-weight:700;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.card h2{font-size:.98rem;line-height:1.35;font-weight:700;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}.card a h2{text-decoration-thickness:1px;text-underline-offset:3px}
 .price{color:var(--text);font-weight:800;font-variant-numeric:tabular-nums}
 .card p.desc{color:var(--muted);font-size:.85rem;flex:1}
 .card .row{display:flex;gap:10px;padding:0 16px 16px}
@@ -164,7 +165,7 @@ ghostcorpnet</a>
 <h1>The Catalog</h1>
 <p class="lede">Every self-serve product in the ghostcorpnet library — playbooks, checklists, runbooks, kits, and working code for governing AI agents. Buy once, download instantly, yours forever.</p>
 </div>
-<div class="wrap"><p class="result-count" id="result-count" aria-live="polite">__COUNT__</p><div class="catalog-search-row"><label for="catalog-search" class="visually-hidden">Search products</label><input id="catalog-search" type="search" aria-keyshortcuts="/" placeholder="Search products… ( / )"><kbd class="search-kbd" aria-hidden="true">/</kbd></div><div class="sort-row"><label for="catalog-sort" class="sort-label">Sort:</label><select id="catalog-sort" aria-label="Sort products"><option value="new">Newest</option><option value="lo">Price: low to high</option><option value="hi">Price: high to low</option></select></div><p class="tier-legend">9 Starter · 9 Core · 9–99 Premium</p><div class="filters" id="filters" role="region" aria-label="Filter products" aria-describedby="filters-note"></div><p class="visually-hidden" id="filters-note">Choosing filters updates the product count announced by the results region.</p></div>
+<div class="wrap"><p class="result-count" id="result-count" aria-live="polite">__COUNT__</p><div class="catalog-search-row"><label for="catalog-search" class="visually-hidden">Search products</label><input id="catalog-search" type="search" aria-keyshortcuts="/" placeholder="Search products… ( / )"><kbd class="search-kbd" aria-hidden="true">/</kbd></div><div class="sort-row"><label for="catalog-sort" class="sort-label">Sort:</label><select id="catalog-sort" aria-label="Sort products"><option value="new">Newest</option><option value="lo">Price: low to high</option><option value="hi">Price: high to low</option></select></div><p class="tier-legend">9 Starter · 9 Core · 9–99 Premium</p><div class="filters" id="filters" role="region" aria-label="Filter products" aria-describedby="filters-note" data-collapsed="false"><button type="button" class="filters-toggle" aria-expanded="true" aria-controls="filters-list"><span>Filter products</span><span class="ft-chev" aria-hidden="true">▾</span></button><div class="filters-list" id="filters-list"></div></div><p class="visually-hidden" id="filters-note">Choosing filters updates the product count announced by the results region.</p></div>
 <div class="wrap"><div class="grid" id="grid">
 __CARDS__
 </div><div id="no-results" role="status"><p>No products match — try different keywords or filters</p><p><button class="chip" id="clear-filters" type="button" style="margin-top:12px">Clear filters</button></p></div></div>
@@ -175,7 +176,7 @@ __CARDS__
 <span><a href="mailto:koalstin.g.k.delaney@gmail.com">Contact</a><a href="../articles/">Articles</a><a href="../changelog.html">Changelog</a><a href="../brands/">Stores</a><a href="../ecosystem/">Ecosystem</a><a href="../directory/">Directory</a><a href="../build/">Build</a><a href="../sitemap.xml">Sitemap</a><a href="../admin-login.html">Admin</a></span>
 </div></footer>
 <script>
-const grid=document.getElementById('grid'),filters=document.getElementById('filters'),rc=document.getElementById('result-count');
+const grid=document.getElementById('grid'),filters=document.getElementById('filters'),rc=document.getElementById('result-count');const filtersList=document.getElementById('filters-list');
 const noResults=document.getElementById('no-results');
 const updateCount=()=>{const total=[...grid.querySelectorAll('.card')].length;const v=[...grid.querySelectorAll('.card')].filter(c=>!c.classList.contains('hidden')).length;rc.textContent=v===0?'No products match':(v===1?'1 of '+total+' product':v+' of '+total+' products');if(noResults)noResults.classList.toggle('show',v===0)};
 const tags=[...new Set([...grid.querySelectorAll('.card')].flatMap(c=>(c.dataset.tags||'').split('|').filter(Boolean)))].sort();
@@ -183,8 +184,10 @@ let activeTag='',searchQ='';
 const applyFilters=()=>{document.querySelectorAll('.card').forEach(c=>{const t=(c.dataset.tags||'').split('|').filter(Boolean);const okT=activeTag===''||t.includes(activeTag);const h2=c.querySelector('h2');const okQ=searchQ===''||(h2&&h2.textContent.toLowerCase().includes(searchQ));c.classList.toggle('hidden',!(okT&&okQ))});updateCount()};
 const tagCounts={};[...grid.querySelectorAll('.card')].forEach(c=>{(c.dataset.tags||'').split('|').filter(Boolean).forEach(t=>{tagCounts[t]=(tagCounts[t]||0)+1})});
 const mk=(label,tag)=>{const b=document.createElement('button');b.className='chip'+(tag===''?' active':'');b.textContent=label;b.setAttribute('aria-pressed',String(tag===''));if(tag===''){b.setAttribute('aria-label','Show all '+grid.querySelectorAll('.card').length+' products')}else{const n=tagCounts[tag]||0;b.setAttribute('aria-label','Show '+n+' '+label+(n===1?'':'s'))}b.onclick=()=>{activeTag=tag;document.querySelectorAll('.chip').forEach(x=>{x.classList.remove('active');x.setAttribute('aria-pressed','false')});b.classList.add('active');b.setAttribute('aria-pressed','true');applyFilters()};return b};
-filters.appendChild(mk('All',''));
-tags.forEach(t=>filters.appendChild(mk(t.replace(/-/g,' '),t)));
+filtersList.appendChild(mk('All',''));
+tags.forEach(t=>filtersList.appendChild(mk(t.replace(/-/g,' '),t)));
+const fToggle=filters.querySelector('.filters-toggle');
+if(fToggle){fToggle.addEventListener('click',()=>{const c=filters.dataset.collapsed!=='true';filters.dataset.collapsed=String(c);fToggle.setAttribute('aria-expanded',String(!c));});}
 const sq=document.getElementById('catalog-search');
 if(sq){sq.addEventListener('input',()=>{searchQ=sq.value.trim().toLowerCase();applyFilters()});
 document.addEventListener('keydown',e=>{if(e.key==='/'&&document.activeElement!==sq&&!/^(INPUT|TEXTAREA|SELECT)$/.test(document.activeElement.tagName)){e.preventDefault();sq.focus()}});
@@ -222,7 +225,7 @@ b.addEventListener('click',function(){window.scrollTo({top:0,behavior:'smooth'})
 
 CARD = """<div class="card" data-tags="{tags}" data-price="{price_num}" data-date="{pdate}">
 <a href="{slug}/" style="text-decoration:none;color:inherit;display:block" aria-label="{title} — ${price}"><picture><source type="image/webp" srcset="../assets/covers/{pid}.webp"><img src="../assets/covers/{pid}.png" alt="{title} cover" {img_attrs} decoding="async" sizes="(max-width:640px) 100vw, (max-width:1100px) 50vw, 320px"></picture>
-<div class="body">{badge}{newbadge}<span class="dlbadge">DIGITAL DOWNLOAD</span><h2 translate="no">{title}</h2><p class="desc">{tagline}</p><p class="price"><span translate="no">${price}</span> <span style="color:var(--muted);font-weight:400;font-size:.85rem">one-time</span></p></div></a>
+<div class="body">{badge}{newbadge}<span class="dlbadge">DIGITAL DOWNLOAD</span><h2 translate="no">{title}</h2><p class="desc">{tagline}</p><p class="price"><span class="visually-hidden">USD </span><span translate="no"><span aria-hidden="true">$</span>{price}</span> <span style="color:var(--muted);font-weight:400;font-size:.85rem">one-time</span></p></div></a>
 <div class="row"><a class="btn" href="{url}" target="_blank" rel="noopener">Get it</a><a class="btn ghost" href="{slug}/">Details</a></div>
 <p class="trust">Instant delivery via Gumroad</p>
 </div>
