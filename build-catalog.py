@@ -104,7 +104,7 @@ nav.main a:hover{color:var(--accent-bright)}
 #catalog-search:focus{border-color:var(--accent);outline:none}
 .chip{border:1px solid var(--line);background:var(--panel);color:var(--muted);border-radius:999px;padding:7px 15px;min-height:44px;display:inline-flex;align-items:center;justify-content:center;font-size:.84rem;letter-spacing:.1em;cursor:pointer;font-family:inherit;transition:all .16s var(--ease)}
 .chip:hover{border-color:var(--accent-dim);color:var(--text)}
-.chip.active{background:var(--accent);border-color:var(--accent);color:var(--accent-ink);font-weight:700}
+.chip.active{background:var(--accent);border-color:var(--accent);color:var(--accent-ink);font-weight:700}.chip:active{transform:scale(.96)}
 .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:24px;padding:8px 0 64px}
 .card{background:linear-gradient(180deg,var(--panel),var(--bg-soft));border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;display:flex;flex-direction:column;content-visibility:auto;contain-intrinsic-size:auto 480px;transition:border-color .18s var(--ease),transform .18s var(--ease),box-shadow .18s var(--ease)}.card{position:relative}.card>a:first-of-type::after{content:"";position:absolute;inset:0}.card .row .btn{position:relative;z-index:1}
 .card:hover{border-color:var(--accent-dim);transform:translateY(-3px);box-shadow:0 14px 34px rgba(0,0,0,.4)}
@@ -140,6 +140,7 @@ footer.site a:hover{color:var(--accent-bright)}
 .trust{color:var(--faint);font-size:.78rem;text-align:center;margin:-8px 0 14px}
 .result-count{color:var(--muted);font-size:.86rem;text-align:center;margin:4px 0 0}
 .hidden{display:none!important}
+.reveal-row{display:flex;justify-content:center;margin:26px 0 8px}
 #backtop{position:fixed;right:22px;bottom:22px;width:46px;height:46px;border-radius:50%;border:1px solid var(--line);background:var(--panel);color:var(--accent);font-size:1.3rem;cursor:pointer;opacity:0;pointer-events:none;transition:opacity .2s var(--ease);z-index:150}
 #backtop.show{opacity:1;pointer-events:auto}
 #backtop:hover{border-color:var(--accent-dim)}
@@ -168,7 +169,7 @@ ghostcorpnet</a>
 <div class="wrap"><p class="result-count" id="result-count" aria-live="polite">__COUNT__</p><div class="catalog-search-row"><label for="catalog-search" class="visually-hidden">Search products</label><input id="catalog-search" type="search" aria-keyshortcuts="/" placeholder="Search products… ( / )"><kbd class="search-kbd" aria-hidden="true">/</kbd></div><div class="sort-row"><label for="catalog-sort" class="sort-label">Sort:</label><select id="catalog-sort" aria-label="Sort products"><option value="new">Newest</option><option value="lo">Price: low to high</option><option value="hi">Price: high to low</option></select></div><p class="tier-legend">9 Starter · 9 Core · 9–99 Premium</p><div class="filters" id="filters" role="region" aria-label="Filter products" aria-describedby="filters-note" data-collapsed="false"><button type="button" class="filters-toggle" aria-expanded="true" aria-controls="filters-list"><span>Filter products</span><span class="ft-chev" aria-hidden="true">▾</span></button><div class="filters-list" id="filters-list"></div></div><p class="visually-hidden" id="filters-note">Choosing filters updates the product count announced by the results region.</p></div>
 <div class="wrap"><div class="grid" id="grid">
 __CARDS__
-</div><div id="no-results" role="status"><p>No products match — try different keywords or filters</p><p><button class="chip" id="clear-filters" type="button" style="margin-top:12px">Clear filters</button></p></div></div>
+</div><div class="reveal-row"><button class="btn ghost" id="show-more" type="button">Show more</button></div><div id="no-results" role="status"><p>No products match — try different keywords or filters</p><p><button class="chip" id="clear-filters" type="button" style="margin-top:12px">Clear filters</button></p></div></div>
 <button id="backtop" aria-label="Back to top">↑</button>
 </main>
 <footer class="site"><div class="wrap">
@@ -181,14 +182,23 @@ const noResults=document.getElementById('no-results');
 const updateCount=()=>{const total=[...grid.querySelectorAll('.card')].length;const v=[...grid.querySelectorAll('.card')].filter(c=>!c.classList.contains('hidden')).length;rc.textContent=v===0?'No products match':(v===1?'1 of '+total+' product':v+' of '+total+' products');if(noResults)noResults.classList.toggle('show',v===0)};
 const tags=[...new Set([...grid.querySelectorAll('.card')].flatMap(c=>(c.dataset.tags||'').split('|').filter(Boolean)))].sort();
 let activeTag='',searchQ='';
-const applyFilters=()=>{document.querySelectorAll('.card').forEach(c=>{const t=(c.dataset.tags||'').split('|').filter(Boolean);const okT=activeTag===''||t.includes(activeTag);const h2=c.querySelector('h2');const okQ=searchQ===''||(h2&&h2.textContent.toLowerCase().includes(searchQ));c.classList.toggle('hidden',!(okT&&okQ))});updateCount()};
+try{var _hp=new URLSearchParams(location.hash.slice(1));activeTag=_hp.get('tag')||'';searchQ=_hp.get('q')||'';}catch(e){}
+// Sync filter/search/sort state to the URL hash so catalog views are shareable.
+const syncHash=()=>{try{const p=new URLSearchParams();if(activeTag)p.set('tag',activeTag);if(searchQ)p.set('q',searchQ);const ss=document.getElementById('catalog-sort');if(ss&&ss.value&&ss.value!=='new')p.set('sort',ss.value);const s=p.toString();history.replaceState(null,'',s?('#'+s):location.pathname+location.search);}catch(e){}};
+const REVEAL_STEP=40;let revealed=40;
+const isFiltering=()=>activeTag!==''||searchQ!=='';
+const updateShowMore=()=>{const sm=document.getElementById('show-more');if(!sm)return;const total=[...grid.querySelectorAll('.card')].length;const rest=total-revealed;const show=!isFiltering()&&rest>0;sm.classList.toggle('hidden',!show);if(show)sm.textContent='Show more ('+rest+' more)';};
+const applyFilters=()=>{const cards=[...grid.querySelectorAll('.card')];let vis=0;cards.forEach(c=>{const t=(c.dataset.tags||'').split('|').filter(Boolean);const okT=activeTag===''||t.includes(activeTag);const h2=c.querySelector('h2');const okQ=searchQ===''||(h2&&h2.textContent.toLowerCase().includes(searchQ));let show=okT&&okQ;if(show&&!isFiltering()){vis++;show=vis<=revealed;}c.classList.toggle('hidden',!show)});updateCount();updateShowMore();syncHash()};
 const tagCounts={};[...grid.querySelectorAll('.card')].forEach(c=>{(c.dataset.tags||'').split('|').filter(Boolean).forEach(t=>{tagCounts[t]=(tagCounts[t]||0)+1})});
-const mk=(label,tag)=>{const b=document.createElement('button');b.className='chip'+(tag===''?' active':'');b.textContent=label;b.setAttribute('aria-pressed',String(tag===''));if(tag===''){b.setAttribute('aria-label','Show all '+grid.querySelectorAll('.card').length+' products')}else{const n=tagCounts[tag]||0;b.setAttribute('aria-label','Show '+n+' '+label+(n===1?'':'s'))}b.onclick=()=>{activeTag=tag;document.querySelectorAll('.chip').forEach(x=>{x.classList.remove('active');x.setAttribute('aria-pressed','false')});b.classList.add('active');b.setAttribute('aria-pressed','true');applyFilters()};return b};
+const mk=(label,tag)=>{const b=document.createElement('button');b.className='chip'+(tag===activeTag?' active':'');b.textContent=label;b.setAttribute('aria-pressed',String(tag===activeTag));if(tag===''){b.setAttribute('aria-label','Show all '+grid.querySelectorAll('.card').length+' products')}else{const n=tagCounts[tag]||0;b.setAttribute('aria-label','Show '+n+' '+label+(n===1?'':'s'))}b.onclick=()=>{activeTag=tag;document.querySelectorAll('.chip').forEach(x=>{x.classList.remove('active');x.setAttribute('aria-pressed','false')});b.classList.add('active');b.setAttribute('aria-pressed','true');applyFilters()};return b};
 filtersList.appendChild(mk('All',''));
 tags.forEach(t=>filtersList.appendChild(mk(t.replace(/-/g,' '),t)));
 const fToggle=filters.querySelector('.filters-toggle');
 if(fToggle){fToggle.addEventListener('click',()=>{const c=filters.dataset.collapsed!=='true';filters.dataset.collapsed=String(c);fToggle.setAttribute('aria-expanded',String(!c));});}
 const sq=document.getElementById('catalog-search');
+if(sq&&searchQ)sq.value=searchQ;
+const smBtn=document.getElementById('show-more');
+if(smBtn)smBtn.addEventListener('click',()=>{revealed+=REVEAL_STEP;applyFilters();});
 if(sq){sq.addEventListener('input',()=>{searchQ=sq.value.trim().toLowerCase();applyFilters()});
 document.addEventListener('keydown',e=>{if(e.key==='/'&&document.activeElement!==sq&&!/^(INPUT|TEXTAREA|SELECT)$/.test(document.activeElement.tagName)){e.preventDefault();sq.focus()}});
 sq.addEventListener('keydown',e=>{if(e.key==='Escape')sq.blur()});}
@@ -201,8 +211,9 @@ cards.sort((a,b)=>{const pa=parseFloat(a.dataset.price||'0'),pb=parseFloat(b.dat
 if(v==='lo')return pa-pb;if(v==='hi')return pb-pa;
 const da=a.dataset.date||'',db=b.dataset.date||'';
 if(da&&!db)return -1;if(!da&&db)return 1;return db.localeCompare(da)});
-cards.forEach(c=>grid.appendChild(c))};
-if(sortSel){sortSel.addEventListener('change',applySort);applySort()}
+cards.forEach(c=>grid.appendChild(c));applyFilters();syncHash()};
+if(sortSel){try{var _hs=new URLSearchParams(location.hash.slice(1)).get('sort');if(_hs&&['new','lo','hi'].indexOf(_hs)>=0)sortSel.value=_hs;}catch(e){}
+sortSel.addEventListener('change',applySort);applySort()}
 
 // Clear filters button in the empty state.
 const clearBtn=document.getElementById('clear-filters');
@@ -223,7 +234,7 @@ b.addEventListener('click',function(){window.scrollTo({top:0,behavior:'smooth'})
 </html>
 """
 
-CARD = """<div class="card" data-tags="{tags}" data-price="{price_num}" data-date="{pdate}">
+CARD = """<div class="card{reveal}" data-tags="{tags}" data-price="{price_num}" data-date="{pdate}">
 <a href="{slug}/" style="text-decoration:none;color:inherit;display:block" aria-label="{title} — ${price}"><picture><source type="image/webp" srcset="../assets/covers/{pid}.webp"><img src="../assets/covers/{pid}.png" alt="{title} cover" {img_attrs} decoding="async" sizes="(max-width:640px) 100vw, (max-width:1100px) 50vw, 320px"></picture>
 <div class="body">{badge}{newbadge}<span class="dlbadge">DIGITAL DOWNLOAD</span><h2 translate="no">{title}</h2><p class="desc">{tagline}</p><p class="price"><span class="visually-hidden">USD </span><span translate="no"><span aria-hidden="true">$</span>{price}</span> <span style="color:var(--muted);font-weight:400;font-size:.85rem">one-time</span></p></div></a>
 <div class="row"><a class="btn" href="{url}" target="_blank" rel="noopener">Get it</a><a class="btn ghost" href="{slug}/">Details</a></div>
@@ -296,7 +307,9 @@ def main():
         tags = "|".join(ptaglist)
         badge = '<span class="codebadge">CODE</span>' if "code" in ptaglist else ""
         newbadge = '<span class="badge-new">New</span>' if is_new(p, datemap) else ""
+        reveal = "" if n <= 40 else " hidden reveal-capped"
         cards.append(CARD.format(
+            reveal=reveal,
             pid=html.escape(pid),
             title=html.escape(p["title"]),
             tagline=html.escape(fix_tagline(p.get("tagline", ""))),

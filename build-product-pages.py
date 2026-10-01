@@ -388,7 +388,7 @@ gtag('config', 'G-541TCHWW98');
   </a>
   <nav aria-label="Breadcrumb" class="crumb"><ol><li><a href="../../">Home</a></li><li><a id="pdp-back" href="../../products/" aria-keyshortcuts="Escape" aria-label="Back to all {n_products} products">Catalog</a><kbd class="esc-hint">Esc</kbd></li><li aria-current="page">{title}</li></ol></nav>
 
-  <div class="hero">
+  <div class="hero" itemscope itemtype="https://schema.org/Product">
     {cover_img}
     <div>
       <h1>{title}</h1>
@@ -550,10 +550,10 @@ def main():
         facts_row = "\n      ".join(facts)
         cover_path = os.path.join(SITE, "assets", "covers", f"{pr['gid']}.png")
         dims = png_dims(cover_path) if os.path.isfile(cover_path) else None
-        cover_img = (f'<img src="../../assets/covers/{pr["gid"]}.png" alt="{esc(pr["title"])} cover"'
+        cover_img = (f'<img itemprop="image" src="../../assets/covers/{pr["gid"]}.png" alt="{esc(pr["title"])} cover"'
                      f' fetchpriority="high" decoding="async" width="{dims[0]}" height="{dims[1]}">'
                      if os.path.isfile(cover_path) and dims else
-                     (f'<img src="../../assets/covers/{pr["gid"]}.png" alt="{esc(pr["title"])} cover"'
+                     (f'<img itemprop="image" src="../../assets/covers/{pr["gid"]}.png" alt="{esc(pr["title"])} cover"'
                       f' fetchpriority="high" decoding="async">'
                       if os.path.isfile(cover_path) else ""))
         og_dims = (f'<meta property="og:image:width" content="{dims[0]}">\n'

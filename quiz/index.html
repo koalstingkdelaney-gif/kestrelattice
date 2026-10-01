@@ -46,6 +46,9 @@ gtag('config', 'G-541TCHWW98');
   .note{color:var(--muted);font-size:.85rem;margin-top:24px}
   footer{border-top:1px solid var(--line);margin-top:48px;padding-top:20px;color:var(--muted);font-size:.82rem}
   footer a{color:var(--muted);text-decoration:none} footer a:hover{color:var(--accent)}
+  /* Visible keyboard focus for all interactive elements on the quiz page. */
+  a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:4px}
+  @media (prefers-reduced-motion:no-preference){a:focus-visible,button:focus-visible{transition:transform .15s ease}}
 </style>
 </head>
 <body>
