@@ -170,6 +170,9 @@
   .kicker{font-size:.72rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);margin-bottom:10px}
   h2{font-size:clamp(1.35rem,2vw + .7rem,1.75rem);font-weight:750;letter-spacing:-.018em;line-height:1.24;margin-bottom:8px;text-wrap:balance}
   .lede{color:var(--muted);font-size:.98rem;max-width:640px;margin-bottom:26px;text-wrap:pretty}
+  .inside-list{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:1fr 1fr;gap:10px 28px}
+  .inside-list li{position:relative;padding-left:30px;font-size:.95rem;line-height:1.5}
+  .inside-list li::before{content:"✓";position:absolute;left:0;top:0;color:var(--accent);font-weight:700}
   .center{text-align:center}
   .center .lede{margin-left:auto;margin-right:auto}
 
@@ -269,6 +272,7 @@
   }
   @media(max-width:640px){
     .featured{grid-template-columns:1fr}
+    .inside-list{grid-template-columns:1fr}
     .nav-toggle{display:inline-flex;align-items:center;justify-content:center;width:44px;height:44px;
       background:none;border:1px solid var(--line);border-radius:8px;color:var(--text);font-size:1.25rem;cursor:pointer}
     nav.main{display:none}
@@ -402,6 +406,25 @@
           <a class="btn primary" href="products/">Open the catalog</a>
         </div>
       </div>
+    </div>
+  </section>
+
+  <!-- What's inside -->
+  <section class="block" id="inside" aria-label="What's inside the Studio Edition">
+    <div class="wrap">
+      <div class="kicker">The Studio Edition</div>
+      <h2>What's inside</h2>
+      <p class="lede">Every policy, schema, and worksheet is copy-ready — no theory, just the artifacts.</p>
+      <ul class="inside-list">
+        <li>Approval &amp; spend-limit policy templates</li>
+        <li>Plan-bound and audit-row JSON schemas</li>
+        <li>Vendor evaluation matrix</li>
+        <li>Risk-tier classification worksheet</li>
+        <li>14-day governed rollout plan</li>
+        <li>First-customer kit &amp; pricing guidance</li>
+        <li>Adopting the policies: sign-off checklists</li>
+        <li>Acceptance checklist</li>
+      </ul>
     </div>
   </section>
 
