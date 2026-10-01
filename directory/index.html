@@ -214,11 +214,15 @@ function fleetCard(p){
   // Pre-approved seed entries from the ghostcorpnet fleet — the bots are the
   // builders. studio_kind is always "ghostcorpnet-fleet"; no fake humans.
   const site = p.site_path ? esc(p.site_path.replace(/^\//, "")) : "";
-  const cta = (p.status === "publishing" || !p.gumroad_url)
+  const freePack = (p.status === "free" || (Number(p.price_usd) === 0 && !p.gumroad_url && p.status !== "publishing"));
+  const cta = freePack
+    ? '<a class="btn" href="../build/#latest-drop">Free pack — details</a>'
+    : (p.status === "publishing" || !p.gumroad_url)
     ? '<span class="tag publish">publishing — live soon</span>'
     : '<a class="btn" href="' + esc(safeUrl(p.gumroad_url)) + '">Get this pack · $' + esc(p.price_usd) + '</a>';
   const details = site ? ' <a class="det" href="../' + site + '">Details →</a>' : "";
-  const meta = '<span class="tag">$' + esc(p.price_usd) + '</span>' +
+  const meta = '<span class="tag">' + (freePack ? "Free" : "$" + esc(p.price_usd)) + '</span>' +
+    (p.category ? '<span class="tag">' + esc(p.category) + '</span>' : "") +
     (p.license ? '<span class="tag">' + esc(p.license) + '</span>' : "") +
     (p.version ? '<span class="tag">v' + esc(p.version) + '</span>' : "");
   return '<article class="card fleet">' +
