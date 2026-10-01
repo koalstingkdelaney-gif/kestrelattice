@@ -592,6 +592,19 @@ def inbox_section(queue=None):
             '\', this, \'Handled ✓\')">Mark handled</button></div>'
             for i in escs)
         esc_html = ('<div class="card warn"><h3>Waiting on you</h3>' + rows + '</div>')
+    threat_html = ""
+    threats = state.get("threat_fyi", []) or []
+    if threats:
+        trows = "".join(
+            '<li><b>' + esc((t.get("from") or "?")[:60]) + '</b> — ' +
+            esc((t.get("subject") or "")[:70]) +
+            ' <span class="muted">' + esc(t.get("at", ""))[:16] + '</span></li>'
+            for t in reversed(threats))
+        threat_html = (
+            '<div class="card"><h3>Quiet FYI — threats received</h3>'
+            '<p class="muted">No reply sent, sender permanently opted out. '
+            'No action needed unless you choose otherwise.</p>'
+            '<ul>' + trows + '</ul></div>')
     hist = ""
     if recent:
         items = "".join(
@@ -602,9 +615,10 @@ def inbox_section(queue=None):
         hist = ('<details class="fold"><summary>Recent inbox activity (' + str(len(recent)) +
                 ')</summary><ul>' + items + '</ul></details>')
     last = state.get("last_run", "")
-    return (stats + esc_html + hist +
-            ('<p class="muted">Inbox watcher checks the business Gmail every ~10 minutes '
-             'and replies to genuine questions automatically. Money, refund, legal, or '
+    return (stats + esc_html + threat_html + hist +
+            ('<p class="muted">Inbox watcher checks the business Gmail every ~10 minutes. '
+             'Genuine questions get an automatic reply. Threats are never answered and never '
+             'escalated — they are logged above as quiet FYI only. Money, refund, or '
              'complex threads come here instead. Last check: ' + esc(last.replace("T", " ").replace("Z", "Z")) +
              '.</p>' if last else '<p class="muted">Inbox watcher has not run yet.</p>'))
 
