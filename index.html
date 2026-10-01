@@ -137,6 +137,16 @@
   header.site{border-bottom:1px solid var(--line);position:sticky;top:0;z-index:100;
     background:rgba(15,14,13,.92);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
   header.site .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:58px}
+  /* Compact header on scroll (mobile): shrink padding + brand size past 80px scroll */
+  @media (max-width:640px){
+    header.site .wrap{transition:min-height .2s ease,padding .2s ease}
+    header.site.compact .wrap{min-height:44px}
+    header.site.compact .logo{font-size:.92rem}
+    header.site.compact .nav-cta{padding:6px 12px}
+  }
+  @media (prefers-reduced-motion:reduce){
+    header.site .wrap{transition:none}
+  }
   .logo{display:flex;align-items:center;gap:9px;font-weight:700;font-size:1.05rem;color:var(--text)}
   .logo:hover{text-decoration:none;color:var(--accent-bright)}
   nav.main{display:flex;align-items:center;gap:20px}
@@ -593,6 +603,10 @@
   (function(){var t=document.querySelector('.nav-toggle'),n=document.getElementById('primary-nav');
   if(t&&n){t.addEventListener('click',function(){var open=n.classList.toggle('open');
   t.setAttribute('aria-expanded',open);t.setAttribute('aria-label',open?'Close menu':'Open menu');});}})();
+  // Sticky header shrink: toggle `compact` class on the site header past ~80px scroll (passive).
+  (function(){var h=document.querySelector('header.site');if(!h)return;
+  var onScroll=function(){h.classList.toggle('compact',window.scrollY>80);};
+  window.addEventListener('scroll',onScroll,{passive:true});onScroll();})();
   // FAQ accordions: keep aria-expanded in sync with the open state.
   (function(){document.querySelectorAll('details.faq').forEach(function(d){
   var s=d.querySelector('summary');if(!s)return;
