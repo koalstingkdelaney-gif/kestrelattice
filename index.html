@@ -417,14 +417,16 @@
   var s=d.querySelector('summary');if(!s)return;
   s.setAttribute('aria-expanded',d.open?'true':'false');
   d.addEventListener('toggle',function(){s.setAttribute('aria-expanded',d.open?'true':'false');});});})();
-  // Sticky buy bar: suppress it while the final #buy CTA section is in view.
+  // Sticky buy bar: suppress it while the final #buy CTA section or the footer is in view.
   (function(){var mq=window.matchMedia('(prefers-reduced-motion: reduce)');if(mq.matches)return;
   if(!('IntersectionObserver' in window))return;
-  var bar=document.querySelector('.sticky-buy'),buy=document.getElementById('buy');
+  var bar=document.querySelector('.sticky-buy'),buy=document.getElementById('buy'),foot=document.querySelector('footer.site');
   if(!bar||!buy)return;
+  var vis={buy:false,foot:false};
   var io=new IntersectionObserver(function(es){es.forEach(function(e){
-  bar.classList.toggle('suppressed',e.isIntersecting);});},{threshold:.1});
-  io.observe(buy);})();
+  if(e.target===buy){vis.buy=e.isIntersecting;}else{vis.foot=e.isIntersecting;}
+  bar.classList.toggle('suppressed',vis.buy||vis.foot);});},{threshold:.1});
+  io.observe(buy);if(foot)io.observe(foot);})();
   // Analytics: lightweight click tracking for key conversion events.
   document.addEventListener("click", function(e){
     const el = e.target.closest("[data-track]");
