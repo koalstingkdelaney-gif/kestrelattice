@@ -563,7 +563,7 @@ function toast(msg, ok){
   setTimeout(function(){ t.classList.add('out'); setTimeout(function(){ t.remove(); }, 350); }, 2600);
 }
 function switchView(brand, tab){
-  if (['drafts','fleet','extras'].indexOf(tab) >= 0) brand = 'all';
+  if (['drafts','fleet','hive','captain','extras'].indexOf(tab) >= 0) brand = 'all';
   App.brand = brand; App.tab = tab;
   document.querySelectorAll('.bpane').forEach(function(p){
     p.classList.toggle('on', p.id === 'pane-' + brand + '-' + tab);
@@ -658,8 +658,9 @@ _SVG = {
     "fleet": '<path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>',
     "hive": '<path d="M12 2l8 4.5v9L12 20l-8-4.5v-9L12 2z"/><circle cx="12" cy="12" r="2.5"/>',
     "extras": '<circle cx="5" cy="12" r="1.6" fill="currentColor" stroke="none"/><circle cx="12" cy="12" r="1.6" fill="currentColor" stroke="none"/><circle cx="19" cy="12" r="1.6" fill="currentColor" stroke="none"/>',
+    "captain": '<circle cx="12" cy="12" r="9"/><path d="M12 3v3M12 18v3M3 12h3M18 12h3"/><circle cx="12" cy="12" r="2"/>',
 }
-TABS = [("overview", "Overview"), ("approvals", "Approvals"), ("outreach", "Outreach"),
+TABS = [("overview", "Overview"), ("captain", "Captain"), ("approvals", "Approvals"), ("outreach", "Outreach"),
         ("products", "Products"), ("drafts", "Drafts"), ("fleet", "Fleet"),
         ("hive", "Hive"), ("extras", "Extras")]
 
@@ -1147,6 +1148,98 @@ def _hive_html():
             + parked_card + retry_card + log_card)
 
 
+# ---------------------------------------------------------------- captain tab
+
+SENT_DIR = os.path.expanduser("~/workspace/sentience")
+
+
+def _sent_json(path, default):
+    try:
+        with open(path) as f:
+            return json.load(f)
+    except Exception:
+        return default
+
+
+def _sent_lines(path):
+    try:
+        with open(path) as f:
+            return [ln.strip() for ln in f if ln.strip() and not ln.startswith("#")]
+    except Exception:
+        return []
+
+
+def _captain_html():
+    status = _sent_json(os.path.join(SENT_DIR, "state/status.json"), {})
+    needs = []
+    for ln in _sent_lines(os.path.join(SENT_DIR, "state/needs_human.jsonl")):
+        try:
+            needs.append(json.loads(ln))
+        except Exception:
+            pass
+    pending_cmds = _sent_lines(os.path.join(SENT_DIR, "inbox/commands.jsonl"))
+    try:
+        soul = open(os.path.join(SENT_DIR, "SOUL.md")).read().splitlines()
+        soul_ex = "\n".join(soul[6:18])
+    except Exception:
+        soul_ex = "Soul not written yet."
+
+    jars = []
+    for b in BRANDS:
+        j = _sent_json(os.path.join(SENT_DIR, "brands", b["slug"], "JAR.json"), None)
+        if j:
+            jars.append((b["name"], j))
+
+    def ago(ts):
+        return esc(str(ts)) if ts else "<span class='muted'>not yet</span>"
+
+    status_card = (
+        '<div class="card"><h3>Status</h3>'
+        f"<p>Operator last run: {ago(status.get('operator_last_run'))}<br>"
+        f"Reflection last run: {ago(status.get('reflect_last_run'))}<br>"
+        f"Commands waiting in inbox: <b>{len(pending_cmds)}</b><br>"
+        f"Items needing your tap: <b>{len(needs)}</b></p>"
+        "<p class='muted'>Loops: operator every ~15 min, reflection daily. "
+        "It shapes its own soul as it learns — the guardrails stay yours.</p></div>"
+    )
+    soul_card = (
+        '<div class="card"><h3>Soul <span class="muted">(co-edit SOUL.md to shape who it becomes)</span></h3>'
+        f"<pre class='mono' style='white-space:pre-wrap'>{esc(soul_ex)}</pre></div>"
+    )
+    if needs:
+        rows = "".join(
+            f"<tr><td><b>{esc(n.get('title', ''))}</b><br><span class='muted'>"
+            f"{esc(n.get('detail', ''))}</span></td>"
+            f"<td>{esc(n.get('tap', 'your tap'))}</td></tr>" for n in needs)
+        needs_html = ('<div class="card"><h3>Needs your tap</h3>'
+                      '<div class="table-wrap"><table><tr><th>Item</th><th>Tap</th></tr>'
+                      + rows + "</table></div></div>")
+    else:
+        needs_html = ('<div class="card"><h3>Needs your tap</h3>'
+                      "<p class='muted'>Nothing waiting. It handles the rest on its own.</p></div>")
+    if jars:
+        jrows = "".join(
+            f"<tr><td><b>{esc(name)}</b></td><td>${j.get('allocation_usd', 0):,.0f}</td>"
+            f"<td>${j.get('income_usd', 0):,.0f}</td><td>${j.get('spent_usd', 0):,.0f}</td>"
+            f"<td><b>${j.get('balance_usd', 0):,.0f}</b></td></tr>" for name, j in jars)
+        jars_html = ('<div class="card"><h3>Brand money jars</h3>'
+                     '<div class="table-wrap"><table><tr><th>Brand</th><th>Allocated</th>'
+                     "<th>Earned</th><th>Spent</th><th>Balance</th></tr>"
+                     + jrows + "</table></div>"
+                     "<p class='muted'>Jars are budget ledgers backed by real allocations you approve. "
+                     "Real funds always flow through your accounts.</p></div>")
+    else:
+        jars_html = ""
+    cmd_html = (
+        '<div class="card"><h3>Command it</h3>'
+        "<p>Talk to Sentience in the <b>Talk to the bots</b> chat — it reads its inbox, "
+        "runs the fleet, hires freelancers, and does client work start to finish. "
+        "A tap-to-command box right here in the panel ships with the pending "
+        "Cloudflare re-auth.</p></div>"
+    )
+    return status_card + soul_card + needs_html + jars_html + cmd_html
+
+
 def _all_panes(products, queue, entries, title_map, omap):
     p = {}
     p["overview"] = (
@@ -1157,6 +1250,10 @@ def _all_panes(products, queue, entries, title_map, omap):
         + brand_comparison_table(products, entries, queue, title_map, omap)
         + S.alerts_section(queue, products) + S.revenue_section(products) + S.activity_feed()
     )
+    p["captain"] = (_sec("Private operator", "Sentience",
+                         "One mind, yours alone. It runs the fleet, operates the ten brands, "
+                         "hires freelancers, and does client work start to finish — so you don't have to.")
+                    + _captain_html())
     p["approvals"] = (_sec("Decision queue", "Needs your approval",
                            "Tap Approve — the fleet picks it up within ~15 minutes.")
                       + S.approvals_section())
