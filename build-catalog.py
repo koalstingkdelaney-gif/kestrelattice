@@ -164,7 +164,7 @@ b.addEventListener('click',function(){window.scrollTo({top:0,behavior:'smooth'})
 """
 
 CARD = """<div class="card" data-tags="{tags}">
-<a href="{slug}/" style="text-decoration:none;color:inherit;display:block"><img src="../assets/covers/{pid}.png" alt="{title} cover" loading="lazy">
+<a href="{slug}/" style="text-decoration:none;color:inherit;display:block"><img src="../assets/covers/{pid}.png" alt="{title} cover" loading="lazy" decoding="async">
 <div class="body">{badge}<h2>{title}</h2><p class="desc">{tagline}</p><p class="price">${price} <span style="color:var(--muted);font-weight:400;font-size:.85rem">one-time</span></p></div></a>
 <div class="row"><a class="btn" href="{url}">Get it</a><a class="btn ghost" href="{slug}/">Details</a></div>
 <p class="trust">Instant delivery via Gumroad</p>
