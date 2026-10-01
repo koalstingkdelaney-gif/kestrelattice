@@ -20,7 +20,7 @@ a.ghost{color:#e07a5f;text-decoration:none;border-bottom:1px solid #e07a5f}
 <div class="card">
 <h1>404</h1>
 <p class="brand">ghostcorpnet</p>
-<p>This agent wandered outside its approval gate — the page you're looking for doesn't exist.</p>
+<p id="c404">This agent wandered outside its approval gate — the page you're looking for doesn't exist.</p>
 <form action="/kestrelattice/products/" method="get" role="search" style="margin:14px 0 6px">
 <label for="s404" style="position:absolute;left:-9999px">Search the catalog</label>
 <input id="s404" name="q" type="search" placeholder="Search the catalog…" style="width:100%;max-width:340px;padding:11px 14px;border-radius:8px;border:1px solid #e07a5f;background:#1a1714;color:#f1ebdd;font-size:.95rem">
@@ -33,5 +33,43 @@ a.ghost{color:#e07a5f;text-decoration:none;border-bottom:1px solid #e07a5f}
 </p>
 <p><a class="ghost" href="/kestrelattice/articles/">Read the articles</a></p>
 </div>
+<script>
+/* Locale-aware 404: GitHub Pages only serves this ROOT 404.html for every 404,
+   including /kestrelattice/es/* and /kestrelattice/pt/*. Detect a locale prefix
+   in the path and swap to the localized copy + recovery links. /es/products/
+   and /pt/products/ do not exist in the repo, so all recovery links fall back
+   to the localized home. noindex is kept. */
+(function(){
+  var p = location.pathname;
+  var loc = p.indexOf('/kestrelattice/es/') === 0 ? 'es'
+          : p.indexOf('/kestrelattice/pt/') === 0 ? 'pt' : null;
+  if (!loc) return;
+  var L = {
+    es: {lang:'es', title:'Página no encontrada — ghostcorpnet',
+         body:'Este agente salió de su puerta de aprobación — la página que buscas no existe.',
+         home:'Inicio', homeHref:'/kestrelattice/es/'},
+    pt: {lang:'pt', title:'Página não encontrada — ghostcorpnet',
+         body:'Este agente saiu da sua porta de aprovação — a página que você procura não existe.',
+         home:'Início', homeHref:'/kestrelattice/pt/'}
+  }[loc];
+  document.title = L.title;
+  document.documentElement.lang = L.lang;
+  var b = document.getElementById('c404');
+  if (b) b.textContent = L.body;
+  var btns = document.querySelectorAll('a.btn, a.ghost');
+  btns.forEach(function(a, i){
+    var h = a.getAttribute('href') || '';
+    if (h.indexOf('/kestrelattice/') !== 0) return;
+    if (i === 0) {
+      /* Primary recovery action: localized home. /es/products/ and
+         /pt/products/ do not exist, so all recovery links fall back here. */
+      a.setAttribute('href', L.homeHref);
+      a.textContent = L.home;
+    } else {
+      a.style.display = 'none';
+    }
+  });
+})();
+</script>
 </body>
 </html>
