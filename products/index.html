@@ -4129,7 +4129,7 @@ ghostcorpnet</a>
 const grid=document.getElementById('grid'),filters=document.getElementById('filters'),rc=document.getElementById('result-count');
 const updateCount=()=>{const v=[...grid.querySelectorAll('.card')].filter(c=>!c.classList.contains('hidden')).length;rc.textContent=v===0?'No products match':(v===1?'1 product':v+' products')};
 const tags=[...new Set([...grid.querySelectorAll('.card')].flatMap(c=>c.dataset.tags.split('|').filter(Boolean)))].sort();
-const mk=(label,tag)=>{const b=document.createElement('button');b.className='chip'+(tag===''?' active':'');b.textContent=label;b.onclick=()=>{document.querySelectorAll('.chip').forEach(x=>x.classList.remove('active'));b.classList.add('active');document.querySelectorAll('.card').forEach(c=>{c.classList.toggle('hidden',tag!==''&&!c.dataset.tags.split('|').includes(tag))});updateCount()};return b};
+const mk=(label,tag)=>{const b=document.createElement('button');b.className='chip'+(tag===''?' active':'');b.textContent=label;b.setAttribute('aria-pressed',String(tag===''));b.onclick=()=>{document.querySelectorAll('.chip').forEach(x=>{x.classList.remove('active');x.setAttribute('aria-pressed','false')});b.classList.add('active');b.setAttribute('aria-pressed','true');document.querySelectorAll('.card').forEach(c=>{c.classList.toggle('hidden',tag!==''&&!c.dataset.tags.split('|').includes(tag))});updateCount()};return b};
 filters.appendChild(mk('All',''));
 tags.forEach(t=>filters.appendChild(mk(t.replace(/-/g,' '),t)));
 
