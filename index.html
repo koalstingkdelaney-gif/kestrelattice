@@ -181,6 +181,10 @@
   section.block + section.block{border-top:1px solid var(--line-soft)}
   .kicker{font-size:.72rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);margin-bottom:10px}
   h2{font-size:clamp(1.35rem,2vw + .7rem,1.75rem);font-weight:750;letter-spacing:-.018em;line-height:1.24;margin-bottom:8px;text-wrap:balance}
+  @media (prefers-reduced-motion:no-preference){
+    .reveal{opacity:0;transform:translateY(14px);transition:opacity .6s ease,transform .6s ease}
+    .reveal.in-view{opacity:1;transform:none}
+  }
   .lede{color:var(--muted);font-size:.98rem;max-width:640px;margin-bottom:26px;text-wrap:pretty}
   .inside-list{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:1fr 1fr;gap:10px 28px}
   .inside-list li{position:relative;padding-left:30px;font-size:.95rem;line-height:1.5}
@@ -368,7 +372,7 @@
   <section class="block" id="featured" aria-label="Featured products">
     <div class="wrap">
       <div class="kicker">The library</div>
-      <h2>Start with the essentials</h2>
+      <h2 class="reveal">Start with the essentials</h2>
       <p class="lede">The six kits buyers reach for first. Everything else lives in the <a href="products/">full catalog</a>.</p>
       <div class="featured">
         <article class="fcard">
@@ -435,7 +439,7 @@
   <section class="block" id="inside" aria-label="What's inside the Studio Edition">
     <div class="wrap">
       <div class="kicker">The Studio Edition</div>
-      <h2>What's inside</h2>
+      <h2 class="reveal">What's inside</h2>
       <p class="lede">Every policy, schema, and worksheet is copy-ready — no theory, just the artifacts.</p>
       <ul class="inside-list">
         <li>Approval &amp; spend-limit policy templates</li>
@@ -454,7 +458,7 @@
   <section class="block" id="how" aria-label="How it works">
     <div class="wrap">
       <div class="kicker">How it works</div>
-      <h2>From click to governed in minutes</h2>
+      <h2 class="reveal">From click to governed in minutes</h2>
       <p class="lede">No accounts, no calls, no waiting. Every product is a self-serve digital download.</p>
       <div class="steps">
         <div class="step"><h3>Pick your kit</h3><p>Browse the catalog or take the <a href="quiz/">60-second quiz</a> to find the kits that close your biggest governance gaps.</p></div>
@@ -469,7 +473,7 @@
     <div class="wrap">
       <div class="center">
         <div class="kicker">Start free, upgrade when ready</div>
-        <h2>Read the approach. Then implement it.</h2>
+        <h2 class="reveal">Read the approach. Then implement it.</h2>
         <p class="lede">The free playbook teaches the 8-layer governance stack. The Studio Edition gives you the templates, schemas, and day plans to run it this afternoon.</p>
       </div>
       <div class="duo">
@@ -505,7 +509,7 @@
     <div class="wrap">
       <div class="center">
         <div class="kicker">FAQ</div>
-        <h2>Questions, answered</h2>
+        <h2 class="reveal">Questions, answered</h2>
         <p class="lede">The short version of everything buyers ask before the $29.</p>
       </div>
       <details class="faq" data-track="faq_open">
@@ -542,7 +546,7 @@
         <img src="assets/studio-edition-cover.jpg" alt="The Governed Agent Mesh Playbook — Studio Edition cover" width="440" height="440" loading="lazy" decoding="async">
         <div>
           <div class="kicker">Get the Studio Edition</div>
-          <h2>Ship governed agents this week</h2>
+          <h2 class="reveal">Ship governed agents this week</h2>
           <p style="color:var(--muted)">The premium companion to the free playbook: 20 PDF pages of fill-in policy templates, JSON schemas, the priced vendor matrix, a 14-day rollout, and a first-customer kit.</p>
           <div class="cta-pair">
             <div class="opt">
@@ -590,6 +594,9 @@
     const el = e.target.closest("[data-track]");
     if (el) track(el.getAttribute("data-track"), { link_text: (el.textContent || "").trim().slice(0, 80) });
   }, { passive: true });
+</script>
+<script>
+(function(){if(!('IntersectionObserver' in window))return;var mq=window.matchMedia('(prefers-reduced-motion: reduce)');if(mq.matches)return;var els=document.querySelectorAll('.reveal');var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in-view');io.unobserve(e.target);}});},{threshold:.15});els.forEach(function(el){io.observe(el);});})();
 </script>
 
 </body>
