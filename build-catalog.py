@@ -48,6 +48,15 @@ PAGE = """<!DOCTYPE html>
 <link rel="canonical" href="https://koalstingkdelaney-gif.github.io/kestrelattice/products/">
 <link rel="preconnect" href="https://koalstin.gumroad.com">
 <link rel="dns-prefetch" href="https://koalstin.gumroad.com">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-541TCHWW98"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  if (!window.__klExcludeSelf) {
+    gtag('js', new Date());
+    gtag('config', 'G-541TCHWW98');
+  }
+</script>
 __PRELOAD__
 <meta property="og:type" content="website">
 <meta property="og:title" content="Product Catalog — ghostcorpnet">
@@ -106,7 +115,7 @@ nav.main a:hover{color:var(--accent-bright)}
 .codebadge{display:inline-block;align-self:flex-start;background:var(--accent-soft);border:1px solid var(--accent-dim);color:var(--accent-bright);font-size:.68rem;font-weight:700;letter-spacing:.08em;padding:2px 8px;border-radius:999px}
 .badge-new{display:inline-block;background:var(--accent);color:var(--accent-ink);font-size:.68rem;font-weight:700;letter-spacing:.08em;padding:2px 8px;border-radius:999px;margin-left:6px}
 .dlbadge{display:inline-block;background:transparent;border:1px solid var(--line);color:var(--muted);font-size:.66rem;font-weight:700;letter-spacing:.08em;padding:2px 8px;border-radius:999px;margin-left:6px}
-.sort-row{display:flex;justify-content:center;margin:0 0 10px}
+.sort-row{display:flex;justify-content:center;align-items:center;margin:0 0 10px}.sort-label{font-size:.86rem;color:var(--muted);margin-right:8px;font-weight:600}
 #catalog-sort{padding:9px 14px;min-height:44px;border:1px solid var(--line);border-radius:999px;background:var(--panel);color:var(--text);font-size:.86rem;font-family:inherit;cursor:pointer}
 #catalog-sort:focus{border-color:var(--accent);outline:none}
 #no-results{display:none;text-align:center;padding:48px 16px;color:var(--muted)}
@@ -155,7 +164,7 @@ ghostcorpnet</a>
 <h1>The Catalog</h1>
 <p class="lede">Every self-serve product in the ghostcorpnet library — playbooks, checklists, runbooks, kits, and working code for governing AI agents. Buy once, download instantly, yours forever.</p>
 </div>
-<div class="wrap"><p class="result-count" id="result-count" aria-live="polite">__COUNT__</p><div class="catalog-search-row"><label for="catalog-search" class="visually-hidden">Search products</label><input id="catalog-search" type="search" aria-keyshortcuts="/" placeholder="Search products… ( / )"><kbd class="search-kbd" aria-hidden="true">/</kbd></div><div class="sort-row"><label for="catalog-sort" class="visually-hidden">Sort products</label><select id="catalog-sort" aria-label="Sort products"><option value="new">Newest</option><option value="lo">Price: low to high</option><option value="hi">Price: high to low</option></select></div><p class="tier-legend">9 Starter · 9 Core · 9–99 Premium</p><div class="filters" id="filters" role="region" aria-label="Filter products" aria-describedby="filters-note"></div><p class="visually-hidden" id="filters-note">Choosing filters updates the product count announced by the results region.</p></div>
+<div class="wrap"><p class="result-count" id="result-count" aria-live="polite">__COUNT__</p><div class="catalog-search-row"><label for="catalog-search" class="visually-hidden">Search products</label><input id="catalog-search" type="search" aria-keyshortcuts="/" placeholder="Search products… ( / )"><kbd class="search-kbd" aria-hidden="true">/</kbd></div><div class="sort-row"><label for="catalog-sort" class="sort-label">Sort:</label><select id="catalog-sort" aria-label="Sort products"><option value="new">Newest</option><option value="lo">Price: low to high</option><option value="hi">Price: high to low</option></select></div><p class="tier-legend">9 Starter · 9 Core · 9–99 Premium</p><div class="filters" id="filters" role="region" aria-label="Filter products" aria-describedby="filters-note"></div><p class="visually-hidden" id="filters-note">Choosing filters updates the product count announced by the results region.</p></div>
 <div class="wrap"><div class="grid" id="grid">
 __CARDS__
 </div><div id="no-results" role="status"><p>No products match — try different keywords or filters</p><p><button class="chip" id="clear-filters" type="button" style="margin-top:12px">Clear filters</button></p></div></div>
@@ -211,7 +220,7 @@ b.addEventListener('click',function(){window.scrollTo({top:0,behavior:'smooth'})
 """
 
 CARD = """<div class="card" data-tags="{tags}" data-price="{price_num}" data-date="{pdate}">
-<a href="{slug}/" style="text-decoration:none;color:inherit;display:block" aria-label="{title} — ${price}"><picture><source type="image/webp" srcset="../assets/covers/{pid}.webp"><img src="../assets/covers/{pid}.png" alt="{title} cover" loading="lazy" fetchpriority="low" decoding="async" sizes="(max-width:640px) 100vw, (max-width:1100px) 50vw, 320px"></picture>
+<a href="{slug}/" style="text-decoration:none;color:inherit;display:block" aria-label="{title} — ${price}"><picture><source type="image/webp" srcset="../assets/covers/{pid}.webp"><img src="../assets/covers/{pid}.png" alt="{title} cover" {img_attrs} decoding="async" sizes="(max-width:640px) 100vw, (max-width:1100px) 50vw, 320px"></picture>
 <div class="body">{badge}{newbadge}<span class="dlbadge">DIGITAL DOWNLOAD</span><h2 translate="no">{title}</h2><p class="desc">{tagline}</p><p class="price"><span translate="no">${price}</span> <span style="color:var(--muted);font-weight:400;font-size:.85rem">one-time</span></p></div></a>
 <div class="row"><a class="btn" href="{url}" target="_blank" rel="noopener">Get it</a><a class="btn ghost" href="{slug}/">Details</a></div>
 <p class="trust">Instant delivery via Gumroad</p>
@@ -275,8 +284,10 @@ def main():
     ordered = sorted(sorted(prods, key=lambda x: (float(x["price"]), x["title"])),
                      key=lambda x: pdate(x, datemap), reverse=True)
     cards = []
-    for p in ordered:
+    for n, p in enumerate(ordered, 1):
         pid = p["id"]
+        # LCP: first-row card images load eagerly with high priority; the rest stay lazy.
+        img_attrs = ' fetchpriority="high"' if n <= 4 else ' loading="lazy" fetchpriority="low"'
         ptaglist = tagmap.get(pid, ["governance"])
         tags = "|".join(ptaglist)
         badge = '<span class="codebadge">CODE</span>' if "code" in ptaglist else ""
@@ -291,6 +302,7 @@ def main():
             url=f"https://koalstin.gumroad.com/l/{html.escape(pid)}",
             tags=html.escape(tags),
             slug=ORIGINAL_SLUGS.get(pid, slugify(p["title"])),
+            img_attrs=img_attrs,
             badge=badge,
             newbadge=newbadge,
         ))
