@@ -80,10 +80,6 @@ export default {
     }
 
     if (req.method === "POST" && url.pathname === "/approve") {
-      const ip = req.headers.get("cf-connecting-ip") || "unknown";
-      if (!(await checkRateLimit(env, ip))) {
-        return json({ ok: false, error: "rate_limited" }, 429);
-      }
       let body;
       try {
         body = await req.json();
@@ -91,6 +87,13 @@ export default {
         return json({ ok: false, error: "bad_json" }, 400);
       }
       if (!body.key || body.key !== env.WRITE_KEY) {
+        // Wrong/missing key: rate-limit the guessing (KV write), then refuse.
+        // Legitimate keyed requests skip the rate-limit write entirely so
+        // normal approvals don't burn the KV daily write budget.
+        const ip = req.headers.get("cf-connecting-ip") || "unknown";
+        if (!(await checkRateLimit(env, ip))) {
+          return json({ ok: false, error: "rate_limited" }, 429);
+        }
         return json({ ok: false, error: "forbidden" }, 403);
       }
       const q = await readQueue(env);
@@ -134,13 +137,13 @@ export default {
         const fromHuman = body.key && body.key === env.WRITE_KEY;
         const fromServer = isServer && body.from === "sentience";
         if (!fromHuman && !fromServer) {
-          return json({ ok: false, error: "forbidden" }, 403);
-        }
-        if (fromHuman) {
+          // Wrong/missing key: rate-limit the guessing, then refuse.
+          // Keyed requests skip the rate-limit KV write (see /approve).
           const ip = req.headers.get("cf-connecting-ip") || "unknown";
           if (!(await checkRateLimit(env, ip))) {
             return json({ ok: false, error: "rate_limited" }, 429);
           }
+          return json({ ok: false, error: "forbidden" }, 403);
         }
         const text = String(body.text || "").trim().slice(0, 2000);
         if (!text) return json({ ok: false, error: "empty" }, 400);
