@@ -118,6 +118,9 @@ gtag('config', 'G-541TCHWW98');
   #backtop:hover{border-color:var(--accent-dim)}
   @media (prefers-reduced-motion:reduce){#backtop{display:none}}
   .copy-link-row{margin:0 0 8px}
+  .share-row{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin:0 0 8px}
+  .share-x,.share-li{border:1px solid var(--line);background:var(--panel);color:var(--muted);border-radius:999px;padding:8px 16px;min-height:44px;font-size:.82rem;display:inline-flex;align-items:center;text-decoration:none}
+  .share-x:hover,.share-li:hover{border-color:var(--accent-dim);color:var(--text);text-decoration:none}
   .copy-link{position:relative;border:1px solid var(--line);background:var(--panel);color:var(--muted);border-radius:999px;padding:8px 16px;min-height:44px;font-size:.82rem;cursor:pointer;font-family:inherit}
   .copy-link:hover{border-color:var(--accent-dim);color:var(--text)}
   .toc{border:1px solid var(--line);border-radius:var(--radius);background:var(--panel);padding:14px 20px;margin:0 0 20px;max-width:720px}
@@ -151,7 +154,11 @@ gtag('config', 'G-541TCHWW98');
   <p class="date"><time datetime="{{DATE_ISO}}">Published {{DATE_ISO}}</time> · <span class="reading-time" id="reading-time"></span></p>
   <p class="reviewed">Last reviewed <time datetime="{{DATE_ISO}}">{{DATE_ISO}}</time></p>
   <p class="updated">Updated <time datetime="{{DATE_ISO}}">{{DATE_ISO}}</time></p>
-  <div class="copy-link-row"><button class="copy-link" id="copy-link" type="button" aria-label="Copy link to this article">Copy link</button></div>
+  <div class="share-row" role="group" aria-label="Share this article">
+    <a class="share-x" href="https://x.com/intent/tweet" target="_blank" rel="noopener" aria-label="Share this article on X">Share on X</a>
+    <a class="share-li" href="https://www.linkedin.com/sharing/share-offsite/" target="_blank" rel="noopener" aria-label="Share this article on LinkedIn">Share on LinkedIn</a>
+    <button class="copy-link" id="copy-link" type="button" aria-label="Copy link to this article">Copy link</button>
+  </div>
 
   <nav class="toc" aria-label="Table of contents">
     <p>On this page</p>
@@ -204,6 +211,10 @@ function fallback(url){var i=document.createElement('input');i.value=url;i.setAt
 b.addEventListener('click',function(){var url=window.location.href;
 if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(url).then(done,function(){fallback(url)})}
 else{fallback(url)}});})();
+</script>
+<script>
+// Share links: point the X / LinkedIn share URLs at this article's canonical URL.
+(function(){try{var u=encodeURIComponent(window.location.href);var x=document.querySelector('.share-x');if(x)x.href='https://x.com/intent/tweet?url='+u;var l=document.querySelector('.share-li');if(l)l.href='https://www.linkedin.com/sharing/share-offsite/?url='+u;}catch(e){}})();
 </script>
 <script>
 // Humanize "Updated <time>" stamps + add h2 section anchors (progressive enhancement).

@@ -100,6 +100,9 @@ gtag('config', 'G-541TCHWW98');
   footer.site a:hover{color:var(--accent-bright)}
   @media(max-width:640px){nav.main a:not(:last-child){display:none}footer.site .wrap{justify-content:center;text-align:center}footer.site a{margin:0 7px}}
   .copy-link-row{margin:0 0 8px}
+  .share-row{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin:0 0 8px}
+  .share-x,.share-li{border:1px solid var(--line);background:var(--panel);color:var(--muted);border-radius:999px;padding:8px 16px;min-height:44px;font-size:.82rem;display:inline-flex;align-items:center;text-decoration:none}
+  .share-x:hover,.share-li:hover{border-color:var(--accent-dim);color:var(--text);text-decoration:none}
   .copy-link{position:relative;border:1px solid var(--line);background:var(--panel);color:var(--muted);border-radius:999px;padding:8px 16px;min-height:44px;font-size:.82rem;cursor:pointer;font-family:inherit}
   .copy-link:hover{border-color:var(--accent-dim);color:var(--text)}
   .copy-link.copied::after{content:"Copied";position:absolute;top:-30px;left:50%;transform:translateX(-50%);background:var(--accent);color:var(--accent-ink);font-size:.72rem;font-weight:700;padding:3px 10px;border-radius:6px;white-space:nowrap}
@@ -122,7 +125,11 @@ gtag('config', 'G-541TCHWW98');
   <p class="date"><time datetime="2026-09-30">Published September 30, 2026</time>
   <p class="reviewed">Last reviewed <time datetime="2026-09-30">September 30, 2026</time></p></p>
   <p class="updated">Updated <time datetime="2026-09-30">September 30, 2026</time></p>
-  <div class="copy-link-row"><button class="copy-link" id="copy-link" type="button" aria-label="Copy link to this article">Copy link</button></div>
+  <div class="share-row" role="group" aria-label="Share this article">
+    <a class="share-x" href="https://x.com/intent/tweet" target="_blank" rel="noopener" aria-label="Share this article on X">Share on X</a>
+    <a class="share-li" href="https://www.linkedin.com/sharing/share-offsite/" target="_blank" rel="noopener" aria-label="Share this article on LinkedIn">Share on LinkedIn</a>
+    <button class="copy-link" id="copy-link" type="button" aria-label="Copy link to this article">Copy link</button>
+  </div>
 
   <article>
 <p>Last year a dev watched an agent burn $700+ in 72 hours. No budget control, no kill switch — just a loop and a credit card.</p>
@@ -170,6 +177,10 @@ function fallback(url){var i=document.createElement('input');i.value=url;i.setAt
 b.addEventListener('click',function(){var url=window.location.href;
 if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(url).then(done,function(){fallback(url)})}
 else{fallback(url)}});})();
+</script>
+<script>
+// Share links: point the X / LinkedIn share URLs at this article's canonical URL.
+(function(){try{var u=encodeURIComponent(window.location.href);var x=document.querySelector('.share-x');if(x)x.href='https://x.com/intent/tweet?url='+u;var l=document.querySelector('.share-li');if(l)l.href='https://www.linkedin.com/sharing/share-offsite/?url='+u;}catch(e){}})();
 </script>
 <script>
 // Humanize "Updated <time>" stamps + add h2 section anchors (progressive enhancement).
