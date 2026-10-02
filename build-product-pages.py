@@ -263,7 +263,7 @@ def next_step_block(pr, ladder):
         price = nxt["price_usd"]
         ptxt = f"${int(price)}" if float(price).is_integer() else f"${price}"
         checkout = (f'    <p style="color:var(--muted);font-size:.9rem">Or go straight to checkout: '
-                    f'<a style="color:var(--accent)" href="{gurl}" target="_blank" rel="noopener">Buy {title} on Gumroad</a></p>\n'
+                    f'<a style="color:var(--accent)" href="{gurl}" target="_blank" rel="noopener" aria-label="Buy {esc(title)} on Gumroad (opens in new tab)">Buy {title} on Gumroad</a></p>\n'
                     if gurl else
                     f'    <p style="color:var(--muted);font-size:.9rem">{title} is publishing now — check back shortly.</p>\n')
         return (
@@ -437,7 +437,7 @@ gtag('config', 'G-541TCHWW98');
 {next_step}
   <footer>
     <span>© 2026 ghostcorpnet · An independent studio</span>
-    <span><a href="../../">Home</a> · <a href="../">Catalog</a> · <a href="../../changelog.html">Changelog</a> · <a href="mailto:koalstin.g.k.delaney@gmail.com">Contact</a></span>
+    <span><a href="../../">Home</a> · <a href="../">Catalog</a> · <a href="../../changelog.html">Changelog</a> · <a href="mailto:ghostcorpnetai@gmail.com">Contact</a></span>
   </footer>
 </div>
 {sticky_bar}
@@ -560,7 +560,7 @@ def main():
                    f'<meta property="og:image:height" content="{dims[1]}">') if dims else ""
         if is_live:
             buy_html = (f'<p class="instant" id="buy-trust">One-time · Instant PDF download via Gumroad</p>\n'
-                        f'      <a class="btn" href="{pr["gumroad_url"]}" target="_blank" rel="noopener" aria-label="Buy {esc(pr["title"])} for ${pr["price"]}" aria-describedby="buy-trust">Get it now — ${pr["price"]}</a>\n'
+                        f'      <a class="btn" href="{pr["gumroad_url"]}" target="_blank" rel="noopener" aria-label="Buy {esc(pr["title"])} for ${pr["price"]} (opens in new tab)" aria-describedby="buy-trust">Get it now — ${pr["price"]}</a>\n'
                         f'      <p class="trust">Secure checkout via Gumroad · <a style="color:var(--accent)" href="https://help.gumroad.com">buyer protection</a> · Single-user license · Instant delivery</p>\n'
                         f'      <p class="notready">Not ready? <a href="../../playbook.md">Get the free MIT playbook</a> first.</p>')
         else:
@@ -593,7 +593,7 @@ def main():
         if is_live:
             sticky_bar = (f'<div class="pdp-sticky" id="pdp-sticky" role="region" aria-label="Quick buy: {esc(pr["title"])}">'
                           f'<span><b>{esc(pr["title"])}</b> \u00b7 ${pr["price"]}</span>'
-                          f'<a class="btn" href="{pr["gumroad_url"]}" target="_blank" rel="noopener">Buy now</a></div>')
+                          f'<a class="btn" href="{pr["gumroad_url"]}" target="_blank" rel="noopener" aria-label="Buy {esc(pr["title"])} on Gumroad (opens in new tab)">Buy now</a></div>')
         else:
             sticky_bar = (f'<div class="pdp-sticky" id="pdp-sticky" role="region" aria-label="Availability: {esc(pr["title"])}">'
                           f'<span><b>{esc(pr["title"])}</b> \u00b7 ${pr["price"]}</span>'
