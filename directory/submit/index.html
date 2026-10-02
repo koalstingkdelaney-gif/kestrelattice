@@ -56,6 +56,8 @@ gtag('config', 'G-541TCHWW98');
   .btn:hover{background:var(--accent-bright);transform:translateY(-1px)}
   .btn:disabled{opacity:.6;cursor:default;transform:none}
   .char-count{font-size:.78rem;color:var(--faint);margin-top:4px;text-align:right;font-variant-numeric:tabular-nums}.err{color:#e08a7f;font-size:.85rem;margin-top:4px;display:none}
+  .req{font-weight:700}
+  .visually-hidden{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
   #err-summary{display:none;margin:0 0 20px;padding:14px 18px;border-radius:8px;background:rgba(224,138,127,.08);border:1px solid rgba(224,138,127,.4);color:#e08a7f;font-size:.9rem}
   #err-summary h2{font-size:.95rem;margin:0 0 8px;color:var(--text)}
   #err-summary ul{margin:0;padding-left:1.2em}
@@ -105,18 +107,19 @@ gtag('config', 'G-541TCHWW98');
     </ol>
   </section>
 
+  <p class="req-legend">Fields marked <span class="req" aria-hidden="true">*</span> are required.</p>
   <form id="submit-form" novalidate>
     <div id="err-summary" role="alert" tabindex="-1" aria-labelledby="err-summary-title"></div>
     <fieldset>
       <legend>Pack info</legend>
-      <label for="pack_name">Pack name
+      <label for="pack_name">Pack name <span class="req" aria-hidden="true">*</span><span class="visually-hidden"> (required)</span>
         <input id="pack_name" aria-describedby="e-pack_name" name="pack_name" type="text" maxlength="120" required aria-required="true" autocomplete="name"
                placeholder="e.g. EU AI Act Evidence Pack for Startups">
       </label>
       <div class="err" id="e-pack_name">Give your pack a name.</div>
 
 
-      <label for="pack_url">Pack URL
+      <label for="pack_url">Pack URL <span class="req" aria-hidden="true">*</span><span class="visually-hidden"> (required)</span>
         <span class="hint">Where people get your pack — your own site, Gumroad, GitHub, etc.</span>
         <input id="pack_url" aria-describedby="e-pack_url" name="pack_url" type="url" maxlength="500" required aria-required="true" inputmode="url" autocomplete="url"
                placeholder="https://example.com/my-pack">
@@ -124,7 +127,7 @@ gtag('config', 'G-541TCHWW98');
       <div class="err" id="e-pack_url">A valid http(s) URL is required.</div>
 
 
-      <label for="description">Description
+      <label for="description">Description <span class="req" aria-hidden="true">*</span><span class="visually-hidden"> (required)</span>
         <span class="hint">At least a sentence or two — what problem does the pack solve?</span>
         <textarea id="description" aria-describedby="e-description" name="description" maxlength="2000" enterkeyhint="send" required
                   placeholder="What the pack contains, who it's for, and how it fits the ghostcorpnet Pack Standard."></textarea>
@@ -136,14 +139,14 @@ gtag('config', 'G-541TCHWW98');
 
     <fieldset>
       <legend>Contact info</legend>
-      <label for="author">Author / studio
+      <label for="author">Author / studio <span class="req" aria-hidden="true">*</span><span class="visually-hidden"> (required)</span>
         <input id="author" aria-describedby="e-author" name="author" type="text" maxlength="120" required aria-required="true" autocomplete="organization"
                placeholder="Your name or studio name">
       </label>
       <div class="err" id="e-author">Tell us who built it.</div>
 
 
-      <label for="author_email">Contact email
+      <label for="author_email">Contact email <span class="req" aria-hidden="true">*</span><span class="visually-hidden"> (required)</span>
         <span class="hint">Only used for review questions. Never published.</span>
         <input id="author_email" aria-describedby="e-author_email" name="author_email" type="email" maxlength="200" required aria-required="true" autocomplete="email" inputmode="email"
                placeholder="you@example.com">
@@ -162,7 +165,7 @@ gtag('config', 'G-541TCHWW98');
       <div class="err" id="e-manifest_url">Must be a valid http(s) URL, or leave blank.</div>
 
 
-      <label for="license">License
+      <label for="license">License <span class="req" aria-hidden="true">*</span><span class="visually-hidden"> (required)</span>
         <input id="license" aria-describedby="e-license" name="license" type="text" maxlength="80" required aria-required="true" autocomplete="off"
                placeholder="e.g. MIT, Apache-2.0, Commercial">
       </label>
