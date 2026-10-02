@@ -469,6 +469,13 @@ tr:nth-child(even) td{background:rgba(255,255,255,.02)}
 tr:hover td{background:rgba(224,122,95,.05)}
 .table-wrap tr:last-child td{border-bottom:0}
 table a{color:var(--accent)}
+.tapcard{background:linear-gradient(180deg,var(--panel2),var(--panel));
+  border:1px solid var(--line);border-radius:var(--radius);
+  padding:16px 18px;margin:12px 0}
+.tapcard p{color:var(--muted);font-size:.9rem;margin:6px 0}
+.tapcard .taphow{color:var(--text);font-size:.88rem;border-left:3px solid var(--accent);
+  padding-left:10px;margin:8px 0}
+.tapcard .btn{margin-top:8px}
 .mono{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:.78rem;color:var(--muted)}
 .muted{color:var(--muted);font-size:.88rem}
 .badge{display:inline-block;font-size:.66rem;font-weight:700;letter-spacing:.06em;

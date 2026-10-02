@@ -472,8 +472,8 @@ def backend_js():
         '  window.scrollTo(0, 0);\n'
         '}\n'
         'document.addEventListener("DOMContentLoaded", function() {\n'
-        '  const h = (location.hash || "#taps").slice(1);\n'
-        '  switchTab(document.getElementById("tab-" + h) ? h : "taps");\n'
+        '  const h = (location.hash || "#overview").slice(1);\n'
+        '  switchTab(document.getElementById("tab-" + h) ? h : "overview");\n'
         '});\n'
         '</script>'
     )
@@ -1157,12 +1157,6 @@ def build():
     <p class="gen">Generated {esc(now)} · every number below is live data, refreshed automatically</p>
   </div>
   {backend_js()}
-
-  <div class="tabpane" id="tab-taps">
-    <div class="sec-title"><div class="eyebrow">Live</div><h2>Action Center</h2>
-    <p class="lede">Everything that needs your tap, in one spot — refreshed every 5 seconds. Tapping <b>Approve</b> executes immediately; the fleet picks it up within ~15 minutes.</p></div>
-    {action_center_section()}
-  </div>
 
   <div class="tabpane" id="tab-overview">
     <div class="sec-title"><div class="eyebrow">At a glance</div><h2>Overview</h2></div>
