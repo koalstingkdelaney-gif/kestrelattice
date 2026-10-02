@@ -318,6 +318,86 @@ export default {
       });
     }
 
+    // ---- Action Center taps feed (private, key-gated) ----------------------
+    // One consolidated "needs your tap" feed for the admin panel's Action
+    // Center tab, polled every few seconds:
+    //   GET  /taps?key=WRITE_KEY -> {approvals:[pending queue items],
+    //                               taps:[needs_human items not yet handled]}
+    //   POST /taps-sync  (x-server-key) -> body = array of tap objects;
+    //                               stored to KV (run by taps-sync.py)
+    //   POST /tap-resolve {id, key} -> marks a tap handled; it drops out of
+    //                               /taps. key must match WRITE_KEY.
+    //   GET  /taps-resolved (x-server-key) -> resolutions map, so the VM
+    //                               sync can mirror them append-only.
+    const TAPS_KEY = "needs_human";
+    const RESOLVED_KEY = "taps_resolved";
+    const tapGate = () => {
+      const qkey = url.searchParams.get("key");
+      return isServer || (qkey && qkey === env.WRITE_KEY);
+    };
+    const readTaps = async () => {
+      const raw = await env.APPROVALS.get(TAPS_KEY);
+      return raw ? JSON.parse(raw) : [];
+    };
+    const readResolved = async () => {
+      const raw = await env.APPROVALS.get(RESOLVED_KEY);
+      return raw ? JSON.parse(raw) : {};
+    };
+
+    if (req.method === "GET" && url.pathname === "/taps") {
+      if (!tapGate()) return new Response("Not found", { status: 404 });
+      const q = await readQueue(env);
+      const approvals = q.filter(
+        (it) => it.status === "pending" && it.group !== "outreach" && it.group !== "drafts"
+      );
+      const taps = await readTaps();
+      const resolved = await readResolved();
+      return json({
+        ok: true,
+        approvals,
+        taps: taps.filter((t) => t.id && !resolved[t.id]),
+      });
+    }
+
+    if (req.method === "POST" && url.pathname === "/taps-sync" && isServer) {
+      const body = await req.json().catch(() => null);
+      if (!Array.isArray(body)) return json({ ok: false, error: "bad_seed" }, 400);
+      const clean = body.slice(0, 200).map((t, i) => ({
+        id: String(t.id || "tap-" + i),
+        kind: String(t.kind || "tap"),
+        title: String(t.title || "Needs your tap"),
+        detail: String(t.detail || ""),
+        tap: String(t.tap || ""),
+        ts: String(t.ts || ""),
+      }));
+      await env.APPROVALS.put(TAPS_KEY, JSON.stringify(clean));
+      return json({ ok: true, count: clean.length });
+    }
+
+    if (req.method === "POST" && url.pathname === "/tap-resolve") {
+      let body;
+      try {
+        body = await req.json();
+      } catch {
+        return json({ ok: false, error: "bad_json" }, 400);
+      }
+      if (!body.key || body.key !== env.WRITE_KEY) {
+        return json({ ok: false, error: "forbidden" }, 403);
+      }
+      if (!body.id) return json({ ok: false, error: "missing_id" }, 400);
+      const resolved = await readResolved();
+      resolved[String(body.id)] = {
+        choice: String(body.choice || "handled"),
+        ts: new Date().toISOString(),
+      };
+      await env.APPROVALS.put(RESOLVED_KEY, JSON.stringify(resolved));
+      return json({ ok: true, id: String(body.id) });
+    }
+
+    if (req.method === "GET" && url.pathname === "/taps-resolved" && isServer) {
+      return json({ ok: true, resolved: await readResolved() });
+    }
+
     return json({ ok: false, error: "not_found" }, 404);
   },
 };

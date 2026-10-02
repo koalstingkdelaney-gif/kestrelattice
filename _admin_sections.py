@@ -472,8 +472,8 @@ def backend_js():
         '  window.scrollTo(0, 0);\n'
         '}\n'
         'document.addEventListener("DOMContentLoaded", function() {\n'
-        '  const h = (location.hash || "#overview").slice(1);\n'
-        '  switchTab(document.getElementById("tab-" + h) ? h : "overview");\n'
+        '  const h = (location.hash || "#taps").slice(1);\n'
+        '  switchTab(document.getElementById("tab-" + h) ? h : "taps");\n'
         '});\n'
         '</script>'
     )
@@ -550,6 +550,80 @@ def approvals_section():
         '</script>'
     )
     return js
+
+
+def action_center_section():
+    """The one-spot live tap list. Polls the worker /taps endpoint every 5s
+    (approvals + needs-human taps, consolidated). Until the worker code with
+    /taps is deployed, it falls back to the public /queue for approvals so
+    the tab is useful immediately. Approve buttons execute via /approve;
+    "Mark handled" hides a tap via /tap-resolve (write-key gated)."""
+    return (
+        '<div id="taplist"><p class="muted">Connecting to the live tap feed…</p></div>\n'
+        '<script>\n'
+        'async function loadTaps() {\n'
+        '  const el = document.getElementById("taplist");\n'
+        '  if (!WURL || !WKEY) { el.innerHTML = "<p class=\'muted\'>Not connected: no admin key on this device. Open the admin login page and tick \\"Remember on this device\\".</p>"; return; }\n'
+        '  let d = null, tapsLive = false;\n'
+        '  try {\n'
+        '    const r = await fetch(WURL + "/taps?key=" + encodeURIComponent(WKEY));\n'
+        '    if (r.ok) { d = await r.json(); tapsLive = !!(d && d.ok); }\n'
+        '  } catch (e) {}\n'
+        '  if (!tapsLive) {\n'
+        '    try {\n'
+        '      const q = await (await fetch(WURL + "/queue")).json();\n'
+        '      d = {ok: true, approvals: q.filter(it => it.status === "pending" && it.group !== "outreach" && it.group !== "drafts"), taps: []};\n'
+        '    } catch (e) { el.innerHTML = "<p class=\'muted\'>Tap feed unreachable — retrying…</p>"; return; }\n'
+        '  }\n'
+        '  const ap = d.approvals || [], tp = d.taps || [];\n'
+        '  const stamp = new Date().toLocaleTimeString();\n'
+        '  let html = "";\n'
+        '  if (!ap.length && !tp.length) {\n'
+        '    html = "<div class=\'tapcard\'><b>All clear \\u0001F389</b><p>Nothing needs your tap right now.</p></div>";\n'
+        '  }\n'
+        '  if (ap.length) {\n'
+        '    html += "<div class=\'sec-title\'><div class=\'eyebrow\'>One tap each</div><h2>Approvals waiting (" + ap.length + ")</h2></div>";\n'
+        '    html += "<div class=\'table-wrap\'><table><tr><th>Item</th><th></th></tr>" + ap.map(it =>\n'
+        '      `<tr><td><b>${it.title}</b><br><span class=\'muted\'>${it.detail || ""}</span></td>` +\n'
+        '      `<td style="white-space:nowrap"><button class="btn" onclick="tapApprove(\\\'${it.code}\\\', this)">Approve</button></td></tr>`\n'
+        '    ).join("") + "</table></div>";\n'
+        '  }\n'
+        '  if (tp.length) {\n'
+        '    html += "<div class=\'sec-title\'><div class=\'eyebrow\'>Your call</div><h2>Needs your tap (" + tp.length + ")</h2></div>";\n'
+        '    html += tp.map(t =>\n'
+        '      `<div class="tapcard"><b>${t.title}</b><p>${t.detail || ""}</p>` +\n'
+        '      (t.tap ? `<p class="taphow">${t.tap}</p>` : "") +\n'
+        '      `<button class="btn" onclick="tapResolve(\\\'${t.id}\\\', this)">Mark handled</button></div>`\n'
+        '    ).join("");\n'
+        '  }\n'
+        '  if (!tapsLive) html += "<p class=\'muted\'>Tap sync activating — approvals above are live; the full tap list arrives with the next backend update.</p>";\n'
+        '  html += `<p class=\'muted\' style=\'margin-top:16px\'>Live \\u00b7 refreshed ${stamp} \\u00b7 updates every 5 seconds</p>`;\n'
+        '  el.innerHTML = html;\n'
+        '}\n'
+        'async function tapApprove(code, btn) {\n'
+        '  const ok = await approveCode(code, btn, "Approved \\u2713");\n'
+        '  if (ok) setTimeout(loadTaps, 800);\n'
+        '}\n'
+        'async function tapResolve(id, btn) {\n'
+        '  btn.disabled = true; btn.textContent = "Working…";\n'
+        '  try {\n'
+        '    const r = await fetch(WURL + "/tap-resolve", {method: "POST",\n'
+        '      headers: {"Content-Type": "application/json"},\n'
+        '      body: JSON.stringify({id: id, key: WKEY, choice: "handled"})});\n'
+        '    const dd = await r.json();\n'
+        '    if (dd.ok) { loadTaps(); return; }\n'
+        '  } catch (e) {}\n'
+        '  btn.disabled = false; btn.textContent = "Retry";\n'
+        '}\n'
+        '// WURL/WKEY/approveCode are declared in the backend_js block (end of body),\n'
+        '// so the first load must wait until they exist — DOMContentLoaded fires\n'
+        '// after all parser-inserted scripts have run.\n'
+        'document.addEventListener("DOMContentLoaded", function() {\n'
+        '  loadTaps();\n'
+        '  setInterval(loadTaps, 5000);\n'
+        '});\n'
+        '</script>'
+    )
 
 
 def outreach_section():
@@ -898,7 +972,7 @@ def build():
     revenue = revenue_section(products)
     feed = activity_feed()
     tabs = [
-        ("overview", "Overview"), ("approvals", "Approvals"), ("outreach", "Outreach"),
+        ("taps", "\u26a1 Action Center"), ("overview", "Overview"), ("approvals", "Approvals"), ("outreach", "Outreach"),
         ("products", "Products"), ("drafts", "Drafts"), ("fleet", "Fleet"),
         ("extras", "Extras"),
     ]
@@ -994,6 +1068,13 @@ def build():
   tr:hover td{{background:rgba(224,122,95,.05)}}
   .table-wrap tr:last-child td,.table-wrap tr:last-child th{{border-bottom:0}}
   table a{{color:var(--accent)}}
+  .tapcard{{background:linear-gradient(180deg,var(--panel2),var(--panel));
+       border:1px solid var(--line);border-radius:var(--radius);
+       padding:16px 18px;margin:12px 0}}
+  .tapcard p{{color:var(--muted);font-size:.9rem;margin:6px 0}}
+  .tapcard .taphow{{color:var(--text);font-size:.88rem;border-left:3px solid var(--accent);
+       padding-left:10px;margin:8px 0}}
+  .tapcard .btn{{margin-top:8px}}
   .mono{{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:.8rem;color:var(--muted)}}
   .muted{{color:var(--muted);font-size:.88rem}}
   .badge{{display:inline-block;font-size:.68rem;font-weight:700;letter-spacing:.06em;
@@ -1076,6 +1157,12 @@ def build():
     <p class="gen">Generated {esc(now)} · every number below is live data, refreshed automatically</p>
   </div>
   {backend_js()}
+
+  <div class="tabpane" id="tab-taps">
+    <div class="sec-title"><div class="eyebrow">Live</div><h2>Action Center</h2>
+    <p class="lede">Everything that needs your tap, in one spot — refreshed every 5 seconds. Tapping <b>Approve</b> executes immediately; the fleet picks it up within ~15 minutes.</p></div>
+    {action_center_section()}
+  </div>
 
   <div class="tabpane" id="tab-overview">
     <div class="sec-title"><div class="eyebrow">At a glance</div><h2>Overview</h2></div>
