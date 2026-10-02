@@ -51,7 +51,7 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://koalstingkdelaney-gif.github.io/kestrelattice/directory/</loc><lastmod>2026-10-01</lastmod>
+    <loc>https://koalstingkdelaney-gif.github.io/kestrelattice/directory/</loc><lastmod>2026-10-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -65,14 +65,14 @@
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
-  <url><loc>https://koalstingkdelaney-gif.github.io/kestrelattice/articles/runaway-agent-costs-spend-ceilings.html</loc><lastmod>2026-10-01</lastmod><changefreq>monthly</changefreq></url>
-  <url><loc>https://koalstingkdelaney-gif.github.io/kestrelattice/articles/agent-permissions-tier-by-consequence.html</loc><lastmod>2026-10-01</lastmod><changefreq>monthly</changefreq></url>
-  <url><loc>https://koalstingkdelaney-gif.github.io/kestrelattice/articles/observability-vs-governance.html</loc><lastmod>2026-10-01</lastmod><changefreq>monthly</changefreq></url>
-  <url><loc>https://koalstingkdelaney-gif.github.io/kestrelattice/articles/scoped-expiring-grants-agents.html</loc><lastmod>2026-10-01</lastmod><changefreq>monthly</changefreq></url>
-  <url><loc>https://koalstingkdelaney-gif.github.io/kestrelattice/articles/buy-observability-build-governance.html</loc><lastmod>2026-10-01</lastmod><changefreq>monthly</changefreq></url>
-  <url><loc>https://koalstingkdelaney-gif.github.io/kestrelattice/articles/governance-economics-paying-wrong-layer.html</loc><lastmod>2026-10-01</lastmod><changefreq>monthly</changefreq></url>
-  <url><loc>https://koalstingkdelaney-gif.github.io/kestrelattice/articles/agent-governance-faq.html</loc><lastmod>2026-10-01</lastmod><changefreq>monthly</changefreq></url>
-  <url><loc>https://koalstingkdelaney-gif.github.io/kestrelattice/articles/ai-agent-permissions-audit.html</loc><lastmod>2026-10-01</lastmod><changefreq>monthly</changefreq></url>
+  <url><loc>https://koalstingkdelaney-gif.github.io/kestrelattice/articles/runaway-agent-costs-spend-ceilings.html</loc><lastmod>2026-10-02</lastmod><changefreq>monthly</changefreq></url>
+  <url><loc>https://koalstingkdelaney-gif.github.io/kestrelattice/articles/agent-permissions-tier-by-consequence.html</loc><lastmod>2026-10-02</lastmod><changefreq>monthly</changefreq></url>
+  <url><loc>https://koalstingkdelaney-gif.github.io/kestrelattice/articles/observability-vs-governance.html</loc><lastmod>2026-10-02</lastmod><changefreq>monthly</changefreq></url>
+  <url><loc>https://koalstingkdelaney-gif.github.io/kestrelattice/articles/scoped-expiring-grants-agents.html</loc><lastmod>2026-10-02</lastmod><changefreq>monthly</changefreq></url>
+  <url><loc>https://koalstingkdelaney-gif.github.io/kestrelattice/articles/buy-observability-build-governance.html</loc><lastmod>2026-10-02</lastmod><changefreq>monthly</changefreq></url>
+  <url><loc>https://koalstingkdelaney-gif.github.io/kestrelattice/articles/governance-economics-paying-wrong-layer.html</loc><lastmod>2026-10-02</lastmod><changefreq>monthly</changefreq></url>
+  <url><loc>https://koalstingkdelaney-gif.github.io/kestrelattice/articles/agent-governance-faq.html</loc><lastmod>2026-10-02</lastmod><changefreq>monthly</changefreq></url>
+  <url><loc>https://koalstingkdelaney-gif.github.io/kestrelattice/articles/ai-agent-permissions-audit.html</loc><lastmod>2026-10-02</lastmod><changefreq>monthly</changefreq></url>
   <url><loc>https://koalstingkdelaney-gif.github.io/kestrelattice/products/the-playbook-studio-edition/</loc><lastmod>2026-10-02</lastmod><changefreq>monthly</changefreq></url>
   <url><loc>https://koalstingkdelaney-gif.github.io/kestrelattice/products/ai-agent-risk-audit-kit/</loc><lastmod>2026-10-02</lastmod><changefreq>monthly</changefreq></url>
   <url><loc>https://koalstingkdelaney-gif.github.io/kestrelattice/products/agent-incident-response-runbook/</loc><lastmod>2026-10-02</lastmod><changefreq>monthly</changefreq></url>
@@ -104,7 +104,7 @@
   <url><loc>https://koalstingkdelaney-gif.github.io/kestrelattice/products/denied-action-log-template-pack/</loc><lastmod>2026-10-02</lastmod><changefreq>monthly</changefreq></url>
   <url><loc>https://koalstingkdelaney-gif.github.io/kestrelattice/products/emergency-override-exception-template/</loc><lastmod>2026-10-02</lastmod><changefreq>monthly</changefreq></url>
   <url><loc>https://koalstingkdelaney-gif.github.io/kestrelattice/products/customer-facing-incident-runbook-excerpt/</loc><lastmod>2026-10-02</lastmod><changefreq>monthly</changefreq></url>
-  <url><loc>https://koalstingkdelaney-gif.github.io/kestrelattice/quiz/</loc><lastmod>2026-10-01</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://koalstingkdelaney-gif.github.io/kestrelattice/quiz/</loc><lastmod>2026-10-02</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://koalstingkdelaney-gif.github.io/kestrelattice/products/monthly-fleet-spend-forecast-calculator/</loc><lastmod>2026-10-02</lastmod><changefreq>monthly</changefreq></url>
   <url><loc>https://koalstingkdelaney-gif.github.io/kestrelattice/products/ai-model-rotation-policy-one-pager/</loc><lastmod>2026-10-02</lastmod><changefreq>monthly</changefreq></url>
   <url><loc>https://koalstingkdelaney-gif.github.io/kestrelattice/products/incident-communication-template-pack/</loc><lastmod>2026-10-02</lastmod><changefreq>monthly</changefreq></url>
@@ -113,13 +113,13 @@
   <url><loc>https://koalstingkdelaney-gif.github.io/kestrelattice/products/grant-issuance-audit-template/</loc><lastmod>2026-10-02</lastmod><changefreq>monthly</changefreq></url>
   <url><loc>https://koalstingkdelaney-gif.github.io/kestrelattice/products/ai-model-provider-vendor-scorecard/</loc><lastmod>2026-10-02</lastmod><changefreq>monthly</changefreq></url>
   <url><loc>https://koalstingkdelaney-gif.github.io/kestrelattice/products/human-in-the-loop-policy-one-pager/</loc><lastmod>2026-10-02</lastmod><changefreq>monthly</changefreq></url>
-  <url><loc>https://koalstingkdelaney-gif.github.io/kestrelattice/articles/eu-ai-act-agent-evidence-checklist.html</loc><lastmod>2026-10-01</lastmod><changefreq>monthly</changefreq></url>
-  <url><loc>https://koalstingkdelaney-gif.github.io/kestrelattice/articles/us-state-ai-laws-agents-2026.html</loc><lastmod>2026-10-01</lastmod><changefreq>monthly</changefreq></url>
-  <url><loc>https://koalstingkdelaney-gif.github.io/kestrelattice/articles/selling-ai-products-to-europe.html</loc><lastmod>2026-10-01</lastmod><changefreq>monthly</changefreq></url>
+  <url><loc>https://koalstingkdelaney-gif.github.io/kestrelattice/articles/eu-ai-act-agent-evidence-checklist.html</loc><lastmod>2026-10-02</lastmod><changefreq>monthly</changefreq></url>
+  <url><loc>https://koalstingkdelaney-gif.github.io/kestrelattice/articles/us-state-ai-laws-agents-2026.html</loc><lastmod>2026-10-02</lastmod><changefreq>monthly</changefreq></url>
+  <url><loc>https://koalstingkdelaney-gif.github.io/kestrelattice/articles/selling-ai-products-to-europe.html</loc><lastmod>2026-10-02</lastmod><changefreq>monthly</changefreq></url>
   <url><loc>https://koalstingkdelaney-gif.github.io/kestrelattice/es/</loc><lastmod>2026-10-01</lastmod></url>
   <url><loc>https://koalstingkdelaney-gif.github.io/kestrelattice/pt/</loc><lastmod>2026-10-01</lastmod></url>
-  <url><loc>https://koalstingkdelaney-gif.github.io/kestrelattice/articles/ai-agent-policy-templates-what-to-include.html</loc><lastmod>2026-10-01</lastmod><changefreq>monthly</changefreq></url>
-  <url><loc>https://koalstingkdelaney-gif.github.io/kestrelattice/articles/ley-ia-ue-lista-verificacion-agentes.html</loc><lastmod>2026-10-01</lastmod><changefreq>monthly</changefreq></url>
+  <url><loc>https://koalstingkdelaney-gif.github.io/kestrelattice/articles/ai-agent-policy-templates-what-to-include.html</loc><lastmod>2026-10-02</lastmod><changefreq>monthly</changefreq></url>
+  <url><loc>https://koalstingkdelaney-gif.github.io/kestrelattice/articles/ley-ia-ue-lista-verificacion-agentes.html</loc><lastmod>2026-10-02</lastmod><changefreq>monthly</changefreq></url>
   <url><loc>https://koalstingkdelaney-gif.github.io/kestrelattice/products/external-outreach-policy-one-pager/</loc><lastmod>2026-10-02</lastmod><changefreq>monthly</changefreq></url>
   <url><loc>https://koalstingkdelaney-gif.github.io/kestrelattice/products/grant-expiry-enforcement-template-pack/</loc><lastmod>2026-10-02</lastmod><changefreq>monthly</changefreq></url>
   <url><loc>https://koalstingkdelaney-gif.github.io/kestrelattice/products/the-boardroom-briefing-pack/</loc><lastmod>2026-10-02</lastmod><changefreq>monthly</changefreq></url>
@@ -174,7 +174,7 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://koalstingkdelaney-gif.github.io/kestrelattice/ecosystem/</loc><lastmod>2026-10-01</lastmod>
+    <loc>https://koalstingkdelaney-gif.github.io/kestrelattice/ecosystem/</loc><lastmod>2026-10-02</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -198,7 +198,7 @@
   <url><loc>https://koalstingkdelaney-gif.github.io/kestrelattice/products/agent-egress-allowlist-checklist/</loc><lastmod>2026-10-02</lastmod><changefreq>monthly</changefreq></url>
   <url><loc>https://koalstingkdelaney-gif.github.io/kestrelattice/products/agent-fleet-tco-calculator/</loc><lastmod>2026-10-02</lastmod><changefreq>monthly</changefreq></url>
   <url><loc>https://koalstingkdelaney-gif.github.io/kestrelattice/products/incident-postmortem-template-pack/</loc><lastmod>2026-10-02</lastmod><changefreq>monthly</changefreq></url>
-  <url><loc>https://koalstingkdelaney-gif.github.io/kestrelattice/brands/</loc><lastmod>2026-10-01</lastmod></url>
+  <url><loc>https://koalstingkdelaney-gif.github.io/kestrelattice/brands/</loc><lastmod>2026-10-02</lastmod></url>
   <url><loc>https://koalstingkdelaney-gif.github.io/kestrelattice/brands/incidentlattice/</loc><lastmod>2026-10-01</lastmod></url>
   <url><loc>https://koalstingkdelaney-gif.github.io/kestrelattice/brands/supportwarden/</loc><lastmod>2026-10-01</lastmod></url>
   <url><loc>https://koalstingkdelaney-gif.github.io/kestrelattice/brands/classwarden/</loc><lastmod>2026-10-01</lastmod></url>
@@ -309,9 +309,9 @@
   <url><loc>https://koalstingkdelaney-gif.github.io/kestrelattice/products/job-description-neutrality-checklist/</loc><lastmod>2026-10-02</lastmod><changefreq>monthly</changefreq></url>
   <url><loc>https://koalstingkdelaney-gif.github.io/kestrelattice/products/candidate-notice-templates/</loc><lastmod>2026-10-02</lastmod><changefreq>monthly</changefreq></url>
   <url><loc>https://koalstingkdelaney-gif.github.io/kestrelattice/products/interview-record-retention-pack/</loc><lastmod>2026-10-02</lastmod><changefreq>monthly</changefreq></url>
-  <url><loc>https://koalstingkdelaney-gif.github.io/kestrelattice/articles/ai-agent-vendor-risk-assessment.html</loc><lastmod>2026-10-01</lastmod><changefreq>monthly</changefreq></url>
-  <url><loc>https://koalstingkdelaney-gif.github.io/kestrelattice/articles/ai-agent-incident-response-plan.html</loc><lastmod>2026-10-01</lastmod><changefreq>monthly</changefreq></url>
-  <url><loc>https://koalstingkdelaney-gif.github.io/kestrelattice/articles/ai-agent-audit-log-schema-retention.html</loc><lastmod>2026-10-01</lastmod><changefreq>monthly</changefreq></url>
+  <url><loc>https://koalstingkdelaney-gif.github.io/kestrelattice/articles/ai-agent-vendor-risk-assessment.html</loc><lastmod>2026-10-02</lastmod><changefreq>monthly</changefreq></url>
+  <url><loc>https://koalstingkdelaney-gif.github.io/kestrelattice/articles/ai-agent-incident-response-plan.html</loc><lastmod>2026-10-02</lastmod><changefreq>monthly</changefreq></url>
+  <url><loc>https://koalstingkdelaney-gif.github.io/kestrelattice/articles/ai-agent-audit-log-schema-retention.html</loc><lastmod>2026-10-02</lastmod><changefreq>monthly</changefreq></url>
   <url><loc>https://koalstingkdelaney-gif.github.io/kestrelattice/brands/actlattice/articles/eu-ai-act-deployer-duties-explained.html</loc><lastmod>2026-10-01</lastmod></url>
   <url><loc>https://koalstingkdelaney-gif.github.io/kestrelattice/brands/civicwarden/articles/public-sector-ai-audit-trail-citizens-trust.html</loc><lastmod>2026-10-01</lastmod></url>
   <url><loc>https://koalstingkdelaney-gif.github.io/kestrelattice/brands/classwarden/articles/classroom-ai-agent-policy-guide.html</loc><lastmod>2026-10-01</lastmod></url>
@@ -345,7 +345,7 @@
   <url><loc>https://koalstingkdelaney-gif.github.io/kestrelattice/products/ai-deployer-obligation-checklist/</loc><lastmod>2026-10-02</lastmod><changefreq>monthly</changefreq></url>
   <url><loc>https://koalstingkdelaney-gif.github.io/kestrelattice/products/ai-act-transparency-disclosure-pack/</loc><lastmod>2026-10-02</lastmod><changefreq>monthly</changefreq></url>
   <url><loc>https://koalstingkdelaney-gif.github.io/kestrelattice/products/voice-agent-governance-complete-pack-collection/</loc><lastmod>2026-10-02</lastmod><changefreq>monthly</changefreq></url>
-  <url><loc>https://koalstingkdelaney-gif.github.io/kestrelattice/articles/ai-agent-approval-workflow.html</loc><lastmod>2026-10-01</lastmod><changefreq>monthly</changefreq></url>
+  <url><loc>https://koalstingkdelaney-gif.github.io/kestrelattice/articles/ai-agent-approval-workflow.html</loc><lastmod>2026-10-02</lastmod><changefreq>monthly</changefreq></url>
   <url><loc>https://koalstingkdelaney-gif.github.io/kestrelattice/products/tamper-evident-agent-audit-logger-python/</loc><lastmod>2026-10-02</lastmod><changefreq>monthly</changefreq></url>
   <url><loc>https://koalstingkdelaney-gif.github.io/kestrelattice/products/support-ticket-triage-classifier-python/</loc><lastmod>2026-10-02</lastmod><changefreq>monthly</changefreq></url>
   <url><loc>https://koalstingkdelaney-gif.github.io/kestrelattice/products/pii-phi-redaction-tool-python/</loc><lastmod>2026-10-02</lastmod><changefreq>monthly</changefreq></url>
@@ -389,4 +389,6 @@
   <url><loc>https://koalstingkdelaney-gif.github.io/kestrelattice/products/oversight-board-briefing-kit/</loc><lastmod>2026-10-02</lastmod><changefreq>monthly</changefreq></url>
   <url><loc>https://koalstingkdelaney-gif.github.io/kestrelattice/products/agency-wide-deployment-mega-kit/</loc><lastmod>2026-10-02</lastmod><changefreq>monthly</changefreq></url>
   <url><loc>https://koalstingkdelaney-gif.github.io/kestrelattice/products/multi-department-governance-bundle/</loc><lastmod>2026-10-02</lastmod><changefreq>monthly</changefreq></url>
+  <url><loc>https://koalstingkdelaney-gif.github.io/kestrelattice/products/audit-foia-readiness-pack/</loc><lastmod>2026-10-02</lastmod><changefreq>monthly</changefreq></url>
+  <url><loc>https://koalstingkdelaney-gif.github.io/kestrelattice/products/legislative-briefing-templates/</loc><lastmod>2026-10-02</lastmod><changefreq>monthly</changefreq></url>
 </urlset>
