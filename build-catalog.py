@@ -155,6 +155,7 @@ nav.main a:not(:last-child){display:none}footer.site .wrap{justify-content:cente
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
+<a class="skip" href="#filters" id="skip-filters">Skip to filters</a>
 <header class="site"><div class="wrap">
 <a class="logo" href="../">
 <svg width="24" height="24" viewBox="0 0 26 26" fill="none" aria-hidden="true"><circle cx="5" cy="6" r="2.4" fill="#e07a5f"/><circle cx="21" cy="6" r="2.4" fill="#e07a5f"/><circle cx="13" cy="13" r="2.4" fill="#e07a5f"/><circle cx="5" cy="20" r="2.4" fill="#e07a5f"/><circle cx="21" cy="20" r="2.4" fill="#e07a5f"/><path d="M6.6 7.4L11.2 11.8M19.4 7.4L14.8 11.8M6.6 18.6L11.2 14.2M19.4 18.6L14.8 14.2" stroke="#e07a5f" stroke-width="1.4"/></svg>
@@ -167,7 +168,7 @@ ghostcorpnet</a>
 <p class="lede sub">Agent governance playbooks, kits and runbooks</p>
 <p class="lede">Every self-serve product in the ghostcorpnet library — playbooks, checklists, runbooks, kits, and working code for governing AI agents. Buy once, download instantly, yours forever.</p>
 </div>
-<div class="wrap"><p class="result-count" id="result-count" aria-live="polite">__COUNT__</p><div class="catalog-search-row"><label for="catalog-search" class="visually-hidden">Search products</label><input id="catalog-search" type="search" autocomplete="off" spellcheck="false" enterkeyhint="search" aria-keyshortcuts="/" placeholder="Search products… ( / )"><kbd class="search-kbd" aria-hidden="true">/</kbd></div><div class="sort-row"><label for="catalog-sort" class="sort-label">Sort:</label><select id="catalog-sort" aria-label="Sort products"><option value="new">Newest</option><option value="lo">Price: low to high</option><option value="hi">Price: high to low</option></select></div><p class="tier-legend">9 Starter · 9 Core · 9–99 Premium</p><div class="filters" id="filters" role="region" aria-label="Filter products" aria-describedby="filters-note" data-collapsed="false"><button type="button" class="filters-toggle" aria-expanded="true" aria-controls="filters-list"><span>Filter products</span><span class="ft-chev" aria-hidden="true">▾</span></button><div class="filters-list" id="filters-list"></div></div><p class="visually-hidden" id="filters-note">Choosing filters updates the product count announced by the results region.</p></div>
+<div class="wrap"><p class="result-count" id="result-count" aria-live="polite">__COUNT__</p><div class="catalog-search-row"><label for="catalog-search" class="visually-hidden">Search products</label><input id="catalog-search" type="search" autocomplete="off" spellcheck="false" enterkeyhint="search" aria-keyshortcuts="/" placeholder="Search products… ( / )"><kbd class="search-kbd" aria-hidden="true">/</kbd></div><div class="sort-row"><label for="catalog-sort" class="sort-label">Sort:</label><select id="catalog-sort" aria-label="Sort products"><option value="new">Newest</option><option value="lo">Price: low to high</option><option value="hi">Price: high to low</option></select></div><p class="tier-legend">9 Starter · 9 Core · 9–99 Premium</p><div class="filters" id="filters" role="region" tabindex="-1" aria-label="Filter products" aria-describedby="filters-note" data-collapsed="false"><button type="button" class="filters-toggle" aria-expanded="true" aria-controls="filters-list"><span>Filter products</span><span class="ft-chev" aria-hidden="true">▾</span></button><div class="filters-list" id="filters-list"></div></div><p class="visually-hidden" id="filters-note">Choosing filters updates the product count announced by the results region.</p></div>
 <div class="wrap"><div class="grid" id="grid">
 __CARDS__
 </div><div class="reveal-row"><button class="btn ghost" id="show-more" type="button">Show more</button></div><div id="no-results" role="status"><p>No products match — try different keywords or filters</p><p><button class="chip" id="clear-filters" type="button" style="margin-top:12px">Clear filters</button></p></div></div>
@@ -196,6 +197,7 @@ filtersList.appendChild(mk('All',''));
 tags.forEach(t=>filtersList.appendChild(mk(t.replace(/-/g,' '),t)));
 const fToggle=filters.querySelector('.filters-toggle');
 if(fToggle){fToggle.addEventListener('click',()=>{const c=filters.dataset.collapsed!=='true';filters.dataset.collapsed=String(c);fToggle.setAttribute('aria-expanded',String(!c));});}
+const skipF=document.getElementById('skip-filters');if(skipF){skipF.addEventListener('click',()=>{filters.focus({preventScroll:true})});}
 const sq=document.getElementById('catalog-search');
 if(sq&&searchQ)sq.value=searchQ;
 const smBtn=document.getElementById('show-more');
@@ -349,6 +351,17 @@ def main():
                f'imagesrcset="../assets/covers/{html.escape(first_pid)}.webp" '
                f'imagesizes="(max-width:640px) 100vw, (max-width:1100px) 50vw, 320px">') if first_pid else ""
     page = PAGE.replace("__PRELOAD__", preload).replace("__ITEMLIST__", json.dumps(itemlist, ensure_ascii=False, indent=2))
+    # tier legend computed from live product data — never hardcoded
+    n_free = sum(1 for p in prods if float(p["price"]) == 0)
+    n_starter = sum(1 for p in prods if 19 <= float(p["price"]) <= 29)
+    n_core = sum(1 for p in prods if 30 <= float(p["price"]) <= 49)
+    n_premium = sum(1 for p in prods if float(p["price"]) >= 50)
+    tier_legend = f"{n_starter} Starter · {n_core} Core · {n_premium} Premium"
+    if n_free:
+        tier_legend += f" · {n_free} Free"
+    import re as _re
+    page = _re.sub(r'<p class="tier-legend">.*?</p>',
+                  f'<p class="tier-legend">{tier_legend}</p>', page, count=1)
     with open(os.path.join(outdir, "index.html"), "w") as f:
         f.write(page.replace("__CARDS__", "\n".join(cards)).replace("__COUNT__", f"{len(prods)} products"))
 

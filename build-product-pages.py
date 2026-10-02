@@ -445,8 +445,9 @@ gtag('config', 'G-541TCHWW98');
   ul.clean li:before{{content:"✓";color:var(--accent);position:absolute;left:0;font-weight:700}}
   .rel{{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:16px}}
   .rel a{{background:var(--panel);border:1px solid var(--line);border-radius:10px;
-          padding:18px;color:var(--text);text-decoration:none;display:block}}
-  .rel a:hover{{border-color:var(--accent)}}
+          padding:18px;color:var(--text);text-decoration:none;display:block;
+          transition:transform .18s ease,box-shadow .18s ease}}
+  .rel a:hover{{border-color:var(--accent);transform:translateY(-3px);box-shadow:0 14px 34px rgba(0,0,0,.4)}}
   .rel .rp{{color:var(--accent);font-weight:700;margin-top:8px}}
   .faq p{{color:var(--muted);margin-bottom:16px}}
   .faq strong{{color:var(--text)}}
