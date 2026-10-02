@@ -357,7 +357,7 @@ def main():
     n_starter = sum(1 for p in prods if 19 <= float(p["price"]) <= 29)
     n_core = sum(1 for p in prods if 30 <= float(p["price"]) <= 49)
     n_premium = sum(1 for p in prods if float(p["price"]) >= 50)
-    tier_legend = f"{n_starter} Starter · {n_core} Core · {n_premium} Premium"
+    tier_legend = f"Full catalog: {n_starter} Starter · {n_core} Core · {n_premium} Premium"
     if n_mini:
         tier_legend += f" · {n_mini} Mini"
     if n_free:
