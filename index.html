@@ -92,7 +92,7 @@
   <div class="hero wrap" id="top">
     <div class="glow" aria-hidden="true"></div>
     <span class="pill">Governed agent mesh · by GhostCorp</span>
-    <h1>AI swarms are useful until nobody can tell what they <em>did</em>, <em>spent</em>, or were <em>allowed</em> to do.</h1>
+    <h1>Know what your AI agents <em>do</em>, <em>spend</em>, and <em>touch</em>.</h1>
     <p class="sub">Ship AI agents your auditors, finance team, and on-call rotation can trust &mdash; the governed-agent playbook: identity, spend limits, approval gates, and audit trails for teams shipping AI agents to production.</p>
     <div class="cta-row">
       <a class="btn primary" href="playbook.md" data-track="playbook_download" aria-describedby="hero-fineprint">Get the free playbook</a>
@@ -259,27 +259,27 @@
         <p class="lede">The short version of everything buyers ask before the $29.</p>
       </div>
       <details class="faq" id="faq-q1" name="faq" open data-track="faq_open" itemscope itemtype="https://schema.org/Question">
-        <summary itemprop="name">Is the free playbook really free?<a class="faq-anchor" href="#faq-q1" aria-label="Link to this answer">Link to this answer</a></summary>
+        <summary itemprop="name">Is the free playbook really free?<a class="faq-anchor" href="#faq-q1" aria-label="Link to this answer" aria-hidden="true" tabindex="-1">Link to this answer</a></summary>
         <p itemprop="acceptedAnswer" itemscope itemtype="https://schema.org/Answer"><span itemprop="text">Yes. It's MIT-licensed open source. Download it with no email signup, no account, and no upsell required to read every word.</span></p>
       </details>
       <details class="faq" id="faq-q2" name="faq" data-track="faq_open" itemscope itemtype="https://schema.org/Question">
-        <summary itemprop="name">What exactly do I get in the Studio Edition?<a class="faq-anchor" href="#faq-q2" aria-label="Link to this answer">Link to this answer</a></summary>
+        <summary itemprop="name">What exactly do I get in the Studio Edition?<a class="faq-anchor" href="#faq-q2" aria-label="Link to this answer" aria-hidden="true" tabindex="-1">Link to this answer</a></summary>
         <p itemprop="acceptedAnswer" itemscope itemtype="https://schema.org/Answer"><span itemprop="text">A 20-page PDF: six fill-in policy templates, plan-bound and audit-row JSON schemas with validation rules, an 8-vendor pricing and governance matrix, a risk-tier classification worksheet, a day-by-day 14-day rollout with acceptance criteria, and a first-customer kit with outreach templates.</span></p>
       </details>
       <details class="faq" id="faq-q3" name="faq" data-track="faq_open" itemscope itemtype="https://schema.org/Question">
-        <summary itemprop="name">How do I receive it after paying?<a class="faq-anchor" href="#faq-q3" aria-label="Link to this answer">Link to this answer</a></summary>
+        <summary itemprop="name">How do I receive it after paying?<a class="faq-anchor" href="#faq-q3" aria-label="Link to this answer" aria-hidden="true" tabindex="-1">Link to this answer</a></summary>
         <p itemprop="acceptedAnswer" itemscope itemtype="https://schema.org/Answer"><span itemprop="text">Checkout runs through a secure payment session. After payment completes, you get an instant download link for the PDF — no waiting, no account needed.</span></p>
       </details>
       <details class="faq" id="faq-q4" name="faq" data-track="faq_open" itemscope itemtype="https://schema.org/Question">
-        <summary itemprop="name">What if it doesn't help me?<a class="faq-anchor" href="#faq-q4" aria-label="Link to this answer">Link to this answer</a></summary>
+        <summary itemprop="name">What if it doesn't help me?<a class="faq-anchor" href="#faq-q4" aria-label="Link to this answer" aria-hidden="true" tabindex="-1">Link to this answer</a></summary>
         <p itemprop="acceptedAnswer" itemscope itemtype="https://schema.org/Answer"><span itemprop="text">Every product page shows exactly what's inside before you pay — the full table of contents, page count, and what's not included. If a file ever fails to download, Gumroad's support can re-issue your link.</span></p>
       </details>
       <details class="faq" id="faq-q5" name="faq" data-track="faq_open" itemscope itemtype="https://schema.org/Question">
-        <summary itemprop="name">Who is this for?<a class="faq-anchor" href="#faq-q5" aria-label="Link to this answer">Link to this answer</a></summary>
+        <summary itemprop="name">Who is this for?<a class="faq-anchor" href="#faq-q5" aria-label="Link to this answer" aria-hidden="true" tabindex="-1">Link to this answer</a></summary>
         <p itemprop="acceptedAnswer" itemscope itemtype="https://schema.org/Answer"><span itemprop="text">Venture studios, AI-native founders, and platform teams shipping multi-agent systems to production — anyone whose agents touch money, data, or external systems.</span></p>
       </details>
       <details class="faq" id="faq-q6" name="faq" data-track="faq_open" itemscope itemtype="https://schema.org/Question">
-        <summary itemprop="name">Do I need to read the free playbook first?<a class="faq-anchor" href="#faq-q6" aria-label="Link to this answer">Link to this answer</a></summary>
+        <summary itemprop="name">Do I need to read the free playbook first?<a class="faq-anchor" href="#faq-q6" aria-label="Link to this answer" aria-hidden="true" tabindex="-1">Link to this answer</a></summary>
         <p itemprop="acceptedAnswer" itemscope itemtype="https://schema.org/Answer"><span itemprop="text">No. The Studio Edition is self-contained. The free playbook is a good preview of the approach if you want to try before you buy.</span></p>
       </details>
     </div>
@@ -358,7 +358,8 @@
   t.addEventListener('click',function(){var open=n.classList.toggle('open');
   t.setAttribute('aria-expanded',String(open));t.setAttribute('aria-label',open?'Close menu':'Open menu');
   if(open){document.addEventListener('keydown',onKey,true);var f=n.querySelector('a[href],button');if(f)f.focus();}
-  else{closeMenu();}});})();
+  else{closeMenu();}});
+  n.addEventListener('click',function(e){if(e.target.closest('a'))closeMenu();});})();
   // Sticky header shrink: toggle `compact` class on the site header past ~80px scroll (passive).
   (function(){var h=document.querySelector('header.site');if(!h)return;
   var onScroll=function(){h.classList.toggle('compact',window.scrollY>80);};

@@ -35,8 +35,9 @@ gtag('config', 'G-541TCHWW98');
   .opt:hover{border-color:var(--accent)}
   .opt:active{transform:scale(.97);background:var(--panel2)}
   .opt.sel{border-color:var(--accent);background:#241f1a}
-  .prog{height:6px;background:var(--line);border-radius:3px;margin-bottom:24px;overflow:hidden}
+  .prog{height:6px;background:var(--line);border-radius:3px;margin-bottom:4px;overflow:hidden}
   .prog div{height:100%;background:var(--accent);width:0;transition:width .3s}
+  .q-count{font-size:.82rem;color:var(--muted);margin:0 0 18px;text-align:right}
   #result{display:none}
   .tier{font-size:1.4rem;font-weight:700;color:var(--accent);margin:12px 0}
   .rec{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:18px;margin:12px 0}
@@ -63,6 +64,7 @@ gtag('config', 'G-541TCHWW98');
     <h1>What's your agent risk tier?</h1>
     <p class="sub">5 questions, 60 seconds. Get your tier and the exact products that close your biggest gaps.</p>
     <div class="prog" role="progressbar" aria-label="Quiz progress" aria-valuemin="0" aria-valuemax="5" aria-valuenow="0"><div id="bar"></div></div>
+    <p class="q-count" aria-hidden="true">Question <span id="qnum">1</span> of 5</p>
     <div id="qbox"></div>
     <noscript>
       <div class="q-fallback">
@@ -142,6 +144,7 @@ const prog = document.querySelector('.prog');
 function render(){
   bar.style.width = (qi/Q.length*100)+'%';
   if(prog) prog.setAttribute('aria-valuenow', Math.min(qi, Q.length));
+  var qn=document.getElementById('qnum'); if(qn) qn.textContent=Math.min(qi+1, Q.length);
   if(qi >= Q.length){ finish(); return; }
   const q = Q[qi];
   qbox.innerHTML = '<fieldset class="q"><legend><h3>'+(qi+1)+'. '+q.t+'</h3></legend>'+
