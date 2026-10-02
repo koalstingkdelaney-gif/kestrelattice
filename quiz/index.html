@@ -164,6 +164,8 @@ function render(){
     if(typeof v === 'number') score += v; else worry = v;
     qi++; render();
   });
+  var h2 = qbox.querySelector('h3');
+  if(h2){ h2.setAttribute('tabindex','-1'); h2.focus(); }
 }
 function restart(){
   qi = 0; score = 0; worry = "start";
