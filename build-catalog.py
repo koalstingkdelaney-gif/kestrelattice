@@ -236,8 +236,8 @@ b.addEventListener('click',function(){window.scrollTo({top:0,behavior:'smooth'})
 """
 
 CARD = """<div class="card{reveal}" data-tags="{tags}" data-price="{price_num}" data-date="{pdate}">
-<a href="{slug}/" style="text-decoration:none;color:inherit;display:block" aria-label="{title} — ${price}"><picture><source type="image/webp" srcset="../assets/covers/{pid}.webp"><img src="../assets/covers/{pid}.png" alt="{title} cover" {img_attrs} decoding="async" sizes="(max-width:640px) 100vw, (max-width:1100px) 50vw, 320px"></picture>
-<div class="body">{badge}{newbadge}<span class="dlbadge">DIGITAL DOWNLOAD</span><h2 translate="no">{title}</h2><p class="desc">{tagline}</p><p class="price"><span class="visually-hidden">USD </span><span translate="no"><span aria-hidden="true">$</span>{price}</span> <span style="color:var(--muted);font-weight:400;font-size:.85rem">one-time</span></p></div></a>
+<a href="{slug}/" style="text-decoration:none;color:inherit;display:block" aria-label="{title} — {price_label}"><picture><source type="image/webp" srcset="../assets/covers/{pid}.webp"><img src="../assets/covers/{pid}.png" alt="{title} cover" {img_attrs} decoding="async" sizes="(max-width:640px) 100vw, (max-width:1100px) 50vw, 320px"></picture>
+<div class="body">{badge}{newbadge}<span class="dlbadge">DIGITAL DOWNLOAD</span><h2 translate="no">{title}</h2><p class="desc">{tagline}</p><p class="price"><span class="visually-hidden">USD </span>{price_html}</p></div></a>
 <div class="row"><a class="btn" href="{url}" target="_blank" rel="noopener">Get it</a><a class="btn ghost" href="{slug}/">Details</a></div>
 <p class="trust">Instant delivery via Gumroad</p>
 </div>
@@ -309,12 +309,17 @@ def main():
         badge = '<span class="codebadge">CODE</span>' if "code" in ptaglist else ""
         newbadge = '<span class="badge-new">New</span>' if is_new(p, datemap) else ""
         reveal = "" if n <= 40 else " hidden reveal-capped"
+        _fmt = fmt_price(p["price"])
+        _is_free = float(p["price"]) == 0
         cards.append(CARD.format(
             reveal=reveal,
             pid=html.escape(pid),
             title=html.escape(p["title"]),
             tagline=html.escape(fix_tagline(p.get("tagline", ""))),
-            price=fmt_price(p["price"]),
+            price_label="Free" if _is_free else "$" + _fmt,
+            price_html='<span translate="no">Free</span>' if _is_free else (
+                '<span translate="no"><span aria-hidden="true">$</span>' + html.escape(_fmt) +
+                '</span> <span style="color:var(--muted);font-weight:400;font-size:.85rem">one-time</span>'),
             price_num=float(p["price"]),
             pdate=html.escape(pdate(p, datemap)),
             url=f"https://koalstin.gumroad.com/l/{html.escape(pid)}",

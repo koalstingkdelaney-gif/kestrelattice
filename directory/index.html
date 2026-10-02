@@ -63,7 +63,7 @@ gtag('config', 'G-541TCHWW98');
   .studio-pill.community{color:var(--muted);border-color:var(--line);background:transparent}
   .card h2{font-size:1.12rem;margin-bottom:4px}
   .card .by{color:var(--faint);font-size:.85rem;margin-bottom:10px}
-  .card p.desc{color:var(--muted);font-size:.92rem;margin-bottom:14px}
+  .card p.desc{color:var(--muted);font-size:.92rem;margin-bottom:14px;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
   .card .meta{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:16px}
   .tag{font-size:.75rem;color:var(--muted);border:1px solid var(--line);border-radius:6px;padding:3px 9px}
   .tag.publish{color:var(--accent-bright);border-color:var(--accent-dim);background:var(--accent-soft);
@@ -235,7 +235,7 @@ function fleetCard(p){
     ? '<span class="tag publish">publishing — live soon</span>'
     : '<a class="btn" href="' + esc(safeUrl(p.gumroad_url)) + '">Get this pack · $' + esc(p.price_usd) + '</a>';
   const details = site ? ' <a class="det" href="../' + site + '">Details →</a>' : "";
-  const meta = '<span class="tag">Pack Standard v1</span>' + '<span class="tag">' + (freePack ? "Free" : "$" + esc(p.price_usd) + " one-time") + '</span>' +
+  const meta = '<span class="tag">Pack Standard v1</span><span class="tag">PDF</span>' + '<span class="tag">' + (freePack ? "Free" : "$" + esc(p.price_usd) + " one-time") + '</span>' +
     (p.category ? '<span class="tag">' + esc(p.category) + '</span>' : "") +
     (p.license ? '<span class="tag">' + esc(p.license) + '</span>' : "") +
     (p.version ? '<span class="tag">v' + esc(p.version) + '</span>' : "");
@@ -257,7 +257,7 @@ function communityCard(p){
     '<h2>' + esc(p.pack_name) + '</h2>' +
     '<div class="by">by ' + esc(p.author) + '</div>' +
     '<p class="desc">' + esc(p.description) + '</p>' +
-    '<div class="meta"><span class="tag">Pack Standard v1</span><span class="tag">' + esc(p.license) + '</span>' + manifest + '</div>' +
+    '<div class="meta"><span class="tag">Pack Standard v1</span><span class="tag">PDF</span><span class="tag">' + esc(p.license) + '</span>' + manifest + '</div>' +
     '<a class="btn" href="' + esc(safeUrl(p.pack_url)) + '" rel="noopener">Get this pack</a>' +
     '</article>';
 }

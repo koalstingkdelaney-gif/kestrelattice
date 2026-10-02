@@ -563,6 +563,7 @@ def main():
             buy_html = (f'<p class="instant" id="buy-trust">One-time · Instant PDF download via Gumroad</p>\n'
                         f'      <a class="btn" href="{pr["gumroad_url"]}" target="_blank" rel="noopener" aria-label="Buy {esc(pr["title"])} for ${pr["price"]} (opens in new tab)" aria-describedby="buy-trust">Get it now — ${pr["price"]}</a>\n'
                         f'      <p class="trust">Secure checkout via Gumroad · <a style="color:var(--accent)" href="https://help.gumroad.com">buyer protection</a> · Single-user license · Instant delivery</p>\n'
+                        f'      <p class="trust">Lifetime access — yours forever in your Gumroad library</p>\n'
                         f'      <p class="notready">Not ready? <a href="../../playbook.md">Get the free MIT playbook</a> first.</p>')
         else:
             buy_html = ('<p class="instant">Publishing now — available shortly</p>\n'
