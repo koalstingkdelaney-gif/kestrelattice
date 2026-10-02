@@ -363,7 +363,7 @@ def next_step_block(pr, ladder):
         '  </section>')
 
 PAGE = """<!DOCTYPE html>
-<html lang="en">
+<html lang="en" dir="ltr">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">

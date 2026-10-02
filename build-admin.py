@@ -1480,7 +1480,7 @@ def build():
     panes_html = "\n".join(panes)
 
     doc = (
-        "<!DOCTYPE html><html lang='en'><head><meta charset='utf-8'>"
+        "<!DOCTYPE html><html lang='en' dir='ltr'><head><meta charset='utf-8'>"
         "<meta name='viewport' content='width=device-width,initial-scale=1,viewport-fit=cover'>"
         '<meta name="robots" content="noindex, nofollow">'
         '<meta name="theme-color" content="#101014">'

@@ -37,7 +37,7 @@ def fmt_price(p):
     return str(int(f)) if f.is_integer() else str(f)
 
 PAGE = """<!DOCTYPE html>
-<html lang="en">
+<html lang="en" dir="ltr">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
