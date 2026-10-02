@@ -972,7 +972,7 @@ def build():
     revenue = revenue_section(products)
     feed = activity_feed()
     tabs = [
-        ("taps", "\u26a1 Action Center"), ("overview", "Overview"), ("approvals", "Approvals"), ("outreach", "Outreach"),
+        ("overview", "Overview"), ("approvals", "Approvals"), ("outreach", "Outreach"),
         ("products", "Products"), ("drafts", "Drafts"), ("fleet", "Fleet"),
         ("extras", "Extras"),
     ]

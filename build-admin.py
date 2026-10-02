@@ -574,7 +574,7 @@ ul.feed li:last-child{border-bottom:0}
 """
 
 JS = """
-var App = {brand:'all', tab:'overview'};
+var App = {brand:'all', tab:'taps'};
 var BUILD_TS = 0;
 function toast(msg, ok){
   var box = document.getElementById('toasts');
@@ -585,7 +585,7 @@ function toast(msg, ok){
   setTimeout(function(){ t.classList.add('out'); setTimeout(function(){ t.remove(); }, 350); }, 2600);
 }
 function switchView(brand, tab){
-  if (['drafts','fleet','hive','captain','extras'].indexOf(tab) >= 0) brand = 'all';
+  if (['drafts','fleet','hive','captain','extras','taps'].indexOf(tab) >= 0) brand = 'all';
   App.brand = brand; App.tab = tab;
   document.querySelectorAll('.bpane').forEach(function(p){
     p.classList.toggle('on', p.id === 'pane-' + brand + '-' + tab);
@@ -681,8 +681,9 @@ _SVG = {
     "hive": '<path d="M12 2l8 4.5v9L12 20l-8-4.5v-9L12 2z"/><circle cx="12" cy="12" r="2.5"/>',
     "extras": '<circle cx="5" cy="12" r="1.6" fill="currentColor" stroke="none"/><circle cx="12" cy="12" r="1.6" fill="currentColor" stroke="none"/><circle cx="19" cy="12" r="1.6" fill="currentColor" stroke="none"/>',
     "captain": '<circle cx="12" cy="12" r="9"/><path d="M12 3v3M12 18v3M3 12h3M18 12h3"/><circle cx="12" cy="12" r="2"/>',
+    "taps": '<path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>',
 }
-TABS = [("overview", "Overview"), ("captain", "Captain"), ("approvals", "Approvals"), ("outreach", "Outreach"),
+TABS = [("taps", "Action Center"), ("overview", "Overview"), ("captain", "Captain"), ("approvals", "Approvals"), ("outreach", "Outreach"),
         ("products", "Products"), ("drafts", "Drafts"), ("fleet", "Fleet"),
         ("hive", "Hive"), ("extras", "Extras")]
 
@@ -1338,6 +1339,10 @@ sentLoad();setInterval(sentLoad,20000);});
 
 def _all_panes(products, queue, entries, title_map, omap):
     p = {}
+    p["taps"] = (_sec("Live", "Action Center",
+                      "Everything that needs your tap, in one spot — refreshed every 5 seconds. "
+                      "Tapping Approve executes immediately; the fleet picks it up within ~15 minutes.")
+                 + S.action_center_section())
     p["overview"] = (
         '<div class="hero"><h1>ghostcorpnet admin</h1>'
         '<p class="lede">Every business, one command center. Pick a brand in the '
