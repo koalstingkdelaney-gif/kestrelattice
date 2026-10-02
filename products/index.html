@@ -3715,9 +3715,9 @@ nav.main a:hover{color:var(--accent-bright)}
 .chip.active{background:var(--accent);border-color:var(--accent);color:var(--accent-ink);font-weight:700}.chip:active{transform:scale(.96)}
 .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:24px;padding:8px 0 64px}
 .card{background:linear-gradient(180deg,var(--panel),var(--bg-soft));border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;display:flex;flex-direction:column;content-visibility:auto;contain-intrinsic-size:auto 480px;transition:border-color .18s var(--ease),transform .18s var(--ease),box-shadow .18s var(--ease)}.card{position:relative}.card>a:first-of-type::after{content:"";position:absolute;inset:0}.card .row .btn{position:relative;z-index:1}
-.card:hover{border-color:var(--accent-dim);transform:translateY(-3px);box-shadow:0 14px 34px rgba(0,0,0,.4)}
+@media (hover:hover){.card:hover{border-color:var(--accent-dim);transform:translateY(-3px);box-shadow:0 14px 34px rgba(0,0,0,.4)}}
 .card img{transition:transform .3s ease}
-.card:hover img{transform:scale(1.05)}
+@media (hover:hover){.card:hover img{transform:scale(1.05)}}
 @media (prefers-reduced-motion:reduce){.card:hover img{transform:none}}
 .card img{width:100%;aspect-ratio:4/3;object-fit:cover;display:block;background:#0b0a09}
 .card .body{padding:16px;display:flex;flex-direction:column;gap:7px;flex:1}
@@ -3731,7 +3731,7 @@ nav.main a:hover{color:var(--accent-bright)}
 #no-results.show{display:block}
 #no-results p{margin-bottom:6px}
 .card picture{display:block}
-.card h2{font-size:.98rem;line-height:1.35;font-weight:700;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}.card a h2{text-decoration-thickness:1px;text-underline-offset:3px}
+.card h2{font-size:.98rem;line-height:1.35;font-weight:700;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;text-wrap:balance}.card a h2{text-decoration-thickness:1px;text-underline-offset:3px}
 .price{color:var(--text);font-weight:800;font-variant-numeric:tabular-nums}
 .card p.desc{color:var(--muted);font-size:.85rem;flex:1}
 .card .row{display:flex;gap:10px;padding:0 16px 16px}

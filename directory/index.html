@@ -235,7 +235,7 @@ function fleetCard(p){
     ? '<span class="tag publish">publishing — live soon</span>'
     : '<a class="btn" href="' + esc(safeUrl(p.gumroad_url)) + '">Get this pack · $' + esc(p.price_usd) + '</a>';
   const details = site ? ' <a class="det" href="../' + site + '">Details →</a>' : "";
-  const meta = '<span class="tag">Pack Standard v1</span>' + '<span class="tag">' + (freePack ? "Free" : "$" + esc(p.price_usd)) + '</span>' +
+  const meta = '<span class="tag">Pack Standard v1</span>' + '<span class="tag">' + (freePack ? "Free" : "$" + esc(p.price_usd) + " one-time") + '</span>' +
     (p.category ? '<span class="tag">' + esc(p.category) + '</span>' : "") +
     (p.license ? '<span class="tag">' + esc(p.license) + '</span>' : "") +
     (p.version ? '<span class="tag">v' + esc(p.version) + '</span>' : "");
@@ -269,7 +269,7 @@ async function load(){
   // Source 1: statically deployed seed listings (pre-approved fleet packs).
   // This keeps the directory alive even if the worker deploy is blocked.
   try {
-    const r = await fetch("seed-listings.json", {cache: "no-store"});
+    const r = await fetch("seed-listings.json");
     if (r.ok) { const d = await r.json(); if (Array.isArray(d)) seeds = d; }
   } catch(e) { /* seed file not landed yet — fall through */ }
   // Source 2: approved third-party submissions from the worker KV.

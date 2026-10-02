@@ -169,8 +169,8 @@ var apply=function(mode){
   t.textContent=mode==='new'?'Newest first':'Oldest first';
   t.setAttribute('data-sort',mode);t.setAttribute('aria-pressed',mode==='new'?'true':'false');
 };
-t.addEventListener('click',function(){apply(t.getAttribute('data-sort')==='new'?'old':'new');});
-apply('new');})();
+t.addEventListener('click',function(){var m=t.getAttribute('data-sort')==='new'?'old':'new';apply(m);location.hash='sort='+m;});
+if(location.hash==='#sort=old')apply('old');else apply('new');})();
 </script>
 (function(){var b=document.getElementById('backtop');if(!b)return;
 function onScroll(){b.classList.toggle('show',window.scrollY>1200)}
