@@ -38,6 +38,82 @@ def page_lastmod(path):
         return datetime.date.today().isoformat()
 
 
+GOAL_DIR = os.path.expanduser("~/workspace/goals/kestrelattice-autonomous-growth")
+_ASSET_EXTS = {".pdf", ".xlsx", ".docx", ".mp3", ".html", ".zip", ".pptx", ".md", ".txt", ".csv"}
+
+
+def pdf_page_count(path):
+    """Real page count parsed from the PDF's own page tree; None when unreadable. Never invented."""
+    try:
+        with open(path, "rb") as f:
+            d = f.read(4000000)
+    except OSError:
+        return None
+    try:
+        # Primary: Catalog object -> its /Pages reference -> that object's /Count.
+        m = re.search(rb"(\d+)\s+0\s+obj\b.{0,600}?/Type\s*/Catalog", d, re.S)
+        if m:
+            seg = d[m.start():m.start() + 1500]
+            pm = re.search(rb"/Pages\s+(\d+)\s+0\s+R", seg)
+            if pm:
+                pn = pm.group(1)
+                om = re.search(rb"(?<![0-9])" + pn + rb"\s+0\s+obj\b", d)
+                if om:
+                    cm = re.search(rb"/Count\s+(\d+)", d[om.start():om.start() + 3000])
+                    if cm:
+                        return int(cm.group(1))
+        # Fallback: largest /Count on any /Pages (not /Page) node = root total.
+        counts = [int(x) for x in re.findall(rb"/Type\s*/Pages\b.{0,400}?/Count\s+(\d+)", d, re.S)]
+        return max(counts) if counts else None
+    except Exception:
+        return None
+
+
+def build_asset_index():
+    """Map filename stem -> full path for every deliverable asset under the goal. First hit wins.
+
+    Two passes: PDFs first (the actual Gumroad deliverable), then other formats fill
+    gaps — a stem with both a .md manuscript and a .pdf resolves to the PDF."""
+    idx = {}
+    roots = (os.path.join(GOAL_DIR, "hidden_files", "approvals"),
+             os.path.join(GOAL_DIR, "hidden_files", "products"))
+    for pass_exts in ((".pdf",), tuple(e for e in _ASSET_EXTS if e != ".pdf")):
+        for root in roots:
+            for dirpath, _dirnames, filenames in os.walk(root):
+                for fn in filenames:
+                    stem, ext = os.path.splitext(fn)
+                    if ext.lower() in pass_exts and stem not in idx:
+                        idx[stem] = os.path.join(dirpath, fn)
+    return idx
+
+
+def file_facts_line(pr, pack_file_path, asset_idx):
+    """Small 'FORMAT · size · pages' line from the real asset; '' when no asset found (never guess)."""
+    path = None
+    if pack_file_path:
+        cand = pack_file_path if os.path.isabs(pack_file_path) else os.path.join(GOAL_DIR, pack_file_path)
+        if os.path.isfile(cand):
+            path = cand
+    if not path:
+        for key in (pr.get("slug", ""), pr.get("gid", "")):
+            if key and key in asset_idx:
+                path = asset_idx[key]
+                break
+    if not path:
+        return ""
+    try:
+        size = os.path.getsize(path)
+    except OSError:
+        return ""
+    ext = os.path.splitext(path)[1].lower().lstrip(".").upper() or "FILE"
+    size_s = f"{size / 1048576:.1f} MB" if size >= 1048576 else f"{max(1, round(size / 1024))} KB"
+    if ext == "PDF":
+        pages = pdf_page_count(path)
+        pages_s = f" · {pages} pages" if pages else ""
+        return f'<p class="file-facts">{ext} · {size_s}{pages_s}</p>'
+    return f'<p class="file-facts">{ext} · {size_s}</p>'
+
+
 def loc_to_file(loc):
     """Map a sitemap <loc> to its local file path; None if unknown."""
     if not loc.startswith(BASE_URL):
@@ -342,6 +418,7 @@ gtag('config', 'G-541TCHWW98');
   .tagline{{color:var(--muted);font-size:1.05rem;margin-bottom:20px}}
   .price{{font-size:1.6rem;color:var(--accent);font-weight:700;margin-bottom:6px}}
   .instant{{color:var(--muted);font-size:.85rem;margin-bottom:20px}}
+  .file-facts{{color:var(--muted);font-size:.85rem;margin:-12px 0 20px}}
   .facts{{display:flex;flex-wrap:wrap;gap:10px;margin:20px 0 4px}}
   .fact{{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:8px 14px;font-size:.86rem;color:var(--muted)}}
   .fact b{{color:var(--text)}}
@@ -396,6 +473,7 @@ gtag('config', 'G-541TCHWW98');
       <p class="tagline">{tagline}</p>
       <p class="price">${price} <span class="currency-note">Prices in USD</span></p>
       {buy_html}
+      {file_facts}
       <div class="facts">{facts_row}</div>
     </div>
   </div>
@@ -514,7 +592,8 @@ def main():
         products.append(dict(gid=gid, slug=slug, title=title,
                              price=fmt_price(p.get("price_usd", 19)), is_pack=is_pack,
                              tagline=fix_tagline(p.get("tagline", "")), description=p.get("description", ""),
-                             inside=inside, gumroad_url=url or None))
+                             inside=inside, gumroad_url=url or None,
+                             file_path=p.get("file_path") or None))
 
     # Pack Standard v1 aliases: the live /products/ catalog links the 10 studio
     # packs under slugified full titles (e.g. healthcare-ai-agent-governance-pack-meridian-studio).
@@ -530,6 +609,7 @@ def main():
 
     # render pages
     sm_entries = []
+    asset_idx = build_asset_index()
     for i, pr in enumerate(products):
         d = os.path.join(SITE, "products", pr["slug"])
         os.makedirs(d, exist_ok=True)
@@ -549,6 +629,7 @@ def main():
             facts.append('<span class="fact">Studio pack</span>')
         facts.append(f'<span class="fact"><b>{len(pr["inside"])}</b> sections inside</span>')
         facts_row = "\n      ".join(facts)
+        file_facts = file_facts_line(pr, pr.get("file_path"), asset_idx)
         cover_path = os.path.join(SITE, "assets", "covers", f"{pr['gid']}.png")
         dims = png_dims(cover_path) if os.path.isfile(cover_path) else None
         cover_img = (f'<img itemprop="image" src="../../assets/covers/{pr["gid"]}.png" alt="{esc(pr["title"])} cover"'
@@ -603,6 +684,7 @@ def main():
         page = PAGE.format(title=esc(pr["title"]), meta=esc(trunc_meta(pr["tagline"] or pr["description"])),
                            page_url=page_url, jsonld=jsonld, breadcrumblist=breadcrumblist, gid=pr["gid"], cover_img=cover_img,
                            tagline=esc(pr["tagline"]), price=pr["price"], buy_html=buy_html,
+                           file_facts=file_facts,
                            facts_row=facts_row,
                            gumroad_url=pr["gumroad_url"] or "", description=esc(pr["description"]),
                            inside_items=inside_items, related=related, bundle_upsell=upsell,
