@@ -161,7 +161,7 @@ nav.main a:not(:last-child){display:none}footer.site .wrap{justify-content:cente
 ghostcorpnet</a>
 <nav class="main" aria-label="Primary"><a href="../">Home</a><a href="../brands/">Stores</a><a href="../ecosystem/">Ecosystem</a><a href="../directory/">Directory</a><a href="../build/">Build</a><a href="../articles/">Articles</a><a href="../changelog.html">Changelog</a><a href="../#faq">FAQ</a></nav>
 </div></header>
-<main id="main">
+<main id="main" tabindex="-1">
 <div class="wrap hero">
 <h1>The Catalog</h1>
 <p class="lede sub">Agent governance playbooks, kits and runbooks</p>
