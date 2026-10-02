@@ -63,6 +63,20 @@ gtag('config', 'G-541TCHWW98');
     <p class="sub">5 questions, 60 seconds. Get your tier and the exact products that close your biggest gaps.</p>
     <div class="prog" role="progressbar" aria-label="Quiz progress" aria-valuemin="0" aria-valuemax="5" aria-valuenow="0"><div id="bar"></div></div>
     <div id="qbox"></div>
+    <noscript>
+      <div class="q-fallback">
+        <h3>This quiz needs JavaScript — here's the short version</h3>
+        <p>The quiz asks 5 questions: how many AI agents you run in production, the most sensitive thing an agent can touch, whether an agent ever surprised you, who reviews agent permissions, and your biggest worry (permissions sprawl, runaway costs, prompt injection, passing an audit, or not knowing where to start).</p>
+        <p>Based on your answers you'd land in one of four risk tiers:</p>
+        <ul>
+          <li><strong>Low — but don't drift:</strong> your exposure is contained today; lock in the basics so growth doesn't create surprises.</li>
+          <li><strong>Moderate — tighten the screws:</strong> real agents touching real systems; a few targeted controls cut most risk.</li>
+          <li><strong>High — act this quarter:</strong> broad access without formal review is how incidents happen — prioritize permissions and response.</li>
+          <li><strong>Critical — act this month:</strong> broad agent access plus incident history is the highest-risk combination — start with the full playbook.</li>
+        </ul>
+        <p><a href="../products/">Browse the catalog</a> — every product maps to a risk tier, starting with the free AI Agent Governance Starter Kit.</p>
+      </div>
+    </noscript>
   </div>
   <div id="result" role="status">
     <h1>Your result</h1>
@@ -160,7 +174,7 @@ function finish(tierOverride){
   document.getElementById('recs').innerHTML = picks.map(k=>{
     const p = PROD[k];
     const price = p.p === 0 ? 'Free' : '$'+p.p;
-    return '<div class="rec"><a href="../products/'+p.s+'/">'+p.n+'</a><p style="color:var(--muted);font-size:.9rem">'+p.d+'</p><div class="p">'+price+' — <a href="../products/'+p.s+'/" style="color:var(--accent)">Get it</a></div></div>';
+    return '<div class="rec"><a href="../products/'+p.s+'/?utm_source=quiz&utm_medium=recommendation/">'+p.n+'</a><p style="color:var(--muted);font-size:.9rem">'+p.d+'</p><div class="p">'+price+' — <a href="../products/'+p.s+'/?utm_source=quiz&utm_medium=recommendation/" style="color:var(--accent)">Get it</a></div></div>';
   }).join('');
   if(typeof gtag==='function') gtag('event','quiz_complete',{tier:TIERS[tier].t});
   try{history.replaceState(null,'','#result='+tier);}catch(e){}
