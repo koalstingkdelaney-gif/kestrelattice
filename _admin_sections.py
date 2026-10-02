@@ -51,6 +51,23 @@ HEALTH_WINDOWS = {
     "weekly": (240, 408),
     "monthly": (1080, 1800),
 }
+# koalstin's four teams — every bot belongs to exactly one. Charters live in
+# hidden_files/teams/. Rendered as cards at the top of the Fleet tab.
+TEAMS = [
+    ("Marketing", "Bring customers in.",
+     "outreach-sync (5 min) · lead scout (daily) · 11 brand teams (daily + weekly) · "
+     "SEO writers (3×/week) · TikTok studio (daily) · Pinterest / Medium / Shorts · "
+     "affiliates · mention + competitor + partner watch"),
+    ("Analytics", "Measure everything, report honestly.",
+     "dashboard refresh (daily) · sale watch (5 min) · site health (daily) · "
+     "pricing experiments (monthly) · watchdog (30 min) · worker-recovery probe (30 min)"),
+    ("Coding", "Write and ship code.",
+     "site improver (weekly) · UI scout (15 min) · AI model refresh (weekly) · "
+     "AI provider scout (monthly)"),
+    ("Development", "Build products and businesses.",
+     "micro-forge (daily drafts) · product forge (weekly) · Gumroad publisher (daily) · "
+     "business foundry (new brand weekly) · ecosystem expansion (monthly)"),
+]
 # Queue kinds that are NEVER auto-approved — they wait for a human tap.
 HUMAN_KINDS = ("outreach_forget", "draft_approve", "draft_discard")
 
@@ -832,6 +849,18 @@ def fleet_section():
             f"<td class='mono'>{esc(fmt_time(ts))}</td>"
             f"<td><span class='pill {cls}'>{label}</span></td></tr>")
     bots = "".join(rows)
+    team_cards = "".join(
+        f"<div class='team' style='border:1px solid var(--line);border-radius:10px;"
+        f"padding:12px 14px;margin:0 0 10px'>"
+        f"<h4 style='margin:0 0 2px'>{esc(n)}</h4>"
+        f"<p class='muted' style='margin:0 0 6px'>{esc(t)}</p>"
+        f"<p style='margin:0;font-size:.92rem'>{esc(m)}</p></div>"
+        for n, t, m in TEAMS)
+    teams_html = (
+        "<div class='card'><h3>Your teams</h3>"
+        "<p class='muted'>Four teams, one owner: you. They run their loops, ship their "
+        "output, and report honestly. Sentience commands all four.</p>"
+        f"{team_cards}</div>")
     props = ""
     try:
         pdir = os.path.join(HF, "proposals")
@@ -844,6 +873,7 @@ def fleet_section():
     except OSError:
         pass
     return (
+        f'{teams_html}'
         '<div class="card"><h3>Talk to your bots</h3>'
         "<p>Open the <b>Talk to the bots</b> chat in your Muse app and tell the "
         "fleet what to do in plain words — e.g. “run the lead scout now”, "
