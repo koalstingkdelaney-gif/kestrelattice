@@ -79,6 +79,7 @@ __ITEMLIST__
 :root{color-scheme:dark;--bg:#0f0e0d;--bg-soft:#141210;--panel:#1a1714;--panel2:#211c17;--line:#2c261e;--text:#f1ebdd;--muted:#a89d89;--faint:#978b74;--accent:#e07a5f;--accent-bright:#f09474;--accent-dim:#c06a4e;--accent-ink:#1a0f08;--accent-soft:rgba(224,122,95,.1);--radius:12px;--radius-sm:8px;--ease:cubic-bezier(.2,.7,.25,1)}@media (prefers-contrast:more){:root{--muted:#d8cfbc;--faint:#c0b59e}}
 *{margin:0;padding:0;box-sizing:border-box}
 html,body{overflow-x:clip}
+::selection{background:var(--accent);color:var(--accent-ink)}
 html{scroll-behavior:smooth}
 body{background:radial-gradient(900px 420px at 50% -6%, rgba(224,122,95,.06), transparent 62%),var(--bg);color:var(--text);font-family:ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;line-height:1.6;-webkit-font-smoothing:antialiased}
 .wrap{max-width:1040px;margin:0 auto;padding:0 24px}
@@ -311,8 +312,9 @@ def main():
     cards = []
     for n, p in enumerate(ordered, 1):
         pid = p["id"]
-        # LCP: first-row card images load eagerly with high priority; the rest stay lazy.
-        img_attrs = ' fetchpriority="high"' if n <= 4 else ' loading="lazy" fetchpriority="low"'
+        # LCP: only the first (above-the-fold) card image loads eagerly with high
+        # priority; the rest stay lazy per the one-high-priority-image standard.
+        img_attrs = ' fetchpriority="high"' if n == 1 else ' loading="lazy" fetchpriority="low"'
         ptaglist = tagmap.get(pid, ["governance"])
         tags = "|".join(ptaglist)
         badge = '<span class="codebadge">CODE</span>' if "code" in ptaglist else ""
