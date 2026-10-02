@@ -76,7 +76,7 @@ __PRELOAD__
 __ITEMLIST__
 </script>
 <style>
-:root{color-scheme:dark;--bg:#0f0e0d;--bg-soft:#141210;--panel:#1a1714;--panel2:#211c17;--line:#2c261e;--text:#f1ebdd;--muted:#a89d89;--faint:#7d7461;--accent:#e07a5f;--accent-bright:#f09474;--accent-dim:#c06a4e;--accent-ink:#1a0f08;--accent-soft:rgba(224,122,95,.1);--radius:12px;--radius-sm:8px;--ease:cubic-bezier(.2,.7,.25,1)}@media (prefers-contrast:more){:root{--muted:#d8cfbc;--faint:#c0b59e}}
+:root{color-scheme:dark;--bg:#0f0e0d;--bg-soft:#141210;--panel:#1a1714;--panel2:#211c17;--line:#2c261e;--text:#f1ebdd;--muted:#a89d89;--faint:#978b74;--accent:#e07a5f;--accent-bright:#f09474;--accent-dim:#c06a4e;--accent-ink:#1a0f08;--accent-soft:rgba(224,122,95,.1);--radius:12px;--radius-sm:8px;--ease:cubic-bezier(.2,.7,.25,1)}@media (prefers-contrast:more){:root{--muted:#d8cfbc;--faint:#c0b59e}}
 *{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth}
 body{background:radial-gradient(900px 420px at 50% -6%, rgba(224,122,95,.06), transparent 62%),var(--bg);color:var(--text);font-family:ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;line-height:1.6;-webkit-font-smoothing:antialiased}
