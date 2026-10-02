@@ -56,6 +56,10 @@ gtag('config', 'G-541TCHWW98');
   .btn:hover{background:var(--accent-bright);transform:translateY(-1px)}
   .btn:disabled{opacity:.6;cursor:default;transform:none}
   .char-count{font-size:.78rem;color:var(--faint);margin-top:4px;text-align:right;font-variant-numeric:tabular-nums}.err{color:#e08a7f;font-size:.85rem;margin-top:4px;display:none}
+  #err-summary{display:none;margin:0 0 20px;padding:14px 18px;border-radius:8px;background:rgba(224,138,127,.08);border:1px solid rgba(224,138,127,.4);color:#e08a7f;font-size:.9rem}
+  #err-summary h2{font-size:.95rem;margin:0 0 8px;color:var(--text)}
+  #err-summary ul{margin:0;padding-left:1.2em}
+  #err-summary a{color:#f09474}
   #status{margin-top:20px;padding:16px 20px;border-radius:8px;display:none;font-size:.92rem}
   #status.ok{display:block;background:rgba(138,203,138,.1);border:1px solid rgba(138,203,138,.4);color:var(--ok)}
   #status.bad{display:block;background:rgba(224,138,127,.08);border:1px solid rgba(224,138,127,.4);color:#e08a7f}
@@ -89,6 +93,7 @@ gtag('config', 'G-541TCHWW98');
   no revenue share on directory listings.</p>
 
   <form id="submit-form" novalidate>
+    <div id="err-summary" role="alert" tabindex="-1" aria-labelledby="err-summary-title"></div>
     <fieldset>
       <legend>Pack info</legend>
       <label for="pack_name">Pack name
@@ -153,7 +158,7 @@ gtag('config', 'G-541TCHWW98');
     </fieldset>
 
     <button class="btn" type="submit" id="go">Submit for review</button>
-    <div id="status" role="status"></div>
+    <div id="status" role="status" tabindex="-1"></div>
   </form>
 
   <p class="fine">By submitting you confirm the pack is yours to list and you accept
@@ -179,6 +184,8 @@ if (descTa && descCount) {
   descTa.addEventListener("input", upd); upd();
 }
 const status = document.getElementById("status");
+const errSummary = document.getElementById("err-summary");
+const FIELD_LABELS = {pack_name:"Pack name",pack_url:"Pack URL",description:"Description",author:"Author / studio",author_email:"Contact email",manifest_url:"pack.json manifest URL",license:"License"};
 const go = document.getElementById("go");
 
 function showErr(id, on){ document.getElementById("e-" + id).style.display = on ? "block" : "none"; }
@@ -187,6 +194,7 @@ function validUrl(v){ try { const u = new URL(v); return u.protocol === "http:" 
 form.addEventListener("submit", async function(ev){
   ev.preventDefault();
   status.className = ""; status.textContent = "";
+  errSummary.style.display = "none"; errSummary.innerHTML = "";
   const v = {
     pack_name: form.pack_name.value.trim(),
     author: form.author.value.trim(),
@@ -205,7 +213,14 @@ form.addEventListener("submit", async function(ev){
   check("description", v.description.length >= 20);
   check("manifest_url", v.manifest_url === "" || validUrl(v.manifest_url));
   check("license", v.license.length > 0);
-  if (!ok) return;
+  if (!ok) {
+    const bad = Object.keys(FIELD_LABELS).filter(id => document.getElementById("e-" + id).style.display === "block");
+    errSummary.innerHTML = "<h2 id=\"err-summary-title\">" + bad.length + " problem" + (bad.length > 1 ? "s" : "") + " to fix</h2><ul>" +
+      bad.map(id => "<li><a href=\"#" + id + "\">" + FIELD_LABELS[id] + "</a> — " + document.getElementById("e-" + id).textContent + "</li>").join("") + "</ul>";
+    errSummary.style.display = "block";
+    errSummary.focus();
+    return;
+  }
 
   go.disabled = true; go.textContent = "Submitting…"; go.setAttribute("aria-busy", "true");
   try {
@@ -220,6 +235,7 @@ form.addEventListener("submit", async function(ev){
       status.textContent = "Submitted — your pack is in the review queue. " +
         "If it's approved, it will appear in the directory within a few days. " +
         "Reference: " + d.id;
+      status.focus();
       form.reset();
     } else {
       throw new Error((d.fields || []).join(", ") || d.error || "server error");
@@ -227,6 +243,7 @@ form.addEventListener("submit", async function(ev){
   } catch(e) {
     status.className = "bad";
     status.textContent = "Submission failed: " + e.message + ". Please try again in a moment.";
+    status.focus();
   }
   go.disabled = false; go.textContent = "Submit for review"; go.removeAttribute("aria-busy");
 });
