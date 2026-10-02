@@ -517,7 +517,7 @@ gtag('config', 'G-541TCHWW98');
 {next_step}
   <footer>
     <span>© 2026 ghostcorpnet · An independent studio</span>
-    <span><a href="../../">Home</a> · <a href="../">Catalog</a> · <a href="../../changelog.html">Changelog</a> · <a href="mailto:ghostcorpnetai@gmail.com">Contact</a></span>
+    <span><a href="../../">Home</a> · <a href="../">Catalog</a> · <a href="../../changelog.html">Changelog · Oct 2026</a> · <a href="mailto:ghostcorpnetai@gmail.com">Contact</a></span>
   </footer>
 </div>
 {sticky_bar}

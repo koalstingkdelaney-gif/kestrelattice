@@ -176,7 +176,7 @@ __CARDS__
 </main>
 <footer class="site"><div class="wrap">
 <span>© <span id="yr">2026</span> GhostCorp · ghostcorpnet · An independent studio</span>
-<span><a href="mailto:koalstin.g.k.delaney@gmail.com">Contact</a><a href="../articles/">Articles</a><a href="../changelog.html">Changelog</a><a href="../brands/">Stores</a><a href="../ecosystem/">Ecosystem</a><a href="../directory/">Directory</a><a href="../build/">Build</a><a href="../sitemap.xml">Sitemap</a><a href="../admin-login.html" rel="nofollow">Admin</a></span>
+<span><a href="mailto:koalstin.g.k.delaney@gmail.com">Contact</a><a href="../articles/">Articles</a><a href="../changelog.html">Changelog · Oct 2026</a><a href="../brands/">Stores</a><a href="../ecosystem/">Ecosystem</a><a href="../directory/">Directory</a><a href="../build/">Build</a><a href="../sitemap.xml">Sitemap</a><a href="../admin-login.html" rel="nofollow">Admin</a></span>
 </div></footer>
 <script>
 const grid=document.getElementById('grid'),filters=document.getElementById('filters'),rc=document.getElementById('result-count');const filtersList=document.getElementById('filters-list');
