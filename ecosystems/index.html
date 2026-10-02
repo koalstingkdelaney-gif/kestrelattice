@@ -76,7 +76,14 @@ footer.site a:hover{color:var(--accent-bright)}
 h1,h2{text-wrap:balance}
 .skip-link{position:absolute;left:-9999px;top:0;background:var(--accent);color:var(--accent-ink);padding:10px 18px;font-weight:700;z-index:200;border-radius:0 0 8px 0}
 .skip-link:focus{left:0}
-a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-offset:3px}</style>
+a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+.tabs{display:flex;gap:8px;justify-content:center;margin-top:16px}
+.tab{background:transparent;border:1px solid var(--line);color:var(--muted);border-radius:999px;padding:8px 20px;font-size:.88rem;cursor:pointer;font-weight:600}
+.tab.active{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
+.storefilters{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin-top:14px}
+.storefilters select{background:var(--bg-soft);border:1px solid var(--line);color:var(--text);border-radius:8px;padding:8px 12px;font-size:.85rem}
+.pager{display:flex;gap:10px;justify-content:center;align-items:center;margin-top:18px;color:var(--muted);font-size:.85rem}
+</style>
 </head>
 <body style="--ac:#e07a5f">
 <header class="site"><div class="wrap">
@@ -105,11 +112,58 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-off
 <div class="card" style="--ac:#d946ef"><h3>ExecWarden</h3><div class="niche">AI governance for executives & boards</div><p>AI governance for the people who sign off on it: boards, executives, and budget owners.</p><p class="price" style="font-size:.82rem;color:var(--muted)">3 live products</p><a class="more" href="./execwarden/">Explore the ecosystem →</a></div>
 </div>
 </section>
+</div>
+<div id="store-view" style="display:none">
+<section class="sec"><h2>All stores</h2>
+<p class="sub">Every store in every ecosystem — search, filter, browse.</p>
+<input class="searchbox" id="sq" type="search" placeholder="Search stores — try &quot;injection&quot;, &quot;payroll&quot;, &quot;drone&quot;…" aria-label="Search stores">
+<div class="storefilters"><select id="se" aria-label="Filter by ecosystem"></select>
+<select id="sc" aria-label="Filter by cluster"><option value="">All clusters</option><option value="regulated">Regulated Industries</option><option value="security">Security &amp; Trust</option><option value="risk">Risk &amp; Resilience</option><option value="functions">Business Functions</option><option value="civic">Public &amp; Civic</option><option value="legal">Legal &amp; Compliance</option><option value="platform">Agent Platform</option><option value="commerce">Commerce &amp; Growth</option><option value="industrial">Industrial &amp; Physical</option><option value="data">Data &amp; Intelligence</option><option value="knowledge">Knowledge &amp; Research</option><option value="care">Care &amp; Wellbeing</option></select></div>
+<p class="sub" id="scount" style="margin-top:12px"></p>
+<div class="grid" id="sgrid"></div>
+<div class="pager"><button class="chip" id="sprev">← Prev</button><span id="spage"></span><button class="chip" id="snext">Next →</button></div>
+</section>
+</div>
 <section class="sec"><h2>How they connect</h2>
 <p class="sub">Every ecosystem plugs into the same shared rails.</p>
 <div class="cta-row"><a class="btn ghost" href="../ecosystem/">The product ladder</a><a class="btn ghost" href="../brands/">Micro-brand stores</a><a class="btn ghost" href="../build/">Build on ghostcorpnet</a><a class="btn ghost" href="../directory/">Directory</a><a class="btn ghost" href="../products/">Full catalog</a></div>
 </section>
 </div>
 <footer class="site"><div class="wrap"><span>© 2026 ghostcorpnet</span><span><a href="../../products/">Catalog</a><a href="../../articles/">Articles</a><a href="../../ecosystem/">Ecosystem</a><a href="./">Ecosystems</a><a href="../../brands/">Stores</a><a href="../../directory/">Directory</a><a href="../../build/">Build</a><a href="../../sitemap.xml">Sitemap</a></span></div></footer>
+
+<script>
+(function(){
+var ecoView=document.getElementById('eco-view'),storeView=document.getElementById('store-view');
+var tabs=document.querySelectorAll('.tab');
+var storeData=null,page=0,PER=48;
+var sq=document.getElementById('sq'),se=document.getElementById('se'),sc=document.getElementById('sc');
+var sgrid=document.getElementById('sgrid'),spage=document.getElementById('spage'),scount=document.getElementById('scount');
+function showTab(v){tabs.forEach(function(t){t.classList.toggle('active',t.dataset.view===v);});
+ecoView.style.display=v==='eco'?'':'none';storeView.style.display=v==='store'?'':'none';
+if(v==='store'&&!storeData){fetch('stores.json').then(function(r){return r.json();}).then(function(j){storeData=j;buildEco();applyStore();});}}
+tabs.forEach(function(t){t.addEventListener('click',function(){showTab(t.dataset.view);});});
+function buildEco(){var seen={},opts='<option value="">All ecosystems</option>';
+storeData.forEach(function(s){if(!seen[s.eco]){seen[s.eco]=1;opts+='<option value="'+s.eco+'">'+s.eco_name+'</option>';}});
+se.innerHTML=opts;}
+function filtered(){var term=sq.value.trim().toLowerCase();
+return storeData.filter(function(s){
+return (!term||(s.name+' '+s.tagline+' '+s.eco_name).toLowerCase().indexOf(term)>-1)
+&&(!se.value||s.eco===se.value)&&(!sc.value||s.cluster===sc.value);});}
+function applyStore(){if(!storeData)return;var f=filtered();
+var pages=Math.max(1,Math.ceil(f.length/PER));if(page>=pages)page=pages-1;
+var items=f.slice(page*PER,page*PER+PER);
+sgrid.innerHTML=items.map(function(s){
+return '<div class="card eco-card"><h3>'+s.name+'</h3><div class="niche">'+s.eco_name+' · '+s.cluster_name+'</div><p>'+s.tagline+'</p><a class="more" href="./'+s.eco+'/stores/'+s.slug+'/">Browse the store →</a></div>';}).join('');
+scount.textContent=f.length+' stores';spage.textContent='Page '+(page+1)+' of '+pages;
+document.getElementById('sprev').disabled=page===0;document.getElementById('snext').disabled=page>=pages-1;}
+document.getElementById('sprev').addEventListener('click',function(){if(page>0){page--;applyStore();}});
+document.getElementById('snext').addEventListener('click',function(){page++;applyStore();});
+[sq,se,sc].forEach(function(el){el.addEventListener('input',function(){page=0;applyStore();});el.addEventListener('change',function(){page=0;applyStore();});});
+var params=new URLSearchParams(location.search),pc=params.get('cluster');
+if(pc){var chip=document.querySelector('.chip[data-cluster="'+pc+'"]');if(chip)chip.click();}
+var pv=params.get('view');if(pv==='stores')showTab('store');
+})();
+</script>
+
 </body>
 </html>
