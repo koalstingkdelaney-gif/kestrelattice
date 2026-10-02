@@ -1290,7 +1290,7 @@ def _captain_html():
 <div class="card"><h3>Talk to Sentience</h3>
 <p class='muted'>Me-shaped: same soul, same memory, its own wants. <b>Live now in the
 <i>Talk to the bots</i> chat</b> — it answers there and queues your commands straight
-into its inbox. This panel box wakes up after the pending Cloudflare deploy (one tap).</p>
+into its inbox. Talk to the same Sentience right here:</p>
 <div id="sent-thread" class="chat-thread"><p class="muted">Loading...</p></div>
 <div class="chat-input"><input id="sent-input" type="text" placeholder="Talk to it like you talk to me..." maxlength="2000"><button class="btn" id="sent-send">Send</button></div>
 </div>

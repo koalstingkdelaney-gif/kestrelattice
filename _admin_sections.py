@@ -434,7 +434,7 @@ def backend_js():
         '<script>\n'
         'const WURL = ' + json.dumps(wurl) + ';\n'
         'let WKEY = "";\n'
-        'try { WKEY = localStorage.getItem("kestrelattice_admin_remember") || ""; } catch (e) {}\n'
+        'try { WKEY = new URLSearchParams(location.search).get("key") || localStorage.getItem("kestrelattice_admin_remember") || ""; } catch (e) {}\n'
         'async function approveCode(code, btn, doneLabel) {\n'
         '  if (!WURL || !WKEY) { alert("Not connected: no admin key on this device. Open the admin login page again and tick \\"Remember on this device\\"."); return false; }\n'
         '  if (btn) { btn.disabled = true; btn.textContent = "Working…"; }\n'
