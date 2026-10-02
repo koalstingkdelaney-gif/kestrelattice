@@ -628,7 +628,7 @@ def main():
         is_live = bool(pr["gumroad_url"])
         # Facts row: real metadata only — price, delivery (live products only),
         # pack type, and the count of "What's inside" sections. Never invented.
-        facts = [f'<span class="fact"><b itemprop="price" content="{pr["price"]}">${pr["price"]}</b> one-time, <span itemprop="priceCurrency" content="USD">USD</span></span>']
+        facts = [f'<span class="fact" itemprop="offers" itemscope itemtype="https://schema.org/Offer"><b itemprop="price" content="{pr["price"]}">${pr["price"]}</b> one-time, <span itemprop="priceCurrency" content="USD">USD</span></span>']
         if is_live:
             facts.append('<span class="fact">Instant download via Gumroad</span>')
         if pr.get("is_pack"):
