@@ -637,19 +637,23 @@ def main():
         facts_row = "\n      ".join(facts)
         file_facts = file_facts_line(pr, pr.get("file_path"), asset_idx)
         cover_path = os.path.join(SITE, "assets", "covers", f"{pr['gid']}.png")
+        webp_path = os.path.join(SITE, "assets", "covers", f"{pr['gid']}.webp")
         dims = png_dims(cover_path) if os.path.isfile(cover_path) else None
-        cover_img = (f'<img itemprop="image" src="../../assets/covers/{pr["gid"]}.png" alt="{esc(pr["title"])} cover"'
-                     f' fetchpriority="high" decoding="async" width="{dims[0]}" height="{dims[1]}">'
-                     if os.path.isfile(cover_path) and dims else
-                     (f'<img itemprop="image" src="../../assets/covers/{pr["gid"]}.png" alt="{esc(pr["title"])} cover"'
-                      f' fetchpriority="high" decoding="async">'
-                      if os.path.isfile(cover_path) else ""))
+        cover_fallback = (f'<img itemprop="image" src="../../assets/covers/{pr["gid"]}.png" alt="{esc(pr["title"])} cover"'
+                          f' fetchpriority="high" decoding="async" width="{dims[0]}" height="{dims[1]}">'
+                          if os.path.isfile(cover_path) and dims else
+                          (f'<img itemprop="image" src="../../assets/covers/{pr["gid"]}.png" alt="{esc(pr["title"])} cover"'
+                           f' fetchpriority="high" decoding="async">'
+                           if os.path.isfile(cover_path) else ""))
+        # WebP-first <picture> (mirrors catalog pattern); webp source only when the file exists so no 404s.
+        cover_img = (f'<picture><source type="image/webp" srcset="../../assets/covers/{pr["gid"]}.webp">{cover_fallback}</picture>'
+                     if cover_fallback and os.path.isfile(webp_path) else cover_fallback)
         og_dims = (f'<meta property="og:image:width" content="{dims[0]}">\n'
                    f'<meta property="og:image:height" content="{dims[1]}">') if dims else ""
         if is_live:
             buy_html = (f'<p class="instant" id="buy-trust">One-time · Instant PDF download via Gumroad</p>\n'
                         f'      <a class="btn" href="{pr["gumroad_url"]}" target="_blank" rel="noopener" aria-label="Buy {esc(pr["title"])} for ${pr["price"]} (opens in new tab)" aria-describedby="buy-trust">Get it now — ${pr["price"]}</a>\n'
-                        f'      <p class="trust">Secure checkout via Gumroad · <a style="color:var(--accent)" href="https://help.gumroad.com">buyer protection</a> · Single-user license · Instant delivery</p>\n'
+                        f'      <p class="trust">Secure checkout via Gumroad · Sold by ghostcorpnet · <a style="color:var(--accent)" href="https://help.gumroad.com">buyer protection</a> · Single-user license · Instant delivery</p>\n'
                         f'      <p class="trust">Lifetime access — yours forever in your Gumroad library</p>\n'
                         f'      <p class="notready">Not ready? <a href="../../playbook.md">Get the free MIT playbook</a> first.</p>')
         else:
