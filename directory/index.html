@@ -236,7 +236,7 @@ function fleetCard(p){
     ? '<span class="tag publish">publishing — live soon</span>'
     : '<a class="btn" href="' + esc(safeUrl(p.gumroad_url)) + '">Get this pack · $' + esc(p.price_usd) + '</a>';
   const details = site ? ' <a class="det" href="../' + site + '">Details →</a>' : "";
-  const meta = '<span class="tag">Pack Standard v1</span><span class="tag">PDF</span>' + '<span class="tag">' + (freePack ? "Free" : "$" + esc(p.price_usd) + " USD one-time") + '</span>' +
+  const meta = '<a class="tag" href="#pack-standard">Pack Standard v1</a><span class="tag">PDF</span>' + '<span class="tag">' + (freePack ? "Free" : "$" + esc(p.price_usd) + " USD one-time") + '</span>' +
     (p.category ? '<span class="tag">' + esc(p.category) + '</span>' : "") +
     (p.license ? '<span class="tag">' + esc(p.license) + '</span>' : "") +
     (p.version ? '<span class="tag">v' + esc(p.version) + '</span>' : "");
@@ -259,7 +259,7 @@ function communityCard(p){
     '<h2>' + esc(p.pack_name) + '</h2>' +
     '<div class="by">by ' + esc(p.author) + '</div>' +
     '<p class="desc">' + esc(p.description) + '</p>' +
-    '<div class="meta"><span class="tag">Pack Standard v1</span><span class="tag">PDF</span><span class="tag">' + esc(p.license) + '</span>' + manifest + '</div>' +
+    '<div class="meta"><a class="tag" href="#pack-standard">Pack Standard v1</a><span class="tag">PDF</span><span class="tag">' + esc(p.license) + '</span>' + manifest + '</div>' +
     '<a class="btn" href="' + esc(safeUrl(p.pack_url)) + '" rel="noopener">Get this pack</a>' +
     '</article>';
 }
