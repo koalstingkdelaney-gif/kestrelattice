@@ -108,24 +108,34 @@ const Q = [
 ];
 const PROD = {
   studio:  {n:"The Playbook — Studio Edition", s:"the-playbook-studio-edition", p:29,
+            f:"PDF",
             d:"The full governed-agent system: policies, schemas, rollout plan."},
   risk:    {n:"AI Agent Risk Audit Kit", s:"ai-agent-risk-audit-kit", p:19,
+            f:"PDF",
             d:"Scored risk-tier self-assessment and 40-point audit checklist."},
   runbook: {n:"Agent Incident Response Runbook", s:"agent-incident-response-runbook", p:19,
+            f:"PDF",
             d:"Severity levels, triage procedures, kill-switch checklists."},
   inject:  {n:"Prompt Injection Defense Field Guide", s:"prompt-injection-defense-field-guide", p:19,
+            f:"PDF",
             d:"15 attack scenarios, 6 layered defenses, 20 test prompts."},
   cost:    {n:"Agent Cost Control Workbook", s:"agent-cost-control-workbook", p:19,
+            f:"PDF",
             d:"Budget worksheets, metering setup, kill-on-overspend rules."},
   access:  {n:"Quarterly Access Review Kit", s:"quarterly-access-review-kit", p:19,
+            f:"PDF",
             d:"Re-tier every agent against what it can actually touch today."},
   rollout: {n:"14-Day Governance Rollout Checklist", s:"14-day-governance-rollout-checklist", p:19,
+            f:"PDF",
             d:"The fourteen-day governed-agent rollout, day by day."},
   quarantine:{n:"Compromised Agent Quarantine Runbook Excerpt", s:"compromised-agent-quarantine-runbook-excerpt", p:19,
+            f:"PDF",
             d:"Isolate a compromised agent in minutes, not hours."},
   free:    {n:"AI Agent Governance Starter Kit", s:"ai-agent-governance-starter-kit", p:0,
+            f:"PDF",
             d:"The essential checklists to begin governing agents today. Free instant download."},
   usecases:{n:"100 Agent Use Cases, Pre-Tiered", s:"100-agent-use-cases-pre-tiered", p:19,
+            f:"PDF",
             d:"100 concrete use cases, each pre-tiered with key controls."}
 };
 const WORRY = {
@@ -178,7 +188,8 @@ function finish(tierOverride){
   document.getElementById('recs').innerHTML = picks.map(k=>{
     const p = PROD[k];
     const price = p.p === 0 ? 'Free' : '$'+p.p;
-    return '<div class="rec"><a href="../products/'+p.s+'/?utm_source=quiz&utm_medium=recommendation">'+p.n+'</a><p style="color:var(--muted);font-size:.9rem">'+p.d+'</p><div class="p">'+price+' — <a href="../products/'+p.s+'/?utm_source=quiz&utm_medium=recommendation" style="color:var(--accent)">Get it</a></div></div>';
+    const fmt = p.f ? p.f+' — ' : '';
+    return '<div class="rec"><a href="../products/'+p.s+'/?utm_source=quiz&utm_medium=recommendation">'+p.n+'</a><p style="color:var(--muted);font-size:.9rem">'+p.d+'</p><div class="p">'+fmt+price+' — <a href="../products/'+p.s+'/?utm_source=quiz&utm_medium=recommendation" style="color:var(--accent)">Get it</a></div></div>';
   }).join('');
   if(typeof gtag==='function') gtag('event','quiz_complete',{tier:TIERS[tier].t});
   try{history.replaceState(null,'','#result='+tier);}catch(e){}
