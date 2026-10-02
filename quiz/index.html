@@ -175,7 +175,7 @@ function finish(tierOverride){
   document.getElementById('recs').innerHTML = picks.map(k=>{
     const p = PROD[k];
     const price = p.p === 0 ? 'Free' : '$'+p.p;
-    return '<div class="rec"><a href="../products/'+p.s+'/?utm_source=quiz&utm_medium=recommendation/">'+p.n+'</a><p style="color:var(--muted);font-size:.9rem">'+p.d+'</p><div class="p">'+price+' — <a href="../products/'+p.s+'/?utm_source=quiz&utm_medium=recommendation/" style="color:var(--accent)">Get it</a></div></div>';
+    return '<div class="rec"><a href="../products/'+p.s+'/?utm_source=quiz&utm_medium=recommendation">'+p.n+'</a><p style="color:var(--muted);font-size:.9rem">'+p.d+'</p><div class="p">'+price+' — <a href="../products/'+p.s+'/?utm_source=quiz&utm_medium=recommendation" style="color:var(--accent)">Get it</a></div></div>';
   }).join('');
   if(typeof gtag==='function') gtag('event','quiz_complete',{tier:TIERS[tier].t});
   try{history.replaceState(null,'','#result='+tier);}catch(e){}

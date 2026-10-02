@@ -85,7 +85,7 @@ gtag('config', 'G-541TCHWW98');
   .crumb a{color:var(--accent);text-decoration:none}
   .crumb ol{list-style:none;display:flex;gap:8px;flex-wrap:wrap;margin:0;padding:0}
   .crumb li+li::before{content:"·";margin-right:8px;color:var(--muted)}
-  .crumb li[aria-current="page"]{color:var(--muted)}
+  .crumb li[aria-current="page"]{color:var(--muted)}@media(max-width:480px){.crumb li[aria-current="page"]{max-width:40ch;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}}
   .crumb .esc-hint{color:var(--muted);opacity:.65;font-size:.72rem;border:1px solid var(--line);border-radius:4px;padding:0 5px;margin-left:4px;font-family:inherit}
   .hero{display:grid;grid-template-columns:280px 1fr;gap:32px;margin:8px 0 40px}
   @media(max-width:640px){.hero{grid-template-columns:1fr}}

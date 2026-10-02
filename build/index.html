@@ -279,5 +279,28 @@ ghostcorpnet</a>
 </script>
 
 <script>document.getElementById('yr').textContent=new Date().getFullYear();</script>
+<script>
+(function(){
+  // Copy-spec buttons for the Pack Standard <pre> blocks. Feedback is a text
+  // swap only (no animation), which honors prefers-reduced-motion by default.
+  document.querySelectorAll('section pre').forEach(function(pre){
+    var wrap=document.createElement('div');
+    wrap.style.position='relative';
+    pre.parentNode.insertBefore(wrap,pre);
+    wrap.appendChild(pre);
+    var btn=document.createElement('button');
+    btn.type='button';btn.textContent='Copy spec';
+    btn.setAttribute('aria-label','Copy specification to clipboard');
+    btn.style.cssText='position:absolute;top:8px;right:8px;font-size:.72rem;padding:4px 10px;border-radius:6px;border:1px solid var(--line);background:var(--panel);color:var(--text);cursor:pointer;opacity:.85';
+    btn.addEventListener('click',function(){
+      var txt=pre.textContent;
+      var done=function(){var o='Copy spec';btn.textContent='Copied';setTimeout(function(){btn.textContent=o},1600)};
+      if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(txt).then(done,done);}
+      else{var ta=document.createElement('textarea');ta.value=txt;document.body.appendChild(ta);ta.select();try{document.execCommand('copy');}catch(e){}document.body.removeChild(ta);done();}
+    });
+    wrap.appendChild(btn);
+  });
+})();
+</script>
 </body>
 </html>
