@@ -472,6 +472,7 @@ gtag('config', 'G-541TCHWW98');
     <div>
       <h1 itemprop="name">{title}</h1>
       <p class="tagline">{tagline}</p>
+      {inside_mini}
       <p class="price">${price} <span class="currency-note">Prices in USD</span></p>
       {buy_html}
       {file_facts}
@@ -616,6 +617,8 @@ def main():
         os.makedirs(d, exist_ok=True)
         page_url = f"{BASE_URL}/products/{pr['slug']}/"
         inside_items = "\n".join(f"      <li>{esc(h)}</li>" for h in pr["inside"])
+        _mini = "\n".join(f"      <li>{esc(h)}</li>" for h in pr["inside"][:3])
+        inside_mini = f'<ul class="inside-mini" aria-label="What\'s inside">\n{_mini}\n      </ul>' if _mini else ""
         rels = [products[(i + k) % len(products)] for k in (1, 2, 3)]
         related = "\n".join(
             f'      <a href="../{r["slug"]}/"><strong>{esc(r["title"])}</strong><div class="rp">${r["price"]}</div></a>'
@@ -688,7 +691,7 @@ def main():
                            file_facts=file_facts,
                            facts_row=facts_row,
                            gumroad_url=pr["gumroad_url"] or "", description=esc(pr["description"]),
-                           inside_items=inside_items, related=related, bundle_upsell=upsell,
+                           inside_items=inside_items, inside_mini=inside_mini, related=related, bundle_upsell=upsell,
                            studio=studio_block(pr, title_map), og_dims=og_dims,
                            next_step=next_step_block(pr, ladder), n_products=len(products),
                            sticky_bar=sticky_bar, fbt=fbt_block(pr, products))
