@@ -3,3 +3,4 @@
 __pycache__/
 worker/.secrets.json
 admin.html
+worker/.account_id
