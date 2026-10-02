@@ -139,6 +139,7 @@ ghostcorpnet</a>
 </div>
 
 <div class="wrap">
+<p class="sr-only" role="status" aria-live="polite" id="copy-status"></p>
 <section class="block" id="standard">
 <h2>The Pack Standard v1</h2>
 <p class="sub">A pack is a versioned bundle of agent-governance content that any tool — ours or yours — can read and verify. The full spec lives in the repo; this is the working summary.</p>
@@ -284,9 +285,7 @@ ghostcorpnet</a>
 (function(){
   // Copy-spec buttons for the Pack Standard <pre> blocks. Feedback is a text
   // swap only (no animation), which honors prefers-reduced-motion by default.
-  var status=document.createElement('p');
-  status.className='sr-only';status.setAttribute('role','status');
-  status.setAttribute('aria-live','polite');status.id='copy-status';
+  var status=document.getElementById('copy-status');
   document.querySelectorAll('section pre').forEach(function(pre){
     var wrap=document.createElement('div');
     wrap.style.position='relative';
