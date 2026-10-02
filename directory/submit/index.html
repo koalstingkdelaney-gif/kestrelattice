@@ -110,7 +110,7 @@ gtag('config', 'G-541TCHWW98');
     <fieldset>
       <legend>Pack info</legend>
       <label for="pack_name">Pack name
-        <input id="pack_name" aria-describedby="e-pack_name" name="pack_name" type="text" maxlength="120" required autocomplete="name"
+        <input id="pack_name" aria-describedby="e-pack_name" name="pack_name" type="text" maxlength="120" required aria-required="true" autocomplete="name"
                placeholder="e.g. EU AI Act Evidence Pack for Startups">
       </label>
       <div class="err" id="e-pack_name">Give your pack a name.</div>
@@ -118,7 +118,7 @@ gtag('config', 'G-541TCHWW98');
 
       <label for="pack_url">Pack URL
         <span class="hint">Where people get your pack — your own site, Gumroad, GitHub, etc.</span>
-        <input id="pack_url" aria-describedby="e-pack_url" name="pack_url" type="url" maxlength="500" required inputmode="url" autocomplete="url"
+        <input id="pack_url" aria-describedby="e-pack_url" name="pack_url" type="url" maxlength="500" required aria-required="true" inputmode="url" autocomplete="url"
                placeholder="https://example.com/my-pack">
       </label>
       <div class="err" id="e-pack_url">A valid http(s) URL is required.</div>
@@ -137,7 +137,7 @@ gtag('config', 'G-541TCHWW98');
     <fieldset>
       <legend>Contact info</legend>
       <label for="author">Author / studio
-        <input id="author" aria-describedby="e-author" name="author" type="text" maxlength="120" required autocomplete="organization"
+        <input id="author" aria-describedby="e-author" name="author" type="text" maxlength="120" required aria-required="true" autocomplete="organization"
                placeholder="Your name or studio name">
       </label>
       <div class="err" id="e-author">Tell us who built it.</div>
@@ -145,7 +145,7 @@ gtag('config', 'G-541TCHWW98');
 
       <label for="author_email">Contact email
         <span class="hint">Only used for review questions. Never published.</span>
-        <input id="author_email" aria-describedby="e-author_email" name="author_email" type="email" maxlength="200" required autocomplete="email" inputmode="email"
+        <input id="author_email" aria-describedby="e-author_email" name="author_email" type="email" maxlength="200" required aria-required="true" autocomplete="email" inputmode="email"
                placeholder="you@example.com">
       </label>
       <div class="err" id="e-author_email">A valid email is required.</div>
@@ -163,7 +163,7 @@ gtag('config', 'G-541TCHWW98');
 
 
       <label for="license">License
-        <input id="license" aria-describedby="e-license" name="license" type="text" maxlength="80" required autocomplete="off"
+        <input id="license" aria-describedby="e-license" name="license" type="text" maxlength="80" required aria-required="true" autocomplete="off"
                placeholder="e.g. MIT, Apache-2.0, Commercial">
       </label>
       <div class="err" id="e-license">Name the license.</div>
