@@ -185,9 +185,10 @@ nav.top a{color:var(--muted);text-decoration:none;margin-left:16px}
 .hero p.tag{font-size:1.15rem;color:var(--faint);max-width:640px;margin-bottom:8px}
 .hero p.pos{color:var(--muted);max-width:680px}
 .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px;padding:34px 0 44px}
-.card{background:var(--bg-soft);border:1px solid var(--line);border-radius:12px;padding:22px;border-top:3px solid var(--ac,#c65d3c);position:relative}.card h2 a::after{content:"";position:absolute;inset:0}
+.card{background:var(--bg-soft);border:1px solid var(--line);border-radius:12px;padding:22px;border-top:3px solid var(--ac,#c65d3c);position:relative}.card:hover{border-color:var(--accent,#c65d3c)}.card h2 a::after{content:"";position:absolute;inset:0}
 .card h2{font-size:1.25rem;margin-bottom:4px}
 .card h2 a{color:var(--ink);text-decoration:none}
+.card h2 a:hover{text-decoration:underline;text-underline-offset:3px}
 .card h2 a:focus-visible{outline:3px solid var(--accent);outline-offset:3px;border-radius:4px}
 nav.top a:focus-visible,.skip:focus-visible,footer.site a:focus-visible{outline:3px solid var(--accent);outline-offset:3px;border-radius:4px}
 .card .niche{font-size:.75rem;text-transform:uppercase;letter-spacing:.06em;color:#d7dce8;color:color-mix(in srgb,var(--ac,#c65d3c) 72%,#fff);margin-bottom:8px}
