@@ -35,6 +35,7 @@ gtag('config', 'G-541TCHWW98');
   .opt:hover{border-color:var(--accent)}
   .opt:active{transform:scale(.97);background:var(--panel2)}
   .opt.sel{border-color:var(--accent);background:#241f1a}
+  .qnext{font-weight:700;color:var(--accent-bright);border-color:var(--accent-dim);text-align:center}
   .prog{height:6px;background:var(--line);border-radius:3px;margin-bottom:4px;overflow:hidden}
   .prog div{height:100%;background:var(--accent);width:0;transition:width .3s}
   .q-count{font-size:.82rem;color:var(--muted);margin:0 0 18px;text-align:right}
@@ -163,13 +164,24 @@ function render(){
   var qn=document.getElementById('qnum'); if(qn) qn.textContent=Math.min(qi+1, Q.length);
   if(qi >= Q.length){ finish(); return; }
   const q = Q[qi];
+  var sel = -1;
   qbox.innerHTML = '<fieldset class="q"><legend><h3>'+(qi+1)+'. '+q.t+'</h3></legend>'+
-    q.o.map((o,i)=>'<button class="opt" data-i="'+i+'">'+o[0]+'</button>').join('')+'</fieldset>';
-  qbox.querySelectorAll('.opt').forEach(b=>b.onclick=()=>{
-    const v = q.o[+b.dataset.i][1];
+    q.o.map((o,i)=>'<button class="opt" type="button" data-i="'+i+'">'+o[0]+'</button>').join('')+
+    '<button class="opt qnext" id="qnext" type="button" hidden>Next &#8594;</button></fieldset>';
+  var nextBtn = qbox.querySelector('#qnext');
+  qbox.querySelectorAll('.opt[data-i]').forEach(b=>b.onclick=()=>{
+    qbox.querySelectorAll('.opt[data-i]').forEach(x=>x.classList.remove('sel'));
+    b.classList.add('sel');
+    sel = +b.dataset.i;
+    nextBtn.hidden = false;
+    nextBtn.focus();
+  });
+  nextBtn.onclick=()=>{
+    if(sel < 0) return;
+    const v = q.o[sel][1];
     if(typeof v === 'number') score += v; else worry = v;
     qi++; render();
-  });
+  };
   var h2 = qbox.querySelector('h3');
   if(h2){ h2.setAttribute('tabindex','-1'); h2.focus(); }
 }
