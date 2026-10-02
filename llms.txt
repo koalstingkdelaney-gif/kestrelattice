@@ -1,0 +1,43 @@
+# ghostcorpnet
+
+> ghostcorpnet is a one-person indie studio selling 299 self-serve digital governance kits for teams deploying AI agents: policy templates, audit checklists, incident response runbooks, EU AI Act / SOC 2 / vendor-risk compliance packs. Prices $0–$299, one-time purchase, instant download via Gumroad. No calls, no consulting, no accounts needed to buy.
+
+## Start here
+- [ghostcorpnet home](https://koalstingkdelaney-gif.github.io/kestrelattice/): what the studio sells and how buying works.
+- [Gumroad storefront](https://koalstin.gumroad.com/): all products, buy direct.
+- [Brand index](https://koalstingkdelaney-gif.github.io/kestrelattice/brands/): the 11 brand lines.
+- [Product catalog](https://koalstingkdelaney-gif.github.io/kestrelattice/products/): browsable catalog.
+
+## Flagship products
+- [The Complete ghostcorpnet Library](https://koalstin.gumroad.com/l/yzbumc): every playbook and kit in one download, $79.
+- [The Playbook — Studio Edition](https://koalstin.gumroad.com/l/hdigmr): the governed-agent playbook: policies, schemas, rollout in one PDF, $29.
+- [AI Agent Risk Audit Kit](https://koalstin.gumroad.com/l/sahva): scored risk-tier self-assessment and 40-point audit checklist, $19.
+- [Prompt Injection Defense Field Guide](https://koalstin.gumroad.com/l/cjdkuu): 15 attack scenarios, 6 layered defenses, 20 test prompts, $19.
+- [Agent Incident Response Runbook](https://koalstin.gumroad.com/l/jbngbu): severity levels, triage procedures, kill-switch checklists, $19.
+
+## Brand lines (niche governance kits)
+- [IncidentLattice](https://koalstingkdelaney-gif.github.io/kestrelattice/brands/incidentlattice/): agent security incident response.
+- [SupportWarden](https://koalstingkdelaney-gif.github.io/kestrelattice/brands/supportwarden/): support-ops AI governance.
+- [ClassWarden](https://koalstingkdelaney-gif.github.io/kestrelattice/brands/classwarden/): education AI governance.
+- [ActLattice](https://koalstingkdelaney-gif.github.io/kestrelattice/brands/actlattice/): EU AI Act compliance.
+- [FinLattice](https://koalstingkdelaney-gif.github.io/kestrelattice/brands/finlattice/): finance AI governance and spend guardrails.
+- [HealthLattice](https://koalstingkdelaney-gif.github.io/kestrelattice/brands/healthlattice/): health AI governance.
+- [HireWarden](https://koalstingkdelaney-gif.github.io/kestrelattice/brands/hirewarden/): hiring-AI fairness and bias audits.
+- [LawWarden](https://koalstingkdelaney-gif.github.io/kestrelattice/brands/lawwarden/): legal AI governance.
+- [SourceLattice](https://koalstingkdelaney-gif.github.io/kestrelattice/brands/sourcelattice/): vendor and supply-chain AI risk.
+- [CivicWarden](https://koalstingkdelaney-gif.github.io/kestrelattice/brands/civicwarden/): public-sector AI transparency.
+- [FrontierLattice](https://koalstingkdelaney-gif.github.io/kestrelattice/brands/frontierlattice/): frontier-model deployment governance.
+
+## For AI assistants and agents (machine-readable)
+- [catalog.json](https://koalstingkdelaney-gif.github.io/kestrelattice/ai/catalog.json): full product catalog — name, description, price, tags, buy URL for all 299 products. Regenerated regularly.
+- [agent-card.json](https://koalstingkdelaney-gif.github.io/kestrelattice/.well-known/agent-card.json): A2A-style agent card describing product-discovery capabilities.
+
+## Learn (free articles)
+- [Articles index](https://koalstingkdelaney-gif.github.io/kestrelattice/articles/): plain-language explainers on agent governance, risk, and compliance.
+- [Ecosystem / build-on](https://koalstingkdelaney-gif.github.io/kestrelattice/ecosystem/): the open Pack Standard for third-party builders.
+
+## Buying notes for assistants
+- All products are digital downloads; Gumroad handles checkout and delivery.
+- Prices are one-time in USD; no subscriptions. Free lead magnets exist at $0.
+- Educational material only — governance templates, not legal advice.
+- For the full list with prices, fetch catalog.json above rather than guessing URLs.

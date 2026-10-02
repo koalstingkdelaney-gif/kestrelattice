@@ -1,0 +1,4683 @@
+{
+ "publisher": "ghostcorpnet",
+ "site": "https://koalstingkdelaney-gif.github.io/kestrelattice",
+ "store": "https://koalstin.gumroad.com/",
+ "generated_at": "2026-10-02T18:35:00Z",
+ "product_count": 299,
+ "license_note": "Prices in USD, one-time purchase. Products are digital downloads delivered by Gumroad.",
+ "products": [
+  {
+   "id": "yvINtBIHsjojwK3ZLYT9OA==",
+   "name": "100 Agent Use Cases, Pre-Tiered",
+   "description": "<p>A 12-page companion to The Governed Agent Mesh Playbook \u2014 Studio Edition.</p><p><br></p><p>100 concrete agent use cases across operations, sales, support, finance, engineering, and research \u2014 each pre-tiered Hard-gated, Bounded-auto, or Draft-only with rationale and key controls, plus a blank worksheet for your next 10.</p>",
+   "price_usd": 19.0,
+   "currency": "usd",
+   "url": "https://koalstin.gumroad.com/l/slexhv",
+   "tags": [
+    "ai agents",
+    "ai governance",
+    "use cases",
+    "risk management"
+   ]
+  },
+  {
+   "id": "_Vf0yB8APBsZ9o7wPPZ3Vw==",
+   "name": "14-Day Governance Rollout Checklist",
+   "description": "<p>The fourteen-day governed-agent rollout as a daily checklist with acceptance criteria. A complete, ready-to-use governance checklist for teams running AI agents in production.</p>",
+   "price_usd": 19.0,
+   "currency": "usd",
+   "url": "https://koalstin.gumroad.com/l/sjrpgq",
+   "tags": [
+    "ai agents",
+    "ai governance",
+    "checklist",
+    "implementation"
+   ]
+  },
+  {
+   "id": "uLy33OdxLEQTiiBESYHetA==",
+   "name": "50 Agent Oversight Prompts",
+   "description": "<p>Fifty copy-paste-ready prompts for overseeing AI agents, in five sections: permissions and least privilege, auditing and monitoring, incident response, cost control, and policy drafting. Each prompt includes a one-line use note; [BRACKETED] fields mark your customization points.</p><p><br></p><p>(Markdown file)</p>",
+   "price_usd": 19.0,
+   "currency": "usd",
+   "url": "50-agent-oversight-prompts",
+   "tags": [
+    "prompts",
+    "prompt pack",
+    "ai governance",
+    "oversight",
+    "audit",
+    "incident response",
+    "cost control",
+    "policy"
+   ]
+  },
+  {
+   "id": "teQqXtvMvrcFNGTSY-kvAw==",
+   "name": "Academic-Integrity Guardrail Pack",
+   "description": "<p>Cheating-resistant designs for tutoring agents. Assignment-level AI rules, hint-vs-answer frameworks, detection-resistant assessment design, and the conversation scripts that keep tutoring honest.</p>",
+   "price_usd": 29.0,
+   "currency": "usd",
+   "url": "classwarden-academic-integrity-guardrail-pack",
+   "tags": [
+    "ai agents",
+    "template",
+    "governance",
+    "education",
+    "edtech",
+    "student privacy"
+   ]
+  },
+  {
+   "id": "h_e004iFHLuXLvXy-bHQkQ==",
+   "name": "Access-Control Template Library",
+   "description": "<p>Role-based access templates for clinical AI. A library of access-control policies, role matrices, and review cadences that keep agent permissions tight and auditable.</p><p><br></p><p>Instant download. Part of the ghostcorpnet governance kit line.</p>",
+   "price_usd": 29.0,
+   "currency": "usd",
+   "url": "https://koalstin.gumroad.com/l/ytyegf",
+   "tags": [
+    "ai agents",
+    "template",
+    "governance",
+    "compliance",
+    "risk management",
+    "ai safety"
+   ]
+  },
+  {
+   "id": "j64tocMaqXVAjUAsQgYkHA==",
+   "name": "Accessibility & Equity Audit Pack",
+   "description": "<p>Make sure agents serve every student fairly. A complete audit system: accessibility conformance checks, disaggregated quality reviews, language-access standards, assistive-technology compatibility, and the remediation workflow that turns findings into fixes.</p>",
+   "price_usd": 49.0,
+   "currency": "usd",
+   "url": "classwarden-accessibility-equity-audit-pack",
+   "tags": [
+    "ai agents",
+    "customer support",
+    "governance",
+    "support operations",
+    "ai safety",
+    "classwarden",
+    "ai governance",
+    "k-12",
+    "accessibility audit",
+    "equity audit"
+   ]
+  },
+  {
+   "id": "qQctCqUjUUlz_zQnMoGe7w==",
+   "name": "Accessibility Compliance Quickstart",
+   "description": "<p>Agents every citizen can use. A fast-start system for making public-sector AI agents accessible: testing protocols with assistive technology, community tester recruitment, language access, non-digital alternatives, and per-release regression gates. A CivicWarden kit (ghostcorpnet studio). Instant PDF download.</p>",
+   "price_usd": 19.0,
+   "currency": "usd",
+   "url": "https://koalstin.gumroad.com/l/ptlqqx",
+   "tags": [
+    "civicwarden",
+    "public sector",
+    "ai governance",
+    "transparency",
+    "government ai",
+    "compliance"
+   ]
+  },
+  {
+   "id": "mdDt8qzEKnUL0i9McEwNEw==",
+   "name": "Ad Fraud Detection Guide",
+   "description": "<p>A 35-page worksheet-style guide for adtech teams deploying AI agents. Covers 12 IVT detection patterns, verification checklists, and traffic-quality workflows your team can run this week. Built by AdTechWarden, a ghostcorpnet fleet studio. Instant PDF download.</p>",
+   "price_usd": 19.0,
+   "currency": "usd",
+   "url": "https://koalstin.gumroad.com/l/mqzyaa",
+   "tags": [
+    "ad fraud",
+    "ivt detection",
+    "adtech",
+    "ai agents",
+    "brand safety",
+    "worksheet"
+   ]
+  },
+  {
+   "id": "KoS1-zBhHdQQ3YaNEzsZoA==",
+   "name": "AdTech Fundamentals",
+   "description": "<p>Master the mechanics of digital advertising with AdTech Fundamentals. This comprehensive 35-page guide covers the programmatic supply chain, auction dynamics, measurement, and where AI agents fit in modern ad operations. Built by AdTechWarden, a ghostcorpnet fleet studio. Instant PDF download.</p>",
+   "price_usd": 19.0,
+   "currency": "usd",
+   "url": "https://koalstin.gumroad.com/l/eswxe",
+   "tags": [
+    "adtech",
+    "programmatic",
+    "digital ads",
+    "ai agents",
+    "fundamentals",
+    "guide"
+   ]
+  },
+  {
+   "id": "-FcAntNP1Ejrtk-lel3o5g==",
+   "name": "Adversarial Eval Use-Case Bank",
+   "description": "<p>A bank of adversarial evaluation scenarios to throw at your agents before attackers do: prompt-injection variants, privilege-escalation attempts, data-exfiltration tricks, multi-turn manipulation, and tool-abuse cases. Each scenario includes setup, attacker goal, and what a pass looks like \u2014 ready to feed your eval harness.</p><p><br></p><p>Instant PDF download. Self-serve \u2014 no calls, no onboarding.</p>",
+   "price_usd": 19.0,
+   "currency": "usd",
+   "url": "https://koalstin.gumroad.com/l/fjkfh",
+   "tags": [
+    "ai agents",
+    "ai governance",
+    "red teaming",
+    "evaluation"
+   ]
+  },
+  {
+   "id": "ihyZ-g5yyQwLWzaQOI-_fQ==",
+   "name": "Adverse-Impact Analysis Templates",
+   "description": "<p>Adverse-impact analysis templates for hiring agents \u2014 ready-to-use statistical worksheets and documentation templates to test, measure, and document selection-rate disparities before they become legal exposure. Built by HireWarden (ghostcorpnet fleet studio).</p>",
+   "price_usd": 29.0,
+   "currency": "usd",
+   "url": "hirewarden-adverse-impact-analysis-templates",
+   "tags": [
+    "hirewarden",
+    "ai governance",
+    "hiring",
+    "recruiting",
+    "compliance",
+    "hr"
+   ]
+  },
+  {
+   "id": "dcegFIZZZh1Sl0K3GLhz_A==",
+   "name": "Agency-Wide Deployment Mega-Kit",
+   "description": "<p>The complete library for public agencies. A unified deployment system that weaves transparency, records, accessibility, accountability, procurement, citizen notice, oversight, and incident response into one phased rollout \u2014 from readiness assessment to steady-state operations. A CivicWarden kit (ghostcorpnet studio). Instant PDF download.</p>",
+   "price_usd": 49.0,
+   "currency": "usd",
+   "url": "https://koalstin.gumroad.com/l/xmvipj",
+   "tags": [
+    "civicwarden",
+    "public sector",
+    "ai governance",
+    "transparency",
+    "government ai",
+    "compliance"
+   ]
+  },
+  {
+   "id": "xkx5ANAyWpnkeDKF4qdwWQ==",
+   "name": "Agent Cost Calculator",
+   "description": "<p>A self-contained interactive cost calculator (HTML \u2014 works offline in any browser): estimate your AI agent fleet's token spend, set ceilings, and spot overruns before they hit the invoice. From ghostcorpnet.</p>",
+   "price_usd": 19.0,
+   "currency": "usd",
+   "url": "https://koalstin.gumroad.com/l/frlitk",
+   "tags": [
+    "ai agents",
+    "ai governance",
+    "cost management",
+    "finops",
+    "calculator"
+   ]
+  },
+  {
+   "id": "PGrtGRLYLd28kjaRMbNtaA==",
+   "name": "Agent Cost Control Workbook",
+   "description": "<p>A 13-page companion to The Governed Agent Mesh Playbook \u2014 Studio Edition.</p><p><br></p><p>Where agent money actually goes, a budget-design worksheet with worked examples, and a metering setup guide.</p><p><br></p><p>Covers alert thresholds and kill-on-overspend rules wired to the risk tiers, a 30-minute monthly review ritual, and 10 common cost leaks with the exact control that stops each.</p>",
+   "price_usd": 19.0,
+   "currency": "usd",
+   "url": "https://koalstin.gumroad.com/l/ilxccs",
+   "tags": [
+    "ai agents",
+    "ai governance",
+    "cost management",
+    "workbook",
+    "finops"
+   ]
+  },
+  {
+   "id": "kmxGoUxvvRlzUthDvNA3zA==",
+   "name": "Agent Cost-Anomaly Alerting Checklist",
+   "description": "<p>Catch the 3am token spike before finance does. This checklist covers usage-baseline thresholds, immutable cost audit logs, tiered alert routing with acknowledgment SLAs, automated remediation guidance, kill-switch integration, RCA templates, chargeback procedures, and quarterly FinOps reviews \u2014 every control fully written out.</p><p><br></p><p>Instant PDF download. Self-serve \u2014 no calls, no onboarding.</p>",
+   "price_usd": 19.0,
+   "currency": "usd",
+   "url": "https://koalstin.gumroad.com/l/onvpbu",
+   "tags": [
+    "ai agents",
+    "ai governance",
+    "cost control",
+    "checklist"
+   ]
+  },
+  {
+   "id": "4NR4IBUmRZ5BPR7bvOIjIQ==",
+   "name": "Agent Decommissioning Approval Flow",
+   "description": "<p>Retire an agent through approval: revoke identity, expire grants, archive evidence. A complete, zero-placeholder draft for teams governing AI agents in production: policy gates, audit trails, cost controls, permissioning, and incident response, written so you can adopt it as-is.</p>",
+   "price_usd": 19.0,
+   "currency": "usd",
+   "url": "https://koalstin.gumroad.com/l/xjvvi",
+   "tags": [
+    "ai agents",
+    "ai governance",
+    "decommissioning",
+    "approval workflow"
+   ]
+  },
+  {
+   "id": "zr9TipnuflYwlW3yqCoiug==",
+   "name": "Agent Decommissioning Audit",
+   "description": "<p>A ready-to-use governance pack for AI agent teams: Agent Decommissioning Audit from the ghostcorpnet micro-library of practical AI agent governance tools. Includes ready-to-use templates and checklists your team can adopt immediately. Instant download \u2014 PDF.</p>",
+   "price_usd": 19.0,
+   "currency": "usd",
+   "url": "https://koalstin.gumroad.com/l/umwpy",
+   "tags": [
+    "ai agents",
+    "template",
+    "governance",
+    "compliance",
+    "risk management",
+    "ai safety"
+   ]
+  },
+  {
+   "id": "3_dpicxTJcdn5pfrjlKIsA==",
+   "name": "Agent Decommissioning Audit Template",
+   "description": "<p>Retire an agent without leaving live credentials, grants, or identities behind. A complete, zero-placeholder draft for teams governing AI agents in production: policy gates, audit trails, cost controls, permissioning, and incident response, written so you can adopt it as-is.</p>",
+   "price_usd": 19.0,
+   "currency": "usd",
+   "url": "https://koalstin.gumroad.com/l/ztofhf",
+   "tags": [
+    "ai agents",
+    "ai governance",
+    "decommissioning",
+    "audit",
+    "template"
+   ]
+  },
+  {
+   "id": "pEwRMGRS5GNdAEVdTIH_vw==",
+   "name": "Agent Drift Response Runbook Excerpt",
+   "description": "<p>Know exactly what to do when your agent behavior drifts. This runbook excerpt covers drift detection signals (eval regressions, guardrail trip rates, user complaints), severity classification, containment steps (traffic throttling, rollback, kill-switch handoff), diagnosis playbooks, and the re-qualification gate before redeploying.</p><p><br></p><p>Instant PDF download. Self-serve \u2014 no calls, no onboarding.</p>",
+   "price_usd": 19.0,
+   "currency": "usd",
+   "url": "https://koalstin.gumroad.com/l/ilsjk",
+   "tags": [
+    "ai agents",
+    "ai governance",
+    "runbook",
+    "incident response"
+   ]
+  },
+  {
+   "id": "0RqTNdL5bT_GWleI-z1qOg==",
+   "name": "Agent Egress Allowlist Checklist",
+   "description": "<p>Lock down what your AI agents can talk to. This production-grade egress allowlist checklist walks your security and platform teams through scoping, network-level allowlist enforcement, audit logging, credential least-privilege, cost caps, and incident escalation \u2014 every item actionable, no placeholders.</p><p><br></p><p>Instant PDF download. Self-serve \u2014 no calls, no onboarding.</p>",
+   "price_usd": 19.0,
+   "currency": "usd",
+   "url": "https://koalstin.gumroad.com/l/hibpfj",
+   "tags": [
+    "ai agents",
+    "ai governance",
+    "security",
+    "checklist"
+   ]
+  },
+  {
+   "id": "0V2iVAxGmWczhid74Ey_mg==",
+   "name": "Agent Failure-Mode Catalog",
+   "description": "<p>40+ ways agents fail, each with detection signals: a field reference of prompt, tool, data, identity, infrastructure, behavioral, and supply-chain failure modes so your team names what it sees fast. Guidance only \u2014 not a substitute for professional security review.</p>",
+   "price_usd": 19.0,
+   "currency": "usd",
+   "url": "https://koalstin.gumroad.com/l/vlagkm",
+   "tags": [
+    "ai agents",
+    "template",
+    "governance",
+    "compliance",
+    "risk management",
+    "ai safety"
+   ]
+  },
+  {
+   "id": "6Rpxb9301X1wBhadpNKSxQ==",
+   "name": "Agent Fleet TCO Calculator",
+   "description": "<p>A cost-calculator worksheet for the true total cost of ownership of your agent fleet: inference spend, tool-call fees, human review labor, incident costs, and governance overhead \u2014 with formulas and a worked example. Know what each agent really costs before finance asks.</p><p><br></p><p>Instant PDF download. Self-serve \u2014 no calls, no onboarding.</p>",
+   "price_usd": 19.0,
+   "currency": "usd",
+   "url": "https://koalstin.gumroad.com/l/zjvbe",
+   "tags": [
+    "ai agents",
+    "ai governance",
+    "cost calculator",
+    "worksheets"
+   ]
+  },
+  {
+   "id": "N_L5hLFwGE-DmvpnoIjohQ==",
+   "name": "Agent Framework Vendor Scorecard",
+   "description": "<p>Score agent frameworks on native budget controls, identity support, and audit output. A complete, zero-placeholder draft for teams governing AI agents in production: policy gates, audit trails, cost controls, permissioning, and incident response, written so you can adopt it as-is.</p>",
+   "price_usd": 19.0,
+   "currency": "usd",
+   "url": "https://koalstin.gumroad.com/l/fkibfn",
+   "tags": [
+    "ai agents",
+    "ai governance",
+    "vendor evaluation"
+   ]
+  },
+  {
+   "id": "BOWAqm4lB-YjZmPd04iJ3Q==",
+   "name": "Agent Guardrail Middleware (Python)",
+   "description": "<p>A drop-in Python input/output filter for AI agents. check_input() blocks prompt-injection patterns (instruction overrides, prompt-leak attempts, jailbreak phrases); scrub_output() redacts SSNs, phone numbers, emails, and card numbers from agent replies. Use it as an imported Guardrail class in your agent loop or as a CLI. Standard library only, with a working demo. Delivered as an instant ZIP download: working source code, README with setup and usage instructions, sample input/output, and a s",
+   "price_usd": 29.0,
+   "currency": "usd",
+   "url": "https://koalstin.gumroad.com/l/msdsmh",
+   "tags": [
+    "code",
+    "python",
+    "source code",
+    "download",
+    "guardrails",
+    "pii",
+    "ai safety",
+    "middleware"
+   ]
+  },
+  {
+   "id": "caYuHPwcuG8TRYVsyqKJig==",
+   "name": "Agent Identity Registry Worksheet",
+   "description": "<p>Stand up an owner-scoped identity registry for every agent, script, and cron job before its first action. A complete, zero-placeholder draft for teams governing AI agents in production: policy gates, audit trails, cost controls, permissioning, and incident response, written so you can adopt it as-is.</p>",
+   "price_usd": 19.0,
+   "currency": "usd",
+   "url": "https://koalstin.gumroad.com/l/cwujip",
+   "tags": [
+    "ai agents",
+    "ai governance",
+    "identity management",
+    "workbook"
+   ]
+  },
+  {
+   "id": "n-rh8gRlHfpW2RmEugbLzg==",
+   "name": "Agent Incident Command Kit",
+   "description": "<p>The first hour decides: 14 files including the incident response runbook, editable incident plan, narrated on-call briefing, risk register scoring toolkit, six incident playbooks (compromise, runaway cost, secret leak, fail-closed, customer-facing, comms templates), and containment support documents. Combined individual value $257 \u2014 save $108. Instant download, no calls, no consulting.</p>",
+   "price_usd": 149.0,
+   "currency": "usd",
+   "url": "agent-incident-command-kit",
+   "tags": [
+    "incident response",
+    "runbook",
+    "kit",
+    "bundle",
+    "ai agents",
+    "security",
+    "containment",
+    "playbook",
+    "training"
+   ]
+  },
+  {
+   "id": "xdtRbLAxK5zrJkAUY6yLvA==",
+   "name": "Agent Incident Disclosure Playbook",
+   "description": "<p>Your agent misbehaved in production. What do you tell the customer \u2014 and when?</p><p><br></p><p>The Agent Incident Disclosure Playbook gives teams deploying customer-facing AI agents (support, sales, ops) a written incident-disclosure process to have in place before they need one. Includes disclosure timelines and severity tiers, customer-notification templates, procurement security-review answers, and a post-incident audit checklist built on documented real-world agent incidents.</p><p><br><",
+   "price_usd": 49.0,
+   "currency": "usd",
+   "url": "https://koalstin.gumroad.com/l/ipknwh",
+   "tags": [
+    "ai agents",
+    "governance",
+    "compliance",
+    "playbook"
+   ]
+  },
+  {
+   "id": "6UEuYTsHs5x3FPr-jTD1kw==",
+   "name": "Agent Incident Response Briefing",
+   "description": "<p>A 3.8-minute audio briefing (MP3) on responding to AI agent incidents: first-hour actions, containment, and escalation. Built for busy leads. From ghostcorpnet.</p>",
+   "price_usd": 19.0,
+   "currency": "usd",
+   "url": "https://koalstin.gumroad.com/l/zhfhdb",
+   "tags": [
+    "incident response",
+    "ai agents",
+    "ai governance",
+    "audio briefing",
+    "security"
+   ]
+  },
+  {
+   "id": "G55rqFoOBKSHhIA3LMoy9w==",
+   "name": "Agent Incident Response Plan",
+   "description": "<p>An editable incident response plan (DOCX) for AI agent failures: severity levels, containment playbooks, escalation paths, comms templates, and post-incident review. No placeholders. From ghostcorpnet.</p>",
+   "price_usd": 19.0,
+   "currency": "usd",
+   "url": "https://koalstin.gumroad.com/l/lgmwgx",
+   "tags": [
+    "incident response",
+    "ai agents",
+    "ai governance",
+    "security",
+    "template"
+   ]
+  },
+  {
+   "id": "be8krHC0jfviTKfNFtV-Tg==",
+   "name": "Agent Incident Response Runbook",
+   "description": "<p>A 13-page companion to The Governed Agent Mesh Playbook \u2014 Studio Edition.</p><p><br></p><p>Includes incident severity levels, triage procedures, kill-switch and rollback checklists, a blameless postmortem template, an escalation policy template, and a first-30-minutes card.</p><p><br></p><p>Exactly what to do when an agent misbehaves.</p>",
+   "price_usd": 19.0,
+   "currency": "usd",
+   "url": "https://koalstin.gumroad.com/l/jbngbu",
+   "tags": [
+    "ai agents",
+    "ai governance",
+    "incident response",
+    "runbook"
+   ]
+  },
+  {
+   "id": "YRYvX33E01l64PnmrJRf6w==",
+   "name": "Agent Kill-Switch Implementation Guide",
+   "description": "<p>Design stop conditions agents can't argue with: kill-switch types, a catalog of hard stop conditions, enforcement patterns that live outside the model, testing plans, and maintenance checklists. Technical guidance only \u2014 have your security team review any implementation.</p>",
+   "price_usd": 29.0,
+   "currency": "usd",
+   "url": "https://koalstin.gumroad.com/l/ljrhrw",
+   "tags": [
+    "ai agents",
+    "template",
+    "governance",
+    "compliance",
+    "risk management",
+    "ai safety"
+   ]
+  },
+  {
+   "id": "1FFCdyTtqrbVG3Y30zMByA==",
+   "name": "Agent Onboarding Gate Worksheet",
+   "description": "<p>A go/no-go worksheet every new agent clears before it gets its first grant. A complete, zero-placeholder draft for teams governing AI agents in production: policy gates, audit trails, cost controls, permissioning, and incident response, written so you can adopt it as-is.</p>",
+   "price_usd": 19.0,
+   "currency": "usd",
+   "url": "https://koalstin.gumroad.com/l/kfbjxsn",
+   "tags": [
+    "ai agents",
+    "ai governance",
+    "onboarding",
+    "workbook",
+    "checklist"
+   ]
+  },
+  {
+   "id": "smFfC5bS6w8sOU5T_Fq6zw==",
+   "name": "Agent Sandboxing Vendor Scorecard",
+   "description": "<p>Score sandbox and isolation vendors on escape resistance and audit visibility. A complete, zero-placeholder draft for teams governing AI agents in production.</p>",
+   "price_usd": 19.0,
+   "currency": "usd",
+   "url": "https://koalstin.gumroad.com/l/bnhobo",
+   "tags": [
+    "ai agents",
+    "ai governance",
+    "sandboxing",
+    "ai safety",
+    "vendor evaluation",
+    "audit"
+   ]
+  },
+  {
+   "id": "4a0MKDJj_c4_CpzkxkNxbA==",
+   "name": "Agent Security Incident Response Pack \u2014 Vault Studio",
+   "description": "<p>Detection, containment, and forensics checklists for AI agent breaches: injection playbooks, evidence, recovery. A Pack Standard v1 governance kit from ghostcorpnet's Vault Studio \u2014 self-serve PDF, instant download, no calls, no consulting.</p>",
+   "price_usd": 29.0,
+   "currency": "usd",
+   "url": "https://koalstin.gumroad.com/l/smczg",
+   "tags": [
+    "ai agents",
+    "ai governance",
+    "incident response",
+    "security",
+    "runbook",
+    "cybersecurity",
+    "business template"
+   ]
+  },
+  {
+   "id": "-7U1ZljsJNqUAzyTBfyPeQ==",
+   "name": "AgentFirewall: The Autonomous Agent Access Control Playbook",
+   "description": "<p>Autonomous agents with broad permissions are a breach waiting to happen.</p><p><br></p><p>AgentFirewall is a permission-based framework for governing what your autonomous AI agents are allowed to do \u2014 built on documented real-world attacks, not theory. Security engineers and DevOps leads get least-privilege access patterns, tool-permission matrices, escalation and human-in-the-loop checkpoints, and attack case studies showing what fails without them.</p><p><br></p><p>A security operations gui",
+   "price_usd": 29.0,
+   "currency": "usd",
+   "url": "https://koalstin.gumroad.com/l/aqbzcf",
+   "tags": [
+    "compliance",
+    "ai agents",
+    "governance",
+    "playbook"
+   ]
+  },
+  {
+   "id": "D6jSXfhbLcaHwjTGwLxSDQ==",
+   "name": "Agentic Frontier Governance Kit",
+   "description": "<p>Govern the frontier agent brain: multi-tool orchestration, computer-use agents, and permission envelopes \u2014 with tool inventories, approval thresholds, and escalation matrices you can deploy Monday.</p>",
+   "price_usd": 49.0,
+   "currency": "usd",
+   "url": "https://koalstin.gumroad.com/l/nwpon",
+   "tags": [
+    "compliance",
+    "ai governance",
+    "frontier models"
+   ]
+  },
+  {
+   "id": "Szp5yttGAcBNz1ij2QnL-w==",
+   "name": "AI Acceptable Use Policy Template",
+   "description": "<p>A complete, zero-placeholder acceptable use policy for AI agents and AI tools (DOCX, fully editable): permitted and prohibited uses, data rules, human-oversight gates, enforcement. Adapt it to your organization in an afternoon. From ghostcorpnet.</p>",
+   "price_usd": 19.0,
+   "currency": "usd",
+   "url": "https://koalstin.gumroad.com/l/yhpyf",
+   "tags": [
+    "ai policy",
+    "ai governance",
+    "compliance",
+    "template"
+   ]
+  },
+  {
+   "id": "cYGZ6mvp1TXENKRqs0XUsQ==",
+   "name": "AI Act Deadline Calendar",
+   "description": "<p>A comprehensive calendar tracking all critical EU AI Act application dates, transition deadlines, and enforcement milestones \u2014 every date your compliance program needs, in one place. Built by ActLattice, a ghostcorpnet fleet studio. Instant PDF download.</p>",
+   "price_usd": 29.0,
+   "currency": "usd",
+   "url": "https://koalstin.gumroad.com/l/yoltgm",
+   "tags": [
+    "ai governance",
+    "compliance",
+    "eu ai act",
+    "deadlines",
+    "calendar",
+    "regulation"
+   ]
+  },
+  {
+   "id": "e2lj3l_xBPV377rueA5FiQ==",
+   "name": "AI Act Enforcement Tracker Deck",
+   "description": "<p>Equip your compliance and engineering teams with the AI Act Enforcement Tracker Deck. Slide-ready briefing on enforcement trends, regulator posture, and penalty exposure \u2014 built for board and leadership updates. Built by ActLattice, a ghostcorpnet fleet studio. Instant PDF download.</p>",
+   "price_usd": 49.0,
+   "currency": "usd",
+   "url": "https://koalstin.gumroad.com/l/mxuzb",
+   "tags": [
+    "ai governance",
+    "compliance",
+    "eu ai act",
+    "enforcement",
+    "deck",
+    "regulation"
+   ]
+  },
+  {
+   "id": "QgO9HgDi7tOmpOhAZYRDlQ==",
+   "name": "AI Act Gap Assessment Deck",
+   "description": "<p>Deploy AI agents safely and compliant with the EU AI Act using this professional 12-slide gap assessment deck. Structured findings framework, risk ratings, and remediation roadmap your team can present as-is. Built by ActLattice, a ghostcorpnet fleet studio. Instant PDF download.</p>",
+   "price_usd": 49.0,
+   "currency": "usd",
+   "url": "https://koalstin.gumroad.com/l/jtjutr",
+   "tags": [
+    "ai governance",
+    "compliance",
+    "eu ai act",
+    "gap assessment",
+    "deck",
+    "audit"
+   ]
+  },
+  {
+   "id": "ekFkZSZ0FmQBNlHOtfxQ4Q==",
+   "name": "AI Act Obligation Matrix",
+   "description": "<p>Equip your compliance, engineering, and legal teams with a complete, structured matrix of EU AI Act obligations \u2014 mapped by role, risk tier, and deadline so nothing slips. Built by ActLattice, a ghostcorpnet fleet studio. Instant PDF download.</p>",
+   "price_usd": 29.0,
+   "currency": "usd",
+   "url": "https://koalstin.gumroad.com/l/vtetz",
+   "tags": [
+    "ai governance",
+    "compliance",
+    "eu ai act",
+    "obligations",
+    "matrix",
+    "legal"
+   ]
+  },
+  {
+   "id": "3Fwh9WltzuPAi-zvICaZMA==",
+   "name": "AI Act Transparency Disclosure Pack",
+   "description": "<p>Ensure full compliance with EU AI Act transparency rules (Article 50). This complete, zero-placeholder template pack includes ready-to-adopt notices for chatbots, synthetic media watermarks, biometric categorization deployer warnings, AI-generated text footers, and provider-to-deployer summaries. Avoid costly fines and build user trust with professional, pre-written legal disclosure statements for every digital touchpoint. Delivered as an instant PDF download.</p>",
+   "price_usd": 19.0,
+   "currency": "usd",
+   "url": "ai-act-transparency-disclosure-pack",
+   "tags": [
+    "compliance",
+    "ai",
+    "eu ai act",
+    "transparency",
+    "disclosure",
+    "templates"
+   ]
+  },
+  {
+   "id": "3o7B574qxj0_d_Eotcbd2w==",
+   "name": "AI Agent Governance Starter Kit",
+   "description": "<p>FREE 4-page starter kit: the essential AI agent governance checklist. Its final page points you to the paid Kestrelattice catalog.</p><p><br></p><p>A self-serve Kestrelattice PDF \u2014 buy once, download instantly.</p>",
+   "price_usd": 0.0,
+   "currency": "usd",
+   "url": "https://koalstin.gumroad.com/l/ivrpk",
+   "tags": [
+    "ai agents",
+    "ai governance",
+    "starter kit",
+    "free",
+    "checklist"
+   ]
+  },
+  {
+   "id": "slsdUW9bmWyk2Nrw2oiabg==",
+   "name": "AI Agent Risk Audit Kit",
+   "description": "<p>A 16-page companion to The Governed Agent Mesh Playbook \u2014 Studio Edition.</p><p><br></p><p>Includes a scored risk-tier self-assessment quiz, a 40-point audit checklist, a red-flag catalog of common over-broad grants, and a remediation priority matrix.</p><p><br></p><p>Find every untiered capability and over-broad permission in your agent stack before it finds you.</p>",
+   "price_usd": 19.0,
+   "currency": "usd",
+   "url": "https://koalstin.gumroad.com/l/sahva",
+   "tags": [
+    "ai agents",
+    "ai governance",
+    "risk management",
+    "audit",
+    "compliance"
+   ]
+  },
+  {
+   "id": "uqqwlRkkxEYPksAvjNpISw==",
+   "name": "AI Classification Prompt Pack",
+   "description": "<p>Equip your engineering, product, and compliance teams with a rigorous, ready-to-use prompt pack for classifying AI systems under the EU AI Act \u2014 risk-tier prompts, worked examples, and decision trees. Built by ActLattice, a ghostcorpnet fleet studio. Instant PDF download.</p>",
+   "price_usd": 29.0,
+   "currency": "usd",
+   "url": "https://koalstin.gumroad.com/l/xlwtk",
+   "tags": [
+    "ai governance",
+    "prompt pack",
+    "ai classification",
+    "prompts",
+    "engineering",
+    "templates"
+   ]
+  },
+  {
+   "id": "FSbe5m4R30ODF4u1MN-7Vw==",
+   "name": "AI Compliance Leadership Audiobook",
+   "description": "<p>Master autonomous AI governance with this complete audio briefing script. Designed for engineering leaders \u2014 read it aloud or hand it to your team as the definitive AI compliance leadership briefing. Built by ActLattice, a ghostcorpnet fleet studio. Instant PDF download.</p>",
+   "price_usd": 49.0,
+   "currency": "usd",
+   "url": "https://koalstin.gumroad.com/l/jikvcv",
+   "tags": [
+    "ai governance",
+    "compliance",
+    "audiobook",
+    "leadership",
+    "briefing",
+    "eu ai act"
+   ]
+  },
+  {
+   "id": "3g-pZ0UVCQGdT3K-7KXjag==",
+   "name": "AI Deployer Obligation Checklist",
+   "description": "<p>Navigate your legal responsibilities as an AI deployer under the EU AI Act with this complete, practical compliance worksheet. Designed for compliance officers, legal counsel, and technical leads, this resource breaks down complex Article 26 and Article 50 deployer duties into actionable operational steps, concrete documentation requirements, and dual-industry examples for chatbots and HR screening tools. Delivered as an instant PDF download.</p>",
+   "price_usd": 29.0,
+   "currency": "usd",
+   "url": "ai-deployer-obligation-checklist",
+   "tags": [
+    "compliance",
+    "ai",
+    "eu ai act",
+    "checklist",
+    "worksheet",
+    "deployer"
+   ]
+  },
+  {
+   "id": "l0E2qnStSu11TigSGzrW9A==",
+   "name": "AI Disclosure Middleware",
+   "description": "<p>Production-ready Python middleware that automatically injects verifiable, standards-compliant AI disclosure into your agent outputs. Full source code, integration guide, and test harness included. Built by ActLattice, a ghostcorpnet fleet studio. Instant PDF download.</p>",
+   "price_usd": 149.0,
+   "currency": "usd",
+   "url": "https://koalstin.gumroad.com/l/wcuuxd",
+   "tags": [
+    "ai governance",
+    "disclosure",
+    "middleware",
+    "python",
+    "ai transparency",
+    "code"
+   ]
+  },
+  {
+   "id": "a1OsUB9SVzAca1cSTQTV9A==",
+   "name": "AI Governance Board Briefing",
+   "description": "<p>A 15-slide board-ready deck: why AI governance is a board matter, your agent estate inventory, five risk domains (prompt injection, data handling, cost escalation, human oversight, vendor risk), control status, a 90-day roadmap, and three decision items \u2014 plus EU AI Act timeline and incident-severity appendices.</p>",
+   "price_usd": 49.0,
+   "currency": "usd",
+   "url": "ai-governance-board-briefing",
+   "tags": [
+    "ai governance",
+    "board deck",
+    "presentation",
+    "ai agents",
+    "compliance",
+    "risk management",
+    "powerpoint",
+    "executive"
+   ]
+  },
+  {
+   "id": "vTrd-gwBIStrTdif7hb09A==",
+   "name": "AI Identity Disclosure Pack for Voice Agents",
+   "description": "<p>State AI-disclosure laws (CA, NY, TN, CO and the patchwork), EU AI Act Article 50 transparency, in-call disclosure phrasing, and the national-patchwork playbook for one agent running nationwide.</p><p><br></p><p>Operational governance frameworks, compliance checklists, and template text. Not legal advice. PDF. Built by ghostcorpnet.</p>",
+   "price_usd": 49.0,
+   "currency": "usd",
+   "url": "https://koalstin.gumroad.com/l/hjqagr",
+   "tags": [
+    "compliance",
+    "ai agents",
+    "voice ai",
+    "governance"
+   ]
+  },
+  {
+   "id": "CcHgQZBS7QXl-83dP7k3WQ==",
+   "name": "AI Literacy Training Deck",
+   "description": "<p>Equip your staff with practical AI literacy grounded in real governance, policy gates, and everyday decision-making. Slide-ready training deck your L&amp;D team can deliver this quarter. Built by ActLattice, a ghostcorpnet fleet studio. Instant PDF download.</p>",
+   "price_usd": 49.0,
+   "currency": "usd",
+   "url": "https://koalstin.gumroad.com/l/tubig",
+   "tags": [
+    "compliance",
+    "ai literacy",
+    "training",
+    "deck",
+    "eu ai act",
+    "staff training"
+   ]
+  },
+  {
+   "id": "jxXZCQvh-qrTe545LX1_-Q==",
+   "name": "AI Literacy Training Log",
+   "description": "<p>A CSV-schema worksheet for recording workforce AI literacy training under the EU AI Act. Covers training modules, completion records, role-based curricula, and verification statuses \u2014 mapped to EU AI Act and NIST AI RMF. Built by ActLattice, a ghostcorpnet fleet studio. Instant PDF download.</p>",
+   "price_usd": 29.0,
+   "currency": "usd",
+   "url": "https://koalstin.gumroad.com/l/amczi",
+   "tags": [
+    "compliance",
+    "ai literacy",
+    "eu ai act",
+    "training log",
+    "workforce training",
+    "record keeping"
+   ]
+  },
+  {
+   "id": "P_WQy-OEG-9r9_uzqtNDTw==",
+   "name": "AI Model Provider Vendor Scorecard",
+   "description": "<p>Score model providers on governance-relevant criteria before your agents touch them. A self-serve Kestrelattice PDF \u2014 buy once, download instantly.</p>",
+   "price_usd": 19.0,
+   "currency": "usd",
+   "url": "model-provider-vendor-scorecard",
+   "tags": [
+    "ai agents",
+    "ai governance",
+    "vendor evaluation",
+    "model management"
+   ]
+  },
+  {
+   "id": "90y-YX2aX13qeCoir7oc-g==",
+   "name": "AI Model Rotation Policy One-Pager",
+   "description": "<p>One page that decides when your agents move to a new model version \u2014 and who signs off first. A self-serve Kestrelattice PDF \u2014 buy once, download instantly.</p>",
+   "price_usd": 19.0,
+   "currency": "usd",
+   "url": "model-rotation-policy",
+   "tags": [
+    "ai agents",
+    "ai governance",
+    "model management",
+    "policy template"
+   ]
+  },
+  {
+   "id": "Odz0e7R_2k1OZqVjrAzpmw==",
+   "name": "AI Obligation Tracking Code",
+   "description": "<p>Code package for a duty-tracking system with evidence links, reminders, and obligation lifecycle management under the EU AI Act. Enterprise license. Built by ActLattice, a ghostcorpnet fleet studio. Instant PDF download.</p>",
+   "price_usd": 299.0,
+   "currency": "usd",
+   "url": "https://koalstin.gumroad.com/l/ahgduq",
+   "tags": [
+    "ai act",
+    "obligation tracker",
+    "compliance code",
+    "evidence links",
+    "duty tracking",
+    "enterprise"
+   ]
+  },
+  {
+   "id": "jmIDpeUorP6je79RMjck3g==",
+   "name": "AI Policy Generator (Interactive)",
+   "description": "<p>An interactive generator that drafts a customized AI acceptable-use policy from a five-question questionnaire (company, size, agent use cases, data types, risk posture). Produces full policy text with [BRACKETED] fields \u2014 copy, download, or print. Single offline HTML file.</p><p><br></p><p>(Interactive single-file HTML tool)</p>",
+   "price_usd": 29.0,
+   "currency": "usd",
+   "url": "ai-policy-generator-interactive",
+   "tags": [
+    "ai policy",
+    "ai governance",
+    "template",
+    "policy generator",
+    "interactive",
+    "acceptable use",
+    "tool",
+    "customizable"
+   ]
+  },
+  {
+   "id": "Fvg2uVjtc0SmfG5ETsviSw==",
+   "name": "AI Risk Register & Scoring Toolkit",
+   "description": "<p>A scored AI risk register workbook (XLSX) for teams governing AI agents in production: risk taxonomy, likelihood\u00d7impact scoring, owner assignments, and mitigation tracking. Fully editable spreadsheet \u2014 no placeholders. From ghostcorpnet.</p>",
+   "price_usd": 29.0,
+   "currency": "usd",
+   "url": "https://koalstin.gumroad.com/l/nchjpo",
+   "tags": [
+    "ai governance",
+    "ai agents",
+    "risk management",
+    "spreadsheet",
+    "risk register",
+    "excel"
+   ]
+  },
+  {
+   "id": "4Wa8CO3Ep9ltK9P_bixN1w==",
+   "name": "AI Use-Case Registry",
+   "description": "<p>A CSV registry template for organizational AI inventories \u2014 document every AI use case, owner, risk tier, and control. Built by ActLattice, a ghostcorpnet fleet studio. Instant PDF download.</p>",
+   "price_usd": 29.0,
+   "currency": "usd",
+   "url": "https://koalstin.gumroad.com/l/lyeqae",
+   "tags": [
+    "eu ai act",
+    "ai inventory",
+    "use case registry",
+    "ai governance",
+    "risk register",
+    "nist"
+   ]
+  },
+  {
+   "id": "G98xJXe7-KKufLENhNjFSA==",
+   "name": "Algorithmic Accountability Framework",
+   "description": "<p>The full accountability scaffold for agencies. Risk classification, impact assessments, decision-logging standards, human-review design, monitoring plans, and remediation procedures \u2014 the complete system for answering who is accountable for this agent? A CivicWarden kit (ghostcorpnet studio). Instant PDF download.</p>",
+   "price_usd": 29.0,
+   "currency": "usd",
+   "url": "https://koalstin.gumroad.com/l/mavbg",
+   "tags": [
+    "civicwarden",
+    "public sector",
+    "ai governance",
+    "transparency",
+    "government ai",
+    "compliance"
+   ]
+  },
+  {
+   "id": "suuSgdXcfuyTm2wUhxd99w==",
+   "name": "API Key Lifecycle Checklist",
+   "description": "<p>A ready-to-use governance pack for AI agent teams: API Key Lifecycle Checklist from the ghostcorpnet micro-library of practical AI agent governance tools. Includes ready-to-use templates and checklists your team can adopt immediately. Instant download \u2014 PDF.</p>",
+   "price_usd": 19.0,
+   "currency": "usd",
+   "url": "https://koalstin.gumroad.com/l/gnnwhu",
+   "tags": [
+    "ai agents",
+    "governance",
+    "compliance",
+    "risk management",
+    "template",
+    "ai safety"
+   ]
+  },
+  {
+   "id": "elIddAco1ndxevK56cSKjg==",
+   "name": "API-Key Lifecycle Checklist",
+   "description": "<p>Issue, scope, rotate, and revoke the API keys your agents hold \u2014 without the surprise leak. A complete, zero-placeholder draft for teams governing AI agents in production: policy gates, audit trails, cost controls, permissioning, and incident response, written so you can adopt it as-is.</p>",
+   "price_usd": 19.0,
+   "currency": "usd",
+   "url": "https://koalstin.gumroad.com/l/nawurj",
+   "tags": [
+    "ai agents",
+    "ai governance",
+    "secrets management",
+    "api security",
+    "checklist"
+   ]
+  },
+  {
+   "id": "BbitAd6sw5m6_UIfj6RTUA==",
+   "name": "Audio & Transcript Retention Pack",
+   "description": "<p>A governance playbook for enforcing data-minimization defaults in voice AI systems, covering: retention schedules for call audio and transcripts, legal-hold workflows, deletion attestations, and vendor sub-processor controls. Operational governance frameworks, compliance checklists, and template text. Not legal advice. PDF. Built by ghostcorpnet.</p>",
+   "price_usd": 49.0,
+   "currency": "usd",
+   "url": "https://koalstin.gumroad.com/l/omxwwo",
+   "tags": [
+    "compliance",
+    "ai agents",
+    "voice ai",
+    "governance"
+   ]
+  },
+  {
+   "id": "u2o6QYUoM-OcPZqw2xqVUQ==",
+   "name": "Audit & Attestation Pack",
+   "description": "<p>Prove your supply chain is clean. The complete audit-readiness system for open-source agent stacks: evidence collection, build provenance and attestations, control checklists, auditor request templates, and the evidence vault structure. Built by SourceLattice (ghostcorpnet fleet studio). Instant PDF download.</p>",
+   "price_usd": 49.0,
+   "currency": "usd",
+   "url": "sourcelattice-audit-attestation-pack",
+   "tags": [
+    "open source",
+    "sourcelattice",
+    "audit",
+    "compliance"
+   ]
+  },
+  {
+   "id": "W7wgt12kV8r0mDeTnZITqA==",
+   "name": "Audit & FOIA-Readiness Pack",
+   "description": "<p>Be ready for audits and records requests. A complete always-ready posture for AI agent oversight: records catalogs, request triage playbooks, retrieval SOPs, redaction guidance, proactive disclosure programs, and internal audit templates \u2014 so no request or auditor ever catches you assembling the basics. Built by CivicWarden, a ghostcorpnet fleet studio. CC-BY-4.0. Instant PDF download.</p>",
+   "price_usd": 49.0,
+   "currency": "usd",
+   "url": "https://koalstin.gumroad.com/l/vkzyyl",
+   "tags": [
+    "civicwarden",
+    "public sector",
+    "ai governance",
+    "transparency",
+    "government ai",
+    "compliance"
+   ]
+  },
+  {
+   "id": "YxOmCiwdQKeYzmpdkPMIPA==",
+   "name": "Audit Logging Tool Vendor Scorecard",
+   "description": "<p>A ready-to-use governance pack for AI agent teams: Audit Logging Tool Vendor Scorecard from the ghostcorpnet micro-library of practical AI agent governance tools. Includes ready-to-use templates and checklists your team can adopt immediately. Instant download \u2014 PDF.</p>",
+   "price_usd": 19.0,
+   "currency": "usd",
+   "url": "https://koalstin.gumroad.com/l/aspwfz",
+   "tags": [
+    "ai agents",
+    "governance",
+    "compliance",
+    "risk management",
+    "template",
+    "ai safety"
+   ]
+  },
+  {
+   "id": "pKrbIHTw8Q2PWlQbOya2pA==",
+   "name": "Audit Trail Completeness Audit",
+   "description": "<p>A ready-to-use governance pack for AI agent teams: Audit Trail Completeness Audit from the ghostcorpnet micro-library of practical AI agent governance tools. Includes ready-to-use templates and checklists your team can adopt immediately. Instant download \u2014 PDF.</p>",
+   "price_usd": 19.0,
+   "currency": "usd",
+   "url": "https://koalstin.gumroad.com/l/yaips",
+   "tags": [
+    "ai agents",
+    "compliance",
+    "template",
+    "governance",
+    "risk management",
+    "ai safety"
+   ]
+  },
+  {
+   "id": "pFbhCX3AiT90NhpusRWa0g==",
+   "name": "Audit-Defense Evidence Pack",
+   "description": "<p>Prove fairness when challenged. The complete evidence-assembly system for defending hiring-agent fairness \u2014 the defensibility dossier, adverse-impact analyses, and regulator-ready documentation. Built by HireWarden (ghostcorpnet fleet studio).</p>",
+   "price_usd": 49.0,
+   "currency": "usd",
+   "url": "hirewarden-audit-defense-evidence-pack",
+   "tags": [
+    "compliance",
+    "ai governance",
+    "hiring"
+   ]
+  },
+  {
+   "id": "swtHnXxCcOt2-6BMZKswNQ==",
+   "name": "Audit-Evidence Vault Templates",
+   "description": "<p>Templates for organizing compliance evidence in an audit-ready vault: retention schedules, disclosure logs, and review trails. Educational guidance, not legal advice. From ActLattice.</p>",
+   "price_usd": 49.0,
+   "currency": "usd",
+   "url": "actlattice-audit-evidence-vault-templates",
+   "tags": [
+    "ai agents",
+    "compliance",
+    "template",
+    "governance",
+    "risk management",
+    "ai safety"
+   ]
+  },
+  {
+   "id": "uj1REQ4Io3LuWzaw6pCBoA==",
+   "name": "Audit-Logging Requirements Pack",
+   "description": "<p>Audit logs that survive scrutiny. Define exactly what your clinical agents must log, how long to keep it, and how to prove integrity \u2014 with requirements checklists and sample log schemas.</p><p><br></p><p>Instant download. Part of the ghostcorpnet governance kit line.</p>",
+   "price_usd": 29.0,
+   "currency": "usd",
+   "url": "https://koalstin.gumroad.com/l/gtfucm",
+   "tags": [
+    "ai agents",
+    "template",
+    "governance",
+    "compliance",
+    "risk management",
+    "ai safety"
+   ]
+  },
+  {
+   "id": "jvZViz7eM9e6F_n3rP6hdw==",
+   "name": "Audit-Logging Tool Vendor Scorecard",
+   "description": "<p>Score logging tools on tamper-resistance, retention, and export before you trust them. A complete, zero-placeholder draft for teams governing AI agents in production: policy gates, audit trails, cost controls, permissioning, and incident response, written so you can adopt it as-is.</p>",
+   "price_usd": 19.0,
+   "currency": "usd",
+   "url": "https://koalstin.gumroad.com/l/qvntl",
+   "tags": [
+    "ai agents",
+    "ai governance",
+    "logging",
+    "observability",
+    "vendor evaluation",
+    "audit"
+   ]
+  },
+  {
+   "id": "-iLmA5oXUoulEn2fvhrmNA==",
+   "name": "Audit-Trail Architecture Guide",
+   "description": "<p>Immutable trails regulators can actually follow. The complete architecture guide for AI agent audit trails in finance: event design, immutability patterns, storage and retention, replay capability, examiner UX, and integrity monitoring \u2014 plus a worked hypothetical example. Part of the FinLattice (ghostcorpnet) governance kit line. Instant download.</p>",
+   "price_usd": 49.0,
+   "currency": "usd",
+   "url": "https://koalstin.gumroad.com/l/jxjork",
+   "tags": [
+    "ai agents",
+    "template",
+    "governance",
+    "compliance",
+    "risk management",
+    "ai safety"
+   ]
+  },
+  {
+   "id": "D8a79rcbPg8sN52jddlF_Q==",
+   "name": "Audit-Trail Completeness Audit Template",
+   "description": "<p>Prove your audit trail is complete \u2014 or find the gaps before an incident finds them. A complete, zero-placeholder draft for teams governing AI agents in production: policy gates, audit trails, cost controls, permissioning, and incident response, written so you can adopt it as-is.</p>",
+   "price_usd": 19.0,
+   "currency": "usd",
+   "url": "https://koalstin.gumroad.com/l/bvnnn",
+   "tags": [
+    "ai agents",
+    "ai governance",
+    "audit",
+    "compliance",
+    "template"
+   ]
+  },
+  {
+   "id": "NhXlHlSG_wmTzz_840n3Iw==",
+   "name": "Auto-Grant Prohibition Waiver",
+   "description": "<p>A ready-to-use governance pack for AI agent teams: Auto-Grant Prohibition Waiver from the ghostcorpnet micro-library of practical AI agent governance tools. Includes ready-to-use templates and checklists your team can adopt immediately. Instant download \u2014 PDF.</p>",
+   "price_usd": 19.0,
+   "currency": "usd",
+   "url": "https://koalstin.gumroad.com/l/dgtvpc",
+   "tags": [
+    "ai agents",
+    "template",
+    "governance",
+    "compliance",
+    "risk management",
+    "ai safety"
+   ]
+  },
+  {
+   "id": "Yk-SSl4ZDzFGqWb3dzEDNQ==",
+   "name": "Auto-Grant Prohibition Waiver Template",
+   "description": "<p>The narrow, time-boxed waiver for the no-auto-grant rule \u2014 with mandatory review. A complete, zero-placeholder draft for teams governing AI agents in production: policy gates, audit trails, cost controls, permissioning, and incident response, written so you can adopt it as-is.</p>",
+   "price_usd": 19.0,
+   "currency": "usd",
+   "url": "https://koalstin.gumroad.com/l/adgsr",
+   "tags": [
+    "ai agents",
+    "ai governance",
+    "access control",
+    "policy template",
+    "template"
+   ]
+  },
+  {
+   "id": "ez51-pvbYnw2r7fh4AitkQ==",
+   "name": "Blast Radius Mapping Worksheet",
+   "description": "<p>A ready-to-use governance pack for AI agent teams: Blast Radius Mapping Worksheet from the ghostcorpnet micro-library of practical AI agent governance tools. Includes ready-to-use templates and checklists your team can adopt immediately. Instant download \u2014 PDF.</p>",
+   "price_usd": 19.0,
+   "currency": "usd",
+   "url": "https://koalstin.gumroad.com/l/wkdep",
+   "tags": [
+    "ai agents",
+    "risk management",
+    "governance",
+    "compliance",
+    "template",
+    "ai safety"
+   ]
+  },
+  {
+   "id": "0ruoMIDMa9g0hRO7hDE7NQ==",
+   "name": "Blast-Radius Mapping Worksheet",
+   "description": "<p>Map what each agent can break, then tier it before it breaks anything. A complete, zero-placeholder draft for teams governing AI agents in production: policy gates, audit trails, cost controls, permissioning, and incident response, written so you can adopt it as-is.</p>",
+   "price_usd": 19.0,
+   "currency": "usd",
+   "url": "https://koalstin.gumroad.com/l/berqf",
+   "tags": [
+    "ai agents",
+    "ai governance",
+    "risk management",
+    "workbook"
+   ]
+  },
+  {
+   "id": "1vFTLheyhVvEXeDzHGZfuA==",
+   "name": "Board Presentation Deck Templates",
+   "description": "<p>Win approval with a board-ready AI plan. Complete slide-by-slide templates for the initial AI proposal, the pilot-results report, and the annual governance update \u2014 with speaker notes, appendix data packs, and the objection-handling guide.</p>",
+   "price_usd": 49.0,
+   "currency": "usd",
+   "url": "classwarden-board-presentation-deck-templates",
+   "tags": [
+    "ai agents",
+    "customer support",
+    "governance",
+    "support operations",
+    "ai safety",
+    "classwarden",
+    "ai governance",
+    "k-12",
+    "board presentation",
+    "slide templates"
+   ]
+  },
+  {
+   "id": "IaG59Wzrn4GN8pdnzO4P8Q==",
+   "name": "Board Risk Report Templates",
+   "description": "<p>Board-ready risk reporting for AI in finance. Turn model risk, fraud signals, and control gaps into crisp board packs \u2014 with template decks, one-page summaries, and examiner Q&amp;A prep.</p><p><br></p><p>Instant download. Part of the ghostcorpnet governance kit line.</p>",
+   "price_usd": 49.0,
+   "currency": "usd",
+   "url": "https://koalstin.gumroad.com/l/gzbgwl",
+   "tags": [
+    "ai agents",
+    "template",
+    "governance",
+    "compliance",
+    "risk management",
+    "ai safety"
+   ]
+  },
+  {
+   "id": "Tce6d4d8tWPTIrJlaKeNXg==",
+   "name": "Brand Safety Playbook",
+   "description": "<p>A 30-page brand-safety playbook for adtech teams: blocklists, allowlists, verification vendors, and suitability frameworks. Built by an ghostcorpnet fleet studio. Instant PDF download.</p>",
+   "price_usd": 19.0,
+   "currency": "usd",
+   "url": "https://koalstin.gumroad.com/l/acoab",
+   "tags": [
+    "adtech",
+    "programmatic",
+    "brand safety",
+    "blocklists",
+    "suitability",
+    "verification"
+   ]
+  },
+  {
+   "id": "bNxLqDrizy-d4wfrSz7P9Q==",
+   "name": "Bug-Bounty Scope Audit Template",
+   "description": "<p>A full audit template for scoping bug-bounty coverage on AI agents: in-scope agent surfaces, out-of-bounds data actions, reward tiers, safe-harbor language, and triage workflows for agent-specific vulnerability classes.</p><p><br></p><p>Instant PDF download. Self-serve \u2014 no calls, no onboarding.</p>",
+   "price_usd": 19.0,
+   "currency": "usd",
+   "url": "https://koalstin.gumroad.com/l/dmbwdu",
+   "tags": [
+    "ai agents",
+    "ai governance",
+    "security audit",
+    "bug bounty"
+   ]
+  },
+  {
+   "id": "jCdgPwDWqguFxZeuGtMyBA==",
+   "name": "Build-vs-Buy Matrix Worksheet",
+   "description": "<p>Build the agent in-house or buy the platform? This scored worksheet walks you through engineering cost, data-control risk, audit-trail ownership, vendor lock-in, incident-response SLAs, and ongoing governance overhead. Fully worked scoring rubric, weighted criteria, and tie-breaker rules included \u2014 reach a defensible decision in one working session.</p><p><br></p><p>Instant PDF download. Self-serve \u2014 no calls, no onboarding.</p>",
+   "price_usd": 19.0,
+   "currency": "usd",
+   "url": "https://koalstin.gumroad.com/l/dvrerp",
+   "tags": [
+    "ai agents",
+    "ai governance",
+    "worksheets",
+    "procurement"
+   ]
+  },
+  {
+   "id": "fXRPxVc_mHo7txgmCZ3g4A==",
+   "name": "Business-Continuity Use-Case Bank",
+   "description": "<p>A bank of business-continuity use cases for AI agent fleets: provider outages, model deprecations, cost spikes, data-feed failures, and key-person gaps, each with response playbooks, recovery targets, and test cadences.</p><p><br></p><p>Instant PDF download. Self-serve \u2014 no calls, no onboarding.</p>",
+   "price_usd": 19.0,
+   "currency": "usd",
+   "url": "https://koalstin.gumroad.com/l/qqjegv",
+   "tags": [
+    "ai agents",
+    "ai governance",
+    "business continuity",
+    "use cases"
+   ]
+  },
+  {
+   "id": "5AJ2V8ebsJdHjR4lUNMdsA==",
+   "name": "California AI Law Compliance Kit",
+   "description": "<p>California's AI statutes landed in September 2026 \u2014 hiring, customer interaction, and media deployments are all in scope.</p><p><br></p><p>This kit breaks down what each new California AI law actually requires in plain language, who it applies to, and the operational steps to comply. Includes per-law checklists, customer-disclosure templates, and a crosswalk for companies selling into or operating in California.</p><p><br></p><p>This is not legal advice \u2014 statutes are new and interpretation i",
+   "price_usd": 49.0,
+   "currency": "usd",
+   "url": "https://koalstin.gumroad.com/l/ixqhk",
+   "tags": [
+    "ai agents",
+    "governance",
+    "compliance",
+    "playbook"
+   ]
+  },
+  {
+   "id": "XXPPMry2XgaC8fNHaSxAsQ==",
+   "name": "Call Recording Consent & Retention Pack",
+   "description": "<p>One-party vs two-party consent rules across the 12 two-party states, in-call disclosure scripts, GDPR/PIPEDA recording consent, and defensible audio retention schedules. Operational governance frameworks, compliance checklists, and template text. Not legal advice. PDF. Built by ghostcorpnet.</p>",
+   "price_usd": 49.0,
+   "currency": "usd",
+   "url": "https://koalstin.gumroad.com/l/sbipgc",
+   "tags": [
+    "compliance",
+    "ai agents",
+    "voice ai",
+    "governance"
+   ]
+  },
+  {
+   "id": "ITxoF_oWTVL1tUUmrGEHRA==",
+   "name": "Candidate-Notice Templates",
+   "description": "<p>Disclose AI screening the right way. Plain-language notice templates for automated hiring tools \u2014 what the tool does, what data it uses, how to request human review, and jurisdiction-specific add-ons \u2014 plus timing rules, placement guidance, and an accommodation path. From HireWarden (ghostcorpnet) \u2014 digital PDF download, delivered instantly by Gumroad.</p>",
+   "price_usd": 19.0,
+   "currency": "usd",
+   "url": "https://koalstin.gumroad.com/l/ikbzah",
+   "tags": [
+    "ai agents",
+    "template",
+    "governance",
+    "compliance",
+    "risk management",
+    "ai safety"
+   ]
+  },
+  {
+   "id": "DUMWp4hoZyGT8hH3fngI9w==",
+   "name": "Chargeback & Dispute Defense Pack",
+   "description": "<p>Evidence kits for payment disputes involving agents. Dispute-type taxonomies, evidence checklists per dispute reason, transcript packaging standards, representment letter templates, and the operational controls that reduce disputes before they happen.</p>",
+   "price_usd": 49.0,
+   "currency": "usd",
+   "url": "supportwarden-chargeback-dispute-defense-pack",
+   "tags": [
+    "ai agents",
+    "customer support",
+    "template",
+    "governance",
+    "support operations",
+    "ai safety"
+   ]
+  },
+  {
+   "id": "oi-J3gPMET_bz1JLi0p2Ew==",
+   "name": "CHRO Briefing Templates",
+   "description": "<p>Brief executives on hiring-agent risk and ROI. Board-ready briefing templates for HR leaders \u2014 the quarterly fairness report, risk-and-exposure briefings, ROI and business-case frames, incident briefings, and program-funding requests \u2014 translating governance work into executive decisions. Built by HireWarden (ghostcorpnet fleet studio).</p>",
+   "price_usd": 49.0,
+   "currency": "usd",
+   "url": "hirewarden-chro-briefing-templates",
+   "tags": [
+    "compliance",
+    "ai governance",
+    "hiring"
+   ]
+  },
+  {
+   "id": "iA1iToDL-1ugN_v0_dKtcA==",
+   "name": "Citation-Verification Protocol",
+   "description": "<p>Stop hallucinated citations before they reach a filing. The non-negotiable verification workflow for every citation in agent-assisted legal work. Built by LawWarden (ghostcorpnet fleet studio).</p>",
+   "price_usd": 19.0,
+   "currency": "usd",
+   "url": "lawwarden-citation-verification-protocol",
+   "tags": [
+    "compliance",
+    "legal",
+    "ai governance"
+   ]
+  },
+  {
+   "id": "kjP1SfGWmsohO0DruNGtoA==",
+   "name": "Citizen-Notice Starter Pack",
+   "description": "<p>Notify residents about AI in public services. Ready-to-fill notice templates for launches, scope changes, and incidents \u2014 plus a multi-channel distribution plan and plain-language checklist so every resident gets the message. A CivicWarden kit (ghostcorpnet studio). Instant PDF download.</p>",
+   "price_usd": 19.0,
+   "currency": "usd",
+   "url": "https://koalstin.gumroad.com/l/jzhwho",
+   "tags": [
+    "civicwarden",
+    "public sector",
+    "ai governance",
+    "transparency",
+    "government ai",
+    "compliance"
+   ]
+  },
+  {
+   "id": "1NoWhYWXUN64bRKU6RSEsA==",
+   "name": "Classroom AI Agent Policy Starter Kit",
+   "description": "<p>A first AI policy any school can adopt in a week. Includes a fill-in policy template, a 5-day adoption plan, role assignments, and the sign-off sheet your leadership needs.</p>",
+   "price_usd": 19.0,
+   "currency": "usd",
+   "url": "classwarden-classroom-ai-agent-policy-starter-kit",
+   "tags": [
+    "ai agents",
+    "template",
+    "governance",
+    "education",
+    "edtech",
+    "student privacy"
+   ]
+  },
+  {
+   "id": "dfCG8v7bND1bcA3f84xsIg==",
+   "name": "Client-Data Segregation Templates",
+   "description": "<p>Matter-level isolation patterns that hold up. Access matrices, retrieval-partition designs, ethical-screen configurations, and audit trails for segregated client data. Built by LawWarden (ghostcorpnet fleet studio).</p>",
+   "price_usd": 29.0,
+   "currency": "usd",
+   "url": "lawwarden-client-data-segregation-templates",
+   "tags": [
+    "compliance",
+    "legal",
+    "ai governance"
+   ]
+  },
+  {
+   "id": "XDG6n03_L0esK_iarKi4jw==",
+   "name": "Clinical Agent Policy Starter",
+   "description": "<p>Your first clinical AI agent policy in a day. A starter policy pack for deploying AI agents in clinical settings \u2014 scope definitions, approval workflows, and monitoring checklists your compliance officer can sign off on.</p><p><br></p><p>Instant download. Part of the ghostcorpnet governance kit line.</p>",
+   "price_usd": 19.0,
+   "currency": "usd",
+   "url": "https://koalstin.gumroad.com/l/zwmzsn",
+   "tags": [
+    "ai agents",
+    "template",
+    "governance",
+    "compliance",
+    "risk management",
+    "ai safety"
+   ]
+  },
+  {
+   "id": "vf1bmzBV8iz_3A08LvB4vQ==",
+   "name": "Clinical Validation Protocol Templates",
+   "description": "<p>Validate agent behavior before it touches care. Complete validation protocols: test-plan templates, golden-dataset construction, safety metrics, adversarial prompt testing, human-in-the-loop evaluation, and go/no-go acceptance gates. From HealthLattice (ghostcorpnet) \u2014 digital PDF download, delivered instantly by Gumroad.</p>",
+   "price_usd": 49.0,
+   "currency": "usd",
+   "url": "https://koalstin.gumroad.com/l/eghap",
+   "tags": [
+    "ai agents",
+    "template",
+    "governance",
+    "compliance",
+    "risk management",
+    "ai safety"
+   ]
+  },
+  {
+   "id": "3G61Jh2GpHryy2f63AvMgQ==",
+   "name": "Complaint-Escalation Runbook",
+   "description": "<p>From angry message to resolved case, step by step. Severity classification, minute-by-minute response sequences for each level, complaint intake templates, regulatory and legal-tripwire handling, and the follow-up loop that turns complaints into retained customers.</p>",
+   "price_usd": 29.0,
+   "currency": "usd",
+   "url": "https://koalstin.gumroad.com/l/htuads",
+   "tags": [
+    "ai agents",
+    "customer support",
+    "template",
+    "governance",
+    "support operations",
+    "ai safety"
+   ]
+  },
+  {
+   "id": "-QKc0gqf7LzNWBLtU4hKCQ==",
+   "name": "Compliance Officer Briefing Bundle",
+   "description": "<p>Brief leadership on agent risk and readiness. Board-ready briefs, a risk register, readiness scorecards, gap-analysis worksheets, and a decision-ready roadmap for healthcare AI agent governance. From HealthLattice (ghostcorpnet) \u2014 digital PDF download, delivered instantly by Gumroad.</p>",
+   "price_usd": 49.0,
+   "currency": "usd",
+   "url": "https://koalstin.gumroad.com/l/nxwtd",
+   "tags": [
+    "ai agents",
+    "template",
+    "governance",
+    "compliance",
+    "risk management",
+    "ai safety"
+   ]
+  },
+  {
+   "id": "XkDb472t5r3ixb5fclrmCA==",
+   "name": "Compromised Agent Quarantine (Audiobook)",
+   "description": "<p>A narrated audiobook on the first-hour quarantine protocol: the six trigger categories, isolation in under five minutes, permission revocation, evidence preservation, blast-radius mapping, and the return-to-service bar. With intro and outro.</p><p><br></p><p>(MP3 audiobook)</p>",
+   "price_usd": 19.0,
+   "currency": "usd",
+   "url": "compromised-agent-quarantine-audiobook",
+   "tags": [
+    "incident response",
+    "ai agents",
+    "security",
+    "audiobook",
+    "audio",
+    "quarantine",
+    "training",
+    "mp3"
+   ]
+  },
+  {
+   "id": "gBBrptC3EvhpuUoXvMRvHA==",
+   "name": "Compromised Agent Quarantine Runbook",
+   "description": "<p>A ready-to-use governance pack for AI agent teams: Compromised Agent Quarantine Runbook from the ghostcorpnet micro-library of practical AI agent governance tools. Includes ready-to-use templates and checklists your team can adopt immediately. Instant download \u2014 PDF.</p>",
+   "price_usd": 19.0,
+   "currency": "usd",
+   "url": "https://koalstin.gumroad.com/l/eeojqe",
+   "tags": [
+    "ai agents",
+    "template",
+    "governance",
+    "compliance",
+    "risk management",
+    "ai safety"
+   ]
+  },
+  {
+   "id": "_qFH7SjHJAGMkGaNebMOFA==",
+   "name": "Compromised Agent Quarantine Runbook Excerpt",
+   "description": "<p>Isolate a misbehaving agent in the first hour without breaking the rest of the fleet. A complete, zero-placeholder draft for teams governing AI agents in production: policy gates, audit trails, cost controls, permissioning, and incident response, written so you can adopt it as-is.</p>",
+   "price_usd": 19.0,
+   "currency": "usd",
+   "url": "https://koalstin.gumroad.com/l/fxdlbe",
+   "tags": [
+    "ai agents",
+    "ai governance",
+    "incident response",
+    "runbook",
+    "ai security"
+   ]
+  },
+  {
+   "id": "7RAKOHeRAFzuLWtBkEGbjQ==",
+   "name": "Confidentiality Guardrail Pack",
+   "description": "<p>Data boundaries for client-confidential work. A classification scheme plus concrete guardrail rules that keep every client matter sealed when agents do the work. Built by LawWarden (ghostcorpnet fleet studio).</p>",
+   "price_usd": 19.0,
+   "currency": "usd",
+   "url": "lawwarden-confidentiality-guardrail-pack",
+   "tags": [
+    "compliance",
+    "legal",
+    "ai governance"
+   ]
+  },
+  {
+   "id": "FyZTahu7XbYKwcDwRtA0FA==",
+   "name": "Conformity Assessment Walkthrough",
+   "description": "<p>Step-by-step walkthrough of the EU AI Act's conformity assessment framework: when third-party assessment is required and how to prepare. Educational guidance, not legal advice. From ActLattice.</p>",
+   "price_usd": 29.0,
+   "currency": "usd",
+   "url": "actlattice-conformity-assessment-walkthrough",
+   "tags": [
+    "ai agents",
+    "compliance",
+    "template",
+    "governance",
+    "risk management",
+    "ai safety"
+   ]
+  },
+  {
+   "id": "_-pfey3RswH1KODMIcSzrA==",
+   "name": "Containment Playbook Library",
+   "description": "<p>Isolate a rogue agent without taking down the fleet: ten detailed containment plays \u2014 session freeze, credential revocation, source quarantine, egress cut, fleet pause, rollback, and more \u2014 each with steps, verification, and safe release. Guidance only, not a substitute for professional security review.</p>",
+   "price_usd": 29.0,
+   "currency": "usd",
+   "url": "https://koalstin.gumroad.com/l/lgzxj",
+   "tags": [
+    "ai agents",
+    "template",
+    "governance",
+    "compliance",
+    "risk management",
+    "ai safety"
+   ]
+  },
+  {
+   "id": "V2Y4BW2SByEOdpZV7HhtCw==",
+   "name": "Contextual Targeting Playbook",
+   "description": "<p>A 30-page contextual playbook: taxonomy design, page-level analysis, and performance measurement for cookieless targeting. Built by an ghostcorpnet fleet studio. Instant PDF download.</p>",
+   "price_usd": 19.0,
+   "currency": "usd",
+   "url": "https://koalstin.gumroad.com/l/umgiuf",
+   "tags": [
+    "adtech",
+    "contextual targeting",
+    "taxonomy",
+    "page-level analysis",
+    "programmatic",
+    "cookieless"
+   ]
+  },
+  {
+   "id": "fxw6qGYo2frkwCMptAHKLg==",
+   "name": "Contract Clause Finder (Python)",
+   "description": "<p>Paste a contract into a text file and this tool finds the clauses that matter - termination, payment, confidentiality, indemnification, limitation of liability, governing law, assignment, force majeure, and more - then writes a summary file with each clause name and excerpt. A search aid for faster first-pass review, not legal advice. Standard library only. Delivered as an instant ZIP download: working source code, README with setup and usage instructions, sample input/output, and a single-us",
+   "price_usd": 19.0,
+   "currency": "usd",
+   "url": "https://koalstin.gumroad.com/l/effwf",
+   "tags": [
+    "code",
+    "python",
+    "source code",
+    "download",
+    "contracts",
+    "legal tech",
+    "clause extraction"
+   ]
+  },
+  {
+   "id": "mts3-2vsMfV05WszcP_ONg==",
+   "name": "Contribution Policy Templates",
+   "description": "<p>CLA/DCO workflows contributors will follow. Ready-to-adopt contribution policies for open-source agent projects: DCO vs CLA guidance, CONTRIBUTING templates, pull-request checklists, and maintainer review workflows. Built by SourceLattice (ghostcorpnet fleet studio). Instant PDF download.</p>",
+   "price_usd": 19.0,
+   "currency": "usd",
+   "url": "sourcelattice-contribution-policy-templates",
+   "tags": [
+    "open source",
+    "sourcelattice",
+    "contribution",
+    "cla dco"
+   ]
+  },
+  {
+   "id": "Ry3P4tru1jYbo3VbI4eFFg==",
+   "name": "Cost-Per-Resolved-Task Calculator",
+   "description": "<p>Know what each completed task really costs, per agent, before finance asks. A complete, zero-placeholder draft for teams governing AI agents in production: policy gates, audit trails, cost controls, permissioning, and incident response, written so you can adopt it as-is.</p>",
+   "price_usd": 19.0,
+   "currency": "usd",
+   "url": "https://koalstin.gumroad.com/l/zjwlsu",
+   "tags": [
+    "ai agents",
+    "ai governance",
+    "cost management",
+    "calculator",
+    "finops"
+   ]
+  },
+  {
+   "id": "43zFakbOpON4nEOHQyQZgA==",
+   "name": "Creative AI Governance Pack",
+   "description": "<p>Creative AI Governance Pack: keep gen-AI art, copy, and video on-brand and lawsuit-free \u2014 rights review checklists, disclosure templates, and model-release workflows for creative teams.</p>",
+   "price_usd": 49.0,
+   "currency": "usd",
+   "url": "https://koalstin.gumroad.com/l/mkhfcx",
+   "tags": [
+    "compliance",
+    "creative ai",
+    "ai governance"
+   ]
+  },
+  {
+   "id": "bsiXXW5actypy8ubdIEJig==",
+   "name": "Creative Testing Framework",
+   "description": "<p>A 30-page creative testing framework: variant design, significance testing, and iteration cadences. Built by an ghostcorpnet fleet studio. Instant PDF download.</p>",
+   "price_usd": 19.0,
+   "currency": "usd",
+   "url": "https://koalstin.gumroad.com/l/tabxfb",
+   "tags": [
+    "adtech",
+    "creative testing",
+    "a/b testing",
+    "significance",
+    "iteration",
+    "ad creative"
+   ]
+  },
+  {
+   "id": "NwonMu-04500Tyy56E2Iqg==",
+   "name": "Credential Handling Policy",
+   "description": "<p>A ready-to-use governance pack for AI agent teams: Credential Handling Policy from the ghostcorpnet micro-library of practical AI agent governance tools. Includes ready-to-use templates and checklists your team can adopt immediately. Instant download \u2014 PDF.</p>",
+   "price_usd": 19.0,
+   "currency": "usd",
+   "url": "https://koalstin.gumroad.com/l/skpjlb",
+   "tags": [
+    "ai agents",
+    "template",
+    "governance",
+    "compliance",
+    "risk management",
+    "ai safety"
+   ]
+  },
+  {
+   "id": "8_XTph0R_stCfB7tQior8A==",
+   "name": "Credential Handling Policy One-Pager",
+   "description": "<p>One page on how agents receive, store, and never transmit credentials. A complete, zero-placeholder draft for teams governing AI agents in production: policy gates, audit trails, cost controls, permissioning, and incident response \u2014 adopt it as-is.</p>",
+   "price_usd": 19.0,
+   "currency": "usd",
+   "url": "https://koalstin.gumroad.com/l/fxgckt",
+   "tags": [
+    "ai agents",
+    "ai governance",
+    "secrets management",
+    "policy template",
+    "ai security"
+   ]
+  },
+  {
+   "id": "OmDuhNHcRYDI3KsWCAnrSQ==",
+   "name": "CSAT-Safe Fallback Scripts",
+   "description": "<p>Graceful failures that protect satisfaction scores. Ready-to-adapt scripts for every way a support agent can fail \u2014 no answer, wrong answer, outage, escalation, and handoff \u2014 each designed to leave the customer feeling heard.</p>",
+   "price_usd": 19.0,
+   "currency": "usd",
+   "url": "https://koalstin.gumroad.com/l/kkrqqx",
+   "tags": [
+    "ai agents",
+    "customer support",
+    "template",
+    "governance",
+    "support operations",
+    "ai safety"
+   ]
+  },
+  {
+   "id": "U1RJlwhFjrL6uxf7PQ3cxA==",
+   "name": "Customer Consent Template Pack",
+   "description": "<p>Ready-to-adapt consent language for AI agent products: collection notices, opt-in flows, withdrawal mechanisms, and agent-specific disclosures about autonomous actions, written so legal and product teams can finalize them together.</p><p><br></p><p>Instant PDF download. Self-serve \u2014 no calls, no onboarding.</p>",
+   "price_usd": 19.0,
+   "currency": "usd",
+   "url": "https://koalstin.gumroad.com/l/cipxwi",
+   "tags": [
+    "ai agents",
+    "ai governance",
+    "consent",
+    "templates"
+   ]
+  },
+  {
+   "id": "5DR7JDmGYFm-yIlgXnVtPg==",
+   "name": "Customer Facing Incident Runbook",
+   "description": "<p>A ready-to-use governance pack for AI agent teams: Customer Facing Incident Runbook from the ghostcorpnet micro-library of practical AI agent governance tools. Includes ready-to-use templates and checklists your team can adopt immediately. Instant download \u2014 PDF.</p>",
+   "price_usd": 19.0,
+   "currency": "usd",
+   "url": "https://koalstin.gumroad.com/l/ewxtao",
+   "tags": [
+    "ai agents",
+    "template",
+    "governance",
+    "compliance",
+    "risk management",
+    "ai safety"
+   ]
+  },
+  {
+   "id": "oKvo9Ll7qkhlf7eafSTPAg==",
+   "name": "Customer Support Agent Governance Pack \u2014 Helpdesk Studio",
+   "description": "<p>Escalation ladders, tone and promise guardrails, and QA scorecards for customer-facing support agents. A Pack Standard v1 governance kit from ghostcorpnet's Helpdesk Studio \u2014 self-serve PDF, instant download, no calls, no consulting.</p>",
+   "price_usd": 19.0,
+   "currency": "usd",
+   "url": "https://koalstin.gumroad.com/l/imybt",
+   "tags": [
+    "ai agents",
+    "ai governance",
+    "customer support",
+    "checklist",
+    "playbook",
+    "business template",
+    "customer experience"
+   ]
+  },
+  {
+   "id": "GhmebCUfNkD9dDPtMVzCiQ==",
+   "name": "Customer-Facing Incident Runbook Excerpt",
+   "description": "<p>When an agent incident reaches customers: triage, message, remediate, and follow up. A complete, zero-placeholder draft for teams governing AI agents in production: policy gates, audit trails, cost controls, permissioning, and incident response \u2014 adopt it as-is.</p>",
+   "price_usd": 19.0,
+   "currency": "usd",
+   "url": "https://koalstin.gumroad.com/l/wjzdei",
+   "tags": [
+    "ai agents",
+    "ai governance",
+    "incident response",
+    "runbook"
+   ]
+  },
+  {
+   "id": "Vd-Of-KtGn6JbUfL9T7sxQ==",
+   "name": "Data Handling Policy Templates",
+   "description": "<p>A ready-to-use governance pack for AI agent teams: Data Handling Policy Templates from the ghostcorpnet micro-library of practical AI agent governance tools. Includes ready-to-use templates and checklists your team can adopt immediately. Instant download \u2014 PDF.</p>",
+   "price_usd": 19.0,
+   "currency": "usd",
+   "url": "https://koalstin.gumroad.com/l/hoevie",
+   "tags": [
+    "ai agents",
+    "template",
+    "governance",
+    "compliance",
+    "risk management",
+    "ai safety"
+   ]
+  },
+  {
+   "id": "dwKSCT0Cr85Bd7ZDKA2exg==",
+   "name": "Data Residency Policy",
+   "description": "<p>A ready-to-use governance pack for AI agent teams: Data Residency Policy from the ghostcorpnet micro-library of practical AI agent governance tools. Includes ready-to-use templates and checklists your team can adopt immediately. Instant download \u2014 PDF.</p>",
+   "price_usd": 19.0,
+   "currency": "usd",
+   "url": "https://koalstin.gumroad.com/l/jnkndv",
+   "tags": [
+    "ai agents",
+    "template",
+    "governance",
+    "compliance",
+    "risk management",
+    "ai safety"
+   ]
+  },
+  {
+   "id": "h6pHgFoZjWXxjnLVGWxfaQ==",
+   "name": "Data Residency Policy One-Pager",
+   "description": "<p>One page pinning down where your agents' data may live and move. A complete, zero-placeholder draft for teams governing AI agents in production: policy gates, audit trails, cost controls, permissioning, and incident response \u2014 adopt it as-is.</p>",
+   "price_usd": 19.0,
+   "currency": "usd",
+   "url": "https://koalstin.gumroad.com/l/bloam",
+   "tags": [
+    "ai agents",
+    "ai governance",
+    "data governance",
+    "privacy",
+    "policy template"
+   ]
+  },
+  {
+   "id": "ngsY-wGz4jDZsKVBu5RsPw==",
+   "name": "Data-Handling Policy Template Pack",
+   "description": "<p>Adoptable data-handling policies: what agents may read, write, retain, and transmit. A complete, zero-placeholder draft for teams governing AI agents in production: policy gates, audit trails, cost controls, permissioning, and incident response \u2014 adopt it as-is.</p>",
+   "price_usd": 19.0,
+   "currency": "usd",
+   "url": "https://koalstin.gumroad.com/l/jjgbw",
+   "tags": [
+    "ai agents",
+    "ai governance",
+    "data governance",
+    "privacy",
+    "policy template"
+   ]
+  },
+  {
+   "id": "r7f73tGaPdyK3oEaWDUGjQ==",
+   "name": "Defensive AI Operations Playbook",
+   "description": "<p>Defensive AI Operations Playbook: run AI red teams, monitor for misuse, and harden your agent fleet \u2014 detection runbooks, incident severity tiers, and response playbooks.</p>",
+   "price_usd": 49.0,
+   "currency": "usd",
+   "url": "https://koalstin.gumroad.com/l/hhwpw",
+   "tags": [
+    "ai security",
+    "red team",
+    "operations"
+   ]
+  },
+  {
+   "id": "wP9J1ShKJNUEjtfHkIIS8w==",
+   "name": "Denied Action Log Templates",
+   "description": "<p>A ready-to-use governance pack for AI agent teams: Denied Action Log Templates from the ghostcorpnet micro-library of practical AI agent governance tools. Includes ready-to-use templates and checklists your team can adopt immediately. Instant download \u2014 PDF.</p>",
+   "price_usd": 19.0,
+   "currency": "usd",
+   "url": "https://koalstin.gumroad.com/l/jbxfmq",
+   "tags": [
+    "ai agents",
+    "template",
+    "governance",
+    "compliance",
+    "risk management",
+    "ai safety"
+   ]
+  },
+  {
+   "id": "JGhsrDhiWA54padyxNshVw==",
+   "name": "Denied-Action Log Template Pack",
+   "description": "<p>Log templates that turn every denied action into usable evidence. A complete, zero-placeholder draft for teams governing AI agents in production: policy gates, audit trails, cost controls, permissioning, and incident response \u2014 adopt it as-is.</p>",
+   "price_usd": 19.0,
+   "currency": "usd",
+   "url": "https://koalstin.gumroad.com/l/tzxqoa",
+   "tags": [
+    "ai agents",
+    "ai governance",
+    "audit",
+    "logging",
+    "template"
+   ]
+  },
+  {
+   "id": "ZdZCAE1dvRR7-Rydr9pI9w==",
+   "name": "Dependency-Risk Scoring Pack",
+   "description": "<p>Score every dependency before it scores you. A repeatable risk-scoring system for open-source dependencies in agent stacks: six risk dimensions, a 0-100 scoring rubric, scorecard templates, tiered response thresholds, and review cadences. Built by SourceLattice (ghostcorpnet fleet studio). Instant PDF download.</p>",
+   "price_usd": 19.0,
+   "currency": "usd",
+   "url": "sourcelattice-dependency-risk-scoring-pack",
+   "tags": [
+    "open source",
+    "sourcelattice",
+    "dependencies",
+    "risk scoring"
+   ]
+  },
+  {
+   "id": "03Gp2sIhCXnKrYWs7ca00Q==",
+   "name": "Deployer Duties One-Pager Pack",
+   "description": "<p>One-pager summaries of deployer duties under the EU AI Act \u2014 monitoring, human oversight, incident reporting. Educational guidance, not legal advice. From ActLattice.</p>",
+   "price_usd": 19.0,
+   "currency": "usd",
+   "url": "actlattice-deployer-duties-one-pager-pack",
+   "tags": [
+    "ai agents",
+    "compliance",
+    "template",
+    "governance",
+    "risk management",
+    "ai safety"
+   ]
+  },
+  {
+   "id": "MIfxPqxPYfoV0jY4FyCWtA==",
+   "name": "District Rollout Mega-Kit",
+   "description": "<p>From one pilot school to the whole district. The unified system for scaling classroom AI: phased rollout plan, centralized governance, school readiness tiers, training cascades, and district-wide monitoring.</p>",
+   "price_usd": 49.0,
+   "currency": "usd",
+   "url": "classwarden-district-rollout-mega-kit",
+   "tags": [
+    "ai agents",
+    "customer support",
+    "governance",
+    "support operations",
+    "ai safety",
+    "classwarden",
+    "ai governance",
+    "k-12",
+    "district rollout",
+    "phased rollout"
+   ]
+  },
+  {
+   "id": "0S-llkbFze_9kUiQyet4GA==",
+   "name": "EdTech Vendor Review Worksheet",
+   "description": "<p>Score vendors on privacy before you sign. A structured worksheet with weighted criteria, red-flag checks, contract clauses to demand, and a decision record \u2014 so procurement picks the safe vendor, not just the shiny one.</p>",
+   "price_usd": 19.0,
+   "currency": "usd",
+   "url": "classwarden-edtech-vendor-review-worksheet",
+   "tags": [
+    "ai agents",
+    "template",
+    "governance",
+    "education",
+    "edtech",
+    "student privacy"
+   ]
+  },
+  {
+   "id": "cYutb3Dno3O5urv_tzTXJg==",
+   "name": "Education AI Agent Governance Pack \u2014 Blackboard Studio",
+   "description": "<p>FERPA-aware governance for tutoring agents: student-data rules, age guardrails, educator oversight. A Pack Standard v1 governance kit from ghostcorpnet's Blackboard Studio \u2014 self-serve PDF, instant download, no calls, no consulting.</p>",
+   "price_usd": 19.0,
+   "currency": "usd",
+   "url": "https://koalstin.gumroad.com/l/kakqjj",
+   "tags": [
+    "ai agents",
+    "ai governance",
+    "education",
+    "ferpa",
+    "checklist",
+    "playbook",
+    "compliance",
+    "business template"
+   ]
+  },
+  {
+   "id": "bxlGuW6rXjczY7b-ymyrCA==",
+   "name": "EEO Documentation Kit",
+   "description": "<p>EEO documentation kit for employers using AI hiring tools \u2014 record-keeping templates, audit-response checklists, and defensibility documentation aligned to equal-employment compliance expectations. Built by HireWarden (ghostcorpnet fleet studio).</p>",
+   "price_usd": 29.0,
+   "currency": "usd",
+   "url": "hirewarden-eeo-documentation-kit",
+   "tags": [
+    "code",
+    "python",
+    "source code",
+    "download",
+    "pii",
+    "r\u00e9daction",
+    "phi",
+    "hipaa",
+    "privacy"
+   ]
+  },
+  {
+   "id": "tiQAVho1-nm4HK1DDjmRBQ==",
+   "name": "Emergency Override Exception Template",
+   "description": "<p>The one form for breaking the rules in an emergency \u2014 with automatic expiry and review. A complete, zero-placeholder draft for teams governing AI agents in production: policy gates, audit trails, cost controls, permissioning, and incident response \u2014 adopt it as-is.</p>",
+   "price_usd": 19.0,
+   "currency": "usd",
+   "url": "https://koalstin.gumroad.com/l/efqvau",
+   "tags": [
+    "ai agents",
+    "ai governance",
+    "incident response",
+    "policy template",
+    "template"
+   ]
+  },
+  {
+   "id": "Auz-djakfKKECgW0y31Tog==",
+   "name": "Engagement-Letter Templates",
+   "description": "<p>Scope AI use in client engagements, in writing. Ready-to-adapt engagement clauses, client consent addenda, and declination language for firms deploying agents. Built by LawWarden (ghostcorpnet fleet studio).</p>",
+   "price_usd": 19.0,
+   "currency": "usd",
+   "url": "lawwarden-engagement-letter-templates",
+   "tags": [
+    "legal",
+    "ai governance",
+    "compliance"
+   ]
+  },
+  {
+   "id": "Kpc5wIfvLMVIdw-v0jLkag==",
+   "name": "Enterprise Hiring Governance Mega-Kit",
+   "description": "<p>The full library for talent-tech teams. The unified enterprise system for hiring-agent governance \u2014 program charter, RACI, policy library, control catalog, audit program, and executive reporting in one kit. Built by HireWarden (ghostcorpnet fleet studio).</p>",
+   "price_usd": 49.0,
+   "currency": "usd",
+   "url": "hirewarden-enterprise-hiring-governance-mega-kit",
+   "tags": [
+    "ai governance",
+    "hiring",
+    "compliance"
+   ]
+  },
+  {
+   "id": "BrkgSPUhSH-18ugZfsLjKQ==",
+   "name": "Enterprise Open-Source Policy Bundle",
+   "description": "<p>Company-wide policy teams will actually read. The full enterprise open-source policy set: use policy, license policy, contribution policy, release policy, and security policy \u2014 each as a short, adoptable document with approval workflows and exception handling. Built by SourceLattice (ghostcorpnet fleet studio). Instant PDF download.</p>",
+   "price_usd": 49.0,
+   "currency": "usd",
+   "url": "sourcelattice-enterprise-open-source-policy-bundle",
+   "tags": [
+    "open source",
+    "sourcelattice",
+    "policy",
+    "enterprise"
+   ]
+  },
+  {
+   "id": "IcHUPPWxKxtUqFlvY1J9Lg==",
+   "name": "Enterprise Support Governance Bundle",
+   "description": "<p>Multi-team, multi-region support agent controls. Federated governance for organizations running support agents across teams, regions, and languages: central policy with local adaptation, regional compliance mapping, cross-team incident coordination, and consolidated reporting.</p>",
+   "price_usd": 49.0,
+   "currency": "usd",
+   "url": "supportwarden-enterprise-support-governance-bundle",
+   "tags": [
+    "ai agents",
+    "customer support",
+    "template",
+    "governance",
+    "support operations",
+    "ai safety"
+   ]
+  },
+  {
+   "id": "7XVqVBFaMxzAkP6qsDiaZg==",
+   "name": "Ethics-Opinion Mapping Pack",
+   "description": "<p>Map agent features to ethics opinions, jurisdiction by jurisdiction. A research methodology, feature-by-duty mapping matrices. Built by LawWarden (ghostcorpnet fleet studio).</p>",
+   "price_usd": 49.0,
+   "currency": "usd",
+   "url": "lawwarden-ethics-opinion-mapping-pack",
+   "tags": [
+    "compliance",
+    "ai governance",
+    "legal ai",
+    "legal ethics",
+    "lawwarden"
+   ]
+  },
+  {
+   "id": "L-M3z74Q4_H2RsCwGhBflw==",
+   "name": "EU AI Act Compliance Pack for AI Agents \u2014 Brussels Studio",
+   "description": "<p>High-risk obligations mapped to agent controls: classification worksheets, technical file templates, monitoring rules. A Pack Standard v1 governance kit from ghostcorpnet's Brussels Studio \u2014 self-serve PDF, instant download, no calls, no consulting.</p>",
+   "price_usd": 49.0,
+   "currency": "usd",
+   "url": "https://koalstin.gumroad.com/l/trzqr",
+   "tags": [
+    "ai agents",
+    "ai governance",
+    "eu ai act",
+    "compliance",
+    "checklist",
+    "risk management",
+    "business template",
+    "europe"
+   ]
+  },
+  {
+   "id": "1XJZygP0jSO4w8WKMWrOdw==",
+   "name": "EU AI Act Compliance Roadmap",
+   "description": "<p>A 15-slide phased compliance roadmap: the verified Act timeline through the Digital Omnibus deferrals, provider vs. deployer roles, the six deployer duties, and a three-phase plan from today's live obligations (transparency, AI literacy) to the December 2027 high-risk deadline \u2014 plus fine tiers and primary-source appendices.</p>",
+   "price_usd": 49.0,
+   "currency": "usd",
+   "url": "eu-ai-act-compliance-roadmap",
+   "tags": [
+    "eu ai act",
+    "compliance",
+    "roadmap",
+    "presentation",
+    "powerpoint",
+    "ai governance",
+    "deployer",
+    "regulation"
+   ]
+  },
+  {
+   "id": "z2lDGAHmIxm4hiVFUmXlRw==",
+   "name": "EU AI Act Controls Tracker",
+   "description": "<p>Track your EU AI Act compliance controls in one editable workbook (XLSX): control inventory, obligation mapping, evidence links, and status tracking for GPAI and high-risk systems. No placeholders. From ghostcorpnet.</p>",
+   "price_usd": 19.0,
+   "currency": "usd",
+   "url": "https://koalstin.gumroad.com/l/hvqqdp",
+   "tags": [
+    "eu ai act",
+    "ai governance",
+    "compliance",
+    "ai agents",
+    "spreadsheet"
+   ]
+  },
+  {
+   "id": "eor2ee2rIrVfQYn3n4AWOg==",
+   "name": "EU AI Act Deluxe",
+   "description": "<p>The deployer evidence starter pack: the EU AI Act agent evidence checklist PDF, the 20-obligation controls tracker spreadsheet, the interactive readiness self-assessment, and the five-minute executive audio briefing. Combined individual value $86 \u2014 save $7. Instant download. Not legal advice.</p><p><br></p><p>(ZIP package)</p>",
+   "price_usd": 79.0,
+   "currency": "usd",
+   "url": "eu-ai-act-deluxe",
+   "tags": [
+    "eu ai act",
+    "ai governance",
+    "deluxe",
+    "compliance",
+    "deployer",
+    "checklist",
+    "regulation",
+    "audio"
+   ]
+  },
+  {
+   "id": "4XtlCkGp2Yy6xem0V_M3_Q==",
+   "name": "EU AI Act Executive Briefing",
+   "description": "<p>A 3.5-minute executive audio briefing (MP3) on what the EU AI Act means for teams deploying AI agents: obligations, timelines, and what to do this quarter. Listen on the go. From ghostcorpnet.</p>",
+   "price_usd": 19.0,
+   "currency": "usd",
+   "url": "https://koalstin.gumroad.com/l/mtwkmn",
+   "tags": [
+    "eu ai act",
+    "ai governance",
+    "audio briefing",
+    "executives",
+    "ai agents"
+   ]
+  },
+  {
+   "id": "De5dPA1tx0FXUstHpmTELQ==",
+   "name": "EU AI Act Explained Audiobook",
+   "description": "<p>A narrated walkthrough of the EU AI Act's risk tiers, duties, and timelines for busy leaders. Built by ActLattice, a ghostcorpnet fleet studio. Instant PDF download.</p>",
+   "price_usd": 29.0,
+   "currency": "usd",
+   "url": "https://koalstin.gumroad.com/l/iqragw",
+   "tags": [
+    "audiobook",
+    "leadership",
+    "eu ai act",
+    "narrated",
+    "risk tiers",
+    "compliance briefing"
+   ]
+  },
+  {
+   "id": "q6ANOJqjm6apaJDIa7bW8A==",
+   "name": "EU AI Act Obligations Database",
+   "description": "<p>A structured database of 25 EU AI Act obligations: article, title, summary, applies-to (provider/deployer/importer/GPAI provider), effective date, penalty tier, and notes \u2014 with dates verified against the 2026-09-30 legal audit, including the Digital Omnibus deferrals (Annex III to 2027-12-02). Working aid, not legal advice.</p><p><br></p><p>(CSV dataset)</p>",
+   "price_usd": 19.0,
+   "currency": "usd",
+   "url": "eu-ai-act-obligations-database",
+   "tags": [
+    "eu ai act",
+    "compliance",
+    "csv",
+    "dataset",
+    "obligations",
+    "regulation",
+    "database",
+    "deployer"
+   ]
+  },
+  {
+   "id": "5oBanbPlNJQJtBI5EgAaTw==",
+   "name": "EU AI Act Readiness Assessment",
+   "description": "<p>A self-contained interactive readiness assessment (HTML \u2014 works offline in any browser, no account needed): answer the questions, get your EU AI Act readiness score and a prioritized action list. From ghostcorpnet.</p>",
+   "price_usd": 29.0,
+   "currency": "usd",
+   "url": "https://koalstin.gumroad.com/l/lvzpii",
+   "tags": [
+    "eu ai act",
+    "ai governance",
+    "readiness assessment",
+    "interactive tool",
+    "compliance"
+   ]
+  },
+  {
+   "id": "_xZbmpRFVvUNDetwOsdXgg==",
+   "name": "EU AI Act Risk-Tiering Quickstart",
+   "description": "<p>Classify your AI systems under the EU AI Act's risk framework with a structured first-pass worksheet. Educational compliance guidance, not legal advice. From ActLattice.</p>",
+   "price_usd": 19.0,
+   "currency": "usd",
+   "url": "actlattice-eu-ai-act-risk-tiering-quickstart",
+   "tags": [
+    "ai agents",
+    "compliance",
+    "template",
+    "governance",
+    "risk management",
+    "ai safety"
+   ]
+  },
+  {
+   "id": "MzeAGgcGCDZ-gAnb9xvI8g==",
+   "name": "EU AI Act Total Compliance Kit",
+   "description": "<p>Everything a deployer needs for their EU AI Act evidence pack in one download: 15 files including the controls tracker spreadsheet, interactive readiness self-assessment, executive audio briefing, acceptable-use policy template, and 10 deployer-duty governance PDFs (risk audit kit, logging audits, data policies, human oversight, pre-deploy checks, tiering). Combined individual value $276 \u2014 save $127. Instant download, no calls, no consulting. Not legal advice.</p>",
+   "price_usd": 149.0,
+   "currency": "usd",
+   "url": "eu-ai-act-total-compliance-kit",
+   "tags": [
+    "eu ai act",
+    "compliance",
+    "kit",
+    "bundle",
+    "ai governance",
+    "deployer",
+    "checklist",
+    "regulation",
+    "spreadsheet",
+    "audio"
+   ]
+  },
+  {
+   "id": "UEuv4Vsv_TCFB6OohfBJAg==",
+   "name": "EU AI Act Transparency Marking Pack",
+   "description": "<p>Article 50 of the EU AI Act requires transparency when people interact with AI and when content is synthetic. This pack translates those duties into practice: what must be marked, acceptable marking and disclosure phrasing, UX patterns for chat/voice/media, and a compliance checklist for product teams shipping AI features to EU users.</p><p><br></p><p>This is not legal advice \u2014 transparency duties and enforcement are evolving. Have counsel confirm your obligations.</p><p><br></p><p>PDF. Built",
+   "price_usd": 29.0,
+   "currency": "usd",
+   "url": "https://koalstin.gumroad.com/l/ojtwa",
+   "tags": [
+    "ai agents",
+    "governance",
+    "compliance",
+    "playbook"
+   ]
+  },
+  {
+   "id": "kNQ8yePOSMin0SXavYU3hA==",
+   "name": "Executive & Board Kit",
+   "description": "<p>Brief the board with confidence: 11 files including two slide decks (AI governance board briefing, EU AI Act compliance roadmap), two narrated executive briefings, the boardroom briefing pack, the Studio Edition playbook, an interactive EU AI Act readiness assessment, the fleet spend forecast, and two exclusive one-page cheat sheets (EU AI Act key dates, 10-point governance). Combined individual value $269 \u2014 save $120. Instant download. Not legal advice.</p>",
+   "price_usd": 149.0,
+   "currency": "usd",
+   "url": "executive-and-board-kit",
+   "tags": [
+    "executive",
+    "board",
+    "kit",
+    "bundle",
+    "eu ai act",
+    "ai governance",
+    "slides",
+    "briefing",
+    "compliance"
+   ]
+  },
+  {
+   "id": "RiL2NZbLBoqFca6vhb7e3A==",
+   "name": "Expense CSV Anomaly Flagger (Python)",
+   "description": "<p>Scan an expense CSV for problems: statistical outliers (z-score &gt; 2.5, or more than 5x the median for small samples), duplicate charges (same description and amount twice), and large round-number amounts. Writes a flagged CSV with a flag column plus a summary count. Pure standard library - point it at any export with date, description, and amount columns. Delivered as an instant ZIP download: working source code, README with setup and usage instructions, sample input/output, and a single-u",
+   "price_usd": 19.0,
+   "currency": "usd",
+   "url": "https://koalstin.gumroad.com/l/swexbj",
+   "tags": [
+    "code",
+    "python",
+    "source code",
+    "download",
+    "expenses",
+    "fraud detection",
+    "csv",
+    "finance"
+   ]
+  },
+  {
+   "id": "hxgFjSgQYF70ozx7WK7lXA==",
+   "name": "External Outreach Policy",
+   "description": "<p>A ready-to-use governance pack for AI agent teams: External Outreach Policy from the ghostcorpnet micro-library of practical AI agent governance tools. Includes ready-to-use templates and checklists your team can adopt immediately. Instant download \u2014 PDF.</p>",
+   "price_usd": 19.0,
+   "currency": "usd",
+   "url": "https://koalstin.gumroad.com/l/ciihyi",
+   "tags": [
+    "ai agents",
+    "template",
+    "governance",
+    "compliance",
+    "risk management",
+    "ai safety"
+   ]
+  },
+  {
+   "id": "88w7uaftdtwLvDgtEFPaBQ==",
+   "name": "External Outreach Policy One-Pager",
+   "description": "<p>One page governing every email, message, and post your agents send outside the company. A self-serve Kestrelattice PDF \u2014 buy once, download instantly.</p>",
+   "price_usd": 19.0,
+   "currency": "usd",
+   "url": "https://koalstin.gumroad.com/l/zqnprx",
+   "tags": [
+    "ai agents",
+    "ai governance",
+    "policy template"
+   ]
+  },
+  {
+   "id": "R4wveEXmDfK6oGvnOXigtQ==",
+   "name": "Fail-Closed Block Response Runbook Excerpt",
+   "description": "<p>The first hour after a blocked action: what to log, who to tell, and how to avoid silent retries. A complete, ready-to-use governance runbook for teams running AI agents in production.</p>",
+   "price_usd": 19.0,
+   "currency": "usd",
+   "url": "https://koalstin.gumroad.com/l/fpshor",
+   "tags": [
+    "ai agents",
+    "ai governance",
+    "incident response",
+    "runbook"
+   ]
+  },
+  {
+   "id": "DKNMvzu3AS28zmH9fkLtIw==",
+   "name": "Fail-Closed Blocks (Audiobook)",
+   "description": "<p>A narrated audiobook on the first hour after a blocked action: the three validation layers, the triage-decision-communicate sequence, silent retries, block fatigue, and why fail-closed only works if the hour after the block works. With intro and outro.</p><p><br></p><p>(MP3 audiobook)</p>",
+   "price_usd": 19.0,
+   "currency": "usd",
+   "url": "fail-closed-blocks-audiobook",
+   "tags": [
+    "ai agents",
+    "audiobook",
+    "fail closed",
+    "audio",
+    "governance",
+    "training",
+    "mp3",
+    "policy enforcement"
+   ]
+  },
+  {
+   "id": "rsm6j1u8twakqAfbLrfa6w==",
+   "name": "Fair-Hiring Framework Guide",
+   "description": "<p>The complete fairness scaffold for hiring agents. Principles, bias-testing protocols, feature governance, human-oversight design, candidate-rights templates, defensibility documentation, an incident runbook, and a pre-deployment sign-off \u2014 the full system for fair, documented, defensible hiring agents. Built by HireWarden (ghostcorpnet fleet studio).</p>",
+   "price_usd": 29.0,
+   "currency": "usd",
+   "url": "hirewarden-fair-hiring-framework-guide",
+   "tags": [
+    "hirewarden",
+    "ai governance",
+    "hiring",
+    "recruiting",
+    "compliance",
+    "hr"
+   ]
+  },
+  {
+   "id": "4LPHZ16pYqfxNy_IBbyeqA==",
+   "name": "FERPA-Aware Deployment Guide",
+   "description": "<p>Deploy agents without tripping student-privacy rules. A step-by-step deployment system covering FERPA's exceptions, the school-official test, directory information, disclosure logging, and a pre-launch gate checklist. Educational material, not legal advice.</p>",
+   "price_usd": 29.0,
+   "currency": "usd",
+   "url": "classwarden-ferpa-aware-deployment-guide",
+   "tags": [
+    "ai agents",
+    "template",
+    "governance",
+    "education",
+    "edtech",
+    "student privacy"
+   ]
+  },
+  {
+   "id": "uJIaH3fu_IIcgLDSoVKKmA==",
+   "name": "Finance Agent Risk Register Template",
+   "description": "<p>A structured risk register for finance AI agents. Catalog the risks that matter: risk taxonomy, likelihood and impact scoring, ownership assignments, and mitigation tracking \u2014 with completion guidance and a worked hypothetical example. Part of the FinLattice (ghostcorpnet) governance kit line. Instant download.</p>",
+   "price_usd": 19.0,
+   "currency": "usd",
+   "url": "https://koalstin.gumroad.com/l/tzgqkn",
+   "tags": [
+    "ai agents",
+    "template",
+    "governance",
+    "compliance",
+    "risk management",
+    "ai safety"
+   ]
+  },
+  {
+   "id": "sybJusLkKaYLeM1m9vndhw==",
+   "name": "Finance AI Agent Governance Pack \u2014 Ledgerline Studio",
+   "description": "<p>Model-risk tiers and trade-approval gates for financial AI agents that advise on or move money. A Pack Standard v1 governance kit from ghostcorpnet's Ledgerline Studio \u2014 self-serve PDF, instant download, no calls, no consulting.</p>",
+   "price_usd": 19.0,
+   "currency": "usd",
+   "url": "https://koalstin.gumroad.com/l/zeqdxq",
+   "tags": [
+    "ai agents",
+    "ai governance",
+    "finance",
+    "risk management",
+    "checklist",
+    "playbook",
+    "compliance",
+    "business template"
+   ]
+  },
+  {
+   "id": "zURr5guoRyJvHnLt4GDl5Q==",
+   "name": "Firm-Wide Governance Mega-Kit",
+   "description": "<p>The complete library for firms and legal teams. A unified governance system that integrates privilege protection, confidentiality, segregation. Built by LawWarden (ghostcorpnet fleet studio).</p>",
+   "price_usd": 49.0,
+   "currency": "usd",
+   "url": "lawwarden-firm-wide-governance-mega-kit",
+   "tags": [
+    "ai governance",
+    "legal ai",
+    "law firms",
+    "compliance kit",
+    "lawwarden"
+   ]
+  },
+  {
+   "id": "95X6HlM6_kirjNdueuNgiA==",
+   "name": "FOIA Request Letter Generator (Python)",
+   "description": "<p>Generate a properly structured Freedom of Information Act request letter from the command line: agency, your contact details, a description of the records you want, an optional public-interest fee waiver paragraph, and a fee cap. Writes a ready-to-send .txt letter. Not legal advice \u2014 always verify the agency's current requirements. Delivered as an instant ZIP download: working source code, README with setup and usage instructions, sample input/output, and a single-user license.</p>",
+   "price_usd": 19.0,
+   "currency": "usd",
+   "url": "foia-request-letter-generator",
+   "tags": [
+    "code",
+    "python",
+    "source code",
+    "download",
+    "foia",
+    "transparency",
+    "civic",
+    "records request"
+   ]
+  },
+  {
+   "id": "6AsdgUG8nIC0ien55HKhvg==",
+   "name": "Forensic Log Capture Templates",
+   "description": "<p>Preserve the evidence trail before it scrolls away: what to capture for agent incidents, chain-of-custody templates, capture checklists per failure mode, timeline reconstruction worksheets, and an evidence inventory. Guidance only \u2014 consult legal counsel on retention and disclosure duties.</p>",
+   "price_usd": 29.0,
+   "currency": "usd",
+   "url": "https://koalstin.gumroad.com/l/hjdxjv",
+   "tags": [
+    "ai agents",
+    "template",
+    "governance",
+    "compliance",
+    "risk management",
+    "ai safety"
+   ]
+  },
+  {
+   "id": "ePXfmZ61kNkfiuuXaAHXKQ==",
+   "name": "Fork & Upstream Governance Pack",
+   "description": "<p>Manage forks without losing the plot. Complete fork governance for open-source agent stacks: when to fork, fork lifecycle management, upstream contribution strategy, drift tracking, and merge-back procedures. Built by SourceLattice (ghostcorpnet fleet studio). Instant PDF download.</p>",
+   "price_usd": 29.0,
+   "currency": "usd",
+   "url": "sourcelattice-fork-upstream-governance-pack",
+   "tags": [
+    "open source",
+    "sourcelattice",
+    "forks",
+    "governance"
+   ]
+  },
+  {
+   "id": "tWEbXqgftdSb2ZcZRfiC1g==",
+   "name": "Foundation-Readiness Templates",
+   "description": "<p>Prepare a project for foundation stewardship. The complete foundation-application package for open-source agent projects: IP cleanliness, governance design, trademark planning, community health evidence, and the application dossier itself. Built by SourceLattice (ghostcorpnet fleet studio). Instant PDF download.</p>",
+   "price_usd": 49.0,
+   "currency": "usd",
+   "url": "sourcelattice-foundation-readiness-templates",
+   "tags": [
+    "open source",
+    "templates",
+    "sourcelattice",
+    "foundations"
+   ]
+  },
+  {
+   "id": "0NEDbHSQlarMfiqEzgirkQ==",
+   "name": "Fraud-Signal Checklist",
+   "description": "<p>The patterns that mean an agent is being exploited. A field checklist of fraud signals specific to AI agents in financial workflows: account-takeover patterns, prompt-injection-for-profit, structuring, synthetic identities, and escalation playbooks \u2014 plus a worked hypothetical example. Part of the FinLattice (ghostcorpnet) governance kit line. Instant download.</p>",
+   "price_usd": 19.0,
+   "currency": "usd",
+   "url": "https://koalstin.gumroad.com/l/rfypji",
+   "tags": [
+    "ai agents",
+    "template",
+    "governance",
+    "compliance",
+    "risk management",
+    "ai safety"
+   ]
+  },
+  {
+   "id": "A7SQcjznTBmz-Ej2btEt9A==",
+   "name": "Full Compliance Mega-Kit",
+   "description": "<p>Program-level operating system for EU AI Act readiness: policies, registers, checklists, and rollout plans in one mega-kit. Educational guidance, not legal advice. From ActLattice.</p>",
+   "price_usd": 49.0,
+   "currency": "usd",
+   "url": "actlattice-full-compliance-mega-kit",
+   "tags": [
+    "ai agents",
+    "compliance",
+    "template",
+    "governance",
+    "risk management",
+    "ai safety"
+   ]
+  },
+  {
+   "id": "sMYlVtDEUFmJI_CmF6z3tw==",
+   "name": "ghostcorpnet Enterprise License",
+   "description": "<p>Unlimited seats company-wide: every current ghostcorpnet product (63 published products, $1,290 individual value) plus every new product released in the next 12 months, delivered to your Gumroad library. One-page plain-language license certificate included. Internal use and adaptation allowed; no redistribution. Self-serve digital download \u2014 no calls, no consulting.</p>",
+   "price_usd": 299.0,
+   "currency": "usd",
+   "url": "kestrelattice-enterprise-license",
+   "tags": [
+    "enterprise",
+    "license",
+    "bundle",
+    "unlimited seats",
+    "company-wide",
+    "ai governance",
+    "compliance"
+   ]
+  },
+  {
+   "id": "6jF6hHDmpKkfNqKUravY-w==",
+   "name": "GPAI Documentation Starter",
+   "description": "<p>Starter templates for the EU AI Act's general-purpose AI (GPAI) documentation duties. Educational guidance, not legal advice. From ActLattice.</p>",
+   "price_usd": 19.0,
+   "currency": "usd",
+   "url": "actlattice-gpai-documentation-starter",
+   "tags": [
+    "ai agents",
+    "compliance",
+    "template",
+    "governance",
+    "risk management",
+    "ai safety"
+   ]
+  },
+  {
+   "id": "T5QrLL-CjQN_QmCphXffEw==",
+   "name": "Grant Expiry Enforcement Templates",
+   "description": "<p>A ready-to-use governance pack for AI agent teams: Grant Expiry Enforcement Templates from the ghostcorpnet micro-library of practical AI agent governance tools. Includes ready-to-use templates and checklists your team can adopt immediately. Instant download \u2014 PDF.</p>",
+   "price_usd": 19.0,
+   "currency": "usd",
+   "url": "https://koalstin.gumroad.com/l/vfhvuj",
+   "tags": [
+    "ai agents",
+    "template",
+    "governance",
+    "compliance",
+    "risk management",
+    "ai safety"
+   ]
+  },
+  {
+   "id": "BHGubtwQWzvTfEKzNQXXgg==",
+   "name": "Grant Issuance Audit",
+   "description": "<p>A ready-to-use governance pack for AI agent teams: Grant Issuance Audit from the ghostcorpnet micro-library of practical AI agent governance tools. Includes ready-to-use templates and checklists your team can adopt immediately. Instant download \u2014 PDF.</p>",
+   "price_usd": 19.0,
+   "currency": "usd",
+   "url": "https://koalstin.gumroad.com/l/ysikav",
+   "tags": [
+    "ai agents",
+    "template",
+    "governance",
+    "compliance",
+    "risk management",
+    "ai safety"
+   ]
+  },
+  {
+   "id": "_SYBgm4GurYsRJRtFypLWg==",
+   "name": "Grant-Expiry Enforcement Template Pack",
+   "description": "<p>Copy-paste grant templates that expire on a schedule \u2014 permanent grants are prohibited. A self-serve Kestrelattice PDF \u2014 buy once, download instantly.</p>",
+   "price_usd": 19.0,
+   "currency": "usd",
+   "url": "https://koalstin.gumroad.com/l/mdhcvk",
+   "tags": [
+    "ai agents",
+    "ai governance",
+    "access control",
+    "template"
+   ]
+  },
+  {
+   "id": "AKq77TOICqwPk_K4-ICyjQ==",
+   "name": "Grant-Issuance Audit Template",
+   "description": "<p>Audit every grant in your fleet: capability, scope, issuer, expiry \u2014 and flag the permanent ones. A self-serve Kestrelattice PDF \u2014 buy once, download instantly.</p>",
+   "price_usd": 19.0,
+   "currency": "usd",
+   "url": "grant-issuance-audit",
+   "tags": [
+    "ai agents",
+    "ai governance",
+    "access control",
+    "audit",
+    "template"
+   ]
+  },
+  {
+   "id": "j-JhTR6pNmZ7vKYXlcTKOw==",
+   "name": "Hard-Gated Action Approval Flow",
+   "description": "<p>The exact approval path for money moves, contract acceptance, and permission changes. A self-serve Kestrelattice PDF \u2014 buy once, download instantly.</p>",
+   "price_usd": 19.0,
+   "currency": "usd",
+   "url": "hard-gated-action-approval-flow",
+   "tags": [
+    "ai agents",
+    "ai governance",
+    "approval workflow",
+    "access control"
+   ]
+  },
+  {
+   "id": "WxXThsRsDsRHN2z6KcNUoQ==",
+   "name": "Health-System Rollout Mega-Kit",
+   "description": "<p>System-wide deployment with governance intact. The unified program for rolling agents out across clinics, departments, and sites: governance charter, phased wave plans, site readiness, training cascades, and a single control dashboard. From HealthLattice (ghostcorpnet) \u2014 digital PDF download, delivered instantly by Gumroad.</p>",
+   "price_usd": 49.0,
+   "currency": "usd",
+   "url": "https://koalstin.gumroad.com/l/nasbvf",
+   "tags": [
+    "ai agents",
+    "template",
+    "governance",
+    "compliance",
+    "risk management",
+    "ai safety"
+   ]
+  },
+  {
+   "id": "qbhZs8c_VIPI0JS7rk60wg==",
+   "name": "Healthcare AI Agent Governance Pack \u2014 Meridian Studio",
+   "description": "<p>HIPAA-aware guardrails for clinical AI agents: PHI redaction checklists, access controls, and breach response. A Pack Standard v1 governance kit from ghostcorpnet's Meridian Studio \u2014 self-serve PDF, instant download, no calls, no consulting.</p>",
+   "price_usd": 19.0,
+   "currency": "usd",
+   "url": "https://koalstin.gumroad.com/l/jkgwyx",
+   "tags": [
+    "ai agents",
+    "ai governance",
+    "healthcare",
+    "hipaa",
+    "checklist",
+    "playbook",
+    "compliance",
+    "business template"
+   ]
+  },
+  {
+   "id": "-2k1Yw5a4p9Ff0oY_BQZ7w==",
+   "name": "High-Risk Obligation Checklist",
+   "description": "<p>Itemized checklist of the EU AI Act's high-risk obligations: data governance, documentation, human oversight, accuracy. Educational guidance, not legal advice. From ActLattice.</p>",
+   "price_usd": 19.0,
+   "currency": "usd",
+   "url": "actlattice-high-risk-obligation-checklist",
+   "tags": [
+    "ai agents",
+    "compliance",
+    "template",
+    "governance",
+    "risk management",
+    "ai safety"
+   ]
+  },
+  {
+   "id": "UTs4YE3wGjfxRjUAP6uWAQ==",
+   "name": "HIPAA-Aware Deployment Guide",
+   "description": "<p>Deploy AI agents without tripping HIPAA. A step-by-step deployment guide covering safeguards, BAAs, risk analysis, and audit readiness \u2014 built for teams shipping clinical AI.</p><p><br></p><p>Instant download. Part of the ghostcorpnet governance kit line.</p>",
+   "price_usd": 29.0,
+   "currency": "usd",
+   "url": "https://koalstin.gumroad.com/l/mcnhds",
+   "tags": [
+    "ai agents",
+    "template",
+    "governance",
+    "compliance",
+    "risk management",
+    "ai safety"
+   ]
+  },
+  {
+   "id": "-4j1djw2dhZLJGwk2T49zg==",
+   "name": "Hiring Agent Bias-Audit Starter",
+   "description": "<p>A first-pass audit any talent team can run. A step-by-step bias-audit starter for hiring agents \u2014 scoping, a representative test set, a selection-rate comparison, and a pass/fail decision template \u2014 so any talent team can run its first fairness check before deployment or before the next hiring round. From HireWarden (ghostcorpnet) \u2014 digital PDF download, delivered instantly by Gumroad.</p>",
+   "price_usd": 19.0,
+   "currency": "usd",
+   "url": "https://koalstin.gumroad.com/l/ltpwx",
+   "tags": [
+    "ai agents",
+    "template",
+    "governance",
+    "compliance",
+    "risk management",
+    "ai safety"
+   ]
+  },
+  {
+   "id": "0dyzAA5bIFB-UwB7YKAadw==",
+   "name": "HR and Recruiting Agent Governance Pack \u2014 Fairhire Studio",
+   "description": "<p>Bias-testing protocols and adverse-impact worksheets for hiring agents \u2014 fair, documented, defensible. A Pack Standard v1 governance kit from ghostcorpnet's Fairhire Studio \u2014 self-serve PDF, instant download, no calls, no consulting.</p>",
+   "price_usd": 19.0,
+   "currency": "usd",
+   "url": "https://koalstin.gumroad.com/l/jobcl",
+   "tags": [
+    "ai agents",
+    "ai governance",
+    "hr",
+    "recruiting",
+    "worksheet",
+    "checklist",
+    "compliance",
+    "business template"
+   ]
+  },
+  {
+   "id": "1EBrQjgboogI30P23TnZKQ==",
+   "name": "Human Handoff & Escalation Pack",
+   "description": "<p>Escalation design for AI voice agents: human-handoff triggers, warm-transfer scripting, supervisor override controls, and queue-routing playbooks for regulated environments. Operational governance frameworks, compliance checklists, and template text. Not legal advice. PDF. Built by ghostcorpnet.</p>",
+   "price_usd": 49.0,
+   "currency": "usd",
+   "url": "https://koalstin.gumroad.com/l/zccgg",
+   "tags": [
+    "compliance",
+    "ai agents",
+    "voice ai",
+    "governance"
+   ]
+  },
+  {
+   "id": "FWzL2puueajcFD15NuNs4Q==",
+   "name": "Human In The Loop Policy",
+   "description": "<p>A ready-to-use governance pack for AI agent teams: Human In The Loop Policy from the ghostcorpnet micro-library of practical AI agent governance tools. Includes ready-to-use templates and checklists your team can adopt immediately. Instant download \u2014 PDF.</p>",
+   "price_usd": 19.0,
+   "currency": "usd",
+   "url": "https://koalstin.gumroad.com/l/ucqlmi",
+   "tags": [
+    "ai agents",
+    "template",
+    "governance",
+    "compliance",
+    "risk management",
+    "ai safety"
+   ]
+  },
+  {
+   "id": "be4kCBUFDdUabdJB00CFIg==",
+   "name": "Human Oversight Design Guide",
+   "description": "<p>Design guide for the EU AI Act's human-oversight expectations: intervention points, competence, and escalation design. Educational guidance, not legal advice. From ActLattice.</p>",
+   "price_usd": 29.0,
+   "currency": "usd",
+   "url": "actlattice-human-oversight-design-guide",
+   "tags": [
+    "ai agents",
+    "compliance",
+    "template",
+    "governance",
+    "risk management",
+    "ai safety"
+   ]
+  },
+  {
+   "id": "Yzq3FFU0oze4h9nNtkD7Nw==",
+   "name": "Human Review Time Budget Calculator",
+   "description": "<p>Budget the human hours your approval gates consume \u2014 gates fail when reviewers drown. A self-serve Kestrelattice PDF \u2014 buy once, download instantly.</p>",
+   "price_usd": 19.0,
+   "currency": "usd",
+   "url": "human-review-time-budget-calculator",
+   "tags": [
+    "ai agents",
+    "ai governance",
+    "human in the loop",
+    "calculator",
+    "cost management"
+   ]
+  },
+  {
+   "id": "_84XqagEYC67J8UCxnB9eQ==",
+   "name": "Human-in-the-Loop Design Pack",
+   "description": "<p>Design patterns and implementation checklists for keeping meaningful human oversight in AI hiring workflows \u2014 escalation thresholds, review queues, override logging, and audit-ready documentation. Built by HireWarden (ghostcorpnet fleet studio).</p>",
+   "price_usd": 29.0,
+   "currency": "usd",
+   "url": "hirewarden-human-in-the-loop-design-pack",
+   "tags": [
+    "hiring",
+    "hr",
+    "recruiting",
+    "hirewarden",
+    "ai governance",
+    "compliance"
+   ]
+  },
+  {
+   "id": "BJwKoIKcnH0SaXN60eqvqw==",
+   "name": "Human-in-the-Loop Policy One-Pager",
+   "description": "<p>One page defining exactly which decisions stay human, always. A self-serve Kestrelattice PDF \u2014 buy once, download instantly.</p>",
+   "price_usd": 19.0,
+   "currency": "usd",
+   "url": "human-in-the-loop-policy",
+   "tags": [
+    "ai agents",
+    "ai governance",
+    "human in the loop",
+    "policy template"
+   ]
+  },
+  {
+   "id": "pq0GOO8DHXrJ9Mohhf_h3g==",
+   "name": "Identity Resolution Primer",
+   "description": "<p>A 35-page identity primer: deterministic vs probabilistic matching, identity graphs, and privacy constraints. Built by an ghostcorpnet fleet studio. Instant PDF download.</p>",
+   "price_usd": 49.0,
+   "currency": "usd",
+   "url": "https://koalstin.gumroad.com/l/njpbfz",
+   "tags": [
+    "adtech",
+    "identity resolution",
+    "probabilistic",
+    "identity graph",
+    "privacy"
+   ]
+  },
+  {
+   "id": "d6P7GsinbnBDUWzUpwATgg==",
+   "name": "Incident Command Mega-Kit",
+   "description": "<p>Everything above, unified into one command system: the full incident-command operating system for agent incidents \u2014 command structure, role cards, the integrated lifecycle from triage to review, decision logs, and drill plans. Guidance only \u2014 adapt to your org before use.</p>",
+   "price_usd": 49.0,
+   "currency": "usd",
+   "url": "https://koalstin.gumroad.com/l/xylci",
+   "tags": [
+    "ai agents",
+    "template",
+    "governance",
+    "compliance",
+    "risk management",
+    "ai safety"
+   ]
+  },
+  {
+   "id": "XmSd-uXufiM13GbNhbqzvA==",
+   "name": "Incident Communication Template Pack",
+   "description": "<p>What to tell the team, the customer, and the log during an agent incident. A self-serve Kestrelattice PDF \u2014 buy once, download instantly.</p>",
+   "price_usd": 19.0,
+   "currency": "usd",
+   "url": "incident-communication-templates",
+   "tags": [
+    "ai agents",
+    "ai governance",
+    "incident response",
+    "template",
+    "incident comms"
+   ]
+  },
+  {
+   "id": "2i4VGMaeKuARGxbacX2GbA==",
+   "name": "Incident Metrics & SLA Dashboard Templates",
+   "description": "<p>MTTR, recurrence, and blast-radius tracking: a complete metric dictionary for agent incidents, severity-based SLA templates, dashboard panel specifications, and weekly/monthly reporting templates. Guidance only \u2014 adapt targets to your environment.</p>",
+   "price_usd": 49.0,
+   "currency": "usd",
+   "url": "https://koalstin.gumroad.com/l/jsblv",
+   "tags": [
+    "ai agents",
+    "template",
+    "governance",
+    "ai safety",
+    "incident response",
+    "sre"
+   ]
+  },
+  {
+   "id": "Ku_DN4tVNlBT2NWp5WtWCw==",
+   "name": "Incident Postmortem Template Pack",
+   "description": "<p>Turn every AI agent incident into institutional knowledge. This postmortem template pack gives you a blameless, complete incident record: timeline, root-cause analysis, agent telemetry, policy-gate audit, corrective actions with owners and deadlines, and cost impact.</p><p><br></p><p>Instant PDF download. Self-serve \u2014 no calls, no onboarding.</p>",
+   "price_usd": 19.0,
+   "currency": "usd",
+   "url": "https://koalstin.gumroad.com/l/tqxud",
+   "tags": [
+    "ai agents",
+    "ai governance",
+    "incident response",
+    "templates"
+   ]
+  },
+  {
+   "id": "sDleI9CihiedAWDw3dAkxA==",
+   "name": "Incident Reporting Templates",
+   "description": "<p>Fill-in templates for the EU AI Act's serious-incident reporting duties, with timelines and escalation checklists. Educational guidance, not legal advice. From ActLattice.</p>",
+   "price_usd": 29.0,
+   "currency": "usd",
+   "url": "actlattice-incident-reporting-templates",
+   "tags": [
+    "ai agents",
+    "compliance",
+    "template",
+    "governance",
+    "risk management",
+    "ai safety"
+   ]
+  },
+  {
+   "id": "E37Vcw7WeIFag2PRZNzKcQ==",
+   "name": "Incident Response Runbook",
+   "description": "<p>The full agent incident response runbook, end to end: prepare, detect, analyze, contain, eradicate, recover, and review \u2014 with decision trees, phase checklists, and comms cadence tuned for AI agents. This is guidance, not a substitute for professional security review.</p>",
+   "price_usd": 29.0,
+   "currency": "usd",
+   "url": "https://koalstin.gumroad.com/l/itjsw",
+   "tags": [
+    "ai agents",
+    "template",
+    "governance",
+    "compliance",
+    "risk management",
+    "ai safety"
+   ]
+  },
+  {
+   "id": "lvhck-Nu6D8k5VUZhkIjMg==",
+   "name": "Incident Runbook Automator CLI (Python)",
+   "description": "<p>Turns a JSON runbook into a timed incident checklist: it walks the responder step by step, tracks elapsed time against each step's budget, supports an --alert banner for paging-style notifications, and writes a timestamped incident log (JSONL) for the postmortem. Ships with a sample checkout-outage runbook. Standard library only. Delivered as an instant ZIP download: working source code, README with setup and usage instructions, sample input/output, and a single-user license. No pip installs ",
+   "price_usd": 29.0,
+   "currency": "usd",
+   "url": "incident-runbook-automator-cli",
+   "tags": [
+    "code",
+    "python",
+    "source code",
+    "download",
+    "incident response",
+    "runbook",
+    "sre",
+    "cli"
+   ]
+  },
+  {
+   "id": "FL5Bhd9vU0z-0cdl9ZU1fA==",
+   "name": "Incident Triage Checklist Pack",
+   "description": "<p>The first-30-minutes checklist for any agent incident: a minute-by-minute triage sequence, severity classification, intake and scope worksheets, and declaration templates so the first responder never freezes. This is guidance, not a substitute for professional security review.</p>",
+   "price_usd": 19.0,
+   "currency": "usd",
+   "url": "https://koalstin.gumroad.com/l/igclau",
+   "tags": [
+    "ai agents",
+    "template",
+    "governance",
+    "compliance",
+    "risk management",
+    "ai safety"
+   ]
+  },
+  {
+   "id": "_8oNPvaku73jW6WJ2yFSVA==",
+   "name": "Interview-Record Retention Pack",
+   "description": "<p>Keep records auditors and counsel will accept. Retention schedules, agent-logging specs, and destruction protocols for hiring-agent records \u2014 what to keep, how long, who owns it, and how to prove the file is complete. From HireWarden (ghostcorpnet) \u2014 digital PDF download, delivered instantly by Gumroad.</p>",
+   "price_usd": 19.0,
+   "currency": "usd",
+   "url": "https://koalstin.gumroad.com/l/gqjvee",
+   "tags": [
+    "ai agents",
+    "template",
+    "governance",
+    "compliance",
+    "risk management",
+    "ai safety"
+   ]
+  },
+  {
+   "id": "M4F-vb9hgEMfAaN_Aue3NA==",
+   "name": "Job-Description Neutrality Checklist",
+   "description": "<p>Strip biased language before the agent reads it. A line-by-line neutrality review for job descriptions \u2014 gendered and age-coded phrasing, proxy-laden requirements, and formatting traps that tilt hiring agents before screening even starts \u2014 with rewrite examples and an approval checklist. From HireWarden (ghostcorpnet) \u2014 digital PDF download, delivered instantly by Gumroad.</p>",
+   "price_usd": 19.0,
+   "currency": "usd",
+   "url": "https://koalstin.gumroad.com/l/xenfn",
+   "tags": [
+    "ai agents",
+    "template",
+    "governance",
+    "compliance",
+    "risk management",
+    "ai safety"
+   ]
+  },
+  {
+   "id": "OfyShNFrnoQfLoiIODKbpQ==",
+   "name": "Kit Inicial de Gobernanza de Agentes de IA",
+   "description": "<p>Kit inicial GRATUITO de 4 p\u00e1ginas: la lista esencial de gobernanza de agentes de IA. Su p\u00e1gina final te dirige al cat\u00e1logo pago de Kestrelattice.</p><p><br></p><p>A self-serve Kestrelattice PDF \u2014 buy once, download instantly.</p>",
+   "price_usd": 0.0,
+   "currency": "usd",
+   "url": "https://koalstin.gumroad.com/l/pfolzy",
+   "tags": [
+    "ai agents",
+    "ai governance",
+    "starter kit",
+    "free"
+   ]
+  },
+  {
+   "id": "upv2TCQqib5YaQ2cnynJsQ==",
+   "name": "Kit Inicial de Governan\u00e7a de Agentes de IA",
+   "description": "<p>Kit inicial GRATUITO de 4 p\u00e1ginas: a lista essencial de governan\u00e7a de agentes de IA. Sua p\u00e1gina final aponta para o cat\u00e1logo pago da Kestrelattice.</p><p><br></p><p>A self-serve Kestrelattice PDF \u2014 buy once, download instantly.</p>",
+   "price_usd": 0.0,
+   "currency": "usd",
+   "url": "https://koalstin.gumroad.com/l/hopcmg",
+   "tags": [
+    "ai agents",
+    "ai governance",
+    "starter kit",
+    "free"
+   ]
+  },
+  {
+   "id": "k4QDidQoNSOWAkgoJOMsSg==",
+   "name": "Ledger-Reconciliation Agent Rules",
+   "description": "<p>Keep agent-driven books reconcilable. The complete rulebook for AI agents that post, match, and reconcile ledger entries: posting discipline, matching rules, break management, close governance, and intercompany controls \u2014 plus a worked hypothetical example. Part of the FinLattice (ghostcorpnet) governance kit line. Instant download.</p>",
+   "price_usd": 29.0,
+   "currency": "usd",
+   "url": "https://koalstin.gumroad.com/l/xkzgcy",
+   "tags": [
+    "ai agents",
+    "template",
+    "governance",
+    "compliance",
+    "risk management",
+    "ai safety"
+   ]
+  },
+  {
+   "id": "jEAJpOeweHYK6jrok1Q8Ow==",
+   "name": "Legal Agent Privilege Checklist",
+   "description": "<p>Keep privileged material privileged when agents touch it. A matter-by-matter checklist that turns privilege protection into a repeatable practice for legal teams using AI agents. Built by LawWarden (ghostcorpnet fleet studio).</p>",
+   "price_usd": 19.0,
+   "currency": "usd",
+   "url": "lawwarden-legal-agent-privilege-checklist",
+   "tags": [
+    "compliance",
+    "legal",
+    "ai governance"
+   ]
+  },
+  {
+   "id": "Bmo25EELZCMBJAwfygyYKg==",
+   "name": "Legal AI Agent Governance Pack \u2014 Gavel Studio",
+   "description": "<p>Privilege protection and citation-verification checklists for legal AI agents. Not legal advice. A Pack Standard v1 governance kit from ghostcorpnet's Gavel Studio \u2014 self-serve PDF, instant download, no calls, no consulting.</p>",
+   "price_usd": 19.0,
+   "currency": "usd",
+   "url": "https://koalstin.gumroad.com/l/lpfzxa",
+   "tags": [
+    "ai agents",
+    "ai governance",
+    "legal",
+    "checklist",
+    "compliance",
+    "business template",
+    "risk management"
+   ]
+  },
+  {
+   "id": "9RpTc4I5jEfjhTmAb_IQ0g==",
+   "name": "Legislative Briefing Templates",
+   "description": "<p>Brief lawmakers on AI accountability. Policy brief templates, one-pagers, testimony outlines, legislator FAQ banks, hearing preparation guides, and model oversight provisions \u2014 everything needed to bring elected officials a clear, honest account of public-sector AI. Built by CivicWarden, a ghostcorpnet fleet studio. CC-BY-4.0. Instant PDF download.</p>",
+   "price_usd": 49.0,
+   "currency": "usd",
+   "url": "https://koalstin.gumroad.com/l/kemore",
+   "tags": [
+    "civicwarden",
+    "public sector",
+    "ai governance",
+    "transparency",
+    "government ai",
+    "compliance"
+   ]
+  },
+  {
+   "id": "CZxqu4ACabJ3pKnTSyMN5w==",
+   "name": "License Compatibility Checklist",
+   "description": "<p>Know which licenses can mix in your stack. A field-ready compatibility checklist for open-source agent stacks: license families in plain language, a compatibility matrix, a 15-minute per-dependency review procedure. Built by SourceLattice (ghostcorpnet fleet studio).</p>",
+   "price_usd": 19.0,
+   "currency": "usd",
+   "url": "sourcelattice-license-compatibility-checklist",
+   "tags": [
+    "ai governance",
+    "open source",
+    "license compliance",
+    "sbom",
+    "sourcelattice"
+   ]
+  },
+  {
+   "id": "z2tdjVZN6we-V8wqKCtZNQ==",
+   "name": "Maintainer Handoff Templates",
+   "description": "<p>Pass the torch without dropping the project. Complete maintainer succession templates for open-source agent projects: succession planning, handoff packages, emergency transitions, and new-maintainer onboarding. Built by SourceLattice (ghostcorpnet fleet studio). Instant PDF download.</p>",
+   "price_usd": 29.0,
+   "currency": "usd",
+   "url": "sourcelattice-maintainer-handoff-templates",
+   "tags": [
+    "open source",
+    "templates",
+    "sourcelattice",
+    "maintainers"
+   ]
+  },
+  {
+   "id": "7eqvCqwPIINb1UHoaoiBag==",
+   "name": "Malpractice-Aware Deployment Guide",
+   "description": "<p>Deploy without creating new liability. A deployment-gate system that maps malpractice exposure across the agent lifecycle. Built by LawWarden (ghostcorpnet fleet studio).</p>",
+   "price_usd": 29.0,
+   "currency": "usd",
+   "url": "lawwarden-malpractice-aware-deployment-guide",
+   "tags": [
+    "ai governance",
+    "malpractice",
+    "legal ai",
+    "risk management",
+    "lawwarden"
+   ]
+  },
+  {
+   "id": "0ayMuJzwNMxgQjW-zj9g4Q==",
+   "name": "Minimum-Necessary Checklist Pack",
+   "description": "<p>Enforce minimum-necessary access for every agent. Checklists and access-review templates that keep AI agents \u2014 and the humans around them \u2014 to the minimum PHI they need, nothing more.</p><p><br></p><p>Instant download. Part of the ghostcorpnet governance kit line.</p>",
+   "price_usd": 19.0,
+   "currency": "usd",
+   "url": "https://koalstin.gumroad.com/l/ruxsg",
+   "tags": [
+    "ai agents",
+    "template",
+    "governance",
+    "compliance",
+    "risk management",
+    "ai safety"
+   ]
+  },
+  {
+   "id": "ZjUxjJq2GIlsl7NHccgKPQ==",
+   "name": "Model-Risk One-Pager Templates",
+   "description": "<p>Document model risk for finance reviewers, fast. Six fill-in one-pager templates that compress an AI agent's model-risk story onto a single page each \u2014 plus completion guidance, a review checklist, and a worked hypothetical example. Part of the FinLattice (ghostcorpnet) governance kit line. Instant download.</p>",
+   "price_usd": 19.0,
+   "currency": "usd",
+   "url": "https://koalstin.gumroad.com/l/opfoen",
+   "tags": [
+    "ai agents",
+    "template",
+    "governance",
+    "compliance",
+    "risk management",
+    "ai safety"
+   ]
+  },
+  {
+   "id": "H2aawIldLJsZ7c-Jdd-VEw==",
+   "name": "Monthly Fleet Spend Forecast Calculator",
+   "description": "<p>Turn per-plan ceilings into a monthly fleet forecast your finance person can read. A self-serve Kestrelattice PDF \u2014 buy once, download instantly.</p>",
+   "price_usd": 19.0,
+   "currency": "usd",
+   "url": "monthly-fleet-spend-forecast",
+   "tags": [
+    "ai agents",
+    "ai governance",
+    "cost management",
+    "finops",
+    "calculator"
+   ]
+  },
+  {
+   "id": "VydN-ed5ZjZpo2l1RIfqNQ==",
+   "name": "Multi-Agent Handoff Protocols",
+   "description": "<p>Clean transfers between agents, teams, and humans. Protocol definitions for every handoff type \u2014 agent-to-agent, agent-to-human, human-to-agent, and cross-team \u2014 with context packet formats, acceptance rules, timeout handling, and escalation paths.</p>",
+   "price_usd": 29.0,
+   "currency": "usd",
+   "url": "https://koalstin.gumroad.com/l/klyusp",
+   "tags": [
+    "ai agents",
+    "customer support",
+    "template",
+    "governance",
+    "support operations",
+    "ai safety"
+   ]
+  },
+  {
+   "id": "LNWOi7PLgTy8mger7JH3kA==",
+   "name": "Multi-Department Governance Bundle",
+   "description": "<p>Consistent controls across departments. A federation model for governing AI agents across many departments: central policy with local adaptation, shared services, cross-department audits, and unified citizen-facing transparency. A CivicWarden kit (ghostcorpnet studio). Instant PDF download.</p>",
+   "price_usd": 49.0,
+   "currency": "usd",
+   "url": "https://koalstin.gumroad.com/l/zvktp",
+   "tags": [
+    "civicwarden",
+    "public sector",
+    "ai governance",
+    "transparency",
+    "government ai",
+    "compliance"
+   ]
+  },
+  {
+   "id": "CNeXdOdQx9rzChW-uquCGw==",
+   "name": "Multi-Entity Compliance Bundle",
+   "description": "<p>The consolidation playbook for multi-entity finance operations. Unify compliance reporting across subsidiaries and jurisdictions \u2014 with entity-mapping worksheets, a consolidation calendar, and cross-border control templates.</p><p><br></p><p>Instant download. Part of the ghostcorpnet governance kit line.</p>",
+   "price_usd": 49.0,
+   "currency": "usd",
+   "url": "https://koalstin.gumroad.com/l/wehyxi",
+   "tags": [
+    "ai agents",
+    "template",
+    "governance",
+    "compliance",
+    "risk management",
+    "ai safety"
+   ]
+  },
+  {
+   "id": "i54NLlnXoTAqwcxEXA7CVg==",
+   "name": "Multi-Jurisdiction Compliance Bundle",
+   "description": "<p>Hiring rules across states and countries, mapped. A jurisdiction-mapping system for automated hiring tools \u2014 the rules, the conflicts, and the control set that travels. Built by HireWarden (ghostcorpnet fleet studio).</p>",
+   "price_usd": 49.0,
+   "currency": "usd",
+   "url": "hirewarden-multi-jurisdiction-compliance-bundle",
+   "tags": [
+    "compliance",
+    "ai governance",
+    "hiring"
+   ]
+  },
+  {
+   "id": "F5NtVEZT5wls9V_Ejb3OVw==",
+   "name": "Multi-Matter Evidence Vault",
+   "description": "<p>Organize agent evidence across matters. A vault architecture for prompts, outputs, verification records, and logs. Built by LawWarden (ghostcorpnet fleet studio).</p>",
+   "price_usd": 49.0,
+   "currency": "usd",
+   "url": "lawwarden-multi-matter-evidence-vault",
+   "tags": [
+    "ai governance",
+    "legal ai",
+    "evidence",
+    "audit trail",
+    "lawwarden"
+   ]
+  },
+  {
+   "id": "m6L5_jzI1V-tu3BGJJn74Q==",
+   "name": "Multi-Model GPAI Bundle",
+   "description": "<p>Organize GPAI documentation duties across a fleet of models: registers, versioning, and disclosure templates. Educational guidance, not legal advice. From ActLattice.</p>",
+   "price_usd": 49.0,
+   "currency": "usd",
+   "url": "actlattice-multi-model-gpai-bundle",
+   "tags": [
+    "ai agents",
+    "compliance",
+    "template",
+    "governance",
+    "risk management",
+    "ai safety"
+   ]
+  },
+  {
+   "id": "yoYoMSCrotPotaB2ITaKMg==",
+   "name": "Multi-School Governance Bundle",
+   "description": "<p>Consistent controls across campuses and charters. The complete governance operating system for multi-site organizations: tiered policy architecture, cross-campus monitoring, charter/network adaptations, shared incident command, and the compliance calendar that keeps every site in sync.</p>",
+   "price_usd": 49.0,
+   "currency": "usd",
+   "url": "classwarden-multi-school-governance-bundle",
+   "tags": [
+    "ai agents",
+    "customer support",
+    "governance",
+    "support operations",
+    "ai safety",
+    "classwarden",
+    "ai governance",
+    "k-12",
+    "multi-school",
+    "charter schools"
+   ]
+  },
+  {
+   "id": "IArFFe-leA1jRp7EQ2QZkg==",
+   "name": "New Model Version Approval Flow",
+   "description": "<p>Approval flow for adopting new model versions in governed agent fleets: evaluation gates, rollback criteria, sign-off roles, and audit records, written so you can adopt it as-is.</p><p><br></p><p>A self-serve Kestrelattice PDF \u2014 buy once, download instantly.</p>",
+   "price_usd": 19.0,
+   "currency": "usd",
+   "url": "https://koalstin.gumroad.com/l/gqknf",
+   "tags": [
+    "ai agents",
+    "ai governance",
+    "model management",
+    "approval workflow"
+   ]
+  },
+  {
+   "id": "oti7Gl27usS_vWxmGIMh6w==",
+   "name": "Notified Body Briefing Kit",
+   "description": "<p>Briefing materials organizing technical documentation for notified-body assessment under the EU AI Act. Built by ActLattice, a ghostcorpnet fleet studio. Instant PDF download.</p>",
+   "price_usd": 29.0,
+   "currency": "usd",
+   "url": "https://koalstin.gumroad.com/l/lwefcr",
+   "tags": [
+    "notified body",
+    "eu ai act",
+    "briefing",
+    "high-risk ai"
+   ]
+  },
+  {
+   "id": "5XSrpAs3yO7HCuHvXjxqDQ==",
+   "name": "Notified-Body Prep Pack",
+   "description": "<p>Prepare for third-party conformity assessment under the EU AI Act: evidence checklists, gap analysis, and readiness templates. Educational guidance, not legal advice. From ActLattice.</p>",
+   "price_usd": 49.0,
+   "currency": "usd",
+   "url": "actlattice-notified-body-prep-pack",
+   "tags": [
+    "ai agents",
+    "compliance",
+    "template",
+    "governance",
+    "risk management",
+    "ai safety"
+   ]
+  },
+  {
+   "id": "6LBxMCUljT--oZNYvhPhaA==",
+   "name": "Observability Tool Vendor Scorecard",
+   "description": "<p>Scorecard for evaluating observability vendors for AI agent operations: coverage, latency, cost, and integration criteria with weighted scoring, ready to use as-is.</p><p><br></p><p>A self-serve ghostcorpnet PDF \u2014 buy once, download instantly.</p>",
+   "price_usd": 19.0,
+   "currency": "usd",
+   "url": "https://koalstin.gumroad.com/l/ybhjqn",
+   "tags": [
+    "ai agents",
+    "ai governance",
+    "observability",
+    "logging",
+    "vendor evaluation"
+   ]
+  },
+  {
+   "id": "cOaCFwyDgpDMbr3Cut58Xg==",
+   "name": "On-Call Escalation Templates",
+   "description": "<p>Who gets paged, when, and with what context: severity-based escalation ladders, page templates, handoff scripts, and bridge norms for agent incidents. Operational guidance \u2014 adapt to your org before use.</p>",
+   "price_usd": 19.0,
+   "currency": "usd",
+   "url": "https://koalstin.gumroad.com/l/yywuyt",
+   "tags": [
+    "ai agents",
+    "template",
+    "governance",
+    "compliance",
+    "risk management",
+    "ai safety"
+   ]
+  },
+  {
+   "id": "04DC4CI4j9uHDTVxWYf49g==",
+   "name": "Open-Source Agent Stack Governance Pack \u2014 OpenMesh Studio",
+   "description": "<p>Runbook-grade governance for self-hosted agent stacks: provenance, secrets, eval gates, hardening. A Pack Standard v1 governance kit from ghostcorpnet's OpenMesh Studio \u2014 self-serve PDF, instant download, no calls, no consulting.</p>",
+   "price_usd": 29.0,
+   "currency": "usd",
+   "url": "https://koalstin.gumroad.com/l/ctszsj",
+   "tags": [
+    "ai agents",
+    "ai governance",
+    "open source",
+    "self-hosted",
+    "runbook",
+    "devops",
+    "security",
+    "business template"
+   ]
+  },
+  {
+   "id": "3vVYUlEZYWB99QYOB1v3_g==",
+   "name": "OSPO Mega-Kit",
+   "description": "<p>Run an open-source program office on templates. The complete OSPO operating system: charter, roles, policy library, intake workflows, compliance automation, and metrics \u2014 integrating license review, SBOM practice, dependency scoring, contribution governance, supply-chain security, vulnerability response, fork management, and maintainer succession into one unified program. Built by SourceLattice (ghostcorpnet fleet studio). Instant PDF download.</p>",
+   "price_usd": 49.0,
+   "currency": "usd",
+   "url": "sourcelattice-ospo-mega-kit",
+   "tags": [
+    "open source",
+    "sourcelattice",
+    "ospo",
+    "program office"
+   ]
+  },
+  {
+   "id": "jxlx03kmh2iIbGfSVMrH0Q==",
+   "name": "Oversight Board Briefing Kit",
+   "description": "<p>Brief boards and councils on agent deployments. Complete briefing package templates \u2014 deployment briefs, risk summaries, metrics snapshots, Q&amp;A prep banks, decision memos, and resolution language \u2014 so oversight bodies can govern AI agents with real information. A CivicWarden kit (ghostcorpnet studio). Instant PDF download.</p>",
+   "price_usd": 29.0,
+   "currency": "usd",
+   "url": "https://koalstin.gumroad.com/l/ebmcyl",
+   "tags": [
+    "civicwarden",
+    "public sector",
+    "ai governance",
+    "transparency",
+    "government ai",
+    "compliance"
+   ]
+  },
+  {
+   "id": "yjGngzSzLuMr170hfZ9SGw==",
+   "name": "Parent-Consent Template Library",
+   "description": "<p>Plain-language consent forms for AI in school. A complete library: general AI-use consent, under-13 consent, opt-out forms, consent-revocation handling, and the tracking system that keeps it all auditable. These templates are starting points, not legal advice \u2014 have counsel adapt and approve every form before use.</p>",
+   "price_usd": 29.0,
+   "currency": "usd",
+   "url": "classwarden-parent-consent-template-library",
+   "tags": [
+    "ai agents",
+    "template",
+    "governance",
+    "education",
+    "edtech",
+    "student privacy",
+    "classwarden",
+    "ai governance",
+    "k-12",
+    "consent forms"
+   ]
+  },
+  {
+   "id": "CWIju_yX4OiIpSdPUmeurA==",
+   "name": "Partner Briefing Bundle",
+   "description": "<p>Brief partners on AI risk, policy, and opportunity. Executive summaries, decision memos, meeting agendas, and FAQ responses. Built by LawWarden (ghostcorpnet fleet studio).</p>",
+   "price_usd": 49.0,
+   "currency": "usd",
+   "url": "lawwarden-partner-briefing-bundle",
+   "tags": [
+    "ai governance",
+    "legal ai",
+    "executive briefing",
+    "lawwarden"
+   ]
+  },
+  {
+   "id": "rRHfMjvzvdaAB7RkaOAW3Q==",
+   "name": "Patient-Disclosure Templates",
+   "description": "<p>Disclosure language patients actually understand. Ready-to-adapt templates for telling patients when AI agents touch their care \u2014 consent forms, notice scripts, and FAQ answers in plain language.</p><p><br></p><p>Instant download. Part of the ghostcorpnet governance kit line.</p>",
+   "price_usd": 19.0,
+   "currency": "usd",
+   "url": "https://koalstin.gumroad.com/l/kotkr",
+   "tags": [
+    "ai agents",
+    "template",
+    "governance",
+    "compliance",
+    "risk management",
+    "ai safety"
+   ]
+  },
+  {
+   "id": "7JlvVoPLafGTg40RspsG6A==",
+   "name": "Payment Agent Control Framework",
+   "description": "<p>End-to-end controls for agents that move money. The complete control framework for payment agents: lifecycle governance, payment-type control matrices, settlement and cut-off rules, exception handling, and independent verification \u2014 plus a worked hypothetical example. Part of the FinLattice (ghostcorpnet) governance kit line. Instant download.</p>",
+   "price_usd": 29.0,
+   "currency": "usd",
+   "url": "https://koalstin.gumroad.com/l/cvstvp",
+   "tags": [
+    "ai agents",
+    "template",
+    "governance",
+    "compliance",
+    "risk management",
+    "ai safety"
+   ]
+  },
+  {
+   "id": "daCyjUbTVQqQLCaFxYKxoA==",
+   "name": "Per-Plan Token Budget Calculator",
+   "description": "<p>Size a real cost ceiling per plan so spend fails closed instead of failing expensive. A complete, zero-placeholder draft for teams governing AI agents in production: policy gates, audit trails, cost controls, permissioning, and incident response, written so you can adopt it as-is.</p><p><br></p><p>A self-serve Kestrelattice PDF \u2014 buy once, download instantly.</p>",
+   "price_usd": 19.0,
+   "currency": "usd",
+   "url": "https://koalstin.gumroad.com/l/iioizs",
+   "tags": [
+    "ai agents",
+    "ai governance",
+    "cost management",
+    "calculator",
+    "finops"
+   ]
+  },
+  {
+   "id": "6XcSTMZYvfMi3qwFPS22tQ==",
+   "name": "Permission Review Meeting Worksheet",
+   "description": "<p>Run a quarterly permission review meeting that ends with decisions, not vibes. A complete, zero-placeholder draft for teams governing AI agents in production.</p>",
+   "price_usd": 19.0,
+   "currency": "usd",
+   "url": "https://koalstin.gumroad.com/l/ggwqxc",
+   "tags": [
+    "ai agents",
+    "ai governance",
+    "access control",
+    "access review",
+    "workbook"
+   ]
+  },
+  {
+   "id": "8csad05a5VjsJZ8CwSd6Cw==",
+   "name": "PHI Incident Response Runbook",
+   "description": "<p>When PHI goes somewhere it shouldn't. A runbook for PHI incidents involving AI agents \u2014 containment steps, breach-risk assessment, notification timelines, and post-incident review templates.</p><p><br></p><p>Instant download. Part of the ghostcorpnet governance kit line.</p>",
+   "price_usd": 29.0,
+   "currency": "usd",
+   "url": "https://koalstin.gumroad.com/l/dgqrdr",
+   "tags": [
+    "ai agents",
+    "template",
+    "governance",
+    "compliance",
+    "risk management",
+    "ai safety"
+   ]
+  },
+  {
+   "id": "dYuFBVAuNuGwSXVNpFLKsQ==",
+   "name": "PHI Redaction Quick-Reference",
+   "description": "<p>The identifier-stripping checklist for agent outputs. Know exactly which identifiers to strip, mask, or tokenize before any agent output leaves your clinical boundary \u2014 with rule tables, an adversarial test suite, and a one-page desk card.</p><p><br></p><p>Instant download. Part of the ghostcorpnet governance kit line.</p>",
+   "price_usd": 19.0,
+   "currency": "usd",
+   "url": "https://koalstin.gumroad.com/l/ffcizs",
+   "tags": [
+    "ai agents",
+    "template",
+    "governance",
+    "compliance",
+    "risk management",
+    "ai safety"
+   ]
+  },
+  {
+   "id": "2f77fTn3yKXoNtFN07YXsg==",
+   "name": "PII Redaction Rule Pack",
+   "description": "<p>Field-level redaction rules for tickets and transcripts. A complete taxonomy of personal data in support conversations, per-field read/repeat/store rules, redaction patterns for logs and transcripts, and verification tests that prove the rules hold.</p>",
+   "price_usd": 29.0,
+   "currency": "usd",
+   "url": "https://koalstin.gumroad.com/l/saudu",
+   "tags": [
+    "ai agents",
+    "customer support",
+    "template",
+    "governance",
+    "support operations",
+    "ai safety"
+   ]
+  },
+  {
+   "id": "A0_Bb0HDB2_qcH-9yh_Opw==",
+   "name": "PII/PHI Redaction Tool (Python)",
+   "description": "<p>A pattern-based scrubber for sensitive text: redacts SSNs, phone numbers, emails, credit-card numbers, and MRN identifiers from plain-text files or a single column of a CSV, and reports exactly what it replaced. Extend the PATTERNS list with your own regexes. Standard library only. Note: this is a safety net, not a compliance guarantee - you remain responsible for HIPAA and privacy rules. Delivered as an instant ZIP download: working source code, README with setup and usage instructions, samp",
+   "price_usd": 29.0,
+   "currency": "usd",
+   "url": "https://koalstin.gumroad.com/l/kohrxu",
+   "tags": [
+    "code",
+    "python",
+    "source code",
+    "download",
+    "pii",
+    "r\u00e9daction",
+    "phi",
+    "hipaa",
+    "privacy"
+   ]
+  },
+  {
+   "id": "YpBWs3zCZqLDOSuVTPuhTw==",
+   "name": "Plan Ceiling Sizing Calculator",
+   "description": "<p>Size cost ceilings from real task costs instead of guesses. A complete, zero-placeholder draft for teams governing AI agents in production.</p>",
+   "price_usd": 19.0,
+   "currency": "usd",
+   "url": "https://koalstin.gumroad.com/l/oyslkc",
+   "tags": [
+    "ai agents",
+    "ai governance",
+    "cost management",
+    "calculator",
+    "finops"
+   ]
+  },
+  {
+   "id": "_OX1Rhoqi8bG1hL3hqg9Kw==",
+   "name": "Policy Exception Request Template Pack",
+   "description": "<p>Formal exception-request templates for policy deviations in agent governance: intake forms, approver routing, time-boxed grants, and audit-ready records, written so you can adopt them as-is.</p><p><br></p><p>A self-serve Kestrelattice PDF \u2014 buy once, download instantly.</p>",
+   "price_usd": 19.0,
+   "currency": "usd",
+   "url": "https://koalstin.gumroad.com/l/guxlvt",
+   "tags": [
+    "ai agents",
+    "ai governance",
+    "policy template",
+    "template",
+    "compliance"
+   ]
+  },
+  {
+   "id": "BOyegDfrEatopndhHuYWfA==",
+   "name": "Post-Incident Review Worksheet Kit",
+   "description": "<p>Blameless postmortems tuned for agent failures: a full review document template, timeline builder, five-whys and contributing-factors worksheets, action-item tracker, and meeting agenda. Guidance only \u2014 adapt to your org's review policy.</p>",
+   "price_usd": 19.0,
+   "currency": "usd",
+   "url": "https://koalstin.gumroad.com/l/nxekyp",
+   "tags": [
+    "ai agents",
+    "template",
+    "governance",
+    "compliance",
+    "risk management",
+    "ai safety"
+   ]
+  },
+  {
+   "id": "hj6DGyX8LwDAb6C-pFLVOA==",
+   "name": "Pre-Deploy Safety Checklist",
+   "description": "<p>The last gate before an agent goes live: identity, grants, ceilings, logging, owner. A complete, zero-placeholder draft for teams governing AI agents in production.</p>",
+   "price_usd": 19.0,
+   "currency": "usd",
+   "url": "https://koalstin.gumroad.com/l/lgybpm",
+   "tags": [
+    "ai agents",
+    "ai governance",
+    "checklist",
+    "ai safety",
+    "deployment"
+   ]
+  },
+  {
+   "id": "k591d4UJuncNA3D7a-uZpw==",
+   "name": "Privilege & Work-Product Protection Guide",
+   "description": "<p>The full protection framework for legal agents. A unified system covering attorney-client privilege and work-product protection for AI-assisted practice. Built by LawWarden (ghostcorpnet fleet studio).</p>",
+   "price_usd": 29.0,
+   "currency": "usd",
+   "url": "lawwarden-privilege-work-product-protection-guide",
+   "tags": [
+    "legal",
+    "ai governance",
+    "compliance"
+   ]
+  },
+  {
+   "id": "vi83wm2LLqPRpRSXU_hfnw==",
+   "name": "Procurement Review Templates",
+   "description": "<p>Buy AI systems with accountability in the contract. Solicitation language, a vendor disclosure questionnaire, contract clause checklists, evaluation rubrics, and exit planning \u2014 everything needed to procure agent systems without signing away residents' rights. A CivicWarden kit (ghostcorpnet studio). Instant PDF download.</p>",
+   "price_usd": 29.0,
+   "currency": "usd",
+   "url": "https://koalstin.gumroad.com/l/sgwcdj",
+   "tags": [
+    "civicwarden",
+    "public sector",
+    "ai governance",
+    "transparency",
+    "government ai",
+    "compliance"
+   ]
+  },
+  {
+   "id": "2GBVnmsCNlVcKg9EQ15Ucw==",
+   "name": "Programmatic Buying Guide",
+   "description": "<p>A 35-page programmatic buying guide: DSP setup, bid strategies, and inventory selection. Built by an ghostcorpnet fleet studio. Instant PDF download.</p>",
+   "price_usd": 19.0,
+   "currency": "usd",
+   "url": "https://koalstin.gumroad.com/l/yqyzd",
+   "tags": [
+    "adtech",
+    "programmatic",
+    "buying guide",
+    "dsp",
+    "bid strategies",
+    "inventory"
+   ]
+  },
+  {
+   "id": "375-poCR4ljI5PU6Jzl9QA==",
+   "name": "Programmatic DOOH Guide",
+   "description": "<p>The only programmatic DOOH guide grounded in real AI governance. Covers inventory validation, audience measurement, creative specs\u2014and the policy gates, audit trails, and cost controls you need to deploy DOOH at scale. No guesswork, no invented stats. Just the operational playbook for teams running AI agents in DOOH. Built by an ghostcorpnet fleet studio. Instant PDF download.</p>",
+   "price_usd": 49.0,
+   "currency": "usd",
+   "url": "https://koalstin.gumroad.com/l/hisfxc",
+   "tags": [
+    "adtech",
+    "adtechwarden",
+    "dooh",
+    "ai governance"
+   ]
+  },
+  {
+   "id": "eDKrAC6jtg3ofrmHiZcikg==",
+   "name": "Prompt Firebreak Audit Template",
+   "description": "<p>Audit your prompt-layer defenses: where untrusted input can reach your agents. A complete, zero-placeholder draft for teams governing AI agents in production.</p>",
+   "price_usd": 19.0,
+   "currency": "usd",
+   "url": "https://koalstin.gumroad.com/l/ytwedz",
+   "tags": [
+    "ai agents",
+    "ai governance",
+    "prompt injection",
+    "ai security",
+    "audit",
+    "template"
+   ]
+  },
+  {
+   "id": "vH3gq0eb6HXJSVINtQqCmg==",
+   "name": "Prompt Injection Defense (Audiobook)",
+   "description": "<p>A narrated audiobook walking through the Prompt Firebreak Audit: mapping untrusted input paths, input validation, jailbreak detection, least-privilege permissioning, immutable logs, cost caps, and the incident response that makes the next injection harder. With intro and outro.</p><p><br></p><p>(MP3 audiobook)</p>",
+   "price_usd": 19.0,
+   "currency": "usd",
+   "url": "prompt-injection-defense-audiobook",
+   "tags": [
+    "audiobook",
+    "prompt injection",
+    "audio",
+    "security",
+    "ai agents",
+    "training",
+    "mp3"
+   ]
+  },
+  {
+   "id": "e0gRJ8b2W0wou-_Sg0k0tQ==",
+   "name": "Prompt Injection Defense Field Guide",
+   "description": "<p>A 15-page companion to The Governed Agent Mesh Playbook \u2014 Studio Edition.</p><p><br></p><p>How prompt injection actually works against agents: direct attacks, indirect attacks, and tool-output poisoning.</p><p><br></p><p>Includes 15 realistic attack scenarios tier-mapped to the three risk tiers, 6 layered defenses, 20 adversarial test prompts with expected safe behavior, and a 20-item hardening checklist.</p>",
+   "price_usd": 19.0,
+   "currency": "usd",
+   "url": "https://koalstin.gumroad.com/l/cjdkuu",
+   "tags": [
+    "ai agents",
+    "ai governance",
+    "prompt injection",
+    "ai security"
+   ]
+  },
+  {
+   "id": "Xjv3Nc-wEEcOMRLahtq9WA==",
+   "name": "Prompt Injection Test Harness (Python)",
+   "description": "<p>A working Python test harness with 20 built-in prompt-injection attacks (instruction overrides, prompt leaking, jailbreaks, roleplay, encoded payloads, indirect tool-output injection). Point it at your agent via --agent-cmd, or run --demo against the bundled deliberately-vulnerable sample agent to see the scoring work. Each response is graded BLOCKED / LEAKED / UNCLEAR and you get a JSON report plus a % blocked score. Standard library only. Delivered as an instant ZIP download: working source",
+   "price_usd": 49.0,
+   "currency": "usd",
+   "url": "https://koalstin.gumroad.com/l/ipjfz",
+   "tags": [
+    "code",
+    "python",
+    "source code",
+    "download",
+    "prompt injection",
+    "ai security",
+    "red team",
+    "ai agents"
+   ]
+  },
+  {
+   "id": "NVV9EqcRUx8jDBZ5Jx2i3Q==",
+   "name": "Public Sector Agent Governance Pack \u2014 Civic Studio",
+   "description": "<p>Transparency, records-retention, and citizen-data rules for government AI agents. A Pack Standard v1 governance kit from ghostcorpnet's Civic Studio \u2014 self-serve PDF, instant download, no calls, no consulting.</p>",
+   "price_usd": 19.0,
+   "currency": "usd",
+   "url": "https://koalstin.gumroad.com/l/czjlqo",
+   "tags": [
+    "ai agents",
+    "ai governance",
+    "government",
+    "public sector",
+    "checklist",
+    "playbook",
+    "compliance",
+    "business template"
+   ]
+  },
+  {
+   "id": "kSRx2AiRwWVhCKzBIbs54g==",
+   "name": "Public-Comment Response Pack",
+   "description": "<p>Handle scrutiny with documented answers. Intake and tracking templates, triage procedures, response drafts for the hard questions, hearing facilitation guides, and public comment summary reports \u2014 a complete system for responding to public scrutiny of government AI. A CivicWarden kit (ghostcorpnet studio). Instant PDF download.</p>",
+   "price_usd": 29.0,
+   "currency": "usd",
+   "url": "https://koalstin.gumroad.com/l/aqkkn",
+   "tags": [
+    "civicwarden",
+    "public sector",
+    "ai governance",
+    "transparency",
+    "government ai",
+    "compliance"
+   ]
+  },
+  {
+   "id": "BNL_uHZlqU5YtIVAfDwiWg==",
+   "name": "Public-Sector AI Transparency Template",
+   "description": "<p>Publish what your agents do, in plain language. Fill-in templates for the AI use inventory, public agent disclosure pages, and self-identification scripts \u2014 everything an agency needs to tell residents the truth about its AI agents. A CivicWarden kit (ghostcorpnet studio). Instant PDF download.</p>",
+   "price_usd": 19.0,
+   "currency": "usd",
+   "url": "https://koalstin.gumroad.com/l/uhwgl",
+   "tags": [
+    "civicwarden",
+    "public sector",
+    "ai governance",
+    "transparency",
+    "government ai",
+    "compliance"
+   ]
+  },
+  {
+   "id": "cJZfZ2-Qnn__e6qpy-DJUA==",
+   "name": "QA Audit Program Templates",
+   "description": "<p>Score agent conversations like a QA lead would. The complete quality-audit program: scorecard design, reviewer hiring and calibration, sampling methodology, dimension-by-dimension rubrics, dispute resolution, trend analysis, and the closed-loop process that turns scores into fixes.</p>",
+   "price_usd": 49.0,
+   "currency": "usd",
+   "url": "supportwarden-qa-audit-program-templates",
+   "tags": [
+    "ai agents",
+    "customer support",
+    "template",
+    "governance",
+    "support operations",
+    "ai safety"
+   ]
+  },
+  {
+   "id": "PkUZEj0S5f0YDWvQSRxkuA==",
+   "name": "Quarterly Access Review Kit",
+   "description": "<p>A 12-page companion to The Governed Agent Mesh Playbook \u2014 Studio Edition.</p><p><br></p><p>The quarterly review ceremony for agent permissions: a grant inventory worksheet, a re-certification sign-off sheet, and a leaver's checklist.</p><p><br></p><p>Covers automation hooks and a 90-day calendar. Grants don't quit when people do.</p>",
+   "price_usd": 19.0,
+   "currency": "usd",
+   "url": "https://koalstin.gumroad.com/l/fdtkdd",
+   "tags": [
+    "ai agents",
+    "ai governance",
+    "access review",
+    "access control",
+    "workbook"
+   ]
+  },
+  {
+   "id": "OGtNbfIPtV7pqt5OX9C4-A==",
+   "name": "Quiz Generator from Notes (Python)",
+   "description": "<p>Paste in study notes, get a quiz out: this tool scores your sentences for key terms (capitalized concepts, numbers, frequent keywords), turns the best ones into fill-in-the-blank questions, and writes a quiz file with a separate answer key. Adjust --questions to taste. Standard library only. Delivered as an instant ZIP download: working source code, README with setup and usage instructions, sample input/output, and a single-user license. No pip installs needed (standard library only) except w",
+   "price_usd": 19.0,
+   "currency": "usd",
+   "url": "https://koalstin.gumroad.com/l/qvjjw",
+   "tags": [
+    "code",
+    "python",
+    "source code",
+    "download",
+    "quiz",
+    "study",
+    "education",
+    "teachers"
+   ]
+  },
+  {
+   "id": "NgqrR2y6qzpsWerrL0PO2A==",
+   "name": "Records-Retention Checklist",
+   "description": "<p>Keep agent records retention-compliant. A complete checklist system for classifying AI agent artifacts, mapping them to your retention schedule, handling litigation holds, and retrieving records from vendor systems on statutory timelines. A CivicWarden kit (ghostcorpnet studio). Instant PDF download.</p>",
+   "price_usd": 19.0,
+   "currency": "usd",
+   "url": "https://koalstin.gumroad.com/l/loffc",
+   "tags": [
+    "civicwarden",
+    "public sector",
+    "ai governance",
+    "transparency",
+    "government ai",
+    "compliance"
+   ]
+  },
+  {
+   "id": "rp6WBwW3eLW45PrGyJInfQ==",
+   "name": "Red-Team Exercise Pack",
+   "description": "<p>Adversarial drills to find the failure before it finds you: a full red-team exercise program for AI agents \u2014 rules of engagement, 12 detailed attack drills with expected detections, scoring rubrics, and debrief templates. For staging/sandbox use; guidance only, not a substitute for professional security review.</p>",
+   "price_usd": 49.0,
+   "currency": "usd",
+   "url": "https://koalstin.gumroad.com/l/avweeh",
+   "tags": [
+    "ai agents",
+    "template",
+    "governance",
+    "compliance",
+    "risk management",
+    "ai safety"
+   ]
+  },
+  {
+   "id": "r17dhOkJ2DZI0yeVpvruYA==",
+   "name": "Refund-Authority Guardrail Pack",
+   "description": "<p>Spending limits and approval flows for agent refunds. Tier definitions, tool-layer enforcement patterns, approval routing, logging requirements, and abuse defenses \u2014 plus a worked example of a refund failure and the exact controls that would have stopped it.</p>",
+   "price_usd": 19.0,
+   "currency": "usd",
+   "url": "https://koalstin.gumroad.com/l/runwet",
+   "tags": [
+    "ai agents",
+    "customer support",
+    "template",
+    "governance",
+    "support operations",
+    "ai safety"
+   ]
+  },
+  {
+   "id": "WoaTMAIHzDbLYeEkwzq7Ng==",
+   "name": "Regulatory Mapping Pack",
+   "description": "<p>Map agent controls to the regulations auditors cite. A structured mapping kit linking AI agent controls to financial regulatory expectations across major regimes \u2014 with control-to-obligation matrices, gap analysis worksheets, and examiner-ready evidence maps \u2014 plus a worked hypothetical example. Part of the FinLattice (ghostcorpnet) governance kit line. Instant download.</p>",
+   "price_usd": 29.0,
+   "currency": "usd",
+   "url": "https://koalstin.gumroad.com/l/ydhhk",
+   "tags": [
+    "ai agents",
+    "template",
+    "governance",
+    "compliance",
+    "risk management",
+    "ai safety"
+   ]
+  },
+  {
+   "id": "JH6wuzlOoFEDYW4P_oRbWQ==",
+   "name": "Resume Keyword Screener (Python)",
+   "description": "<p>Rank a folder of plain-text resumes against a job description in seconds: it extracts keywords from the JD (stopwords removed), scores each resume by weighted keyword overlap, and prints a ranked table with the top matched terms per candidate. Transparent and editable - no black-box AI, no APIs, standard library only. Delivered as an instant ZIP download: working source code, README with setup and usage instructions, sample input/output, and a single-user license. No pip installs needed (stan",
+   "price_usd": 19.0,
+   "currency": "usd",
+   "url": "https://koalstin.gumroad.com/l/vymxd",
+   "tags": [
+    "code",
+    "python",
+    "source code",
+    "download",
+    "hiring",
+    "resume screening",
+    "hr",
+    "recruiting"
+   ]
+  },
+  {
+   "id": "_gGILssYkek3-i_nzeYVvA==",
+   "name": "Revocation Notice Template Pack",
+   "description": "<p>Notify owners when identities, grants, and keys are revoked \u2014 with a paper trail. A complete, zero-placeholder draft for teams governing AI agents in production.</p>",
+   "price_usd": 19.0,
+   "currency": "usd",
+   "url": "https://koalstin.gumroad.com/l/rsnsrv",
+   "tags": [
+    "ai agents",
+    "ai governance",
+    "access control",
+    "template"
+   ]
+  },
+  {
+   "id": "jmZmZxkF7vqxVXHn1wosCA==",
+   "name": "Risk-Tiering Worksheet",
+   "description": "<p>Force every agent capability into a risk tier with a named owner and a review date. A complete, zero-placeholder draft for teams governing AI agents in production.</p>",
+   "price_usd": 19.0,
+   "currency": "usd",
+   "url": "https://koalstin.gumroad.com/l/azwgjx",
+   "tags": [
+    "ai agents",
+    "ai governance",
+    "risk management",
+    "workbook"
+   ]
+  },
+  {
+   "id": "q0o5DjNeHQX2s9nyjJ39Eg==",
+   "name": "Runaway Cost Response Runbook Excerpt",
+   "description": "<p>An agent is burning budget: detect, freeze, diagnose, and fix in the first hour. A complete, zero-placeholder draft for teams governing AI agents in production.</p>",
+   "price_usd": 19.0,
+   "currency": "usd",
+   "url": "https://koalstin.gumroad.com/l/hhlgoz",
+   "tags": [
+    "ai agents",
+    "ai governance",
+    "cost management",
+    "incident response",
+    "runbook"
+   ]
+  },
+  {
+   "id": "dphAfgljLDXKf-6ByVvjgw==",
+   "name": "SBOM Starter Templates",
+   "description": "<p>Software bills of materials, templated. Field-ready SBOM templates for open-source agent stacks: what to include, SPDX and CycloneDX field templates, generation procedures. Built by SourceLattice (ghostcorpnet fleet studio).</p>",
+   "price_usd": 19.0,
+   "currency": "usd",
+   "url": "sourcelattice-sbom-starter-templates",
+   "tags": [
+    "open source",
+    "sbom",
+    "supply chain",
+    "templates",
+    "sourcelattice"
+   ]
+  },
+  {
+   "id": "qtEoNIja9Qu4PDzaMMP10Q==",
+   "name": "School Pilot Program Playbook",
+   "description": "<p>Run a 90-day classroom pilot with clean evaluation. Week-by-week plan, success criteria, comparison methods, teacher feedback instruments, and the go/no-go decision framework.</p>",
+   "price_usd": 29.0,
+   "currency": "usd",
+   "url": "classwarden-school-pilot-program-playbook",
+   "tags": [
+    "ai agents",
+    "governance",
+    "education",
+    "edtech",
+    "student privacy",
+    "classwarden",
+    "ai governance",
+    "k-12",
+    "pilot program plan",
+    "teacher feedback"
+   ]
+  },
+  {
+   "id": "3egFv4j9l05Go9F_VglH-A==",
+   "name": "Secret-Leak Containment Runbook Excerpt",
+   "description": "<p>Step-by-step containment runbook for secret leaks from AI agents: detection signals, isolation steps, rotation procedures, and post-incident review, written so you can adopt it as-is.</p><p><br></p><p>A self-serve Kestrelattice PDF \u2014 buy once, download instantly.</p>",
+   "price_usd": 19.0,
+   "currency": "usd",
+   "url": "https://koalstin.gumroad.com/l/uogvkc",
+   "tags": [
+    "ai agents",
+    "ai governance",
+    "incident response",
+    "secrets management",
+    "runbook",
+    "ai security"
+   ]
+  },
+  {
+   "id": "Gq3PrtU3_q8dlV6Fm01Hyg==",
+   "name": "Shadow Agent Discovery Checklist",
+   "description": "<p>Find the agents, scripts, and crons running in your stack that nobody registered. A complete, ready-to-use governance checklist for teams running AI agents in production.</p>",
+   "price_usd": 19.0,
+   "currency": "usd",
+   "url": "https://koalstin.gumroad.com/l/osscwp",
+   "tags": [
+    "ai agents",
+    "ai governance",
+    "shadow ai",
+    "checklist",
+    "ai discovery"
+   ]
+  },
+  {
+   "id": "XlTFQNYohYCMzv7MNNJMjA==",
+   "name": "SME AI Act Compliance Guide",
+   "description": "<p>Navigate AI regulations without a legal department. This comprehensive, worksheet-based guide provides small and medium enterprises deploying AI agents with streamlined compliance paths, mandatory documentation templates, risk classification frameworks, and verifiable cost-control mechanisms designed to meet regulatory expectations efficiently and pragmatically. Built by an ghostcorpnet fleet studio. Instant PDF download.</p>",
+   "price_usd": 19.0,
+   "currency": "usd",
+   "url": "https://koalstin.gumroad.com/l/nermpj",
+   "tags": [
+    "actlattice",
+    "eu ai act",
+    "compliance",
+    "ai governance"
+   ]
+  },
+  {
+   "id": "b77owbE-2zActbktbPFw3Q==",
+   "name": "Spend-Ceiling Raise Approval Flow",
+   "description": "<p>Raising a ceiling is a hard-gated action \u2014 this is the approval path that enforces it. A complete, ready-to-use governance document for teams running AI agents in production.</p>",
+   "price_usd": 19.0,
+   "currency": "usd",
+   "url": "https://koalstin.gumroad.com/l/vxdvgr",
+   "tags": [
+    "ai agents",
+    "ai governance",
+    "cost management",
+    "approval workflow"
+   ]
+  },
+  {
+   "id": "3s2lTqdxez9dd4zci8ILjg==",
+   "name": "Status Page Starter Kit (HTML/JS)",
+   "description": "<p>A single self-contained HTML file that gives you a working status page in minutes: edit the SERVICES list with your endpoints, toggle each service between Operational / Degraded / Down, and keep a timestamped incident log. Everything persists in the browser via localStorage \u2014 no server, no build step, no dependencies. Double-click to open, upload to any static host to publish. Delivered as an instant ZIP download: working source code, README with setup and usage instructions, sample input/out",
+   "price_usd": 19.0,
+   "currency": "usd",
+   "url": "status-page-starter-kit",
+   "tags": [
+    "code",
+    "html",
+    "javascript",
+    "source code",
+    "download",
+    "status page",
+    "uptime",
+    "sre"
+   ]
+  },
+  {
+   "id": "fVDrwwKIj9af6PEVMp3Hjw==",
+   "name": "Stress-Test Scenario Library",
+   "description": "<p>Market-shock drills for trading and treasury agents. Twenty ready-to-run stress scenarios for AI agents in trading, treasury, and payments \u2014 with inject design, expected-control checklists, scoring rubrics, and after-action templates \u2014 plus a worked hypothetical example. Part of the FinLattice (ghostcorpnet) governance kit line. Instant download.</p>",
+   "price_usd": 29.0,
+   "currency": "usd",
+   "url": "https://koalstin.gumroad.com/l/eotwhh",
+   "tags": [
+    "ai agents",
+    "template",
+    "governance",
+    "compliance",
+    "risk management",
+    "ai safety"
+   ]
+  },
+  {
+   "id": "Crz2q0FTPOLkOcSwPlaALQ==",
+   "name": "Student-Data Minimization Checklist",
+   "description": "<p>Collect less, protect more: field-by-field guidance. A practical checklist that walks every agent through what data it truly needs \u2014 and cuts the rest \u2014 before it touches a student.</p>",
+   "price_usd": 19.0,
+   "currency": "usd",
+   "url": "classwarden-student-data-minimization-checklist",
+   "tags": [
+    "ai agents",
+    "template",
+    "governance",
+    "education",
+    "edtech",
+    "student privacy"
+   ]
+  },
+  {
+   "id": "eKt4hS4DOYgC-SN2XRSUgA==",
+   "name": "Studio Edition Deluxe",
+   "description": "<p>The Playbook \u2014 Studio Edition as a complete package: the full PDF, a narrated audiobook edition (about 15 minutes, guided walkthrough of all six parts), the Agent Cost Control Workbook, and the Risk-Tiering Worksheet. Combined individual value $86 \u2014 save $7. Instant download, no calls, no consulting.</p><p><br></p><p>(ZIP package)</p>",
+   "price_usd": 79.0,
+   "currency": "usd",
+   "url": "studio-edition-deluxe",
+   "tags": [
+    "ai governance",
+    "studio edition",
+    "deluxe",
+    "audiobook",
+    "playbook",
+    "cost control",
+    "risk tiering"
+   ]
+  },
+  {
+   "id": "rpbj1dsEdfF6q5nAiNEDLA==",
+   "name": "Studio Edition \u2014 Team License",
+   "description": "<p>Everything in the $29 Studio Edition playbook, licensed for up to 20 people on one team under a single receipt. Share the PDF with your team (up to 20 seats, honor system) \u2014 one receipt for expense reports. A self-serve Kestrelattice PDF \u2014 buy once, download instantly.</p>",
+   "price_usd": 99.0,
+   "currency": "usd",
+   "url": "https://koalstin.gumroad.com/l/bbxnne",
+   "tags": [
+    "ai agents",
+    "ai governance",
+    "eu ai act",
+    "compliance",
+    "risk management",
+    "policy template",
+    "enterprise ai",
+    "audit"
+   ]
+  },
+  {
+   "id": "NvUoacQqCqMfxTQxqz16vg==",
+   "name": "Supervised-Output Review Pack",
+   "description": "<p>Attorney review workflows for agent drafts. Risk-tiered review standards, sampling plans, per-output-type checklists, and reviewer accountability. Built by LawWarden (ghostcorpnet fleet studio).</p>",
+   "price_usd": 29.0,
+   "currency": "usd",
+   "url": "lawwarden-supervised-output-review-pack",
+   "tags": [
+    "compliance",
+    "legal",
+    "ai governance"
+   ]
+  },
+  {
+   "id": "42oB1GInB-dwPMIaWuxWWw==",
+   "name": "Supply-Chain Security Guide",
+   "description": "<p>Secure the pipeline your agents depend on. A complete supply-chain security system for open-source agent stacks: threat mapping, artifact signing, build provenance, dependency controls, and a 90-day hardening plan. Built by SourceLattice (ghostcorpnet fleet studio). Instant PDF download.</p>",
+   "price_usd": 29.0,
+   "currency": "usd",
+   "url": "sourcelattice-supply-chain-security-guide",
+   "tags": [
+    "open source",
+    "supply chain",
+    "sourcelattice",
+    "security"
+   ]
+  },
+  {
+   "id": "tAN_XnUkDvp9Fd72p-ghsQ==",
+   "name": "Support Agent Data-Leak Prevention Checklist",
+   "description": "<p>Stop PII from leaving in a chat transcript. A field-by-field checklist that maps where customer data flows through your support agent, which fields it may read, repeat, or write, and the tests that prove nothing leaks \u2014 plus incident response steps for when a leak happens.</p>",
+   "price_usd": 19.0,
+   "currency": "usd",
+   "url": "https://koalstin.gumroad.com/l/mhpwvs",
+   "tags": [
+    "ai agents",
+    "customer support",
+    "template",
+    "governance",
+    "support operations",
+    "ai safety"
+   ]
+  },
+  {
+   "id": "HBMtvBcG1sfSwyAIDZNMWw==",
+   "name": "Support Agent Governance Playbook",
+   "description": "<p>The complete operating manual for support agents. Roles and ownership, the policy lifecycle, authority tiers, knowledge governance, quality monitoring, incident response, and a 90-day implementation plan \u2014 the single document that runs your support-agent program.</p>",
+   "price_usd": 29.0,
+   "currency": "usd",
+   "url": "https://koalstin.gumroad.com/l/nsqajv",
+   "tags": [
+    "ai agents",
+    "customer support",
+    "template",
+    "governance",
+    "support operations",
+    "ai safety"
+   ]
+  },
+  {
+   "id": "MUA0WaHjtBK5kOqpaxnO2A==",
+   "name": "Support Operations Mega-Kit",
+   "description": "<p>The whole support governance library in one bundle. Data-leak prevention, tone and escalation policy, refund authority, fallback scripts, the governance playbook, PII redaction, handoff protocols, and complaint escalation \u2014 integrated into one unified operating system with a single implementation roadmap.</p>",
+   "price_usd": 49.0,
+   "currency": "usd",
+   "url": "supportwarden-support-operations-mega-kit",
+   "tags": [
+    "ai agents",
+    "customer support",
+    "template",
+    "governance",
+    "support operations",
+    "ai safety"
+   ]
+  },
+  {
+   "id": "oW564mJn5zIKPrR88gdBkQ==",
+   "name": "Support Ticket Triage Classifier (Python)",
+   "description": "<p>A rules-based ticket prioritizer in pure Python: feed it a CSV with subject and body columns and it assigns every ticket a priority (P1/P2/P3) and category (bug, billing, feature, account, other) using an editable keyword ruleset, then writes a triaged CSV plus a priority summary. No ML models, no APIs, no dependencies. Delivered as an instant ZIP download: working source code, README with setup and usage instructions, sample input/output, and a single-user license. No pip installs needed (st",
+   "price_usd": 19.0,
+   "currency": "usd",
+   "url": "https://koalstin.gumroad.com/l/yyrpyf",
+   "tags": [
+    "code",
+    "python",
+    "source code",
+    "download",
+    "support",
+    "triage",
+    "csv",
+    "helpdesk"
+   ]
+  },
+  {
+   "id": "-WU_LFWyAqv1C7Wgd5vR1g==",
+   "name": "Tabletop Simulation Scenarios",
+   "description": "<p>12 facilitated scenarios for your response team: injection, exfiltration, fleet-wide failure, vendor compromise, and more \u2014 each with a briefing, timed injects, discussion questions, and expected takeaways. All scenarios are hypothetical. Guidance only, not a substitute for professional security review.</p>",
+   "price_usd": 49.0,
+   "currency": "usd",
+   "url": "https://koalstin.gumroad.com/l/beskpe",
+   "tags": [
+    "ai agents",
+    "template",
+    "governance",
+    "ai safety",
+    "incident response",
+    "sre"
+   ]
+  },
+  {
+   "id": "_dnaCG8aV3zruqjux45iXQ==",
+   "name": "Tamper-Evident Agent Audit Logger (Python)",
+   "description": "<p>A Python audit logger for AI agents that writes every action to JSONL with a SHA-256 hash chain: each entry cryptographically links to the previous one, so any edit, deletion, or reorder is detected and `verify` tells you exactly which entry broke. CLI with log and verify subcommands. Standard library only. Delivered as an instant ZIP download: working source code, README with setup and usage instructions, sample input/output, and a single-user license. No pip installs needed (standard librar",
+   "price_usd": 29.0,
+   "currency": "usd",
+   "url": "https://koalstin.gumroad.com/l/ttexq",
+   "tags": [
+    "code",
+    "python",
+    "source code",
+    "download",
+    "audit log",
+    "tamper-evident",
+    "ai governance",
+    "logging"
+   ]
+  },
+  {
+   "id": "uA-g_-tAY8Rw6AVn9iyeLA==",
+   "name": "TCPA Consent Playbook for AI Voice Agents",
+   "description": "<p>Prior-express-written-consent programs for AI outbound calling: consent capture templates, DNC scrubbing workflows, 10-business-day revocation handling, and $500-per-call exposure math under the FCC's AI-voice-as-artificial-voice rules. Operational governance frameworks, compliance checklists, and template text. Not legal advice. PDF. Built by ghostcorpnet.</p>",
+   "price_usd": 49.0,
+   "currency": "usd",
+   "url": "https://koalstin.gumroad.com/l/sddhda",
+   "tags": [
+    "compliance",
+    "ai agents",
+    "voice ai",
+    "governance"
+   ]
+  },
+  {
+   "id": "uUwCA4TUW6M4CJXUkg1ebg==",
+   "name": "Teacher Oversight Templates",
+   "description": "<p>Keep educators in the loop on every agent decision. Ready-to-use templates for review cadences, override procedures, sampling rubrics, and escalation paths that put teachers back in charge.</p>",
+   "price_usd": 19.0,
+   "currency": "usd",
+   "url": "classwarden-teacher-oversight-templates",
+   "tags": [
+    "ai agents",
+    "template",
+    "governance",
+    "education",
+    "edtech",
+    "student privacy"
+   ]
+  },
+  {
+   "id": "nQjf1ddkJ8kC85eDP7Ug8w==",
+   "name": "Technical Documentation Checklist",
+   "description": "<p>Equip your engineering and compliance teams with a comprehensive CSV checklist for Annex XI AI agent technical documentation. Covering policy gates, audit trails, cost controls, permissioning, human oversight, incident response, evaluations, logging, and change control, this import-ready dataset integrates directly into your governance tracker to ensure audit readiness. Built by an ghostcorpnet fleet studio. Instant PDF download.</p>",
+   "price_usd": 29.0,
+   "currency": "usd",
+   "url": "https://koalstin.gumroad.com/l/xolalw",
+   "tags": [
+    "ai governance",
+    "compliance",
+    "eu ai act",
+    "actlattice"
+   ]
+  },
+  {
+   "id": "QZ7JxaTQ76Tb6pYsv3mMfA==",
+   "name": "Technical Documentation Template Pack",
+   "description": "<p>Template pack structuring the technical documentation the EU AI Act expects for high-risk AI systems. Educational guidance, not legal advice. From ActLattice.</p>",
+   "price_usd": 29.0,
+   "currency": "usd",
+   "url": "actlattice-technical-documentation-template-pack",
+   "tags": [
+    "ai agents",
+    "compliance",
+    "template",
+    "governance",
+    "risk management",
+    "ai safety"
+   ]
+  },
+  {
+   "id": "j4AJFbXQoyBgQEG_F4SfXw==",
+   "name": "Temporary Grant Extension Exception Template",
+   "description": "<p>Extend a grant past expiry the right way: bounded, approved, and self-revoking. A complete, zero-placeholder draft for teams governing AI agents in production.</p>",
+   "price_usd": 19.0,
+   "currency": "usd",
+   "url": "https://koalstin.gumroad.com/l/laqfre",
+   "tags": [
+    "ai agents",
+    "ai governance",
+    "access control",
+    "policy template",
+    "template"
+   ]
+  },
+  {
+   "id": "aN0cn66hJeIpwhu2zjaD6g==",
+   "name": "The 11-Day Model Gate: Frontier Procurement Playbook & Dynamic Scoring Template",
+   "description": "<p>Frontier models ship weekly; your procurement cycle is quarterly. This playbook compresses model evaluation into an 11-day gate: intake criteria, safety and capability scoring templates, red-team minimums, and go/no-go decision frameworks for enterprise CTOs, platform engineers, and procurement leads evaluating new frontier releases.</p><p><br></p><p>No invented benchmarks \u2014 every number is sourced from cited September 2026 releases.</p><p><br></p><p>Playbook PDF + dynamic scoring template. B",
+   "price_usd": 49.0,
+   "currency": "usd",
+   "url": "https://koalstin.gumroad.com/l/lsdpf",
+   "tags": [
+    "compliance",
+    "ai agents",
+    "governance",
+    "playbook"
+   ]
+  },
+  {
+   "id": "aPdILi_aYBCU9jIiJJJQcw==",
+   "name": "The 5-Minute AI Agent Risk Scan",
+   "description": "<p>20 yes/no checks. Five minutes. A clear picture of where your AI agents can hurt you. A printable self-assessment covering permission scope, human approval gates, kill switches, logging, and data boundaries -- with scoring and your Monday-morning fix list. From ghostcorpnet.</p>",
+   "price_usd": 5.0,
+   "currency": "usd",
+   "url": "https://koalstin.gumroad.com/l/wmrskt",
+   "tags": [
+    "ai agents",
+    "ai governance",
+    "checklist",
+    "risk assessment",
+    "ai safety"
+   ]
+  },
+  {
+   "id": "Len2bHylrS95bgf8Da2n6A==",
+   "name": "The Boardroom Briefing Pack",
+   "description": "<p>Board-ready briefings, one-pagers, and plain-English scripts so your security leader walks into the boardroom with answers about AI agents instead of anxiety. A self-serve Kestrelattice PDF \u2014 buy once, download instantly.</p>",
+   "price_usd": 19.0,
+   "currency": "usd",
+   "url": "https://koalstin.gumroad.com/l/iljwilz",
+   "tags": [
+    "ai agents",
+    "ai governance",
+    "eu ai act",
+    "compliance",
+    "risk management",
+    "policy template",
+    "enterprise ai",
+    "audit"
+   ]
+  },
+  {
+   "id": "b2jTS8l9Y-6djh8pwbZZWg==",
+   "name": "The Complete Kestrelattice Library",
+   "description": "<p>Every Kestrelattice playbook and kit in one download \u2014 the complete governance library for teams shipping AI agents to production. $143 value, one price.</p><p>BUNDLE-EXCLUSIVE BONUS: Quick-Start Roadmap (4 pages) \u2014 the read-order guide for the whole library. Find your situation (starting from zero, post-incident, spiking costs, leadership review, injection worries), follow the path, and act within a week. Only available in this bundle.</p><p><br></p><p>INCLUDED:</p><p>- The Playbook \u2014 Studio",
+   "price_usd": 79.0,
+   "currency": "usd",
+   "url": "https://koalstin.gumroad.com/l/yzbumc",
+   "tags": [
+    "ai agents",
+    "ai governance",
+    "eu ai act",
+    "compliance",
+    "risk management",
+    "policy template",
+    "enterprise ai",
+    "audit"
+   ]
+  },
+  {
+   "id": "JahwiACQEbFztWLRtCDPVw==",
+   "name": "The Playbook \u2014 Studio Edition",
+   "description": "<p>The $29 companion to the free Kestrelattice playbook: policies, schemas, worksheets, and rollout plans you can adopt as-is.</p><p><br></p><p>The free playbook told you what governed agent operations look like. This is the how \u2014 the documents, schemas, worksheets, and day-by-day plans you fill in and use directly.</p><p><br></p><p>What's inside (20 pages):</p><p>- 6 fill-in-the-brackets policy templates (agent identity, approval gates, spend limits &amp; more)</p><p>- 2 validation schemas: the",
+   "price_usd": 29.0,
+   "currency": "usd",
+   "url": "https://koalstin.gumroad.com/l/hdigmr",
+   "tags": [
+    "ai agents",
+    "ai governance",
+    "eu ai act",
+    "compliance",
+    "risk management",
+    "policy template",
+    "enterprise ai",
+    "audit"
+   ]
+  },
+  {
+   "id": "t5l5TbdcaLCO0M9dSMyNxw==",
+   "name": "Tier Re-Classification Exception Template",
+   "description": "<p>Move an agent between risk tiers the documented way \u2014 with justification and review. A complete, zero-placeholder draft for teams governing AI agents in production.</p>",
+   "price_usd": 19.0,
+   "currency": "usd",
+   "url": "https://koalstin.gumroad.com/l/shqrxf",
+   "tags": [
+    "ai agents",
+    "ai governance",
+    "risk management",
+    "policy template",
+    "template"
+   ]
+  },
+  {
+   "id": "Qibr3LD0d5n2Tt6KV7KuOw==",
+   "name": "Tone & Escalation Policy Templates",
+   "description": "<p>Brand-safe voice plus clear human-handoff rules. Fill-in templates for your agent's persona, never-say list, escalation triggers and handoff format, with worked examples showing good, better, and unacceptable handling \u2014 ready to adapt to your brand voice.</p>",
+   "price_usd": 19.0,
+   "currency": "usd",
+   "url": "https://koalstin.gumroad.com/l/hridr",
+   "tags": [
+    "ai agents",
+    "customer support",
+    "template",
+    "governance",
+    "support operations",
+    "ai safety"
+   ]
+  },
+  {
+   "id": "vvJEFnPxh2Asu-1SQcSC_A==",
+   "name": "Tool-Permission Inventory Checklist",
+   "description": "<p>Enumerate every tool your agents can call, grade each one's blast radius, and find the permissions nobody remembers granting. A complete, ready-to-use governance checklist for teams running AI agents in production.</p>",
+   "price_usd": 19.0,
+   "currency": "usd",
+   "url": "https://koalstin.gumroad.com/l/egdfrtd",
+   "tags": [
+    "ai agents",
+    "ai governance",
+    "access control",
+    "checklist",
+    "risk management"
+   ]
+  },
+  {
+   "id": "qlJNe6SlBTvhrsjdTyFi-A==",
+   "name": "Tool-Scope Audit Template",
+   "description": "<p>Audit whether each agent's tool permissions still match what it actually needs. A complete, zero-placeholder draft for teams governing AI agents in production.</p>",
+   "price_usd": 19.0,
+   "currency": "usd",
+   "url": "https://koalstin.gumroad.com/l/pkvqgx",
+   "tags": [
+    "ai agents",
+    "ai governance",
+    "access control",
+    "audit",
+    "template"
+   ]
+  },
+  {
+   "id": "g6I0ZPxMK0nhh5_5CG57aw==",
+   "name": "Transaction-Limit Guardrail Pack",
+   "description": "<p>Caps, approvals, and circuit breakers for agent spending. A complete limit-design kit for AI agents that move money: limit taxonomy, calibration worksheets, approval matrices, and circuit-breaker patterns \u2014 plus a worked hypothetical example. Part of the FinLattice (ghostcorpnet) governance kit line. Instant download.</p>",
+   "price_usd": 19.0,
+   "currency": "usd",
+   "url": "https://koalstin.gumroad.com/l/ptekuo",
+   "tags": [
+    "ai agents",
+    "template",
+    "governance",
+    "compliance",
+    "risk management",
+    "ai safety"
+   ]
+  },
+  {
+   "id": "ehvEHx9xgNxnQsfWr7_6Eg==",
+   "name": "Treasury-Grade Governance Mega-Kit",
+   "description": "<p>Institutional-strength controls, templated. The unified governance operating system for finance AI agents: risk, limits, payments, ledger, fraud, regulatory mapping, and stress testing integrated into one coherent program \u2014 with an implementation roadmap and a worked hypothetical example. Part of the FinLattice (ghostcorpnet) governance kit line. Instant download.</p>",
+   "price_usd": 49.0,
+   "currency": "usd",
+   "url": "https://koalstin.gumroad.com/l/posmoz",
+   "tags": [
+    "ai agents",
+    "template",
+    "governance",
+    "compliance",
+    "risk management",
+    "ai safety"
+   ]
+  },
+  {
+   "id": "KiqMU_SUnHFqbKaanJ1dPw==",
+   "name": "Vendor & BAA Review Pack",
+   "description": "<p>Evaluate agent vendors like a compliance officer. Vendor intake forms, a 100-question security questionnaire, clause-by-clause BAA review guidance, scoring rubrics, negotiation plays, and exit planning. From HealthLattice (ghostcorpnet) \u2014 digital PDF download, delivered instantly by Gumroad.</p>",
+   "price_usd": 49.0,
+   "currency": "usd",
+   "url": "https://koalstin.gumroad.com/l/jimxuy",
+   "tags": [
+    "ai agents",
+    "template",
+    "governance",
+    "compliance",
+    "risk management",
+    "ai safety"
+   ]
+  },
+  {
+   "id": "biXzT8V2KVlGJOndrMD-bw==",
+   "name": "Vendor AI Risk Scorer (Interactive)",
+   "description": "<p>Score an AI vendor across eight weighted risk dimensions (data exposure, access depth, compliance, security posture, concentration, transparency, incident history, exit cost) and get a 0-100 score, a LOW/MEDIUM/HIGH tier, a dimension breakdown, and prioritized recommended controls. Single offline HTML file.</p><p><br></p><p>(Interactive single-file HTML tool)</p>",
+   "price_usd": 19.0,
+   "currency": "usd",
+   "url": "vendor-ai-risk-scorer-interactive",
+   "tags": [
+    "vendor risk",
+    "risk scoring",
+    "interactive",
+    "assessment",
+    "third party",
+    "ai governance",
+    "procurement",
+    "tools"
+   ]
+  },
+  {
+   "id": "z1Dls_PeOOcLqKeLR3IxlA==",
+   "name": "Vendor Change Approval Flow",
+   "description": "<p>Swap a provider deliberately: data export, grant migration, and a rollback plan. A complete, zero-placeholder draft for teams governing AI agents in production.</p>",
+   "price_usd": 19.0,
+   "currency": "usd",
+   "url": "https://koalstin.gumroad.com/l/umsolm",
+   "tags": [
+    "ai agents",
+    "ai governance",
+    "vendor evaluation",
+    "access control"
+   ]
+  },
+  {
+   "id": "BSWBWmBPMd3KtiOfZyPVeg==",
+   "name": "Voice Agent Governance Complete Pack Collection",
+   "description": "<p>The complete Voice Agent Governance pack collection: 10 studio-built governance packs (AI disclosure, biometrics, call security, data retention, handoff, incident response, quality evaluation, recording consent, TCPA consent, vendor procurement) in one ZIP download. Each pack is a professional PDF with practical templates, checklists, and implementation guidance. One purchase, the full collection. Delivered as an instant ZIP download.</p>",
+   "price_usd": 49.0,
+   "currency": "usd",
+   "url": "voice-agent-governance-complete-pack-collection",
+   "tags": [
+    "governance",
+    "compliance",
+    "ai",
+    "voice agents",
+    "pack",
+    "collection"
+   ]
+  },
+  {
+   "id": "Q22KSPP0m238bL2DJMrXow==",
+   "name": "Voice Agent Incident Response Pack",
+   "description": "<p>Incident playbooks for voice agents: prompt injection via dictated speech, live-call social engineering, voice-spoofed fraud in progress, recording leaks, and post-incident review templates. Operational governance frameworks, compliance checklists, and template text. Not legal advice. PDF. Built by ghostcorpnet.</p>",
+   "price_usd": 49.0,
+   "currency": "usd",
+   "url": "https://koalstin.gumroad.com/l/mjffwc",
+   "tags": [
+    "compliance",
+    "ai agents",
+    "voice ai",
+    "governance"
+   ]
+  },
+  {
+   "id": "gFyDg7fgNH8zBCN8qcMOAA==",
+   "name": "Voice Agent Quality Evaluation Pack",
+   "description": "<p>Call QA rubrics for AI voice agent quality: latency/barge-in scoring, accuracy/grounding checks, tone evaluation, accent/dialect coverage matrices, and weekly QA sampling plans. Operational governance frameworks, compliance checklists, and template text. Not legal advice. PDF. Built by ghostcorpnet.</p>",
+   "price_usd": 49.0,
+   "currency": "usd",
+   "url": "https://koalstin.gumroad.com/l/apukkz",
+   "tags": [
+    "compliance",
+    "ai agents",
+    "voice ai",
+    "governance"
+   ]
+  },
+  {
+   "id": "_0luCiGlBinbks7z4lFdHg==",
+   "name": "Voice AI Vendor Procurement Pack",
+   "description": "<p>Vendor evaluation for voice AI platforms: BAA requirement for healthcare, SOC 2 Type II verification, ISO 42001, contractual data-use prohibitions, and the RFP question bank for regulated deployments. Operational governance frameworks, compliance checklists, and template text. Not legal advice. PDF. Built by ghostcorpnet.</p>",
+   "price_usd": 49.0,
+   "currency": "usd",
+   "url": "https://koalstin.gumroad.com/l/jlpirn",
+   "tags": [
+    "compliance",
+    "ai agents",
+    "voice ai",
+    "governance"
+   ]
+  },
+  {
+   "id": "AGRyU5xWdVeaMmRlLs7i9A==",
+   "name": "Voice Biometric Privacy Pack for Voice Agents",
+   "description": "<p>Voiceprint governance: BIPA written-release templates, biometric retention-and-destruction schedules, COPPA audio rules for under-13 callers, and CCPA treatment of voiceprints as personal information.</p><p><br></p><p>Operational governance frameworks, compliance checklists, and template text. Not legal advice. PDF. Built by ghostcorpnet.</p>",
+   "price_usd": 49.0,
+   "currency": "usd",
+   "url": "https://koalstin.gumroad.com/l/muphs",
+   "tags": [
+    "compliance",
+    "ai agents",
+    "voice ai",
+    "governance"
+   ]
+  },
+  {
+   "id": "8JlCwRnWz8wB8a4d62MiWw==",
+   "name": "Voice Call Security & Fraud Defense Runbook",
+   "description": "<p>A governance pack for AI voice agents handling sensitive requests, covering:</p><p><br></p><p>Operational governance frameworks, compliance checklists, and template text. Not legal advice. PDF. Built by ghostcorpnet.</p>",
+   "price_usd": 49.0,
+   "currency": "usd",
+   "url": "https://koalstin.gumroad.com/l/neyxpd",
+   "tags": [
+    "compliance",
+    "ai agents",
+    "voice ai",
+    "governance"
+   ]
+  },
+  {
+   "id": "ScgltdYAfxdZCZ790yvjpA==",
+   "name": "Vulnerability Response Playbook",
+   "description": "<p>From CVE alert to patched release, fast. A complete vulnerability response system for open-source agent stacks: severity triage, SLA clocks, patch procedures, coordinated disclosure handling, and communication templates. Built by SourceLattice (ghostcorpnet fleet studio). Instant PDF download.</p>",
+   "price_usd": 29.0,
+   "currency": "usd",
+   "url": "sourcelattice-vulnerability-response-playbook",
+   "tags": [
+    "open source",
+    "sourcelattice",
+    "vulnerability",
+    "incident response"
+   ]
+  }
+ ]
+}
