@@ -703,10 +703,32 @@ def _sec(eyebrow, title, lede=""):
 
 def _extras_html():
     traffic = (
-        '<div class="card"><h3>Google Analytics needs a one-time setup</h3>'
-        "<p>Live visitor numbers can't be pulled with just a key — Google requires an "
-        "OAuth client you create in Google Cloud Console (about 10 minutes at a computer). "
-        "Say the word and I'll walk you through it; after that, traffic charts appear here.</p></div>"
+        '<div class=\"card\"><h3>Traffic — daily pageviews</h3>'
+        '<p class=\"muted\">First-party counts from the site beacon (no Google, no cookies, '
+        'no personal data). Real numbers only — days with no data show 0.</p>'
+        '<div id=\"traffic-card\"><p class=\"muted\">Loading…</p></div>'
+        '<script>'
+        'async function loadTraffic(){'
+        'var el=document.getElementById(\"traffic-card\");'
+        'if(!el||typeof WURL===\"undefined\"||!WURL||!WKEY)'
+        '{if(el)el.innerHTML=\"<p class=\'muted\'>Not connected: no admin key on this device.</p>\";return;}'
+        'try{var r=await fetch(WURL+\"/traffic?key=\"+encodeURIComponent(WKEY));var d=await r.json();'
+        'if(!d.ok||!d.days)throw 0;'
+        'var days=d.days.slice(-14);'
+        'var tot=days.reduce(function(s,x){return s+x.hits},0);'
+        'var mx=Math.max.apply(null,days.map(function(x){return x.hits}).concat([1]));'
+        'var h=\"<p><b>\"+tot+\"</b> pageviews in the last 14 days</p>\"'
+        '+\"<div style=\'display:flex;align-items:flex-end;gap:4px;height:90px\'>\";'
+        'days.forEach(function(x){var bh=Math.max(3,Math.round(x.hits/mx*84));'
+        'h+=\"<div title=\'\"+x.date+\": \"+x.hits+\" pageviews\' style=\'flex:1;min-height:3px;height:\"+bh+\"px;'
+        'background:var(--accent,#e07a5f)\'></div>\"});'
+        'h+=\"</div><p class=\'muted\' style=\'display:flex\'><span>\"+days[0].date.slice(5)+\"</span>\"'
+        '+\"<span style=\'margin-left:auto\'>\"+days[days.length-1].date.slice(5)+\"</span></p>\";'
+        'el.innerHTML=h;}'
+        'catch(e){el.innerHTML=\"<p class=\'muted\'>Traffic unavailable — the worker update hasn\\u2019t been deployed yet.</p>\"}}'
+        'if(document.readyState===\"loading\"){document.addEventListener(\"DOMContentLoaded\",loadTraffic)}'
+        'else{loadTraffic()}'
+        '</script></div>'
     )
     return (
         S.directory_section() + S.tiktok_section() + traffic

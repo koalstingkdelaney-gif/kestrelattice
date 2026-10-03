@@ -39,6 +39,13 @@
  *                              Blast radius: status of one pre-seeded submission.
  *   GET  /directory-approved  -> public. Approved entries only, no emails —
  *                              feeds the static directory page.
+ *
+ * First-party traffic counting (privacy-friendly, no cookies, no IPs):
+ *   GET  /pv?p=<path>&r=<referrer> -> public, increments today's UTC hit
+ *                              counter. 204, permissive CORS. Counts only —
+ *                              never stores IPs, user agents, or the params.
+ *   GET  /traffic               -> server key (x-server-key) OR write key as
+ *                              ?key=. Last 30 days of {date, hits} as JSON.
  */
 
 const CORS = {
@@ -396,6 +403,34 @@ export default {
 
     if (req.method === "GET" && url.pathname === "/taps-resolved" && isServer) {
       return json({ ok: true, resolved: await readResolved() });
+    }
+
+    // ---- First-party pageview counting (privacy-friendly) ------------------
+    //   GET /pv?p=<path>&r=<referrer> -> public. Increments today's UTC hit
+    //     counter in KV ("pv:YYYY-MM-DD", 35-day TTL). Responds 204 with
+    //     permissive CORS so the site beacon can fire from GitHub Pages.
+    //     Counts only: the params are accepted but never stored, and no IP,
+    //     user agent, or cookie is ever recorded.
+    //   GET /traffic -> gated like /taps (server key header OR ?key=WRITE_KEY).
+    //     Returns {ok:true, days:[{date:"YYYY-MM-DD",hits:N}...]} for the
+    //     last 30 days UTC. Real KV counts only — missing days are 0.
+    if (req.method === "GET" && url.pathname === "/pv") {
+      const day = new Date().toISOString().slice(0, 10);
+      const k = "pv:" + day;
+      const n = parseInt((await env.APPROVALS.get(k)) || "0", 10) + 1;
+      await env.APPROVALS.put(k, String(n), { expirationTtl: 86400 * 35 });
+      return new Response(null, { status: 204, headers: CORS });
+    }
+
+    if (req.method === "GET" && url.pathname === "/traffic") {
+      if (!tapGate()) return new Response("Not found", { status: 404 });
+      const days = [];
+      for (let i = 29; i >= 0; i--) {
+        const d = new Date(Date.now() - i * 86400000).toISOString().slice(0, 10);
+        const n = parseInt((await env.APPROVALS.get("pv:" + d)) || "0", 10);
+        days.push({ date: d, hits: n });
+      }
+      return json({ ok: true, days });
     }
 
     return json({ ok: false, error: "not_found" }, 404);

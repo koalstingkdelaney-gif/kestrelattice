@@ -247,5 +247,6 @@ gtag('config', 'G-541TCHWW98');
 document.addEventListener('keydown',function(e){if(e.key==='Escape'&&!e.defaultPrevented&&!/INPUT|TEXTAREA|SELECT/.test(document.activeElement.tagName)){var b=document.getElementById('pdp-back');if(b&&b.href){location.href=b.href;}}});
 var _cb=document.getElementById('pdp-copylink');if(_cb){_cb.addEventListener('click',function(){var done=function(){var t=document.getElementById('pdp-copied');if(t){t.hidden=false;setTimeout(function(){t.hidden=true;},2000);}};var fallback=function(){var i=document.createElement('input');i.value=location.href;document.body.appendChild(i);i.select();try{document.execCommand('copy');done();}catch(err){window.prompt('Copy this link:',location.href);}document.body.removeChild(i);};if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(location.href).then(done,fallback);}else{fallback();}});}
 </script>
+<script>try{fetch("https://kestrelattice-approvals.koalstin-g-k-delaney.workers.dev/pv?p="+encodeURIComponent(location.pathname),{mode:"no-cors",keepalive:true}).catch(function(){})}catch(e){}</script>
 </body>
 </html>
