@@ -82,7 +82,7 @@ gtag('config', 'G-541TCHWW98');
          flex-wrap:wrap;gap:8px}
   footer a{color:var(--muted);text-decoration:none}
   footer a:hover{color:var(--accent)}
-:focus-visible{outline:2px solid var(--accent-bright);outline-offset:3px;border-radius:4px}@media (prefers-reduced-motion:no-preference){:focus-visible{transition:transform .15s ease}a:focus-visible{transform:scale(1.03)}}@media(max-width:640px){footer a{padding:10px 7px}}.sticky-buy{display:none}@media(max-width:860px){.sticky-buy{display:flex;position:fixed;bottom:0;left:0;right:0;z-index:100;background:rgba(26,23,20,.97);border-top:1px solid var(--line);padding:10px 16px calc(10px + env(safe-area-inset-bottom));align-items:center;justify-content:space-between;gap:12px}.sticky-buy span{font-size:.84rem;color:var(--muted)}.sticky-buy span b{color:var(--text)}.sticky-buy .btn{padding:10px 20px;font-size:.88rem}body{padding-bottom:70px}}</style>
+:focus-visible{outline:2px solid var(--accent-bright);outline-offset:3px;border-radius:4px}@media (prefers-reduced-motion:no-preference){:focus-visible{transition:transform .15s ease}a:focus-visible{transform:scale(1.03)}}@media(max-width:640px){#backtop.show{bottom:calc(22px + env(safe-area-inset-bottom,0px) + 76px)}footer a{padding:10px 7px}}.sticky-buy{display:none}@media(max-width:860px){.sticky-buy{display:flex;position:fixed;bottom:0;left:0;right:0;z-index:100;background:rgba(26,23,20,.97);border-top:1px solid var(--line);padding:10px 16px calc(10px + env(safe-area-inset-bottom));align-items:center;justify-content:space-between;gap:12px}.sticky-buy span{font-size:.84rem;color:var(--muted)}.sticky-buy span b{color:var(--text)}.sticky-buy .btn{padding:10px 20px;font-size:.88rem}body{padding-bottom:70px}}#backtop{position:fixed;right:22px;bottom:22px;width:46px;height:46px;border-radius:50%;border:1px solid var(--line);background:var(--panel);color:var(--accent);font-size:1.3rem;cursor:pointer;opacity:0;pointer-events:none;transition:opacity .2s var(--ease);z-index:150}#backtop.show{opacity:1;pointer-events:auto}#backtop:hover{border-color:var(--accent-dim)}@media(prefers-reduced-motion:reduce){#backtop{display:none}}</style>
 </head>
 <body>
 <div class="wrap">
@@ -162,7 +162,8 @@ gtag('config', 'G-541TCHWW98');
     <a class="btn" href="https://koalstin.gumroad.com/l/hdigmr" referrerpolicy="no-referrer">Adquira o Studio Edition — $29</a>
   </div>
 
-  <footer>
+  <button id="backtop" aria-label="Voltar ao topo">↑</button>
+<footer>
     <span>© <span id="yr">2026</span> ghostcorpnet · Estúdio independente</span>
     <span><a href="../">Início</a> · <a href="../articles/">Artigos</a> · <a href="mailto:ghostcorpnetai@gmail.com">Contato</a> · <a href="../terms.html" hreflang="en" title="Termos (página em inglês)">Termos</a> · <a href="../privacy.html" hreflang="en" title="Privacidade (página em inglês)">Privacidade</a></span>
   </footer>
@@ -172,5 +173,12 @@ gtag('config', 'G-541TCHWW98');
   <a class="btn primary" href="https://koalstin.gumroad.com/l/hdigmr" referrerpolicy="no-referrer">Garanta o seu</a>
 </div>
 <script>document.getElementById('yr').textContent=new Date().getFullYear();</script>
+<script>
+// Back-to-top button (mirrors homepage pattern; appears after ~600px scroll).
+(function(){var b=document.getElementById('backtop');if(!b)return;
+function onScroll(){b.classList.toggle('show',window.scrollY>600)}
+window.addEventListener('scroll',onScroll,{passive:true});onScroll();
+b.addEventListener('click',function(){window.scrollTo({top:0,behavior:'smooth'})});})();
+</script>
 </body>
 </html>
