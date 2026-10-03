@@ -148,7 +148,7 @@ footer.site a:hover{color:var(--accent-bright)}
 #backtop.show{opacity:1;pointer-events:auto}
 #backtop:hover{border-color:var(--accent-dim)}
 @media(prefers-reduced-motion:reduce){#backtop{display:none}}
-@media(max-width:640px){.filters{overflow-x:auto;flex-wrap:nowrap;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+@media(max-width:640px){.filters{overflow-x:auto;flex-wrap:nowrap;-webkit-overflow-scrolling:touch;scrollbar-width:none;-webkit-mask-image:linear-gradient(90deg,#000 92%,transparent);mask-image:linear-gradient(90deg,#000 92%,transparent)}
 .filters::-webkit-scrollbar{display:none}
 nav.main a:not(:last-child){display:none}footer.site .wrap{justify-content:center;text-align:center}footer.site a{margin:0 7px}.desc{display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{transition:none!important;animation:none!important}a:focus-visible,.btn:focus-visible,.chip:focus-visible,nav.main a:focus-visible{transform:none!important}}
@@ -248,7 +248,7 @@ b.addEventListener('click',function(){window.scrollTo({top:0,behavior:'smooth'})
 """
 
 CARD = """<div class="card{reveal}" data-tags="{tags}" data-price="{price_num}" data-date="{pdate}">
-<a href="{slug}/" style="text-decoration:none;color:inherit;display:block" aria-label="{title} — {price_label}"><picture><source type="image/webp" srcset="../assets/covers/{pid}.webp"><img src="../assets/covers/{pid}.png" alt="{title} cover" {img_attrs} decoding="async" sizes="(max-width:640px) 100vw, (max-width:1100px) 50vw, 320px"></picture>
+<a href="{slug}/" style="text-decoration:none;color:inherit;display:block" aria-label="{title} — {price_label}"><picture><source type="image/webp" srcset="../assets/covers/{pid}.webp"><img src="../assets/covers/{pid}.png" alt="{title} cover" {img_attrs} sizes="(max-width:640px) 100vw, (max-width:1100px) 50vw, 320px"></picture>
 <div class="body">{badge}{newbadge}<span class="dlbadge">DIGITAL DOWNLOAD</span><h2 translate="no">{title}</h2><p class="desc">{tagline}</p><p class="price"><span class="visually-hidden">USD </span>{price_html}</p></div></a>
 <div class="row"><a class="btn" href="{url}" target="_blank" rel="noopener">Get it</a><a class="btn ghost" href="{slug}/">Details</a></div>
 <p class="trust">Instant delivery via Gumroad</p>
@@ -316,7 +316,7 @@ def main():
         pid = p["id"]
         # LCP: only the first (above-the-fold) card image loads eagerly with high
         # priority; the rest stay lazy per the one-high-priority-image standard.
-        img_attrs = ' fetchpriority="high"' if n == 1 else ' loading="lazy" fetchpriority="low"'
+        img_attrs = ' fetchpriority="high"' if n == 1 else ' loading="lazy" fetchpriority="low" decoding="async"'
         ptaglist = tagmap.get(pid, ["governance"])
         tags = "|".join(ptaglist)
         badge = '<span class="codebadge">CODE</span>' if "code" in ptaglist else ""
