@@ -416,6 +416,19 @@ def main():
         with open(sm, "w") as f:
             f.write(content)
 
+    # ecosystems index entry (idempotent)
+    eco_entry = f"""  <url>
+    <loc>{BASE_URL}/ecosystems/</loc>
+    <lastmod>{date.today().isoformat()}</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+"""
+    if "/ecosystems/</loc>" not in content:
+        content = content.replace("</urlset>", eco_entry + "</urlset>")
+        with open(sm, "w") as f:
+            f.write(content)
+
     # homepage catalog link card (insert once)
     idx = os.path.join(SITE, "index.html")
     with open(idx) as f:
