@@ -370,6 +370,7 @@ PAGE = """<!DOCTYPE html>
 <title>{title} — ghostcorpnet</title>
 <meta name="description" content="{meta}">
 <link rel="canonical" href="{page_url}">
+<link rel="preconnect" href="https://koalstin.gumroad.com">
 <meta property="og:type" content="product">
 <meta property="og:title" content="{title} — ghostcorpnet">
 <meta property="og:description" content="{meta}">
@@ -694,7 +695,7 @@ def main():
         if is_live:
             sticky_bar = (f'<div class="pdp-sticky" id="pdp-sticky" role="region" aria-label="Quick buy: {esc(pr["title"])}">'
                           f'<span><b>{esc(pr["title"])}</b> \u00b7 ${pr["price"]}</span>'
-                          f'<a class="btn" href="{pr["gumroad_url"]}" target="_blank" rel="noopener" aria-label="Buy {esc(pr["title"])} on Gumroad (opens in new tab)">Buy now</a></div>')
+                          f'<a class="btn" href="{pr["gumroad_url"]}" target="_blank" rel="noopener" aria-label="Buy {esc(pr["title"])} for ${pr["price"]} (opens in new tab)">Buy now</a></div>')
         else:
             sticky_bar = (f'<div class="pdp-sticky" id="pdp-sticky" role="region" aria-label="Availability: {esc(pr["title"])}">'
                           f'<span><b>{esc(pr["title"])}</b> \u00b7 ${pr["price"]}</span>'
