@@ -108,7 +108,7 @@ nav.main a:hover{color:var(--accent-bright)}
 .chip{border:1px solid var(--line);background:var(--panel);color:var(--muted);border-radius:999px;padding:7px 15px;min-height:44px;display:inline-flex;align-items:center;justify-content:center;font-size:.84rem;letter-spacing:.1em;cursor:pointer;font-family:inherit;transition:all .16s var(--ease)}
 .chip:hover{border-color:var(--accent-dim);color:var(--text)}
 .chip.active{background:var(--accent);border-color:var(--accent);color:var(--accent-ink);font-weight:700}.chip:active{transform:scale(.96)}\n.chip-count{font-size:.72em;color:var(--muted);opacity:.85;margin-left:2px;font-weight:400;letter-spacing:0}
-.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:24px;padding:8px 0 64px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:24px;padding:8px 0 64px;list-style:none;margin:0}
 .card{background:linear-gradient(180deg,var(--panel),var(--bg-soft));border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;display:flex;flex-direction:column;content-visibility:auto;contain-intrinsic-size:auto 480px;transition:border-color .18s var(--ease),transform .18s var(--ease),box-shadow .18s var(--ease)}.card{position:relative}.card>a:first-of-type::after{content:"";position:absolute;inset:0}.card .row .btn{position:relative;z-index:1}
 .card:hover{border-color:var(--accent-dim);transform:translateY(-3px);box-shadow:0 14px 34px rgba(0,0,0,.4)}
 .card img{transition:transform .3s ease}
@@ -184,9 +184,9 @@ ghostcorpnet</a>
 <p class="lede">Every self-serve product in the ghostcorpnet library — playbooks, checklists, runbooks, kits, and working code for governing AI agents. Buy once, download instantly, yours forever.</p>
 </div>
 <div class="wrap"><p class="result-count" id="result-count" aria-live="polite">__COUNT__</p><search class="catalog-search-row"><label for="catalog-search" class="visually-hidden">Search products</label><input id="catalog-search" type="search" autocomplete="off" spellcheck="false" enterkeyhint="search" aria-keyshortcuts="/" placeholder="Search products… ( / )"><kbd class="search-kbd" aria-hidden="true">/</kbd></search><div class="sort-row"><label for="catalog-sort" class="sort-label">Sort:</label><select id="catalog-sort" aria-label="Sort products"><option value="new">Newest</option><option value="lo">Price: low to high</option><option value="hi">Price: high to low</option></select></div><noscript><style>.catalog-search-row,.sort-row{display:none}</style><p class="lede sub">The full catalog is listed below — search and sort need JavaScript.</p></noscript><p class="tier-legend">9 Starter · 9 Core · 9–99 Premium</p><div class="filters" id="filters" role="region" tabindex="-1" aria-label="Filter products" aria-describedby="filters-note" data-collapsed="false"><button type="button" class="filters-toggle" aria-expanded="true" aria-controls="filters-list"><span>Filter products</span><span class="ft-chev" aria-hidden="true">▾</span></button><div class="filters-list" id="filters-list"></div></div><p class="visually-hidden" id="filters-note">Choosing filters updates the product count announced by the results region.</p></div>
-<div class="wrap"><div class="grid" id="grid">
+<div class="wrap"><ul class="grid" id="grid">
 __CARDS__
-</div><div class="reveal-row"><button class="btn ghost" id="show-more" type="button">Show more</button></div><div id="no-results" role="status"><p>No products match — try different keywords or filters</p><p><button class="chip" id="clear-filters" type="button" style="margin-top:12px">Clear filters</button></p><div class="sug-grid" id="no-results-sug"></div></div></div>
+</ul><div class="reveal-row"><button class="btn ghost" id="show-more" type="button">Show more</button></div><div id="no-results" role="status"><p>No products match — try different keywords or filters</p><p><button class="chip" id="clear-filters" type="button" style="margin-top:12px">Clear filters</button></p><div class="sug-grid" id="no-results-sug"></div></div></div>
 <button id="backtop" aria-label="Back to top">↑</button>
 </main>
 <footer class="site"><div class="wrap">
@@ -255,12 +255,12 @@ b.addEventListener('click',function(){window.scrollTo({top:0,behavior:'smooth'})
 </html>
 """
 
-CARD = """<div class="card{reveal}" data-tags="{tags}" data-price="{price_num}" data-date="{pdate}">
+CARD = """<li class="card{reveal}" data-tags="{tags}" data-price="{price_num}" data-date="{pdate}">
 <a href="{slug}/" style="text-decoration:none;color:inherit;display:block" aria-label="{title} — {price_label}"><picture><source type="image/webp" srcset="../assets/covers/{pid}.webp"><img src="../assets/covers/{pid}.png" alt="{title} cover" {img_attrs} sizes="(max-width:640px) 100vw, (max-width:1100px) 50vw, 320px"></picture>
 <div class="body">{badge}{newbadge}<span class="dlbadge">DIGITAL DOWNLOAD</span><h2 translate="no">{title}</h2><p class="desc">{tagline}</p><p class="price"><span class="visually-hidden">USD </span>{price_html}</p></div></a>
 <div class="row"><a class="btn" href="{url}" target="_blank" rel="noopener">Get it<span class="visually-hidden">(opens in new tab)</span></a><a class="btn ghost" href="{slug}/">Details</a></div>
 <p class="trust">Instant delivery via Gumroad</p>
-</div>
+</li>
 """
 
 ORIGINAL_SLUGS = {
