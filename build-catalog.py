@@ -125,6 +125,11 @@ nav.main a:hover{color:var(--accent-bright)}
 #no-results{display:none;text-align:center;padding:48px 16px;color:var(--muted)}
 #no-results.show{display:block}
 #no-results p{margin-bottom:6px}
+#no-results .sug-grid{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:14px}
+#no-results .sug{display:block;border:1px solid var(--line);border-radius:12px;padding:12px 16px;background:var(--panel);min-width:200px;max-width:260px;text-decoration:none}
+#no-results .sug:hover{border-color:var(--accent)}
+#no-results .sug strong{display:block;color:var(--text);font-size:.9rem;line-height:1.35}
+#no-results .sug span{display:block;color:var(--muted);font-size:.78rem;margin-top:6px}
 .card picture{display:block}
 .card h2{font-size:.98rem;line-height:1.35;font-weight:700;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}.card a h2{text-decoration-thickness:1px;text-underline-offset:3px}
 .price{color:var(--text);font-weight:800;font-variant-numeric:tabular-nums}
@@ -178,10 +183,10 @@ ghostcorpnet</a>
 <p class="lede sub">Agent governance playbooks, kits and runbooks</p>
 <p class="lede">Every self-serve product in the ghostcorpnet library — playbooks, checklists, runbooks, kits, and working code for governing AI agents. Buy once, download instantly, yours forever.</p>
 </div>
-<div class="wrap"><p class="result-count" id="result-count" aria-live="polite">__COUNT__</p><search class="catalog-search-row"><label for="catalog-search" class="visually-hidden">Search products</label><input id="catalog-search" type="search" autocomplete="off" spellcheck="false" enterkeyhint="search" aria-keyshortcuts="/" placeholder="Search products… ( / )"><kbd class="search-kbd" aria-hidden="true">/</kbd></search><div class="sort-row"><label for="catalog-sort" class="sort-label">Sort:</label><select id="catalog-sort" aria-label="Sort products"><option value="new">Newest</option><option value="lo">Price: low to high</option><option value="hi">Price: high to low</option></select></div><p class="tier-legend">9 Starter · 9 Core · 9–99 Premium</p><div class="filters" id="filters" role="region" tabindex="-1" aria-label="Filter products" aria-describedby="filters-note" data-collapsed="false"><button type="button" class="filters-toggle" aria-expanded="true" aria-controls="filters-list"><span>Filter products</span><span class="ft-chev" aria-hidden="true">▾</span></button><div class="filters-list" id="filters-list"></div></div><p class="visually-hidden" id="filters-note">Choosing filters updates the product count announced by the results region.</p></div>
+<div class="wrap"><p class="result-count" id="result-count" aria-live="polite">__COUNT__</p><search class="catalog-search-row"><label for="catalog-search" class="visually-hidden">Search products</label><input id="catalog-search" type="search" autocomplete="off" spellcheck="false" enterkeyhint="search" aria-keyshortcuts="/" placeholder="Search products… ( / )"><kbd class="search-kbd" aria-hidden="true">/</kbd></search><div class="sort-row"><label for="catalog-sort" class="sort-label">Sort:</label><select id="catalog-sort" aria-label="Sort products"><option value="new">Newest</option><option value="lo">Price: low to high</option><option value="hi">Price: high to low</option></select></div><noscript><style>.catalog-search-row,.sort-row{display:none}</style><p class="lede sub">The full catalog is listed below — search and sort need JavaScript.</p></noscript><p class="tier-legend">9 Starter · 9 Core · 9–99 Premium</p><div class="filters" id="filters" role="region" tabindex="-1" aria-label="Filter products" aria-describedby="filters-note" data-collapsed="false"><button type="button" class="filters-toggle" aria-expanded="true" aria-controls="filters-list"><span>Filter products</span><span class="ft-chev" aria-hidden="true">▾</span></button><div class="filters-list" id="filters-list"></div></div><p class="visually-hidden" id="filters-note">Choosing filters updates the product count announced by the results region.</p></div>
 <div class="wrap"><div class="grid" id="grid">
 __CARDS__
-</div><div class="reveal-row"><button class="btn ghost" id="show-more" type="button">Show more</button></div><div id="no-results" role="status"><p>No products match — try different keywords or filters</p><p><button class="chip" id="clear-filters" type="button" style="margin-top:12px">Clear filters</button></p></div></div>
+</div><div class="reveal-row"><button class="btn ghost" id="show-more" type="button">Show more</button></div><div id="no-results" role="status"><p>No products match — try different keywords or filters</p><p><button class="chip" id="clear-filters" type="button" style="margin-top:12px">Clear filters</button></p><div class="sug-grid" id="no-results-sug"></div></div></div>
 <button id="backtop" aria-label="Back to top">↑</button>
 </main>
 <footer class="site"><div class="wrap">
@@ -191,7 +196,10 @@ __CARDS__
 <script>
 const grid=document.getElementById('grid'),filters=document.getElementById('filters'),rc=document.getElementById('result-count');const filtersList=document.getElementById('filters-list');
 const noResults=document.getElementById('no-results');
-const updateCount=()=>{const total=[...grid.querySelectorAll('.card')].length;const v=[...grid.querySelectorAll('.card')].filter(c=>!c.classList.contains('hidden')).length;rc.textContent=v===0?'No products match':(v===1?'1 of '+total+' product':v+' of '+total+' products');if(noResults)noResults.classList.toggle('show',v===0)};
+const noResultsSug=document.getElementById('no-results-sug');
+const POPULAR_SUGS=[['The Playbook — Studio Edition','the-playbook-studio-edition/','$29 · the flagship playbook'],['AI Agent Risk Audit Kit','ai-agent-risk-audit-kit/','$19 · audit any agent deployment'],['Agent Incident Response Runbook','agent-incident-response-runbook/','$19 · respond to agent incidents']];
+const renderNoResultsSug=()=>{if(!noResultsSug||noResultsSug.childNodes.length)return;noResultsSug.innerHTML=POPULAR_SUGS.map(s=>'<a class="sug" href="'+s[1]+'"><strong>'+s[0]+'</strong><span>'+s[2]+'</span></a>').join('')};
+const updateCount=()=>{const total=[...grid.querySelectorAll('.card')].length;const v=[...grid.querySelectorAll('.card')].filter(c=>!c.classList.contains('hidden')).length;rc.textContent=v===0?'No products match':(v===1?'1 of '+total+' product':v+' of '+total+' products');if(noResults){noResults.classList.toggle('show',v===0);if(v===0)renderNoResultsSug()}};
 const tags=[...new Set([...grid.querySelectorAll('.card')].flatMap(c=>(c.dataset.tags||'').split('|').filter(Boolean)))].sort();
 let activeTag='',searchQ='';
 try{var _hp=new URLSearchParams(location.hash.slice(1));activeTag=_hp.get('tag')||'';searchQ=_hp.get('q')||'';}catch(e){}
