@@ -112,6 +112,9 @@ gtag('config', 'G-541TCHWW98');
   .btn{display:inline-block;background:var(--accent);color:#121212;font-weight:700;
        padding:14px 32px;border-radius:8px;text-decoration:none;font-size:1.05rem}
   .btn:hover{background:var(--accent-dim)}
+  .copylink-row{display:flex;align-items:center;gap:10px;margin-top:10px}
+  .copylink-btn{background:transparent;color:var(--text);border:1px solid var(--line);min-height:40px;padding:9px 18px;font-size:.9rem;cursor:pointer;font-family:inherit}
+  .copylink-btn:hover{border-color:var(--accent);color:var(--accent)}
   section{margin:36px 0;scroll-margin-top:80px}
   h2{font-size:1.35rem;margin-bottom:14px}
   .inside{columns:2;column-gap:32px}
@@ -161,6 +164,10 @@ gtag('config', 'G-541TCHWW98');
       <p class="trust">Secure checkout via Gumroad · Sold by ghostcorpnet · <a style="color:var(--accent)" href="https://help.gumroad.com">buyer protection</a> · Single-user license · Instant delivery</p>
       <p class="trust">Lifetime access — yours forever in your Gumroad library</p>
       <p class="notready">Not ready? <a href="../../playbook.md">Get the free MIT playbook</a> first.</p>
+      <div class="copylink-row">
+        <button type="button" class="btn copylink-btn" id="pdp-copylink">Copy link</button>
+        <span class="copylink-done" id="pdp-copied" role="status" aria-live="polite" hidden>Copied</span>
+      </div>
       <p class="file-facts">PDF · 16 KB · 7 pages</p>
       <div class="facts"><span class="fact" itemprop="offers" itemscope itemtype="https://schema.org/Offer"><b itemprop="price" content="19">$19</b> one-time, <span itemprop="priceCurrency" content="USD">USD</span></span>
       <span class="fact">Instant download via Gumroad</span>
@@ -232,6 +239,7 @@ gtag('config', 'G-541TCHWW98');
 <div class="pdp-sticky" id="pdp-sticky" role="region" aria-label="Quick buy: Legal Agent Privilege Checklist"><span><b>Legal Agent Privilege Checklist</b> · $19</span><a class="btn" href="https://koalstin.gumroad.com/l/lawwarden-legal-agent-privilege-checklist" target="_blank" rel="noopener" aria-label="Buy Legal Agent Privilege Checklist on Gumroad (opens in new tab)">Buy now</a></div>
 <script>
 document.addEventListener('keydown',function(e){if(e.key==='Escape'&&!e.defaultPrevented&&!/INPUT|TEXTAREA|SELECT/.test(document.activeElement.tagName)){var b=document.getElementById('pdp-back');if(b&&b.href){location.href=b.href;}}});
+var _cb=document.getElementById('pdp-copylink');if(_cb){_cb.addEventListener('click',function(){var done=function(){var t=document.getElementById('pdp-copied');if(t){t.hidden=false;setTimeout(function(){t.hidden=true;},2000);}};var fallback=function(){var i=document.createElement('input');i.value=location.href;document.body.appendChild(i);i.select();try{document.execCommand('copy');done();}catch(err){window.prompt('Copy this link:',location.href);}document.body.removeChild(i);};if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(location.href).then(done,fallback);}else{fallback();}});}
 </script>
 </body>
 </html>

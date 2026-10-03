@@ -435,6 +435,9 @@ gtag('config', 'G-541TCHWW98');
   .btn{{display:inline-block;background:var(--accent);color:#121212;font-weight:700;
        padding:14px 32px;border-radius:8px;text-decoration:none;font-size:1.05rem}}
   .btn:hover{{background:var(--accent-dim)}}
+  .copylink-row{{display:flex;align-items:center;gap:10px;margin-top:10px}}
+  .copylink-btn{{background:transparent;color:var(--text);border:1px solid var(--line);min-height:40px;padding:9px 18px;font-size:.9rem;cursor:pointer;font-family:inherit}}
+  .copylink-btn:hover{{border-color:var(--accent);color:var(--accent)}}
   section{{margin:36px 0;scroll-margin-top:80px}}
   h2{{font-size:1.35rem;margin-bottom:14px}}
   .inside{{columns:2;column-gap:32px}}
@@ -476,6 +479,10 @@ gtag('config', 'G-541TCHWW98');
       {inside_mini}
       <p class="price">${price} <span class="currency-note">Prices in USD</span></p>
       {buy_html}
+      <div class="copylink-row">
+        <button type="button" class="btn copylink-btn" id="pdp-copylink">Copy link</button>
+        <span class="copylink-done" id="pdp-copied" role="status" aria-live="polite" hidden>Copied</span>
+      </div>
       {file_facts}
       <div class="facts">{facts_row}</div>
     </div>
@@ -525,6 +532,7 @@ gtag('config', 'G-541TCHWW98');
 {sticky_bar}
 <script>
 document.addEventListener('keydown',function(e){{if(e.key==='Escape'&&!e.defaultPrevented&&!/INPUT|TEXTAREA|SELECT/.test(document.activeElement.tagName)){{var b=document.getElementById('pdp-back');if(b&&b.href){{location.href=b.href;}}}}}});
+var _cb=document.getElementById('pdp-copylink');if(_cb){{_cb.addEventListener('click',function(){{var done=function(){{var t=document.getElementById('pdp-copied');if(t){{t.hidden=false;setTimeout(function(){{t.hidden=true;}},2000);}}}};var fallback=function(){{var i=document.createElement('input');i.value=location.href;document.body.appendChild(i);i.select();try{{document.execCommand('copy');done();}}catch(err){{window.prompt('Copy this link:',location.href);}}document.body.removeChild(i);}};if(navigator.clipboard&&navigator.clipboard.writeText){{navigator.clipboard.writeText(location.href).then(done,fallback);}}else{{fallback();}}}});}}
 </script>
 </body>
 </html>
@@ -703,7 +711,8 @@ def main():
                            sticky_bar=sticky_bar, fbt=fbt_block(pr, products))
         with open(os.path.join(d, "index.html"), "w") as f:
             f.write(page)
-        sm_entries.append(f'  <url><loc>{page_url}</loc><lastmod>{page_lastmod(d)}</lastmod><changefreq>monthly</changefreq></url>')
+        img_loc = f"{BASE_URL}/assets/covers/{pr['gid']}.png"
+        sm_entries.append(f'  <url><loc>{page_url}</loc><lastmod>{page_lastmod(d)}</lastmod><changefreq>monthly</changefreq><image:image><image:loc>{img_loc}</image:loc></image:image></url>')
 
     # sitemap
     sm_path = os.path.join(SITE, "sitemap.xml")
@@ -714,6 +723,22 @@ def main():
         if loc not in sm:
             sm = sm.replace("</urlset>", e + "\n</urlset>")
             added += 1
+    # image-sitemap namespace (idempotent)
+    if 'xmlns:image=' not in sm:
+        sm = sm.replace('<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">',
+                        '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">')
+    # backfill: add <image:image> blocks to existing PDP entries that lack them (idempotent)
+    backfilled = 0
+    for pr in products:
+        purl = f"{BASE_URL}/products/{pr['slug']}/"
+        iloc = f"{BASE_URL}/assets/covers/{pr['gid']}.png"
+        pat = re.compile(r'(<url><loc>' + re.escape(purl) + r'</loc><lastmod>[^<]*</lastmod><changefreq>monthly</changefreq>)</url>')
+        def _backfill(m, _img='<image:image><image:loc>' + iloc + '</image:loc></image:image>'):
+            return m.group(1) + ('' if '<image:image>' in m.group(1) else _img) + '</url>'
+        sm, n = pat.subn(_backfill, sm)
+        backfilled += n
+    if backfilled:
+        print(f"sitemap: backfilled <image:image> into {backfilled} existing PDP entries")
     open(sm_path, "w").write(sm)
     refresh_sitemap_lastmods()
     print(f"product pages: {len(products)} written, sitemap +{added}")
