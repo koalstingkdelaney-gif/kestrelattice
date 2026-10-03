@@ -113,8 +113,9 @@ gtag('config', 'G-541TCHWW98');
     <fieldset>
       <legend>Pack info</legend>
       <label for="pack_name">Pack name <span class="req" aria-hidden="true">*</span><span class="visually-hidden"> (required)</span>
-        <input id="pack_name" aria-describedby="e-pack_name" name="pack_name" type="text" maxlength="120" required aria-required="true" autocomplete="name"
+        <input id="pack_name" aria-describedby="e-pack_name" name="pack_name" type="text" maxlength="120" required aria-required="true" autocomplete="off"
                placeholder="e.g. EU AI Act Evidence Pack for Startups">
+        <!-- REGRESSION GUARD: pack title, not a person's name — keep autocomplete="off" (fixed 2026-10-01, regressed 2026-10-02) -->
       </label>
       <div class="err" id="e-pack_name">Give your pack a name.</div>
 
@@ -129,7 +130,7 @@ gtag('config', 'G-541TCHWW98');
 
       <label for="description">Description <span class="req" aria-hidden="true">*</span><span class="visually-hidden"> (required)</span>
         <span class="hint">At least a sentence or two — what problem does the pack solve?</span>
-        <textarea id="description" aria-describedby="e-description" name="description" maxlength="2000" enterkeyhint="send" required
+        <textarea id="description" aria-describedby="e-description" name="description" maxlength="2000" enterkeyhint="send" required aria-required="true"
                   placeholder="What the pack contains, who it's for, and how it fits the ghostcorpnet Pack Standard."></textarea>
         <div class="char-count" id="description-count">0 / 2000</div>
       </label>
