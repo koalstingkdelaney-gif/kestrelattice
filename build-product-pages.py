@@ -9,6 +9,13 @@ and registers every page in sitemap.xml. Idempotent.
 import datetime
 import html, json, os, re, struct, subprocess
 
+import importlib.util as _ilu
+_ospec = _ilu.spec_from_file_location(
+    "slug_overrides", os.path.join(os.path.dirname(os.path.abspath(__file__)), "slug_overrides.py"))
+_omod = _ilu.module_from_spec(_ospec)
+_ospec.loader.exec_module(_omod)
+SLUG_OVERRIDES = _omod.SLUG_OVERRIDES
+
 
 def png_dims(path):
     """Return (width, height) of a PNG via its IHDR chunk; None on failure."""
@@ -597,6 +604,7 @@ def main():
         else:
             slug = slugify(title)
             mp = best_manuscript(title, mans)
+        slug = SLUG_OVERRIDES.get(gid, slug)  # dedup punctuation-only title collisions
         inside = headings_of(mp) if mp else []
         if not inside:
             inside = ["Complete, zero-placeholder document", "Ready to adopt as-is",

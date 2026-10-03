@@ -15,6 +15,12 @@ _mod = importlib.util.module_from_spec(_spec)
 _spec.loader.exec_module(_mod)
 products = _mod.products
 
+_ospec = importlib.util.spec_from_file_location(
+    "slug_overrides", os.path.join(os.path.dirname(os.path.abspath(__file__)), "slug_overrides.py"))
+_omod = importlib.util.module_from_spec(_ospec)
+_ospec.loader.exec_module(_omod)
+SLUG_OVERRIDES = _omod.SLUG_OVERRIDES
+
 SITE = os.path.expanduser("~/workspace/kestrelattice")
 BASE_URL = "https://koalstingkdelaney-gif.github.io/kestrelattice"
 
@@ -281,6 +287,12 @@ def slugify(t):
 
 ORIGINALS_DATE = "2026-09-29"  # flagship launch date (publish records); micros carry created_at per listing
 
+NEW_BADGE_DAYS = 2  # "New" badge window. The whole catalog launched within
+                    # days, so a 14-day window would badge every card and make
+                    # the badge meaningless. 2 days (last 48h of launches) keeps
+                    # it selective and truthful (real publish dates only, never
+                    # fake). As the catalog ages, the badge naturally thins out.
+
 def pdate(p, datemap):
     """Product publish date (YYYY-MM-DD) from listing created_at, or ORIGINALS_DATE
     for the 8 flagships, or '' when unknown."""
@@ -291,12 +303,12 @@ def pdate(p, datemap):
     return ""
 
 def is_new(p, datemap):
-    """True when the product published <14 days ago (real date field only)."""
+    """True when the product published <NEW_BADGE_DAYS days ago (real date field only)."""
     d = pdate(p, datemap)
     if not d:
         return False
     try:
-        return (date.today() - date.fromisoformat(d)).days < 14
+        return (date.today() - date.fromisoformat(d)).days < NEW_BADGE_DAYS
     except ValueError:
         return False
 
@@ -345,7 +357,7 @@ def main():
             pdate=html.escape(pdate(p, datemap)),
             url=f"https://koalstin.gumroad.com/l/{html.escape(pid)}",
             tags=html.escape(tags),
-            slug=ORIGINAL_SLUGS.get(pid, slugify(p["title"])),
+            slug=SLUG_OVERRIDES.get(pid, ORIGINAL_SLUGS.get(pid, slugify(p["title"]))),
             img_attrs=img_attrs,
             badge=badge,
             newbadge=newbadge,
