@@ -159,6 +159,15 @@ SITE = os.path.expanduser("~/workspace/kestrelattice")
 HIDDEN = os.path.expanduser("~/workspace/goals/kestrelattice-autonomous-growth/hidden_files")
 BASE_URL = "https://koalstingkdelaney-gif.github.io/kestrelattice"
 
+# Explicit sitemap exclusion: product-path slugs never advertised, even if their
+# directory exists on disk. (2026-10-04: products/premium/ 404s live; the two
+# short-slug PDPs are canonicalized duplicates of the long-slug primaries.)
+SITEMAP_EXCLUDE = {
+    "premium",
+    "agent-security-incident-pack",
+    "hr-recruiting-agent-governance",
+}
+
 _BOILER = ("A complete, zero-placeholder template for teams governing AI agents in production: "
            "policy gates, audit trails, cost controls.")
 
@@ -777,7 +786,7 @@ def main():
     added = 0
     for e in sm_entries:
         loc = re.search(r"<loc>([^<]+)</loc>", e).group(1)
-        if loc not in sm:
+        if loc not in sm and not any(loc.endswith(f"/products/{s}/") for s in SITEMAP_EXCLUDE):
             sm = sm.replace("</urlset>", e + "\n</urlset>")
             added += 1
     # image-sitemap namespace (idempotent)
