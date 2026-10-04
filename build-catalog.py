@@ -335,6 +335,19 @@ def main():
     # tag lookup from pending-listings for filtering
     tagmap = {}
     datemap = {}
+    formatmap = {}
+    # Deliverable-format badge labels keyed by the extension of the actual file
+    # uploaded at publish time (pending-listings pdf_path). The Gumroad API
+    # product scan carries NO format field (file_info empty for 327/335 live
+    # products as of 2026-10-04), so the publish ledger's recorded upload file
+    # is the real per-product source. Same keyed-by-pid pattern as tagmap /
+    # datamap. NEVER infer format from titles/taglines — no ledger entry or
+    # unknown extension means the generic badge stays.
+    FORMAT_BADGE = {".pdf": "PDF DOWNLOAD", ".pptx": "PPTX DOWNLOAD",
+                    ".mp3": "AUDIO DOWNLOAD", ".html": "HTML TOOL",
+                    ".csv": "CSV DATASET", ".zip": "ZIP DOWNLOAD",
+                    ".docx": "DOCX DOWNLOAD", ".xlsx": "XLSX DOWNLOAD",
+                    ".md": "MD DOWNLOAD"}
     pj = os.path.expanduser("~/workspace/goals/kestrelattice-autonomous-growth/hidden_files/marketplace/pending-listings.jsonl")
     if os.path.exists(pj):
         with open(pj) as f:
@@ -344,6 +357,9 @@ def main():
                     pid = p["gumroad_url"].rstrip("/").split("/")[-1]
                     tagmap[pid] = [t.lower().replace(" ", "-") for t in p.get("tags", [])[:6]]
                     datemap[pid] = str(p.get("created_at", ""))[:10]
+                    ext = os.path.splitext(str(p.get("pdf_path") or p.get("file_path") or "").lower())[1]
+                    if ext in FORMAT_BADGE:
+                        formatmap[pid] = FORMAT_BADGE[ext]
                 except Exception:
                     pass
     # default card order = newest first (matches the sort control's default)
@@ -362,7 +378,8 @@ def main():
             badges.append('<span class="badge-new">New</span>')
         if "code" in ptaglist:
             badges.append('<span class="codebadge">CODE</span>')
-        badges.append('<span class="dlbadge">DIGITAL DOWNLOAD</span>')
+        _fmt_badge = formatmap.get(pid, "DIGITAL DOWNLOAD")
+        badges.append('<span class="dlbadge">' + _fmt_badge + '</span>')
         badge_row = "".join(badges)
         reveal = "" if n <= 40 else " hidden reveal-capped"
         _fmt = fmt_price(p["price"])
