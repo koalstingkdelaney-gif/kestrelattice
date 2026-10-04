@@ -1,0 +1,8 @@
+name = "kestrelattice-approvals"
+main = "approvals-worker.js"
+compatibility_date = "2024-01-01"
+account_id = "31f223b01e629ccdd20f9bb26b14129d"
+
+[[kv_namespaces]]
+binding = "APPROVALS"
+id = "3e6f90cbd2844243bdc27d42343d4f9e"
