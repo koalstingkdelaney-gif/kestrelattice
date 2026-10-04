@@ -80,6 +80,7 @@ __PRELOAD__
 <meta name="twitter:title" content="AI Agent Governance Products — Catalog | ghostcorpnet">
 <meta name="twitter:description" content="Every ghostcorpnet self-serve product: agent governance playbooks, checklists, runbooks, kits, and working code. Instant download.">
 <meta name="twitter:image" content="https://koalstingkdelaney-gif.github.io/kestrelattice/assets/studio-edition-cover.jpg">
+<meta name="twitter:image:alt" content="ghostcorpnet product catalog — AI agent governance playbooks and kits">
 <script type="application/ld+json">
 __ITEMLIST__
 </script>
