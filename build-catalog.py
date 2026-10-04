@@ -162,7 +162,7 @@ footer.site a:hover{color:var(--accent-bright)}
 .result-count{color:var(--muted);font-size:.86rem;text-align:center;margin:4px 0 0}
 .hidden{display:none!important}
 .reveal-row{display:flex;justify-content:center;margin:26px 0 8px}
-#backtop{position:fixed;right:22px;bottom:22px;width:46px;height:46px;border-radius:50%;border:1px solid var(--line);background:var(--panel);color:var(--accent);font-size:1.3rem;cursor:pointer;opacity:0;pointer-events:none;transition:opacity .2s var(--ease);z-index:150}
+#backtop{position:fixed;right:22px;bottom:calc(22px + env(safe-area-inset-bottom, 0px));width:46px;height:46px;border-radius:50%;border:1px solid var(--line);background:var(--panel);color:var(--accent);font-size:1.3rem;cursor:pointer;opacity:0;pointer-events:none;transition:opacity .2s var(--ease);z-index:150}
 #backtop.show{opacity:1;pointer-events:auto}
 #backtop:hover{border-color:var(--accent-dim)}
 @media(prefers-reduced-motion:reduce){#backtop{display:none}}
