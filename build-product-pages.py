@@ -102,8 +102,13 @@ def file_facts_line(pr, pack_file_path, asset_idx):
         if os.path.isfile(cand):
             path = cand
     if not path:
+        keys = []
         for key in (pr.get("slug", ""), pr.get("gid", "")):
-            if key and key in asset_idx:
+            if key:
+                keys.append(key)
+                keys.append("kestrelattice-" + key)
+        for key in keys:
+            if key in asset_idx:
                 path = asset_idx[key]
                 break
     if not path:
