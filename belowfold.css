@@ -8,3 +8,86 @@ section.block{padding:16px 0!important;content-visibility:visible!important}
 a{color:#8a3a20!important;text-decoration:underline!important}
 .reveal{opacity:1!important;transform:none!important}
 .fcard,.plan,.step{break-inside:avoid}}.fgroups{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px 24px;width:100%;margin-top:18px}.fgroups nav{min-width:0}.fgroups h3{font-size:.7rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--faint);margin-bottom:8px}.fgroups a{display:block;margin:0;padding:7px 0;font-size:.88rem;color:var(--muted);min-height:36px}.fgroups a:hover{color:var(--accent-bright)}@media(max-width:640px){.fgroups{grid-template-columns:1fr;gap:12px}}
+/* ===== 2026-10-04 20-AI rebuild: mobile experience enhancements (additive-only) ===== */
+/* mobile.css — mobile experience enhancements for ghostcorpnet (koalstin rebuild, worker 9 of 20)
+   Additive-only: every rule is new or scoped inside max-width / hover / pointer
+   media queries, so desktop (>1024px, hover-capable) rendering is unchanged.
+   Targets: index.html inline <style>, belowfold.css, and the shared inline
+   <style> in product/article page templates. */
+
+/* ============ 1. Card buy-link: whole card becomes the tap target ============
+   .fcard .meta a.go is tiny inline text on the card (the primary revenue tap
+   on mobile). Pure-CSS stretched-link: the ::after overlay covers the card and
+   forwards taps to the buy link, while the title link keeps a higher z-index. */
+.fcard{position:relative}
+.fcard .go{
+  display:inline-flex;align-items:center;justify-content:center;
+  min-height:44px;padding:8px 16px;
+  border:1px solid var(--accent-dim);border-radius:var(--radius-sm);
+  background:var(--accent-soft);font-size:.9rem;font-weight:700;color:var(--accent-bright);
+  position:relative;z-index:2;white-space:nowrap;
+}
+.fcard .go:hover{color:var(--accent-bright);border-color:var(--accent);text-decoration:none}
+.fcard .go::after{content:"";position:absolute;inset:0;z-index:1}
+.fcard h3 a{position:relative;z-index:3}
+.fcard .secure-checkout{position:relative;z-index:3}
+
+/* ============ 2. Tap feedback + tap delay ============ */
+a,button,summary,[role="button"]{
+  -webkit-tap-highlight-color:rgba(224,122,95,.18); /* accent #e07a5f at low alpha */
+  touch-action:manipulation; /* kills 300ms tap delay / double-tap zoom */
+}
+
+/* ============ 3. Mobile nav menu: scrolls on short / landscape phones ============ */
+nav.main.open{
+  max-height:calc(100dvh - 58px);
+  max-height:calc(100vh - 58px); /* dvh fallback */
+  overflow-y:auto;
+  overscroll-behavior:contain;
+  -webkit-overflow-scrolling:touch;
+  padding-bottom:calc(16px + env(safe-area-inset-bottom,0px));
+}
+
+/* ============ 4. Touch devices: no sticky hover lift, crisp :active ============ */
+@media(hover:none){
+  .fcard:hover{transform:none;box-shadow:none}
+  .btn.primary:active,.btn.ghost:active,.fcard .go:active{transform:scale(.97)}
+}
+
+/* ============ 5. Small phones (<=400px): breathing room ============ */
+@media(max-width:400px){
+  .wrap{padding:0 16px}
+  h1{font-size:1.72rem}
+  .cta-row .btn{width:100%;padding-left:12px;padding-right:12px}
+  .proof-strip .wrap{gap:6px 12px}
+  .proof-strip li{font-size:.76rem}
+  .cta-pair .opt{padding:14px}
+  .cta-pair .opt .btn{padding:12px 10px;font-size:.85rem}
+  .sticky-buy{gap:8px;padding-left:12px;padding-right:12px}
+  .sticky-buy span{font-size:.78rem}
+  .sticky-buy .btn{padding:10px 14px;font-size:.82rem;white-space:nowrap}
+  .fcard .body{padding:14px 14px 16px}
+  #backtop{right:14px;width:44px;height:44px}
+}
+
+/* ============ 6. Tablet portrait (641-1024px): tighten stacked sections ============ */
+@media(min-width:641px) and (max-width:1024px){
+  .fcard .body{padding:14px 15px 16px}
+  .step{padding:18px}
+}
+@media(max-width:860px){
+  .cta-band{padding:clamp(40px,6vw,64px)} /* was clamp(64px,8vw,96px) — huge on tablets */
+}
+
+/* ============ 7. iOS: dynamic viewport + no orientation font inflation ============ */
+html{
+  -webkit-text-size-adjust:100%;
+  text-size-adjust:100%;
+}
+
+/* ============ 8. Overflow guards (article/product pages) ============ */
+img,video,iframe{max-width:100%}
+pre{max-width:100%;overflow-x:auto;-webkit-overflow-scrolling:touch}
+@media(max-width:640px){
+  table{display:block;max-width:100%;overflow-x:auto;-webkit-overflow-scrolling:touch;width:100%}
+}

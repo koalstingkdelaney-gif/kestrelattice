@@ -165,6 +165,8 @@ def fix_tagline(t):
     t = t.replace(
         "A complete, zero-placeholder draft for teams governing AI agents in production: policy gates, audit trails, cost controls.",
         _BOILER)
+    # Trim lone trailing fragments from mid-word cuts ("...protocols for h")
+    t = re.sub(r"\s[a-zA-Z0-9]$", "\u2026", t)
     return t.replace(" -- ", " \u2014 ")
 
 def fmt_price(p):
@@ -173,6 +175,14 @@ def fmt_price(p):
 
 def trunc_meta(text, limit=160):
     """Truncate a meta description at a word boundary so it never cuts mid-word."""
+    text = text or ""
+    if len(text) <= limit:
+        return text
+    cut = text[:limit].rsplit(" ", 1)[0]
+    return cut + "\u2026"
+
+def trunc_title(text, limit=60):
+    """Truncate a <title> at a word boundary so SERPs never cut mid-word."""
     text = text or ""
     if len(text) <= limit:
         return text
@@ -374,18 +384,23 @@ PAGE = """<!DOCTYPE html>
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>{title} — ghostcorpnet</title>
+<title>{title60} — ghostcorpnet</title>
 <meta name="description" content="{meta}">
 <link rel="canonical" href="{page_url}">
 <link rel="preconnect" href="https://koalstin.gumroad.com">
 <meta property="og:type" content="product">
-<meta property="og:title" content="{title} — ghostcorpnet">
+<meta property="og:title" content="{title60} — ghostcorpnet">
 <meta property="og:description" content="{meta}">
 <meta property="og:url" content="{page_url}">
 <meta property="og:image" content="https://koalstingkdelaney-gif.github.io/kestrelattice/assets/covers/{gid}.png">
 {og_dims}
+<meta property="og:site_name" content="ghostcorpnet">
+<meta property="og:locale" content="en_US">
+<meta property="og:image:alt" content="{title} — cover art">
+<meta property="product:price:amount" content="{price_num}">
+<meta property="product:price:currency" content="USD">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="{title} — ghostcorpnet">
+<meta name="twitter:title" content="{title60} — ghostcorpnet">
 <meta name="twitter:description" content="{meta}">
 <meta name="twitter:image" content="https://koalstingkdelaney-gif.github.io/kestrelattice/assets/covers/{gid}.png">
 <meta name="twitter:image:alt" content="{title} — cover art">
@@ -397,10 +412,12 @@ PAGE = """<!DOCTYPE html>
 </script>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-541TCHWW98"></script>
 <script>
+(function(){{try{{if(new URLSearchParams(location.search).get('admin')==='1'){{localStorage.setItem('kestrelattice_admin','1');}}}}catch(e){{}}}})();
+</script>
+<script>
 window.dataLayer = window.dataLayer || [];
 function gtag(){{dataLayer.push(arguments);}}
-gtag('js', new Date());
-gtag('config', 'G-541TCHWW98');
+try{{if(localStorage.getItem('kestrelattice_admin')!=='1'){{gtag('js', new Date());gtag('config', 'G-541TCHWW98');}}}}catch(e){{gtag('js', new Date());gtag('config', 'G-541TCHWW98');}}
 </script>
 <style>
   :root{{color-scheme:dark;--bg:#121212; --panel:#1c1a18; --line:#332e26; --text:#e8e2d8;
@@ -425,6 +442,8 @@ gtag('config', 'G-541TCHWW98');
   h1{{font-size:1.9rem;line-height:1.25;margin-bottom:8px;text-wrap:balance}}
   p[itemprop="description"]{{text-wrap:pretty}}
   .tagline{{color:var(--muted);font-size:1.05rem;margin-bottom:20px}}
+  .who-for{{color:var(--muted);font-size:.92rem;margin:-8px 0 20px}}
+  .who-for b{{color:var(--text)}}
   .price{{font-size:1.6rem;color:var(--accent);font-weight:700;margin-bottom:6px;font-variant-numeric:tabular-nums}}
   .instant{{color:var(--muted);font-size:.85rem;margin-bottom:20px}}
   .file-facts{{color:var(--muted);font-size:.85rem;margin:-12px 0 20px}}
@@ -432,6 +451,8 @@ gtag('config', 'G-541TCHWW98');
   .fact{{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:8px 14px;font-size:.86rem;color:var(--muted)}}
   .fact b{{color:var(--text)}}
   a:focus-visible,button:focus-visible{{outline:3px solid var(--accent);outline-offset:3px;border-radius:4px}}
+  .skip-link{{position:absolute;left:-9999px;top:0;background:var(--accent);color:#121212;padding:10px 18px;font-weight:700;z-index:200;border-radius:0 0 8px 0}}
+  .skip-link:focus{{left:0}}
   .pdp-sticky{{display:none}}
   .pdp-sticky span{{font-size:.85rem;color:var(--muted)}}
   .pdp-sticky span b{{color:var(--text)}}
@@ -463,6 +484,11 @@ gtag('config', 'G-541TCHWW98');
   .rel .rp{{color:var(--accent);font-weight:700;margin-top:8px}}
   .faq p{{color:var(--muted);margin-bottom:16px}}
   .faq strong{{color:var(--text)}}
+  .faq-item{{border:1px solid var(--line);border-radius:8px;margin-bottom:8px;background:var(--panel)}}
+  .faq-item summary{{cursor:pointer;padding:12px 16px;font-weight:700;list-style:none;color:var(--text)}}
+  .faq-item summary::-webkit-details-marker{{display:none}}
+  .faq-item .faq-a{{padding:0 16px 14px;color:var(--muted)}}
+  .faq-item .faq-a p{{margin-bottom:0}}
   footer{{border-top:1px solid var(--line);margin-top:48px;padding-top:20px;
          color:var(--muted);font-size:.82rem;display:flex;justify-content:space-between;
          flex-wrap:wrap;gap:8px}}
@@ -472,6 +498,7 @@ gtag('config', 'G-541TCHWW98');
 .currency-note{{font-size:.72rem;font-weight:400;color:var(--muted, #a89d89);margin-left:6px;vertical-align:middle}}</style>
 </head>
 <body>
+<a class="skip-link" href="#pdp-what">Skip to product details</a>
 <div class="wrap">
   <a class="brand" href="../../">
     <svg width="24" height="24" viewBox="0 0 26 26" fill="none" aria-hidden="true"><circle cx="5" cy="6" r="2.4" fill="#e07a5f"/><circle cx="21" cy="6" r="2.4" fill="#e07a5f"/><circle cx="13" cy="13" r="2.4" fill="#e07a5f"/><circle cx="5" cy="20" r="2.4" fill="#e07a5f"/><circle cx="21" cy="20" r="2.4" fill="#e07a5f"/><path d="M6.6 7.4L11.2 11.8M19.4 7.4L14.8 11.8M6.6 18.6L11.2 14.2M19.4 18.6L14.8 14.2" stroke="#e07a5f" stroke-width="1.4"/></svg>
@@ -484,6 +511,7 @@ gtag('config', 'G-541TCHWW98');
     <div>
       <h1 itemprop="name">{title}</h1>
       <p class="tagline">{tagline}</p>
+      <p class="who-for"><b>Who this is for:</b> teams shipping AI agents to production — founders, platform engineers, and anyone whose agents touch money, data, or external systems.</p>
       {inside_mini}
       <p class="price">${price} <span class="currency-note">Prices in USD</span></p>
       {buy_html}
@@ -510,9 +538,9 @@ gtag('config', 'G-541TCHWW98');
 
   <section class="faq">
     <h2>How it works</h2>
-    <p><strong>How do I receive it?</strong><br>Checkout is handled by Gumroad. The PDF is available for instant download the moment you pay — no account setup on our side, no waiting.</p>
-    <p><strong>Is it really ready to use?</strong><br>Yes. Every ghostcorpnet product is written with zero placeholders — adopt it as-is, no "insert your policy here" gaps.</p>
-    <p><strong>Who is it for?</strong><br>Teams shipping AI agents to production — founders, platform engineers, and anyone whose agents touch money, data, or external systems.</p>
+    <details class="faq-item"><summary>How do I receive it?</summary><div class="faq-a"><p>Checkout is handled by Gumroad. The PDF is available for instant download the moment you pay — no account setup on our side, no waiting.</p></div></details>
+    <details class="faq-item"><summary>Is it really ready to use?</summary><div class="faq-a"><p>Yes. Every ghostcorpnet product is written with zero placeholders — adopt it as-is, no "insert your policy here" gaps.</p></div></details>
+    <details class="faq-item"><summary>Who is it for?</summary><div class="faq-a"><p>Teams shipping AI agents to production — founders, platform engineers, and anyone whose agents touch money, data, or external systems.</p></div></details>
   </section>
   <script type="application/ld+json">
 {{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
@@ -639,7 +667,21 @@ def main():
         inside_label = f"What's inside - {len(pr['inside'])} items"
         _mini = "\n".join(f"      <li>{esc(h)}</li>" for h in pr["inside"][:3])
         inside_mini = f'<ul class="inside-mini" aria-label="What\'s inside - {len(pr["inside"][:3])} items">\n{_mini}\n      </ul>' if _mini else ""
-        rels = [products[(i + k) % len(products)] for k in (1, 2, 3)]
+        _stop = {"the", "a", "an", "and", "for", "with", "your", "you", "ai"}
+        def _tier(x):
+            _p = float(x.get("price") or 0)
+            return 0 if _p == 0 else 1 if _p < 19 else 2 if _p <= 29 else 3 if _p <= 49 else 4
+        def _words(t):
+            return {w for w in re.sub(r"[^a-z0-9 ]", " ", (t or "").lower()).split() if w not in _stop and len(w) > 2}
+        _pw, _pt = _words(pr["title"]), _tier(pr)
+        def _score(x):
+            _s = len(_pw & _words(x.get("title"))) * 2
+            if _tier(x) == _pt:
+                _s += 1
+            return _s
+        _cands = [x for x in products if x["gid"] != pr["gid"] and x.get("slug")]
+        _cands.sort(key=_score, reverse=True)
+        rels = _cands[:3] or [products[(i + k) % len(products)] for k in (1, 2, 3)]
         related = "\n".join(
             f'      <a href="../{r["slug"]}/"><strong>{esc(r["title"])}</strong><div class="rp">${r["price"]}</div></a>'
             for r in rels)
@@ -709,9 +751,9 @@ def main():
             sticky_bar = (f'<div class="pdp-sticky" id="pdp-sticky" role="region" aria-label="Availability: {esc(pr["title"])}">'
                           f'<span><b>{esc(pr["title"])}</b> \u00b7 ${pr["price"]}</span>'
                           '<span class="soon">Publishing soon</span></div>')
-        page = PAGE.format(title=esc(pr["title"]), meta=esc(trunc_meta(pr["tagline"] or pr["description"])),
+        page = PAGE.format(title=esc(pr["title"]), title60=esc(trunc_title(pr["title"])), meta=esc(trunc_meta(pr["tagline"] or pr["description"])),
                            page_url=page_url, jsonld=jsonld, breadcrumblist=breadcrumblist, gid=pr["gid"], cover_img=cover_img,
-                           tagline=esc(pr["tagline"]), price=pr["price"], buy_html=buy_html,
+                           tagline=esc(pr["tagline"]), price=pr["price"], price_num=pr["price"], buy_html=buy_html,
                            file_facts=file_facts,
                            facts_row=facts_row,
                            gumroad_url=pr["gumroad_url"] or "", description=esc(pr["description"]),

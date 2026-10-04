@@ -36,6 +36,8 @@ def fix_tagline(t):
     t = t.replace(
         "A complete, zero-placeholder draft for teams governing AI agents in production: policy gates, audit trails, cost controls.",
         _BOILER)
+    # Trim lone trailing fragments from mid-word cuts ("...protocols for h")
+    t = _re.sub(r"\s[a-zA-Z0-9]$", "\u2026", t)
     return t.replace(" -- ", " \u2014 ")
 
 def fmt_price(p):
@@ -123,8 +125,13 @@ nav.main a:hover{color:var(--accent-bright)}
 .card img{width:100%;aspect-ratio:4/3;object-fit:cover;display:block;background:#0b0a09}
 .card .body{padding:16px;display:flex;flex-direction:column;gap:7px;flex:1}
 .codebadge{display:inline-block;align-self:flex-start;background:var(--accent-soft);border:1px solid var(--accent-dim);color:var(--accent-bright);font-size:.68rem;font-weight:700;letter-spacing:.08em;padding:2px 8px;border-radius:999px}
-.badge-new{display:inline-block;background:var(--accent);color:var(--accent-ink);font-size:.68rem;font-weight:700;letter-spacing:.08em;padding:2px 8px;border-radius:999px;margin-left:6px}
-.dlbadge{display:inline-block;background:transparent;border:1px solid var(--line);color:var(--muted);font-size:.66rem;font-weight:700;letter-spacing:.08em;padding:2px 8px;border-radius:999px;margin-left:6px}
+.badge-new{display:inline-block;background:var(--accent);color:var(--accent-ink);font-size:.68rem;font-weight:700;letter-spacing:.08em;padding:2px 8px;border-radius:999px}
+.dlbadge{display:inline-block;background:transparent;border:1px solid var(--line);color:var(--muted);font-size:.66rem;font-weight:700;letter-spacing:.08em;padding:2px 8px;border-radius:999px}
+.badge-row{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin:0 0 2px;min-height:22px}
+.chip-group{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;align-items:center}
+.chip-group-label{font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:var(--faint);font-weight:700;margin-right:2px}
+.filters-list{display:flex;flex-wrap:wrap;gap:14px 10px;justify-content:center;align-items:center}
+.catalog .wrap{max-width:1200px}
 .sort-row{display:flex;justify-content:center;align-items:center;margin:0 0 10px}.sort-label{font-size:.86rem;color:var(--muted);margin-right:8px;font-weight:600}
 #catalog-sort{padding:9px 14px;min-height:44px;border:1px solid var(--line);border-radius:999px;background:var(--panel);color:var(--text);font-size:.86rem;font-family:inherit;cursor:pointer}
 #catalog-sort:focus{border-color:var(--accent);outline:none}
@@ -139,7 +146,8 @@ nav.main a:hover{color:var(--accent-bright)}
 .card picture{display:block}
 .card h2{font-size:.98rem;line-height:1.35;font-weight:700;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}.card a h2{text-decoration-thickness:1px;text-underline-offset:3px}
 .price{color:var(--text);font-weight:800;font-variant-numeric:tabular-nums}
-.card p.desc{color:var(--muted);font-size:.85rem;flex:1}
+.card p.desc{color:var(--muted);font-size:.85rem;flex:0 1 auto;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+.card p.price{margin-top:auto;padding-top:6px}
 .card .row{display:flex;gap:10px;padding:0 16px 16px}
 .btn{display:inline-block;background:linear-gradient(180deg,var(--accent-bright),var(--accent));color:var(--accent-ink);font-weight:700;padding:10px 18px;border-radius:var(--radius-sm);text-align:center;font-size:.88rem;flex:1;transition:transform .16s var(--ease)}
 .btn:hover{transform:translateY(-1px);text-decoration:none}.card .row .btn{min-height:44px;display:inline-flex;align-items:center;justify-content:center}
@@ -151,7 +159,6 @@ footer.site a{color:var(--muted);margin-left:14px}
 footer.site a:hover{color:var(--accent-bright)}
 .skip{position:absolute;left:-9999px;top:0;background:var(--accent);color:var(--accent-ink);padding:10px 18px;font-weight:700;z-index:200;border-radius:0 0 8px 0}
 .skip:focus{left:0}
-.trust{color:var(--faint);font-size:.78rem;text-align:center;margin:-8px 0 14px}
 .result-count{color:var(--muted);font-size:.86rem;text-align:center;margin:4px 0 0}
 .hidden{display:none!important}
 .reveal-row{display:flex;justify-content:center;margin:26px 0 8px}
@@ -182,17 +189,16 @@ a{color:#8a3a20!important;text-decoration:underline!important}}
 ghostcorpnet</a>
 <nav class="main" aria-label="Primary"><a href="../">Home</a><a href="../brands/">Stores</a><a href="../ecosystem/">Ecosystem</a><a href="../directory/">Directory</a><a href="../build/">Build</a><a href="../articles/">Articles</a><a href="../changelog.html">Changelog</a><a href="../#faq">FAQ</a></nav>
 </div></header>
-<main id="main" tabindex="-1">
+<main id="main" class="catalog" tabindex="-1">
 <div class="wrap hero">
 <h1>Catalog</h1>
+<p class="lede">Every self-serve product in the ghostcorpnet library — playbooks, checklists, runbooks, kits, and working code for governing AI agents. Buy once, download instantly.</p>
 <p class="secure-checkout">Secure checkout via Gumroad · Instant delivery</p>
-<p class="lede sub">Agent governance playbooks, kits and runbooks</p>
-<p class="lede">Every self-serve product in the ghostcorpnet library — playbooks, checklists, runbooks, kits, and working code for governing AI agents. Buy once, download instantly, yours forever.</p>
 </div>
-<div class="wrap"><p class="result-count" id="result-count" aria-live="polite">__COUNT__</p><search class="catalog-search-row"><label for="catalog-search" class="visually-hidden">Search products</label><input id="catalog-search" type="search" autocomplete="off" spellcheck="false" enterkeyhint="search" aria-keyshortcuts="/" placeholder="Search products… ( / )"><kbd class="search-kbd" aria-hidden="true">/</kbd></search><div class="sort-row"><label for="catalog-sort" class="sort-label">Sort:</label><select id="catalog-sort" aria-label="Sort products"><option value="new">Newest</option><option value="lo">Price: low to high</option><option value="hi">Price: high to low</option></select></div><noscript><style>.catalog-search-row,.sort-row{display:none}</style><p class="lede sub">The full catalog is listed below — search and sort need JavaScript.</p></noscript><p class="tier-legend">9 Starter · 9 Core · 9–99 Premium</p><div class="filters" id="filters" role="region" tabindex="-1" aria-label="Filter products" aria-describedby="filters-note" data-collapsed="false"><button type="button" class="filters-toggle" aria-expanded="true" aria-controls="filters-list"><span>Filter products</span><span class="ft-chev" aria-hidden="true">▾</span></button><div class="filters-list" id="filters-list"></div></div><p class="visually-hidden" id="filters-note">Choosing filters updates the product count announced by the results region.</p></div>
+<div class="wrap"><p class="result-count" id="result-count" aria-live="polite">__COUNT__</p><search class="catalog-search-row"><label for="catalog-search" class="visually-hidden">Search products</label><input id="catalog-search" type="search" autocomplete="off" spellcheck="false" enterkeyhint="search" aria-keyshortcuts="/" placeholder="Search products… ( / )"><kbd class="search-kbd" aria-hidden="true">/</kbd></search><div class="sort-row"><label for="catalog-sort" class="sort-label">Sort:</label><select id="catalog-sort" aria-label="Sort products"><option value="new">Newest</option><option value="az">Title: A to Z</option><option value="lo">Price: low to high</option><option value="hi">Price: high to low</option></select></div><noscript><style>.catalog-search-row,.sort-row{display:none}</style><p class="lede sub">The full catalog is listed below — search and sort need JavaScript.</p></noscript><p class="tier-legend">9 Starter · 9 Core · 9–99 Premium</p><div class="filters" id="filters" role="region" tabindex="-1" aria-label="Filter products" aria-describedby="filters-note" data-collapsed="false"><button type="button" class="filters-toggle" aria-expanded="true" aria-controls="filters-list"><span>Filter products</span><span class="ft-chev" aria-hidden="true">▾</span></button><div class="filters-list" id="filters-list"></div></div><p class="visually-hidden" id="filters-note">Choosing filters updates the product count announced by the results region.</p></div>
 <div class="wrap"><ul class="grid" id="grid">
 __CARDS__
-</ul><div class="reveal-row"><button class="btn ghost" id="show-more" type="button">Show more</button></div><div id="no-results" role="status"><p>No products match — try different keywords or filters</p><p><button class="chip" id="clear-filters" type="button" style="margin-top:12px">Clear filters</button></p><div class="sug-grid" id="no-results-sug"></div></div></div>
+</ul><div class="reveal-row"><button class="btn ghost" id="show-more" type="button">Show more</button></div><div id="no-results" role="status"><p>Nothing matches that combination — try fewer filters or different keywords.</p><p><button class="chip" id="clear-filters" type="button" style="margin-top:12px">Clear filters</button></p><div class="sug-grid" id="no-results-sug"></div></div></div>
 <button id="backtop" aria-label="Back to top">↑</button>
 </main>
 <footer class="site"><div class="wrap">
@@ -207,18 +213,30 @@ const POPULAR_SUGS=[['The Playbook — Studio Edition','the-playbook-studio-edit
 const renderNoResultsSug=()=>{if(!noResultsSug||noResultsSug.childNodes.length)return;noResultsSug.innerHTML=POPULAR_SUGS.map(s=>'<a class="sug" href="'+s[1]+'"><strong>'+s[0]+'</strong><span>'+s[2]+'</span></a>').join('')};
 const updateCount=()=>{const total=[...grid.querySelectorAll('.card')].length;const v=[...grid.querySelectorAll('.card')].filter(c=>!c.classList.contains('hidden')).length;rc.textContent=v===0?'No products match':(v===1?'1 of '+total+' product':v+' of '+total+' products');if(noResults){noResults.classList.toggle('show',v===0);if(v===0)renderNoResultsSug()}};
 const tags=[...new Set([...grid.querySelectorAll('.card')].flatMap(c=>(c.dataset.tags||'').split('|').filter(Boolean)))].sort();
-let activeTag='',searchQ='';
-try{var _hp=new URLSearchParams(location.hash.slice(1));activeTag=_hp.get('tag')||'';searchQ=_hp.get('q')||'';}catch(e){}
+let activeTag='',searchQ='',activePrice=null;
+try{var _hp=new URLSearchParams(location.hash.slice(1));activeTag=_hp.get('tag')||'';searchQ=_hp.get('q')||'';if(!searchQ){try{searchQ=new URLSearchParams(location.search).get('q')||''}catch(_e){}}}catch(e){}
 // Sync filter/search/sort state to the URL hash so catalog views are shareable.
-const syncHash=()=>{try{const p=new URLSearchParams();if(activeTag)p.set('tag',activeTag);if(searchQ)p.set('q',searchQ);const ss=document.getElementById('catalog-sort');if(ss&&ss.value&&ss.value!=='new')p.set('sort',ss.value);const s=p.toString();history.replaceState(null,'',s?('#'+s):location.pathname+location.search);}catch(e){}};
+const syncHash=()=>{try{const p=new URLSearchParams();if(activeTag)p.set('tag',activeTag);if(searchQ)p.set('q',searchQ);if(activePrice)p.set('pr',PRICE_RANGES.indexOf(activePrice));const ss=document.getElementById('catalog-sort');if(ss&&ss.value&&ss.value!=='new')p.set('sort',ss.value);const s=p.toString();history.replaceState(null,'',s?('#'+s):location.pathname+location.search);}catch(e){}};
 const REVEAL_STEP=40;let revealed=40;
-const isFiltering=()=>activeTag!==''||searchQ!=='';
+const isFiltering=()=>activeTag!==''||searchQ!==''||activePrice!==null;
 const updateShowMore=()=>{const sm=document.getElementById('show-more');if(!sm)return;const total=[...grid.querySelectorAll('.card')].length;const rest=total-revealed;const show=!isFiltering()&&rest>0;sm.classList.toggle('hidden',!show);if(show)sm.textContent='Show more ('+rest+' more)';};
-const applyFilters=()=>{const cards=[...grid.querySelectorAll('.card')];let vis=0;cards.forEach(c=>{const t=(c.dataset.tags||'').split('|').filter(Boolean);const okT=activeTag===''||t.includes(activeTag);const h2=c.querySelector('h2');const okQ=searchQ===''||(h2&&h2.textContent.toLowerCase().includes(searchQ));let show=okT&&okQ;if(show&&!isFiltering()){vis++;show=vis<=revealed;}c.classList.toggle('hidden',!show)});updateCount();updateShowMore();syncHash()};
+const applyFilters=()=>{const cards=[...grid.querySelectorAll('.card')];let vis=0;cards.forEach(c=>{const t=(c.dataset.tags||'').split('|').filter(Boolean);const okT=activeTag===''||t.includes(activeTag);const h2=c.querySelector('h2');const dsc=c.querySelector('.desc');const hay=((h2&&h2.textContent)||'')+' '+((dsc&&dsc.textContent)||'');const okQ=searchQ===''||hay.toLowerCase().includes(searchQ);const pr=parseFloat(c.dataset.price||'0');const okP=!activePrice||(pr>=activePrice.min&&pr<=activePrice.max);let show=okT&&okQ&&okP;if(show&&!isFiltering()){vis++;show=vis<=revealed;}c.classList.toggle('hidden',!show)});updateCount();updateShowMore();syncHash()};
 const tagCounts={};[...grid.querySelectorAll('.card')].forEach(c=>{(c.dataset.tags||'').split('|').filter(Boolean).forEach(t=>{tagCounts[t]=(tagCounts[t]||0)+1})});
 const mk=(label,tag)=>{const b=document.createElement('button');b.className='chip'+(tag===activeTag?' active':'');b.textContent=label;b.setAttribute('aria-pressed',String(tag===activeTag));const n=tag===''?grid.querySelectorAll('.card').length:(tagCounts[tag]||0);if(tag===''){b.setAttribute('aria-label','Show all '+n+' products')}else{b.setAttribute('aria-label','Show '+n+' '+label+(n===1?'':'s'))}const badge=document.createElement('span');badge.className='chip-count';badge.setAttribute('aria-hidden','true');badge.textContent=' · '+n;b.appendChild(badge);b.onclick=()=>{activeTag=tag;document.querySelectorAll('.chip').forEach(x=>{x.classList.remove('active');x.setAttribute('aria-pressed','false')});b.classList.add('active');b.setAttribute('aria-pressed','true');applyFilters()};return b};
 filtersList.appendChild(mk('All',''));
-tags.forEach(t=>filtersList.appendChild(mk(t.replace(/-/g,' '),t)));
+const FORMAT_TAGS=new Set(['playbook','runbook','kit','checklist','template','templates','policy-template','code','tool','interactive-tool','bundle','pack','collection','quiz','assessment','readiness-assessment','prompts','prompt-pack','dataset','csv','spreadsheet','worksheet','worksheets','audiobook','audio','audio-briefing','powerpoint','presentation','board-deck','compliance-kit','policy-generator','cost-calculator']);
+const PRICE_RANGES=[{label:'$19 and under',min:0,max:19},{label:'$29 \u2013 $49',min:29,max:49},{label:'$50 and up',min:50,max:Infinity}];
+const fmt=tags.filter(t=>FORMAT_TAGS.has(t));
+const top=tags.filter(t=>!FORMAT_TAGS.has(t));
+const grp=(label,list)=>{const s=document.createElement('span');s.className='chip-group';const h=document.createElement('span');h.className='chip-group-label';h.textContent=label;s.appendChild(h);list.forEach(t=>s.appendChild(mk(t.replace(/-/g,' '),t)));return s};
+if(fmt.length)filtersList.appendChild(grp('Format',fmt));
+if(top.length)filtersList.appendChild(grp('Topic',top));
+const priceRow=document.createElement('span');priceRow.className='chip-group';priceRow.id='price-row';
+const pLab=document.createElement('span');pLab.className='chip-group-label';pLab.textContent='Price';priceRow.appendChild(pLab);
+const mkp=(r)=>{const b=document.createElement('button');b.className='chip';b.textContent=r.label;b.setAttribute('aria-pressed','false');const cnt=[...grid.querySelectorAll('.card')].filter(c=>{const p=parseFloat(c.dataset.price||'0');return p>=r.min&&p<=r.max}).length;const cb=document.createElement('span');cb.className='chip-count';cb.setAttribute('aria-hidden','true');cb.textContent=' \u00b7 '+cnt;b.appendChild(cb);b.onclick=()=>{activePrice=(activePrice===r)?null:r;priceRow.querySelectorAll('.chip').forEach(x=>{x.classList.remove('active');x.setAttribute('aria-pressed','false')});if(activePrice){b.classList.add('active');b.setAttribute('aria-pressed','true')}applyFilters()};return b};
+PRICE_RANGES.forEach(r=>priceRow.appendChild(mkp(r)));
+try{var _pr=new URLSearchParams(location.hash.slice(1)).get('pr');if(_pr!==null&&PRICE_RANGES[+_pr]){activePrice=PRICE_RANGES[+_pr];priceRow.querySelectorAll('.chip').forEach((x,i)=>{if(PRICE_RANGES[i]===activePrice){x.classList.add('active');x.setAttribute('aria-pressed','true')}})}}catch(e){}
+filtersList.appendChild(priceRow);
 const fToggle=filters.querySelector('.filters-toggle');
 if(fToggle){fToggle.addEventListener('click',()=>{const c=filters.dataset.collapsed!=='true';filters.dataset.collapsed=String(c);fToggle.setAttribute('aria-expanded',String(!c));});}
 const skipF=document.getElementById('skip-filters');if(skipF){skipF.addEventListener('click',()=>{filters.focus({preventScroll:true})});}
@@ -235,16 +253,16 @@ applyFilters();
 const sortSel=document.getElementById('catalog-sort');
 const applySort=()=>{if(!sortSel)return;const v=sortSel.value;const cards=[...grid.querySelectorAll('.card')];
 cards.sort((a,b)=>{const pa=parseFloat(a.dataset.price||'0'),pb=parseFloat(b.dataset.price||'0');
-if(v==='lo')return pa-pb;if(v==='hi')return pb-pa;
+if(v==='lo')return pa-pb;if(v==='hi')return pb-pa;if(v==='az')return (a.querySelector('h2').textContent||'').localeCompare(b.querySelector('h2').textContent||'');
 const da=a.dataset.date||'',db=b.dataset.date||'';
 if(da&&!db)return -1;if(!da&&db)return 1;return db.localeCompare(da)});
 cards.forEach(c=>grid.appendChild(c));applyFilters();syncHash()};
-if(sortSel){try{var _hs=new URLSearchParams(location.hash.slice(1)).get('sort');if(_hs&&['new','lo','hi'].indexOf(_hs)>=0)sortSel.value=_hs;}catch(e){}
+if(sortSel){try{var _hs=new URLSearchParams(location.hash.slice(1)).get('sort');if(_hs&&['new','az','lo','hi'].indexOf(_hs)>=0)sortSel.value=_hs;}catch(e){}
 sortSel.addEventListener('change',applySort);applySort()}
 
 // Clear filters button in the empty state.
 const clearBtn=document.getElementById('clear-filters');
-if(clearBtn){clearBtn.addEventListener('click',()=>{activeTag='';searchQ='';sq.value='';
+if(clearBtn){clearBtn.addEventListener('click',()=>{activeTag='';searchQ='';activePrice=null;sq.value='';
 if(sortSel){sortSel.value='new';applySort()}
 document.querySelectorAll('#filters .chip').forEach(x=>{x.classList.remove('active');x.setAttribute('aria-pressed','false')});
 const all=document.querySelector('#filters .chip');if(all){all.classList.add('active');all.setAttribute('aria-pressed','true')}
@@ -264,9 +282,8 @@ b.addEventListener('click',function(){window.scrollTo({top:0,behavior:'smooth'})
 
 CARD = """<li class="card{reveal}" data-tags="{tags}" data-price="{price_num}" data-date="{pdate}">
 <a href="{slug}/" style="text-decoration:none;color:inherit;display:block" aria-label="{title} — {price_label}"><picture><source type="image/webp" srcset="../assets/covers/{pid}.webp"><img src="../assets/covers/{pid}.png" alt="{title} cover" {img_attrs} sizes="(max-width:640px) 100vw, (max-width:1100px) 50vw, 320px"></picture>
-<div class="body">{badge}{newbadge}<span class="dlbadge">DIGITAL DOWNLOAD</span><h2 translate="no">{title}</h2><p class="desc">{tagline}</p><p class="price"><span class="visually-hidden">USD </span>{price_html}</p></div></a>
+<div class="body"><p class="badge-row">{badge_row}</p><h2 translate="no">{title}</h2><p class="desc">{tagline}</p><p class="price"><span class="visually-hidden">USD </span>{price_html}</p></div></a>
 <div class="row"><a class="btn" href="{url}" target="_blank" rel="noopener">Get it<span class="visually-hidden">(opens in new tab)</span></a><a class="btn ghost" href="{slug}/" aria-label="Details: {title}">Details</a></div>
-<p class="trust">Instant delivery via Gumroad</p>
 </li>
 """
 
@@ -340,8 +357,13 @@ def main():
         img_attrs = ' fetchpriority="high"' if n == 1 else ' loading="lazy" fetchpriority="low" decoding="async"'
         ptaglist = tagmap.get(pid, ["governance"])
         tags = "|".join(ptaglist)
-        badge = '<span class="codebadge">CODE</span>' if "code" in ptaglist else ""
-        newbadge = '<span class="badge-new">New</span>' if is_new(p, datemap) else ""
+        badges = []
+        if is_new(p, datemap):
+            badges.append('<span class="badge-new">New</span>')
+        if "code" in ptaglist:
+            badges.append('<span class="codebadge">CODE</span>')
+        badges.append('<span class="dlbadge">DIGITAL DOWNLOAD</span>')
+        badge_row = "".join(badges)
         reveal = "" if n <= 40 else " hidden reveal-capped"
         _fmt = fmt_price(p["price"])
         _is_free = float(p["price"]) == 0
@@ -353,15 +375,14 @@ def main():
             price_label="Free" if _is_free else "$" + _fmt,
             price_html='<span translate="no">Free</span>' if _is_free else (
                 '<span translate="no"><span aria-hidden="true">$</span>' + html.escape(_fmt) +
-                '</span> <span style="color:var(--muted);font-weight:400;font-size:.85rem">one-time</span>'),
+                '</span> <span style="color:var(--muted);font-weight:400;font-size:.85rem">one-time · instant delivery</span>'),
             price_num=float(p["price"]),
             pdate=html.escape(pdate(p, datemap)),
             url=f"https://koalstin.gumroad.com/l/{html.escape(pid)}",
             tags=html.escape(tags),
             slug=SLUG_OVERRIDES.get(pid, ORIGINAL_SLUGS.get(pid, slugify(p["title"]))),
             img_attrs=img_attrs,
-            badge=badge,
-            newbadge=newbadge,
+            badge_row=badge_row,
         ))
     outdir = os.path.join(SITE, "products")
     os.makedirs(outdir, exist_ok=True)
