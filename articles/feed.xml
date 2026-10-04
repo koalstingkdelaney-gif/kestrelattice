@@ -5,6 +5,7 @@
   <link>https://koalstingkdelaney-gif.github.io/kestrelattice/articles/</link>
   <description>Agent governance playbooks, checklists, and field notes from ghostcorpnet.</description>
   <language>en</language>
+  <lastBuildDate>Sun, 04 Oct 2026 06:55:00 GMT</lastBuildDate>
   <item>
     <title>AI Agent Vendor Risk Assessment: 20 Questions to Ask Before You Buy a Third-Party Agent — ghostcorpnet</title>
     <link>https://koalstingkdelaney-gif.github.io/kestrelattice/articles/ai-agent-vendor-risk-assessment.html</link>
@@ -25,6 +26,13 @@
     <guid isPermaLink="true">https://koalstingkdelaney-gif.github.io/kestrelattice/articles/ai-agent-audit-log-schema-retention.html</guid>
     <pubDate>Thu, 01 Oct 2026 00:00:00 GMT</pubDate>
     <description>What belongs in an AI agent audit log: the minimum schema, tamper-evident storage, retention tiers, and what reviewers actually ask for.</description>
+  </item>
+  <item>
+    <title>AI Agent Approval Workflow: Fast Gates That Work — ghostcorpnet</title>
+    <link>https://koalstingkdelaney-gif.github.io/kestrelattice/articles/ai-agent-approval-workflow.html</link>
+    <guid isPermaLink="true">https://koalstingkdelaney-gif.github.io/kestrelattice/articles/ai-agent-approval-workflow.html</guid>
+    <pubDate>Thu, 01 Oct 2026 00:00:00 GMT</pubDate>
+    <description>Build an AI agent approval workflow that keeps agents fast: three-tier approvals, recorded decisions, fail-closed blocks, and per-plan spend ceilings.</description>
   </item>
   <item>
     <title>What Belongs in an AI Agent Policy: The Template Pack Checklist — ghostcorpnet</title>
