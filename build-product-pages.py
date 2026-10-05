@@ -398,6 +398,7 @@ PAGE = """<!DOCTYPE html>
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0f0e0d">
 <title>{title60} — ghostcorpnet</title>
 <meta name="description" content="{meta}">
 <link rel="canonical" href="{page_url}">
