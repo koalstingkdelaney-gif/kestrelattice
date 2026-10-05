@@ -133,18 +133,24 @@ try{if(localStorage.getItem('kestrelattice_admin')!=='1'){gtag('js', new Date())
   .share-x:hover,.share-li:hover{border-color:var(--accent-dim);color:var(--text);text-decoration:none}
   .copy-link{position:relative;border:1px solid var(--line);background:var(--panel);color:var(--muted);border-radius:999px;padding:8px 16px;min-height:44px;font-size:.82rem;cursor:pointer;font-family:inherit}
   .copy-link:hover{border-color:var(--accent-dim);color:var(--text)}
-  .toc{border:1px solid var(--line);border-radius:var(--radius);background:var(--panel);padding:14px 20px;margin:0 0 20px;max-width:720px}
-  .toc p{font-size:.72rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);margin:0 0 8px}
-  .toc ul{list-style:none;margin:0;padding:0;display:grid;gap:4px}
-  .toc li{font-size:.9rem}
-  .toc a{color:var(--muted)}
-  .toc a:hover{color:var(--accent-bright)}
+  .toc-details{border:1px solid var(--line);border-radius:var(--radius);background:var(--panel);padding:0 20px;margin:0 0 20px;max-width:720px}
+  .toc-details[open]{padding-bottom:14px}
+  .toc-details summary{font-size:.72rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);cursor:pointer;min-height:44px;display:flex;align-items:center;gap:8px;list-style:none;padding:12px 0 4px}
+  .toc-details[open] summary{padding-bottom:8px}
+  .toc-details summary::-webkit-details-marker{display:none}
+  .toc-details summary::marker{content:""}
+  .toc-details summary::after{content:"\25B8";font-size:.9rem;color:var(--accent-bright);transition:transform .15s ease}
+  .toc-details[open] summary::after{transform:rotate(90deg)}
+  .toc-details ul{list-style:none;margin:0;padding:0;display:grid;gap:4px}
+  .toc-details li{font-size:.9rem}
+  .toc-details a{color:var(--muted)}
+  .toc-details a:hover{color:var(--accent-bright)}
   .copy-link.copied::after{content:"Copied";position:absolute;top:-30px;left:50%;transform:translateX(-50%);background:var(--accent);color:var(--accent-ink);font-size:.72rem;font-weight:700;padding:3px 10px;border-radius:6px;white-space:nowrap}
   @media (prefers-reduced-motion:reduce){.copy-link.copied::after{transition:none}}
   .skip{position:absolute;left:-9999px;top:0;background:var(--accent);color:var(--accent-ink);padding:10px 18px;font-weight:700;z-index:200;border-radius:0 0 8px 0}
   .skip:focus{left:0}
 @media print{
-header.site,footer.site,nav,.nav-toggle,#backtop,.sticky-buy,.reading-progress,.toc,.share,.related,.progress-wrap{display:none!important}
+header.site,footer.site,nav,.nav-toggle,#backtop,.sticky-buy,.reading-progress,.toc,.toc-details,.share,.related,.progress-wrap{display:none!important}
 :root{--bg:#fff;--bg-soft:#fff;--panel:#fff;--panel2:#fff;--text:#141414;--muted:#333;--faint:#555;--line:#d4d4d4;--line-soft:#e8e8e8}
 body{background:#fff!important;color:#141414!important}
 .wrap{max-width:none!important}
@@ -178,10 +184,10 @@ a{color:#8a3a20!important;text-decoration:underline!important}}
   </div>
   <nav class="article-back article-back-top" aria-label="Article navigation" style="max-width:720px;margin:0 auto 20px"><a href="../articles/" aria-label="All articles" style="color:var(--accent)">&larr; All articles</a></nav>
 
-  <nav class="toc" aria-label="Table of contents">
-    <p>On this page</p>
+  <details class="toc-details" open aria-label="Table of contents">
+    <summary>On this page</summary>
     <ul id="toc-list"></ul>
-  </nav>
+  </details>
 
   <article>
 {{BODY_HTML}}
@@ -198,6 +204,10 @@ a{color:#8a3a20!important;text-decoration:underline!important}}
 <script>
 /* TOC: build the 'On this page' list from section anchors inside the article */
 (function(){var ul=document.getElementById('toc-list');if(!ul)return;ul.parentElement.style.display='none';var h2s=document.querySelectorAll('article h2[id]');for(var i=0;i<h2s.length;i++){var h=h2s[i],t=(h.textContent||'').replace(/¶/g,'').trim();if(!t)continue;var li=document.createElement('li'),a=document.createElement('a');a.href='#'+h.id;a.textContent=t;li.appendChild(a);ul.appendChild(li);}if(ul.children.length)ul.parentElement.style.display='';})();
+</script>
+<script>
+/* TOC: collapse the TOC <details> on narrow viewports (open on desktop, collapsed on <=720px) */
+(function(){var d=document.querySelector('details.toc-details');if(!d||!window.matchMedia)return;var mq=matchMedia('(max-width:720px)');function apply(){if(mq.matches){d.removeAttribute('open');}else{d.setAttribute('open','');}}apply();if(mq.addEventListener){mq.addEventListener('change',apply);}else if(mq.addListener){mq.addListener(apply);}})();
 </script>
 
 {{RELATED_BLOCK}}
