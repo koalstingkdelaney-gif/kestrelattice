@@ -4604,7 +4604,7 @@ nav.main a[aria-current="page"]::after{transform:scaleX(1)}
 .chip.active{background:var(--accent);border-color:var(--accent);color:var(--accent-ink);font-weight:700}.chip:active{transform:scale(.96)}
 .chip-count{font-size:.72em;color:var(--muted);opacity:.85;margin-left:2px;font-weight:400;letter-spacing:0}
 .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:24px;padding:8px 0 64px;list-style:none;margin:0}
-.card{background:linear-gradient(180deg,var(--panel),var(--bg-soft));border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;display:flex;flex-direction:column;content-visibility:auto;contain-intrinsic-size:auto 480px;transition:border-color .18s var(--ease),transform .18s var(--ease),box-shadow .18s var(--ease)}.card{position:relative}.card>a:first-of-type::after{content:"";position:absolute;inset:0}.card .row .btn{position:relative;z-index:1}
+.card{background:linear-gradient(180deg,var(--panel),var(--bg-soft));border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;display:flex;flex-direction:column;content-visibility:auto;contain-intrinsic-size:auto 480px;transition:border-color .18s var(--ease),transform .18s var(--ease),box-shadow .18s var(--ease)}.card{position:relative}.card>a:first-of-type::after{content:"";position:absolute;inset:0}.card .row .btn{position:relative;z-index:1}@media (prefers-reduced-motion: no-preference){.card{view-transition-name:card}}
 @media (hover:hover) and (pointer:fine){
 .card:hover{border-color:var(--accent-dim);transform:translateY(-3px);box-shadow:0 14px 34px rgba(0,0,0,.4)}
 }
@@ -4676,7 +4676,7 @@ header.site,footer.site,nav,.nav-toggle,#backtop,.sticky-buy,.filters,.proof-str
 body{background:#fff!important;color:#141414!important}
 .wrap{max-width:none!important}
 a{color:#8a3a20!important;text-decoration:underline!important}}
-a,button,summary,[role="button"]{touch-action:manipulation}</style>
+</style>
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -6667,7 +6667,8 @@ const syncHash=()=>{try{const p=new URLSearchParams();if(activeTag)p.set('tag',a
 const REVEAL_STEP=40;let revealed=40;
 const isFiltering=()=>activeTag!==''||searchQ!==''||activePrice!==null;
 const updateShowMore=()=>{const sm=document.getElementById('show-more');if(!sm)return;const total=[...grid.querySelectorAll('.card')].length;const rest=total-revealed;const show=!isFiltering()&&rest>0;sm.classList.toggle('hidden',!show);if(show)sm.textContent='Show more ('+rest+' more)';};
-const applyFilters=()=>{const cards=[...grid.querySelectorAll('.card')];let vis=0;cards.forEach(c=>{const t=(c.dataset.tags||'').split('|').filter(Boolean);const okT=activeTag===''||t.includes(activeTag);const h2=c.querySelector('h2');const dsc=c.querySelector('.desc');const hay=((h2&&h2.textContent)||'')+' '+((dsc&&dsc.textContent)||'');const okQ=searchQ===''||hay.toLowerCase().includes(searchQ);const pr=parseFloat(c.dataset.price||'0');const okP=!activePrice||(pr>=activePrice.min&&pr<=activePrice.max);let show=okT&&okQ&&okP;if(show&&!isFiltering()){vis++;show=vis<=revealed;}c.classList.toggle('hidden',!show)});updateCount();updateShowMore();syncHash()};
+const vtApply=(fn)=>{if(document.startViewTransition&&!matchMedia('(prefers-reduced-motion: reduce)').matches){document.startViewTransition(()=>{fn()})}else{fn()}};
+const applyFilters=()=>{vtApply(()=>{const cards=[...grid.querySelectorAll('.card')];let vis=0;cards.forEach(c=>{const t=(c.dataset.tags||'').split('|').filter(Boolean);const okT=activeTag===''||t.includes(activeTag);const h2=c.querySelector('h2');const dsc=c.querySelector('.desc');const hay=((h2&&h2.textContent)||'')+' '+((dsc&&dsc.textContent)||'');const okQ=searchQ===''||hay.toLowerCase().includes(searchQ);const pr=parseFloat(c.dataset.price||'0');const okP=!activePrice||(pr>=activePrice.min&&pr<=activePrice.max);let show=okT&&okQ&&okP;if(show&&!isFiltering()){vis++;show=vis<=revealed;}c.classList.toggle('hidden',!show)})});updateCount();updateShowMore();syncHash()};
 const tagCounts={};[...grid.querySelectorAll('.card')].forEach(c=>{(c.dataset.tags||'').split('|').filter(Boolean).forEach(t=>{tagCounts[t]=(tagCounts[t]||0)+1})});
 const mk=(label,tag)=>{const b=document.createElement('button');b.className='chip'+(tag===activeTag?' active':'');b.textContent=label;b.setAttribute('aria-pressed',String(tag===activeTag));const n=tag===''?grid.querySelectorAll('.card').length:(tagCounts[tag]||0);if(tag===''){b.setAttribute('aria-label','Show all '+n+' products')}else{b.setAttribute('aria-label','Show '+n+' '+label+(n===1?'':'s'))}const badge=document.createElement('span');badge.className='chip-count';badge.setAttribute('aria-hidden','true');badge.textContent=' · '+n;b.appendChild(badge);b.onclick=()=>{activeTag=tag;document.querySelectorAll('.chip').forEach(x=>{x.classList.remove('active');x.setAttribute('aria-pressed','false')});b.classList.add('active');b.setAttribute('aria-pressed','true');applyFilters()};return b};
 filtersList.appendChild(mk('All',''));
