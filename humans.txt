@@ -1,0 +1,17 @@
+/* TEAM */
+  Site: ghostcorpnet — governed agent mesh
+  Location: https://koalstingkdelaney-gif.github.io/kestrelattice/
+  Contact: corpghost420@gmail.com
+  From: Ghost Corp brand studio — independent studio building self-serve digital governance products for AI agents.
+
+/* THANKS */
+  Free AI inference providers that power this studio's build pipeline:
+  Hugging Face, SambaNova, NVIDIA, Cohere, DeepSeek, Fireworks,
+  Together, Zhipu, SiliconFlow, Ollama, Pollinations.
+
+/* SITE */
+  Last update: 2026-10
+  Language: English
+  Doctype: HTML5
+  IDE/Tools: AI-assisted build
+  Standards: HTML5, CSS, RSS, sitemap.xml, humans.txt, llms.txt
