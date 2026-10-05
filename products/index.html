@@ -4573,7 +4573,7 @@ html{scrollbar-gutter:stable}
 html,body{overflow-x:clip}
 ::selection{background:var(--accent);color:var(--accent-ink)}
 html{scroll-behavior:smooth}
-body{background:radial-gradient(900px 420px at 50% -6%, rgba(224,122,95,.06), transparent 62%),var(--bg);color:var(--text);font-family:ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;line-height:1.6;-webkit-font-smoothing:antialiased}
+body{background:radial-gradient(900px 420px at 50% -6%, rgba(224,122,95,.06), transparent 62%),var(--bg);color:var(--text);font-family:ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;line-height:1.6;-webkit-font-smoothing:antialiased;-webkit-tap-highlight-color:rgba(224,122,95,.25)}
 .wrap{max-width:1040px;margin:0 auto;padding:0 24px}
 a{color:var(--accent);text-decoration:none;transition:color .16s var(--ease)}
 a:hover{text-decoration:underline}
@@ -4608,6 +4608,7 @@ nav.main a[aria-current="page"]::after{transform:scaleX(1)}
 @media (hover:hover) and (pointer:fine){
 .card:hover{border-color:var(--accent-dim);transform:translateY(-3px);box-shadow:0 14px 34px rgba(0,0,0,.4)}
 }
+.card:focus-within{outline:3px solid var(--accent-bright,#f09474);outline-offset:3px;border-radius:4px}
 .card img{transition:transform .3s ease}
 @media (hover:hover) and (pointer:fine){
 .card:hover img{transform:scale(1.05)}
@@ -6643,7 +6644,7 @@ Operational governance frameworks, compliance checklists, and template text. Not
 </main>
 <footer class="site"><div class="wrap">
 <span>© <span id="yr">2026</span> GhostCorp · ghostcorpnet · An independent studio</span>
-<span><a href="mailto:corpghost420@gmail.com">Contact</a><a href="../articles/">Articles</a><a href="../changelog.html">Changelog · Oct 2026</a><a href="../brands/">Stores</a><a href="../ecosystem/">Ecosystem</a><a href="../directory/">Directory</a><a href="../build/">Build</a><a href="../sitemap.xml">Sitemap</a><a href="../admin-login.html" rel="nofollow">Admin</a></span>
+<span><a href="mailto:corpghost420@gmail.com">Contact</a><a href="../articles/">Articles</a><a href="../changelog.html">Changelog · Oct 2026</a><a href="../brands/">Stores</a><a href="../ecosystem/">Ecosystem</a><a href="../directory/">Directory</a><a href="../build/">Build</a><a href="../sitemap.xml">Sitemap</a><a href="../accessibility.html">Accessibility</a><a href="../admin-login.html" rel="nofollow">Admin</a></span>
 </div></footer>
 <script>
 const grid=document.getElementById('grid'),filters=document.getElementById('filters'),rc=document.getElementById('result-count');const filtersList=document.getElementById('filters-list');
