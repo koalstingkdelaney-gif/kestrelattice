@@ -84,6 +84,7 @@ try{if(localStorage.getItem('kestrelattice_admin')!=='1'){gtag('js', new Date())
   :root{color-scheme:dark;--bg:#121212; --panel:#1c1a18; --line:#332e26; --text:#e8e2d8;
         --muted:#9a917f; --accent:#e07a5f; --accent-dim:#b9634b;}
   *{margin:0;padding:0;box-sizing:border-box}
+  .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
   body{background:var(--bg);color:var(--text);
        font-family:ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
        line-height:1.7}
@@ -172,7 +173,7 @@ try{if(localStorage.getItem('kestrelattice_admin')!=='1'){gtag('js', new Date())
   <nav aria-label="Breadcrumb" class="crumb"><ol><li><a href="../../">Home</a></li><li><a id="pdp-back" href="../../products/" aria-keyshortcuts="Escape" aria-label="Back to all 323 products">Catalog</a><kbd class="esc-hint">Esc</kbd></li><li aria-current="page">AI Use-Case Registry</li></ol></nav>
 
   <div class="hero" itemscope itemtype="https://schema.org/Product">
-    <picture><source type="image/webp" srcset="../../assets/covers/lyeqae.webp"><img itemprop="image" src="../../assets/covers/lyeqae.png" alt="AI Use-Case Registry cover" fetchpriority="high" decoding="async" width="1200" height="1600"></picture>
+    <figure class="pdp-cover"><picture><source type="image/webp" srcset="../../assets/covers/lyeqae.webp"><img itemprop="image" src="../../assets/covers/lyeqae.png" alt="AI Use-Case Registry cover" fetchpriority="high" decoding="async" width="1200" height="1600"></picture><figcaption class="sr-only">AI Use-Case Registry — Studio Edition cover</figcaption></figure>
     <div>
       <h1 itemprop="name">AI Use-Case Registry</h1>
       <p class="tagline">Registry template for inventorying every AI use case with risk tier and owner.</p>

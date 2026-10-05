@@ -438,6 +438,7 @@ try{{if(localStorage.getItem('kestrelattice_admin')!=='1'){{gtag('js', new Date(
   :root{{color-scheme:dark;--bg:#121212; --panel:#1c1a18; --line:#332e26; --text:#e8e2d8;
         --muted:#9a917f; --accent:#e07a5f; --accent-dim:#b9634b;}}
   *{{margin:0;padding:0;box-sizing:border-box}}
+  .sr-only{{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}}
   body{{background:var(--bg);color:var(--text);
        font-family:ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
        line-height:1.7}}
@@ -727,6 +728,11 @@ def main():
         # WebP-first <picture> (mirrors catalog pattern); webp source only when the file exists so no 404s.
         cover_img = (f'<picture><source type="image/webp" srcset="../../assets/covers/{pr["gid"]}.webp">{cover_fallback}</picture>'
                      if cover_fallback and os.path.isfile(webp_path) else cover_fallback)
+        # PDP cover in <figure> + screen-reader <figcaption> (accessibility): names product + edition; alt text unchanged.
+        if cover_img:
+            _edition = "Studio Pack" if pr.get("is_pack") else "Studio Edition"
+            cover_img = (f'<figure class="pdp-cover">{cover_img}'
+                         f'<figcaption class="sr-only">{esc(pr["title"])} \u2014 {_edition} cover</figcaption></figure>')
         og_dims = (f'<meta property="og:image:width" content="{dims[0]}">\n'
                    f'<meta property="og:image:height" content="{dims[1]}">') if dims else ""
         if is_live:
