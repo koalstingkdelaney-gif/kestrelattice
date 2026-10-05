@@ -2,7 +2,7 @@
 <html lang="en" dir="ltr">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="viewport" content="width=device-width, initial-scale=1, interactive-widget=resizes-content, viewport-fit=cover">
 <title>AI Agent Governance Products — Catalog | ghostcorpnet</title>
 <meta name="description" content="Every ghostcorpnet self-serve product: agent governance playbooks, checklists, runbooks, kits, and working code. Instant download.">
 <meta name="theme-color" content="#0f0e0d">
@@ -4612,6 +4612,12 @@ nav.main a[aria-current="page"]::after{transform:scaleX(1)}
 .card img{transition:transform .3s ease}
 @media (hover:hover) and (pointer:fine){
 .card:hover img{transform:scale(1.05)}
+/* SU-products-card-subgrid: align card internals across each grid row via subgrid so price/CTA baselines line up */
+@supports (grid-template-rows:subgrid){.card{display:grid;grid-template-rows:subgrid;grid-row:span 2}.card>a{display:block;min-width:0}}
+/* SU-products-card-codebadge: visually distinguish CODE-download cards from PDF cards */
+.card:has(.codebadge){border-color:var(--accent-dim);box-shadow:inset 0 0 0 1px var(--accent-dim)}
+.card:has(.codebadge):hover{border-color:var(--accent-bright);box-shadow:inset 0 0 0 1px var(--accent-bright),0 14px 34px rgba(0,0,0,.4)}
+.card:has(.codebadge) .badge-row{background:linear-gradient(90deg,transparent,var(--accent-soft),transparent);border-radius:6px}
 }
 @media (prefers-reduced-motion:reduce){.card:hover img{transform:none}}
 .card img{width:100%;aspect-ratio:4/3;object-fit:cover;display:block;background:#0b0a09}
@@ -6644,7 +6650,7 @@ Operational governance frameworks, compliance checklists, and template text. Not
 </main>
 <footer class="site"><div class="wrap">
 <span>© <span id="yr">2026</span> GhostCorp · ghostcorpnet · An independent studio</span>
-<span><a href="mailto:corpghost420@gmail.com">Contact</a><a href="../articles/">Articles</a><a href="../changelog.html">Changelog · Oct 2026</a><a href="../brands/">Stores</a><a href="../ecosystem/">Ecosystem</a><a href="../directory/">Directory</a><a href="../build/">Build</a><a href="../sitemap.xml">Sitemap</a><a href="../accessibility.html">Accessibility</a><a href="../admin-login.html" rel="nofollow">Admin</a></span>
+<span><a href="mailto:corpghost420@gmail.com">Contact</a><a href="../articles/">Articles</a><a href="../changelog.html">Changelog · Oct 2026</a><a href="../brands/">Stores</a><a href="../ecosystem/">Ecosystem</a><a href="../directory/">Directory</a><a href="../build/">Build</a><a href="../sitemap.xml">Sitemap</a><a href="../sitemap.html">Site index</a><a href="../accessibility.html">Accessibility</a><a href="../admin-login.html" rel="nofollow">Admin</a></span>
 </div></footer>
 <script>
 const grid=document.getElementById('grid'),filters=document.getElementById('filters'),rc=document.getElementById('result-count');const filtersList=document.getElementById('filters-list');
