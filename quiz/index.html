@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, interactive-widget=resizes-content">
 <meta name="theme-color" content="#0f0e0d">
 <title>What's Your Agent Risk Tier? — ghostcorpnet</title>
 <meta name="description" content="Answer 5 questions and get your AI agent risk tier plus the exact governance products that fix your biggest gaps. Free, 60 seconds.">
@@ -181,26 +181,37 @@ function render(){
   const q = Q[qi];
   var sel = -1;
   qbox.innerHTML = '<fieldset class="q"><legend><h3>'+(qi+1)+'. '+q.t+'</h3></legend>'+
-    q.o.map((o,i)=>'<button class="opt" type="button" data-i="'+i+'">'+o[0]+'</button>').join('')+
+    '<div role="radiogroup" aria-label="Question '+(qi+1)+': '+q.t.replace(/'/g,"&#39;")+'">'+
+    q.o.map((o,i)=>'<button class="opt" type="button" role="radio" aria-checked="false" data-i="'+i+'">'+o[0]+'</button>').join('')+'</div>'+
     '<button class="opt qnext" id="qnext" type="button" hidden>Next &#8594;</button></fieldset>';
   var nextBtn = qbox.querySelector('#qnext');
-  qbox.querySelectorAll('.opt[data-i]').forEach(b=>b.onclick=()=>{
-    qbox.querySelectorAll('.opt[data-i]').forEach(x=>x.classList.remove('sel'));
-    b.classList.add('sel');
+  var opts = Array.prototype.slice.call(qbox.querySelectorAll('.opt[data-i]'));
+  opts.forEach(b=>b.onclick=()=>{
+    opts.forEach(x=>{x.classList.remove('sel');x.setAttribute('aria-checked','false');});
+    b.classList.add('sel');b.setAttribute('aria-checked','true');
     sel = +b.dataset.i;
     nextBtn.hidden = false;
     nextBtn.focus();
+  });
+  /* SU-quiz-radiogroup: arrow-key navigation within the radio group */
+  qbox.querySelector('[role="radiogroup"]').addEventListener('keydown',function(e){
+    var cur = opts.indexOf(document.activeElement), n = -1;
+    if(e.key==='ArrowDown'||e.key==='ArrowRight') n = (cur+1+opts.length)%opts.length;
+    else if(e.key==='ArrowUp'||e.key==='ArrowLeft') n = (cur-1+opts.length)%opts.length;
+    else if((e.key===' '||e.key==='Enter')&&cur>=0){e.preventDefault();opts[cur].click();return;}
+    if(n>=0){e.preventDefault();opts[n].focus();}
   });
   nextBtn.onclick=()=>{
     if(sel < 0) return;
     const v = q.o[sel][1];
     if(typeof v === 'number') score += v; else worry = v;
-    qi++; render();
+    qi++; saveProgress(); render();
   };
   var h2 = qbox.querySelector('h3');
   if(h2){ h2.setAttribute('tabindex','-1'); h2.focus(); }
 }
 function restart(){
+  clearProgress();
   qi = 0; score = 0; worry = "start";
   document.getElementById('result').style.display='none';
   document.getElementById('quiz').style.display='block';
@@ -209,12 +220,18 @@ function restart(){
   var h = document.querySelector('#qbox h3');
   if(h){ h.setAttribute('tabindex','-1'); h.focus(); }
 }
+/* SU-quiz-progress-localstorage: persist quiz state so a refresh resumes mid-quiz */
+var QUIZ_KEY='ghostcorpnet-quiz-progress';
+function saveProgress(){try{localStorage.setItem(QUIZ_KEY,JSON.stringify({qi:qi,score:score,worry:worry}));}catch(e){}}
+function clearProgress(){try{localStorage.removeItem(QUIZ_KEY);}catch(e){}}
+function loadProgress(){try{var r=localStorage.getItem(QUIZ_KEY);return r?JSON.parse(r):null;}catch(e){return null;}}
 document.addEventListener('DOMContentLoaded', function(){
   var btn = document.getElementById('share-result');
   if(!btn) return;
   btn.addEventListener('click', function(){
     var tierText = (document.getElementById('tier').textContent || '').trim();
-    var text = 'My AI agent governance risk tier: ' + tierText + ' — take the 2-minute quiz: https://koalstingkdelaney-gif.github.io/kestrelattice/quiz/';
+    var tierIdx = (score<=2?0:score<=5?1:score<=8?2:3);
+    var text = 'My AI agent governance risk tier: ' + tierText + ' — take the 2-minute quiz: https://koalstingkdelaney-gif.github.io/kestrelattice/quiz/?tier=' + tierIdx;
     function done(){
       var orig = 'Share my result';
       btn.textContent = 'Copied ✓';
@@ -238,6 +255,7 @@ document.addEventListener('DOMContentLoaded', function(){
   });
 });
 function finish(tierOverride){
+  clearProgress();
   document.getElementById('quiz').style.display='none';
   const r = document.getElementById('result');
   r.style.display='block';
@@ -257,8 +275,27 @@ function finish(tierOverride){
   if(typeof gtag==='function') gtag('event','quiz_complete',{tier:TIERS[tier].t});
   try{history.replaceState(null,'','#result='+tier);}catch(e){}
 }
-// Deep-linkable results: #result=<tier index> restores that result on load.
-(function(){var m=/^#result=([0-3])$/.exec(location.hash||'');if(m){qi=Q.length;finish(+m[1]);}else{render();}})();
+// Deep-linkable results: ?tier=<0-3> (or legacy #result=<tier index>) renders that result on load.
+// SU-quiz-progress-localstorage: saved mid-quiz state offers a "Resume where you left off?" affordance.
+(function(){
+  var qs=/[?&]tier=([0-3])(?:&|$)/.exec(location.search||'');
+  var m=/^#result=([0-3])$/.exec(location.hash||'');
+  if(qs){qi=Q.length;finish(+qs[1]);return;}
+  if(m){qi=Q.length;finish(+m[1]);return;}
+  var saved=loadProgress();
+  if(saved&&saved.qi>0&&saved.qi<Q.length){
+    var box=document.getElementById('qbox'),p=document.createElement('p');
+    p.style.textAlign='center';p.style.margin='24px 0';
+    p.innerHTML='<span style="color:var(--muted)">You left off at question '+(saved.qi+1)+' of '+Q.length+'.</span><br>';
+    var b=document.createElement('button');b.type='button';b.className='opt';
+    b.style.cssText='max-width:280px;margin:12px auto 0';b.textContent='Resume where you left off';
+    b.onclick=function(){qi=saved.qi;score=saved.score;worry=saved.worry;p.remove();render();};
+    var c=document.createElement('button');c.type='button';c.className='opt';
+    c.style.cssText='max-width:280px;margin:8px auto 0';c.textContent='Start over';
+    c.onclick=function(){clearProgress();p.remove();render();};
+    p.appendChild(b);p.appendChild(c);box.appendChild(p);
+  }else{render();}
+})();
 </script>
 </body>
 </html>
