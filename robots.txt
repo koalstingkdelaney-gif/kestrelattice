@@ -2,3 +2,6 @@ User-agent: *
 Allow: /
 
 Sitemap: https://koalstingkdelaney-gif.github.io/kestrelattice/sitemap-index.xml
+
+# AI-training: see /llms.txt for the content-use policy
+# llms.txt: https://koalstingkdelaney-gif.github.io/kestrelattice/llms.txt
