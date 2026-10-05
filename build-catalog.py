@@ -87,6 +87,7 @@ __ITEMLIST__
 <style>
 :root{color-scheme:dark;--bg:#0f0e0d;--bg-soft:#141210;--panel:#1a1714;--panel2:#211c17;--line:#2c261e;--text:#f1ebdd;--muted:#a89d89;--faint:#978b74;--accent:#e07a5f;--accent-bright:#f09474;--accent-dim:#c06a4e;--accent-ink:#1a0f08;--accent-soft:rgba(224,122,95,.1);--radius:12px;--radius-sm:8px;--ease:cubic-bezier(.2,.7,.25,1)}@media (prefers-contrast:more){:root{--muted:#d8cfbc;--faint:#c0b59e}}
 *{margin:0;padding:0;box-sizing:border-box}
+html{scrollbar-gutter:stable}
 html,body{overflow-x:clip}
 ::selection{background:var(--accent);color:var(--accent-ink)}
 html{scroll-behavior:smooth}
@@ -153,7 +154,7 @@ nav.main a[aria-current="page"]::after{transform:scaleX(1)}
 .card picture{display:block}
 .card h2{font-size:.98rem;line-height:1.35;font-weight:700;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}.card a h2{text-decoration-thickness:1px;text-underline-offset:3px}
 .price{color:var(--text);font-weight:800;font-variant-numeric:tabular-nums}
-.card p.desc{color:var(--muted);font-size:.85rem;flex:0 1 auto;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+.card p.desc{color:var(--muted);font-size:.85rem;flex:0 1 auto;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;text-wrap:pretty}
 .card p.price{margin-top:auto;padding-top:6px}
 .card .row{display:flex;gap:10px;padding:0 16px 16px}
 .btn{display:inline-block;background:linear-gradient(180deg,var(--accent-bright),var(--accent));color:var(--accent-ink);font-weight:700;padding:10px 18px;border-radius:var(--radius-sm);text-align:center;font-size:.88rem;flex:1;transition:transform .16s var(--ease)}
@@ -290,7 +291,7 @@ b.addEventListener('click',function(){window.scrollTo({top:0,behavior:'smooth'})
 CARD = """<li class="card{reveal}" data-tags="{tags}" data-price="{price_num}" data-date="{pdate}">
 <a href="{slug}/" style="text-decoration:none;color:inherit;display:block" aria-label="{title} — {price_label}"><picture><source type="image/webp" srcset="../assets/covers/{pid}.webp"><img src="../assets/covers/{pid}.png" alt="{title} cover" {img_attrs} sizes="(max-width:640px) 100vw, (max-width:1100px) 50vw, 320px"></picture>
 <div class="body"><p class="badge-row">{badge_row}</p><h2 translate="no">{title}</h2><p class="desc">{tagline}</p><p class="price"><span class="visually-hidden">USD </span>{price_html}</p></div></a>
-<div class="row"><a class="btn" href="{url}" target="_blank" rel="noopener">Get it<span class="visually-hidden">(opens in new tab)</span></a><a class="btn ghost" href="{slug}/" aria-label="Details: {title}">Details</a></div>
+<div class="row"><a class="btn" href="{url}" target="_blank" rel="noopener" referrerpolicy="strict-origin-when-cross-origin">Get it<span class="visually-hidden">(opens in new tab)</span></a><a class="btn ghost" href="{slug}/" aria-label="Details: {title}">Details</a></div>
 </li>
 """
 
