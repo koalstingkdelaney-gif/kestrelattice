@@ -103,3 +103,4 @@ pre{max-width:100%;overflow-x:auto;-webkit-overflow-scrolling:touch}
   a:focus-visible,button:focus-visible,summary:focus-visible,.btn:focus-visible,.chip:focus-visible,nav.main a:focus-visible{outline:3px solid ButtonText;transform:none!important;box-shadow:none!important}
   .proof-strip .ok,.price,.go{color:ButtonText}
 }
+@media (prefers-reduced-motion:no-preference){details.faq{interpolate-size:allow-keywords}details.faq::details-content{block-size:0;overflow:hidden;transition:content-visibility .3s ease allow-discrete,block-size .3s ease}details.faq[open]::details-content{block-size:auto}}

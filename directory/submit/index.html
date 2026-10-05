@@ -191,6 +191,14 @@ input:focus-visible,select:focus-visible,textarea:focus-visible{outline:2px soli
 
     <button class="btn" type="submit" id="go">Submit for review</button>
     <div id="status" role="status" tabindex="-1"></div>
+    <section id="what-next" hidden aria-label="What happens next">
+      <h2>What happens next</h2>
+      <ol class="checklist">
+        <li><span class="n">1</span><span><b>Human review</b> — we review every submission for quality and rule compliance.</span></li>
+        <li><span class="n">2</span><span><b>Email reply</b> — we reply to your contact email, usually within a few days.</span></li>
+        <li><span class="n">3</span><span><b>Listing goes live</b> — if approved, your pack appears in the directory.</span></li>
+      </ol>
+    </section>
   </form>
 
   <p class="fine">By submitting you confirm the pack is yours to list and you accept
@@ -268,6 +276,7 @@ form.addEventListener("submit", async function(ev){
         "If it's approved, it will appear in the directory within a few days. " +
         "Reference: " + d.id;
       status.focus();
+      document.getElementById("what-next").hidden = false;
       form.reset();
     } else {
       throw new Error((d.fields || []).join(", ") || d.error || "server error");
@@ -276,6 +285,7 @@ form.addEventListener("submit", async function(ev){
     status.className = "bad";
     status.textContent = "Submission failed: " + e.message + ". Please try again in a moment.";
     status.focus();
+    document.getElementById("what-next").hidden = true;
   }
   go.disabled = false; go.textContent = "Submit for review"; go.removeAttribute("aria-busy");
 });
