@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <link rel="preconnect" href="https://gumroad.com">
 <link rel="preconnect" href="https://www.googletagmanager.com">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, interactive-widget=resizes-content">
 <title>AI Agent Incident Response: The Complete Runbook</title>
 <meta name="description" content="Build a robust AI agent incident response plan to stop runaway loops, prompt injections, and unauthorized actions before they break production.">
 <meta name="robots" content="index,follow,max-image-preview:large">
@@ -134,6 +134,8 @@ try{if(localStorage.getItem('kestrelattice_admin')!=='1'){gtag('js', new Date())
   .toc-details summary{font-size:.72rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);cursor:pointer;min-height:44px;display:flex;align-items:center;gap:8px;list-style:none;padding:12px 0 4px}
   .toc-details[open] summary{padding-bottom:8px}
   .toc-details summary::-webkit-details-marker{display:none}
+  /* SU-article-sticky-toc: keep the "On this page" TOC visible while scrolling (desktop only) */
+  @media(min-width:900px){.toc-details{position:sticky;top:76px;z-index:60;max-height:calc(100vh - 96px);overflow:auto}}
   .toc-details summary::marker{content:""}
   .toc-details summary::after{content:"\25B8";font-size:.9rem;color:var(--accent-bright);transition:transform .15s ease}
   .toc-details[open] summary::after{transform:rotate(90deg)}
