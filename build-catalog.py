@@ -102,6 +102,8 @@ header.site .wrap{display:flex;align-items:center;justify-content:space-between;
 nav.main{display:flex;align-items:center;gap:20px}
 nav.main a{color:var(--muted);font-size:.88rem;font-weight:500}
 nav.main a:hover{color:var(--accent-bright)}
+nav.main a[aria-current="page"]{color:var(--accent-bright)}
+nav.main a[aria-current="page"]::after{transform:scaleX(1)}
 .hero{padding:44px 0 8px;text-align:center}
 .hero h1{font-size:clamp(1.7rem,3.4vw + .8rem,2.4rem);font-weight:800;letter-spacing:-.02em;margin-bottom:10px}
 .lede{color:var(--muted);max-width:620px;margin:0 auto;font-size:.98rem}
@@ -119,9 +121,13 @@ nav.main a:hover{color:var(--accent-bright)}
 .chip.active{background:var(--accent);border-color:var(--accent);color:var(--accent-ink);font-weight:700}.chip:active{transform:scale(.96)}\n.chip-count{font-size:.72em;color:var(--muted);opacity:.85;margin-left:2px;font-weight:400;letter-spacing:0}
 .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:24px;padding:8px 0 64px;list-style:none;margin:0}
 .card{background:linear-gradient(180deg,var(--panel),var(--bg-soft));border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;display:flex;flex-direction:column;content-visibility:auto;contain-intrinsic-size:auto 480px;transition:border-color .18s var(--ease),transform .18s var(--ease),box-shadow .18s var(--ease)}.card{position:relative}.card>a:first-of-type::after{content:"";position:absolute;inset:0}.card .row .btn{position:relative;z-index:1}
+@media (hover:hover) and (pointer:fine){
 .card:hover{border-color:var(--accent-dim);transform:translateY(-3px);box-shadow:0 14px 34px rgba(0,0,0,.4)}
+}
 .card img{transition:transform .3s ease}
+@media (hover:hover) and (pointer:fine){
 .card:hover img{transform:scale(1.05)}
+}
 @media (prefers-reduced-motion:reduce){.card:hover img{transform:none}}
 .card img{width:100%;aspect-ratio:4/3;object-fit:cover;display:block;background:#0b0a09}
 .card .body{padding:16px;display:flex;flex-direction:column;gap:7px;flex:1}
@@ -188,7 +194,7 @@ a{color:#8a3a20!important;text-decoration:underline!important}}
 <a class="logo" href="../">
 <svg width="24" height="24" viewBox="0 0 26 26" fill="none" aria-hidden="true" focusable="false"><circle cx="5" cy="6" r="2.4" fill="#e07a5f"/><circle cx="21" cy="6" r="2.4" fill="#e07a5f"/><circle cx="13" cy="13" r="2.4" fill="#e07a5f"/><circle cx="5" cy="20" r="2.4" fill="#e07a5f"/><circle cx="21" cy="20" r="2.4" fill="#e07a5f"/><path d="M6.6 7.4L11.2 11.8M19.4 7.4L14.8 11.8M6.6 18.6L11.2 14.2M19.4 18.6L14.8 14.2" stroke="#e07a5f" stroke-width="1.4"/></svg>
 ghostcorpnet</a>
-<nav class="main" aria-label="Primary"><a href="../">Home</a><a href="../brands/">Stores</a><a href="../ecosystem/">Ecosystem</a><a href="../directory/">Directory</a><a href="../build/">Build</a><a href="../articles/">Articles</a><a href="../changelog.html">Changelog</a><a href="../#faq">FAQ</a></nav>
+<nav class="main" aria-label="Primary"><a href="./" aria-current="page">Catalog</a><a href="../">Home</a><a href="../brands/">Stores</a><a href="../ecosystem/">Ecosystem</a><a href="../directory/">Directory</a><a href="../build/">Build</a><a href="../articles/">Articles</a><a href="../changelog.html">Changelog</a><a href="../#faq">FAQ</a></nav>
 </div></header>
 <main id="main" class="catalog" tabindex="-1">
 <div class="wrap hero">
