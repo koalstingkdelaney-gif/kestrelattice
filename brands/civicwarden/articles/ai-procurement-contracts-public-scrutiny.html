@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="utf-8">
+<link rel="preconnect" href="https://gumroad.com">
+<link rel="preconnect" href="https://www.googletagmanager.com">
+<meta name="viewport" content="width=device-width, initial-scale=1, interactive-widget=resizes-content, viewport-fit=cover">
+<title>Writing AI procurement contracts that survive public scrutiny — ghostcorpnet</title>
+<meta name="description" content="Contract clauses that keep public-sector AI accountable: audit rights, disclosure duties, bias testing, and FOIA-ready documentation. From CivicWarden.">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<meta name="theme-color" content="#121212">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="ghostcorpnet">
+<meta property="og:locale" content="en_US">
+<meta property="og:url" content="https://koalstingkdelaney-gif.github.io/kestrelattice/brands/civicwarden/articles/ai-procurement-contracts-public-scrutiny.html">
+<meta property="og:title" content="Writing AI procurement contracts that survive public scrutiny — ghostcorpnet">
+<meta property="og:description" content="Contract clauses that keep public-sector AI accountable: audit rights, disclosure duties, bias testing, and FOIA-ready documentation. From CivicWarden.">
+<meta property="og:image" content="https://koalstingkdelaney-gif.github.io/kestrelattice/assets/studio-edition-cover.jpg">
+<meta property="og:image:alt" content="Writing AI procurement contracts that survive public scrutiny - ghostcorpnet">
+<meta property="og:image:width" content="1600">
+<meta property="og:image:height" content="1600">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Writing AI procurement contracts that survive public scrutiny — ghostcorpnet">
+<meta name="twitter:description" content="Contract clauses that keep public-sector AI accountable: audit rights, disclosure duties, bias testing, and FOIA-ready documentation. From CivicWarden.">
+<meta name="twitter:image" content="https://koalstingkdelaney-gif.github.io/kestrelattice/assets/studio-edition-cover.jpg">
+<meta name="twitter:image:alt" content="Writing AI procurement contracts that survive public scrutiny - ghostcorpnet">
+<meta property="article:published_time" content="2026-10-07T00:00:00-04:00">
+<meta property="article:section" content="Articles">
+<meta property="article:author" content="ghostcorpnet Studio">
+<meta property="article:tag" content="agent governance">
+<meta property="article:tag" content="AI agent ops">
+<meta property="article:tag" content="compliance">
+
+<meta property="article:modified_time" content="2026-10-07T00:00:00-04:00">
+<link rel="canonical" href="https://koalstingkdelaney-gif.github.io/kestrelattice/brands/civicwarden/articles/ai-procurement-contracts-public-scrutiny.html">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Writing AI procurement contracts that survive public scrutiny",
+  "image": "https://koalstingkdelaney-gif.github.io/kestrelattice/assets/studio-edition-cover.jpg",
+  "description": "Contract clauses that keep public-sector AI accountable: audit rights, disclosure duties, bias testing, and FOIA-ready documentation. From CivicWarden.",
+  "datePublished": "2026-10-07T00:00:00-04:00",
+  "dateModified": "2026-10-07T00:00:00-04:00",
+  "author": {"@type": "Organization", "name": "ghostcorpnet", "sameAs": ["https://github.com/koalstingkdelaney-gif/kestrelattice", "https://www.tiktok.com/@ghostcorpnetai4", "https://koalstin.gumroad.com/"]},
+  "publisher": {"@type": "Organization", "name": "ghostcorpnet", "sameAs": ["https://github.com/koalstingkdelaney-gif/kestrelattice", "https://www.tiktok.com/@ghostcorpnetai4", "https://koalstin.gumroad.com/"]},
+  "mainEntityOfPage": "https://koalstingkdelaney-gif.github.io/kestrelattice/brands/civicwarden/articles/ai-procurement-contracts-public-scrutiny.html",
+  "speakableSpecification": {"@type": "SpeakableSpecification", "cssSelector": ["h1", "article p:first-of-type"]}
+}
+</script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-541TCHWW98"></script>
+<script>
+(function(){try{if(new URLSearchParams(location.search).get('admin')==='1'){localStorage.setItem('kestrelattice_admin','1');}}catch(e){}})();
+</script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+try{if(localStorage.getItem('kestrelattice_admin')!=='1'){gtag('js', new Date());gtag('config', 'G-541TCHWW98');}}catch(e){gtag('js', new Date());gtag('config', 'G-541TCHWW98');}
+</script>
+<style>
+  :root{color-scheme:dark;--bg:#0f0e0d; --bg-soft:#141210; --panel:#1a1714; --panel2:#211c17;
+        --line:#2c261e; --line-soft:#221d15; --text:#f1ebdd;
+        --muted:#a89d89; --faint:#978b74; --accent:#e07a5f;
+        --accent-bright:#f09474; --accent-dim:#c06a4e; --accent-ink:#1a0f08;
+        --accent-soft:rgba(224,122,95,.1); --radius:12px;
+        --ease:cubic-bezier(.2,.7,.25,1)}
+  @media (prefers-contrast:more){:root{--muted:#d8cfbc;--faint:#c0b59e}}
+  *{margin:0;padding:0;box-sizing:border-box}
+  ::selection{background:var(--accent);color:var(--accent-ink)}
+  html,body{overflow-x:clip}
+  html{scroll-behavior:smooth}html{scrollbar-gutter:stable}
+  body{background:var(--bg);color:var(--text);
+       font-family:ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+       line-height:1.7;-webkit-font-smoothing:antialiased}
+  a:focus-visible{outline:3px solid var(--accent-bright);outline-offset:3px;border-radius:4px}@media (prefers-reduced-motion:no-preference){a:focus-visible{transition:transform .15s ease}a:focus-visible{transform:scale(1.03)}}
+  header.site{border-bottom:1px solid var(--line);position:sticky;top:0;z-index:100;
+    background:rgba(15,14,13,.92);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
+  header.site .wrap{display:flex;align-items:center;justify-content:space-between;min-height:56px;max-width:1040px;margin:0 auto;padding:0 24px}
+  .brand{display:flex;align-items:center;gap:9px;font-weight:700;color:var(--text);text-decoration:none;font-size:1.02rem}
+  .brand:hover{color:var(--accent-bright)}
+  nav.main{display:flex;align-items:center;gap:20px}
+  nav.main a{color:var(--muted);font-size:.88rem;font-weight:500;text-decoration:none}
+  nav.main a:hover{color:var(--accent-bright)}
+  .wrap{max-width:68ch;margin:0 auto;padding:40px 24px 64px}
+  .crumb{color:var(--muted);font-size:.85rem;margin-bottom:24px}
+  .crumb a{color:var(--accent);text-decoration:none}
+  h1{font-size:clamp(1.6rem,3vw + .8rem,2.1rem);font-weight:800;letter-spacing:-.02em;line-height:1.25;margin-bottom:8px;text-wrap:balance}
+  .date{color:var(--muted);font-size:.85rem;margin-bottom:28px}
+  h2[id]{scroll-margin-top:84px}
+  .updated{color:var(--muted);font-size:.85rem;margin:-22px 0 6px}.reviewed{color:var(--faint);font-size:.85rem;margin:0 0 28px}
+  h2 .h2-anchor{opacity:0;color:var(--accent);margin-left:.35em;text-decoration:none;font-size:.75em;vertical-align:middle;transition:opacity .15s var(--ease)}
+  h2:hover .h2-anchor,h2:focus-within .h2-anchor,.h2-anchor:focus-visible{opacity:1}
+  h2 .h2-anchor:hover{text-decoration:none}
+  article h2{font-size:1.35rem;margin:32px 0 12px;letter-spacing:-.01em}
+  article h3{font-size:1.1rem;margin:24px 0 10px}
+  article p{margin:0 0 16px}
+  article ul,article ol{margin:0 0 16px 24px}
+  article li{margin:6px 0}
+  article a{color:var(--accent);text-decoration:underline;text-decoration-color:var(--accent-dim);text-underline-offset:3px;text-decoration-thickness:1px;transition:text-decoration-thickness .18s ease}article a:hover,article a:focus-visible{text-decoration-thickness:2px}
+  article a:hover{text-decoration-color:var(--accent-bright);color:var(--accent-bright)}
+  article code{background:var(--panel);padding:2px 6px;border-radius:4px;font-size:.88em}
+  article pre{background:var(--panel);border:1px solid var(--line);border-radius:8px;
+              padding:16px;overflow-x:auto;margin:0 0 16px}
+  article blockquote{border-left:3px solid var(--accent);padding-left:16px;
+                     color:var(--muted);margin:0 0 16px}
+  .related-articles{margin:40px 0}
+  .related-articles h2{font-size:1.25rem;margin-bottom:14px;letter-spacing:-.01em}
+  .related-articles ul{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+  .related-articles a{display:block;border:1px solid var(--line);border-radius:10px;padding:14px 18px;color:var(--text);text-decoration:none}
+  .related-articles a:hover{border-color:var(--accent-dim)}
+  .related-articles a:hover strong{color:var(--accent-bright)}
+  .related-articles .rd{color:var(--muted);font-size:.85rem;margin-top:4px}
+  .cta{background:linear-gradient(180deg,var(--panel2),var(--panel));border:1px solid var(--accent-dim);border-radius:var(--radius);
+       padding:28px;margin:40px 0;text-align:center;box-shadow:0 16px 40px rgba(0,0,0,.35)}
+  .cta h2{margin:0 0 10px;font-size:1.3rem}
+  .cta p{color:var(--muted);margin-bottom:18px}
+  .btn{display:inline-block;background:linear-gradient(180deg,var(--accent-bright),var(--accent));color:var(--accent-ink);font-weight:700;
+       padding:12px 28px;border-radius:8px;text-decoration:none;transition:transform .16s var(--ease)}
+  .btn:hover{transform:translateY(-2px)}
+  footer.site{border-top:1px solid var(--line);background:var(--bg-soft);padding:22px 0;margin-top:48px}
+  footer.site .wrap{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px 16px;max-width:1040px;padding:0 24px}
+  footer.site{color:var(--muted);font-size:.82rem}
+  footer.site a{color:var(--muted);text-decoration:none;margin-left:14px}
+  footer.site a:hover{color:var(--accent-bright)}
+  @media(max-width:640px){nav.main a:not(:last-child){display:none}footer.site .wrap{justify-content:center;text-align:center}footer.site a{margin:0 7px}}
+
+  :focus-visible{outline:3px solid #e07a5f;outline-offset:3px}
+  @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{animation:none!important;transition:none!important}}
+  h1,h2{text-wrap:balance}
+  #backtop{position:fixed;right:22px;bottom:22px;width:46px;height:46px;border-radius:50%;border:1px solid var(--line);background:var(--panel);color:var(--accent);font-size:1.3rem;cursor:pointer;opacity:0;pointer-events:none;transition:opacity .2s var(--ease);z-index:150}
+  #backtop.show{opacity:1;pointer-events:auto}
+  #backtop:hover{border-color:var(--accent-dim)}
+  @media (prefers-reduced-motion:reduce){#backtop{display:none}}
+  .copy-link-row{margin:0 0 8px}
+  .share-row{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin:0 0 8px}
+  .share-x,.share-li{border:1px solid var(--line);background:var(--panel);color:var(--muted);border-radius:999px;padding:8px 16px;min-height:44px;font-size:.82rem;display:inline-flex;align-items:center;text-decoration:none}
+  .share-x:hover,.share-li:hover{border-color:var(--accent-dim);color:var(--text);text-decoration:none}
+  .copy-link{position:relative;border:1px solid var(--line);background:var(--panel);color:var(--muted);border-radius:999px;padding:8px 16px;min-height:44px;font-size:.82rem;cursor:pointer;font-family:inherit}
+  .copy-link:hover{border-color:var(--accent-dim);color:var(--text)}
+  .toc-details{border:1px solid var(--line);border-radius:var(--radius);background:var(--panel);padding:0 20px;margin:0 0 20px;max-width:720px}
+  .toc-details[open]{padding-bottom:14px}
+  .toc-details summary{font-size:.72rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);cursor:pointer;min-height:44px;display:flex;align-items:center;gap:8px;list-style:none;padding:12px 0 4px}
+  .toc-details[open] summary{padding-bottom:8px}
+  .toc-details summary::-webkit-details-marker{display:none}
+  /* SU-article-sticky-toc: keep the "On this page" TOC visible while scrolling (desktop only) */
+  @media(min-width:900px){.toc-details{position:sticky;top:76px;z-index:60;max-height:calc(100vh - 96px);overflow:auto}}
+  .toc-details summary::marker{content:""}
+  .toc-details summary::after{content:"\25B8";font-size:.9rem;color:var(--accent-bright);transition:transform .15s ease}
+  .toc-details[open] summary::after{transform:rotate(90deg)}
+  .toc-details ul{list-style:none;margin:0;padding:0;display:grid;gap:4px}
+  .toc-details li{font-size:.9rem}
+  .toc-details a{color:var(--muted)}
+  .toc-details a:hover{color:var(--accent-bright)}
+  .copy-link.copied::after{content:"Copied";position:absolute;top:-30px;left:50%;transform:translateX(-50%);background:var(--accent);color:var(--accent-ink);font-size:.72rem;font-weight:700;padding:3px 10px;border-radius:6px;white-space:nowrap}
+  @media (prefers-reduced-motion:reduce){.copy-link.copied::after{transition:none}}
+  .skip{position:absolute;left:-9999px;top:0;background:var(--accent);color:var(--accent-ink);padding:10px 18px;font-weight:700;z-index:200;border-radius:0 0 8px 0}
+  .skip:focus{left:0}
+@media print{
+header.site,footer.site,nav,.nav-toggle,#backtop,.sticky-buy,.reading-progress,.toc,.toc-details,.share,.related,.progress-wrap{display:none!important}
+:root{--bg:#fff;--bg-soft:#fff;--panel:#fff;--panel2:#fff;--text:#141414;--muted:#333;--faint:#555;--line:#d4d4d4;--line-soft:#e8e8e8}
+body{background:#fff!important;color:#141414!important}
+.wrap{max-width:none!important}
+article{max-width:74ch;margin:0 auto}
+a{color:#8a3a20!important;text-decoration:underline!important}}
+a,button,summary,[role="button"]{touch-action:manipulation}</style>
+<link rel="alternate" type="application/rss+xml" title="ghostcorpnet articles" href="feed.xml">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site"><div class="wrap">
+  <a class="brand" href="../">
+    <svg width="22" height="22" viewBox="0 0 26 26" fill="none" aria-hidden="true"><circle cx="5" cy="6" r="2.4" fill="#e07a5f"/><circle cx="21" cy="6" r="2.4" fill="#e07a5f"/><circle cx="13" cy="13" r="2.4" fill="#e07a5f"/><circle cx="5" cy="20" r="2.4" fill="#e07a5f"/><circle cx="21" cy="20" r="2.4" fill="#e07a5f"/><path d="M6.6 7.4L11.2 11.8M19.4 7.4L14.8 11.8M6.6 18.6L11.2 14.2M19.4 18.6L14.8 14.2" stroke="#e07a5f" stroke-width="1.4"/></svg>
+    ghostcorpnet
+  </a>
+  <nav class="main" aria-label="Primary"><a href="../../">Home</a><a href="../../../products/">Catalog</a><a href="../../../brands/">Stores</a><a href="../../../ecosystem/">Ecosystem</a><a href="../">CivicWarden</a></nav>
+</div></header>
+<div id="reading-progress" aria-hidden="true" style="position:fixed;top:0;top:env(safe-area-inset-top);left:0;right:0;z-index:200;height:3px"><div id="reading-progress-fill" aria-hidden="true" style="height:100%;width:0;background:#e07a5f"></div></div>
+<script>(function(){try{if(window.matchMedia&&matchMedia("(prefers-reduced-motion: reduce)").matches)return;}catch(e){}var f=document.getElementById("reading-progress-fill");if(!f)return;var t=false;function u(){t=false;var m=document.getElementById("main")||document.body;var top=(m===document.body?0:m.getBoundingClientRect().top+window.scrollY);var tot=m.scrollHeight-window.innerHeight;var p=tot>0?(window.scrollY-top)/tot:0;f.style.width=(Math.max(0,Math.min(1,p))*100)+"%";}function s(){if(!t){t=true;requestAnimationFrame(u);}}addEventListener("scroll",s,{passive:true});addEventListener("resize",s);u();})();</script>
+<main class="wrap" id="main" tabindex="-1">
+  <p class="crumb"><a href="../../">Home</a> · <a href="../">CivicWarden</a></p>
+
+  <h1>Writing AI procurement contracts that survive public scrutiny</h1>
+  <p class="date"><span class="byline">By ghostcorpnet Studio</span> · <time datetime="2026-10-07T00:00:00-04:00">Published 2026-10-07T00:00:00-04:00</time> · <span class="reading-time" id="reading-time">1 min read</span></p>
+  <p class="reviewed">Last reviewed <time datetime="2026-10-07T00:00:00-04:00">2026-10-07T00:00:00-04:00</time></p>
+  <p class="updated">Updated <time datetime="2026-10-07T00:00:00-04:00">2026-10-07T00:00:00-04:00</time></p>
+  <div class="share-row" role="group" aria-label="Share this article">
+    <a class="share-x" href="https://x.com/intent/tweet" target="_blank" rel="noopener" aria-label="Share this article on X">Share on X</a>
+    <a class="share-li" href="https://www.linkedin.com/sharing/share-offsite/" target="_blank" rel="noopener" aria-label="Share this article on LinkedIn">Share on LinkedIn</a>
+    <button class="copy-link" id="copy-link" type="button" aria-label="Copy link to this article">Copy link</button>
+  </div>
+  <nav class="article-back article-back-top" aria-label="Article navigation" style="max-width:720px;margin:0 auto 20px"><a href="../" aria-label="Back to the CivicWarden store" style="color:var(--accent)">&larr; Back to the CivicWarden store</a></nav>
+
+  <details class="toc-details" open aria-label="Table of contents">
+    <summary>On this page</summary>
+    <ul id="toc-list"></ul>
+  </details>
+
+  <article>
+<div>
+    <p>The right AI procurement contract isn’t just a formality—it’s the foundation for accountability. When public agencies sign contracts with AI vendors, they’re not just buying software; they’re entrusting decisions that shape lives, budgets, and public trust. But too many contracts fail to survive scrutiny because they’re written for legal teams, not for the people who’ll actually use the AI or defend it under FOIA requests. The problem isn’t that agencies want to hide; it’s that the contracts they sign often force them into a corner where transparency becomes impossible. That’s why the details matter.</p>
+
+    <h2>Why most AI contracts fail public scrutiny</h2>
+    <p>Public-sector AI procurement contracts often treat AI like any other software purchase. But AI isn’t just code—it’s a black box of training data, proprietary algorithms, and hidden biases. When a vendor says “we’ll provide access for audits,” the contract might as well say “we’ll provide a backdoor pass.” The result? Agencies end up with no real way to verify claims about fairness, explainability, or performance—until it’s too late.</p>
+
+    <p>Here’s the hard truth: <strong>without the right clauses, you can’t hold vendors accountable, and you can’t defend your agency when questions arise.</strong> That’s why this guide focuses on the clauses that actually matter—the ones that force vendors to document their work, let you inspect their processes, and make sure changes don’t break the rules.</p>
+
+    <h2>The 5 must-have clauses for AI contracts</h2>
+    <p>Not all contract clauses are created equal. Some are boilerplate; others are critical. These five clauses are non-negotiable if you want a contract that can survive public scrutiny:</p>
+
+    <ol>
+        <li><strong>Explicit audit rights</strong>—not just “we’ll cooperate,” but <em>specific, scheduled access</em> to training data, model weights, and decision logs.</li>
+        <li><strong>Bias and fairness testing obligations</strong>—vendors must run tests on protected groups and document results, not just claim compliance.</li>
+        <li><strong>FOIA-proof documentation</strong>—require vendors to keep records in a format that can’t be easily deleted or obscured.</li>
+        <li><strong>Vendor change controls</strong>—if the vendor changes its algorithm or data sources, you get <em>prior notice and approval</em>.</li>
+        <li><strong>Third-party validation rights</strong>—the ability to hire independent auditors without vendor interference.</li>
+    </ol>
+
+    <h3>1. Audit rights: More than just “we’ll let you look”</h3>
+    <p>Vendors love vague language like “agency shall have reasonable access for audits.” That’s not enough. You need <strong>specific, enforceable terms</strong> that:</p>
+
+    <ul>
+        <li>Define <em>what</em> you can audit (training data, model weights, inference logs, bias test results).</li>
+        <li>Set <em>when</em> audits can happen (not just “whenever we say”), including <strong>unscheduled audits</strong> at least twice a year.</li>
+        <li>Require <em>documented procedures</em> for how vendors handle audit requests (response times, data access protocols).</li>
+        <li>Prohibit <em>redacting or destroying</em> audit-related records during the contract term.</li>
+    </ul>
+
+    <blockquote>
+        <p><strong>Sample clause:</strong><br>
+        “Vendor shall provide agency with <em>unredacted access</em> to all training data, model parameters, and decision logs upon written request. Audits may be conducted <em>without prior notice</em> at least twice annually, with Vendor required to respond within 15 business days to all reasonable audit requests.”</p>
+    </blockquote>
+
+    <p>Why this matters: Without these terms, vendors can claim “we don’t have that data anymore” or “our algorithm is proprietary.” The clause above forces them to prove their claims—or admit when they’re hiding something.</p>
+
+    <h3>2. Bias and fairness testing: From claims to proof</h3>
+    <p>Vendors will tell you their AI is “fair.” But fairness is never self-evident—it’s something you <strong>measure and document</strong>. Your contract must require:</p>
+
+    <ul>
+        <li><strong>Regular, independent bias testing</strong> on protected attributes (race, gender, income, etc.) at least quarterly.</li>
+        <li><strong>Publicly available test reports</strong> (not just internal memos) that include:</li>
+        <ul>
+            <li>Disparate impact metrics by subgroup</li>
+            <li>Explanations for any disparities found</li>
+            <li>Mitigation strategies and their effectiveness</li>
+        </ul>
+        <li><strong>Vendor liability for false claims</strong>—if they say the AI is “unbiased” but tests prove otherwise, they must correct it or refund costs.</li>
+    </ul>
+
+    <blockquote>
+        <p><strong>Sample clause:</strong><br>
+        “Vendor shall conduct <em>independent bias audits</em> every three months using methods approved by agency. All audit reports shall be <em>publicly accessible</em> within 30 days of completion and include detailed metrics on disparate impact. If any audit finds statistically significant bias, Vendor shall provide a corrective action plan within 15 days.”</p>
+    </blockquote>
+
+    <p>Why this matters: Without these terms, “fairness” becomes an unprovable marketing claim. This clause forces vendors to <strong>prove</strong> their AI works as advertised—or face consequences.</p>
+
+    <h3>3. FOIA-proof documentation: What happens when someone asks?</h3>
+    <p>FOIA requests don’t wait for contracts to be negotiated. If a reporter or advocate asks for records about your AI system, you need to be able to:</p>
+
+    <ul>
+        <li><strong>Locate and produce</strong> all relevant documents (training data, model cards, bias test results).</li>
+        <li><strong>Avoid redactions</strong> that obscure key details (e.g., “we can’t show the training data because it’s proprietary”—that’s not a valid FOIA exemption).</li>
+        <li><strong>Protect agency liability</strong> by ensuring vendors can’t claim “we don’t have that” when records exist.</li>
+    </ul>
+
+    <p>The solution? <strong>Require vendors to maintain FOIA-compliant records</strong> from day one. Key clauses:</p>
+
+    <ul>
+        <li>“Vendor shall maintain all training data, model documentation, and audit records in a <em>searchable, non-proprietary format</em> for the duration of the contract.”</li>
+        <li>“Vendor shall provide agency with a <em>FOIA request response plan</em> within 30 days of contract signing, including a list of all records subject to public disclosure.”</li>
+        <li>“Vendor shall not destroy or alter any records related to this contract until the later of <em>five years after termination</em> or final agency approval.”</li>
+    </ul>
+
+    <blockquote>
+        <p><strong>Key principle:</strong> If a vendor can’t produce records, they’re either hiding something or haven’t been forced to document properly. Your contract should make that impossible.</p>
+    </blockquote>
+
+    <h3>4. Vendor change controls: When the AI drifts</h3>
+    <p>AI models don’t stay static. Vendors update algorithms, switch training data, or change inference logic—often without notice. If you don’t control these changes, you risk:</p>
+
+    <ul>
+        <li>Unintended bias creep</li>
+        <li>Regulatory violations</li>
+        <li>Legal exposure when the AI behaves differently than promised</li>
+    </ul>
+
+    <p>The fix? <strong>Mandate prior approval for any material changes</strong>. Key clauses:</p>
+
+    <ul>
+        <li>“Vendor shall provide <em>30 days’ written notice</em> before making any changes to training data, model architecture, or inference logic.”</li>
+        <li>“Agency approval is required for any change that could <em>materially affect fairness, accuracy, or transparency</em>.”</li>
+        <li>“Vendor shall <em>retest for bias</em> after any change and provide updated reports before deployment.”</li>
+    </ul>
+
+    <blockquote>
+        <p><strong>Sample clause:</strong><br>
+        “No changes to the AI system’s training data, model parameters, or decision logic shall take effect without <em>agency written approval</em>. Vendor shall provide a <em>change impact assessment</em> at least 30 days prior to any proposed change, including bias test results from the previous version.”</p>
+    </blockquote>
+
+    <p>Why this matters: Without these terms, vendors can silently update their AI and blame you when it starts making worse decisions. This clause gives you a real say in the process.</p>
+
+    <h3>5. Third-party validation rights: Independent eyes</h3>
+    <p>Vendors have a financial incentive to make their AI look good. That’s why you need the right to bring in <strong>independent auditors</strong>—without vendor interference. Key clauses:</p>
+
+    <ul>
+        <li>“Agency may hire <em>independent third parties</em> to conduct audits of the AI system at any time.”</li>
+        <li>“Vendor shall <em>fully cooperate</em> with audits, including providing access to all necessary data and personnel.”</li>
+        <li>“Vendor shall not <em>redact or obstruct</em> audit findings, and shall provide a summary of any issues to the agency within 10 days.”</li>
+    </ul>
+
+    <blockquote>
+        <p><strong>Sample clause:</strong><br>
+        “Agency reserves the right to engage <em>independent auditors</em> to verify compliance with this contract. Vendor shall <em>not interfere</em> with audit activities and shall provide a written summary of any audit findings to the agency within 10 business days.”</p>
+    </blockquote>
+
+    <p>Why this matters: If you can’t trust the vendor’s self-reports, you need someone else to check. This clause ensures you have that option.</p>
+
+    <h2>Negotiation checklist: How to get the contract right</h2>
+    <p>Negotiating AI contracts isn’t about winning—it’s about <strong>protecting your agency</strong>. Use this checklist to push back on weak clauses and demand real accountability:</p>
+
+    <ol>
+        <li><strong>Audit rights</strong>
+            <ul>
+                <li>Is access to training data and model weights <em>explicitly required</em>?</li>
+                <li>Are unscheduled audits <em>mandated</em> at least twice a year?</li>
+                <li>Can the vendor <em>redact or destroy</em> audit-related records?</li>
+            </ul>
+        </li>
+        <li><strong>Bias and fairness</strong>
+            <ul>
+                <li>Are bias tests <em>independent</em> and conducted regularly?</li>
+                <li>Are test results <em>publicly available</em>?</li>
+                <li>Is the vendor <em>liable</em> for false fairness claims?</li>
+            </ul>
+        </li>
+        <li><strong>FOIA compliance</strong>
+            <ul>
+                <li>Are records maintained in a <em>searchable, non-proprietary format</em>?</li>
+                <li>Does the vendor have a <em>FOIA response plan</em>?</li>
+                <li>Are records <em>preserved for at least five years</em>?</li>
+            </ul>
+        </li>
+        <li><strong>Vendor change controls</strong>
+            <ul>
+                <li>Is <em>prior approval</em> required for material changes?</li>
+                <li>Must changes be <em>retested for bias</em>?</li>
+                <li>Is there a <em>30-day notice period</em> for changes?</li>
+            </ul>
+        </li>
+        <li><strong>Third-party validation</strong>
+            <ul>
+                <li>Can agency hire <em>independent auditors</em>?</li>
+                <li>Can the vendor <em>obstruct audits</em>?</li>
+                <li>Must audit findings be <em>shared with agency</em>?</li>
+            </ul>
+        </li>
+    </ol>
+
+    <p>If the vendor resists any of these terms, ask why. If their answer is “that’s how we do it,” that’s a red flag. The right contract doesn’t just protect your agency—it <strong>proves</strong> you’re doing the right thing.</p>
+
+    <h2>Final thought: Don’t sign until you’re sure</h2>
+    <p>The contract you sign today isn’t just a legal formality—it’s the foundation for how your agency will be judged when questions arise. If it doesn’t give you real power to audit, document, and defend your AI decisions, it’s not doing its job. Before you sign, ask yourself: <strong>Can we really hold this vendor accountable with this contract?</strong> If the answer is no, keep negotiating. The alternative—signing a weak contract and facing scrutiny later—isn’t worth the risk.</p>
+
+    <p>Accountability starts with the contract. Get it right.</p>
+</div>
+  </article>
+  <nav class="article-back" aria-label="Article navigation" style="max-width:720px;margin:28px auto 0"><a href="../" style="color:var(--accent)">&larr; Back to the CivicWarden store</a></nav>
+<script>
+(function(){var t=document.querySelector('article').innerText||'';var w=t.trim().split(/\s+/).length;var m=Math.max(1,Math.ceil(w/200));document.getElementById('reading-time').textContent=m+' min read';})();
+</script>
+<script>
+/* TOC: build the 'On this page' list from section anchors inside the article */
+(function(){var ul=document.getElementById('toc-list');if(!ul)return;ul.parentElement.style.display='none';var h2s=document.querySelectorAll('article h2[id]');for(var i=0;i<h2s.length;i++){var h=h2s[i],t=(h.textContent||'').replace(/¶/g,'').trim();if(!t)continue;var li=document.createElement('li'),a=document.createElement('a');a.href='#'+h.id;a.textContent=t;li.appendChild(a);ul.appendChild(li);}if(ul.children.length)ul.parentElement.style.display='';})();
+</script>
+<script>
+/* TOC: collapse the TOC <details> on narrow viewports (open on desktop, collapsed on <=720px) */
+(function(){var d=document.querySelector('details.toc-details');if(!d||!window.matchMedia)return;var mq=matchMedia('(max-width:720px)');function apply(){if(mq.matches){d.removeAttribute('open');}else{d.setAttribute('open','');}}apply();if(mq.addEventListener){mq.addEventListener('change',apply);}else if(mq.addListener){mq.addListener(apply);}})();
+</script>
+
+  <div class="cta">
+    <h2 id="put-this-into-practice">Put this into practice<a class="h2-anchor" href="#put-this-into-practice" aria-label="Permalink to this section">¶</a></h2>
+    <p>CivicWarden is building the procurement toolkit now: the <strong>Procurement Review Templates</strong> ($29) will give you the accountability clauses, scoring rubrics, and contract checklists — straight from the CivicWarden store as soon as they land.</p>
+    <a class="btn" href="https://koalstingkdelaney-gif.github.io/kestrelattice/brands/civicwarden/" referrerpolicy="no-referrer">Visit the CivicWarden store</a>
+  </div>
+
+  <footer class="site">
+    <div class="wrap">
+      <span>© <span id="yr">2026</span> ghostcorpnet · An independent studio</span>
+      <span><a href="../../">Home</a><a href="../../../products/">Catalog</a><a href="../../../brands/">Stores</a><a href="../../../ecosystem/">Ecosystem</a><a href="../../../changelog.html">Changelog · Oct 2026</a><a href="../../../sitemap.html">Site index</a><a href="mailto:corpghost420@gmail.com">Contact</a><a href="../../../terms.html">Terms</a><a href="../../../privacy.html">Privacy</a></span>
+    </div>
+  </footer>
+<button id="backtop" aria-label="Back to top">↑</button>
+</main>
+<script>
+(function(){var b=document.getElementById('backtop');if(!b)return;
+function onScroll(){b.classList.toggle('show',window.scrollY>1200)}
+window.addEventListener('scroll',onScroll,{passive:true});onScroll();
+b.addEventListener('click',function(){window.scrollTo({top:0,behavior:'smooth'})});})();
+</script>
+<script>
+// Copy-link button: clipboard API with "copied" tooltip, legacy fallback.
+(function(){var b=document.getElementById('copy-link');if(!b)return;
+function done(){b.classList.add('copied');setTimeout(function(){b.classList.remove('copied')},2000)}
+function fallback(url){var i=document.createElement('input');i.value=url;i.setAttribute('readonly','');document.body.appendChild(i);i.select();try{document.execCommand('copy');done()}catch(e){}document.body.removeChild(i)}
+b.addEventListener('click',function(){var url=window.location.href;
+if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(url).then(done,function(){fallback(url)})}
+else{fallback(url)}});})();
+</script>
+<script>
+// Share links: point the X / LinkedIn share URLs at this article's canonical URL.
+(function(){try{var u=encodeURIComponent(window.location.href);var x=document.querySelector('.share-x');if(x)x.href='https://x.com/intent/tweet?url='+u;var l=document.querySelector('.share-li');if(l)l.href='https://www.linkedin.com/sharing/share-offsite/?url='+u;}catch(e){}})();
+</script>
+<script>
+// Humanize "Updated <time>" stamps + add h2 section anchors (progressive enhancement).
+(function(){
+document.querySelectorAll('p.updated time[datetime]').forEach(function(t){var v=t.getAttribute('datetime');var d=new Date(v+'T12:00:00');if(!isNaN(d)){t.textContent=d.toLocaleDateString('en-US',{month:'long',day:'numeric',year:'numeric'});}});
+function slug(s){return s.toLowerCase().trim().replace(/[^a-z0-9\u00C0-\u024F]+/g,'-').replace(/^-+|-+$/g,'')||'section';}
+var seen={};document.querySelectorAll('h2').forEach(function(h){if(h.querySelector('.h2-anchor'))return;var id=h.id||slug(h.textContent);if(seen[id]){var n=2;while(seen[id+'-'+n])n++;id=id+'-'+n;}seen[id]=1;h.id=id;var a=document.createElement('a');a.className='h2-anchor';a.href='#'+id;a.setAttribute('aria-label','Permalink to this section');a.textContent='\u00b6';h.appendChild(a);});
+})();
+</script>
+<script>document.getElementById('yr').textContent=new Date().getFullYear();</script>
+<script>try{fetch("https://kestrelattice-approvals.koalstin-g-k-delaney.workers.dev/pv?p="+encodeURIComponent(location.pathname),{mode:"no-cors",keepalive:true}).catch(function(){})}catch(e){}</script>
+</body>
+</html>
