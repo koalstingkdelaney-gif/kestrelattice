@@ -72,6 +72,15 @@ try{if(localStorage.getItem('kestrelattice_admin')!=='1'){gtag('js', new Date())
   footer{border-top:1px solid var(--line);margin-top:48px;padding-top:20px;
          color:var(--muted);font-size:.82rem;display:flex;justify-content:space-between;
          flex-wrap:wrap;gap:8px}
+  .articles-cta-band{margin:56px auto 0;padding:36px 28px;text-align:center;
+         background:var(--panel);border:1px solid var(--line);border-radius:14px;max-width:760px}
+  .articles-cta-band .kicker{font-size:.78rem;letter-spacing:.12em;text-transform:uppercase;
+         color:var(--accent);font-weight:700;margin-bottom:10px}
+  .articles-cta-band h2{font-size:clamp(1.25rem,2.6vw,1.7rem);margin:0 0 10px;color:var(--text)}
+  .articles-cta-band p{color:var(--muted);font-size:.95rem;max-width:56ch;margin:0 auto 20px}
+  .articles-cta-band .btn{display:inline-block;background:var(--accent);color:var(--accent-ink);
+         font-weight:700;padding:12px 28px;border-radius:8px;text-decoration:none;font-size:1rem}
+  .articles-cta-band .btn:hover{background:var(--accent-bright)}
   footer a{color:var(--muted);text-decoration:none;padding:10px 7px}
   footer a:hover{color:var(--accent-bright)}
   .featured{background:linear-gradient(180deg,var(--panel),#231a14);border:1px solid var(--accent-dim);
@@ -213,6 +222,13 @@ a,button,summary,[role="button"]{touch-action:manipulation}</style>
       <div class="desc">A practical permissions audit for AI agents in production: 12 questions covering grants, credential handling, spend ceilings, and audit trails — before something breaks.</div>
     <button type="button" class="copy-link" data-url="https://koalstingkdelaney-gif.github.io/kestrelattice/articles/ai-agent-permissions-audit.html">Copy link</button></li>
   </ul>
+
+  <section class="articles-cta-band cta-band" aria-label="Browse the product catalog">
+    <div class="kicker">Put it into practice</div>
+    <h2>Turn governance reading into governed agents</h2>
+    <p>These articles are free forever. The ready-made policy templates, audit checklists, and first-customer kits that put them to work live in the product catalog.</p>
+    <a class="btn" href="../products/">Browse the catalog →</a>
+  </section>
 
   <footer>
     <span>© <span id="yr">2026</span> ghostcorpnet · An independent studio</span>
