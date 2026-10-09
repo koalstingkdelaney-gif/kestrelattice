@@ -1435,6 +1435,14 @@ def _sandbox_html():
         'placeholder="Ask it anything &#8212; it can&#39;t touch your business from here&#8230;" maxlength="2000">'
         '<button class="btn" id="sb-chat-send">Send</button></div></div>'
     )
+    broadcast = (
+        '<div class="card" id="sb-broadcast-card"><h3>&#128226; Message all quarantined bots</h3>'
+        "<p class='muted'>Say it once — every bot in the Quarantine box hears it. "
+        "They each reply, and you'll see it all together in the shared transcript feed.</p>"
+        '<div class="chat-input"><input id="sb-broadcast-input" type="text" '
+        'placeholder="One message for the whole quarantine&#8230;" maxlength="2000">'
+        '<button class="btn" id="sb-broadcast-send">Send to all</button></div></div>'
+    )
     inventions = (
         '<div class="card"><h3>&#128161; Invention shelf</h3>'
         "<p class='muted'>Bots here are encouraged to invent — new pitches, product concepts, wild ideas. "
@@ -1684,6 +1692,23 @@ input.value="";await sbLoadChat();
 }catch(e){toast(SB_DOWN,false);}
 btn.disabled=false;
 }
+async function sbSendBroadcast(){
+var input=document.getElementById("sb-broadcast-input"),btn=document.getElementById("sb-broadcast-send");
+var text=input.value.trim();
+if(!text||!sbReady())return;
+var targets=sbRogues.filter(function(g){return String(g.sandbox_id||"quarantine")===String(sbCurrent)&&String(g.status||"")!=="released";});
+if(!targets.length){toast("No quarantined bots in this sandbox yet.",false);return;}
+btn.disabled=true;
+try{
+for(var i=0;i<targets.length;i++){
+await fetch(WURL+"/sandbox/chat",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({key:WKEY,sandbox_id:sbCurrent,bot_id:targets[i].id,text:text})});
+}
+input.value="";
+toast("Heard by "+targets.length+" bot"+(targets.length>1?"s":"")+" — replies land in the transcript.",true);
+var tr=document.getElementById("sb-transcript");if(tr)tr.scrollIntoView({behavior:"smooth",block:"nearest"});
+}catch(e){toast(SB_DOWN,false);}
+btn.disabled=false;
+}
 async function sbSaveIdea(i){
 var m=sbChatMsgs[i];if(!m||!sbChatId)return;
 if(!sbReady()){toast(SB_DOWN,false);return;}
@@ -1820,6 +1845,9 @@ document.addEventListener("DOMContentLoaded",function(){
 var send=document.getElementById("sb-chat-send"),inp=document.getElementById("sb-chat-input");
 if(send)send.addEventListener("click",sbSendChat);
 if(inp)inp.addEventListener("keydown",function(e){if(e.key==="Enter")sbSendChat();});
+var bsend=document.getElementById("sb-broadcast-send"),binp=document.getElementById("sb-broadcast-input");
+if(bsend)bsend.addEventListener("click",sbSendBroadcast);
+if(binp)binp.addEventListener("keydown",function(e){if(e.key==="Enter")sbSendBroadcast();});
 var sel=document.getElementById("sb-chat-bot");
 if(sel)sel.addEventListener("change",function(){sbOpenChat(parseInt(sel.value,10),false);});
 var tgl=document.getElementById("sb-new-toggle");
@@ -1833,7 +1861,7 @@ setInterval(sbLoadTranscript,10000);
 setInterval(function(){if(sbChatId)sbLoadChat();},15000);
 });
 })();</script>"""
-    return scoped_css + switcher + roster + rogues + transcript + chat + inventions + quarantine + script
+    return scoped_css + switcher + roster + rogues + transcript + chat + broadcast + inventions + quarantine + script
 
 
 

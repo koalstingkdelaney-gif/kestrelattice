@@ -15,6 +15,11 @@ import tempfile
 HOME = os.path.expanduser("~")
 UA = "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 Chrome/126.0 Safari/537.36"
 NEEDS_HUMAN = os.path.join(HOME, "workspace/sentience/state/needs_human.jsonl")
+LAST_HASH = os.path.join(
+    HOME,
+    "workspace/goals/kestrelattice-autonomous-growth/hidden_files/approvals/"
+    "taps-sync-last-hash.txt",
+)
 MIRRORED = os.path.join(
     HOME,
     "workspace/goals/kestrelattice-autonomous-growth/hidden_files/approvals/"
@@ -102,6 +107,20 @@ def main():
     except Exception as e:
         fail_soft("resolution mirror skipped: %s" % e)
 
+    # Idempotency guard: the worker rewrites TAPS_KEY on every POST, and every
+    # write counts against the KV daily write budget (Cloudflare alerted at 50%
+    # on 2026-10-06). Skip the push when the taps payload is byte-identical to
+    # the last successful sync; the resolution mirror above already ran.
+    payload = json.dumps(taps, sort_keys=True)
+    phash = hashlib.sha1(payload.encode()).hexdigest()
+    try:
+        last = open(LAST_HASH).read().strip()
+    except OSError:
+        last = ""
+    if last == phash:
+        print("taps-sync: unchanged (%d taps), push skipped" % len(taps))
+        return
+
     # Push the taps array. (Cloudflare WAF bans python urllib's default UA,
     # so this goes through curl like every other worker mutation.)
     try:
@@ -118,7 +137,11 @@ def main():
             data_file=tmp,
         )
         os.unlink(tmp)
-        print("taps-sync: %s" % (r.stdout.strip()[:200] or r.stderr.strip()[:200]))
+        out = r.stdout.strip()[:200] or r.stderr.strip()[:200]
+        print("taps-sync: %s" % out)
+        if r.returncode == 0 and out.startswith('{"ok":true'):
+            with open(LAST_HASH, "w") as f:
+                f.write(phash)
     except Exception as e:
         fail_soft("push failed: %s" % e)
 
