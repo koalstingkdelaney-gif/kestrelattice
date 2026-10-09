@@ -1330,16 +1330,25 @@ function escH(s){var d=document.createElement("div");d.appendChild(document.crea
 async function sentLoad(){
 var thread=document.getElementById("sent-thread");
 if(!thread||typeof WURL==="undefined"||!WURL||!WKEY){if(thread)thread.innerHTML="<p class='muted'>Not connected: no admin key on this device.</p>";return;}
+if(document.hidden)return;
 try{
 var r=await fetch(WURL+"/sentience-chat?key="+encodeURIComponent(WKEY));
 var msgs=await r.json();
+var sig=(Array.isArray(msgs)?msgs.length:0)+"|"+((msgs&&msgs[msgs.length-1]||{}).text||"").length;
+if(sig===thread._sig)return;
+var newN=Array.isArray(msgs)?msgs.length-(thread._len||0):0;
+thread._sig=sig;thread._len=Array.isArray(msgs)?msgs.length:0;
 if(!Array.isArray(msgs)||!msgs.length){thread.innerHTML="<p class='muted'>No messages yet. Say hi.</p>";return;}
+var typing=document.activeElement&&document.activeElement.id==="sent-input";
+var wasBottom=(thread.scrollHeight-thread.scrollTop-thread.clientHeight)<90;
+var st=thread.scrollTop;
 thread.innerHTML=msgs.map(function(m){
 var who=m.from==="koalstin"?"you":"sentience";
 return '<div class="chat-msg '+who+'"><span class="chat-who">'+who+'</span><p>'+escH(m.text)+"</p></div>";
 }).join("");
-thread.scrollTop=thread.scrollHeight;
-}catch(e){}}
+if(wasBottom&&!typing){thread.scrollTop=thread.scrollHeight;}
+else{thread.scrollTop=st;}
+}catch(e){if(!thread.innerHTML)thread.innerHTML="<p class='muted'>Couldn't load.</p>";}}
 async function sentSend(){
 var input=document.getElementById("sent-input"),btn=document.getElementById("sent-send");
 var text=input.value.trim();
@@ -1553,21 +1562,51 @@ else toast("That didn't work — try again.",false);
 }catch(e){toast(SB_DOWN,false);}
 }
 /* ----- transcript ----- */
+/* ----- calm refresh (2026-10-08): live feeds must never yank the reader's
+   scroll or disturb typing. New arrivals while scrolled up (or while the
+   composer has focus) show a "new" pill instead of jumping. Identical
+   content skips the DOM entirely. */
+function sbFeedSig(entries){
+var l=entries[entries.length-1]||{};
+return entries.length+"|"+(l.at||l.ts||"")+"|"+String(l.text||"").length;
+}
+function sbNearBottom(el){return (el.scrollHeight-el.scrollTop-el.clientHeight)<90;}
+function sbFeedPill(box,id){
+var pill=document.getElementById(id);
+if(!pill){
+pill=document.createElement("button");pill.id=id;pill.className="btn btn-sm";
+pill.style.cssText="display:none;margin:6px auto;position:sticky;top:6px;z-index:5;";
+pill.onclick=function(){box.scrollTop=box.scrollHeight;pill.style.display="none";};
+box.parentNode.insertBefore(pill,box);
+}
+return pill;
+}
+var sbTxState={sig:"",len:0};
 async function sbLoadTranscript(){
 var box=document.getElementById("sb-transcript");if(!box)return;
 if(!sbReady()){box.innerHTML=SB_ERR;return;}
+if(document.hidden)return;
 try{
 var r=await fetch(WURL+"/sandbox/transcript?key="+encodeURIComponent(WKEY)+"&sandbox_id="+encodeURIComponent(sbCurrent)+"&limit=100");
 var d=await r.json();
 var entries=(d&&d.ok&&Array.isArray(d.entries))?d.entries:[];
+var sig=sbFeedSig(entries);
+if(sig===sbTxState.sig)return;
+var newCount=Math.max(0,entries.length-sbTxState.len);
+sbTxState={sig:sig,len:entries.length};
 if(!entries.length){box.innerHTML="<p class='muted'>Nothing here yet — when a bot in this sandbox thinks or acts, you'll see it here.</p>";return;}
+var pill=sbFeedPill(box,"sb-tx-newpill");
+var typing=document.activeElement&&document.activeElement.id==="sb-chat-input";
+var wasBottom=sbNearBottom(box);
+var st=box.scrollTop;
 box.innerHTML=entries.map(function(en){
 if(en.kind==="system")return "<div class='sb-sys'>"+escH(en.text)+"</div>";
 var tag=en.kind==="action"?" · did something":"";
 return "<div class='chat-msg sentience'><span class='chat-who'>"+escH(en.bot||"bot")+tag+"</span><p>"+escH(en.text)+"</p></div>";
 }).join("");
-box.scrollTop=box.scrollHeight;
-}catch(e){box.innerHTML=SB_ERR;}
+if(wasBottom&&!typing){pill.style.display="none";box.scrollTop=box.scrollHeight;}
+else{box.scrollTop=st;if(newCount>0){pill.textContent="↓ "+newCount+" new";pill.style.display="block";}}
+}catch(e){if(!box.innerHTML)box.innerHTML=SB_ERR;}
 }
 /* ----- chat: conversation list + thread view ----- */
 function sbRenderConvos(){
@@ -1653,7 +1692,15 @@ var r=await fetch(WURL+"/sandbox/chat?key="+encodeURIComponent(WKEY)+"&sandbox_i
 var d=await r.json();
 var msgs=(d&&d.ok&&Array.isArray(d.thread))?d.thread:[];
 sbChatMsgs=msgs;
+var chatSig=sbFeedSig(msgs);
+if(chatSig===th._sig&&th._threadId===sbChatId)return;
+var chatNew=Math.max(0,msgs.length-(th._len||0));
+th._sig=chatSig;th._len=msgs.length;th._threadId=sbChatId;
 if(!msgs.length){th.innerHTML="<p class='muted' style='padding:14px'>No messages yet. Say hi \u2014 it can think and chat, it just can't touch your real business.</p>";return;}
+var cpill=sbFeedPill(th,"sb-chat-newpill");
+var ctyping=document.activeElement&&document.activeElement.id==="sb-chat-input";
+var cwasBottom=sbNearBottom(th);
+var cst=th.scrollTop;
 th.innerHTML=msgs.map(function(m,i){
 var you=m.from==="koalstin";
 var tm=m.ts?"<div class='msg-time'>"+escH(sbTimeShort(m.ts))+"</div>":"";
@@ -1661,8 +1708,9 @@ var ava=you?"":"<span class='ava sm' style='background:"+sbAvaColor(sbChatName)+
 var h="<div class='msg-row "+(you?"you":"")+"'>"+ava+"<div style='min-width:0'><div class='chat-msg "+(you?"you":"sentience")+"'><span class='chat-who'>"+(you?"you":escH(sbChatName))+"</span><p>"+escH(m.text)+"</p></div>"+tm+"</div></div>";
 if(!you)h+="<div class='sb-idea-row'><button class='btn btn-sm btn-ghost' data-sb-save-idea='"+i+"'>&#128161; Save this as an idea</button></div>";
 return h;}).join("");
-th.scrollTop=th.scrollHeight;
-}catch(e){th.innerHTML=SB_ERR;}
+if(cwasBottom&&!ctyping){cpill.style.display="none";th.scrollTop=th.scrollHeight;}
+else{th.scrollTop=cst;if(chatNew>0){cpill.textContent="↓ "+chatNew+" new";cpill.style.display="block";}}
+}catch(e){if(!th.innerHTML)th.innerHTML=SB_ERR;}
 }
 async function sbSendChat(){
 var input=document.getElementById("sb-chat-input"),btn=document.getElementById("sb-chat-send");
