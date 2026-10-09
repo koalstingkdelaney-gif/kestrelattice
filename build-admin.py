@@ -2007,13 +2007,13 @@ def _universe_html():
 
     jobs = (
         """<div class="card"><h3>👆 Your jobs in this universe</h3>
-<p class='muted'>Everything else runs itself. Only these need you:</p>
+<p class='muted'>Almost everything runs itself now. Only these need you:</p>
 <ul style="line-height:2">
-<li><b>One tap</b> to approve each house offer before it goes out.</li>
-<li><b>Your signature</b> on purchase and assignment contracts — never the bots'.</li>
-<li><b>Confirm</b> when a contract is actually signed, so the desk can blast it to buyers.</li>
-<li><b>One tap</b> on anything in the Action Center that only a human can do.</li>
-</ul></div>""")
+<li><b>Sign</b> purchase and assignment contracts — the law needs your signature, never the bots'. Seconds on your phone when a seller bites.</li>
+<li><b>Money</b> in or out — payouts, refunds, price changes stay yours, always.</li>
+<li><b>Your phone</b> — a few one-time account taps (Ko-fi listings, itch.io payout setup).</li>
+</ul>
+<p class='muted'>Draft triage, outreach, seller introductions, follow-ups, inventions, publishing — all autonomous. Binding house offers stay human-only by law; everything short of that goes on its own.</p></div>""")
 
     deals_rows = ""
     for d in (ex.get("deals") or [])[:6]:
