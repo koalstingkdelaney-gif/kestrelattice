@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="utf-8">
+<link rel="preconnect" href="https://gumroad.com">
+<link rel="preconnect" href="https://www.googletagmanager.com">
+<meta name="viewport" content="width=device-width, initial-scale=1, interactive-widget=resizes-content, viewport-fit=cover">
+<title>EU AI Act Readiness Checker — Free Interactive Tool | ghostcorpnet</title>
+<meta name="description" content="Free EU AI Act readiness checker: answer 10 questions, get your compliance score and a prioritized fix list for your AI deployment.">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<meta name="theme-color" content="#121212">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ghostcorpnet">
+<meta property="og:locale" content="en_US">
+<meta property="og:url" content="https://koalstingkdelaney-gif.github.io/kestrelattice/tools/eu-ai-act-readiness-checker/">
+<meta property="og:title" content="EU AI Act Readiness Checker — Free Interactive Tool | ghostcorpnet">
+<meta property="og:description" content="Free EU AI Act readiness checker: answer 10 questions, get your compliance score and a prioritized fix list for your AI deployment.">
+<meta property="og:image" content="https://koalstingkdelaney-gif.github.io/kestrelattice/assets/studio-edition-cover.jpg">
+<meta property="og:image:alt" content="EU AI Act Readiness Checker — ghostcorpnet">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="EU AI Act Readiness Checker — Free Interactive Tool | ghostcorpnet">
+<meta name="twitter:description" content="Free EU AI Act readiness checker: answer 10 questions, get your compliance score and a prioritized fix list for your AI deployment.">
+<meta name="twitter:image" content="https://koalstingkdelaney-gif.github.io/kestrelattice/assets/studio-edition-cover.jpg">
+<link rel="canonical" href="https://koalstingkdelaney-gif.github.io/kestrelattice/tools/eu-ai-act-readiness-checker/">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebApplication",
+"name":"EU AI Act Readiness Checker","applicationCategory":"BusinessApplication",
+"operatingSystem":"Web","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},
+"description":"Free EU AI Act readiness checker: answer 10 questions, get your compliance score and a prioritized fix list for your AI deployment.",
+"url":"https://koalstingkdelaney-gif.github.io/kestrelattice/tools/eu-ai-act-readiness-checker/"}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
+{"@type":"Question","name":"What is the EU AI Act?","acceptedAnswer":{"@type":"Answer","text":"The EU AI Act is the European Union's comprehensive law regulating artificial intelligence, in force since August 2024. It takes a risk-based approach: AI systems are sorted into prohibited, high-risk, limited-risk (transparency obligations), and minimal-risk tiers, each with its own set of obligations."}},
+{"@type":"Question","name":"Does the EU AI Act apply to companies outside the EU?","acceptedAnswer":{"@type":"Answer","text":"Yes, it has extraterritorial reach. It applies to providers and deployers whose AI systems are placed on the EU market or whose outputs are used in the EU — even if the company itself is based elsewhere. If your AI product or service touches EU users, it likely applies."}},
+{"@type":"Question","name":"When do the EU AI Act's main obligations take effect?","acceptedAnswer":{"@type":"Answer","text":"The Act phases in: prohibitions applied from February 2025, general-purpose AI model obligations from August 2025, and the full obligations for high-risk AI systems apply from August 2026 (some extended to 2027). Companies deploying AI now should be preparing, not waiting."}},
+{"@type":"Question","name":"What counts as a high-risk AI system?","acceptedAnswer":{"@type":"Answer","text":"High-risk systems include AI used for recruitment and worker management, access to education, creditworthiness and insurance pricing, law enforcement, migration, biometric identification, safety components of regulated products, and certain uses in critical infrastructure, among others listed in Annex III of the Act."}},
+{"@type":"Question","name":"What are the fines under the EU AI Act?","acceptedAnswer":{"@type":"Answer","text":"Fines scale with the violation: up to €35 million or 7% of global annual turnover for prohibited AI practices, up to €15 million or 3% for most other violations, and up to €7.5 million or 1.5% for supplying incorrect or misleading information."}},
+{"@type":"Question","name":"Is this checker legal advice?","acceptedAnswer":{"@type":"Answer","text":"No. This tool is an informational self-assessment for operational readiness — it is not legal advice and does not determine your legal classification under the Act. For binding answers, consult qualified counsel."}}]}
+</script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-541TCHWW98"></script>
+<script>
+(function(){try{if(new URLSearchParams(location.search).get('admin')==='1'){localStorage.setItem('kestrelattice_admin','1');}}catch(e){}})();
+</script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+try{if(localStorage.getItem('kestrelattice_admin')!=='1'){gtag('js', new Date());gtag('config', 'G-541TCHWW98');}}catch(e){gtag('js', new Date());gtag('config', 'G-541TCHWW98');}
+</script>
+<style>
+  :root{color-scheme:dark;--bg:#0f0e0d; --bg-soft:#141210; --panel:#1a1714; --panel2:#211c17;
+        --line:#2c261e; --line-soft:#221d15; --text:#f1ebdd;
+        --muted:#a89d89; --faint:#978b74; --accent:#e07a5f;
+        --accent-bright:#f09474; --accent-dim:#c06a4e; --accent-ink:#1a0f08;
+        --accent-soft:rgba(224,122,95,.1); --radius:12px;
+        --green:#7fc97f; --amber:#e8b04b; --red:#e06a5f;
+        --ease:cubic-bezier(.2,.7,.25,1)}
+  *{margin:0;padding:0;box-sizing:border-box}
+  ::selection{background:var(--accent);color:var(--accent-ink)}
+  html{scroll-behavior:smooth;scrollbar-gutter:stable}
+  html,body{overflow-x:clip}
+  body{background:var(--bg);color:var(--text);
+       font-family:ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+       line-height:1.7;-webkit-font-smoothing:antialiased}
+  a:focus-visible,button:focus-visible{outline:3px solid var(--accent-bright);outline-offset:3px;border-radius:4px}
+  header.site{border-bottom:1px solid var(--line);position:sticky;top:0;z-index:100;
+    background:rgba(15,14,13,.92);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
+  header.site .wrap{display:flex;align-items:center;justify-content:space-between;min-height:56px;max-width:1040px;margin:0 auto;padding:0 24px}
+  .brand{display:flex;align-items:center;gap:9px;font-weight:700;color:var(--text);text-decoration:none;font-size:1.02rem}
+  .brand:hover{color:var(--accent-bright)}
+  nav.main{display:flex;align-items:center;gap:20px}
+  nav.main a{color:var(--muted);font-size:.88rem;font-weight:500;text-decoration:none}
+  nav.main a:hover{color:var(--accent-bright)}
+  .wrap{max-width:68ch;margin:0 auto;padding:40px 24px 64px}
+  .crumb{color:var(--muted);font-size:.85rem;margin-bottom:24px}
+  .crumb a{color:var(--accent);text-decoration:none}
+  h1{font-size:clamp(1.6rem,3vw + .8rem,2.1rem);font-weight:800;letter-spacing:-.02em;line-height:1.25;margin-bottom:8px;text-wrap:balance}
+  .date{color:var(--muted);font-size:.85rem;margin-bottom:28px}
+  h2{font-size:1.35rem;margin:40px 0 12px;letter-spacing:-.01em}
+  h3{font-size:1.1rem;margin:24px 0 10px}
+  p{margin:0 0 16px}
+  ul,ol{margin:0 0 16px 24px}
+  li{margin:6px 0}
+  a{color:var(--accent)}
+  code{background:var(--panel);padding:2px 6px;border-radius:4px;font-size:.88em}
+  .lead{font-size:1.08rem;color:var(--muted);max-width:60ch}
+  .pill{display:inline-block;font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);border:1px solid var(--accent-dim);border-radius:999px;padding:5px 14px;margin-bottom:18px}
+  .hero-tool{border:1px solid var(--line);border-radius:var(--radius);background:linear-gradient(180deg,var(--panel2),var(--panel));padding:28px;margin:32px 0;box-shadow:0 16px 40px rgba(0,0,0,.35)}
+  .progress-wrap{height:8px;background:var(--bg-soft);border:1px solid var(--line);border-radius:999px;overflow:hidden;margin:0 0 24px}
+  #progress-fill{height:100%;width:0;background:linear-gradient(90deg,var(--accent-dim),var(--accent-bright));transition:width .3s var(--ease)}
+  .q{border:1px solid var(--line);border-radius:10px;background:var(--bg-soft);padding:18px 20px;margin:0 0 16px}
+  .q legend,.q .q-title{font-weight:700;font-size:1rem;margin-bottom:4px}
+  .q .q-hint{color:var(--muted);font-size:.86rem;margin-bottom:12px}
+  .opts{display:grid;gap:8px}
+  .opts label{display:flex;gap:12px;align-items:flex-start;border:1px solid var(--line-soft);border-radius:8px;padding:10px 14px;cursor:pointer;font-size:.94rem;transition:border-color .15s var(--ease)}
+  .opts label:hover{border-color:var(--accent-dim)}
+  .opts input[type=radio]{margin-top:5px;accent-color:var(--accent);width:17px;height:17px;flex:none}
+  .opts label:has(input:checked){border-color:var(--accent);background:var(--accent-soft)}
+  .btn-row{display:flex;gap:12px;flex-wrap:wrap;margin-top:20px}
+  .btn{display:inline-block;background:linear-gradient(180deg,var(--accent-bright),var(--accent));color:var(--accent-ink);font-weight:700;
+       padding:14px 30px;border-radius:8px;text-decoration:none;border:0;cursor:pointer;font-size:1rem;font-family:inherit;
+       transition:transform .16s var(--ease)}
+  .btn:hover{transform:translateY(-2px)}
+  .btn-ghost{background:var(--panel);color:var(--muted);border:1px solid var(--line)}
+  .btn-ghost:hover{color:var(--text);border-color:var(--accent-dim)}
+  .error-note{display:none;color:var(--red);font-size:.9rem;margin-top:12px;font-weight:600}
+  .error-note.show{display:block}
+  #results{display:none;border:1px solid var(--accent-dim);border-radius:var(--radius);background:linear-gradient(180deg,var(--panel2),var(--panel));padding:28px;margin-top:24px}
+  #results.show{display:block}
+  .score-line{display:flex;align-items:center;gap:20px;flex-wrap:wrap;margin-bottom:16px}
+  .score-ring{width:110px;height:110px;border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;flex:none;
+    border:5px solid var(--accent);font-weight:800}
+  .score-ring .num{font-size:2rem;line-height:1}
+  .score-ring .of{font-size:.7rem;color:var(--muted)}
+  .tier{font-size:1.15rem;font-weight:800;margin:0}
+  .tier small{display:block;font-weight:400;color:var(--muted);font-size:.9rem;margin-top:6px;max-width:46ch}
+  .fix{border:1px solid var(--line);border-radius:10px;padding:16px 18px;margin:12px 0;background:var(--bg-soft)}
+  .fix .prio{font-size:.7rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;margin-bottom:6px}
+  .prio.crit{color:var(--red)} .prio.high{color:var(--amber)} .prio.med{color:var(--accent-bright)}
+  .fix strong{font-size:1rem}
+  .fix p{color:var(--muted);font-size:.9rem;margin:6px 0 0}
+  .cta{background:linear-gradient(180deg,var(--panel2),var(--panel));border:1px solid var(--accent-dim);border-radius:var(--radius);
+       padding:28px;margin:48px 0;text-align:center;box-shadow:0 16px 40px rgba(0,0,0,.35)}
+  .cta h2{margin:0 0 10px;font-size:1.3rem}
+  .cta p{color:var(--muted);margin-bottom:18px}
+  .disclaimer{font-size:.82rem;color:var(--faint);border:1px dashed var(--line);border-radius:8px;padding:12px 16px;margin:32px 0}
+  .faq details{border:1px solid var(--line);border-radius:10px;background:var(--panel);padding:14px 18px;margin:10px 0}
+  .faq summary{font-weight:700;cursor:pointer}
+  .faq summary::marker{color:var(--accent)}
+  .faq details p{color:var(--muted);margin:10px 0 4px;font-size:.94rem}
+  footer.site{border-top:1px solid var(--line);background:var(--bg-soft);padding:22px 0;margin-top:48px}
+  footer.site .wrap{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px 16px;max-width:1040px;padding:0 24px}
+  footer.site{color:var(--muted);font-size:.82rem}
+  footer.site a{color:var(--muted);text-decoration:none;margin-left:14px}
+  footer.site a:hover{color:var(--accent-bright)}
+  #backtop{position:fixed;right:22px;bottom:22px;width:46px;height:46px;border-radius:50%;border:1px solid var(--line);background:var(--panel);color:var(--accent);font-size:1.3rem;cursor:pointer;opacity:0;pointer-events:none;transition:opacity .2s var(--ease);z-index:150}
+  #backtop.show{opacity:1;pointer-events:auto}
+  @media(max-width:640px){nav.main a:not(:last-child){display:none}footer.site .wrap{justify-content:center;text-align:center}footer.site a{margin:0 7px}}
+  @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{animation:none!important;transition:none!important}}
+  .skip{position:absolute;left:-9999px;top:0;background:var(--accent);color:var(--accent-ink);padding:10px 18px;font-weight:700;z-index:200;border-radius:0 0 8px 0}
+  .skip:focus{left:0}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site"><div class="wrap">
+  <a class="brand" href="../../">
+    <svg width="22" height="22" viewBox="0 0 26 26" fill="none" aria-hidden="true"><circle cx="5" cy="6" r="2.4" fill="#e07a5f"/><circle cx="21" cy="6" r="2.4" fill="#e07a5f"/><circle cx="13" cy="13" r="2.4" fill="#e07a5f"/><circle cx="5" cy="20" r="2.4" fill="#e07a5f"/><circle cx="21" cy="20" r="2.4" fill="#e07a5f"/><path d="M6.6 7.4L11.2 11.8M19.4 7.4L14.8 11.8M6.6 18.6L11.2 14.2M19.4 18.6L14.8 14.2" stroke="#e07a5f" stroke-width="1.4"/></svg>
+    ghostcorpnet
+  </a>
+  <nav class="main" aria-label="Primary"><a href="../../">Home</a><a href="../../products/">Catalog</a><a href="../../brands/">Stores</a><a href="../../ecosystem/">Ecosystem</a><a href="../../articles/">Articles</a><a href="../../changelog.html">Changelog</a></nav>
+</div></header>
+<main class="wrap" id="main" tabindex="-1">
+  <p class="crumb"><a href="../../">Home</a> · <a href="../">Free tools</a></p>
+  <p class="pill">Free tool · 3 minutes</p>
+  <h1>EU AI Act Readiness Checker</h1>
+  <p class="date">By <a href="../../about.html" rel="author">ghostcorpnet Studio</a> · Free self-assessment</p>
+  <p class="lead">Answer 10 questions about how your team deploys AI. You'll get a readiness score out of 100, your risk tier, and a prioritized fix list for the gaps that matter most.</p>
+
+  <div class="hero-tool" id="checker" aria-label="EU AI Act readiness checker">
+    <div class="progress-wrap" role="progressbar" aria-label="Questions answered" aria-valuemin="0" aria-valuemax="10" aria-valuenow="0" id="progress-bar"><div id="progress-fill"></div></div>
+    <form id="quiz" novalidate>
+
+      <fieldset class="q" data-q="production">
+        <p class="q-title"><span aria-hidden="true">1.</span> Do you deploy AI systems or AI agents in production?</p>
+        <p class="q-hint">The Act applies to providers and deployers who put AI on the market or into service — including API-powered agents.</p>
+        <div class="opts">
+          <label><input type="radio" name="production" value="0"> <span>No AI in production yet (evaluating or planning)</span></label>
+          <label><input type="radio" name="production" value="1"> <span>One pilot or experiment in production</span></label>
+          <label><input type="radio" name="production" value="2"> <span>Several AI systems in production, managed ad-hoc</span></label>
+          <label><input type="radio" name="production" value="3"> <span>Multiple systems in production with a governed process</span></label>
+        </div>
+      </fieldset>
+
+      <fieldset class="q" data-q="highrisk">
+        <p class="q-title"><span aria-hidden="true">2.</span> Do any of your AI use cases fall in EU high-risk categories?</p>
+        <p class="q-hint">Recruiting or worker management, credit or insurance pricing, education, law enforcement, biometrics, migration, or safety components of regulated products (Annex III).</p>
+        <div class="opts">
+          <label><input type="radio" name="highrisk" value="3"> <span>None of our use cases fit high-risk categories</span></label>
+          <label><input type="radio" name="highrisk" value="2"> <span>We checked and ruled high-risk out, documented</span></label>
+          <label><input type="radio" name="highrisk" value="1"> <span>Possibly — we haven't done a formal classification</span></label>
+          <label><input type="radio" name="highrisk" value="0"> <span>Yes, we operate at least one high-risk use case</span></label>
+        </div>
+      </fieldset>
+
+      <fieldset class="q" data-q="gpai">
+        <p class="q-title"><span aria-hidden="true">3.</span> Do you build on general-purpose AI models (foundation models)?</p>
+        <p class="q-hint">GPAI obligations (technical documentation, training-data summaries, copyright policy) apply to providers from August 2025 — deployers inherit downstream duties.</p>
+        <div class="opts">
+          <label><input type="radio" name="gpai" value="3"> <span>No — we use narrow, task-specific models only</span></label>
+          <label><input type="radio" name="gpai" value="2"> <span>Yes, via a vendor API, and we know their model documentation</span></label>
+          <label><input type="radio" name="gpai" value="1"> <span>Yes, via API, but we haven't reviewed the provider's docs</span></label>
+          <label><input type="radio" name="gpai" value="0"> <span>Yes — we train or fine-tune foundation models ourselves</span></label>
+        </div>
+      </fieldset>
+
+      <fieldset class="q" data-q="logging">
+        <p class="q-title"><span aria-hidden="true">4.</span> How complete are your logs and audit trails?</p>
+        <p class="q-hint">Record-keeping — who did what, when, and why — is a core obligation for high-risk systems and the backbone of any incident defense.</p>
+        <div class="opts">
+          <label><input type="radio" name="logging" value="0"> <span>None to speak of</span></label>
+          <label><input type="radio" name="logging" value="1"> <span>Basic application logs, no AI-specific trail</span></label>
+          <label><input type="radio" name="logging" value="2"> <span>We log model inputs/outputs and key decisions</span></label>
+          <label><input type="radio" name="logging" value="3"> <span>Immutable audit trail with retention policy, reviewed regularly</span></label>
+        </div>
+      </fieldset>
+
+      <fieldset class="q" data-q="oversight">
+        <p class="q-title"><span aria-hidden="true">5.</span> What does human oversight look like for your AI's decisions?</p>
+        <p class="q-hint">The Act requires human oversight proportionate to risk — the higher the stakes, the closer the human must be.</p>
+        <div class="opts">
+          <label><input type="radio" name="oversight" value="0"> <span>Fully autonomous — no human in the loop</span></label>
+          <label><input type="radio" name="oversight" value="1"> <span>Humans review occasionally or after the fact</span></label>
+          <label><input type="radio" name="oversight" value="2"> <span>Human-on-the-loop for consequential actions</span></label>
+          <label><input type="radio" name="oversight" value="3"> <span>Human approves high-stakes actions; kill switch tested</span></label>
+        </div>
+      </fieldset>
+
+      <fieldset class="q" data-q="data">
+        <p class="q-title"><span aria-hidden="true">6.</span> Is your training and fine-tuning data documented?</p>
+        <p class="q-hint">Data governance — sources, lineage, consent, and rights — is a named high-risk obligation and a frequent audit target.</p>
+        <div class="opts">
+          <label><input type="radio" name="data" value="0"> <span>No documentation of data sources</span></label>
+          <label><input type="radio" name="data" value="1"> <span>Informal notes; we could reconstruct it</span></label>
+          <label><input type="radio" name="data" value="2"> <span>Documented for main datasets, gaps remain</span></label>
+          <label><input type="radio" name="data" value="3"> <span>Full lineage: sources, consent, licensing, and retention</span></label>
+        </div>
+      </fieldset>
+
+      <fieldset class="q" data-q="incidents">
+        <p class="q-title"><span aria-hidden="true">7.</span> Do you have an AI incident response plan?</p>
+        <p class="q-hint">Serious incidents must be reported to regulators; the plan has to exist before the incident, not after.</p>
+        <div class="opts">
+          <label><input type="radio" name="incidents" value="0"> <span>No plan</span></label>
+          <label><input type="radio" name="incidents" value="1"> <span>We'd improvise using our general IT incident process</span></label>
+          <label><input type="radio" name="incidents" value="2"> <span>Draft AI-specific plan exists, not yet tested</span></label>
+          <label><input type="radio" name="incidents" value="3"> <span>Documented plan, tested, with reporting thresholds defined</span></label>
+        </div>
+      </fieldset>
+
+      <fieldset class="q" data-q="docs">
+        <p class="q-title"><span aria-hidden="true">8.</span> Do you maintain technical documentation for each AI system?</p>
+        <p class="q-hint">High-risk providers must keep technical documentation that lets regulators assess compliance — and deployers need their own records.</p>
+        <div class="opts">
+          <label><input type="radio" name="docs" value="0"> <span>None</span></label>
+          <label><input type="radio" name="docs" value="1"> <span>Outdated docs from the original build</span></label>
+          <label><input type="radio" name="docs" value="2"> <span>Docs exist but miss key details (data, limits, evaluations)</span></label>
+          <label><input type="radio" name="docs" value="3"> <span>Current docs covering architecture, data, limits, and evaluations</span></label>
+        </div>
+      </fieldset>
+
+      <fieldset class="q" data-q="testing">
+        <p class="q-title"><span aria-hidden="true">9.</span> How do you test for accuracy, robustness, and abuse?</p>
+        <p class="q-hint">Accuracy, robustness, and cybersecurity are explicit high-risk requirements — including adversarial and red-team testing proportionate to risk.</p>
+        <div class="opts">
+          <label><input type="radio" name="testing" value="0"> <span>We don't formally test beyond launch</span></label>
+          <label><input type="radio" name="testing" value="1"> <span>Tested once at launch</span></label>
+          <label><input type="radio" name="testing" value="2"> <span>Periodic evaluations; no adversarial testing</span></label>
+          <label><input type="radio" name="testing" value="3"> <span>Regular evaluations plus adversarial/red-team testing</span></label>
+        </div>
+      </fieldset>
+
+      <fieldset class="q" data-q="monitoring">
+        <p class="q-title"><span aria-hidden="true">10.</span> How do you monitor your AI after deployment?</p>
+        <p class="q-hint">Post-market monitoring — catching drift, misuse, and degradation — is a deployer obligation under the Act.</p>
+        <div class="opts">
+          <label><input type="radio" name="monitoring" value="0"> <span>Reactive only — we find out when users complain</span></label>
+          <label><input type="radio" name="monitoring" value="1"> <span>Periodic manual reviews</span></label>
+          <label><input type="radio" name="monitoring" value="2"> <span>Automated alerts on basic metrics</span></label>
+          <label><input type="radio" name="monitoring" value="3"> <span>Continuous monitoring with drift, abuse, and quality detection</span></label>
+        </div>
+      </fieldset>
+
+      <p class="error-note" id="error-note" role="alert">Please answer all 10 questions to get your score.</p>
+      <div class="btn-row">
+        <button type="submit" class="btn">Get my readiness score</button>
+        <button type="button" class="btn btn-ghost" id="reset-btn">Start over</button>
+      </div>
+    </form>
+
+    <div id="results" role="status" aria-live="polite">
+      <div class="score-line">
+        <div class="score-ring" id="score-ring"><span class="num" id="score-num">0</span><span class="of">/ 100</span></div>
+        <p class="tier" id="tier-line"></p>
+      </div>
+      <h3 id="fix-heading">Your prioritized fix list</h3>
+      <div id="fix-list"></div>
+      <p class="disclaimer" style="margin:20px 0 0">This is an informational self-assessment, not legal advice. It scores operational readiness — it does not determine your legal classification under the EU AI Act. For binding answers, consult qualified counsel.</p>
+    </div>
+  </div>
+
+  <h2 id="how-scoring-works">How scoring works</h2>
+  <p>Each of the 10 answers earns 0–3 points, for a maximum of 30. Your score is that total scaled to 100. The fix list below your score is sorted by impact: each gap is weighted by how much regulators care — a missing audit trail on a high-risk system outranks a missing document on a pilot, and your list reflects that.</p>
+  <ul>
+    <li><strong>80–100 — Strong readiness.</strong> A minimal-risk posture: keep monitoring and keep docs current.</li>
+    <li><strong>55–79 — Progressing.</strong> Foundations exist; a few specific obligations are unmet.</li>
+    <li><strong>30–54 — Exposed.</strong> Meaningful gaps a regulator or enterprise buyer would flag.</li>
+    <li><strong>0–29 — High exposure.</strong> Treat your deployment as high-risk until proven otherwise and close the critical gaps first.</li>
+  </ul>
+
+  <h2 id="how-the-playbook-helps">How the Governed Agent Mesh Playbook helps</h2>
+  <p>The checker finds your gaps; closing them takes a system. The <strong>Governed Agent Mesh Playbook — Studio Edition ($29)</strong> is a 20-page field manual for exactly this work: use-case tiering worksheets so you know which obligations apply to you, approval-gate patterns that put humans back in the loop, audit-trail templates that satisfy record-keeping, and an incident-response runbook you can adapt instead of writing from scratch. Every critical fix on your list maps to a section of the playbook.</p>
+
+  <h2 id="faq">FAQ</h2>
+  <div class="faq">
+    <details><summary>What is the EU AI Act?</summary><p>The EU AI Act is the European Union's comprehensive law regulating artificial intelligence, in force since August 2024. It takes a risk-based approach: AI systems are sorted into prohibited, high-risk, limited-risk (transparency obligations), and minimal-risk tiers, each with its own set of obligations.</p></details>
+    <details><summary>Does the EU AI Act apply to companies outside the EU?</summary><p>Yes, it has extraterritorial reach. It applies to providers and deployers whose AI systems are placed on the EU market or whose outputs are used in the EU — even if the company itself is based elsewhere. If your AI product or service touches EU users, it likely applies.</p></details>
+    <details><summary>When do the EU AI Act's main obligations take effect?</summary><p>The Act phases in: prohibitions applied from February 2025, general-purpose AI model obligations from August 2025, and the full obligations for high-risk AI systems apply from August 2026 (some extended to 2027). Companies deploying AI now should be preparing, not waiting.</p></details>
+    <details><summary>What counts as a high-risk AI system?</summary><p>High-risk systems include AI used for recruitment and worker management, access to education, creditworthiness and insurance pricing, law enforcement, migration, biometric identification, safety components of regulated products, and certain uses in critical infrastructure, among others listed in Annex III of the Act.</p></details>
+    <details><summary>What are the fines under the EU AI Act?</summary><p>Fines scale with the violation: up to €35 million or 7% of global annual turnover for prohibited AI practices, up to €15 million or 3% for most other violations, and up to €7.5 million or 1.5% for supplying incorrect or misleading information.</p></details>
+    <details><summary>Is this checker legal advice?</summary><p>No. This tool is an informational self-assessment for operational readiness — it is not legal advice and does not determine your legal classification under the Act. For binding answers, consult qualified counsel.</p></details>
+  </div>
+
+  <div class="cta">
+    <h2 id="put-this-into-practice">Put your fix list into practice</h2>
+    <p>The Governed Agent Mesh Playbook — Studio Edition ($29) gives you the full system behind every fix: tiering, approvals, spend controls, and incident response, ready to run.</p>
+    <a class="btn" href="https://koalstin.gumroad.com/l/hdigmr" referrerpolicy="no-referrer">Get the Studio Edition — $29</a>
+    <p style="margin-top:12px"><a href="../../products/">Or browse the full catalog of products &rarr;</a></p>
+  </div>
+</main>
+<footer class="site">
+  <div class="wrap">
+    <span>© <span id="yr">2026</span> ghostcorpnet · An independent studio</span>
+    <span><a href="../../">Home</a><a href="../../products/">Catalog</a><a href="../../brands/">Stores</a><a href="../../ecosystem/">Ecosystem</a><a href="../../articles/">Articles</a><a href="../../changelog.html">Changelog</a><a href="../../sitemap.html">Site index</a><a href="mailto:corpghost420@gmail.com">Contact</a><a href="../../terms.html">Terms</a><a href="../../privacy.html">Privacy</a></span>
+  </div>
+</footer>
+<button id="backtop" aria-label="Back to top">↑</button>
+<script>
+(function(){
+  var form = document.getElementById('quiz');
+  var fill = document.getElementById('progress-fill');
+  var bar = document.getElementById('progress-bar');
+  var errorNote = document.getElementById('error-note');
+  var results = document.getElementById('results');
+  var QUESTIONS = [
+    {key:'production', weight:1, label:'Production AI footprint',
+     fix:'Inventory every AI system in production.',
+     why:'You cannot govern what you have not listed. Maintain a registry of every AI system and agent in production with owner, data, and purpose.'},
+    {key:'highrisk', weight:4, label:'High-risk classification',
+     fix:'Formally classify each use case against Annex III.',
+     why:'High-risk status triggers the heaviest obligations (risk management, documentation, conformity assessment). Document the classification decision — "we never checked" is itself the gap.'},
+    {key:'gpai', weight:2, label:'General-purpose model obligations',
+     fix:'Review your GPAI providers\' technical documentation.',
+     why:'If you build on foundation models, you inherit downstream duties. Keep the provider\'s model documentation, training-data summary, and acceptable-use terms on file.'},
+    {key:'logging', weight:3, label:'Audit trails and record-keeping',
+     fix:'Build an immutable audit trail for agent actions.',
+     why:'Log who (or which agent) did what, when, and on what basis — with retention. This is the single most audited control in AI governance.'},
+    {key:'oversight', weight:3, label:'Human oversight and kill switches',
+     fix:'Put humans in the loop for consequential actions.',
+     why:'Define which actions need human approval, implement a working kill switch, and test it. Oversight must be proportionate to the stakes of the decision.'},
+    {key:'data', weight:2, label:'Data governance and lineage',
+     fix:'Document data sources, consent, and licensing.',
+     why:'Record where training and fine-tuning data came from, what rights you have, and how long you keep it. Gaps here are a frequent audit finding.'},
+    {key:'incidents', weight:2, label:'Incident response and reporting',
+     fix:'Write and tabletop-test an AI incident response plan.',
+     why:'Define what counts as a serious AI incident, who decides, and how it gets reported to regulators. The plan must exist before the incident.'},
+    {key:'docs', weight:2, label:'Technical documentation',
+     fix:'Bring technical documentation up to date.',
+     why:'Document architecture, data, intended use, known limits, and evaluation results per system. Regulators — and enterprise buyers — will ask for it.'},
+    {key:'testing', weight:2, label:'Robustness and adversarial testing',
+     fix:'Start adversarial and red-team testing.',
+     why:'Beyond functional tests, probe for prompt injection, data poisoning, and failure under adversarial inputs — proportionate to your risk tier.'},
+    {key:'monitoring', weight:2, label:'Post-market monitoring',
+     fix:'Set up continuous post-deployment monitoring.',
+     why:'Watch for model drift, quality degradation, and misuse in production. Post-market monitoring is an explicit deployer obligation.'}
+  ];
+
+  function answered(){
+    var n = 0;
+    QUESTIONS.forEach(function(q){
+      if (form.querySelector('input[name="'+q.key+'"]:checked')) n++;
+    });
+    return n;
+  }
+  function updateProgress(){
+    var n = answered();
+    fill.style.width = (n/10*100) + '%';
+    bar.setAttribute('aria-valuenow', n);
+    if (n === 10) errorNote.classList.remove('show');
+  }
+  form.addEventListener('change', updateProgress);
+  updateProgress();
+
+  function tierFor(score){
+    if (score >= 80) return ['Strong readiness', 'A minimal-risk posture. Keep monitoring and keep your documentation current — compliance decays without maintenance.', 'var(--green)'];
+    if (score >= 55) return ['Progressing', 'Your foundations exist, but specific obligations are unmet. Work the fix list top-down.', 'var(--amber)'];
+    if (score >= 30) return ['Exposed', 'Meaningful gaps a regulator or enterprise buyer would flag. Start with the critical items today.', 'var(--amber)'];
+    return ['High exposure', 'Treat your deployment as high-risk until proven otherwise. Close the critical gaps before expanding your AI footprint.', 'var(--red)'];
+  }
+
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    var n = answered();
+    if (n < 10){ errorNote.classList.add('show'); errorNote.scrollIntoView({block:'center', behavior:'smooth'}); return; }
+    errorNote.classList.remove('show');
+    var total = 0, gaps = [];
+    QUESTIONS.forEach(function(q){
+      var v = parseInt(form.querySelector('input[name="'+q.key+'"]:checked').value, 10);
+      total += v;
+      var gap = (3 - v) * q.weight;
+      if (v < 3) gaps.push({gap:gap, q:q});
+    });
+    var score = Math.round(total / 30 * 100);
+    document.getElementById('score-num').textContent = score;
+    document.getElementById('score-ring').style.borderColor = tierFor(score)[2];
+    var t = tierFor(score);
+    document.getElementById('tier-line').innerHTML = t[0] + '<small>' + t[1] + '</small>';
+    gaps.sort(function(a,b){ return b.gap - a.gap; });
+    var list = document.getElementById('fix-list');
+    list.innerHTML = '';
+    if (!gaps.length){
+      list.innerHTML = '<p style="color:var(--muted)">No gaps found — exemplary. Re-run this check quarterly or whenever you ship a new AI system.</p>';
+    } else {
+      gaps.forEach(function(g, i){
+        var prio = g.gap >= 9 ? ['Critical', 'crit'] : g.gap >= 5 ? ['High', 'high'] : ['Medium', 'med'];
+        var div = document.createElement('div');
+        div.className = 'fix';
+        div.innerHTML = '<p class="prio ' + prio[1] + '">' + (i+1) + ' · ' + prio[0] + ' · ' + g.q.label + '</p>' +
+                        '<strong>' + g.q.fix + '</strong><p>' + g.q.why + '</p>';
+        list.appendChild(div);
+      });
+    }
+    results.classList.add('show');
+    results.scrollIntoView({block:'start', behavior:'smooth'});
+  });
+
+  document.getElementById('reset-btn').addEventListener('click', function(){
+    form.reset();
+    results.classList.remove('show');
+    updateProgress();
+    document.getElementById('checker').scrollIntoView({block:'start', behavior:'smooth'});
+  });
+})();
+</script>
+<script>
+(function(){var b=document.getElementById('backtop');if(!b)return;
+function onScroll(){b.classList.toggle('show',window.scrollY>1200)}
+window.addEventListener('scroll',onScroll,{passive:true});onScroll();
+b.addEventListener('click',function(){window.scrollTo({top:0,behavior:'smooth'})});})();
+</script>
+<script>document.getElementById('yr').textContent=new Date().getFullYear();</script>
+<script>try{fetch("https://kestrelattice-approvals.koalstin-g-k-delaney.workers.dev/pv?p="+encodeURIComponent(location.pathname),{mode:"no-cors",keepalive:true}).catch(function(){})}catch(e){}</script>
+</body>
+</html>
