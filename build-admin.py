@@ -1937,6 +1937,35 @@ def _universe_html():
                f"${t.get('court_attributed_usd', 0):,.0f} bot-earned")
         + "</div>")
 
+    reg = u.get("registry", {})
+    reg_total = reg.get("total", 0)
+    reg_live = reg.get("live", 0)
+    reg_building = reg.get("building", 0)
+    reg_sec = ""
+    if reg_total:
+        pct = int(100 * reg_live / reg_total)
+        wnames = {"signal": ("📡", "The Signal"), "marketplace": ("🏪", "The Marketplace"),
+                  "exchange": ("🏠", "The Exchange"), "forge": ("🔥", "The Forge"),
+                  "operations": ("⚙️", "Operations")}
+        bars = ""
+        for w in ("signal", "marketplace", "exchange", "forge", "operations"):
+            tot = (reg.get("by_world") or {}).get(w, 0)
+            lv = (reg.get("live_by_world") or {}).get(w, 0)
+            if not tot:
+                continue
+            wp = int(100 * lv / tot)
+            emoji, wname = wnames.get(w, ("", w))
+            bars += (
+                f"<div class='ureg-row'><span class='ureg-w'>{emoji} {esc(wname)}</span>"
+                f"<div class='ureg-bar'><div class='ureg-fill' style='width:{wp}%'></div></div>"
+                f"<span class='ureg-n'>{lv}/{tot}</span></div>")
+        reg_sec = (
+            f"""<div class="card"><h3>🧱 The 100 things this universe needs</h3>
+<p class='muted'>Every component the universe needs to make money — tools, channels, deals, systems. The bots build them in order; this bar fills on its own.</p>
+<div class='ureg-big'><div class='ureg-bigfill' style='width:{pct}%'></div></div>
+<p style='font-weight:700'>{reg_live} live · {reg_building} being built · {reg.get('queued', 0)} queued — {pct}% of 100</p>
+{bars}</div>""")
+
     def world(emoji, name, what, stat, goto):
         return (
             f'<div class="card"><h3>{emoji} {esc(name)}</h3>'
@@ -2008,11 +2037,18 @@ def _universe_html():
 .tbl{width:100%;border-collapse:collapse;font-size:.88rem}
 .tbl th{text-align:left;color:var(--muted);font-weight:600;padding:8px 10px;border-bottom:1px solid var(--line)}
 .tbl td{padding:9px 10px;border-bottom:1px solid var(--line)}
+.ureg-big{background:var(--panel2);border:1px solid var(--line);border-radius:999px;height:18px;overflow:hidden;margin:10px 0}
+.ureg-bigfill{height:100%;background:linear-gradient(90deg,var(--accent),var(--accent-deep));border-radius:999px;transition:width .6s}
+.ureg-row{display:flex;align-items:center;gap:10px;margin:7px 0;font-size:.88rem}
+.ureg-w{flex:0 0 150px;font-weight:600}
+.ureg-bar{flex:1;background:var(--panel2);border:1px solid var(--line);border-radius:999px;height:10px;overflow:hidden}
+.ureg-fill{height:100%;background:var(--accent);border-radius:999px}
+.ureg-n{flex:0 0 52px;text-align:right;color:var(--muted);font-size:.8rem}
 </style>"""
 
     stamp = (f"<p class='muted' style='margin-top:6px'>Treasury snapshot: {esc(upd_s)}.</p>"
              if upd_s else "")
-    return scoped + treasury + worlds + flow + deals_card + jobs + stamp
+    return scoped + treasury + reg_sec + worlds + flow + deals_card + jobs + stamp
 
 
 def _all_panes(products, queue, entries, title_map, omap):
