@@ -449,11 +449,11 @@ def backend_js():
     wurl = read_file(os.path.join(wdir, ".worker-url")).strip().rstrip("/")
     return (
         '<script>\n'
-        'const WURL = ' + json.dumps(wurl) + ';\n'
+        'const WURL = ""; // same-origin: panel talks to its serving worker\n'
         'let WKEY = "";\n'
         'try { WKEY = new URLSearchParams(location.search).get("key") || localStorage.getItem("kestrelattice_admin_remember") || ""; } catch (e) {}\n'
         'async function approveCode(code, btn, doneLabel) {\n'
-        '  if (!WURL || !WKEY) { alert("Not connected: no admin key on this device. Open the admin login page again and tick \\"Remember on this device\\"."); return false; }\n'
+        '  if (!WKEY) { alert("Not connected: no admin key on this device. Open the admin login page again and tick \\"Remember on this device\\"."); return false; }\n'
         '  if (btn) { btn.disabled = true; btn.textContent = "Working…"; }\n'
         '  try {\n'
         '    const r = await fetch(WURL + "/approve", {method: "POST",\n'
@@ -563,7 +563,7 @@ def action_center_section():
         '<script>\n'
         'async function loadTaps() {\n'
         '  const el = document.getElementById("taplist");\n'
-        '  if (!WURL || !WKEY) { el.innerHTML = "<p class=\'muted\'>Not connected: no admin key on this device. Open the admin login page and tick \\"Remember on this device\\".</p>"; return; }\n'
+        '  if (!WKEY) { el.innerHTML = "<p class=\'muted\'>Not connected: no admin key on this device. Open the admin login page and tick \\"Remember on this device\\".</p>"; return; }\n'
         '  let d = null, tapsLive = false;\n'
         '  try {\n'
         '    const r = await fetch(WURL + "/taps?key=" + encodeURIComponent(WKEY));\n'
@@ -811,7 +811,7 @@ def directory_section():
         '}\n'
         'async function loadDir() {\n'
         '  const el = document.getElementById("dirsub");\n'
-        '  if (!WURL || !WKEY) { el.innerHTML = "<p class=\'muted\'>Backend not connected.</p>"; return; }\n'
+        '  if (!WKEY) { el.innerHTML = "<p class=\'muted\'>Backend not connected.</p>"; return; }\n'
         '  try {\n'
         '    const r = await fetch(WURL + "/directory-submissions?key=" + encodeURIComponent(WKEY), {cache: "no-store"});\n'
         '    const subs = await r.json();\n'
@@ -1303,8 +1303,20 @@ def build():
 
 def upload_private(html):
     """Publish the dashboard to the key-gated worker route (not the public site)."""
-    import tempfile
+    import tempfile, hashlib, re
     try:
+        # KV-write diet (2026-10-09): skip the upload when the page content is
+        # unchanged. The BUILD_TS embed is excluded from the comparison so the
+        # timestamp alone never forces a write.
+        comparable = re.sub(r"var BUILD_TS = \d+;", "var BUILD_TS = 0;", html)
+        digest = hashlib.sha256(comparable.encode()).hexdigest()
+        hash_file = os.path.join(HOME, "workspace/kestrelattice/.admin-upload.sha256")
+        try:
+            if open(hash_file).read().strip() == digest:
+                print("private upload skipped: content unchanged")
+                return
+        except FileNotFoundError:
+            pass
         sec = json.loads(read_file(os.path.join(HOME, "workspace/kestrelattice/worker/.secrets.json")))
         wurl, skey = sec.get("worker_url", ""), sec.get("server_key", "")
         if not wurl or not skey:
@@ -1326,8 +1338,37 @@ def upload_private(html):
              "-H", "Content-Type: text/html; charset=utf-8",
              "--data-binary", "@" + tmp, wurl.rstrip("/") + "/admin-upload"],
             capture_output=True, text=True, timeout=120)
-        os.unlink(tmp)
         print("private upload:", r.stdout.strip()[:120] or r.stderr.strip()[:120])
+        # Record the hash only on a successful upload (ok:true in response).
+        if '"ok":true' in (r.stdout or "").replace(" ", ""):
+            try:
+                open(hash_file, "w").write(digest)
+            except Exception:
+                pass
+            # ACTIVE-ACTIVE FAN-OUT: same panel to every other healthy worker.
+            try:
+                sys.path.insert(0, os.path.join(
+                    HOME, "workspace/goals/kestrelattice-autonomous-growth/"
+                    "hidden_files/approvals"))
+                from workers import healthy_workers as _hw
+                for _name, _wurl in _hw(check_writes=True):
+                    if _wurl.rstrip("/") == wurl.rstrip("/"):
+                        continue
+                    _r = subprocess.run(
+                        ["curl", "-s", "-X", "POST", "-A", UA,
+                         "-H", "x-server-key: " + skey,
+                         "-H", "Content-Type: text/html; charset=utf-8",
+                         "--data-binary", "@" + tmp,
+                         _wurl.rstrip("/") + "/admin-upload"],
+                        capture_output=True, text=True, timeout=120)
+                    print(f"private upload -> {_name}:",
+                          _r.stdout.strip()[:80] or _r.stderr.strip()[:80])
+            except Exception as e:
+                print("private upload fan-out failed:", str(e)[:100])
+        try:
+            os.unlink(tmp)
+        except OSError:
+            pass
     except Exception as e:
         print("private upload failed:", e)
 
