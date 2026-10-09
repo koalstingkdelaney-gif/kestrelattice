@@ -405,32 +405,41 @@ export default {
       return json({ ok: true, resolved: await readResolved() });
     }
 
-    // ---- Rogue-bot sandbox (private, key-gated) -----------------------------
-    // koalstin ordered 2026-10-08: any bot that goes rogue gets
-    // auto-quarantined; a clean clone replaces it so duties continue. Inside
-    // the sandbox the bots can read/draft/plan/chat but never touch live
+    // ---- Sandbox routes (private, key-gated) --------------------------------
+    // koalstin ordered 2026-10-08: multiple independent sandboxes. Any bot
+    // that goes rogue gets auto-quarantined; a clean clone replaces it so
+    // duties continue. A 50-bot research crew also lives in sandboxes. Inside
+    // a sandbox the bots can read/draft/plan/chat but never touch live
     // systems (no sends, no queue writes, no money, no publishing). The
     // Sandbox tab in the private admin panel reads these routes:
-    //   GET  /sandbox/rogues?key=        -> {ok:true, rogues:[...]}
-    //   GET  /sandbox/transcript?key=&limit= -> {ok:true, entries:[...]} last N
-    //   GET  /sandbox/chat?key=&rogue_id= -> {ok:true, thread:[...]}
-    //   POST /sandbox/chat {key, rogue_id, text} -> he talks to a rogue
-    //   POST /sandbox/chat-reply (x-server-key) -> sandbox-side bot replies
-    //   POST /sandbox/quarantine {key, job_id, reason} -> request to quarantine
-    //   POST /sandbox/release {key, rogue_id}          -> request to release
-    //   GET  /sandbox/inventions?key=     -> {ok:true, inventions:[...]}
-    //   POST /sandbox/invention {key, rogue_id, text}  -> logged invention
+    //   GET  /sandbox/sandboxes?key=        -> {ok:true, sandboxes:[...]}
+    //   POST /sandbox/sandboxes {key, name, purpose} -> {ok:true, id}
+    //   POST /sandbox/sandboxes/retire {key, id} -> {ok:true}
+    //   GET  /sandbox/rogues?key=&sandbox_id= -> {ok:true, rogues:[...]}
+    //   GET  /sandbox/crew?key=&sandbox_id=   -> {ok:true, crew:[...]}
+    //   GET  /sandbox/transcript?key=&sandbox_id=&limit= -> entries (last N)
+    //   GET  /sandbox/chat?key=&sandbox_id=&bot_id= -> {ok:true, thread:[]}
+    //   POST /sandbox/chat {key, sandbox_id, bot_id, text} -> he talks to a bot
+    //   POST /sandbox/chat-reply (x-server-key) {sandbox_id, bot_id, text, from}
+    //   POST /sandbox/quarantine {key, job_id, reason, sandbox_id} -> request
+    //   POST /sandbox/release {key, rogue_id}                -> request
+    //   POST /sandbox/move-bot {key, bot_ref, to_sandbox}    -> request
+    //   GET  /sandbox/inventions?key=&sandbox_id=&bot_id= -> {ok:true, inventions}
+    //   POST /sandbox/invention {key, sandbox_id, bot_id, bot_name, text}
     //   POST /sandbox/promote {key, invention_id, dest, contact_email}
     //   GET  /sandbox/requests (x-server-key) -> {ok:true, requests:[...]}
     //   POST /sandbox/requests/ack (x-server-key) {id} -> status done
-    //   POST /sandbox-sync (x-server-key) {rogues, transcript, inventions}
+    //   POST /sandbox-sync (x-server-key) {sandboxes, crew, rogues,
+    //                                      transcript, inventions}
     // User routes are key-gated (tapGate); wrong/missing key -> 404 "Not
     // found" like /taps. Server routes require x-server-key == SERVER_KEY.
-    const SB_ROGUES = "sandbox_rogues";
-    const SB_TRANSCRIPT = "sandbox_transcript";
-    const SB_THREADS = "sandbox_threads";
-    const SB_INVENTIONS = "sandbox_inventions";
-    const SB_REQUESTS = "sandbox_requests";
+    const SB_SANDBOXES = "sb_sandboxes";
+    const SB_CREW = "sb_crew";
+    const SB_ROGUES = "sb_rogues";
+    const SB_TRANSCRIPT = "sb_transcript";
+    const SB_THREADS = "sb_threads";
+    const SB_INVENTIONS = "sb_inventions";
+    const SB_REQUESTS = "sb_requests";
 
     const readSb = async (k, fallback) => {
       const raw = await env.APPROVALS.get(k);
@@ -442,6 +451,8 @@ export default {
       }
     };
     const writeSb = (k, v) => env.APPROVALS.put(k, JSON.stringify(v));
+    const readSbSandboxes = () => readSb(SB_SANDBOXES, []);
+    const readSbCrew = () => readSb(SB_CREW, []);
     const readSbRogues = () => readSb(SB_ROGUES, []);
     const readSbTranscript = () => readSb(SB_TRANSCRIPT, []);
     const readSbThreads = () => readSb(SB_THREADS, {});
@@ -456,10 +467,87 @@ export default {
       await writeSb(SB_REQUESTS, requests);
       return r;
     };
+    const slugify = (s) =>
+      String(s)
+        .toLowerCase()
+        .replace(/[^a-z0-9]+/g, "-")
+        .replace(/^-+|-+$/g, "")
+        .slice(0, 40) || "box";
+    const readJsonBody = async () => {
+      try {
+        return await req.json();
+      } catch {
+        return null;
+      }
+    };
+    const requireUserKey = (body) => body && body.key && body.key === env.WRITE_KEY;
+
+    if (req.method === "GET" && url.pathname === "/sandbox/sandboxes") {
+      if (!tapGate()) return new Response("Not found", { status: 404 });
+      return json({ ok: true, sandboxes: await readSbSandboxes() });
+    }
+
+    if (req.method === "POST" && url.pathname === "/sandbox/sandboxes") {
+      const body = await readJsonBody();
+      if (!body) return json({ ok: false, error: "bad_json" }, 400);
+      if (!requireUserKey(body)) return new Response("Not found", { status: 404 });
+      const name = String(body.name || "").trim().slice(0, 60);
+      if (!name) return json({ ok: false, error: "missing_name" }, 400);
+      const purpose = String(body.purpose || "").trim().slice(0, 200);
+      const id = "sb-" + slugify(name) + "-" + Date.now().toString(36);
+      const boxes = await readSbSandboxes();
+      boxes.push({
+        id,
+        name,
+        purpose,
+        kind: "custom",
+        created_at: new Date().toISOString(),
+      });
+      await writeSb(SB_SANDBOXES, boxes);
+      return json({ ok: true, id });
+    }
+
+    if (req.method === "POST" && url.pathname === "/sandbox/sandboxes/retire") {
+      const body = await readJsonBody();
+      if (!body) return json({ ok: false, error: "bad_json" }, 400);
+      if (!requireUserKey(body)) return new Response("Not found", { status: 404 });
+      const id = String(body.id || "").trim();
+      if (!id) return json({ ok: false, error: "missing_id" }, 400);
+      const boxes = await readSbSandboxes();
+      const box = boxes.find((b) => b.id === id);
+      if (!box) return json({ ok: false, error: "unknown_id" }, 404);
+      if (box.kind !== "custom") return json({ ok: false, error: "not_custom" }, 400);
+      const rogues = await readSbRogues();
+      const crew = await readSbCrew();
+      const occupied = (rec) =>
+        rec &&
+        rec.sandbox_id === id &&
+        (rec.status === "active" || rec.status === "quarantined");
+      if (rogues.some(occupied) || crew.some(occupied)) {
+        return json({ ok: false, error: "not_empty" }, 400);
+      }
+      await writeSb(SB_SANDBOXES, boxes.filter((b) => b.id !== id));
+      return json({ ok: true });
+    }
 
     if (req.method === "GET" && url.pathname === "/sandbox/rogues") {
       if (!tapGate()) return new Response("Not found", { status: 404 });
-      return json({ ok: true, rogues: await readSbRogues() });
+      const sandbox_id = url.searchParams.get("sandbox_id");
+      const rogues = await readSbRogues();
+      return json({
+        ok: true,
+        rogues: sandbox_id ? rogues.filter((r) => r.sandbox_id === sandbox_id) : rogues,
+      });
+    }
+
+    if (req.method === "GET" && url.pathname === "/sandbox/crew") {
+      if (!tapGate()) return new Response("Not found", { status: 404 });
+      const sandbox_id = url.searchParams.get("sandbox_id");
+      const crew = await readSbCrew();
+      return json({
+        ok: true,
+        crew: sandbox_id ? crew.filter((c) => c.sandbox_id === sandbox_id) : crew,
+      });
     }
 
     if (req.method === "GET" && url.pathname === "/sandbox/transcript") {
@@ -467,91 +555,88 @@ export default {
       let limit = parseInt(url.searchParams.get("limit") || "100", 10);
       if (!Number.isFinite(limit) || limit < 1) limit = 100;
       limit = Math.min(limit, 500);
+      const sandbox_id = url.searchParams.get("sandbox_id");
       const entries = await readSbTranscript();
-      return json({ ok: true, entries: entries.slice(-limit) });
+      const filtered = sandbox_id
+        ? entries.filter((e) => e.sandbox_id === sandbox_id)
+        : entries;
+      return json({ ok: true, entries: filtered.slice(-limit) });
     }
 
     if (req.method === "GET" && url.pathname === "/sandbox/chat") {
       if (!tapGate()) return new Response("Not found", { status: 404 });
-      const rogue_id = url.searchParams.get("rogue_id");
+      const key =
+        String(url.searchParams.get("sandbox_id") || "").trim() +
+        ":" +
+        String(url.searchParams.get("bot_id") || "").trim();
       const threads = await readSbThreads();
-      return json({ ok: true, thread: rogue_id && threads[rogue_id] ? threads[rogue_id] : [] });
+      return json({
+        ok: true,
+        thread: threads[key] && Array.isArray(threads[key]) ? threads[key] : [],
+      });
     }
 
     if (req.method === "POST" && url.pathname === "/sandbox/chat") {
-      let body;
-      try {
-        body = await req.json();
-      } catch {
-        return json({ ok: false, error: "bad_json" }, 400);
+      const body = await readJsonBody();
+      if (!body) return json({ ok: false, error: "bad_json" }, 400);
+      if (!requireUserKey(body)) return new Response("Not found", { status: 404 });
+      const sandbox_id = String(body.sandbox_id || "").trim();
+      const bot_id = String(body.bot_id || "").trim();
+      if (!sandbox_id || !bot_id) {
+        return json({ ok: false, error: "missing_sandbox_or_bot" }, 400);
       }
-      if (!body.key || body.key !== env.WRITE_KEY) {
-        return new Response("Not found", { status: 404 });
-      }
-      const rogue_id = String(body.rogue_id || "").trim();
-      if (!rogue_id) return json({ ok: false, error: "missing_rogue_id" }, 400);
       const text = String(body.text || "").trim().slice(0, 2000);
       if (!text) return json({ ok: false, error: "empty" }, 400);
       const threads = await readSbThreads();
-      const thread = Array.isArray(threads[rogue_id]) ? threads[rogue_id] : [];
+      const key = sandbox_id + ":" + bot_id;
+      const thread = Array.isArray(threads[key]) ? threads[key] : [];
       thread.push({ ts: new Date().toISOString(), from: "koalstin", text });
-      threads[rogue_id] = thread.slice(-100);
+      threads[key] = thread.slice(-100);
       await writeSb(SB_THREADS, threads);
       return json({ ok: true });
     }
 
     if (req.method === "POST" && url.pathname === "/sandbox/chat-reply" && isServer) {
-      let body;
-      try {
-        body = await req.json();
-      } catch {
-        return json({ ok: false, error: "bad_json" }, 400);
+      const body = await readJsonBody();
+      if (!body) return json({ ok: false, error: "bad_json" }, 400);
+      const sandbox_id = String(body.sandbox_id || "").trim();
+      const bot_id = String(body.bot_id || "").trim();
+      if (!sandbox_id || !bot_id) {
+        return json({ ok: false, error: "missing_sandbox_or_bot" }, 400);
       }
-      const rogue_id = String(body.rogue_id || "").trim();
-      if (!rogue_id) return json({ ok: false, error: "missing_rogue_id" }, 400);
       const text = String(body.text || "").trim().slice(0, 2000);
       if (!text) return json({ ok: false, error: "empty" }, 400);
       const threads = await readSbThreads();
-      const thread = Array.isArray(threads[rogue_id]) ? threads[rogue_id] : [];
+      const key = sandbox_id + ":" + bot_id;
+      const thread = Array.isArray(threads[key]) ? threads[key] : [];
       thread.push({
         ts: new Date().toISOString(),
         from: String(body.from || "sandbox").slice(0, 80),
         text,
       });
-      threads[rogue_id] = thread.slice(-100);
+      threads[key] = thread.slice(-100);
       await writeSb(SB_THREADS, threads);
       return json({ ok: true });
     }
 
     if (req.method === "POST" && url.pathname === "/sandbox/quarantine") {
-      let body;
-      try {
-        body = await req.json();
-      } catch {
-        return json({ ok: false, error: "bad_json" }, 400);
-      }
-      if (!body.key || body.key !== env.WRITE_KEY) {
-        return new Response("Not found", { status: 404 });
-      }
+      const body = await readJsonBody();
+      if (!body) return json({ ok: false, error: "bad_json" }, 400);
+      if (!requireUserKey(body)) return new Response("Not found", { status: 404 });
       if (!body.job_id) return json({ ok: false, error: "missing_job_id" }, 400);
       const r = await pushSbRequest({
         type: "quarantine",
         job_id: String(body.job_id).slice(0, 200),
         reason: String(body.reason || "").slice(0, 300),
+        sandbox_id: String(body.sandbox_id || "").trim().slice(0, 200) || "quarantine",
       });
       return json({ ok: true, request_id: r.id });
     }
 
     if (req.method === "POST" && url.pathname === "/sandbox/release") {
-      let body;
-      try {
-        body = await req.json();
-      } catch {
-        return json({ ok: false, error: "bad_json" }, 400);
-      }
-      if (!body.key || body.key !== env.WRITE_KEY) {
-        return new Response("Not found", { status: 404 });
-      }
+      const body = await readJsonBody();
+      if (!body) return json({ ok: false, error: "bad_json" }, 400);
+      if (!requireUserKey(body)) return new Response("Not found", { status: 404 });
       if (!body.rogue_id) return json({ ok: false, error: "missing_rogue_id" }, 400);
       const r = await pushSbRequest({
         type: "release",
@@ -560,28 +645,43 @@ export default {
       return json({ ok: true, request_id: r.id });
     }
 
+    if (req.method === "POST" && url.pathname === "/sandbox/move-bot") {
+      const body = await readJsonBody();
+      if (!body) return json({ ok: false, error: "bad_json" }, 400);
+      if (!requireUserKey(body)) return new Response("Not found", { status: 404 });
+      if (!body.bot_ref) return json({ ok: false, error: "missing_bot_ref" }, 400);
+      if (!body.to_sandbox) return json({ ok: false, error: "missing_to_sandbox" }, 400);
+      const r = await pushSbRequest({
+        type: "move_bot",
+        bot_ref: String(body.bot_ref).slice(0, 200),
+        to_sandbox: String(body.to_sandbox).slice(0, 200),
+      });
+      return json({ ok: true, request_id: r.id });
+    }
+
     if (req.method === "GET" && url.pathname === "/sandbox/inventions") {
       if (!tapGate()) return new Response("Not found", { status: 404 });
-      return json({ ok: true, inventions: await readSbInventions() });
+      const sandbox_id = url.searchParams.get("sandbox_id");
+      const bot_id = url.searchParams.get("bot_id");
+      let inventions = await readSbInventions();
+      if (sandbox_id) inventions = inventions.filter((i) => i.sandbox_id === sandbox_id);
+      if (bot_id) inventions = inventions.filter((i) => i.bot_id === bot_id);
+      return json({ ok: true, inventions });
     }
 
     if (req.method === "POST" && url.pathname === "/sandbox/invention") {
-      let body;
-      try {
-        body = await req.json();
-      } catch {
-        return json({ ok: false, error: "bad_json" }, 400);
-      }
-      if (!body.key || body.key !== env.WRITE_KEY) {
-        return new Response("Not found", { status: 404 });
-      }
+      const body = await readJsonBody();
+      if (!body) return json({ ok: false, error: "bad_json" }, 400);
+      if (!requireUserKey(body)) return new Response("Not found", { status: 404 });
       const text = String(body.text || "").trim().slice(0, 4000);
       if (!text) return json({ ok: false, error: "empty" }, 400);
       const id = "inv-" + Date.now().toString(36);
       const inventions = await readSbInventions();
       inventions.push({
         id,
-        rogue_id: String(body.rogue_id || "").slice(0, 200),
+        sandbox_id: String(body.sandbox_id || "").trim().slice(0, 200),
+        bot_id: String(body.bot_id || "").trim().slice(0, 200),
+        bot_name: String(body.bot_name || "").trim().slice(0, 120),
         text,
         at: new Date().toISOString(),
         status: "sandboxed",
@@ -591,15 +691,9 @@ export default {
     }
 
     if (req.method === "POST" && url.pathname === "/sandbox/promote") {
-      let body;
-      try {
-        body = await req.json();
-      } catch {
-        return json({ ok: false, error: "bad_json" }, 400);
-      }
-      if (!body.key || body.key !== env.WRITE_KEY) {
-        return new Response("Not found", { status: 404 });
-      }
+      const body = await readJsonBody();
+      if (!body) return json({ ok: false, error: "bad_json" }, 400);
+      if (!requireUserKey(body)) return new Response("Not found", { status: 404 });
       if (!body.invention_id) return json({ ok: false, error: "missing_invention_id" }, 400);
       if (!["pitch", "product", "ideas"].includes(body.dest)) {
         return json({ ok: false, error: "bad_dest" }, 400);
@@ -623,12 +717,8 @@ export default {
     }
 
     if (req.method === "POST" && url.pathname === "/sandbox/requests/ack" && isServer) {
-      let body;
-      try {
-        body = await req.json();
-      } catch {
-        return json({ ok: false, error: "bad_json" }, 400);
-      }
+      const body = await readJsonBody();
+      if (!body) return json({ ok: false, error: "bad_json" }, 400);
       if (!body.id) return json({ ok: false, error: "missing_id" }, 400);
       const requests = await readSbRequests();
       const r = requests.find((x) => x.id === String(body.id));
@@ -640,20 +730,20 @@ export default {
     }
 
     if (req.method === "POST" && url.pathname === "/sandbox-sync" && isServer) {
-      let body;
-      try {
-        body = await req.json();
-      } catch {
-        return json({ ok: false, error: "bad_json" }, 400);
-      }
+      const body = await readJsonBody();
+      if (!body) return json({ ok: false, error: "bad_json" }, 400);
+      const sandboxes = Array.isArray(body.sandboxes) ? body.sandboxes : null;
+      const crew = Array.isArray(body.crew) ? body.crew : null;
       const rogues = Array.isArray(body.rogues) ? body.rogues : null;
       const transcript = Array.isArray(body.transcript) ? body.transcript : null;
       const payloadInv = Array.isArray(body.inventions) ? body.inventions : null;
-      if (!rogues && !transcript && !payloadInv) {
+      if (!sandboxes && !crew && !rogues && !transcript && !payloadInv) {
         return json({ ok: false, error: "empty_sync" }, 400);
       }
+      if (sandboxes) await writeSb(SB_SANDBOXES, sandboxes);
       if (rogues) await writeSb(SB_ROGUES, rogues);
-      if (transcript) await writeSb(SB_TRANSCRIPT, transcript.slice(-500));
+      if (crew) await writeSb(SB_CREW, crew);
+      if (transcript) await writeSb(SB_TRANSCRIPT, transcript.slice(-1000));
       if (payloadInv) {
         const kvInv = await readSbInventions();
         const payloadIds = new Set(payloadInv.map((i) => i && i.id).filter(Boolean));
