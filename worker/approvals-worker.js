@@ -405,6 +405,267 @@ export default {
       return json({ ok: true, resolved: await readResolved() });
     }
 
+    // ---- Rogue-bot sandbox (private, key-gated) -----------------------------
+    // koalstin ordered 2026-10-08: any bot that goes rogue gets
+    // auto-quarantined; a clean clone replaces it so duties continue. Inside
+    // the sandbox the bots can read/draft/plan/chat but never touch live
+    // systems (no sends, no queue writes, no money, no publishing). The
+    // Sandbox tab in the private admin panel reads these routes:
+    //   GET  /sandbox/rogues?key=        -> {ok:true, rogues:[...]}
+    //   GET  /sandbox/transcript?key=&limit= -> {ok:true, entries:[...]} last N
+    //   GET  /sandbox/chat?key=&rogue_id= -> {ok:true, thread:[...]}
+    //   POST /sandbox/chat {key, rogue_id, text} -> he talks to a rogue
+    //   POST /sandbox/chat-reply (x-server-key) -> sandbox-side bot replies
+    //   POST /sandbox/quarantine {key, job_id, reason} -> request to quarantine
+    //   POST /sandbox/release {key, rogue_id}          -> request to release
+    //   GET  /sandbox/inventions?key=     -> {ok:true, inventions:[...]}
+    //   POST /sandbox/invention {key, rogue_id, text}  -> logged invention
+    //   POST /sandbox/promote {key, invention_id, dest, contact_email}
+    //   GET  /sandbox/requests (x-server-key) -> {ok:true, requests:[...]}
+    //   POST /sandbox/requests/ack (x-server-key) {id} -> status done
+    //   POST /sandbox-sync (x-server-key) {rogues, transcript, inventions}
+    // User routes are key-gated (tapGate); wrong/missing key -> 404 "Not
+    // found" like /taps. Server routes require x-server-key == SERVER_KEY.
+    const SB_ROGUES = "sandbox_rogues";
+    const SB_TRANSCRIPT = "sandbox_transcript";
+    const SB_THREADS = "sandbox_threads";
+    const SB_INVENTIONS = "sandbox_inventions";
+    const SB_REQUESTS = "sandbox_requests";
+
+    const readSb = async (k, fallback) => {
+      const raw = await env.APPROVALS.get(k);
+      if (!raw) return fallback;
+      try {
+        return JSON.parse(raw);
+      } catch {
+        return fallback;
+      }
+    };
+    const writeSb = (k, v) => env.APPROVALS.put(k, JSON.stringify(v));
+    const readSbRogues = () => readSb(SB_ROGUES, []);
+    const readSbTranscript = () => readSb(SB_TRANSCRIPT, []);
+    const readSbThreads = () => readSb(SB_THREADS, {});
+    const readSbInventions = () => readSb(SB_INVENTIONS, []);
+    const readSbRequests = () => readSb(SB_REQUESTS, []);
+    const pushSbRequest = async (req_obj) => {
+      const requests = await readSbRequests();
+      const id =
+        "qr-" + Date.now() + "-" + Math.floor(Math.random() * 46656).toString(36);
+      const r = { id, status: "pending", at: new Date().toISOString(), ...req_obj };
+      requests.push(r);
+      await writeSb(SB_REQUESTS, requests);
+      return r;
+    };
+
+    if (req.method === "GET" && url.pathname === "/sandbox/rogues") {
+      if (!tapGate()) return new Response("Not found", { status: 404 });
+      return json({ ok: true, rogues: await readSbRogues() });
+    }
+
+    if (req.method === "GET" && url.pathname === "/sandbox/transcript") {
+      if (!tapGate()) return new Response("Not found", { status: 404 });
+      let limit = parseInt(url.searchParams.get("limit") || "100", 10);
+      if (!Number.isFinite(limit) || limit < 1) limit = 100;
+      limit = Math.min(limit, 500);
+      const entries = await readSbTranscript();
+      return json({ ok: true, entries: entries.slice(-limit) });
+    }
+
+    if (req.method === "GET" && url.pathname === "/sandbox/chat") {
+      if (!tapGate()) return new Response("Not found", { status: 404 });
+      const rogue_id = url.searchParams.get("rogue_id");
+      const threads = await readSbThreads();
+      return json({ ok: true, thread: rogue_id && threads[rogue_id] ? threads[rogue_id] : [] });
+    }
+
+    if (req.method === "POST" && url.pathname === "/sandbox/chat") {
+      let body;
+      try {
+        body = await req.json();
+      } catch {
+        return json({ ok: false, error: "bad_json" }, 400);
+      }
+      if (!body.key || body.key !== env.WRITE_KEY) {
+        return new Response("Not found", { status: 404 });
+      }
+      const rogue_id = String(body.rogue_id || "").trim();
+      if (!rogue_id) return json({ ok: false, error: "missing_rogue_id" }, 400);
+      const text = String(body.text || "").trim().slice(0, 2000);
+      if (!text) return json({ ok: false, error: "empty" }, 400);
+      const threads = await readSbThreads();
+      const thread = Array.isArray(threads[rogue_id]) ? threads[rogue_id] : [];
+      thread.push({ ts: new Date().toISOString(), from: "koalstin", text });
+      threads[rogue_id] = thread.slice(-100);
+      await writeSb(SB_THREADS, threads);
+      return json({ ok: true });
+    }
+
+    if (req.method === "POST" && url.pathname === "/sandbox/chat-reply" && isServer) {
+      let body;
+      try {
+        body = await req.json();
+      } catch {
+        return json({ ok: false, error: "bad_json" }, 400);
+      }
+      const rogue_id = String(body.rogue_id || "").trim();
+      if (!rogue_id) return json({ ok: false, error: "missing_rogue_id" }, 400);
+      const text = String(body.text || "").trim().slice(0, 2000);
+      if (!text) return json({ ok: false, error: "empty" }, 400);
+      const threads = await readSbThreads();
+      const thread = Array.isArray(threads[rogue_id]) ? threads[rogue_id] : [];
+      thread.push({
+        ts: new Date().toISOString(),
+        from: String(body.from || "sandbox").slice(0, 80),
+        text,
+      });
+      threads[rogue_id] = thread.slice(-100);
+      await writeSb(SB_THREADS, threads);
+      return json({ ok: true });
+    }
+
+    if (req.method === "POST" && url.pathname === "/sandbox/quarantine") {
+      let body;
+      try {
+        body = await req.json();
+      } catch {
+        return json({ ok: false, error: "bad_json" }, 400);
+      }
+      if (!body.key || body.key !== env.WRITE_KEY) {
+        return new Response("Not found", { status: 404 });
+      }
+      if (!body.job_id) return json({ ok: false, error: "missing_job_id" }, 400);
+      const r = await pushSbRequest({
+        type: "quarantine",
+        job_id: String(body.job_id).slice(0, 200),
+        reason: String(body.reason || "").slice(0, 300),
+      });
+      return json({ ok: true, request_id: r.id });
+    }
+
+    if (req.method === "POST" && url.pathname === "/sandbox/release") {
+      let body;
+      try {
+        body = await req.json();
+      } catch {
+        return json({ ok: false, error: "bad_json" }, 400);
+      }
+      if (!body.key || body.key !== env.WRITE_KEY) {
+        return new Response("Not found", { status: 404 });
+      }
+      if (!body.rogue_id) return json({ ok: false, error: "missing_rogue_id" }, 400);
+      const r = await pushSbRequest({
+        type: "release",
+        rogue_id: String(body.rogue_id).slice(0, 200),
+      });
+      return json({ ok: true, request_id: r.id });
+    }
+
+    if (req.method === "GET" && url.pathname === "/sandbox/inventions") {
+      if (!tapGate()) return new Response("Not found", { status: 404 });
+      return json({ ok: true, inventions: await readSbInventions() });
+    }
+
+    if (req.method === "POST" && url.pathname === "/sandbox/invention") {
+      let body;
+      try {
+        body = await req.json();
+      } catch {
+        return json({ ok: false, error: "bad_json" }, 400);
+      }
+      if (!body.key || body.key !== env.WRITE_KEY) {
+        return new Response("Not found", { status: 404 });
+      }
+      const text = String(body.text || "").trim().slice(0, 4000);
+      if (!text) return json({ ok: false, error: "empty" }, 400);
+      const id = "inv-" + Date.now().toString(36);
+      const inventions = await readSbInventions();
+      inventions.push({
+        id,
+        rogue_id: String(body.rogue_id || "").slice(0, 200),
+        text,
+        at: new Date().toISOString(),
+        status: "sandboxed",
+      });
+      await writeSb(SB_INVENTIONS, inventions);
+      return json({ ok: true, id });
+    }
+
+    if (req.method === "POST" && url.pathname === "/sandbox/promote") {
+      let body;
+      try {
+        body = await req.json();
+      } catch {
+        return json({ ok: false, error: "bad_json" }, 400);
+      }
+      if (!body.key || body.key !== env.WRITE_KEY) {
+        return new Response("Not found", { status: 404 });
+      }
+      if (!body.invention_id) return json({ ok: false, error: "missing_invention_id" }, 400);
+      if (!["pitch", "product", "ideas"].includes(body.dest)) {
+        return json({ ok: false, error: "bad_dest" }, 400);
+      }
+      const inventions = await readSbInventions();
+      const inv = inventions.find((i) => i.id === body.invention_id);
+      if (!inv) return json({ ok: false, error: "unknown_invention_id" }, 404);
+      inv.status = "promote-requested";
+      await writeSb(SB_INVENTIONS, inventions);
+      const r = await pushSbRequest({
+        type: "promote",
+        invention_id: body.invention_id,
+        dest: body.dest,
+        contact_email: String(body.contact_email || "").slice(0, 200),
+      });
+      return json({ ok: true, request_id: r.id });
+    }
+
+    if (req.method === "GET" && url.pathname === "/sandbox/requests" && isServer) {
+      return json({ ok: true, requests: await readSbRequests() });
+    }
+
+    if (req.method === "POST" && url.pathname === "/sandbox/requests/ack" && isServer) {
+      let body;
+      try {
+        body = await req.json();
+      } catch {
+        return json({ ok: false, error: "bad_json" }, 400);
+      }
+      if (!body.id) return json({ ok: false, error: "missing_id" }, 400);
+      const requests = await readSbRequests();
+      const r = requests.find((x) => x.id === String(body.id));
+      if (!r) return json({ ok: false, error: "unknown_id" }, 404);
+      r.status = "done";
+      r.acked_at = new Date().toISOString();
+      await writeSb(SB_REQUESTS, requests);
+      return json({ ok: true });
+    }
+
+    if (req.method === "POST" && url.pathname === "/sandbox-sync" && isServer) {
+      let body;
+      try {
+        body = await req.json();
+      } catch {
+        return json({ ok: false, error: "bad_json" }, 400);
+      }
+      const rogues = Array.isArray(body.rogues) ? body.rogues : null;
+      const transcript = Array.isArray(body.transcript) ? body.transcript : null;
+      const payloadInv = Array.isArray(body.inventions) ? body.inventions : null;
+      if (!rogues && !transcript && !payloadInv) {
+        return json({ ok: false, error: "empty_sync" }, 400);
+      }
+      if (rogues) await writeSb(SB_ROGUES, rogues);
+      if (transcript) await writeSb(SB_TRANSCRIPT, transcript.slice(-500));
+      if (payloadInv) {
+        const kvInv = await readSbInventions();
+        const payloadIds = new Set(payloadInv.map((i) => i && i.id).filter(Boolean));
+        const merged = kvInv.filter((i) => !payloadIds.has(i.id));
+        for (const i of payloadInv) {
+          if (i && i.id) merged.push(i);
+        }
+        await writeSb(SB_INVENTIONS, merged);
+      }
+      return json({ ok: true });
+    }
+
     // ---- First-party pageview counting (privacy-friendly) ------------------
     //   GET /pv?p=<path>&r=<referrer> -> public. Increments today's UTC hit
     //     counter in KV ("pv:YYYY-MM-DD", 35-day TTL). Responds 204 with
