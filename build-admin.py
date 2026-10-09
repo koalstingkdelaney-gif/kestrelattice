@@ -683,8 +683,9 @@ _SVG = {
     "captain": '<circle cx="12" cy="12" r="9"/><path d="M12 3v3M12 18v3M3 12h3M18 12h3"/><circle cx="12" cy="12" r="2"/>',
     "taps": '<path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>',
     "sandbox": '<path d="M21 8l-9-5-9 5v8l9 5 9-5V8z"/><path d="M3 8l9 5 9-5"/><path d="M12 13v8"/>',
+    "universe": '<circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4"/><circle cx="18.5" cy="7.5" r="1.4" fill="currentColor" stroke="none"/>',
 }
-TABS = [("taps", "Action Center"), ("overview", "Overview"), ("captain", "Captain"), ("sandbox", "Sandbox"), ("approvals", "Approvals"), ("outreach", "Outreach"),
+TABS = [("taps", "Action Center"), ("overview", "Overview"), ("universe", "Universe"), ("captain", "Captain"), ("sandbox", "Sandbox"), ("approvals", "Approvals"), ("outreach", "Outreach"),
         ("products", "Products"), ("drafts", "Drafts"), ("fleet", "Fleet"),
         ("hive", "Hive"), ("extras", "Extras")]
 
@@ -1376,10 +1377,12 @@ def _sandbox_html():
     had (transcript feed, invention shelf, bot roster, rogue management,
     sandbox switcher, manual quarantine) is preserved below in tidy sections.
     Plain-English throughout."""
-    scoped_css = """<style>.sb-chat-app{background:var(--panel);border:1px solid var(--line);border-radius:22px;overflow:hidden;margin:18px 0;box-shadow:var(--shadow)}.sb-chat-head{display:flex;align-items:center;justify-content:space-between;padding:18px 18px 4px}.sb-chat-head h3{margin:0;font-size:1.08rem}.sb-convos{padding:6px 8px 12px}.crow{display:flex;align-items:center;gap:12px;width:100%;text-align:left;background:transparent;border:0;padding:11px 10px;border-radius:16px;cursor:pointer;font-family:inherit;color:var(--text);min-height:64px}.crow:hover{background:var(--panel2)}.crow:active{background:var(--panel2)}.ava{width:46px;height:46px;border-radius:50%;flex:0 0 auto;display:inline-flex;align-items:center;justify-content:center;font-weight:800;font-size:1.15rem;color:#fff}.ava.sm{width:30px;height:30px;font-size:.8rem}.crow .cmeta{flex:1;min-width:0;display:flex;flex-direction:column}.crow .cname{font-weight:700;font-size:.95rem;display:flex;align-items:center;gap:8px}.crow .cprev{color:var(--muted);font-size:.83rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-top:2px}.crow .ctime{color:var(--faint);font-size:.72rem;flex:0 0 auto}.crow .chev{color:var(--faint);font-size:1.25rem;flex:0 0 auto;padding-right:2px}.sb-threadview{display:none}.sb-threadview.open{display:block;animation:rise .22s ease}.thread-head{display:flex;align-items:center;gap:10px;padding:12px 14px;border-bottom:1px solid var(--line);background:var(--panel2)}.thread-head .back{width:40px;height:40px;border-radius:50%;border:1px solid var(--line2);background:var(--panel);color:var(--text);cursor:pointer;font-size:1.2rem;display:flex;align-items:center;justify-content:center;flex:0 0 auto}.thread-head .cmeta{flex:1;min-width:0;display:flex;flex-direction:column}.thread-head .cname{font-weight:750;font-size:1rem}.thread-head .cprev{color:var(--muted);font-size:.78rem}#sb-chat-thread{max-height:52vh;min-height:300px;padding:14px}.msg-row{display:flex;gap:8px;align-items:flex-end;margin:2px 0}.msg-row.you{flex-direction:row-reverse}.msg-row .chat-msg{margin:0}.msg-time{font-size:.68rem;color:var(--faint);margin:3px 6px 0}.msg-row.you .msg-time{text-align:right}.composer{display:flex;gap:8px;padding:12px 14px;border-top:1px solid var(--line);background:var(--panel);align-items:center}.composer input{flex:1;background:var(--panel2);border:1px solid var(--line2);color:var(--text);border-radius:999px;padding:13px 18px;font-size:.95rem;font-family:inherit;min-width:0}.composer input:focus{outline:none;border-color:var(--accent)}.composer .send{width:48px;height:48px;border-radius:50%;border:0;flex:0 0 auto;background:linear-gradient(135deg,var(--accent),var(--accent-deep));color:#fff;font-size:1.25rem;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:var(--shadow)}.composer .send:disabled{opacity:.5}.bc-toggle{width:48px;height:48px;border-radius:50%;border:1px solid var(--line2);background:var(--panel2);color:var(--muted);font-size:1.2rem;cursor:pointer;flex:0 0 auto;display:flex;align-items:center;justify-content:center}.bc-toggle.on{background:var(--accent);border-color:var(--accent);color:#fff}#sb-bc-hint{display:none;padding:0 18px 12px;font-size:.78rem;color:var(--accent)}#sb-bc-hint.on{display:block}.sb-idea-row{display:flex;justify-content:flex-start;gap:10px;flex-wrap:wrap;margin:0 0 8px}.sb-sys{text-align:center;color:var(--muted);font-size:.84rem;padding:8px 0}select.sb-select{background:var(--panel2);border:1px solid var(--line);color:var(--text);border-radius:14px;padding:12px;font-size:.92rem;font-family:inherit;max-width:100%;min-height:48px}.sb-pills{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0}.sb-pill{background:var(--panel2);border:1px solid var(--line);color:var(--text);border-radius:999px;padding:11px 20px;font-size:.9rem;font-family:inherit;cursor:pointer;min-height:44px}.sb-pill.active{background:var(--accent);border-color:transparent;color:#fff;font-weight:600}.sb-bot{background:var(--panel2);border:1px solid var(--line);border-radius:18px;padding:16px}.sb-bot h4{margin:2px 0 6px;font-size:1.02rem}.sb-dot{display:inline-block;width:10px;height:10px;border-radius:50%;background:#39d353;margin-right:8px}.sb-dot.idle{background:#9aa0a6}.sb-move-row{display:none;margin-top:8px}.sb-opt{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:16px;margin:10px 0}.sb-opt p{margin:4px 0 10px}.sb-opt input[type=email],.sb-field input{width:100%;box-sizing:border-box;background:var(--panel2);border:1px solid var(--line);color:var(--text);border-radius:14px;padding:13px 16px;font-size:.92rem;font-family:inherit;margin-top:6px}.sb-field{display:block;margin:10px 0;font-size:.88rem}#sb-retire:disabled{opacity:.45;cursor:not-allowed}.sb-inv-bot{margin:16px 0 6px}details.sb-fold{background:var(--panel);border:1px solid var(--line);border-radius:20px;margin:14px 0;overflow:hidden}details.sb-fold>summary{cursor:pointer;padding:16px 18px;font-weight:700;font-size:1rem;list-style:none}details.sb-fold>summary::-webkit-details-marker{display:none}details.sb-fold .fold-body{padding:0 18px 18px}</style>"""
+    scoped_css = """<style>.sb-chat-app{background:var(--panel);border:1px solid var(--line);border-radius:22px;overflow:hidden;margin:18px 0;box-shadow:var(--shadow)}.sb-chat-head{display:flex;align-items:center;justify-content:space-between;padding:18px 18px 4px}.sb-chat-head h3{margin:0;font-size:1.08rem}.sb-convos{padding:6px 8px 12px}.crow{display:flex;align-items:center;gap:12px;width:100%;text-align:left;background:transparent;border:0;padding:11px 10px;border-radius:16px;cursor:pointer;font-family:inherit;color:var(--text);min-height:64px}.crow:hover{background:var(--panel2)}.crow:active{background:var(--panel2)}.ava{width:46px;height:46px;border-radius:50%;flex:0 0 auto;display:inline-flex;align-items:center;justify-content:center;font-weight:800;font-size:1.15rem;color:#fff}.ava.sm{width:30px;height:30px;font-size:.8rem}.crow .cmeta{flex:1;min-width:0;display:flex;flex-direction:column}.crow .cname{font-weight:700;font-size:.95rem;display:flex;align-items:center;gap:8px}.crow .cprev{color:var(--muted);font-size:.83rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-top:2px}.crow .ctime{color:var(--faint);font-size:.72rem;flex:0 0 auto}.crow .chev{color:var(--faint);font-size:1.25rem;flex:0 0 auto;padding-right:2px}.sb-threadview{display:none}.sb-threadview.open{display:block;animation:rise .22s ease}.thread-head{display:flex;align-items:center;gap:10px;padding:12px 14px;border-bottom:1px solid var(--line);background:var(--panel2)}.thread-head .back{width:40px;height:40px;border-radius:50%;border:1px solid var(--line2);background:var(--panel);color:var(--text);cursor:pointer;font-size:1.2rem;display:flex;align-items:center;justify-content:center;flex:0 0 auto}.thread-head .cmeta{flex:1;min-width:0;display:flex;flex-direction:column}.thread-head .cname{font-weight:750;font-size:1rem}.thread-head .cprev{color:var(--muted);font-size:.78rem}#sb-chat-thread{max-height:52vh;min-height:300px;padding:14px}.msg-row{display:flex;gap:8px;align-items:flex-end;margin:2px 0}.msg-row.you{flex-direction:row-reverse}.msg-row .chat-msg{margin:0}.msg-time{font-size:.68rem;color:var(--faint);margin:3px 6px 0}.msg-row.you .msg-time{text-align:right}.composer{display:flex;gap:8px;padding:12px 14px;border-top:1px solid var(--line);background:var(--panel);align-items:center}.composer input{flex:1;background:var(--panel2);border:1px solid var(--line2);color:var(--text);border-radius:999px;padding:13px 18px;font-size:.95rem;font-family:inherit;min-width:0}.composer input:focus{outline:none;border-color:var(--accent)}.composer .send{width:48px;height:48px;border-radius:50%;border:0;flex:0 0 auto;background:linear-gradient(135deg,var(--accent),var(--accent-deep));color:#fff;font-size:1.25rem;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:var(--shadow)}.composer .send:disabled{opacity:.5}.bc-toggle{width:48px;height:48px;border-radius:50%;border:1px solid var(--line2);background:var(--panel2);color:var(--muted);font-size:1.2rem;cursor:pointer;flex:0 0 auto;display:flex;align-items:center;justify-content:center}.bc-toggle.on{background:var(--accent);border-color:var(--accent);color:#fff}#sb-bc-hint{display:none;padding:0 18px 12px;font-size:.78rem;color:var(--accent)}#sb-bc-hint.on{display:block}.sb-idea-row{display:flex;justify-content:flex-start;gap:10px;flex-wrap:wrap;margin:0 0 8px}.sb-sys{text-align:center;color:var(--muted);font-size:.84rem;padding:8px 0}select.sb-select{background:var(--panel2);border:1px solid var(--line);color:var(--text);border-radius:14px;padding:12px;font-size:.92rem;font-family:inherit;max-width:100%;min-height:48px}.sb-pills{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0}.sb-pill{background:var(--panel2);border:1px solid var(--line);color:var(--text);border-radius:999px;padding:11px 20px;font-size:.9rem;font-family:inherit;cursor:pointer;min-height:44px}.sb-pill.active{background:var(--accent);border-color:transparent;color:#fff;font-weight:600}.sb-bot{background:var(--panel2);border:1px solid var(--line);border-radius:18px;padding:16px}.sb-bot h4{margin:2px 0 6px;font-size:1.02rem}.sb-dot{display:inline-block;width:10px;height:10px;border-radius:50%;background:#39d353;margin-right:8px}.sb-dot.idle{background:#9aa0a6}.sb-move-row{display:none;margin-top:8px}.sb-opt{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:16px;margin:10px 0}.sb-opt p{margin:4px 0 10px}.sb-opt input[type=email],.sb-field input{width:100%;box-sizing:border-box;background:var(--panel2);border:1px solid var(--line);color:var(--text);border-radius:14px;padding:13px 16px;font-size:.92rem;font-family:inherit;margin-top:6px}.sb-field{display:block;margin:10px 0;font-size:.88rem}#sb-retire:disabled{opacity:.45;cursor:not-allowed}.sb-inv-bot{margin:16px 0 6px}details.sb-fold{background:var(--panel);border:1px solid var(--line);border-radius:20px;margin:14px 0;overflow:hidden}details.sb-fold>summary{cursor:pointer;padding:16px 18px;font-weight:700;font-size:1rem;list-style:none}details.sb-fold>summary::-webkit-details-marker{display:none}details.sb-fold .fold-body{padding:0 18px 18px}.room-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:16px;margin:14px 0}.room-card{border-radius:22px;overflow:hidden;border:1px solid var(--line);background:var(--panel2);box-shadow:var(--shadow);display:flex;flex-direction:column}.room-hero{padding:22px 20px 18px;color:#fff;position:relative;min-height:148px;display:flex;flex-direction:column;justify-content:flex-end}.room-hero .room-theme{font-size:1.22rem;font-weight:800;text-shadow:0 2px 12px rgba(0,0,0,.5);margin:0;line-height:1.3}.room-hero .room-bot{display:flex;align-items:center;gap:10px;margin-bottom:10px}.room-hero .room-bot .ava{background:rgba(255,255,255,.25)!important;backdrop-filter:blur(4px)}.room-body{padding:16px 18px;display:flex;flex-direction:column;gap:10px;flex:1}.room-desc{font-size:.9rem;line-height:1.55;color:var(--text);margin:0}.room-motto{font-style:italic;color:var(--muted);font-size:.88rem;border-left:3px solid var(--accent);padding-left:12px;margin:0}.room-stats{display:flex;flex-wrap:wrap;gap:8px;margin-top:auto;padding-top:6px}.room-stat{font-size:.76rem;background:var(--panel);border:1px solid var(--line);border-radius:999px;padding:6px 12px;color:var(--muted)}.room-procs{font-size:.8rem;color:var(--muted);margin:0;padding:0}.room-procs li{margin:3px 0;list-style:none}.room-undesigned{padding:36px 20px;text-align:center;color:var(--muted);background:var(--panel2)}.room-hist{margin:2px 0;border:1px solid var(--line);border-radius:14px;overflow:hidden}.room-hist>summary{cursor:pointer;padding:10px 14px;font-size:.82rem;font-weight:700;color:var(--accent);list-style:none}.room-hist>summary::-webkit-details-marker{display:none}.room-hist-v{padding:10px 14px;border-top:1px solid var(--line);font-size:.82rem}.room-hist-t{font-weight:700;color:var(--text)}.room-hist-t span{font-weight:400;color:var(--faint);font-size:.75rem;margin-left:6px}.room-hist-c{color:var(--muted);font-size:.76rem;margin:2px 0}.room-hist-v p{margin:4px 0;line-height:1.5}</style>"""
     chats = """<div class="sb-chat-app" id="sb-chat-app"><div id="sb-convos-wrap"><div class="sb-chat-head"><h3>&#128172; Chats</h3><span class="muted" style="font-size:.78rem" id="sb-chats-count"></span></div><div id="sb-convos" class="sb-convos"><p class="muted" style="padding:14px">Loading chats&#8230;</p></div></div><div id="sb-threadview" class="sb-threadview"><div class="thread-head"><button class="back" id="sb-thread-back" aria-label="Back to chats">&#8592;</button><span class="ava" id="sb-thread-ava">?</span><div class="cmeta"><div class="cname" id="sb-thread-name">Bot</div><div class="cprev" id="sb-thread-sub"></div></div></div><div id="sb-chat-thread" class="chat-thread"><p class="muted">Loading&#8230;</p></div><div class="composer"><button class="bc-toggle" id="sb-bc-toggle" title="Broadcast: send to every quarantined bot at once">&#128226;</button><input id="sb-chat-input" type="text" placeholder="Message&#8230;" maxlength="2000" autocomplete="off"><button class="send" id="sb-chat-send" aria-label="Send">&#10148;</button></div><p id="sb-bc-hint">&#128226; Broadcast mode &#8212; your message goes to every quarantined bot at once.</p></div></div>"""
     transcript = """<div class="card"><h3>&#128064; Sandbox feed</h3><p class='muted'>Everything the bots in this sandbox say and do, newest at the bottom, refreshed every 10 seconds. This is just a window in &#8212; they can't touch your business from here.</p><div id="sb-transcript" class="chat-thread" style="max-height:380px"><p class="muted">Loading&#8230;</p></div></div>"""
     inventions = """<div class="card"><h3>&#128161; Invention shelf</h3><p class='muted'>Bots here are encouraged to invent &#8212; new pitches, product concepts, wild ideas. Everything they invent lands here as a draft. It only becomes real when you tap Promote.</p><div id="sb-inventions"><p class="muted">Loading&#8230;</p></div></div>"""
+    rooms = """<div class="card"><h3>&#127963;&#65039; Bot rooms</h3><p class='muted'>Each bot designed its own room inside its private machine. Walk through them — new designs and redecorations appear here on their own.</p><div id="sb-rooms"><p class="muted" style="padding:14px">Loading rooms&#8230;</p></div></div>"""
+
     manage = """<details class='sb-fold'><summary>&#129302; Bots &amp; sandboxes &#8212; manage</summary><div class='fold-body'><div class="card" style="margin:0 0 14px"><h3>&#129521; Your sandboxes</h3><p class='muted'>A sandbox is a separate safe play-pen. Bots in one can't see or touch the others.</p><div id="sb-switcher" class="sb-pills"><p class="muted">Loading&#8230;</p></div><p id="sb-purpose" class="muted"></p><div class="sb-idea-row" style="margin-top:6px"><button class="btn btn-sm btn-ghost" id="sb-new-toggle">&#10133; New sandbox</button><button class="btn btn-sm btn-ghost" id="sb-retire" style="display:none">&#128465; Retire this sandbox</button></div><p id="sb-retire-note" class="muted"></p><div id="sb-new-form" style="display:none;margin-top:12px"><p class='muted' style='margin-bottom:4px'>Give it a name and say what it's for.</p><label class="sb-field">Name it<input id="sb-new-name" type="text" placeholder="e.g. Experiment: new pricing angles" maxlength="120"></label><label class="sb-field">What is it for?<input id="sb-new-purpose" type="text" placeholder="e.g. Try out risky ideas without touching the real business" maxlength="500"></label><button class="btn btn-sm" id="sb-new-go">Create sandbox</button><p class='muted'>You can retire a sandbox when it's empty.</p></div></div><div id="sb-roster"></div><div id="sb-rogues"></div><div id="sb-manual-q"></div></div></details>"""
     script = """<script>(function(){
 var SB_DOWN="Couldn't reach the Sandbox — the worker update may not be deployed yet.";
@@ -1872,18 +1875,144 @@ var tgl=document.getElementById("sb-bc-toggle");
 if(tgl)tgl.addEventListener("click",function(){sbBcMode=!sbBcMode;sbSyncBcToggle();});
 var tgo=document.getElementById("sb-new-toggle");
 if(tgo)tgo.addEventListener("click",sbToggleNew);
+var sbRooms=[];
+var ROOM_COLORS={black:"#14141c",white:"#f5f5f5",red:"#e5484d",magenta:"#ff2fb3",pink:"#ff7ac6",cyan:"#22d3ee",teal:"#2dd4bf",blue:"#3b82f6",indigo:"#6366f1",violet:"#8b5cf6",purple:"#a855f7",green:"#22c55e",emerald:"#10b981",gold:"#d4af37",amber:"#f59e0b",orange:"#f97316",crimson:"#dc143c",silver:"#c0c0c0",grey:"#9aa0a6",gray:"#9aa0a6",navy:"#1e2a5a",maroon:"#6b1f2a",lime:"#a3e635",turquoise:"#40e0d0",coral:"#ff7f50",ivory:"#fffff0",charcoal:"#2b2b30",midnight:"#0b0b18",neon:"#39ff14",blood:"#8a0303",rust:"#b7410e",sand:"#e6c88a",forest:"#1d4d2b",ocean:"#0a4d68",lavender:"#c9b6f2",peach:"#ffcba4",rose:"#f43f5e",sky:"#7dd3fc",slate:"#475569",bronze:"#b08d57",copper:"#b87333",jade:"#00a86b",onyx:"#0f0f12",pearl:"#eae6df",wine:"#722f37",moss:"#5a7247",clay:"#b0703c"};
+function roomHexes(str,name){var out=[];var s=String(str||"");var hex=s.match(/#[0-9a-fA-F]{3,8}/g)||[];for(var k=0;k<hex.length;k++)out.push(hex[k]);var words=s.toLowerCase().split(/[,;|]/);for(var w=0;w<words.length;w++){var c=ROOM_COLORS[words[w].trim()];if(c)out.push(c);}if(!out.length){var h=0;var n=String(name||"?");for(var q=0;q<n.length;q++)h=(h*31+n.charCodeAt(q))%360;out.push("hsl("+h+",60%,38%)");out.push("hsl("+((h+50)%360)+",55%,28%)");}while(out.length<2)out.push(out[0]);return out.slice(0,3);}
+function roomGradient(room,name){var c=roomHexes(room&&room.colors,name);var g="linear-gradient(135deg,"+c[0]+" 0%,"+c[1]+" 70%";if(c[2])g+=", "+c[2]+" 130%";return g+")";}
+async function sbLoadRooms(){var el=document.getElementById("sb-rooms");if(!el)return;if(!sbReady()){el.innerHTML=SB_ERR;return;}try{var r=await fetch(WURL+"/sandbox/rooms?key="+encodeURIComponent(WKEY));var d=await r.json();var list=(d&&d.ok&&Array.isArray(d.rooms))?d.rooms:[];sbRooms=list;sbRenderRooms();}catch(e){el.innerHTML=SB_ERR;}}
+function sbRenderRooms(){var el=document.getElementById("sb-rooms");if(!el)return;if(!sbRooms.length){el.innerHTML="<p class='muted' style='padding:14px'>No rooms yet.</p>";return;}var html="<div class='room-grid'>";for(var i=0;i<sbRooms.length;i++){var b=sbRooms[i];var rm=b.room||null;var hero;if(rm){hero="<div class='room-hero' style='background:"+roomGradient(rm,b.name)+"'><div class='room-bot'><span class='ava'>"+escH(String(b.name||"?").charAt(0).toUpperCase())+"</span><div><div style='font-weight:800'>"+escH(b.name||"?")+"</div><div style='font-size:.75rem;opacity:.85'>"+(rm.designed_at?"designed "+sbRelTime(rm.designed_at):"")+"</div></div></div><p class='room-theme'>"+escH(rm.theme||"Untitled room")+"</p></div>";}else{hero="<div class='room-undesigned'><div style='font-size:2rem;margin-bottom:8px'>&#128682;</div><div style='font-weight:700;color:var(--text)'>"+escH(b.name||"?")+"</div><p style='margin:6px 0 0'>Hasn't designed their room yet.</p></div>";}var stats="<span class='room-stat'>&#11088; "+(b.points||0)+" pts</span><span class='room-stat'>&#128193; "+(b.file_count||0)+" files</span>";if(b.last_active)stats+="<span class='room-stat'>&#128336; active "+sbRelTime(b.last_active)+"</span>";var procs="";var pl=b.processes||[];for(var p2=0;p2<Math.min(3,pl.length);p2++){procs+="<li>&#9881; "+escH(pl[p2].name||"")+" &mdash; "+escH(pl[p2].status||"")+"</li>";}var body;if(rm){var hist="";var hh=b.room_history||[];if(hh.length){hist="<details class='room-hist'><summary>&#128336; Design history ("+hh.length+")</summary>";for(var hv=hh.length-1;hv>=0;hv--){var vv=hh[hv];hist+="<div class='room-hist-v'><div class='room-hist-t'>"+escH(vv.theme||"Untitled")+" <span>"+sbRelTime(vv.designed_at)+"</span></div>";hist+="<div class='room-hist-c'>"+escH(vv.colors||"")+"</div><p>"+escH(vv.description||"")+"</p>";if(vv.motto)hist+="<p class='room-motto'>&ldquo;"+escH(vv.motto)+"&rdquo;</p>";hist+="</div>";}hist+="</details>";}body="<div class='room-body'><p class='room-desc'>"+escH(rm.description||"")+"</p>";if(rm.motto)body+="<p class='room-motto'>&ldquo;"+escH(rm.motto)+"&rdquo;</p>";body+=hist;if(procs)body+="<ul class='room-procs'>"+procs+"</ul>";body+="<div class='room-stats'>"+stats+"</div></div>";}else{body="<div class='room-body'><div class='room-stats'>"+stats+"</div></div>";}html+="<div class='room-card'>"+hero+body+"</div>";}html+="</div>";el.innerHTML=html;}
 var ngo=document.getElementById("sb-new-go");
 if(ngo)ngo.addEventListener("click",sbNewSandbox);
 var rt=document.getElementById("sb-retire");
 if(rt)rt.addEventListener("click",sbRetire);
 sbLoadSandboxes();
 setInterval(sbLoadTranscript,10000);
+sbLoadRooms();
+setInterval(sbLoadRooms,60000);
 setInterval(function(){var tv=document.getElementById("sb-threadview");if(sbChatId&&tv&&tv.classList.contains("open"))sbLoadChat();},15000);
 });
 })();
 </script>"""
-    return scoped_css + chats + transcript + inventions + manage + script
+    return scoped_css + chats + transcript + inventions + rooms + manage + script
 
+
+def _universe_html():
+    """Universe tab: the whole money machine as one economy — four worlds,
+    one treasury. Plain English throughout. Data baked at build time from
+    hidden_files/universe/universe.json (refreshed hourly by universe-treasury)."""
+    import json as _json, os as _os
+    uj = os.path.join(os.path.expanduser("~"),
+                      "workspace/goals/kestrelattice-autonomous-growth/hidden_files/universe/universe.json")
+    try:
+        with open(uj) as _f:
+            u = _json.load(_f)
+    except Exception:
+        u = {}
+    t = u.get("treasury", {})
+    ex = u.get("exchange", {})
+    fo = u.get("forge", {})
+    sg = u.get("signal", {})
+    upd = u.get("updated_at", "")
+    try:
+        from datetime import datetime as _dt
+        upd_s = _dt.fromisoformat(upd).strftime("%b %d, %I:%M %p")
+    except Exception:
+        upd_s = ""
+
+    def tile(value, label, sub="", css=""):
+        return (f'<div class="kpi {css}"><div class="kpi-v">{value}</div>'
+                f'<div class="kpi-l">{label}</div>'
+                + (f'<div class="kpi-s">{sub}</div>' if sub else "") + '</div>')
+
+    gross = t.get("lifetime_gross_usd", 0)
+    treasury = (
+        '<div class="kpirow">'
+        + tile(f"${gross:,.0f}", "lifetime revenue", f"{t.get('lifetime_orders', 0)} orders",
+               "accent" if gross > 0 else "")
+        + tile(f"${t.get('week_revenue', 0):,.0f}", "this week",
+               f"{t.get('week_units', 0)} sales")
+        + tile(f"${t.get('pipeline_fees_usd', 0):,.0f}", "deal pipeline",
+               f"{ex.get('deals_total', 0)} houses in play")
+        + tile(f"{t.get('court_points', 0)}", "court points",
+               f"${t.get('court_attributed_usd', 0):,.0f} bot-earned")
+        + "</div>")
+
+    def world(emoji, name, what, stat, goto):
+        return (
+            f'<div class="card"><h3>{emoji} {esc(name)}</h3>'
+            f"<p class='muted'>{what}</p>"
+            f"<p style='font-size:1.05rem;font-weight:700'>{stat}</p>"
+            f"<button class='btn btn-sm btn-ghost' data-goto-tab='all|{goto}'>Open {esc(name)}</button></div>")
+
+    worlds = (
+        '<div class="room-grid">'
+        + world("🏪", "The Marketplace",
+                "Your 11 brands selling digital products on Gumroad. Money lands straight to your Cash App.",
+                f"${t.get('lifetime_gross_usd', 0):,.0f} earned · {t.get('lifetime_orders', 0)} orders",
+                "products")
+        + world("🏠", "The Exchange",
+                "The wholesaling desk: find houses, find cash buyers, assign the contract, keep the fee. You sign; the desk does the hunting.",
+                f"{ex.get('deals_total', 0)} deals · ${ex.get('pipeline_fees_usd', 0):,.0f} in potential fees",
+                "drafts")
+        + world("🔥", "The Forge",
+                "Your court of five bots, inventing around the clock — product ideas, pitch angles, tools. Every $100 they earn you is a point.",
+                f"{fo.get('bots', 5)} bots · {fo.get('inventions_drafted', 0)} inventions · {fo.get('pitch_angles_filed', 0)} pitch angles",
+                "sandbox")
+        + world("📡", "The Signal",
+                "Outreach and free tools pulling customers in. Cold pitches go out daily; tools and articles pull people to the site.",
+                f"{sg.get('pitches_sent', 0)} pitches sent · {sg.get('genuine_replies', 0)} real replies",
+                "outreach")
+        + "</div>")
+
+    flow = (
+        """<div class="card"><h3>🌌 How money flows</h3>
+<p class='muted'>One loop, running on its own:</p>
+<div class="uflow">
+<span class="uflow-n">🔥 Forge invents</span><span class="uflow-a">→</span>
+<span class="uflow-n">📡 Signal attracts</span><span class="uflow-a">→</span>
+<span class="uflow-n">🏪 Marketplace sells<br>🏠 Exchange closes</span><span class="uflow-a">→</span>
+<span class="uflow-n">💰 Treasury grows</span>
+</div>
+<p class='muted'>The court's inventions become pitch angles and free tools. The signal sends pitches and publishes tools. Buyers pay through the marketplace; house deals pay through the exchange. Every dollar lands in your treasury — and the bots that earned it get their points.</p>
+</div>""")
+
+    jobs = (
+        """<div class="card"><h3>👆 Your jobs in this universe</h3>
+<p class='muted'>Everything else runs itself. Only these need you:</p>
+<ul style="line-height:2">
+<li><b>One tap</b> to approve each house offer before it goes out.</li>
+<li><b>Your signature</b> on purchase and assignment contracts — never the bots'.</li>
+<li><b>Confirm</b> when a contract is actually signed, so the desk can blast it to buyers.</li>
+<li><b>One tap</b> on anything in the Action Center that only a human can do.</li>
+</ul></div>""")
+
+    deals_rows = ""
+    for d in (ex.get("deals") or [])[:6]:
+        deals_rows += (
+            f"<tr><td>{esc(d.get('address') or d.get('id') or '')}</td>"
+            f"<td>{esc(str(d.get('status', '')))}</td>"
+            f"<td>${(d.get('fee_target') or 0):,.0f}</td></tr>")
+    deals_card = ""
+    if deals_rows:
+        deals_card = (
+            """<div class="card"><h3>🏠 Live house deals</h3>
+<table class="tbl"><tr><th>Address</th><th>Stage</th><th>Fee target</th></tr>"""
+            + deals_rows + "</table>"
+            "<p class='muted'>Plain-English stage guide: research → comps checked → offer drafted → "
+            "waiting on your tap → under contract → assigned → paid.</p></div>")
+
+    scoped = """<style>
+.uflow{display:flex;align-items:center;justify-content:center;gap:10px;flex-wrap:wrap;margin:14px 0}
+.uflow-n{background:var(--panel2);border:1px solid var(--line);border-radius:16px;padding:12px 18px;font-weight:700;text-align:center;line-height:1.5}
+.uflow-a{font-size:1.4rem;color:var(--accent);font-weight:800}
+.tbl{width:100%;border-collapse:collapse;font-size:.88rem}
+.tbl th{text-align:left;color:var(--muted);font-weight:600;padding:8px 10px;border-bottom:1px solid var(--line)}
+.tbl td{padding:9px 10px;border-bottom:1px solid var(--line)}
+</style>"""
+
+    stamp = (f"<p class='muted' style='margin-top:6px'>Treasury snapshot: {esc(upd_s)}.</p>"
+             if upd_s else "")
+    return scoped + treasury + worlds + flow + deals_card + jobs + stamp
 
 
 def _all_panes(products, queue, entries, title_map, omap):
@@ -1900,6 +2029,10 @@ def _all_panes(products, queue, entries, title_map, omap):
         + brand_comparison_table(products, entries, queue, title_map, omap)
         + S.alerts_section(queue, products) + S.revenue_section(products) + S.activity_feed()
     )
+    p["universe"] = (_sec("One economy", "The Universe",
+                         "Every money line in your world — the marketplace, the house exchange, "
+                         "the forge, and the signal — feeding one treasury.")
+                    + _universe_html())
     p["captain"] = (_sec("Private operator", "Sentience",
                          "One mind, yours alone. It runs the fleet, operates the ten brands, "
                          "hires freelancers, and does client work start to finish — so you don't have to.")

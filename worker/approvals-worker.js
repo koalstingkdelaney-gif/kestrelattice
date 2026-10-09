@@ -440,6 +440,7 @@ export default {
     const SB_THREADS = "sb_threads";
     const SB_INVENTIONS = "sb_inventions";
     const SB_REQUESTS = "sb_requests";
+    const SB_ROOMS = "sb_rooms";
 
     const readSb = async (k, fallback) => {
       const raw = await env.APPROVALS.get(k);
@@ -455,6 +456,7 @@ export default {
     const readSbCrew = () => readSb(SB_CREW, []);
     const readSbRogues = () => readSb(SB_ROGUES, []);
     const readSbTranscript = () => readSb(SB_TRANSCRIPT, []);
+    const readSbRooms = () => readSb(SB_ROOMS, []);
     const readSbThreads = () => readSb(SB_THREADS, {});
     // Append-only per-message thread storage: one KV key per message avoids
     // read-modify-write races on the old sb_threads blob (rapid posts used to
@@ -607,6 +609,16 @@ export default {
       }
       await writeSb(SB_SANDBOXES, boxes.filter((b) => b.id !== id));
       return json({ ok: true });
+    }
+
+    if (req.method === "GET" && url.pathname === "/sandbox/rooms") {
+      if (!tapGate()) return new Response("Not found", { status: 404 });
+      const sandbox_id = url.searchParams.get("sandbox_id");
+      const rooms = await readSbRooms();
+      return json({
+        ok: true,
+        rooms: sandbox_id ? rooms.filter((r) => r.sandbox_id === sandbox_id) : rooms,
+      });
     }
 
     if (req.method === "GET" && url.pathname === "/sandbox/rogues") {
@@ -823,13 +835,15 @@ export default {
       const rogues = Array.isArray(body.rogues) ? body.rogues : null;
       const transcript = Array.isArray(body.transcript) ? body.transcript : null;
       const payloadInv = Array.isArray(body.inventions) ? body.inventions : null;
-      if (!sandboxes && !crew && !rogues && !transcript && !payloadInv) {
+      const rooms = Array.isArray(body.rooms) ? body.rooms : null;
+      if (!sandboxes && !crew && !rogues && !transcript && !payloadInv && !rooms) {
         return json({ ok: false, error: "empty_sync" }, 400);
       }
       if (sandboxes) await writeSb(SB_SANDBOXES, sandboxes);
       if (rogues) await writeSb(SB_ROGUES, rogues);
       if (crew) await writeSb(SB_CREW, crew);
       if (transcript) await writeSb(SB_TRANSCRIPT, transcript.slice(-1000));
+      if (rooms) await writeSb(SB_ROOMS, rooms);
       if (payloadInv) {
         const kvInv = await readSbInventions();
         const payloadIds = new Set(payloadInv.map((i) => i && i.id).filter(Boolean));
