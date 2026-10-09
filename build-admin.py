@@ -1654,7 +1654,7 @@ var you=m.from==="koalstin";
 var tm=m.ts?"<div class='msg-time'>"+escH(sbTimeShort(m.ts))+"</div>":"";
 var ava=you?"":"<span class='ava sm' style='background:"+sbAvaColor(sbChatName)+"'>"+escH(String(sbChatName||"?").charAt(0).toUpperCase())+"</span>";
 var h="<div class='msg-row "+(you?"you":"")+"'>"+ava+"<div style='min-width:0'><div class='chat-msg "+(you?"you":"sentience")+"'><span class='chat-who'>"+(you?"you":escH(sbChatName))+"</span><p>"+escH(m.text)+"</p></div>"+tm+"</div></div>";
-if(!you)h+="<div class='sb-idea-row'><button class='btn btn-sm btn-ghost' data-sb-save-idea='"+i+"'>\ud83d\udca1 Save this as an idea</button></div>";
+if(!you)h+="<div class='sb-idea-row'><button class='btn btn-sm btn-ghost' data-sb-save-idea='"+i+"'>&#128161; Save this as an idea</button></div>";
 return h;}).join("");
 th.scrollTop=th.scrollHeight;
 }catch(e){th.innerHTML=SB_ERR;}
