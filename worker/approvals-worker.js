@@ -851,7 +851,10 @@ export default {
         for (const i of payloadInv) {
           if (i && i.id) merged.push(i);
         }
-        for (const i of merged) {
+        for (const i of payloadInv) {
+          // KV-write diet 2026-10-09: only the new/changed inventions from this
+          // payload. (Was: re-put the entire merged set, ~72 puts per sync,
+          // burning 2-3x the free-plan daily write budget -> error 1101.)
           if (i && i.id) {
             await env.APPROVALS.put(SB_INVENTION_PREFIX + i.id, JSON.stringify(i));
           }
