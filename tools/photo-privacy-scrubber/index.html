@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="utf-8">
+<link rel="preconnect" href="https://gumroad.com">
+<link rel="preconnect" href="https://www.googletagmanager.com">
+<link rel="preconnect" href="https://cdn.jsdelivr.net">
+<meta name="viewport" content="width=device-width, initial-scale=1, interactive-widget=resizes-content, viewport-fit=cover">
+<title>Photo Privacy Scrubber — Remove Hidden Location & Device Data | ghostcorpnet</title>
+<meta name="description" content="Free photo privacy scrubber: see the hidden GPS, device, and date data inside your photos, then strip it all in one tap. Everything runs in your browser — photos never leave your device.">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<meta name="theme-color" content="#121212">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ghostcorpnet">
+<meta property="og:locale" content="en_US">
+<meta property="og:url" content="https://koalstingkdelaney-gif.github.io/kestrelattice/tools/photo-privacy-scrubber/">
+<meta property="og:title" content="Photo Privacy Scrubber — Remove Hidden Location & Device Data | ghostcorpnet">
+<meta property="og:description" content="See the hidden GPS, device, and date data inside your photos, then strip it all in one tap. Runs 100% in your browser.">
+<meta property="og:image" content="https://koalstingkdelaney-gif.github.io/kestrelattice/assets/studio-edition-cover.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Photo Privacy Scrubber — Remove Hidden Location & Device Data | ghostcorpnet">
+<meta name="twitter:description" content="See the hidden GPS, device, and date data inside your photos, then strip it all in one tap. Runs 100% in your browser.">
+<link rel="canonical" href="https://koalstingkdelaney-gif.github.io/kestrelattice/tools/photo-privacy-scrubber/">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebApplication",
+"name":"Photo Privacy Scrubber","applicationCategory":"UtilitiesApplication",
+"operatingSystem":"Web","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},
+"description":"Free tool that reveals and removes hidden EXIF metadata (GPS location, device model, timestamps) from photos, entirely in the browser.",
+"url":"https://koalstingkdelaney-gif.github.io/kestrelattice/tools/photo-privacy-scrubber/"}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
+{"@type":"Question","name":"What hidden data do photos contain?","acceptedAnswer":{"@type":"Answer","text":"Most phone photos carry EXIF metadata: GPS coordinates of where the shot was taken, the phone make and model, and the exact date and time. Anyone you send the original file to can read it."}},
+{"@type":"Question","name":"Do my photos leave my device when I use this tool?","acceptedAnswer":{"@type":"Answer","text":"No. The scrubber runs entirely in your browser using JavaScript. Your photos are never uploaded anywhere."}},
+{"@type":"Question","name":"Does scrubbing reduce photo quality?","acceptedAnswer":{"@type":"Answer","text":"Slightly. Scrubbed photos are re-encoded at high quality (92%), which is visually identical for sharing and posting. The original file on your device is never modified."}},
+{"@type":"Question","name":"Which formats are supported?","acceptedAnswer":{"@type":"Answer","text":"JPEG and PNG photos, including HEIC-converted files saved as JPEG/PNG. iPhone users should export as JPEG first for full metadata inspection."}}]}
+</script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-541TCHWW98"></script>
+<script>
+(function(){try{if(new URLSearchParams(location.search).get('admin')==='1'){localStorage.setItem('kestrelattice_admin','1');}}catch(e){}})();
+</script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+try{if(localStorage.getItem('kestrelattice_admin')!=='1'){gtag('js', new Date());gtag('config', 'G-541TCHWW98');}}catch(e){gtag('js', new Date());gtag('config', 'G-541TCHWW98');}
+</script>
+<script src="https://cdn.jsdelivr.net/npm/exifr@7.1.3/dist/lite.umd.min.js"></script>
+<style>
+  :root{color-scheme:dark;--bg:#0f0e0d; --bg-soft:#141210; --panel:#1a1714; --panel2:#211c17;
+        --line:#2c261e; --line-soft:#221d15; --text:#f1ebdd;
+        --muted:#a89d89; --faint:#978b74; --accent:#e07a5f;
+        --accent-bright:#f09474; --accent-dim:#c06a4e; --accent-ink:#1a0f08;
+        --accent-soft:rgba(224,122,95,.1); --radius:12px;
+        --green:#7fc97f; --amber:#e8b04b; --red:#e06a5f;
+        --ease:cubic-bezier(.2,.7,.25,1)}
+  *{margin:0;padding:0;box-sizing:border-box}
+  ::selection{background:var(--accent);color:var(--accent-ink)}
+  html{scroll-behavior:smooth;scrollbar-gutter:stable}
+  html,body{overflow-x:clip}
+  body{background:var(--bg);color:var(--text);
+       font-family:ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+       line-height:1.7;-webkit-font-smoothing:antialiased}
+  a:focus-visible,button:focus-visible{outline:3px solid var(--accent-bright);outline-offset:3px;border-radius:4px}
+  header.site{border-bottom:1px solid var(--line);position:sticky;top:0;z-index:100;
+    background:rgba(15,14,13,.92);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
+  header.site .wrap{display:flex;align-items:center;justify-content:space-between;min-height:56px;max-width:1040px;margin:0 auto;padding:0 24px}
+  .brand{display:flex;align-items:center;gap:9px;font-weight:700;color:var(--text);text-decoration:none;font-size:1.02rem}
+  .brand:hover{color:var(--accent-bright)}
+  nav.main{display:flex;align-items:center;gap:20px}
+  nav.main a{color:var(--muted);font-size:.88rem;font-weight:500;text-decoration:none}
+  nav.main a:hover{color:var(--accent-bright)}
+  .wrap{max-width:68ch;margin:0 auto;padding:40px 24px 64px}
+  .crumb{color:var(--muted);font-size:.85rem;margin-bottom:24px}
+  .crumb a{color:var(--accent);text-decoration:none}
+  h1{font-size:clamp(1.6rem,3vw + .8rem,2.1rem);font-weight:800;letter-spacing:-.02em;line-height:1.25;margin-bottom:8px;text-wrap:balance}
+  .date{color:var(--muted);font-size:.85rem;margin-bottom:28px}
+  h2{font-size:1.35rem;margin:40px 0 12px;letter-spacing:-.01em}
+  h3{font-size:1.1rem;margin:24px 0 10px}
+  p{margin:0 0 16px}
+  ul,ol{margin:0 0 16px 24px}
+  li{margin:6px 0}
+  a{color:var(--accent)}
+  code{background:var(--panel);padding:2px 6px;border-radius:4px;font-size:.88em}
+  .lead{font-size:1.08rem;color:var(--muted);max-width:60ch}
+  .pill{display:inline-block;font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);border:1px solid var(--accent-dim);border-radius:999px;padding:5px 14px;margin-bottom:18px}
+  .hero-tool{border:1px solid var(--line);border-radius:var(--radius);background:linear-gradient(180deg,var(--panel2),var(--panel));padding:28px;margin:32px 0;box-shadow:0 16px 40px rgba(0,0,0,.35)}
+  .progress-wrap{height:8px;background:var(--bg-soft);border:1px solid var(--line);border-radius:999px;overflow:hidden;margin:0 0 24px}
+  #progress-fill{height:100%;width:0;background:linear-gradient(90deg,var(--accent-dim),var(--accent-bright));transition:width .3s var(--ease)}
+  .q{border:1px solid var(--line);border-radius:10px;background:var(--bg-soft);padding:18px 20px;margin:0 0 16px}
+  .q legend,.q .q-title{font-weight:700;font-size:1rem;margin-bottom:4px}
+  .q .q-hint{color:var(--muted);font-size:.86rem;margin-bottom:12px}
+  .opts{display:grid;gap:8px}
+  .opts label{display:flex;gap:12px;align-items:flex-start;border:1px solid var(--line-soft);border-radius:8px;padding:10px 14px;cursor:pointer;font-size:.94rem;transition:border-color .15s var(--ease)}
+  .opts label:hover{border-color:var(--accent-dim)}
+  .opts input[type=radio]{margin-top:5px;accent-color:var(--accent);width:17px;height:17px;flex:none}
+  .opts label:has(input:checked){border-color:var(--accent);background:var(--accent-soft)}
+  .btn-row{display:flex;gap:12px;flex-wrap:wrap;margin-top:20px}
+  .btn{display:inline-block;background:linear-gradient(180deg,var(--accent-bright),var(--accent));color:var(--accent-ink);font-weight:700;
+       padding:14px 30px;border-radius:8px;text-decoration:none;border:0;cursor:pointer;font-size:1rem;font-family:inherit;
+       transition:transform .16s var(--ease)}
+  .btn:hover{transform:translateY(-2px)}
+  .btn-ghost{background:var(--panel);color:var(--muted);border:1px solid var(--line)}
+  .btn-ghost:hover{color:var(--text);border-color:var(--accent-dim)}
+  .error-note{display:none;color:var(--red);font-size:.9rem;margin-top:12px;font-weight:600}
+  .error-note.show{display:block}
+  #results{display:none;border:1px solid var(--accent-dim);border-radius:var(--radius);background:linear-gradient(180deg,var(--panel2),var(--panel));padding:28px;margin-top:24px}
+  #results.show{display:block}
+  .score-line{display:flex;align-items:center;gap:20px;flex-wrap:wrap;margin-bottom:16px}
+  .score-ring{width:110px;height:110px;border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;flex:none;
+    border:5px solid var(--accent);font-weight:800}
+  .score-ring .num{font-size:2rem;line-height:1}
+  .score-ring .of{font-size:.7rem;color:var(--muted)}
+  .tier{font-size:1.15rem;font-weight:800;margin:0}
+  .tier small{display:block;font-weight:400;color:var(--muted);font-size:.9rem;margin-top:6px;max-width:46ch}
+  .fix{border:1px solid var(--line);border-radius:10px;padding:16px 18px;margin:12px 0;background:var(--bg-soft)}
+  .fix .prio{font-size:.7rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;margin-bottom:6px}
+  .prio.crit{color:var(--red)} .prio.high{color:var(--amber)} .prio.med{color:var(--accent-bright)}
+  .fix strong{font-size:1rem}
+  .fix p{color:var(--muted);font-size:.9rem;margin:6px 0 0}
+  .cta{background:linear-gradient(180deg,var(--panel2),var(--panel));border:1px solid var(--accent-dim);border-radius:var(--radius);
+       padding:28px;margin:48px 0;text-align:center;box-shadow:0 16px 40px rgba(0,0,0,.35)}
+  .cta h2{margin:0 0 10px;font-size:1.3rem}
+  .cta p{color:var(--muted);margin-bottom:18px}
+  .disclaimer{font-size:.82rem;color:var(--faint);border:1px dashed var(--line);border-radius:8px;padding:12px 16px;margin:32px 0}
+  .faq details{border:1px solid var(--line);border-radius:10px;background:var(--panel);padding:14px 18px;margin:10px 0}
+  .faq summary{font-weight:700;cursor:pointer}
+  .faq summary::marker{color:var(--accent)}
+  .faq details p{color:var(--muted);margin:10px 0 4px;font-size:.94rem}
+  footer.site{border-top:1px solid var(--line);background:var(--bg-soft);padding:22px 0;margin-top:48px}
+  footer.site .wrap{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px 16px;max-width:1040px;padding:0 24px}
+  footer.site{color:var(--muted);font-size:.82rem}
+  footer.site a{color:var(--muted);text-decoration:none;margin-left:14px}
+  footer.site a:hover{color:var(--accent-bright)}
+  #backtop{position:fixed;right:22px;bottom:22px;width:46px;height:46px;border-radius:50%;border:1px solid var(--line);background:var(--panel);color:var(--accent);font-size:1.3rem;cursor:pointer;opacity:0;pointer-events:none;transition:opacity .2s var(--ease);z-index:150}
+  #backtop.show{opacity:1;pointer-events:auto}
+  @media(max-width:640px){nav.main a:not(:last-child){display:none}footer.site .wrap{justify-content:center;text-align:center}footer.site a{margin:0 7px}}
+  @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{animation:none!important;transition:none!important}}
+  .skip{position:absolute;left:-9999px;top:0;background:var(--accent);color:var(--accent-ink);padding:10px 18px;font-weight:700;z-index:200;border-radius:0 0 8px 0}
+  .skip:focus{left:0}
+</style><style>
+.drop{border:2px dashed var(--line);border-radius:var(--radius);padding:34px 20px;text-align:center;cursor:pointer;transition:border-color .2s}
+.drop:hover,.drop.over{border-color:var(--accent)}
+.drop input{display:none}
+.photogrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:14px;margin-top:18px}
+.photocard{background:var(--panel2);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden}
+.photocard img{width:100%;height:150px;object-fit:cover;display:block}
+.photocard .pbody{padding:12px 14px;font-size:.85rem}
+.photocard .pname{font-weight:700;word-break:break-all;margin-bottom:6px}
+.tagchip{display:inline-block;font-size:.72rem;border-radius:999px;padding:3px 10px;margin:2px 4px 2px 0;border:1px solid var(--line)}
+.tagchip.high{background:rgba(224,106,95,.15);border-color:var(--red);color:var(--red)}
+.tagchip.med{background:rgba(232,176,75,.12);border-color:var(--amber);color:var(--amber)}
+.tagchip.low{background:rgba(127,201,127,.12);border-color:var(--green);color:var(--green)}
+.tagchip.none{background:var(--panel);color:var(--muted)}
+.metafound{font-size:.78rem;color:var(--muted);margin-top:6px;line-height:1.5}
+.scrubbar{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px;align-items:center}
+.privnote{font-size:.82rem;color:var(--muted);margin-top:14px}
+.donebadge{color:var(--green);font-weight:700}
+</style></head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site"><div class="wrap">
+  <a class="brand" href="../../">
+    <svg width="22" height="22" viewBox="0 0 26 26" fill="none" aria-hidden="true"><circle cx="5" cy="6" r="2.4" fill="#e07a5f"/><circle cx="21" cy="6" r="2.4" fill="#e07a5f"/><circle cx="13" cy="13" r="2.4" fill="#e07a5f"/><circle cx="5" cy="20" r="2.4" fill="#e07a5f"/><circle cx="21" cy="20" r="2.4" fill="#e07a5f"/><path d="M6.6 7.4L11.2 11.8M19.4 7.4L14.8 11.8M6.6 18.6L11.2 14.2M19.4 18.6L14.8 14.2" stroke="#e07a5f" stroke-width="1.4"/></svg>
+    ghostcorpnet
+  </a>
+  <nav class="main" aria-label="Primary"><a href="../../">Home</a><a href="../../products/">Catalog</a><a href="../../brands/">Stores</a><a href="../../ecosystem/">Ecosystem</a><a href="../../articles/">Articles</a><a href="../../changelog.html">Changelog</a></nav>
+</div></header>
+<main class="wrap" id="main" tabindex="-1">
+  <p class="crumb"><a href="../../">Home</a> · <a href="../">Free tools</a></p>
+  <p class="pill">Free tool · 1 minute</p>
+  <h1>Photo Privacy Scrubber</h1>
+  <p class="date">By <a href="../../about.html" rel="author">ghostcorpnet Studio</a> · Free forever</p>
+  <p class="lead">Your photos carry hidden data — GPS location, your phone model, the exact moment you took them. Drop photos below to see what's inside, then scrub it all clean in one tap. Everything runs in your browser. Nothing is ever uploaded.</p>
+
+  <div class="hero-tool" id="scrubber" aria-label="Photo privacy scrubber">
+    <div class="drop" id="drop" role="button" tabindex="0" aria-label="Choose photos to inspect">
+      <p style="font-size:1.05rem;font-weight:700">Drop photos here or tap to choose</p>
+      <p class="privnote">JPEG / PNG · multiple files OK · files never leave this device</p>
+      <input type="file" id="fileinput" accept="image/jpeg,image/png,image/webp" multiple>
+    </div>
+    <div class="photogrid" id="photogrid"></div>
+    <div class="scrubbar" id="scrubbar" style="display:none">
+      <button class="btn" id="scruball">Scrub all photos</button>
+      <span class="privnote" id="scrubnote"></span>
+    </div>
+    <p class="privnote">🔒 Private by design: this page has no server. Inspection and scrubbing happen entirely on your device.</p>
+  </div>
+
+  <h2 id="why-it-matters">Why this matters</h2>
+  <p>Every photo your phone takes is stamped with EXIF metadata. Post an original photo online or send it to someone, and you're handing over the GPS coordinates of your home, your kid's school, or wherever you were standing — plus your exact phone model and the timestamp. Scrubbing takes ten seconds and removes all of it.</p>
+
+  <h2 id="faq">FAQ</h2>
+  <div class="faq">
+    <details><summary>What hidden data do photos contain?</summary><p>Most phone photos carry EXIF metadata: GPS coordinates of where the shot was taken, the phone make and model, and the exact date and time. Anyone you send the original file to can read it.</p></details>
+    <details><summary>Do my photos leave my device when I use this tool?</summary><p>No. The scrubber runs entirely in your browser using JavaScript. Your photos are never uploaded anywhere.</p></details>
+    <details><summary>Does scrubbing reduce photo quality?</summary><p>Slightly. Scrubbed photos are re-encoded at high quality (92%), which is visually identical for sharing and posting. The original file on your device is never modified.</p></details>
+    <details><summary>Which formats are supported?</summary><p>JPEG and PNG photos, including HEIC-converted files saved as JPEG/PNG. iPhone users should export as JPEG first for full metadata inspection.</p></details>
+  </div>
+
+  <div class="cta">
+    <h2 id="put-privacy-into-practice">Put privacy into practice</h2>
+    <p>The Governed Agent Mesh Playbook — Studio Edition ($29) gives you the full system for running AI tools that respect boundaries: approvals, data controls, and incident response, ready to run.</p>
+    <a class="btn" href="https://koalstin.gumroad.com/l/hdigmr" referrerpolicy="no-referrer">Get the Studio Edition — $29</a>
+    <p style="margin-top:12px"><a href="../../products/">Or browse the full catalog of products &rarr;</a></p>
+  </div>
+</main>
+<footer class="site">
+  <div class="wrap">
+    <span>© <span id="yr">2026</span> ghostcorpnet · An independent studio</span>
+    <span><a href="../../">Home</a><a href="../../products/">Catalog</a><a href="../../brands/">Stores</a><a href="../../ecosystem/">Ecosystem</a><a href="../../articles/">Articles</a><a href="../../changelog.html">Changelog</a><a href="../../sitemap.html">Site index</a><a href="mailto:corpghost420@gmail.com">Contact</a><a href="../../terms.html">Terms</a><a href="../../privacy.html">Privacy</a></span>
+  </div>
+</footer>
+<button id="backtop" aria-label="Back to top">↑</button>
+<script>
+(function(){
+  var drop = document.getElementById('drop');
+  var input = document.getElementById('fileinput');
+  var grid = document.getElementById('photogrid');
+  var scrubbar = document.getElementById('scrubbar');
+  var scrubnote = document.getElementById('scrubnote');
+  var photos = [];
+  document.getElementById('yr').textContent = new Date().getFullYear();
+
+  drop.addEventListener('click', function(){ input.click(); });
+  drop.addEventListener('keydown', function(e){ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); input.click(); }});
+  ['dragover','dragenter'].forEach(function(ev){ drop.addEventListener(ev, function(e){ e.preventDefault(); drop.classList.add('over'); }); });
+  ['dragleave','drop'].forEach(function(ev){ drop.addEventListener(ev, function(e){ e.preventDefault(); drop.classList.remove('over'); }); });
+  drop.addEventListener('drop', function(e){ addFiles(e.dataTransfer.files); });
+  input.addEventListener('change', function(){ addFiles(input.files); input.value=''; });
+
+  function esc(s){ var d=document.createElement('div'); d.appendChild(document.createTextNode(s==null?'':String(s))); return d.innerHTML; }
+
+  function addFiles(files){
+    for (var i=0;i<files.length;i++){
+      (function(file){
+        if(!/^image\//.test(file.type)) return;
+        var url = URL.createObjectURL(file);
+        var rec = {file:file, url:url, meta:null, scrubbed:false};
+        photos.push(rec);
+        renderCard(rec);
+        inspect(rec);
+      })(files[i]);
+    }
+    if(photos.length) scrubbar.style.display='flex';
+  }
+
+  function renderCard(rec){
+    var card = document.createElement('div');
+    card.className='photocard';
+    card.innerHTML = '<img alt="uploaded photo"><div class="pbody"><div class="pname"></div><div class="tags"></div><div class="metafound">Reading metadata…</div></div>';
+    card.querySelector('img').src = rec.url;
+    card.querySelector('.pname').textContent = rec.file.name;
+    rec.card = card;
+    grid.appendChild(card);
+  }
+
+  function inspect(rec){
+    var done = function(tags){
+      rec.meta = tags||{};
+      var t = rec.meta;
+      var chips = [], found = [];
+      if(t.latitude!=null && t.longitude!=null){
+        chips.push('<span class="tagchip high">GPS location</span>');
+        found.push('GPS: '+Number(t.latitude).toFixed(4)+', '+Number(t.longitude).toFixed(4));
+      }
+      var dev = [t.Make,t.Model].filter(Boolean).join(' ').trim();
+      if(dev){ chips.push('<span class="tagchip med">Device</span>'); found.push('Device: '+dev); }
+      var dt = t.DateTimeOriginal||t.CreateDate||t.ModifyDate;
+      if(dt){ chips.push('<span class="tagchip low">Timestamp</span>'); found.push('Taken: '+dt); }
+      if(!chips.length){ chips.push('<span class="tagchip none">No risky metadata found</span>'); }
+      rec.card.querySelector('.tags').innerHTML = chips.join('');
+      rec.card.querySelector('.metafound').innerHTML = found.map(esc).join('<br>') || 'This photo carries no GPS, device, or timestamp data.';
+    };
+    try{
+      if(window.exifr){ exifr.parse(rec.file).then(done).catch(function(){ done({}); }); }
+      else done({});
+    }catch(e){ done({}); }
+  }
+
+  document.getElementById('scruball').addEventListener('click', function(){
+    var pending = photos.filter(function(p){ return !p.scrubbed; });
+    if(!pending.length) return;
+    scrubnote.textContent = 'Scrubbing '+pending.length+' photo(s)…';
+    var i = 0;
+    function next(){
+      if(i>=pending.length){ scrubnote.innerHTML = '<span class="donebadge">Done — '+pending.length+' clean photo(s) downloaded.</span>'; return; }
+      scrubOne(pending[i++], next);
+    }
+    next();
+  });
+
+  function scrubOne(rec, cb){
+    var img = new Image();
+    img.onload = function(){
+      URL.revokeObjectURL(rec.url);
+      var c = document.createElement('canvas');
+      var max = 4096, w = img.naturalWidth, h = img.naturalHeight;
+      var s = Math.min(1, max/Math.max(w,h));
+      c.width = Math.round(w*s); c.height = Math.round(h*s);
+      c.getContext('2d').drawImage(img, 0, 0, c.width, c.height);
+      c.toBlob(function(blob){
+        if(!blob){ cb(); return; }
+        var a = document.createElement('a');
+        a.href = URL.createObjectURL(blob);
+        var nm = rec.file.name.replace(/\.[^.]+$/,'');
+        a.download = nm + '-scrubbed.jpg';
+        document.body.appendChild(a); a.click();
+        setTimeout(function(){ document.body.removeChild(a); }, 500);
+        rec.scrubbed = true;
+        var badge = document.createElement('div');
+        badge.innerHTML = '<span class="donebadge">✓ Scrubbed — metadata removed</span>';
+        rec.card.querySelector('.pbody').appendChild(badge);
+        cb();
+      }, 'image/jpeg', 0.92);
+    };
+    img.onerror = function(){ cb(); };
+    img.src = rec.url;
+  }
+
+  var bt = document.getElementById('backtop');
+  window.addEventListener('scroll', function(){ bt.style.display = window.scrollY>600 ? 'block':'none'; }, {passive:true});
+  bt.addEventListener('click', function(){ window.scrollTo({top:0, behavior:'smooth'}); });
+})();
+</script>
+</body>
+</html>
