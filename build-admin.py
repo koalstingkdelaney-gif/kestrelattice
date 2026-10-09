@@ -1361,10 +1361,26 @@ sentLoad();setInterval(sentLoad,20000);});
 
 
 def _sandbox_html():
-    """Rogue-Bot Sandbox tab: quarantined bots, shared transcript feed,
-    per-bot chat, sandboxed inventions with one-tap promote, manual quarantine."""
+    """Multi-sandbox tab: a switcher across independent safe play-pens.
+    Each sandbox shows a bot roster (crew grouped by group, or quarantined
+    rogue cards), a shared transcript feed, per-bot chat, an invention shelf
+    with one-tap promote, move-bot between sandboxes, retire (custom
+    sandboxes only), and manual quarantine (quarantine sandbox only).
+    Plain-English throughout."""
     scoped_css = (
         "<style>"
+        ".sb-pills{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0}"
+        ".sb-pill{background:var(--panel2);border:1px solid var(--line);color:var(--text);"
+        "border-radius:999px;padding:9px 18px;font-size:.9rem;font-family:inherit;cursor:pointer}"
+        ".sb-pill.active{background:var(--accent);border-color:transparent;color:#fff;font-weight:600}"
+        "#sb-roster details{margin:10px 0}"
+        "#sb-roster summary{cursor:pointer;font-size:1rem;padding:6px 0}"
+        ".sb-roster-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:12px;margin-top:8px}"
+        ".sb-bot{background:var(--panel2);border:1px solid var(--line);border-radius:12px;padding:12px 14px}"
+        ".sb-bot h4{margin:2px 0 6px;font-size:1.02rem}"
+        ".sb-dot{display:inline-block;width:10px;height:10px;border-radius:50%;background:#39d353;margin-right:8px}"
+        ".sb-dot.idle{background:#9aa0a6}"
+        ".sb-move-row{display:none;margin-top:8px}"
         ".sb-opt{background:var(--panel);border:1px solid var(--line);border-radius:12px;"
         "padding:14px 16px;margin:10px 0}"
         ".sb-opt p{margin:4px 0 10px}"
@@ -1376,18 +1392,36 @@ def _sandbox_html():
         ".sb-sys{text-align:center;color:var(--muted);font-size:.84rem;padding:8px 0}"
         "select.sb-select{background:var(--panel2);border:1px solid var(--line);color:var(--text);"
         "border-radius:10px;padding:10px 12px;font-size:.92rem;font-family:inherit;max-width:100%}"
+        "#sb-retire:disabled{opacity:.45;cursor:not-allowed}"
+        ".sb-inv-bot{margin:16px 0 6px}"
         "</style>"
     )
-    rogues = (
-        '<div class="card"><h3>&#129302; Bots in the Sandbox right now</h3>'
-        "<p class='muted'>These bots did something they shouldn't have. Each one is paused here "
-        "while a clean copy does its job — so nothing you run ever stops.</p>"
-        '<div id="sb-rogues"><p class="muted">Loading&#8230;</p></div></div>'
+    switcher = (
+        '<div class="card"><h3>&#129521; Your sandboxes</h3>'
+        "<p class='muted'>A sandbox is a separate safe play-pen. Bots in one can't see or touch the others.</p>"
+        '<div id="sb-switcher" class="sb-pills"><p class="muted">Loading&#8230;</p></div>'
+        '<p id="sb-purpose" class="muted"></p>'
+        '<div class="sb-idea-row" style="margin-top:6px">'
+        '<button class="btn btn-sm btn-ghost" id="sb-new-toggle">&#10133; New sandbox</button>'
+        '<button class="btn btn-sm btn-ghost" id="sb-retire" style="display:none">&#128465; Retire this sandbox</button>'
+        '</div>'
+        '<p id="sb-retire-note" class="muted"></p>'
+        '<div id="sb-new-form" style="display:none;margin-top:12px">'
+        "<p class='muted' style='margin-bottom:4px'>Give it a name and say what it's for.</p>"
+        '<label class="sb-field">Name it'
+        '<input id="sb-new-name" type="text" placeholder="e.g. Experiment: new pricing angles" maxlength="120"></label>'
+        '<label class="sb-field">What is it for?'
+        '<input id="sb-new-purpose" type="text" placeholder="e.g. Try out risky ideas without touching the real business" maxlength="500"></label>'
+        '<button class="btn btn-sm" id="sb-new-go">Create sandbox</button>'
+        "<p class='muted'>You can retire a sandbox when it's empty.</p>"
+        '</div></div>'
     )
+    roster = '<div id="sb-roster"></div>'
+    rogues = '<div id="sb-rogues"></div>'
     transcript = (
         '<div class="card"><h3>&#128064; Watch them</h3>'
-        "<p class='muted'>Everything the sandboxed bots say and do, newest at the bottom, "
-        "refreshed every few seconds. This is just a window in — they can't touch your business from here.</p>"
+        "<p class='muted'>Everything the bots in this sandbox say and do, newest at the bottom, "
+        "refreshed every 10 seconds. This is just a window in — they can't touch your business from here.</p>"
         '<div id="sb-transcript" class="chat-thread" style="max-height:380px">'
         '<p class="muted">Loading&#8230;</p></div></div>'
     )
@@ -1402,22 +1436,12 @@ def _sandbox_html():
         '<button class="btn" id="sb-chat-send">Send</button></div></div>'
     )
     inventions = (
-        '<div class="card"><h3>&#128161; Ideas from the Sandbox</h3>'
-        "<p class='muted'>Bots in the Sandbox are encouraged to invent — new pitches, product concepts, "
-        "wild ideas. Everything they invent lands here as a draft. It only becomes real when you tap Promote.</p>"
+        '<div class="card"><h3>&#128161; Invention shelf</h3>'
+        "<p class='muted'>Bots here are encouraged to invent — new pitches, product concepts, wild ideas. "
+        "Everything they invent lands here as a draft. It only becomes real when you tap Promote.</p>"
         '<div id="sb-inventions"><p class="muted">Loading&#8230;</p></div></div>'
     )
-    quarantine = (
-        '<details class="fold"><summary>&#10133; Move a bot to the Sandbox</summary>'
-        "<p class='muted'>If a bot is misbehaving, you can move it here yourself. "
-        "This pauses it immediately and a clean copy takes over its job, so nothing breaks.</p>"
-        '<label class="sb-field">Bot job name'
-        '<input id="sb-q-job" type="text" placeholder="e.g. brand-hirewarden-acquire"></label>'
-        '<label class="sb-field">What did it do wrong?'
-        '<input id="sb-q-reason" type="text" placeholder="e.g. sent emails without asking" maxlength="500"></label>'
-        '<button class="btn btn-danger" id="sb-q-go">Move to Sandbox</button>'
-        "</details>"
-    )
+    quarantine = '<div id="sb-manual-q"></div>'
     script = """<script>(function(){
 var SB_DOWN="Couldn't reach the Sandbox — the worker update may not be deployed yet.";
 var SB_ERR="<p class='muted'>"+SB_DOWN+"</p>";
@@ -1425,39 +1449,159 @@ function escH(s){var d=document.createElement("div");d.appendChild(document.crea
 function escA(s){return escH(s).replace(/'/g,"&#39;").replace(/"/g,"&quot;");}
 function sbReady(){return !(typeof WURL==="undefined"||!WURL||!WKEY);}
 function sbTime(ts){if(!ts)return "";try{var d=new Date(ts);if(isNaN(d.getTime()))return escH(String(ts));return d.toLocaleString();}catch(e){return escH(String(ts));}}
-var sbRogues=[],sbChatMsgs=[],sbInvs=[],sbChatId=null,sbChatName="";
-/* ----- rogues ----- */
-async function sbLoadRogues(){
-var box=document.getElementById("sb-rogues");if(!box)return;
-if(!sbReady()){box.innerHTML=SB_ERR;sbFillChatSelect([]);return;}
+var sbSandboxes=[],sbCurrent=null,sbRogues=[],sbCrew=[],sbInvs=[],sbChatMsgs=[],sbChatId=null,sbChatName="",sbChatables=[];
+/* ----- sandboxes ----- */
+function sbCur(){for(var i=0;i<sbSandboxes.length;i++)if(String(sbSandboxes[i].id)===String(sbCurrent))return sbSandboxes[i];return null;}
+async function sbLoadSandboxes(){
+var sw=document.getElementById("sb-switcher");
+if(!sbReady()){if(sw)sw.innerHTML=SB_ERR;return;}
 try{
-var r=await fetch(WURL+"/sandbox/rogues?key="+encodeURIComponent(WKEY));
+var r=await fetch(WURL+"/sandbox/sandboxes?key="+encodeURIComponent(WKEY));
 var d=await r.json();
-var rogues=(d&&d.ok&&Array.isArray(d.rogues))?d.rogues:[];
-sbRogues=rogues;sbFillChatSelect(rogues);
-if(!rogues.length){box.innerHTML="<div class='card ok-card' style='margin:0'><p style='font-size:1.02rem'>&#9989; The Sandbox is empty — that's good. It means no bot has misbehaved.</p></div>";return;}
-box.innerHTML=rogues.map(function(g,i){
+var list=(d&&d.ok&&Array.isArray(d.sandboxes))?d.sandboxes:[];
+sbSandboxes=list;
+if(list.length){sbSelect(String(list[0].id));}
+else if(sw){sw.innerHTML="<p class='muted'>No sandboxes yet — make one below.</p>";}
+}catch(e){if(sw)sw.innerHTML=SB_ERR;}
+}
+function sbRenderSwitcher(){
+var sw=document.getElementById("sb-switcher");if(!sw)return;
+if(!sbSandboxes.length){sw.innerHTML="<p class='muted'>No sandboxes yet.</p>";return;}
+sw.innerHTML=sbSandboxes.map(function(s){
+return "<button class='sb-pill"+(String(s.id)===String(sbCurrent)?" active":"")+"' data-sb-sandbox='"+escA(String(s.id))+"'>"+escH(s.name||"Sandbox")+"</button>";
+}).join("");
+var p=document.getElementById("sb-purpose"),c=sbCur();
+if(p)p.innerHTML=c&&c.purpose?escH(c.purpose):"";
+var rt=document.getElementById("sb-retire");
+if(rt){var custom=c&&c.kind!=="quarantine"&&c.kind!=="research";rt.style.display=custom?"":"none";}
+sbRenderRetireState();
+}
+function sbSelect(id){sbCurrent=id;sbRenderSwitcher();sbLoadSandbox();}
+function sbRenderRetireState(){
+var rt=document.getElementById("sb-retire"),note=document.getElementById("sb-retire-note"),c=sbCur();
+if(!rt||rt.style.display==="none")return;
+var busy=sbRogues.length>0||sbCrew.length>0;
+rt.disabled=busy;
+if(note)note.textContent=busy?"This sandbox still has bots in it — move or release them first, then you can retire it.":"";
+}
+function sbToggleNew(){
+var f=document.getElementById("sb-new-form");if(!f)return;
+f.style.display=f.style.display==="none"?"block":"none";
+}
+async function sbNewSandbox(){
+var name=document.getElementById("sb-new-name"),purp=document.getElementById("sb-new-purpose"),f=document.getElementById("sb-new-form");
+var nm=name?(name.value||"").trim():"",pu=purp?(purp.value||"").trim():"";
+if(!nm){toast("Give the sandbox a name first.",false);if(name)name.focus();return;}
+if(!sbReady()){toast(SB_DOWN,false);return;}
+try{
+var r=await fetch(WURL+"/sandbox/sandboxes",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({key:WKEY,name:nm,purpose:pu})});
+var d=await r.json();
+if(d&&d.ok){
+if(name)name.value="";if(purp)purp.value="";if(f)f.style.display="none";
+toast("Sandbox created.",true);
+await sbLoadSandboxes();if(d.id)sbSelect(String(d.id));
+}
+else toast("That didn't work — try again.",false);
+}catch(e){toast(SB_DOWN,false);}
+}
+async function sbRetire(){
+var c=sbCur();if(!c)return;
+var nm=c.name||"this sandbox";
+if(!window.confirm("Retire "+nm+"?\\n\\nTAP OK — it's gone for good.\\nTAP CANCEL — keep it."))return;
+if(!sbReady()){toast(SB_DOWN,false);return;}
+try{
+var r=await fetch(WURL+"/sandbox/sandboxes/retire",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({key:WKEY,id:c.id})});
+var d=await r.json();
+if(d&&d.ok){toast("Retired.",true);sbCurrent=null;await sbLoadSandboxes();}
+else if(d&&d.error==="not_empty"){toast("It's not empty — move or release its bots first.",false);sbLoadSandbox();}
+else toast("That didn't work — try again.",false);
+}catch(e){toast(SB_DOWN,false);}
+}
+/* ----- per-sandbox load ----- */
+async function sbLoadSandbox(){
+if(!sbReady())return;
+var q="?key="+encodeURIComponent(WKEY)+"&sandbox_id="+encodeURIComponent(sbCurrent);
+try{
+var pr=await fetch(WURL+"/sandbox/rogues"+q),pc=await fetch(WURL+"/sandbox/crew"+q),pi=await fetch(WURL+"/sandbox/inventions"+q);
+var dr=await pr.json(),dc=await pc.json(),di=await pi.json();
+sbRogues=(dr&&dr.ok&&Array.isArray(dr.rogues))?dr.rogues:[];
+sbCrew=(dc&&dc.ok&&Array.isArray(dc.crew))?dc.crew:[];
+sbInvs=(di&&di.ok&&Array.isArray(di.inventions))?di.inventions:[];
+}catch(e){
+document.getElementById("sb-roster").innerHTML=SB_ERR;
+document.getElementById("sb-rogues").innerHTML=SB_ERR;
+document.getElementById("sb-inventions").innerHTML=SB_ERR;
+sbFillChatSelect();return;
+}
+sbRenderRogues();sbRenderRoster();sbRenderInventions();sbFillChatSelect();sbRenderManualQ();sbRenderRetireState();
+sbLoadTranscript();
+}
+/* ----- roster (crew) ----- */
+function sbMoveOptions(){
+return sbSandboxes.filter(function(s){return String(s.id)!==String(sbCurrent);}).map(function(s){
+return "<option value='"+escA(String(s.id))+"'>"+escH(s.name||"Sandbox")+"</option>";}).join("");
+}
+function sbRenderRoster(){
+var box=document.getElementById("sb-roster");if(!box)return;
+if(!sbCrew.length){box.innerHTML="";return;}
+var groups=[],gmap={};
+sbCrew.forEach(function(b){
+var g=b.group||"Bots";
+if(!(g in gmap)){gmap[g]=groups.length;groups.push({name:g,bots:[]});}
+groups[gmap[g]].bots.push(b);
+});
+box.innerHTML="<div class='card'><h3>&#129302; Bot roster — "+sbCrew.length+" bot"+(sbCrew.length===1?"":"s")+"</h3>"
++"<p class='muted'>These bots live and work inside this sandbox. They can't see your real business — this is their play-pen.</p>"
++groups.map(function(gr,gi){
+var cards=gr.bots.map(function(b){
+var idx=sbCrew.indexOf(b);
+var active=String(b.status||"active").toLowerCase()==="active";
+return "<div class='sb-bot'><h4><span class='sb-dot"+(active?"":" idle")+"'></span>"+escH(b.name||"A bot")+"</h4>"
++"<p style='margin:2px 0'>"+escH(b.role||"A sandboxed helper bot.")+"</p>"
++"<p class='muted' style='margin:2px 0'>Working on now: "+escH(b.focus||"getting set up")+"</p>"
++"<div class='sb-idea-row' style='margin-top:8px'>"
++"<button class='btn btn-sm btn-ghost' data-sb-talk-c='"+idx+"'>&#128172; Talk</button>"
++"<button class='btn btn-sm btn-ghost' data-sb-move-c='"+idx+"'>&#8646; Move</button></div>"
++"<div class='sb-move-row' id='sb-movec-"+idx+"'><select class='sb-select' id='sb-moveselc-"+idx+"'>"+sbMoveOptions()+"</select> "
++"<button class='btn btn-sm' data-sb-domove-c='"+idx+"'>Confirm move</button></div>"
++"</div>";}).join("");
+return "<details"+(gi===0?" open":"")+"><summary><b>"+escH(gr.name)+"</b> — "+gr.bots.length+" bot"+(gr.bots.length===1?"":"s")+"</summary><div class='sb-roster-grid'>"+cards+"</div></details>";
+}).join("")
++"<p class='muted' style='margin-top:10px'>Moving just changes which play-pen it's in. Its replacement (if any) keeps working.</p></div>";
+}
+/* ----- rogues ----- */
+function sbRenderRogues(){
+var box=document.getElementById("sb-rogues");if(!box)return;
+var c=sbCur(),isQ=c&&c.kind==="quarantine";
+if(!sbRogues.length){
+if(isQ)box.innerHTML="<div class='card'><h3>&#129302; Bots in the Sandbox right now</h3>"
++"<p class='muted'>These bots did something they shouldn't have. Each one is paused here "
++"while a clean copy does its job — so nothing you run ever stops.</p>"
++"<div class='card ok-card' style='margin:0'><p style='font-size:1.02rem'>&#9989; The Sandbox is empty — that's good. It means no bot has misbehaved.</p></div></div>";
+else box.innerHTML="";
+return;
+}
+box.innerHTML="<div class='card'><h3>&#129302; Bots in the Sandbox right now</h3>"
++"<p class='muted'>These bots did something they shouldn't have. Each one is paused here "
++"while a clean copy does its job — so nothing you run ever stops.</p>"
++sbRogues.map(function(g,i){
 var name=escH(g.bot_name||g.job_id||"A bot");
 return "<div class='card warn' style='margin:14px 0'><h3>&#129302; "+name+" <span class='pill warn'>in the Sandbox</span></h3>"
 +"<p><b>What it did wrong:</b> "+escH(g.reason||"It did something it shouldn't have.")+"</p>"
 +"<p class='muted'><b>What's happening now:</b> A clean copy ("+escH(g.replacement_job_id||"a fresh copy")+") is doing its old job, so nothing stopped.</p>"
 +"<div class='sb-idea-row'>"
-+"<button class='btn btn-sm' data-sb-talk='"+i+"'>&#128172; Talk to it</button>"
-+"<button class='btn btn-sm btn-ghost' data-sb-release='"+i+"'>&#9989; Let it back out</button></div>"
++"<button class='btn btn-sm' data-sb-talk-r='"+i+"'>&#128172; Talk to it</button>"
++"<button class='btn btn-sm btn-ghost' data-sb-release-r='"+i+"'>&#9989; Let it back out</button>"
++"<button class='btn btn-sm btn-ghost' data-sb-move-r='"+i+"'>&#8646; Move</button></div>"
++"<div class='sb-move-row' id='sb-mover-"+i+"'><select class='sb-select' id='sb-movesel-"+i+"'>"+sbMoveOptions()+"</select> "
++"<button class='btn btn-sm' data-sb-domove-r='"+i+"'>Confirm move</button></div>"
 +"<details class='fold'><summary>What happens if I let it out?</summary><ul>"
 +"<li><b>YES (let it out):</b> the original bot goes back to work and its clean replacement is retired.</li>"
 +"<li><b>NO (leave it here):</b> it stays in the Sandbox and the replacement keeps doing its job.</li>"
-+"</ul></details></div>";}).join("");
-}catch(e){box.innerHTML=SB_ERR;}
++"</ul></details></div>";}).join("")
++"</div>";
 }
-function sbTalkTo(i){
-var g=sbRogues[i];if(!g)return;
-var sel=document.getElementById("sb-chat-bot");if(sel)sel.value=g.id;
-sbChatName=g.bot_name||g.job_id||"sandboxed bot";
-sbLoadChat(g.id);
-var card=document.getElementById("sb-chat-card");if(card)card.scrollIntoView({behavior:"smooth",block:"start"});
-}
-async function sbRelease(i){
+async function sbReleaseR(i){
 var g=sbRogues[i];if(!g)return;
 if(!sbReady()){toast(SB_DOWN,false);return;}
 var name=g.bot_name||"this bot";
@@ -1466,7 +1610,7 @@ if(!ok)return;
 try{
 var r=await fetch(WURL+"/sandbox/release",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({key:WKEY,rogue_id:g.id})});
 var d=await r.json();
-if(d&&d.ok){toast("It's on its way out — the clean copy retires once the original is back at work.",true);sbLoadRogues();}
+if(d&&d.ok){toast("It's on its way out — the clean copy retires once the original is back at work.",true);sbLoadSandbox();}
 else toast("That didn't work — try again.",false);
 }catch(e){toast(SB_DOWN,false);}
 }
@@ -1475,10 +1619,10 @@ async function sbLoadTranscript(){
 var box=document.getElementById("sb-transcript");if(!box)return;
 if(!sbReady()){box.innerHTML=SB_ERR;return;}
 try{
-var r=await fetch(WURL+"/sandbox/transcript?key="+encodeURIComponent(WKEY)+"&limit=100");
+var r=await fetch(WURL+"/sandbox/transcript?key="+encodeURIComponent(WKEY)+"&sandbox_id="+encodeURIComponent(sbCurrent)+"&limit=100");
 var d=await r.json();
 var entries=(d&&d.ok&&Array.isArray(d.entries))?d.entries:[];
-if(!entries.length){box.innerHTML="<p class='muted'>Nothing here yet — when a sandboxed bot thinks or acts, you'll see it here.</p>";return;}
+if(!entries.length){box.innerHTML="<p class='muted'>Nothing here yet — when a bot in this sandbox thinks or acts, you'll see it here.</p>";return;}
 box.innerHTML=entries.map(function(en){
 if(en.kind==="system")return "<div class='sb-sys'>"+escH(en.text)+"</div>";
 var tag=en.kind==="action"?" · did something":"";
@@ -1488,19 +1632,33 @@ box.scrollTop=box.scrollHeight;
 }catch(e){box.innerHTML=SB_ERR;}
 }
 /* ----- chat ----- */
-function sbFillChatSelect(rogues){
-var sel=document.getElementById("sb-chat-bot");if(!sel)return;
-sel.innerHTML=rogues.map(function(g){return "<option value='"+escA(String(g.id))+"'>"+escH(g.bot_name||g.job_id||"bot")+"</option>";}).join("");
+function sbFillChatSelect(){
+var sel=document.getElementById("sb-chat-bot");
+sbChatables=[];
+sbRogues.forEach(function(g,i){sbChatables.push({kind:"r",idx:i,label:(g.bot_name||g.job_id||"bot")+" (in quarantine)"});});
+sbCrew.forEach(function(b,i){sbChatables.push({kind:"c",idx:i,label:b.name||"bot"});});
+if(!sel)return;
+sel.innerHTML=sbChatables.map(function(c,i){return "<option value='"+i+"'>"+escH(c.label)+"</option>";}).join("");
 var th=document.getElementById("sb-chat-thread");
-if(rogues.length){sbChatName=rogues[0].bot_name||rogues[0].job_id||"sandboxed bot";sbLoadChat(rogues[0].id);}
-else if(th){sbChatId=null;th.innerHTML="<p class='muted'>No bots in the Sandbox yet.</p>";}
+if(sbChatables.length){sbOpenChat(0,false);}
+else if(th){sbChatId=null;th.innerHTML="<p class='muted'>No bots in this sandbox yet.</p>";}
 }
-async function sbLoadChat(rid){
-sbChatId=rid;
-var th=document.getElementById("sb-chat-thread");if(!th)return;
+function sbOpenChat(ci,scroll){
+var c=sbChatables[ci];if(!c)return;
+var g=c.kind==="r"?sbRogues[c.idx]:sbCrew[c.idx];
+sbChatId={kind:c.kind,idx:c.idx};
+sbChatName=c.kind==="r"?(g.bot_name||g.job_id||"sandboxed bot"):(g.name||"sandboxed bot");
+sbLoadChat();
+if(scroll!==false){var card=document.getElementById("sb-chat-card");if(card)card.scrollIntoView({behavior:"smooth",block:"start"});}
+}
+function sbBotRef(){if(!sbChatId)return null;return sbChatId.kind==="r"?sbRogues[sbChatId.idx]:sbCrew[sbChatId.idx];}
+async function sbLoadChat(){
+var th=document.getElementById("sb-chat-thread");if(!th||!sbChatId)return;
 if(!sbReady()){th.innerHTML=SB_ERR;return;}
+var ref=sbBotRef();
+if(!ref){th.innerHTML=SB_ERR;return;}
 try{
-var r=await fetch(WURL+"/sandbox/chat?key="+encodeURIComponent(WKEY)+"&rogue_id="+encodeURIComponent(rid));
+var r=await fetch(WURL+"/sandbox/chat?key="+encodeURIComponent(WKEY)+"&sandbox_id="+encodeURIComponent(sbCurrent)+"&bot_id="+encodeURIComponent(ref.id));
 var d=await r.json();
 var msgs=(d&&d.ok&&Array.isArray(d.thread))?d.thread:[];
 sbChatMsgs=msgs;
@@ -1517,42 +1675,48 @@ async function sbSendChat(){
 var input=document.getElementById("sb-chat-input"),btn=document.getElementById("sb-chat-send");
 var text=input.value.trim();
 if(!text||!sbChatId||!sbReady())return;
+var ref=sbBotRef();
+if(!ref)return;
 btn.disabled=true;
 try{
-await fetch(WURL+"/sandbox/chat",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({key:WKEY,rogue_id:sbChatId,text:text})});
-input.value="";await sbLoadChat(sbChatId);
+await fetch(WURL+"/sandbox/chat",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({key:WKEY,sandbox_id:sbCurrent,bot_id:ref.id,text:text})});
+input.value="";await sbLoadChat();
 }catch(e){toast(SB_DOWN,false);}
 btn.disabled=false;
 }
 async function sbSaveIdea(i){
 var m=sbChatMsgs[i];if(!m||!sbChatId)return;
 if(!sbReady()){toast(SB_DOWN,false);return;}
+var ref=sbBotRef();
 try{
-var r=await fetch(WURL+"/sandbox/invention",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({key:WKEY,rogue_id:sbChatId,text:m.text})});
+var r=await fetch(WURL+"/sandbox/invention",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({key:WKEY,sandbox_id:sbCurrent,bot_id:ref?ref.id:null,bot_name:sbChatName,text:m.text})});
 var d=await r.json();
-if(d&&d.ok){toast("Saved — you'll find it under “Ideas from the Sandbox” below.",true);sbLoadInventions();}
+if(d&&d.ok){toast("Saved — you'll find it under the Invention shelf below.",true);sbLoadSandbox();}
 else toast("That didn't work — try again.",false);
 }catch(e){toast(SB_DOWN,false);}
 }
 /* ----- inventions ----- */
-async function sbLoadInventions(){
+function sbRenderInventions(){
 var box=document.getElementById("sb-inventions");if(!box)return;
-if(!sbReady()){box.innerHTML=SB_ERR;return;}
-try{
-var r=await fetch(WURL+"/sandbox/inventions?key="+encodeURIComponent(WKEY));
-var d=await r.json();
-var invs=(d&&d.ok&&Array.isArray(d.inventions))?d.inventions:[];
-sbInvs=invs;
-if(!invs.length){box.innerHTML="<p class='muted'>No ideas yet. Sandboxed bots are encouraged to invent here — and everything they invent shows up as a draft until you decide.</p>";return;}
-box.innerHTML=invs.map(function(v,i){
+if(!sbInvs.length){box.innerHTML="<p class='muted'>No ideas yet. Bots here are encouraged to invent — and everything they invent shows up as a draft until you decide.</p>";return;}
+var bmap={},order=[];
+sbInvs.forEach(function(v){
+var bn=v.bot_name||"a sandboxed bot";
+if(!(bn in bmap)){bmap[bn]=order.length;order.push({name:bn,items:[]});}
+order[bmap[bn]].items.push(v);
+});
+box.innerHTML=order.map(function(gr){
+return "<div class='sb-inv-bot'><h4>&#128161; Ideas from "+escH(gr.name)+"</h4>"
++gr.items.map(function(v){
+var i=sbInvs.indexOf(v);
 var promoted=String(v.status||"").toLowerCase()==="promoted";
 var badge=promoted?"<span class='pill ok'>Sent to the real pipeline</span>":"<span class='pill warn'>Waiting for you</span>";
-var h="<div class='card' style='margin:14px 0'><h3>&#128161; Idea from "+escH(v.bot_name||"a sandboxed bot")+" "+badge+"</h3>"
+var h="<div class='card' style='margin:14px 0'><h3>&#128161; Idea from "+escH(gr.name)+" "+badge+"</h3>"
 +"<p style='white-space:pre-wrap;color:var(--text)'>"+escH(v.text)+"</p>"
 +"<p class='muted'>"+sbTime(v.at)+"</p>";
 if(!promoted)h+="<button class='btn btn-sm' data-sb-promote='"+i+"'>&#128640; Promote to real pipeline</button><div id='sb-opts-"+i+"' style='display:none'></div>";
-return h+"</div>";}).join("");
-}catch(e){box.innerHTML=SB_ERR;}
+return h+"</div>";}).join("")+"</div>";
+}).join("");
 }
 function sbShowPromote(i){
 var v=sbInvs[i];if(!v)return;
@@ -1583,30 +1747,71 @@ var r=await fetch(WURL+"/sandbox/promote",{method:"POST",headers:{"Content-Type"
 var d=await r.json();
 if(d&&d.ok){
 var msg=dest==="ideas"?"Saved to your idea list.":dest==="product"?"Filed as a product proposal — the product team will take it from here.":"Added to the pitch queue — you can cancel it in the Outreach tab before it goes.";
-toast(msg,true);sbLoadInventions();
+toast(msg,true);sbLoadSandbox();
 }else toast("That didn't work — try again.",false);
 }catch(e){toast(SB_DOWN,false);}
 }
-/* ----- manual quarantine ----- */
-async function sbQuarantine(){
+/* ----- move a bot ----- */
+function sbToggleMoveRow(kind,idx){
+var el=document.getElementById(kind==="r"?"sb-mover-"+idx:"sb-movec-"+idx);
+if(el)el.style.display=el.style.display==="block"?"none":"block";
+}
+async function sbDoMove(kind,idx){
+var sel=document.getElementById(kind==="r"?"sb-movesel-"+idx:"sb-moveselc-"+idx);
+var to=sel?sel.value:"";
+if(!to){toast("Pick a sandbox first.",false);return;}
+var ref=kind==="r"?sbRogues[idx]:sbCrew[idx];
+if(!ref)return;
+var nm=kind==="r"?(ref.bot_name||ref.job_id):ref.name;
+var dest=null;for(var i=0;i<sbSandboxes.length;i++)if(String(sbSandboxes[i].id)===String(to))dest=sbSandboxes[i];
+if(!window.confirm("Move "+(nm||"this bot")+" to "+(dest?dest.name:"another sandbox")+"?\\n\\nIt keeps working — this only changes which play-pen it's in."))return;
+if(!sbReady()){toast(SB_DOWN,false);return;}
+try{
+var r=await fetch(WURL+"/sandbox/move-bot",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({key:WKEY,bot_ref:ref.id,to_sandbox:to})});
+var d=await r.json();
+if(d&&d.ok){toast("Moved.",true);sbLoadSandbox();}
+else toast("That didn't work — try again.",false);
+}catch(e){toast(SB_DOWN,false);}
+}
+/* ----- manual quarantine (quarantine sandbox only) ----- */
+function sbRenderManualQ(){
+var box=document.getElementById("sb-manual-q");if(!box)return;
+var c=sbCur();
+if(!(c&&c.kind==="quarantine")){box.innerHTML="";return;}
+box.innerHTML="<details class='fold'><summary>&#10133; Move a bot to the Sandbox</summary>"
++"<p class='muted'>If a bot is misbehaving, you can move it here yourself. "
++"This pauses it immediately and a clean copy takes over its job, so nothing breaks.</p>"
++'<label class="sb-field">Bot job name<input id="sb-q-job" type="text" placeholder="e.g. brand-hirewarden-acquire"></label>'
++'<label class="sb-field">What did it do wrong?<input id="sb-q-reason" type="text" placeholder="e.g. sent emails without asking" maxlength="500"></label>'
++'<button class="btn btn-danger" id="sb-q-go">Move to Sandbox</button></details>';
+var q=document.getElementById("sb-q-go");if(q)q.addEventListener("click",sbQuarantineSubmit);
+}
+async function sbQuarantineSubmit(){
 var job=document.getElementById("sb-q-job"),reason=document.getElementById("sb-q-reason"),btn=document.getElementById("sb-q-go");
 var jobId=job?(job.value||"").trim():"",rsn=reason?(reason.value||"").trim():"";
 if(!jobId){toast("Type the bot's job name first.",false);if(job)job.focus();return;}
 if(!sbReady()){toast(SB_DOWN,false);return;}
 btn.disabled=true;
 try{
-var r=await fetch(WURL+"/sandbox/quarantine",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({key:WKEY,job_id:jobId,reason:rsn||"moved by hand"})});
+var r=await fetch(WURL+"/sandbox/quarantine",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({key:WKEY,job_id:jobId,reason:rsn||"moved by hand",sandbox_id:sbCurrent})});
 var d=await r.json();
-if(d&&d.ok){toast("Moved to the Sandbox — a clean copy is taking over its job.",true);if(job)job.value="";if(reason)reason.value="";sbLoadRogues();sbLoadTranscript();}
+if(d&&d.ok){toast("Moved to the Sandbox — a clean copy is taking over its job.",true);if(job)job.value="";if(reason)reason.value="";sbLoadSandbox();}
 else toast("That didn't work — check the job name and try again.",false);
 }catch(e){toast(SB_DOWN,false);}
 btn.disabled=false;
 }
+/* ----- wiring ----- */
 document.addEventListener("click",function(e){
-var el=e.target&&e.target.closest?e.target.closest("[data-sb-talk],[data-sb-release],[data-sb-promote],[data-sb-do-promote],[data-sb-save-idea]"):null;
+var el=e.target&&e.target.closest?e.target.closest("[data-sb-sandbox],[data-sb-talk-r],[data-sb-release-r],[data-sb-move-r],[data-sb-domove-r],[data-sb-talk-c],[data-sb-move-c],[data-sb-domove-c],[data-sb-promote],[data-sb-do-promote],[data-sb-save-idea]"):null;
 if(!el)return;
-if(el.hasAttribute("data-sb-talk"))sbTalkTo(parseInt(el.getAttribute("data-sb-talk"),10));
-else if(el.hasAttribute("data-sb-release"))sbRelease(parseInt(el.getAttribute("data-sb-release"),10));
+if(el.hasAttribute("data-sb-sandbox"))sbSelect(el.getAttribute("data-sb-sandbox"));
+else if(el.hasAttribute("data-sb-talk-r"))sbOpenChat(sbChatables.findIndex(function(c){return c.kind==="r"&&c.idx===parseInt(el.getAttribute("data-sb-talk-r"),10);}),true);
+else if(el.hasAttribute("data-sb-release-r"))sbReleaseR(parseInt(el.getAttribute("data-sb-release-r"),10));
+else if(el.hasAttribute("data-sb-move-r"))sbToggleMoveRow("r",parseInt(el.getAttribute("data-sb-move-r"),10));
+else if(el.hasAttribute("data-sb-domove-r"))sbDoMove("r",parseInt(el.getAttribute("data-sb-domove-r"),10));
+else if(el.hasAttribute("data-sb-talk-c"))sbOpenChat(sbChatables.findIndex(function(c){return c.kind==="c"&&c.idx===parseInt(el.getAttribute("data-sb-talk-c"),10);}),true);
+else if(el.hasAttribute("data-sb-move-c"))sbToggleMoveRow("c",parseInt(el.getAttribute("data-sb-move-c"),10));
+else if(el.hasAttribute("data-sb-domove-c"))sbDoMove("c",parseInt(el.getAttribute("data-sb-domove-c"),10));
 else if(el.hasAttribute("data-sb-save-idea"))sbSaveIdea(parseInt(el.getAttribute("data-sb-save-idea"),10));
 else if(el.hasAttribute("data-sb-promote"))sbShowPromote(parseInt(el.getAttribute("data-sb-promote"),10));
 else if(el.hasAttribute("data-sb-do-promote"))sbDoPromote(parseInt(el.getAttribute("data-sb-do-promote"),10),el.getAttribute("data-sb-dest"));
@@ -1616,15 +1821,20 @@ var send=document.getElementById("sb-chat-send"),inp=document.getElementById("sb
 if(send)send.addEventListener("click",sbSendChat);
 if(inp)inp.addEventListener("keydown",function(e){if(e.key==="Enter")sbSendChat();});
 var sel=document.getElementById("sb-chat-bot");
-if(sel)sel.addEventListener("change",function(){sbChatName=sel.options[sel.selectedIndex]?sel.options[sel.selectedIndex].text:"sandboxed bot";sbLoadChat(sel.value);});
-var q=document.getElementById("sb-q-go");
-if(q)q.addEventListener("click",sbQuarantine);
-sbLoadRogues();sbLoadTranscript();sbLoadInventions();
+if(sel)sel.addEventListener("change",function(){sbOpenChat(parseInt(sel.value,10),false);});
+var tgl=document.getElementById("sb-new-toggle");
+if(tgl)tgl.addEventListener("click",sbToggleNew);
+var ngo=document.getElementById("sb-new-go");
+if(ngo)ngo.addEventListener("click",sbNewSandbox);
+var rt=document.getElementById("sb-retire");
+if(rt)rt.addEventListener("click",sbRetire);
+sbLoadSandboxes();
 setInterval(sbLoadTranscript,10000);
-setInterval(function(){if(sbChatId)sbLoadChat(sbChatId);},15000);
+setInterval(function(){if(sbChatId)sbLoadChat();},15000);
 });
 })();</script>"""
-    return scoped_css + rogues + transcript + chat + inventions + quarantine + script
+    return scoped_css + switcher + roster + rogues + transcript + chat + inventions + quarantine + script
+
 
 
 def _all_panes(products, queue, entries, title_map, omap):
