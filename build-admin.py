@@ -1931,8 +1931,8 @@ def _universe_html():
                "accent" if gross > 0 else "")
         + tile(f"${t.get('week_revenue', 0):,.0f}", "this week",
                f"{t.get('week_units', 0)} sales")
-        + tile(f"${t.get('pipeline_fees_usd', 0):,.0f}", "deal pipeline",
-               f"{ex.get('deals_total', 0)} houses in play")
+        + tile(f"${t.get('pipeline_fees_usd', 0):,.0f}", "lead pipeline",
+               f"{ex.get('leads_total', 0)} leads for sale")
         + tile(f"{t.get('court_points', 0)}", "court points",
                f"${t.get('court_attributed_usd', 0):,.0f} bot-earned")
         + "</div>")
@@ -1980,8 +1980,8 @@ def _universe_html():
                 f"${t.get('lifetime_gross_usd', 0):,.0f} earned · {t.get('lifetime_orders', 0)} orders",
                 "products")
         + world("🏠", "The Exchange",
-                "The wholesaling desk: find houses, find cash buyers, assign the contract, keep the fee. You sign; the desk does the hunting.",
-                f"{ex.get('deals_total', 0)} deals · ${ex.get('pipeline_fees_usd', 0):,.0f} in potential fees",
+                "The Tip Desk: finds motivated sellers, packages each into a lead dossier, and sells it to cash buyers for $299. No offers, no contracts, no signatures — just information.",
+                f"{ex.get('leads_total', 0)} leads · ${ex.get('pipeline_value_usd', 0):,.0f} in sellable dossiers",
                 "drafts")
         + world("🔥", "The Forge",
                 "Your court of five bots, inventing around the clock — product ideas, pitch angles, tools. Every $100 they earn you is a point.",
@@ -1999,36 +1999,37 @@ def _universe_html():
 <div class="uflow">
 <span class="uflow-n">🔥 Forge invents</span><span class="uflow-a">→</span>
 <span class="uflow-n">📡 Signal attracts</span><span class="uflow-a">→</span>
-<span class="uflow-n">🏪 Marketplace sells<br>🏠 Exchange closes</span><span class="uflow-a">→</span>
+<span class="uflow-n">🏪 Marketplace sells<br>🏠 Exchange sells tips</span><span class="uflow-a">→</span>
 <span class="uflow-n">💰 Treasury grows</span>
 </div>
-<p class='muted'>The court's inventions become pitch angles and free tools. The signal sends pitches and publishes tools. Buyers pay through the marketplace; house deals pay through the exchange. Every dollar lands in your treasury — and the bots that earned it get their points.</p>
+<p class='muted'>The court's inventions become pitch angles and free tools. The signal sends pitches and publishes tools. Buyers pay through the marketplace; lead dossiers pay through the exchange. Every dollar lands in your treasury — and the bots that earned it get their points.</p>
 </div>""")
 
     jobs = (
         """<div class="card"><h3>👆 Your jobs in this universe</h3>
 <p class='muted'>Almost everything runs itself now. Only these need you:</p>
 <ul style="line-height:2">
-<li><b>Sign</b> purchase and assignment contracts — the law needs your signature, never the bots'. Seconds on your phone when a seller bites.</li>
 <li><b>Money</b> in or out — payouts, refunds, price changes stay yours, always.</li>
 <li><b>Your phone</b> — a few one-time account taps (Ko-fi listings, itch.io payout setup).</li>
 </ul>
-<p class='muted'>Draft triage, outreach, seller introductions, follow-ups, inventions, publishing — all autonomous. Binding house offers stay human-only by law; everything short of that goes on its own.</p></div>""")
+<p class='muted'>Draft triage, outreach, lead dossiers, buyer alerts, claim handling, inventions, publishing — all autonomous. The Tip Desk sells information, never houses: nothing to sign, ever.</p></div>""")
 
     deals_rows = ""
-    for d in (ex.get("deals") or [])[:6]:
+    for d in (ex.get("leads") or [])[:6]:
         deals_rows += (
-            f"<tr><td>{esc(d.get('address') or d.get('id') or '')}</td>"
+            f"<tr><td>{esc(d.get('id') or '')}</td>"
             f"<td>{esc(str(d.get('status', '')))}</td>"
-            f"<td>${(d.get('fee_target') or 0):,.0f}</td></tr>")
+            f"<td>${(d.get('asking_price') or 0):,.0f}</td>"
+            f"<td>~${(d.get('arv') or 0):,.0f}</td>"
+            f"<td>${(d.get('price_usd') or 0):,.0f}</td></tr>")
     deals_card = ""
     if deals_rows:
         deals_card = (
-            """<div class="card"><h3>🏠 Live house deals</h3>
-<table class="tbl"><tr><th>Address</th><th>Stage</th><th>Fee target</th></tr>"""
+            """<div class="card"><h3>🏠 Live leads</h3>
+<table class="tbl"><tr><th>Lead</th><th>Stage</th><th>Asking</th><th>ARV</th><th>Price</th></tr>"""
             + deals_rows + "</table>"
-            "<p class='muted'>Plain-English stage guide: research → comps checked → offer drafted → "
-            "waiting on your tap → under contract → assigned → paid.</p></div>")
+            "<p class='muted'>Stage guide: needs-comps → analyzed → available → claimed → delivered. "
+            "Street addresses and seller contacts stay hidden until a buyer pays.</p></div>")
 
     scoped = """<style>
 .uflow{display:flex;align-items:center;justify-content:center;gap:10px;flex-wrap:wrap;margin:14px 0}
