@@ -1454,18 +1454,23 @@ else toast("That didn't work — try again.",false);
 async function sbLoadSandbox(){
 if(!sbReady())return;
 var q="?key="+encodeURIComponent(WKEY)+"&sandbox_id="+encodeURIComponent(sbCurrent);
+/* Resilient per-route fetch (2026-10-08): one failing route must never blank the others.
+   Cloudflare 1101s hit KV-list() routes (/sandbox/inventions, /sandbox/chat) while
+   single-get routes stay 200 — so fetch each independently. */
+async function sbFetch(path){
 try{
-var pr=await fetch(WURL+"/sandbox/rogues"+q),pc=await fetch(WURL+"/sandbox/crew"+q),pi=await fetch(WURL+"/sandbox/inventions"+q);
-var dr=await pr.json(),dc=await pc.json(),di=await pi.json();
-sbRogues=(dr&&dr.ok&&Array.isArray(dr.rogues))?dr.rogues:[];
-sbCrew=(dc&&dc.ok&&Array.isArray(dc.crew))?dc.crew:[];
-sbInvs=(di&&di.ok&&Array.isArray(di.inventions))?di.inventions:[];
-}catch(e){
-document.getElementById("sb-roster").innerHTML=SB_ERR;
-document.getElementById("sb-rogues").innerHTML=SB_ERR;
-document.getElementById("sb-inventions").innerHTML=SB_ERR;
-sbRenderConvos();return;
+var r=await fetch(WURL+path+q);
+var d=await r.json();
+return (d&&d.ok)?d:null;
+}catch(e){return null;}
 }
+var dr=await sbFetch("/sandbox/rogues"),dc=await sbFetch("/sandbox/crew"),di=await sbFetch("/sandbox/inventions");
+sbRogues=(dr&&Array.isArray(dr.rogues))?dr.rogues:[];
+sbCrew=(dc&&Array.isArray(dc.crew))?dc.crew:[];
+sbInvs=(di&&Array.isArray(di.inventions))?di.inventions:[];
+if(!dr)document.getElementById("sb-rogues").innerHTML=SB_ERR;
+if(!dc)document.getElementById("sb-roster").innerHTML=SB_ERR;
+if(!di)document.getElementById("sb-inventions").innerHTML=SB_ERR;
 sbRenderRogues();sbRenderRoster();sbRenderInventions();sbRenderConvos();sbRenderManualQ();sbRenderRetireState();
 sbLoadTranscript();
 }
