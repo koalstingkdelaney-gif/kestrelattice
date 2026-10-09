@@ -456,15 +456,94 @@ export default {
     const readSbRogues = () => readSb(SB_ROGUES, []);
     const readSbTranscript = () => readSb(SB_TRANSCRIPT, []);
     const readSbThreads = () => readSb(SB_THREADS, {});
-    const readSbInventions = () => readSb(SB_INVENTIONS, []);
-    const readSbRequests = () => readSb(SB_REQUESTS, []);
+    // Append-only per-message thread storage: one KV key per message avoids
+    // read-modify-write races on the old sb_threads blob (rapid posts used to
+    // clobber each other inside KV's propagation window).
+    const SB_THREAD_PREFIX = "sb_thread:";
+    const pushSbThreadMsg = async (sandbox_id, bot_id, msg) => {
+      const k =
+        SB_THREAD_PREFIX +
+        sandbox_id +
+        ":" +
+        bot_id +
+        ":" +
+        Date.now() +
+        ":" +
+        Math.floor(Math.random() * 46656).toString(36);
+      await env.APPROVALS.put(k, JSON.stringify(msg));
+    };
+    const readSbThread = async (sandbox_id, bot_id) => {
+      const prefix = SB_THREAD_PREFIX + sandbox_id + ":" + bot_id + ":";
+      const msgs = [];
+      let cursor;
+      do {
+        const page = await env.APPROVALS.list({ prefix, cursor, limit: 1000 });
+        for (const key of page.keys) {
+          const raw = await env.APPROVALS.get(key.name);
+          if (!raw) continue;
+          try {
+            msgs.push(JSON.parse(raw));
+          } catch {
+            /* skip corrupt entries */
+          }
+        }
+        cursor = page.list_complete ? undefined : page.cursor;
+      } while (cursor);
+      msgs.sort((a, b) => String(a.ts || "").localeCompare(String(b.ts || "")));
+      return msgs.slice(-100);
+    };
+    // Per-item keys for inventions: same race fix as requests.
+    const SB_INVENTION_PREFIX = "sb_invention:";
+    const readSbInventions = async () => {
+      await migrateSbBlob(SB_INVENTIONS, SB_INVENTION_PREFIX);
+      const out = await listSbPrefixed(SB_INVENTION_PREFIX);
+      out.sort((a, b) => String(a.at || "").localeCompare(String(b.at || "")));
+      return out;
+    };
+    // Per-item keys for requests: avoids read-modify-write races on the old
+    // sb_requests blob (back-to-back request creates could clobber each other).
+    const SB_REQUEST_PREFIX = "sb_request:";
+    const listSbPrefixed = async (prefix) => {
+      const out = [];
+      let cursor;
+      do {
+        const page = await env.APPROVALS.list({ prefix, cursor, limit: 1000 });
+        for (const key of page.keys) {
+          const raw = await env.APPROVALS.get(key.name);
+          if (!raw) continue;
+          try {
+            out.push(JSON.parse(raw));
+          } catch {
+            /* skip corrupt entries */
+          }
+        }
+        cursor = page.list_complete ? undefined : page.cursor;
+      } while (cursor);
+      return out;
+    };
+    const migrateSbBlob = async (blobKey, prefix) => {
+      const legacy = await readSb(blobKey, null);
+      if (!Array.isArray(legacy) || legacy.length === 0) return;
+      for (const item of legacy) {
+        if (!item || !item.id) continue;
+        const k = prefix + item.id;
+        if (!(await env.APPROVALS.get(k))) {
+          await env.APPROVALS.put(k, JSON.stringify(item));
+        }
+      }
+      await env.APPROVALS.delete(blobKey);
+    };
+    const readSbRequests = async () => {
+      await migrateSbBlob(SB_REQUESTS, SB_REQUEST_PREFIX);
+      const out = await listSbPrefixed(SB_REQUEST_PREFIX);
+      out.sort((a, b) => String(a.at || "").localeCompare(String(b.at || "")));
+      return out;
+    };
     const pushSbRequest = async (req_obj) => {
-      const requests = await readSbRequests();
       const id =
         "qr-" + Date.now() + "-" + Math.floor(Math.random() * 46656).toString(36);
       const r = { id, status: "pending", at: new Date().toISOString(), ...req_obj };
-      requests.push(r);
-      await writeSb(SB_REQUESTS, requests);
+      await env.APPROVALS.put(SB_REQUEST_PREFIX + id, JSON.stringify(r));
       return r;
     };
     const slugify = (s) =>
@@ -569,11 +648,11 @@ export default {
         String(url.searchParams.get("sandbox_id") || "").trim() +
         ":" +
         String(url.searchParams.get("bot_id") || "").trim();
-      const threads = await readSbThreads();
-      return json({
-        ok: true,
-        thread: threads[key] && Array.isArray(threads[key]) ? threads[key] : [],
-      });
+      const thread = await readSbThread(
+        String(url.searchParams.get("sandbox_id") || "").trim(),
+        String(url.searchParams.get("bot_id") || "").trim()
+      );
+      return json({ ok: true, thread });
     }
 
     if (req.method === "POST" && url.pathname === "/sandbox/chat") {
@@ -587,12 +666,11 @@ export default {
       }
       const text = String(body.text || "").trim().slice(0, 2000);
       if (!text) return json({ ok: false, error: "empty" }, 400);
-      const threads = await readSbThreads();
-      const key = sandbox_id + ":" + bot_id;
-      const thread = Array.isArray(threads[key]) ? threads[key] : [];
-      thread.push({ ts: new Date().toISOString(), from: "koalstin", text });
-      threads[key] = thread.slice(-100);
-      await writeSb(SB_THREADS, threads);
+      await pushSbThreadMsg(sandbox_id, bot_id, {
+        ts: new Date().toISOString(),
+        from: "koalstin",
+        text,
+      });
       return json({ ok: true });
     }
 
@@ -606,16 +684,11 @@ export default {
       }
       const text = String(body.text || "").trim().slice(0, 2000);
       if (!text) return json({ ok: false, error: "empty" }, 400);
-      const threads = await readSbThreads();
-      const key = sandbox_id + ":" + bot_id;
-      const thread = Array.isArray(threads[key]) ? threads[key] : [];
-      thread.push({
+      await pushSbThreadMsg(sandbox_id, bot_id, {
         ts: new Date().toISOString(),
         from: String(body.from || "sandbox").slice(0, 80),
         text,
       });
-      threads[key] = thread.slice(-100);
-      await writeSb(SB_THREADS, threads);
       return json({ ok: true });
     }
 
@@ -676,8 +749,7 @@ export default {
       const text = String(body.text || "").trim().slice(0, 4000);
       if (!text) return json({ ok: false, error: "empty" }, 400);
       const id = "inv-" + Date.now().toString(36);
-      const inventions = await readSbInventions();
-      inventions.push({
+      const inv = {
         id,
         sandbox_id: String(body.sandbox_id || "").trim().slice(0, 200),
         bot_id: String(body.bot_id || "").trim().slice(0, 200),
@@ -685,8 +757,8 @@ export default {
         text,
         at: new Date().toISOString(),
         status: "sandboxed",
-      });
-      await writeSb(SB_INVENTIONS, inventions);
+      };
+      await env.APPROVALS.put(SB_INVENTION_PREFIX + id, JSON.stringify(inv));
       return json({ ok: true, id });
     }
 
@@ -698,11 +770,18 @@ export default {
       if (!["pitch", "product", "ideas"].includes(body.dest)) {
         return json({ ok: false, error: "bad_dest" }, 400);
       }
-      const inventions = await readSbInventions();
-      const inv = inventions.find((i) => i.id === body.invention_id);
-      if (!inv) return json({ ok: false, error: "unknown_invention_id" }, 404);
+      await migrateSbBlob(SB_INVENTIONS, SB_INVENTION_PREFIX);
+      const ik = SB_INVENTION_PREFIX + String(body.invention_id);
+      const iraw = await env.APPROVALS.get(ik);
+      if (!iraw) return json({ ok: false, error: "unknown_invention_id" }, 404);
+      let inv;
+      try {
+        inv = JSON.parse(iraw);
+      } catch {
+        return json({ ok: false, error: "unknown_invention_id" }, 404);
+      }
       inv.status = "promote-requested";
-      await writeSb(SB_INVENTIONS, inventions);
+      await env.APPROVALS.put(ik, JSON.stringify(inv));
       const r = await pushSbRequest({
         type: "promote",
         invention_id: body.invention_id,
@@ -720,12 +799,19 @@ export default {
       const body = await readJsonBody();
       if (!body) return json({ ok: false, error: "bad_json" }, 400);
       if (!body.id) return json({ ok: false, error: "missing_id" }, 400);
-      const requests = await readSbRequests();
-      const r = requests.find((x) => x.id === String(body.id));
-      if (!r) return json({ ok: false, error: "unknown_id" }, 404);
+      await migrateSbBlob(SB_REQUESTS, SB_REQUEST_PREFIX);
+      const rk = SB_REQUEST_PREFIX + String(body.id);
+      const raw = await env.APPROVALS.get(rk);
+      if (!raw) return json({ ok: false, error: "unknown_id" }, 404);
+      let r;
+      try {
+        r = JSON.parse(raw);
+      } catch {
+        return json({ ok: false, error: "unknown_id" }, 404);
+      }
       r.status = "done";
       r.acked_at = new Date().toISOString();
-      await writeSb(SB_REQUESTS, requests);
+      await env.APPROVALS.put(rk, JSON.stringify(r));
       return json({ ok: true });
     }
 
@@ -751,7 +837,11 @@ export default {
         for (const i of payloadInv) {
           if (i && i.id) merged.push(i);
         }
-        await writeSb(SB_INVENTIONS, merged);
+        for (const i of merged) {
+          if (i && i.id) {
+            await env.APPROVALS.put(SB_INVENTION_PREFIX + i.id, JSON.stringify(i));
+          }
+        }
       }
       return json({ ok: true });
     }
