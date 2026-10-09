@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="utf-8">
+<link rel="preconnect" href="https://gumroad.com">
+<link rel="preconnect" href="https://www.googletagmanager.com">
+<meta name="viewport" content="width=device-width, initial-scale=1, interactive-widget=resizes-content, viewport-fit=cover">
+<title>Fix-and-Flip Calculator — Free Deal Analyzer | ghostcorpnet</title>
+<meta name="description" content="Free fix-and-flip calculator: enter purchase price, repairs, ARV and costs to get net profit, ROI, max allowable offer, and a plain-English deal verdict. No signup.">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<meta name="theme-color" content="#121212">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ghostcorpnet">
+<meta property="og:locale" content="en_US">
+<meta property="og:url" content="https://koalstingkdelaney-gif.github.io/kestrelattice/tools/fix-and-flip-calculator/">
+<meta property="og:title" content="Fix-and-Flip Calculator — Free Deal Analyzer | ghostcorpnet">
+<meta property="og:description" content="Free fix-and-flip calculator: purchase price, repairs, ARV and costs in — net profit, ROI, max allowable offer, and a plain-English verdict out.">
+<meta property="og:image" content="https://koalstingkdelaney-gif.github.io/kestrelattice/assets/studio-edition-cover.jpg">
+<meta property="og:image:alt" content="Fix-and-Flip Calculator — ghostcorpnet">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Fix-and-Flip Calculator — Free Deal Analyzer | ghostcorpnet">
+<meta name="twitter:description" content="Free fix-and-flip calculator: run the numbers on any flip before you commit a dollar.">
+<meta name="twitter:image" content="https://koalstingkdelaney-gif.github.io/kestrelattice/assets/studio-edition-cover.jpg">
+<link rel="canonical" href="https://koalstingkdelaney-gif.github.io/kestrelattice/tools/fix-and-flip-calculator/">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebApplication",
+"name":"Fix-and-Flip Calculator","applicationCategory":"FinanceApplication",
+"operatingSystem":"Web","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},
+"description":"Free fix-and-flip calculator: enter purchase price, repairs, ARV, holding and selling costs to get net profit, ROI, max allowable offer, and a plain-English deal verdict.",
+"url":"https://koalstingkdelaney-gif.github.io/kestrelattice/tools/fix-and-flip-calculator/"}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
+{"@type":"Question","name":"What is the 70% rule in house flipping?","acceptedAnswer":{"@type":"Answer","text":"The 70% rule is a conservative guideline: your maximum allowable offer equals 70% of the after-repair value (ARV) minus repair costs. It leaves roughly a 30% margin for profit, holding costs, and surprises. This calculator computes it for you."}},
+{"@type":"Question","name":"What ROI should I target on a flip?","acceptedAnswer":{"@type":"Answer","text":"Many experienced flippers look for at least 15-20% profit margin on the ARV, or a minimum dollar profit that makes the risk worthwhile (often $20,000+). This calculator flags deals below an 8% margin as not-a-deal and 8-15% as thin."}},
+{"@type":"Question","name":"Is this calculator financial advice?","acceptedAnswer":{"@type":"Answer","text":"No. It is an arithmetic tool — it computes exactly what you type in. Verify your ARV with real comparable sales, get contractor bids for repairs, and do your own due diligence before spending money."}},
+{"@type":"Question","name":"Does my data leave my device?","acceptedAnswer":{"@type":"Answer","text":"No. Every calculation happens in your browser. Nothing you type is sent anywhere."}}]}
+</script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-541TCHWW98"></script>
+<script>
+(function(){try{if(new URLSearchParams(location.search).get('admin')==='1'){localStorage.setItem('kestrelattice_admin','1');}}catch(e){}})();
+</script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+try{if(localStorage.getItem('kestrelattice_admin')!=='1'){gtag('js', new Date());gtag('config', 'G-541TCHWW98');}}catch(e){gtag('js', new Date());gtag('config', 'G-541TCHWW98');}
+</script>
+<style>
+  :root{color-scheme:dark;--bg:#0f0e0d; --bg-soft:#141210; --panel:#1a1714; --panel2:#211c17;
+        --line:#2c261e; --line-soft:#221d15; --text:#f1ebdd;
+        --muted:#a89d89; --faint:#978b74; --accent:#e07a5f;
+        --accent-bright:#f09474; --accent-dim:#c06a4e; --accent-ink:#1a0f08;
+        --accent-soft:rgba(224,122,95,.1); --radius:12px;
+        --green:#7fc97f; --amber:#e8b04b; --red:#e06a5f;
+        --ease:cubic-bezier(.2,.7,.25,1)}
+  *{margin:0;padding:0;box-sizing:border-box}
+  ::selection{background:var(--accent);color:var(--accent-ink)}
+  html{scroll-behavior:smooth;scrollbar-gutter:stable}
+  body{background:var(--bg);color:var(--text);font-family:ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;line-height:1.6;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:1040px;margin:0 auto;padding:0 24px}
+  header.site{border-bottom:1px solid var(--line);position:sticky;top:0;z-index:100;background:rgba(15,14,13,.92);backdrop-filter:blur(8px)}
+  header.site .wrap{display:flex;align-items:center;justify-content:space-between;min-height:56px;max-width:1040px;margin:0 auto;padding:0 24px}
+  .brand{display:flex;align-items:center;gap:9px;color:var(--text);text-decoration:none;font-weight:800;letter-spacing:.2px}
+  nav.main a{color:var(--muted);text-decoration:none;margin-left:18px;font-size:.9rem}
+  nav.main a:hover{color:var(--accent-bright)}
+  .crumb{font-size:.82rem;color:var(--faint);margin:22px 0 8px}
+  .crumb a{color:var(--muted);text-decoration:none}
+  .pill{display:inline-block;background:var(--accent-soft);border:1px solid var(--line);color:var(--accent-bright);font-size:.78rem;font-weight:700;padding:4px 12px;border-radius:999px;margin-bottom:10px}
+  h1{font-size:clamp(1.7rem,4.5vw,2.4rem);line-height:1.15;letter-spacing:-.5px;margin-bottom:6px}
+  .lead{color:var(--muted);font-size:1.02rem;max-width:640px;margin-bottom:26px}
+  .calc{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin-bottom:30px}
+  @media(max-width:820px){.calc{grid-template-columns:1fr}}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:22px}
+  .card h2{font-size:1.05rem;margin-bottom:14px;letter-spacing:.2px}
+  .field{margin-bottom:14px}
+  .field label{display:block;font-size:.85rem;color:var(--muted);margin-bottom:5px}
+  .field input{width:100%;background:var(--bg-soft);border:1px solid var(--line);border-radius:8px;color:var(--text);font-size:1.05rem;padding:10px 12px;font-family:inherit}
+  .field input:focus{outline:2px solid var(--accent);border-color:var(--accent)}
+  .field .hint{font-size:.76rem;color:var(--faint);margin-top:3px}
+  .seg{display:flex;gap:8px;margin-bottom:14px}
+  .seg button{flex:1;background:var(--bg-soft);border:1px solid var(--line);color:var(--muted);border-radius:8px;padding:9px;font-size:.9rem;cursor:pointer;font-family:inherit}
+  .seg button.on{background:var(--accent-soft);border-color:var(--accent);color:var(--accent-bright);font-weight:700}
+  .result-hero{background:var(--panel2);border:1px solid var(--line);border-radius:var(--radius);padding:22px;margin-bottom:16px;text-align:center}
+  .verdict{font-size:1.35rem;font-weight:800;margin-bottom:4px}
+  .verdict.good{color:var(--green)} .verdict.thin{color:var(--amber)} .verdict.bad{color:var(--red)}
+  .verdict-sub{color:var(--muted);font-size:.9rem}
+  .kpis{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:16px}
+  .kpi{background:var(--panel2);border:1px solid var(--line);border-radius:10px;padding:12px 14px}
+  .kpi .n{font-size:1.25rem;font-weight:800}
+  .kpi .l{font-size:.78rem;color:var(--muted)}
+  .kpi .n.neg{color:var(--red)} .kpi .n.pos{color:var(--green)}
+  .breakdown{font-size:.85rem;color:var(--muted);width:100%;border-collapse:collapse}
+  .breakdown td{padding:7px 4px;border-bottom:1px solid var(--line-soft)}
+  .breakdown td:last-child{text-align:right;color:var(--text);font-weight:600;font-variant-numeric:tabular-nums}
+  .note{background:var(--accent-soft);border:1px solid var(--line);border-radius:10px;padding:14px 16px;font-size:.88rem;color:var(--muted);margin:22px 0}
+  .note b{color:var(--text)}
+  .cta-card{background:var(--panel);border:1px solid var(--accent-dim);border-radius:var(--radius);padding:22px;margin:26px 0}
+  .cta-card h2{font-size:1.1rem;margin-bottom:8px}
+  .cta-card p{color:var(--muted);font-size:.92rem;margin-bottom:14px}
+  .btn{display:inline-block;background:var(--accent);color:var(--accent-ink);font-weight:800;text-decoration:none;padding:11px 22px;border-radius:10px;font-size:.95rem}
+  .btn:hover{background:var(--accent-bright)}
+  .faq{margin:30px 0}
+  .faq h2{font-size:1.15rem;margin-bottom:12px}
+  .faq details{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:12px 16px;margin-bottom:8px}
+  .faq summary{cursor:pointer;font-weight:600;font-size:.92rem}
+  .faq p{color:var(--muted);font-size:.88rem;margin-top:8px}
+  footer.site{border-top:1px solid var(--line);background:var(--bg-soft);padding:22px 0;margin-top:48px}
+  footer.site .wrap{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px 16px;max-width:1040px;padding:0 24px}
+  footer.site{color:var(--muted);font-size:.82rem}
+  footer.site a{color:var(--muted);text-decoration:none;margin-left:14px}
+  footer.site a:hover{color:var(--accent-bright)}
+  .skip{position:absolute;left:-9999px;top:0;background:var(--accent);color:var(--accent-ink);padding:10px 18px;font-weight:700;z-index:200;border-radius:0 0 8px 0}
+  .skip:focus{left:0}
+  @media(max-width:640px){nav.main a:not(:last-child){display:none}footer.site .wrap{justify-content:center;text-align:center}footer.site a{margin:0 7px}.kpis{grid-template-columns:1fr 1fr}}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site"><div class="wrap">
+  <a class="brand" href="../../">
+    <svg width="22" height="22" viewBox="0 0 26 26" fill="none" aria-hidden="true"><circle cx="5" cy="6" r="2.4" fill="#e07a5f"/><circle cx="21" cy="6" r="2.4" fill="#e07a5f"/><circle cx="13" cy="13" r="2.4" fill="#e07a5f"/><circle cx="5" cy="20" r="2.4" fill="#e07a5f"/><circle cx="21" cy="20" r="2.4" fill="#e07a5f"/><path d="M6.6 7.4L11.2 11.8M19.4 7.4L14.8 11.8M6.6 18.6L11.2 14.2M19.4 18.6L14.8 14.2" stroke="#e07a5f" stroke-width="1.4"/></svg>
+    ghostcorpnet
+  </a>
+  <nav class="main" aria-label="Primary"><a href="../../">Home</a><a href="../../products/">Catalog</a><a href="../../brands/">Stores</a><a href="../../ecosystem/">Ecosystem</a><a href="../../articles/">Articles</a><a href="../../changelog.html">Changelog</a></nav>
+</div></header>
+<main class="wrap" id="main" tabindex="-1">
+  <p class="crumb"><a href="../../">Home</a> · <a href="../">Free tools</a></p>
+  <p class="pill">Free tool · 2 minutes</p>
+  <h1>Fix-and-Flip Calculator</h1>
+  <p class="lead">Type in your numbers — purchase price, repairs, ARV, costs. Get net profit, ROI, your max allowable offer (the 70% rule), and a plain-English verdict. Everything runs in your browser; nothing you type leaves your device.</p>
+
+  <div class="calc">
+    <div class="card" aria-label="Deal inputs">
+      <h2>Your numbers</h2>
+      <div class="seg" role="group" aria-label="Purchase type">
+        <button type="button" id="seg-cash" class="on">Cash purchase</button>
+        <button type="button" id="seg-loan">Financed</button>
+      </div>
+      <div class="field"><label for="purchase">Purchase price ($)</label><input id="purchase" type="number" min="0" step="1000" value="150000"></div>
+      <div class="field"><label for="repairs">Repair / renovation costs ($)</label><input id="repairs" type="number" min="0" step="1000" value="40000"><p class="hint">Get a real contractor bid — guesses here are where flips die.</p></div>
+      <div class="field"><label for="arv">After-repair value — ARV ($)</label><input id="arv" type="number" min="0" step="1000" value="250000"><p class="hint">What fixed-up homes like this actually sold for nearby. Verify with comparable sales.</p></div>
+      <div id="loan-fields" style="display:none">
+        <div class="field"><label for="downpct">Down payment (%)</label><input id="downpct" type="number" min="0" max="100" step="1" value="20"></div>
+        <div class="field"><label for="rate">Interest rate (annual %)</label><input id="rate" type="number" min="0" max="30" step="0.125" value="10"></div>
+        <div class="field"><label for="points">Loan points / origination (%)</label><input id="points" type="number" min="0" max="10" step="0.25" value="2"><p class="hint">Hard-money lenders often charge 2+ points up front.</p></div>
+      </div>
+      <div class="field"><label for="months">Months you'll hold it</label><input id="months" type="number" min="1" max="36" step="1" value="6"></div>
+      <div class="field"><label for="holding">Monthly holding costs ($)</label><input id="holding" type="number" min="0" step="50" value="800"><p class="hint">Taxes, insurance, utilities — per month.</p></div>
+      <div class="field"><label for="commission">Agent commission when you sell (%)</label><input id="commission" type="number" min="0" max="10" step="0.5" value="6"></div>
+      <div class="field"><label for="closing">Seller closing costs (%)</label><input id="closing" type="number" min="0" max="10" step="0.5" value="2"><p class="hint">Title, transfer taxes, fees on the sale side.</p></div>
+      <div class="field"><label for="staging">Staging / misc sale prep ($)</label><input id="staging" type="number" min="0" step="100" value="2000"></div>
+    </div>
+
+    <div aria-label="Results" aria-live="polite">
+      <div class="result-hero">
+        <div class="verdict" id="verdict">—</div>
+        <div class="verdict-sub" id="verdict-sub">Enter your numbers to see the verdict.</div>
+      </div>
+      <div class="kpis">
+        <div class="kpi"><div class="n" id="k-profit">$0</div><div class="l">Net profit</div></div>
+        <div class="kpi"><div class="n" id="k-roi">0%</div><div class="l">ROI on cash in</div></div>
+        <div class="kpi"><div class="n" id="k-mao">$0</div><div class="l">Max offer (70% rule)</div></div>
+        <div class="kpi"><div class="n" id="k-cash">$0</div><div class="l">Cash you'll need</div></div>
+      </div>
+      <div class="card">
+        <h2>Where the money goes</h2>
+        <table class="breakdown" id="breakdown"></table>
+      </div>
+    </div>
+  </div>
+
+  <div class="note"><b>How to read this:</b> the 70% rule says never pay more than 70% of ARV minus repairs — the 30% gap covers your profit, holding costs, and surprises. The verdict calls it a deal at a 15%+ profit margin on ARV, thin at 8–15%, and not-a-deal below 8%. Conservative on purpose.</div>
+
+  <div class="cta-card">
+    <h2>Want deals with the numbers already run?</h2>
+    <p>Our Tip Desk finds off-market leads, packages each with the seller's direct contact plus ARV, repair, and comp numbers, and sells the dossier to cash buyers. Join the alert list and you'll see every new lead first.</p>
+    <a class="btn" href="mailto:corpghost420@gmail.com?subject=Tip%20Desk%20alert%20list%20—%20add%20me">Get lead alerts</a>
+  </div>
+
+  <div class="faq">
+    <h2>Common questions</h2>
+    <details><summary>What is the 70% rule?</summary><p>A conservative guideline: max allowable offer = 70% of ARV minus repair costs. The 30% margin covers profit, holding costs, selling costs, and the surprises every renovation hides.</p></details>
+    <details><summary>What ROI should I target?</summary><p>Many experienced flippers want at least a 15–20% profit margin on ARV, or a minimum dollar profit (often $20,000+) that justifies the risk and the months of work.</p></details>
+    <details><summary>Is this financial advice?</summary><p>No. It's arithmetic on the numbers you type. Verify ARV with real comparable sales, get contractor bids for repairs, and do your own due diligence before spending money.</p></details>
+    <details><summary>Does my data leave my device?</summary><p>No. Every calculation happens in your browser. Nothing you type is sent anywhere.</p></details>
+  </div>
+</main>
+<footer class="site">
+  <div class="wrap">
+    <span>© <span id="yr">2026</span> ghostcorpnet · An independent studio</span>
+    <span><a href="../../">Home</a><a href="../../products/">Catalog</a><a href="../../brands/">Stores</a><a href="../../ecosystem/">Ecosystem</a><a href="../../articles/">Articles</a><a href="../../changelog.html">Changelog</a><a href="../../sitemap.html">Site index</a><a href="mailto:corpghost420@gmail.com">Contact</a><a href="../../terms.html">Terms</a><a href="../../privacy.html">Privacy</a></span>
+  </div>
+</footer>
+<script>
+document.getElementById('yr').textContent = new Date().getFullYear();
+(function(){
+  var $ = function(id){ return document.getElementById(id); };
+  var financed = false;
+  function num(id, dflt){
+    var v = parseFloat($(id).value);
+    return (isFinite(v) && v >= 0) ? v : (dflt || 0);
+  }
+  function fmt(n){
+    var neg = n < 0;
+    var s = '$' + Math.abs(Math.round(n)).toLocaleString('en-US');
+    return neg ? '-' + s : s;
+  }
+  function pct(n){
+    return (n >= 0 ? '' : '-') + Math.abs(n * 100).toFixed(1) + '%';
+  }
+  function setSeg(){
+    $('seg-cash').classList.toggle('on', !financed);
+    $('seg-loan').classList.toggle('on', financed);
+    $('loan-fields').style.display = financed ? 'block' : 'none';
+  }
+  $('seg-cash').addEventListener('click', function(){ financed = false; setSeg(); calc(); });
+  $('seg-loan').addEventListener('click', function(){ financed = true; setSeg(); calc(); });
+
+  function calc(){
+    var purchase = num('purchase'), repairs = num('repairs'), arv = num('arv');
+    var months = Math.max(1, Math.round(num('months', 6)));
+    var holding = num('holding'), commission = num('commission') / 100;
+    var closing = num('closing') / 100, staging = num('staging');
+
+    var down = purchase, loanAmt = 0, interestPaid = 0, pointsPaid = 0;
+    if (financed){
+      var downPct = Math.min(100, num('downpct')) / 100;
+      var rate = num('rate') / 100, pts = num('points') / 100;
+      down = purchase * downPct;
+      loanAmt = purchase - down;
+      interestPaid = loanAmt * (rate / 12) * months; // interest-only, hard-money style
+      pointsPaid = loanAmt * pts;
+    }
+    var holdingTotal = holding * months;
+    var sellingCosts = arv * (commission + closing) + staging;
+    var totalCost = purchase + repairs + interestPaid + pointsPaid + holdingTotal + sellingCosts;
+    var profit = arv - totalCost;
+    var cashIn = down + repairs + pointsPaid + holdingTotal + staging;
+    var roi = cashIn > 0 ? profit / cashIn : 0;
+    var ann = months > 0 && roi > -1 ? Math.pow(1 + roi, 12 / months) - 1 : 0;
+    var mao = arv * 0.70 - repairs;
+    var margin = arv > 0 ? profit / arv : 0;
+
+    var v = $('verdict'), vs = $('verdict-sub');
+    v.classList.remove('good','thin','bad');
+    if (arv <= 0 || purchase <= 0){
+      v.textContent = '—'; vs.textContent = 'Enter a purchase price and ARV to see the verdict.';
+    } else if (margin >= 0.15 && profit > 0){
+      v.textContent = 'Looks like a deal'; v.classList.add('good');
+      vs.textContent = fmt(profit) + ' profit — a ' + pct(margin) + ' margin on ARV. Still verify the comps and get a real repair bid.';
+    } else if (margin >= 0.08 && profit > 0){
+      v.textContent = 'Thin — risky'; v.classList.add('thin');
+      vs.textContent = fmt(profit) + ' profit is only a ' + pct(margin) + ' margin. One surprise repair erases it. Negotiate lower or walk.';
+    } else {
+      v.textContent = 'Not a deal'; v.classList.add('bad');
+      vs.textContent = (profit > 0 ? ('Only ' + fmt(profit) + ' profit — ') : (fmt(profit) + ' loss — ')) + 'a ' + pct(margin) + ' margin. The 70% rule says offer no more than ' + fmt(mao) + '.';
+    }
+
+    var kp = $('k-profit');
+    kp.textContent = fmt(profit);
+    kp.classList.toggle('neg', profit < 0); kp.classList.toggle('pos', profit >= 0);
+    var kr = $('k-roi');
+    kr.textContent = pct(roi) + (months !== 12 ? ' (' + pct(ann) + '/yr)' : '');
+    kr.classList.toggle('neg', roi < 0); kr.classList.toggle('pos', roi >= 0);
+    $('k-mao').textContent = fmt(Math.max(0, mao));
+    $('k-cash').textContent = fmt(cashIn);
+
+    var rows = [
+      ['Purchase price', purchase],
+      ['Repairs', repairs],
+      ['Holding costs (' + months + ' mo)', holdingTotal]
+    ];
+    if (financed){
+      rows.push(['Loan interest paid', interestPaid]);
+      rows.push(['Loan points', pointsPaid]);
+    }
+    rows.push(['Selling costs (commission + closing + staging)', sellingCosts]);
+    rows.push(['<b>Total project cost</b>', '<b>' + fmt(totalCost) + '</b>']);
+    rows.push(['Sale price (ARV)', fmt(arv)]);
+    var html = '';
+    for (var i = 0; i < rows.length; i++){
+      html += '<tr><td>' + rows[i][0] + '</td><td>' + rows[i][1] + '</td></tr>';
+    }
+    $('breakdown').innerHTML = html;
+  }
+  var inputs = document.querySelectorAll('input');
+  for (var i = 0; i < inputs.length; i++){ inputs[i].addEventListener('input', calc); }
+  setSeg(); calc();
+})();
+</script>
+<script>try{fetch("https://kestrelattice-approvals.koalstin-g-k-delaney.workers.dev/pv?p="+encodeURIComponent(location.pathname),{mode:"no-cors",keepalive:true}).catch(function(){})}catch(e){}</script>
+</body>
+</html>

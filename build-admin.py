@@ -15,6 +15,7 @@ import html
 import importlib.util
 import json
 import os
+import prison
 import re
 import sys
 from datetime import datetime, timezone
@@ -1893,7 +1894,7 @@ setInterval(function(){var tv=document.getElementById("sb-threadview");if(sbChat
 });
 })();
 </script>"""
-    return scoped_css + chats + transcript + inventions + rooms + manage + script
+    return scoped_css + prison.prison_card_html() + chats + transcript + inventions + rooms + manage + script
 
 
 def _universe_html():
