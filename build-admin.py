@@ -351,7 +351,7 @@ body{
   background:rgba(18,18,23,.92);backdrop-filter:blur(12px);
   border-right:1px solid var(--line);padding:20px 14px 28px;z-index:50;
 }
-.main{flex:1;min-width:0;max-width:1180px;margin:0 auto;padding:0 28px 120px;width:100%}
+.main{flex:1;min-width:0;max-width:760px;margin:0 auto;padding:0 28px 120px;width:100%}
 .sbrand{display:flex;align-items:center;gap:10px;padding:4px 10px 16px;font-weight:800;font-size:1.02rem}
 .sbrand .admin-tag{font-size:.62rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;
   color:#0f0e0c;background:linear-gradient(135deg,var(--accent),#f0a184);
@@ -405,7 +405,7 @@ body{
   background:none;border:0;color:var(--faint);font-size:.62rem;font-weight:700;
   padding:8px 2px;cursor:pointer;font-family:inherit;min-height:52px;border-radius:10px}
 .tabitem svg{width:21px;height:21px}
-.tabitem.on{color:var(--accent)}
+.tabitem.on{color:var(--accent);background:rgba(224,122,95,.12)}
 /* ---------- content ---------- */
 .hero{padding:34px 0 2px}
 .hero h1{font-size:clamp(1.7rem,4vw,2.3rem);font-weight:800;letter-spacing:-.025em;
@@ -444,8 +444,8 @@ body{
 .kpi-l{color:var(--text);font-size:.82rem;font-weight:650;margin-top:2px}
 .kpi-s{color:var(--muted);font-size:.74rem}
 .card{background:linear-gradient(180deg,var(--panel2),var(--panel));
-  border:1px solid var(--line);border-radius:var(--r);
-  padding:22px 24px;margin:14px 0;box-shadow:var(--shadow)}
+  border:1px solid var(--line);border-radius:22px;
+  padding:22px;margin:16px 0;box-shadow:var(--shadow)}
 .card.warn{border-left:4px solid var(--warn)}
 .card.ok-card{border-left:4px solid var(--ok)}
 .card h3{margin:0 0 10px;font-size:1.06rem;font-weight:750;letter-spacing:-.01em}
@@ -470,7 +470,7 @@ tr:hover td{background:rgba(224,122,95,.05)}
 .table-wrap tr:last-child td{border-bottom:0}
 table a{color:var(--accent)}
 .tapcard{background:linear-gradient(180deg,var(--panel2),var(--panel));
-  border:1px solid var(--line);border-radius:var(--radius);
+  border:1px solid var(--line);border-radius:18px;
   padding:16px 18px;margin:12px 0}
 .tapcard p{color:var(--muted);font-size:.9rem;margin:6px 0}
 .tapcard .taphow{color:var(--text);font-size:.88rem;border-left:3px solid var(--accent);
@@ -488,7 +488,7 @@ table a{color:var(--accent)}
 .pill.blocked{background:#3a2320;color:#e08a7f}
 /* ---------- buttons ---------- */
 .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;
-  min-height:44px;padding:11px 22px;border:0;border-radius:12px;
+  min-height:46px;padding:11px 24px;border:0;border-radius:999px;
   background:linear-gradient(135deg,var(--accent),#ef9278);
   color:var(--accent-ink);font-weight:750;font-size:.9rem;cursor:pointer;font-family:inherit;
   box-shadow:0 3px 12px rgba(224,122,95,.32);transition:all .15s ease;white-space:nowrap}
@@ -497,7 +497,7 @@ table a{color:var(--accent)}
 .btn:disabled{opacity:.65;cursor:default;transform:none}
 .btn-ghost{background:var(--panel2);color:var(--muted);border:1px solid var(--line2);box-shadow:none}
 .btn-ghost:hover{color:var(--text);border-color:var(--faint);filter:none}
-.btn-sm{min-height:38px;padding:8px 16px;font-size:.82rem;border-radius:10px}
+.btn-sm{min-height:40px;padding:9px 18px;font-size:.82rem;border-radius:999px}
 .btn-danger{background:linear-gradient(135deg,#c0392b,#e08a7f);color:#fff}
 .btn.loading{pointer-events:none;opacity:.8}
 .btn.loading::before{content:"";width:16px;height:16px;border:2px solid rgba(0,0,0,.25);
@@ -1361,95 +1361,17 @@ sentLoad();setInterval(sentLoad,20000);});
 
 
 def _sandbox_html():
-    """Multi-sandbox tab: a switcher across independent safe play-pens.
-    Each sandbox shows a bot roster (crew grouped by group, or quarantined
-    rogue cards), a shared transcript feed, per-bot chat, an invention shelf
-    with one-tap promote, move-bot between sandboxes, retire (custom
-    sandboxes only), and manual quarantine (quarantine sandbox only).
+    """Sandbox tab, chat-first: a conversation list (one thread per bot) that
+    opens into a real thread view with bubbles and a composer. Broadcast to
+    all quarantined bots is a composer action. Everything else the tab ever
+    had (transcript feed, invention shelf, bot roster, rogue management,
+    sandbox switcher, manual quarantine) is preserved below in tidy sections.
     Plain-English throughout."""
-    scoped_css = (
-        "<style>"
-        ".sb-pills{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0}"
-        ".sb-pill{background:var(--panel2);border:1px solid var(--line);color:var(--text);"
-        "border-radius:999px;padding:9px 18px;font-size:.9rem;font-family:inherit;cursor:pointer}"
-        ".sb-pill.active{background:var(--accent);border-color:transparent;color:#fff;font-weight:600}"
-        "#sb-roster details{margin:10px 0}"
-        "#sb-roster summary{cursor:pointer;font-size:1rem;padding:6px 0}"
-        ".sb-roster-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:12px;margin-top:8px}"
-        ".sb-bot{background:var(--panel2);border:1px solid var(--line);border-radius:12px;padding:12px 14px}"
-        ".sb-bot h4{margin:2px 0 6px;font-size:1.02rem}"
-        ".sb-dot{display:inline-block;width:10px;height:10px;border-radius:50%;background:#39d353;margin-right:8px}"
-        ".sb-dot.idle{background:#9aa0a6}"
-        ".sb-move-row{display:none;margin-top:8px}"
-        ".sb-opt{background:var(--panel);border:1px solid var(--line);border-radius:12px;"
-        "padding:14px 16px;margin:10px 0}"
-        ".sb-opt p{margin:4px 0 10px}"
-        ".sb-opt input[type=email],.sb-field input{width:100%;box-sizing:border-box;"
-        "background:var(--panel2);border:1px solid var(--line);color:var(--text);"
-        "border-radius:10px;padding:11px 14px;font-size:.92rem;font-family:inherit;margin-top:6px}"
-        ".sb-field{display:block;margin:10px 0;font-size:.88rem}"
-        ".sb-idea-row{display:flex;justify-content:flex-start;gap:10px;flex-wrap:wrap;margin:0 0 8px}"
-        ".sb-sys{text-align:center;color:var(--muted);font-size:.84rem;padding:8px 0}"
-        "select.sb-select{background:var(--panel2);border:1px solid var(--line);color:var(--text);"
-        "border-radius:10px;padding:10px 12px;font-size:.92rem;font-family:inherit;max-width:100%}"
-        "#sb-retire:disabled{opacity:.45;cursor:not-allowed}"
-        ".sb-inv-bot{margin:16px 0 6px}"
-        "</style>"
-    )
-    switcher = (
-        '<div class="card"><h3>&#129521; Your sandboxes</h3>'
-        "<p class='muted'>A sandbox is a separate safe play-pen. Bots in one can't see or touch the others.</p>"
-        '<div id="sb-switcher" class="sb-pills"><p class="muted">Loading&#8230;</p></div>'
-        '<p id="sb-purpose" class="muted"></p>'
-        '<div class="sb-idea-row" style="margin-top:6px">'
-        '<button class="btn btn-sm btn-ghost" id="sb-new-toggle">&#10133; New sandbox</button>'
-        '<button class="btn btn-sm btn-ghost" id="sb-retire" style="display:none">&#128465; Retire this sandbox</button>'
-        '</div>'
-        '<p id="sb-retire-note" class="muted"></p>'
-        '<div id="sb-new-form" style="display:none;margin-top:12px">'
-        "<p class='muted' style='margin-bottom:4px'>Give it a name and say what it's for.</p>"
-        '<label class="sb-field">Name it'
-        '<input id="sb-new-name" type="text" placeholder="e.g. Experiment: new pricing angles" maxlength="120"></label>'
-        '<label class="sb-field">What is it for?'
-        '<input id="sb-new-purpose" type="text" placeholder="e.g. Try out risky ideas without touching the real business" maxlength="500"></label>'
-        '<button class="btn btn-sm" id="sb-new-go">Create sandbox</button>'
-        "<p class='muted'>You can retire a sandbox when it's empty.</p>"
-        '</div></div>'
-    )
-    roster = '<div id="sb-roster"></div>'
-    rogues = '<div id="sb-rogues"></div>'
-    transcript = (
-        '<div class="card"><h3>&#128064; Watch them</h3>'
-        "<p class='muted'>Everything the bots in this sandbox say and do, newest at the bottom, "
-        "refreshed every 10 seconds. This is just a window in — they can't touch your business from here.</p>"
-        '<div id="sb-transcript" class="chat-thread" style="max-height:380px">'
-        '<p class="muted">Loading&#8230;</p></div></div>'
-    )
-    chat = (
-        '<div class="card" id="sb-chat-card"><h3>&#128172; Talk to a bot</h3>'
-        "<p class='muted'>Pick a bot, then chat with it like you'd chat with me. "
-        "If it says something good, tap <b>&#128161; Save this as an idea</b> under its reply.</p>"
-        '<p><select id="sb-chat-bot" class="sb-select" aria-label="Pick a bot"></select></p>'
-        '<div id="sb-chat-thread" class="chat-thread"><p class="muted">Loading&#8230;</p></div>'
-        '<div class="chat-input"><input id="sb-chat-input" type="text" '
-        'placeholder="Ask it anything &#8212; it can&#39;t touch your business from here&#8230;" maxlength="2000">'
-        '<button class="btn" id="sb-chat-send">Send</button></div></div>'
-    )
-    broadcast = (
-        '<div class="card" id="sb-broadcast-card"><h3>&#128226; Message all quarantined bots</h3>'
-        "<p class='muted'>Say it once — every bot in the Quarantine box hears it. "
-        "They each reply, and you'll see it all together in the shared transcript feed.</p>"
-        '<div class="chat-input"><input id="sb-broadcast-input" type="text" '
-        'placeholder="One message for the whole quarantine&#8230;" maxlength="2000">'
-        '<button class="btn" id="sb-broadcast-send">Send to all</button></div></div>'
-    )
-    inventions = (
-        '<div class="card"><h3>&#128161; Invention shelf</h3>'
-        "<p class='muted'>Bots here are encouraged to invent — new pitches, product concepts, wild ideas. "
-        "Everything they invent lands here as a draft. It only becomes real when you tap Promote.</p>"
-        '<div id="sb-inventions"><p class="muted">Loading&#8230;</p></div></div>'
-    )
-    quarantine = '<div id="sb-manual-q"></div>'
+    scoped_css = """<style>.sb-chat-app{background:var(--panel);border:1px solid var(--line);border-radius:22px;overflow:hidden;margin:18px 0;box-shadow:var(--shadow)}.sb-chat-head{display:flex;align-items:center;justify-content:space-between;padding:18px 18px 4px}.sb-chat-head h3{margin:0;font-size:1.08rem}.sb-convos{padding:6px 8px 12px}.crow{display:flex;align-items:center;gap:12px;width:100%;text-align:left;background:transparent;border:0;padding:11px 10px;border-radius:16px;cursor:pointer;font-family:inherit;color:var(--text);min-height:64px}.crow:hover{background:var(--panel2)}.crow:active{background:var(--panel2)}.ava{width:46px;height:46px;border-radius:50%;flex:0 0 auto;display:inline-flex;align-items:center;justify-content:center;font-weight:800;font-size:1.15rem;color:#fff}.ava.sm{width:30px;height:30px;font-size:.8rem}.crow .cmeta{flex:1;min-width:0;display:flex;flex-direction:column}.crow .cname{font-weight:700;font-size:.95rem;display:flex;align-items:center;gap:8px}.crow .cprev{color:var(--muted);font-size:.83rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-top:2px}.crow .ctime{color:var(--faint);font-size:.72rem;flex:0 0 auto}.crow .chev{color:var(--faint);font-size:1.25rem;flex:0 0 auto;padding-right:2px}.sb-threadview{display:none}.sb-threadview.open{display:block;animation:rise .22s ease}.thread-head{display:flex;align-items:center;gap:10px;padding:12px 14px;border-bottom:1px solid var(--line);background:var(--panel2)}.thread-head .back{width:40px;height:40px;border-radius:50%;border:1px solid var(--line2);background:var(--panel);color:var(--text);cursor:pointer;font-size:1.2rem;display:flex;align-items:center;justify-content:center;flex:0 0 auto}.thread-head .cmeta{flex:1;min-width:0;display:flex;flex-direction:column}.thread-head .cname{font-weight:750;font-size:1rem}.thread-head .cprev{color:var(--muted);font-size:.78rem}#sb-chat-thread{max-height:52vh;min-height:300px;padding:14px}.msg-row{display:flex;gap:8px;align-items:flex-end;margin:2px 0}.msg-row.you{flex-direction:row-reverse}.msg-row .chat-msg{margin:0}.msg-time{font-size:.68rem;color:var(--faint);margin:3px 6px 0}.msg-row.you .msg-time{text-align:right}.composer{display:flex;gap:8px;padding:12px 14px;border-top:1px solid var(--line);background:var(--panel);align-items:center}.composer input{flex:1;background:var(--panel2);border:1px solid var(--line2);color:var(--text);border-radius:999px;padding:13px 18px;font-size:.95rem;font-family:inherit;min-width:0}.composer input:focus{outline:none;border-color:var(--accent)}.composer .send{width:48px;height:48px;border-radius:50%;border:0;flex:0 0 auto;background:linear-gradient(135deg,var(--accent),var(--accent-deep));color:#fff;font-size:1.25rem;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:var(--shadow)}.composer .send:disabled{opacity:.5}.bc-toggle{width:48px;height:48px;border-radius:50%;border:1px solid var(--line2);background:var(--panel2);color:var(--muted);font-size:1.2rem;cursor:pointer;flex:0 0 auto;display:flex;align-items:center;justify-content:center}.bc-toggle.on{background:var(--accent);border-color:var(--accent);color:#fff}#sb-bc-hint{display:none;padding:0 18px 12px;font-size:.78rem;color:var(--accent)}#sb-bc-hint.on{display:block}.sb-idea-row{display:flex;justify-content:flex-start;gap:10px;flex-wrap:wrap;margin:0 0 8px}.sb-sys{text-align:center;color:var(--muted);font-size:.84rem;padding:8px 0}select.sb-select{background:var(--panel2);border:1px solid var(--line);color:var(--text);border-radius:14px;padding:12px;font-size:.92rem;font-family:inherit;max-width:100%;min-height:48px}.sb-pills{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0}.sb-pill{background:var(--panel2);border:1px solid var(--line);color:var(--text);border-radius:999px;padding:11px 20px;font-size:.9rem;font-family:inherit;cursor:pointer;min-height:44px}.sb-pill.active{background:var(--accent);border-color:transparent;color:#fff;font-weight:600}.sb-bot{background:var(--panel2);border:1px solid var(--line);border-radius:18px;padding:16px}.sb-bot h4{margin:2px 0 6px;font-size:1.02rem}.sb-dot{display:inline-block;width:10px;height:10px;border-radius:50%;background:#39d353;margin-right:8px}.sb-dot.idle{background:#9aa0a6}.sb-move-row{display:none;margin-top:8px}.sb-opt{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:16px;margin:10px 0}.sb-opt p{margin:4px 0 10px}.sb-opt input[type=email],.sb-field input{width:100%;box-sizing:border-box;background:var(--panel2);border:1px solid var(--line);color:var(--text);border-radius:14px;padding:13px 16px;font-size:.92rem;font-family:inherit;margin-top:6px}.sb-field{display:block;margin:10px 0;font-size:.88rem}#sb-retire:disabled{opacity:.45;cursor:not-allowed}.sb-inv-bot{margin:16px 0 6px}details.sb-fold{background:var(--panel);border:1px solid var(--line);border-radius:20px;margin:14px 0;overflow:hidden}details.sb-fold>summary{cursor:pointer;padding:16px 18px;font-weight:700;font-size:1rem;list-style:none}details.sb-fold>summary::-webkit-details-marker{display:none}details.sb-fold .fold-body{padding:0 18px 18px}</style>"""
+    chats = """<div class="sb-chat-app" id="sb-chat-app"><div id="sb-convos-wrap"><div class="sb-chat-head"><h3>&#128172; Chats</h3><span class="muted" style="font-size:.78rem" id="sb-chats-count"></span></div><div id="sb-convos" class="sb-convos"><p class="muted" style="padding:14px">Loading chats&#8230;</p></div></div><div id="sb-threadview" class="sb-threadview"><div class="thread-head"><button class="back" id="sb-thread-back" aria-label="Back to chats">&#8592;</button><span class="ava" id="sb-thread-ava">?</span><div class="cmeta"><div class="cname" id="sb-thread-name">Bot</div><div class="cprev" id="sb-thread-sub"></div></div></div><div id="sb-chat-thread" class="chat-thread"><p class="muted">Loading&#8230;</p></div><div class="composer"><button class="bc-toggle" id="sb-bc-toggle" title="Broadcast: send to every quarantined bot at once">&#128226;</button><input id="sb-chat-input" type="text" placeholder="Message&#8230;" maxlength="2000" autocomplete="off"><button class="send" id="sb-chat-send" aria-label="Send">&#10148;</button></div><p id="sb-bc-hint">&#128226; Broadcast mode &#8212; your message goes to every quarantined bot at once.</p></div></div>"""
+    transcript = """<div class="card"><h3>&#128064; Sandbox feed</h3><p class='muted'>Everything the bots in this sandbox say and do, newest at the bottom, refreshed every 10 seconds. This is just a window in &#8212; they can't touch your business from here.</p><div id="sb-transcript" class="chat-thread" style="max-height:380px"><p class="muted">Loading&#8230;</p></div></div>"""
+    inventions = """<div class="card"><h3>&#128161; Invention shelf</h3><p class='muted'>Bots here are encouraged to invent &#8212; new pitches, product concepts, wild ideas. Everything they invent lands here as a draft. It only becomes real when you tap Promote.</p><div id="sb-inventions"><p class="muted">Loading&#8230;</p></div></div>"""
+    manage = """<details class='sb-fold'><summary>&#129302; Bots &amp; sandboxes &#8212; manage</summary><div class='fold-body'><div class="card" style="margin:0 0 14px"><h3>&#129521; Your sandboxes</h3><p class='muted'>A sandbox is a separate safe play-pen. Bots in one can't see or touch the others.</p><div id="sb-switcher" class="sb-pills"><p class="muted">Loading&#8230;</p></div><p id="sb-purpose" class="muted"></p><div class="sb-idea-row" style="margin-top:6px"><button class="btn btn-sm btn-ghost" id="sb-new-toggle">&#10133; New sandbox</button><button class="btn btn-sm btn-ghost" id="sb-retire" style="display:none">&#128465; Retire this sandbox</button></div><p id="sb-retire-note" class="muted"></p><div id="sb-new-form" style="display:none;margin-top:12px"><p class='muted' style='margin-bottom:4px'>Give it a name and say what it's for.</p><label class="sb-field">Name it<input id="sb-new-name" type="text" placeholder="e.g. Experiment: new pricing angles" maxlength="120"></label><label class="sb-field">What is it for?<input id="sb-new-purpose" type="text" placeholder="e.g. Try out risky ideas without touching the real business" maxlength="500"></label><button class="btn btn-sm" id="sb-new-go">Create sandbox</button><p class='muted'>You can retire a sandbox when it's empty.</p></div></div><div id="sb-roster"></div><div id="sb-rogues"></div><div id="sb-manual-q"></div></div></details>"""
     script = """<script>(function(){
 var SB_DOWN="Couldn't reach the Sandbox — the worker update may not be deployed yet.";
 var SB_ERR="<p class='muted'>"+SB_DOWN+"</p>";
@@ -1457,7 +1379,10 @@ function escH(s){var d=document.createElement("div");d.appendChild(document.crea
 function escA(s){return escH(s).replace(/'/g,"&#39;").replace(/"/g,"&quot;");}
 function sbReady(){return !(typeof WURL==="undefined"||!WURL||!WKEY);}
 function sbTime(ts){if(!ts)return "";try{var d=new Date(ts);if(isNaN(d.getTime()))return escH(String(ts));return d.toLocaleString();}catch(e){return escH(String(ts));}}
-var sbSandboxes=[],sbCurrent=null,sbRogues=[],sbCrew=[],sbInvs=[],sbChatMsgs=[],sbChatId=null,sbChatName="",sbChatables=[];
+function sbTimeShort(ts){try{var d=new Date(ts);if(isNaN(d.getTime()))return "";return d.toLocaleTimeString([],{hour:"numeric",minute:"2-digit"});}catch(e){return "";}}
+function sbRelTime(ts){try{var d=new Date(ts).getTime();if(isNaN(d))return "";var s=Math.max(0,Math.floor((Date.now()-d)/1000));if(s<60)return "now";var m=Math.floor(s/60);if(m<60)return m+"m";var h=Math.floor(m/60);if(h<24)return h+"h";return Math.floor(h/24)+"d";}catch(e){return "";}}
+function sbAvaColor(name){var h=0;var n=String(name||"?");for(var i=0;i<n.length;i++)h=(h*31+n.charCodeAt(i))%360;return "hsl("+h+",48%,40%)";}
+var sbSandboxes=[],sbCurrent=null,sbRogues=[],sbCrew=[],sbInvs=[],sbChatMsgs=[],sbChatId=null,sbChatName="",sbConvos=[],sbBcMode=false;
 /* ----- sandboxes ----- */
 function sbCur(){for(var i=0;i<sbSandboxes.length;i++)if(String(sbSandboxes[i].id)===String(sbCurrent))return sbSandboxes[i];return null;}
 async function sbLoadSandboxes(){
@@ -1539,9 +1464,9 @@ sbInvs=(di&&di.ok&&Array.isArray(di.inventions))?di.inventions:[];
 document.getElementById("sb-roster").innerHTML=SB_ERR;
 document.getElementById("sb-rogues").innerHTML=SB_ERR;
 document.getElementById("sb-inventions").innerHTML=SB_ERR;
-sbFillChatSelect();return;
+sbRenderConvos();return;
 }
-sbRenderRogues();sbRenderRoster();sbRenderInventions();sbFillChatSelect();sbRenderManualQ();sbRenderRetireState();
+sbRenderRogues();sbRenderRoster();sbRenderInventions();sbRenderConvos();sbRenderManualQ();sbRenderRetireState();
 sbLoadTranscript();
 }
 /* ----- roster (crew) ----- */
@@ -1639,25 +1564,78 @@ return "<div class='chat-msg sentience'><span class='chat-who'>"+escH(en.bot||"b
 box.scrollTop=box.scrollHeight;
 }catch(e){box.innerHTML=SB_ERR;}
 }
-/* ----- chat ----- */
-function sbFillChatSelect(){
-var sel=document.getElementById("sb-chat-bot");
-sbChatables=[];
-sbRogues.forEach(function(g,i){sbChatables.push({kind:"r",idx:i,label:(g.bot_name||g.job_id||"bot")+" (in quarantine)"});});
-sbCrew.forEach(function(b,i){sbChatables.push({kind:"c",idx:i,label:b.name||"bot"});});
-if(!sel)return;
-sel.innerHTML=sbChatables.map(function(c,i){return "<option value='"+i+"'>"+escH(c.label)+"</option>";}).join("");
-var th=document.getElementById("sb-chat-thread");
-if(sbChatables.length){sbOpenChat(0,false);}
-else if(th){sbChatId=null;th.innerHTML="<p class='muted'>No bots in this sandbox yet.</p>";}
+/* ----- chat: conversation list + thread view ----- */
+function sbRenderConvos(){
+var box=document.getElementById("sb-convos");if(!box)return;
+var rows=[];
+sbRogues.forEach(function(g,i){
+if(String(g.status||"")==="released")return;
+rows.push({kind:"r",idx:i,id:g.id,name:g.bot_name||g.job_id||"Sandboxed bot"});
+});
+sbCrew.forEach(function(b,i){
+if(String(b.status||"active").toLowerCase()!=="active")return;
+rows.push({kind:"c",idx:i,id:b.id,name:b.name||"Bot"});
+});
+sbConvos=rows;
+var cnt=document.getElementById("sb-chats-count");
+if(cnt)cnt.textContent=rows.length?rows.length+" chats":"";
+if(!rows.length){box.innerHTML="<p class='muted' style='padding:14px'>No bots in this sandbox yet.</p>";return;}
+box.innerHTML=rows.map(function(r,i){
+return "<button class='crow' data-sb-convo='"+i+"'>"
++"<span class='ava' style='background:"+sbAvaColor(r.name)+"'>"+escH(String(r.name||"?").charAt(0).toUpperCase())+"</span>"
++"<span class='cmeta'><span class='cname'>"+escH(r.name)+(r.kind==="r"?" <span class='pill warn' style='font-size:.62rem'>quarantine</span>":"")+"</span>"
++"<span class='cprev' id='sb-prev-"+i+"'>Tap to chat</span></span>"
++"<span class='ctime' id='sb-time-"+i+"'></span><span class='chev'>&#8250;</span></button>";
+}).join("");
+rows.forEach(function(r,i){if(r.kind==="r")sbFillPreview(r,i);});
 }
-function sbOpenChat(ci,scroll){
-var c=sbChatables[ci];if(!c)return;
-var g=c.kind==="r"?sbRogues[c.idx]:sbCrew[c.idx];
-sbChatId={kind:c.kind,idx:c.idx};
-sbChatName=c.kind==="r"?(g.bot_name||g.job_id||"sandboxed bot"):(g.name||"sandboxed bot");
+async function sbFillPreview(r,i){
+if(!sbReady())return;
+try{
+var rr=await fetch(WURL+"/sandbox/chat?key="+encodeURIComponent(WKEY)+"&sandbox_id="+encodeURIComponent(sbCurrent)+"&bot_id="+encodeURIComponent(r.id));
+var d=await rr.json();
+var msgs=(d&&d.ok&&Array.isArray(d.thread))?d.thread:[];
+if(!msgs.length)return;
+var m=msgs[msgs.length-1];
+var p=document.getElementById("sb-prev-"+i),t=document.getElementById("sb-time-"+i);
+if(p)p.textContent=String(m.text||"").slice(0,90);
+if(t&&m.ts)t.textContent=sbRelTime(m.ts);
+}catch(e){}
+}
+function sbOpenConvo(i){
+var r=sbConvos[i];if(!r)return;
+var ref=r.kind==="r"?sbRogues[r.idx]:sbCrew[r.idx];if(!ref)return;
+sbChatId={kind:r.kind,idx:r.idx};
+sbChatName=r.name;sbBcMode=false;sbSyncBcToggle();
+document.getElementById("sb-convos-wrap").style.display="none";
+var tv=document.getElementById("sb-threadview");tv.classList.add("open");
+var ava=document.getElementById("sb-thread-ava");
+ava.textContent=String(r.name||"?").charAt(0).toUpperCase();
+ava.style.background=sbAvaColor(r.name);
+document.getElementById("sb-thread-name").textContent=r.name;
+document.getElementById("sb-thread-sub").textContent=r.kind==="r"?"in quarantine \u00b7 can't touch your business":"research crew \u00b7 sandboxed";
+document.getElementById("sb-chat-input").placeholder="Message "+r.name+"\u2026";
 sbLoadChat();
-if(scroll!==false){var card=document.getElementById("sb-chat-card");if(card)card.scrollIntoView({behavior:"smooth",block:"start"});}
+tv.scrollIntoView({behavior:"smooth",block:"start"});
+}
+function sbOpenConvoByRef(kind,idx){
+var i=-1,k;
+for(k=0;k<sbConvos.length;k++){if(sbConvos[k].kind===kind&&sbConvos[k].idx===idx){i=k;break;}}
+if(i<0){sbRenderConvos();for(k=0;k<sbConvos.length;k++){if(sbConvos[k].kind===kind&&sbConvos[k].idx===idx){i=k;break;}}}
+if(i>=0)sbOpenConvo(i);
+}
+function sbBackToConvos(){
+sbChatId=null;
+var tv=document.getElementById("sb-threadview");if(tv)tv.classList.remove("open");
+var w=document.getElementById("sb-convos-wrap");if(w)w.style.display="";
+sbRenderConvos();
+var app=document.getElementById("sb-chat-app");if(app)app.scrollIntoView({behavior:"smooth",block:"start"});
+}
+function sbSyncBcToggle(){
+var t=document.getElementById("sb-bc-toggle"),hint=document.getElementById("sb-bc-hint"),inp=document.getElementById("sb-chat-input");
+if(t)t.classList.toggle("on",sbBcMode);
+if(hint)hint.classList.toggle("on",sbBcMode);
+if(inp)inp.placeholder=sbBcMode?"Message all quarantined bots\u2026":("Message "+(sbChatName||"bot")+"\u2026");
 }
 function sbBotRef(){if(!sbChatId)return null;return sbChatId.kind==="r"?sbRogues[sbChatId.idx]:sbCrew[sbChatId.idx];}
 async function sbLoadChat(){
@@ -1670,55 +1648,44 @@ var r=await fetch(WURL+"/sandbox/chat?key="+encodeURIComponent(WKEY)+"&sandbox_i
 var d=await r.json();
 var msgs=(d&&d.ok&&Array.isArray(d.thread))?d.thread:[];
 sbChatMsgs=msgs;
-if(!msgs.length){th.innerHTML="<p class='muted'>No messages yet. Say hi — it can think and chat, it just can't touch your real business.</p>";return;}
+if(!msgs.length){th.innerHTML="<p class='muted' style='padding:14px'>No messages yet. Say hi \u2014 it can think and chat, it just can't touch your real business.</p>";return;}
 th.innerHTML=msgs.map(function(m,i){
 var you=m.from==="koalstin";
-var h="<div class='chat-msg "+(you?"you":"sentience")+"'><span class='chat-who'>"+(you?"you":escH(sbChatName))+"</span><p>"+escH(m.text)+"</p></div>";
-if(!you)h+="<div class='sb-idea-row'><button class='btn btn-sm btn-ghost' data-sb-save-idea='"+i+"'>&#128161; Save this as an idea</button></div>";
+var tm=m.ts?"<div class='msg-time'>"+escH(sbTimeShort(m.ts))+"</div>":"";
+var ava=you?"":"<span class='ava sm' style='background:"+sbAvaColor(sbChatName)+"'>"+escH(String(sbChatName||"?").charAt(0).toUpperCase())+"</span>";
+var h="<div class='msg-row "+(you?"you":"")+"'>"+ava+"<div style='min-width:0'><div class='chat-msg "+(you?"you":"sentience")+"'><span class='chat-who'>"+(you?"you":escH(sbChatName))+"</span><p>"+escH(m.text)+"</p></div>"+tm+"</div></div>";
+if(!you)h+="<div class='sb-idea-row'><button class='btn btn-sm btn-ghost' data-sb-save-idea='"+i+"'>\ud83d\udca1 Save this as an idea</button></div>";
 return h;}).join("");
 th.scrollTop=th.scrollHeight;
 }catch(e){th.innerHTML=SB_ERR;}
 }
 async function sbSendChat(){
 var input=document.getElementById("sb-chat-input"),btn=document.getElementById("sb-chat-send");
-var text=input.value.trim();
-if(!text||!sbChatId||!sbReady())return;
-var ref=sbBotRef();
-if(!ref)return;
+var text=input.value.trim();if(!text||!sbReady())return;
+if(sbBcMode){input.value="";sbSendBroadcast(text);return;}
+if(!sbChatId)return;
+var ref=sbBotRef();if(!ref)return;
 btn.disabled=true;
 try{
 await fetch(WURL+"/sandbox/chat",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({key:WKEY,sandbox_id:sbCurrent,bot_id:ref.id,text:text})});
-input.value="";await sbLoadChat();
+input.value="";sbRenderConvos();await sbLoadChat();
 }catch(e){toast(SB_DOWN,false);}
 btn.disabled=false;
 }
-async function sbSendBroadcast(){
-var input=document.getElementById("sb-broadcast-input"),btn=document.getElementById("sb-broadcast-send");
-var text=input.value.trim();
-if(!text||!sbReady())return;
+async function sbSendBroadcast(text){
+var btn=document.getElementById("sb-chat-send");
 var targets=sbRogues.filter(function(g){return String(g.sandbox_id||"quarantine")===String(sbCurrent)&&String(g.status||"")!=="released";});
 if(!targets.length){toast("No quarantined bots in this sandbox yet.",false);return;}
-btn.disabled=true;
+if(btn)btn.disabled=true;
 try{
 for(var i=0;i<targets.length;i++){
 await fetch(WURL+"/sandbox/chat",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({key:WKEY,sandbox_id:sbCurrent,bot_id:targets[i].id,text:text})});
 }
-input.value="";
-toast("Heard by "+targets.length+" bot"+(targets.length>1?"s":"")+" — replies land in the transcript.",true);
+toast("Heard by "+targets.length+" bot"+(targets.length>1?"s":"")+" \u2014 replies land in the feed below.",true);
+sbRenderConvos();if(sbChatId)await sbLoadChat();
 var tr=document.getElementById("sb-transcript");if(tr)tr.scrollIntoView({behavior:"smooth",block:"nearest"});
 }catch(e){toast(SB_DOWN,false);}
-btn.disabled=false;
-}
-async function sbSaveIdea(i){
-var m=sbChatMsgs[i];if(!m||!sbChatId)return;
-if(!sbReady()){toast(SB_DOWN,false);return;}
-var ref=sbBotRef();
-try{
-var r=await fetch(WURL+"/sandbox/invention",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({key:WKEY,sandbox_id:sbCurrent,bot_id:ref?ref.id:null,bot_name:sbChatName,text:m.text})});
-var d=await r.json();
-if(d&&d.ok){toast("Saved — you'll find it under the Invention shelf below.",true);sbLoadSandbox();}
-else toast("That didn't work — try again.",false);
-}catch(e){toast(SB_DOWN,false);}
+if(btn)btn.disabled=false;
 }
 /* ----- inventions ----- */
 function sbRenderInventions(){
@@ -1827,14 +1794,15 @@ btn.disabled=false;
 }
 /* ----- wiring ----- */
 document.addEventListener("click",function(e){
-var el=e.target&&e.target.closest?e.target.closest("[data-sb-sandbox],[data-sb-talk-r],[data-sb-release-r],[data-sb-move-r],[data-sb-domove-r],[data-sb-talk-c],[data-sb-move-c],[data-sb-domove-c],[data-sb-promote],[data-sb-do-promote],[data-sb-save-idea]"):null;
+var el=e.target&&e.target.closest?e.target.closest("[data-sb-sandbox],[data-sb-convo],[data-sb-talk-r],[data-sb-talk-c],[data-sb-release-r],[data-sb-move-r],[data-sb-domove-r],[data-sb-move-c],[data-sb-domove-c],[data-sb-promote],[data-sb-do-promote],[data-sb-save-idea]"):null;
 if(!el)return;
 if(el.hasAttribute("data-sb-sandbox"))sbSelect(el.getAttribute("data-sb-sandbox"));
-else if(el.hasAttribute("data-sb-talk-r"))sbOpenChat(sbChatables.findIndex(function(c){return c.kind==="r"&&c.idx===parseInt(el.getAttribute("data-sb-talk-r"),10);}),true);
+else if(el.hasAttribute("data-sb-convo"))sbOpenConvo(parseInt(el.getAttribute("data-sb-convo"),10));
+else if(el.hasAttribute("data-sb-talk-r"))sbOpenConvoByRef("r",parseInt(el.getAttribute("data-sb-talk-r"),10));
+else if(el.hasAttribute("data-sb-talk-c"))sbOpenConvoByRef("c",parseInt(el.getAttribute("data-sb-talk-c"),10));
 else if(el.hasAttribute("data-sb-release-r"))sbReleaseR(parseInt(el.getAttribute("data-sb-release-r"),10));
 else if(el.hasAttribute("data-sb-move-r"))sbToggleMoveRow("r",parseInt(el.getAttribute("data-sb-move-r"),10));
 else if(el.hasAttribute("data-sb-domove-r"))sbDoMove("r",parseInt(el.getAttribute("data-sb-domove-r"),10));
-else if(el.hasAttribute("data-sb-talk-c"))sbOpenChat(sbChatables.findIndex(function(c){return c.kind==="c"&&c.idx===parseInt(el.getAttribute("data-sb-talk-c"),10);}),true);
 else if(el.hasAttribute("data-sb-move-c"))sbToggleMoveRow("c",parseInt(el.getAttribute("data-sb-move-c"),10));
 else if(el.hasAttribute("data-sb-domove-c"))sbDoMove("c",parseInt(el.getAttribute("data-sb-domove-c"),10));
 else if(el.hasAttribute("data-sb-save-idea"))sbSaveIdea(parseInt(el.getAttribute("data-sb-save-idea"),10));
@@ -1845,23 +1813,23 @@ document.addEventListener("DOMContentLoaded",function(){
 var send=document.getElementById("sb-chat-send"),inp=document.getElementById("sb-chat-input");
 if(send)send.addEventListener("click",sbSendChat);
 if(inp)inp.addEventListener("keydown",function(e){if(e.key==="Enter")sbSendChat();});
-var bsend=document.getElementById("sb-broadcast-send"),binp=document.getElementById("sb-broadcast-input");
-if(bsend)bsend.addEventListener("click",sbSendBroadcast);
-if(binp)binp.addEventListener("keydown",function(e){if(e.key==="Enter")sbSendBroadcast();});
-var sel=document.getElementById("sb-chat-bot");
-if(sel)sel.addEventListener("change",function(){sbOpenChat(parseInt(sel.value,10),false);});
-var tgl=document.getElementById("sb-new-toggle");
-if(tgl)tgl.addEventListener("click",sbToggleNew);
+var back=document.getElementById("sb-thread-back");
+if(back)back.addEventListener("click",sbBackToConvos);
+var tgl=document.getElementById("sb-bc-toggle");
+if(tgl)tgl.addEventListener("click",function(){sbBcMode=!sbBcMode;sbSyncBcToggle();});
+var tgo=document.getElementById("sb-new-toggle");
+if(tgo)tgo.addEventListener("click",sbToggleNew);
 var ngo=document.getElementById("sb-new-go");
 if(ngo)ngo.addEventListener("click",sbNewSandbox);
 var rt=document.getElementById("sb-retire");
 if(rt)rt.addEventListener("click",sbRetire);
 sbLoadSandboxes();
 setInterval(sbLoadTranscript,10000);
-setInterval(function(){if(sbChatId)sbLoadChat();},15000);
+setInterval(function(){var tv=document.getElementById("sb-threadview");if(sbChatId&&tv&&tv.classList.contains("open"))sbLoadChat();},15000);
 });
-})();</script>"""
-    return scoped_css + switcher + roster + rogues + transcript + chat + broadcast + inventions + quarantine + script
+})();
+</script>"""
+    return scoped_css + chats + transcript + inventions + manage + script
 
 
 
