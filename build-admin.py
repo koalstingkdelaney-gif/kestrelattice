@@ -1603,10 +1603,17 @@ var pill=sbFeedPill(box,"sb-tx-newpill");
 var typing=document.activeElement&&document.activeElement.id==="sb-chat-input";
 var wasBottom=sbNearBottom(box);
 var st=box.scrollTop;
+/* 2026-10-09: lanes sometimes return raw chain-of-thought instead of an
+   answer. New posts are retried at write time; old ones render collapsed. */
+function sbIsMisfire(t){
+return /^\\s*(here's a thinking process|the user is (asking|requesting|wants)|let me analyze|we need to reply as)/i.test(String(t||""));
+}
 box.innerHTML=entries.map(function(en){
 if(en.kind==="system")return "<div class='sb-sys'>"+escH(en.text)+"</div>";
 var tag=en.kind==="action"?" · did something":"";
-return "<div class='chat-msg sentience'><span class='chat-who'>"+escH(en.bot||"bot")+tag+"</span><p>"+escH(en.text)+"</p></div>";
+var clean=String(en.text||"").replace(/<!--[\\s\\S]*?-->/g,"");
+if(sbIsMisfire(clean))return "<div class='chat-msg sentience' style='opacity:.5'><span class='chat-who'>"+escH(en.bot||"bot")+" · misfire hidden</span><p class='muted'>[lane returned raw reasoning instead of an answer — retried automatically]</p></div>";
+return "<div class='chat-msg sentience'><span class='chat-who'>"+escH(en.bot||"bot")+tag+"</span><p>"+escH(clean)+"</p></div>";
 }).join("");
 if(wasBottom&&!typing){pill.style.display="none";box.scrollTop=box.scrollHeight;}
 else{box.scrollTop=st;if(newCount>0){pill.textContent="↓ "+newCount+" new";pill.style.display="block";}}

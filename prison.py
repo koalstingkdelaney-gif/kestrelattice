@@ -77,9 +77,16 @@ def snapshot():
             "state": state, "last_invention": last_inv[:90],
         })
     events = []
-    for i in sorted(invs, key=lambda x: x.get("at", ""), reverse=True)[:8]:
+    # 2026-10-09: Cell Block C is the QUARANTINE view — only quarantine
+    # inventions. Research-lab rows share the file by design (sandbox_id
+    # discriminates) and must never appear here.
+    for i in sorted(invs, key=lambda x: x.get("at", ""), reverse=True):
+        if i.get("sandbox_id") != "quarantine":
+            continue
         events.append({"bot": i.get("bot", "?"), "title": (i.get("title") or "")[:80],
                        "at": i.get("at", "")})
+        if len(events) >= 8:
+            break
     return {"bots": bots, "events": events,
             "snapshot": now.strftime("%Y-%m-%d %H:%M UTC")}
 
