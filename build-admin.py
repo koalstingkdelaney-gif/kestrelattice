@@ -1877,6 +1877,7 @@ def _all_panes(products, queue, entries, title_map, omap):
                    + S.drafts_section() + S.pipeline_section())
     p["fleet"] = (_sec("Autonomous fleet", "Fleet",
                        "Every bot, its health, its last run. Red = stuck.")
+                  + S.fleet_brain_section() + S.self_improvement_section()
                   + S.fleet_section())
     p["hive"] = (_sec("Swarm control", "Hive",
                       "The 103-role HiveBrain: live task queue, workers, free-tier quotas, migration.")

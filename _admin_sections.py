@@ -963,6 +963,80 @@ def fleet_section():
     )
 
 
+def fleet_brain_section():
+    """Shared learnings across all brands, in plain English."""
+    rows = []
+    for line in read_file(os.path.join(HF, "fleet/fleet-brain.jsonl")).splitlines():
+        line = line.strip()
+        if not line:
+            continue
+        try:
+            rows.append(json.loads(line))
+        except json.JSONDecodeError:
+            pass
+    rows = rows[-20:]
+    if not rows:
+        items = "<li>No shared learnings yet — the fleet is still gathering data.</li>"
+    else:
+        lis = []
+        for r in rows:
+            kind = esc(str(r.get("kind", "note")).replace("-", " "))
+            lis.append(
+                f"<li><b>{kind}</b> — {esc(r.get('finding', ''))}<br>"
+                f"<span class='muted'>Evidence: {esc(r.get('evidence', ''))} · "
+                f"shared by {esc(r.get('from_bot', ''))} · "
+                f"{esc(str(r.get('at', ''))[:10])}</span></li>")
+        items = "".join(lis)
+    return (
+        '<div class="card"><h3>Fleet Brain — what the brands learn together</h3>'
+        "<p class='muted'>One shared notebook for the whole fleet: when any brand "
+        "discovers something that works (or doesn't), it lands here so the other "
+        "ten brands use it too. Updated weekly.</p>"
+        f"<ul>{items}</ul></div>")
+
+
+def self_improvement_section():
+    """Pending self-improvement proposals, plain English, Approve/Reject."""
+    rows = []
+    for line in read_file(os.path.join(HF, "fleet/self-improvement-proposals.jsonl")).splitlines():
+        line = line.strip()
+        if not line:
+            continue
+        try:
+            rows.append(json.loads(line))
+        except json.JSONDecodeError:
+            pass
+    pending = [r for r in rows if r.get("status", "pending") == "pending"]
+    if not pending:
+        return (
+            '<div class="card"><h3>Self-improvement proposals</h3>'
+            "<p class='muted'>Nothing waiting. Every week the self-review bot studies "
+            "each brand's results and proposes one concrete improvement at most — "
+            "you approve or reject each one here.</p></div>")
+    cards = []
+    for r in reversed(pending[-10:]):
+        code = esc(r.get("code", ""))
+        rcode = esc(r.get("reject_code", ""))
+        cards.append(
+            '<div class="card" style="margin:0 0 10px"><h4>' + esc(r.get("title", "Proposal")) + '</h4>'
+            f"<p>{esc(r.get('reason', ''))}</p>"
+            f"<p class='muted'>Evidence: {esc(r.get('evidence', ''))}</p>"
+            '<details class="fold"><summary>See the exact change</summary>'
+            '<p class="muted"><b>Current text:</b></p>'
+            f'<p style="white-space:pre-wrap" class="mono">{esc(r.get("current_text", ""))}</p>'
+            '<p class="muted"><b>Proposed text:</b></p>'
+            f'<p style="white-space:pre-wrap" class="mono">{esc(r.get("proposed_text", ""))}</p></details>'
+            f'<p><button class="btn" onclick="approveCode(\'{code}\', this, \'Approved ✓\')">Approve</button> '
+            f'<button class="btn" onclick="approveCode(\'{rcode}\', this, \'Rejected ✓\')">Reject</button></p>'
+            "<p class='muted'>Approving queues the change to be applied to the bot's "
+            "instructions; rejecting leaves the bot exactly as it is.</p></div>")
+    return (
+        '<div class="card"><h3>Self-improvement proposals</h3>'
+        "<p class='muted'>The fleet studies its own results and suggests upgrades to "
+        "its instructions. Nothing changes until you tap Approve.</p>"
+        + "".join(cards) + "</div>")
+
+
 def build():
     now = datetime.now().strftime("%Y-%m-%d %H:%M %Z")
     products = gumroad_all_products() or []
