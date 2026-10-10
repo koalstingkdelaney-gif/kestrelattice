@@ -1,1 +1,23 @@
-{"primary":"https://kestrelattice-approvals.ghostcorpnet.workers.dev","workers":[{"account_id":"ORIGINAL (production)","name":"A","note":"KV writes exhausted until 2026-10-10T00:00:00Z; reads OK","status":"write-blocked","url":"https://kestrelattice-approvals.koalstin-g-k-delaney.workers.dev"},{"account_id":"585090c6d395bc9647692b58e6b76b9b","name":"B","status":"active","url":"https://kestrelattice-approvals.ghostcorpnet.workers.dev"},{"account_id":"51471e40724a23b4ccac2c47914cb8d3","name":"C","status":"active","url":"https://kestrelattice-approvals.ghostcorpnet-c.workers.dev"}]}
+{
+  "primary": "https://kestrelattice-approvals.ghostcorpnet.workers.dev",
+  "workers": [
+    {
+      "account_id": "ORIGINAL (production)",
+      "name": "A",
+      "status": "active",
+      "url": "https://kestrelattice-approvals.koalstin-g-k-delaney.workers.dev"
+    },
+    {
+      "account_id": "585090c6d395bc9647692b58e6b76b9b",
+      "name": "B",
+      "status": "active",
+      "url": "https://kestrelattice-approvals.ghostcorpnet.workers.dev"
+    },
+    {
+      "account_id": "51471e40724a23b4ccac2c47914cb8d3",
+      "name": "C",
+      "status": "active",
+      "url": "https://kestrelattice-approvals.ghostcorpnet-c.workers.dev"
+    }
+  ]
+}
