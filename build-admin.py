@@ -1477,6 +1477,20 @@ var d=await r.json();
 return (d&&d.ok)?d:null;
 }catch(e){return null;}
 }
+/* Worker failover for /sandbox/chat reads (2026-10-09): a worker's KV .list() read path
+   1101s when its list budget burns, while writes still work — so thread reads fail over
+   across all three workers, first healthy one wins. Writes (POST) stay on WURL. */
+var SB_WURLS=["", "https://kestrelattice-approvals.ghostcorpnet-c.workers.dev", "https://kestrelattice-approvals.koalstin-g-k-delaney.workers.dev"];
+async function sbChatGet(path){
+for(var i=0;i<SB_WURLS.length;i++){
+try{
+var r=await fetch(SB_WURLS[i]+path);
+var d=await r.json();
+if(d&&d.ok&&Array.isArray(d.thread))return d;
+}catch(e){}
+}
+return null;
+}
 var dr=await sbFetch("/sandbox/rogues"),dc=await sbFetch("/sandbox/crew"),di=await sbFetch("/sandbox/inventions");
 sbRogues=(dr&&Array.isArray(dr.rogues))?dr.rogues:[];
 sbCrew=(dc&&Array.isArray(dc.crew))?dc.crew:[];
@@ -1647,9 +1661,8 @@ rows.forEach(function(r,i){if(r.kind==="r")sbFillPreview(r,i);});
 async function sbFillPreview(r,i){
 if(!sbReady())return;
 try{
-var rr=await fetch(WURL+"/sandbox/chat?key="+encodeURIComponent(WKEY)+"&sandbox_id="+encodeURIComponent(sbCurrent)+"&bot_id="+encodeURIComponent(r.id));
-var d=await rr.json();
-var msgs=(d&&d.ok&&Array.isArray(d.thread))?d.thread:[];
+var d=await sbChatGet("/sandbox/chat?key="+encodeURIComponent(WKEY)+"&sandbox_id="+encodeURIComponent(sbCurrent)+"&bot_id="+encodeURIComponent(r.id));
+var msgs=(d&&Array.isArray(d.thread))?d.thread:[];
 if(!msgs.length)return;
 var m=msgs[msgs.length-1];
 var p=document.getElementById("sb-prev-"+i),t=document.getElementById("sb-time-"+i);
@@ -1700,9 +1713,8 @@ if(!sbReady()){th.innerHTML=SB_ERR;return;}
 var ref=sbBotRef();
 if(!ref){th.innerHTML=SB_ERR;return;}
 try{
-var r=await fetch(WURL+"/sandbox/chat?key="+encodeURIComponent(WKEY)+"&sandbox_id="+encodeURIComponent(sbCurrent)+"&bot_id="+encodeURIComponent(ref.id));
-var d=await r.json();
-var msgs=(d&&d.ok&&Array.isArray(d.thread))?d.thread:[];
+var d=await sbChatGet("/sandbox/chat?key="+encodeURIComponent(WKEY)+"&sandbox_id="+encodeURIComponent(sbCurrent)+"&bot_id="+encodeURIComponent(ref.id));
+var msgs=(d&&Array.isArray(d.thread))?d.thread:[];
 sbChatMsgs=msgs;
 var chatSig=sbFeedSig(msgs);
 if(chatSig===th._sig&&th._threadId===sbChatId)return;
