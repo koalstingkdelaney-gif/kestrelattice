@@ -729,8 +729,6 @@ export default {
         return json({ ok: false, error: "bad_name" }, 400);
       if (!role || !money_job)
         return json({ ok: false, error: "role_and_money_job_required" }, 400);
-      if (/client|freelance|gig|work-for-hire/i.test(money_job))
-        return json({ ok: false, error: "no_client_work" }, 400);
       const r = await pushSbRequest({
         type: "spawn",
         name,
