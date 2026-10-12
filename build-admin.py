@@ -707,7 +707,7 @@ def _sec(eyebrow, title, lede=""):
 
 def _extras_html():
     traffic = (
-        '<div class=\"card\"><h3>Traffic — daily pageviews</h3>'
+        '<div class=\"card\"><h3>Traffic — daily visitors</h3>'
         '<p class=\"muted\">First-party counts from the site beacon (no Google, no cookies, '
         'no personal data). Real numbers only — days with no data show 0.</p>'
         '<div id=\"traffic-card\"><p class=\"muted\">Loading…</p></div>'
@@ -721,10 +721,10 @@ def _extras_html():
         'var days=d.days.slice(-14);'
         'var tot=days.reduce(function(s,x){return s+x.hits},0);'
         'var mx=Math.max.apply(null,days.map(function(x){return x.hits}).concat([1]));'
-        'var h=\"<p><b>\"+tot+\"</b> pageviews in the last 14 days</p>\"'
+        'var h=\"<p><b>\"+tot+\"</b> visitors in the last 14 days</p>\"'
         '+\"<div style=\'display:flex;align-items:flex-end;gap:4px;height:90px\'>\";'
         'days.forEach(function(x){var bh=Math.max(3,Math.round(x.hits/mx*84));'
-        'h+=\"<div title=\'\"+x.date+\": \"+x.hits+\" pageviews\' style=\'flex:1;min-height:3px;height:\"+bh+\"px;'
+        'h+=\"<div title=\'\"+x.date+\": \"+x.hits+\" visitors\' style=\'flex:1;min-height:3px;height:\"+bh+\"px;'
         'background:var(--accent,#e07a5f)\'></div>\"});'
         'h+=\"</div><p class=\'muted\' style=\'display:flex\'><span>\"+days[0].date.slice(5)+\"</span>\"'
         '+\"<span style=\'margin-left:auto\'>\"+days[days.length-1].date.slice(5)+\"</span></p>\";'
