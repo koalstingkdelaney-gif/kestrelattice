@@ -1385,9 +1385,77 @@ def _sandbox_html():
     rooms = """<div class="card"><h3>&#127963;&#65039; Bot rooms</h3><p class='muted'>Each bot designed its own room inside its private machine. Walk through them — new designs and redecorations appear here on their own.</p><div id="sb-rooms"><p class="muted" style="padding:14px">Loading rooms&#8230;</p></div></div>"""
 
     manage = """<details class='sb-fold'><summary>&#129302; Bots &amp; sandboxes &#8212; manage</summary><div class='fold-body'><div class="card" style="margin:0 0 14px"><h3>&#129521; Your sandboxes</h3><p class='muted'>A sandbox is a separate safe play-pen. Bots in one can't see or touch the others.</p><div id="sb-switcher" class="sb-pills"><p class="muted">Loading&#8230;</p></div><p id="sb-purpose" class="muted"></p><div class="sb-idea-row" style="margin-top:6px"><button class="btn btn-sm btn-ghost" id="sb-new-toggle">&#10133; New sandbox</button><button class="btn btn-sm btn-ghost" id="sb-retire" style="display:none">&#128465; Retire this sandbox</button></div><p id="sb-retire-note" class="muted"></p><div id="sb-new-form" style="display:none;margin-top:12px"><p class='muted' style='margin-bottom:4px'>Give it a name and say what it's for.</p><label class="sb-field">Name it<input id="sb-new-name" type="text" placeholder="e.g. Experiment: new pricing angles" maxlength="120"></label><label class="sb-field">What is it for?<input id="sb-new-purpose" type="text" placeholder="e.g. Try out risky ideas without touching the real business" maxlength="500"></label><button class="btn btn-sm" id="sb-new-go">Create sandbox</button><p class='muted'>You can retire a sandbox when it's empty.</p></div></div><div id="sb-roster"></div><div id="sb-rogues"></div><div id="sb-manual-q"></div></div></details>"""
+    def build_sb_snapshot():
+        """Compact local sandbox snapshot embedded in the page (KV diet 2026-10-12):
+        when the worker is unreachable the Sandbox tab renders this instead of
+        erroring. All data is koalstin's own, already shown in this private panel."""
+        import glob as _glob
+        snap = {"built_at": datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M UTC")}
+        sbd = os.path.join(HF, "sandbox")
+        def _load(name, default):
+            try:
+                with open(os.path.join(sbd, name)) as f:
+                    return json.load(f)
+            except Exception:
+                return default
+        def _tail_jsonl(name, n):
+            rows = []
+            try:
+                with open(os.path.join(sbd, name)) as f:
+                    for line in f:
+                        line = line.strip()
+                        if line:
+                            try:
+                                rows.append(json.loads(line))
+                            except Exception:
+                                pass
+            except Exception:
+                pass
+            return rows[-n:]
+        rogues = _load("rogues.json", {}).get("rogues", []) if isinstance(_load("rogues.json", {}), dict) else []
+        if not rogues:
+            r = _load("rogues.json", [])
+            rogues = r if isinstance(r, list) else []
+        snap["rogues"] = [
+            {k: g.get(k) for k in ("id", "bot_name", "name", "sandbox_id", "status", "brand", "reason", "quarantined_at", "spawned_at") if g.get(k)}
+            for g in rogues if isinstance(g, dict)
+        ]
+        crew = _load("crew.json", [])
+        crew = crew if isinstance(crew, list) else crew.get("crew", [])
+        snap["crew"] = [
+            {k: b.get(k) for k in ("id", "name", "sandbox_id", "status", "role", "group", "focus") if b.get(k)}
+            for b in crew if isinstance(b, dict)
+        ][:60]
+        invs = _tail_jsonl("inventions.jsonl", 40)
+        snap["inventions"] = [
+            {k: i.get(k) for k in ("id", "title", "bot", "at", "status") if i.get(k)}
+            for i in invs if isinstance(i, dict)
+        ]
+        tx = _tail_jsonl("transcript.jsonl", 80)
+        snap["transcript"] = [
+            {k: r.get(k) for k in ("at", "ts", "bot", "kind", "text", "sandbox_id") if r.get(k) is not None}
+            for r in tx if isinstance(r, dict)
+        ]
+        rooms = []
+        for rp in _glob.glob(os.path.join(sbd, "machines", "*", "room.json")):
+            try:
+                with open(rp) as f:
+                    rm = json.load(f)
+                bid = os.path.basename(os.path.dirname(rp))
+                rooms.append({"bot_id": bid, "theme": rm.get("theme"), "description": (rm.get("description") or "")[:300],
+                              "motto": rm.get("motto"), "colors": rm.get("colors")})
+            except Exception:
+                pass
+        snap["rooms"] = rooms
+        return snap
+    _sb_snap_json = json.dumps(build_sb_snapshot(), separators=(",", ":"))
     script = """<script>(function(){
+var SB_SNAP=""" + _sb_snap_json + """;
 var SB_DOWN="Couldn't reach the Sandbox — the worker update may not be deployed yet.";
 var SB_ERR="<p class='muted'>"+SB_DOWN+"</p>";
+/* Snapshot fallback (KV diet 2026-10-12): SB_SNAP is a local snapshot embedded at
+   build time. When the worker is unreachable the tab renders it instead of erroring. */
+function sbSnapMsg(){var t=(typeof SB_SNAP!=="undefined"&&SB_SNAP&&SB_SNAP.built_at)?SB_SNAP.built_at:"earlier";return "<p class='muted'>Live feed unreachable — showing snapshot from "+escH(t)+". It refreshes when the worker recovers.</p>";}
 function escH(s){var d=document.createElement("div");d.appendChild(document.createTextNode(s===null||s===undefined?"":String(s)));return d.innerHTML;}
 function escA(s){return escH(s).replace(/'/g,"&#39;").replace(/"/g,"&quot;");}
 function sbReady(){return !(typeof WURL==="undefined"||!WURL||!WKEY);}
@@ -1492,12 +1560,13 @@ if(d&&d.ok&&Array.isArray(d.thread))return d;
 return null;
 }
 var dr=await sbFetch("/sandbox/rogues"),dc=await sbFetch("/sandbox/crew"),di=await sbFetch("/sandbox/inventions");
-sbRogues=(dr&&Array.isArray(dr.rogues))?dr.rogues:[];
-sbCrew=(dc&&Array.isArray(dc.crew))?dc.crew:[];
-sbInvs=(di&&Array.isArray(di.inventions))?di.inventions:[];
-if(!dr)document.getElementById("sb-rogues").innerHTML=SB_ERR;
-if(!dc)document.getElementById("sb-roster").innerHTML=SB_ERR;
-if(!di)document.getElementById("sb-inventions").innerHTML=SB_ERR;
+var SN=(typeof SB_SNAP!=="undefined")?SB_SNAP:null;
+sbRogues=(dr&&Array.isArray(dr.rogues))?dr.rogues:((SN&&Array.isArray(SN.rogues))?SN.rogues:[]);
+sbCrew=(dc&&Array.isArray(dc.crew))?dc.crew:((SN&&Array.isArray(SN.crew))?SN.crew:[]);
+sbInvs=(di&&Array.isArray(di.inventions))?di.inventions:((SN&&Array.isArray(SN.inventions))?SN.inventions:[]);
+if(!dr)document.getElementById("sb-rogues").innerHTML=(SN&&SN.rogues&&SN.rogues.length)?sbSnapMsg():SB_ERR;
+if(!dc)document.getElementById("sb-roster").innerHTML=(SN&&SN.crew&&SN.crew.length)?sbSnapMsg():SB_ERR;
+if(!di)document.getElementById("sb-inventions").innerHTML=(SN&&SN.inventions&&SN.inventions.length)?sbSnapMsg():SB_ERR;
 sbRenderRogues();sbRenderRoster();sbRenderInventions();sbRenderConvos();sbRenderManualQ();sbRenderRetireState();
 sbLoadTranscript();
 }
@@ -1631,7 +1700,7 @@ return "<div class='chat-msg sentience'><span class='chat-who'>"+escH(en.bot||"b
 }).join("");
 if(wasBottom&&!typing){pill.style.display="none";box.scrollTop=box.scrollHeight;}
 else{box.scrollTop=st;if(newCount>0){pill.textContent="↓ "+newCount+" new";pill.style.display="block";}}
-}catch(e){if(!box.innerHTML)box.innerHTML=SB_ERR;}
+}catch(e){var _sn=(typeof SB_SNAP!=="undefined"&&SB_SNAP&&Array.isArray(SB_SNAP.transcript))?SB_SNAP.transcript.filter(function(en){return !sbCurrent||String(en.sandbox_id||"quarantine")===String(sbCurrent);}).slice(-40):[];if(_sn.length){box.innerHTML=sbSnapMsg()+_sn.map(function(en){if(en.kind==="system")return "<div class='sb-sys'>"+escH(en.text)+"</div>";return "<div class='chat-msg sentience'><span class='chat-who'>"+escH(en.bot||"bot")+"</span><p>"+escH(String(en.text||"").replace(/<!--[\s\S]*?-->/g,"")).slice(0,600)+"</p></div>";}).join("");}else if(!box.innerHTML)box.innerHTML=SB_ERR;}
 }
 /* ----- chat: conversation list + thread view ----- */
 function sbRenderConvos(){
@@ -1745,6 +1814,9 @@ var ref=sbBotRef();if(!ref)return;
 btn.disabled=true;
 try{
 await fetch(WURL+"/sandbox/chat",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({key:WKEY,sandbox_id:sbCurrent,bot_id:ref.id,text:text})});
+/* Inbox ping (KV diet 2026-10-12): one extra write lets the chat bridge find new
+   messages with a single thread read instead of sweeping all 55 threads. */
+try{await fetch(WURL+"/sandbox/chat",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({key:WKEY,sandbox_id:sbCurrent,bot_id:"__inbox__",text:"@"+ref.id+" "+text})});}catch(_){}
 input.value="";sbRenderConvos();await sbLoadChat();
 }catch(e){toast(SB_DOWN,false);}
 btn.disabled=false;
@@ -1758,6 +1830,8 @@ try{
 for(var i=0;i<targets.length;i++){
 await fetch(WURL+"/sandbox/chat",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({key:WKEY,sandbox_id:sbCurrent,bot_id:targets[i].id,text:text})});
 }
+/* Inbox ping for broadcasts (KV diet 2026-10-12). */
+try{await fetch(WURL+"/sandbox/chat",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({key:WKEY,sandbox_id:sbCurrent,bot_id:"__inbox__",text:"@* "+text})});}catch(_){}
 toast("Heard by "+targets.length+" bot"+(targets.length>1?"s":"")+" \u2014 replies land in the feed below.",true);
 sbRenderConvos();if(sbChatId)await sbLoadChat();
 var tr=document.getElementById("sb-transcript");if(tr)tr.scrollIntoView({behavior:"smooth",block:"nearest"});
@@ -1900,7 +1974,7 @@ var sbRooms=[];
 var ROOM_COLORS={black:"#14141c",white:"#f5f5f5",red:"#e5484d",magenta:"#ff2fb3",pink:"#ff7ac6",cyan:"#22d3ee",teal:"#2dd4bf",blue:"#3b82f6",indigo:"#6366f1",violet:"#8b5cf6",purple:"#a855f7",green:"#22c55e",emerald:"#10b981",gold:"#d4af37",amber:"#f59e0b",orange:"#f97316",crimson:"#dc143c",silver:"#c0c0c0",grey:"#9aa0a6",gray:"#9aa0a6",navy:"#1e2a5a",maroon:"#6b1f2a",lime:"#a3e635",turquoise:"#40e0d0",coral:"#ff7f50",ivory:"#fffff0",charcoal:"#2b2b30",midnight:"#0b0b18",neon:"#39ff14",blood:"#8a0303",rust:"#b7410e",sand:"#e6c88a",forest:"#1d4d2b",ocean:"#0a4d68",lavender:"#c9b6f2",peach:"#ffcba4",rose:"#f43f5e",sky:"#7dd3fc",slate:"#475569",bronze:"#b08d57",copper:"#b87333",jade:"#00a86b",onyx:"#0f0f12",pearl:"#eae6df",wine:"#722f37",moss:"#5a7247",clay:"#b0703c"};
 function roomHexes(str,name){var out=[];var s=String(str||"");var hex=s.match(/#[0-9a-fA-F]{3,8}/g)||[];for(var k=0;k<hex.length;k++)out.push(hex[k]);var words=s.toLowerCase().split(/[,;|]/);for(var w=0;w<words.length;w++){var c=ROOM_COLORS[words[w].trim()];if(c)out.push(c);}if(!out.length){var h=0;var n=String(name||"?");for(var q=0;q<n.length;q++)h=(h*31+n.charCodeAt(q))%360;out.push("hsl("+h+",60%,38%)");out.push("hsl("+((h+50)%360)+",55%,28%)");}while(out.length<2)out.push(out[0]);return out.slice(0,3);}
 function roomGradient(room,name){var c=roomHexes(room&&room.colors,name);var g="linear-gradient(135deg,"+c[0]+" 0%,"+c[1]+" 70%";if(c[2])g+=", "+c[2]+" 130%";return g+")";}
-async function sbLoadRooms(){var el=document.getElementById("sb-rooms");if(!el)return;if(!sbReady()){el.innerHTML=SB_ERR;return;}try{var r=await fetch(WURL+"/sandbox/rooms?key="+encodeURIComponent(WKEY));var d=await r.json();var list=(d&&d.ok&&Array.isArray(d.rooms))?d.rooms:[];sbRooms=list;sbRenderRooms();}catch(e){el.innerHTML=SB_ERR;}}
+async function sbLoadRooms(){var el=document.getElementById("sb-rooms");if(!el)return;if(!sbReady()){el.innerHTML=SB_ERR;return;}try{var r=await fetch(WURL+"/sandbox/rooms?key="+encodeURIComponent(WKEY));var d=await r.json();var list=(d&&d.ok&&Array.isArray(d.rooms))?d.rooms:[];if(!list.length)throw 0;sbRooms=list;sbRenderRooms();}catch(e){var _sn=(typeof SB_SNAP!=="undefined"&&SB_SNAP&&Array.isArray(SB_SNAP.rooms))?SB_SNAP.rooms:[];if(_sn.length){sbRooms=_sn.map(function(x){return {name:x.bot_id,room:{theme:x.theme,description:x.description,motto:x.motto,colors:x.colors}};});el.innerHTML=sbSnapMsg();sbRenderRooms();}else el.innerHTML=SB_ERR;}}
 function sbRenderRooms(){var el=document.getElementById("sb-rooms");if(!el)return;if(!sbRooms.length){el.innerHTML="<p class='muted' style='padding:14px'>No rooms yet.</p>";return;}var html="<div class='room-grid'>";for(var i=0;i<sbRooms.length;i++){var b=sbRooms[i];var rm=b.room||null;var hero;if(rm){hero="<div class='room-hero' style='background:"+roomGradient(rm,b.name)+"'><div class='room-bot'>"+sbAvatar(b.name)+"<div><div style='font-weight:800'>"+escH(b.name||"?")+"</div><div style='font-size:.75rem;opacity:.85'>"+(rm.designed_at?"designed "+sbRelTime(rm.designed_at):"")+"</div></div></div><p class='room-theme'>"+escH(rm.theme||"Untitled room")+"</p></div>";}else{hero="<div class='room-undesigned'><div style='font-size:2rem;margin-bottom:8px'>&#128682;</div><div style='font-weight:700;color:var(--text)'>"+escH(b.name||"?")+"</div><p style='margin:6px 0 0'>Hasn't designed their room yet.</p></div>";}var stats="<span class='room-stat'>&#11088; "+(b.points||0)+" pts</span><span class='room-stat'>&#128193; "+(b.file_count||0)+" files</span>";if(b.last_active)stats+="<span class='room-stat'>&#128336; active "+sbRelTime(b.last_active)+"</span>";var procs="";var pl=b.processes||[];for(var p2=0;p2<Math.min(3,pl.length);p2++){procs+="<li>&#9881; "+escH(pl[p2].name||"")+" &mdash; "+escH(pl[p2].status||"")+"</li>";}var body;if(rm){var hist="";var hh=b.room_history||[];if(hh.length){hist="<details class='room-hist'><summary>&#128336; Design history ("+hh.length+")</summary>";for(var hv=hh.length-1;hv>=0;hv--){var vv=hh[hv];hist+="<div class='room-hist-v'><div class='room-hist-t'>"+escH(vv.theme||"Untitled")+" <span>"+sbRelTime(vv.designed_at)+"</span></div>";hist+="<div class='room-hist-c'>"+escH(vv.colors||"")+"</div><p>"+escH(vv.description||"")+"</p>";if(vv.motto)hist+="<p class='room-motto'>&ldquo;"+escH(vv.motto)+"&rdquo;</p>";hist+="</div>";}hist+="</details>";}body="<div class='room-body'><p class='room-desc'>"+escH(rm.description||"")+"</p>";if(rm.motto)body+="<p class='room-motto'>&ldquo;"+escH(rm.motto)+"&rdquo;</p>";body+=hist;if(procs)body+="<ul class='room-procs'>"+procs+"</ul>";body+="<div class='room-stats'>"+stats+"</div></div>";}else{body="<div class='room-body'><div class='room-stats'>"+stats+"</div></div>";}html+="<div class='room-card'>"+hero+body+"</div>";}html+="</div>";el.innerHTML=html;}
 var ngo=document.getElementById("sb-new-go");
 if(ngo)ngo.addEventListener("click",sbNewSandbox);
