@@ -156,6 +156,9 @@ article>p:first-of-type::first-letter{font-size:3.3em;line-height:.82;float:left
 /* #1549 pull-quote treatment for highlighted quotes */
 article>blockquote{margin:2rem 0;padding:1.1rem 1.4rem;border-left:3px solid var(--accent);background:var(--accent-soft);border-radius:0 var(--radius) var(--radius) 0;font-size:1.1em;line-height:1.65}
 article>blockquote p{margin:0}
+
+/* #1558 print stylesheet: readable hard copy, hide site chrome */
+@media print{header.site,#reading-progress,footer.site,footer,.sticky-buy,#backtop,.h2-anchor{display:none!important}body{background:#fff;color:#111;line-height:1.7}article{max-width:100%}article a{color:#111;text-decoration:underline}article a[href^="http"]::after{content:" (" attr(href) ")";font-size:.85em;word-break:break-all}@page{margin:1.8cm}}
 </style>
 </head>
 <body>
