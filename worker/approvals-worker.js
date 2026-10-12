@@ -718,6 +718,30 @@ export default {
       return json({ ok: true, request_id: r.id });
     }
 
+    if (req.method === "POST" && url.pathname === "/sandbox/spawn") {
+      const body = await readJsonBody();
+      if (!body) return json({ ok: false, error: "bad_json" }, 400);
+      if (!requireUserKey(body)) return new Response("Not found", { status: 404 });
+      const name = String(body.name || "").trim().slice(0, 32);
+      const role = String(body.role || "").trim().slice(0, 200);
+      const money_job = String(body.money_job || "").trim().slice(0, 300);
+      if (!/^[A-Za-z][A-Za-z0-9-]{1,30}$/.test(name))
+        return json({ ok: false, error: "bad_name" }, 400);
+      if (!role || !money_job)
+        return json({ ok: false, error: "role_and_money_job_required" }, 400);
+      if (/client|freelance|gig|work-for-hire/i.test(money_job))
+        return json({ ok: false, error: "no_client_work" }, 400);
+      const r = await pushSbRequest({
+        type: "spawn",
+        name,
+        role,
+        money_job,
+        persona: String(body.persona || "").slice(0, 500),
+        proposed_by: "koalstin",
+      });
+      return json({ ok: true, request_id: r.id });
+    }
+
     if (req.method === "POST" && url.pathname === "/sandbox/release") {
       const body = await readJsonBody();
       if (!body) return json({ ok: false, error: "bad_json" }, 400);
