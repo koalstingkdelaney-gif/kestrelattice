@@ -1984,7 +1984,7 @@ sbLoadSandboxes();
 setInterval(sbLoadTranscript,10000);
 sbLoadRooms();
 setInterval(sbLoadRooms,60000);
-setInterval(function(){var tv=document.getElementById("sb-threadview");if(sbChatId&&tv&&tv.classList.contains("open"))sbLoadChat();},15000);
+setInterval(function(){if(document.hidden)return;var tv=document.getElementById("sb-threadview");if(sbChatId&&tv&&tv.classList.contains("open"))sbLoadChat();},15000);
 });
 })();
 </script>"""
