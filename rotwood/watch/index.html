@@ -332,6 +332,7 @@ function onNewData(d){
   buildPicker(al);
   syncZombies(1,performance.now());
   syncBandits(1,performance.now());
+  if(followedId&&!labelSprite)setFollowed(followedId);
   fillCard();fillWorld(d);
   if(labelSprite){scene.remove(labelSprite);labelSprite=null;}
 }
