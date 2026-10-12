@@ -632,11 +632,12 @@ document.addEventListener('DOMContentLoaded', function(){
   // toast + spinner on every action button
   var _ac = window.approveCode;
   window.approveCode = async function(code, btn, doneLabel){
+    window.gcLastTapQueued=false;
     if (btn) btn.classList.add('loading');
     var ok = false;
     try { ok = await _ac(code, btn, doneLabel); } catch(e){ ok = false; }
     if (btn) btn.classList.remove('loading');
-    toast(ok ? (doneLabel || 'Done ✓') : 'Something failed — tap Retry', ok);
+    if(!window.gcLastTapQueued) toast(ok ? (doneLabel || 'Done ✓') : 'Something failed — tap Retry', ok);
     return ok;
   };
   document.addEventListener('click', async function(e){
