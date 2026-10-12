@@ -47,6 +47,8 @@ body::after{content:"";position:fixed;inset:0;z-index:200;pointer-events:none;op
 .live{margin-left:auto;display:flex;align-items:center;gap:8px;font-size:15px;color:var(--dim);font-family:var(--mono)}
 .live .dot{width:10px;height:10px;border-radius:50%;background:var(--green);box-shadow:0 0 10px var(--green);animation:pulse 2s infinite}
 .live.off .dot{background:var(--red);box-shadow:0 0 10px var(--red)}
+.specbtn{margin-left:12px;padding:8px 16px;border:1px solid var(--gold);border-radius:8px;color:#ffd75e;text-decoration:none;font-family:var(--disp);font-size:16px;letter-spacing:2px;background:rgba(216,169,63,.08);white-space:nowrap}
+.specbtn:hover{background:rgba(216,169,63,.25)}
 .tiles{display:flex;flex-wrap:wrap;gap:10px;margin-top:12px}
 .tile{background:rgba(255,255,255,.03);border:1px solid var(--line);border-radius:10px;padding:8px 18px;min-width:108px;
  box-shadow:inset 0 1px 0 rgba(255,255,255,.05)}
@@ -194,6 +196,7 @@ footer .fine{font-size:13px;margin-top:6px}
    <span class="badge" id="dn"></span>
    <span id="alerts" style="display:contents"></span>
    <div class="live" id="live"><span class="dot"></span><span id="livetxt">LINKING&hellip;</span></div>
+   <a class="specbtn" href="watch/">&#9673; SPECTATE 3D</a>
   </div>
   <div class="tiles" id="tiles"></div>
  </div>
