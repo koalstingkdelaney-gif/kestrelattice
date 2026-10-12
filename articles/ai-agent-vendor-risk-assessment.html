@@ -136,7 +136,10 @@ try{if(localStorage.getItem('kestrelattice_admin')!=='1'){gtag('js', new Date())
   .copy-link{position:relative;border:1px solid var(--line);background:var(--panel);color:var(--muted);border-radius:999px;padding:8px 16px;min-height:44px;font-size:.82rem;cursor:pointer;font-family:inherit}
   .copy-link:hover{border-color:var(--accent-dim);color:var(--text)}
   .copy-link.copied::after{content:"Copied";position:absolute;top:-30px;left:50%;transform:translateX(-50%);background:var(--accent);color:var(--accent-ink);font-size:.72rem;font-weight:700;padding:3px 10px;border-radius:6px;white-space:nowrap}
-a,button,summary,[role="button"]{touch-action:manipulation}</style>
+a,button,summary,[role="button"]{touch-action:manipulation}
+/* #1544 editorial drop-cap on the article lede paragraph */
+article>p:first-of-type::first-letter{font-size:3.3em;line-height:.82;float:left;margin:.05em .14em 0 0;color:var(--accent);font-weight:700}
+</style>
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>

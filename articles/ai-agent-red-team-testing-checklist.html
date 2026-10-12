@@ -164,7 +164,10 @@ body{background:#fff!important;color:#141414!important}
 .wrap{max-width:none!important}
 article{max-width:74ch;margin:0 auto}
 a{color:#8a3a20!important;text-decoration:underline!important}}
-a,button,summary,[role="button"]{touch-action:manipulation}</style>
+a,button,summary,[role="button"]{touch-action:manipulation}
+/* #1544 editorial drop-cap on the article lede paragraph */
+article>p:first-of-type::first-letter{font-size:3.3em;line-height:.82;float:left;margin:.05em .14em 0 0;color:var(--accent);font-weight:700}
+</style>
 <link rel="alternate" type="application/rss+xml" title="ghostcorpnet articles" href="feed.xml">
 </head>
 <body>
