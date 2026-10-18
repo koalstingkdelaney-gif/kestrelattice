@@ -6283,7 +6283,11 @@
     <loc>https://koalstingkdelaney-gif.github.io/kestrelattice/articles/ai-agent-plan-bound-template.html</loc><lastmod>2026-10-18</lastmod>
     <changefreq>monthly</changefreq>
   </url>
-  <url>
+    <url>
+    <loc>https://koalstingkdelaney-gif.github.io/kestrelattice/articles/ai-agent-timeout-retry-policy-template.html</loc><lastmod>2026-10-18</lastmod>
+    <changefreq>monthly</changefreq>
+  </url>
+<url>
     <loc>https://koalstingkdelaney-gif.github.io/kestrelattice/articles/ai-agent-risk-tier-classification-worksheet.html</loc><lastmod>2026-10-18</lastmod>
     <changefreq>monthly</changefreq>
   </url>
