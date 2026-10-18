@@ -75,7 +75,7 @@ a,button,summary,[role="button"]{touch-action:manipulation}
   a:focus-visible,button:focus-visible,summary:focus-visible,.btn:focus-visible,.chip:focus-visible,nav.main a:focus-visible{outline:3px solid ButtonText;transform:none!important;box-shadow:none!important}
   .proof-strip .ok,.price,.go{color:ButtonText}
   h1 em{background:none!important;color:inherit;-webkit-background-clip:border-box;background-clip:border-box}
-}</style><link rel="stylesheet" href="belowfold.css" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="belowfold.css"></noscript>
+}</style><link rel="stylesheet" href="belowfold.css" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="belowfold.css"><style>.reveal{opacity:1!important;transform:none!important}</style></noscript>
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -434,7 +434,7 @@ if(window.visualViewport){visualViewport.addEventListener('resize',updateBar);}}
 })();
 </script>
 <script>
-(function(){if(!('IntersectionObserver' in window))return;var mq=window.matchMedia('(prefers-reduced-motion: reduce)');if(mq.matches)return;var els=document.querySelectorAll('.reveal');var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in-view');io.unobserve(e.target);}});},{threshold:.15});els.forEach(function(el){io.observe(el);});})();
+(function(){var els=document.querySelectorAll('.reveal');if(!('IntersectionObserver' in window)){els.forEach(function(el){el.classList.add('in-view');});return;}var mq=window.matchMedia('(prefers-reduced-motion: reduce)');if(mq.matches)return;var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in-view');io.unobserve(e.target);}});},{threshold:.15});els.forEach(function(el){io.observe(el);});})();
 </script>
 <script>
 // prefers-reduced-data: prevent below-fold lazy images from auto-loading (hero stays eager).
