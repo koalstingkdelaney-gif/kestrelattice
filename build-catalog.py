@@ -387,7 +387,7 @@ def main():
         pid = p["id"]
         # LCP: only the first (above-the-fold) card image loads eagerly with high
         # priority; the rest stay lazy per the one-high-priority-image standard.
-        img_attrs = ' fetchpriority="high"' if n == 1 else ' loading="lazy" fetchpriority="low" decoding="async"'
+        img_attrs = ' width="400" height="300" fetchpriority="high"' if n == 1 else ' width="400" height="300" loading="lazy" fetchpriority="low" decoding="async"'
         ptaglist = tagmap.get(pid, ["governance"])
         tags = "|".join(ptaglist)
         badges = []
