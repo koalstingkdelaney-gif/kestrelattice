@@ -54,6 +54,8 @@ PAGE = """<!DOCTYPE html>
 <meta name="theme-color" content="#0f0e0d">
 <meta name="robots" content="index,follow,max-image-preview:large">
 <link rel="canonical" href="https://koalstingkdelaney-gif.github.io/kestrelattice/products/">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 26 26'%3E%3Ccircle cx='5' cy='6' r='2.4' fill='%23e07a5f'/%3E%3Ccircle cx='21' cy='6' r='2.4' fill='%23e07a5f'/%3E%3Ccircle cx='13' cy='13' r='2.4' fill='%23e07a5f'/%3E%3Ccircle cx='5' cy='20' r='2.4' fill='%23e07a5f'/%3E%3Ccircle cx='21' cy='20' r='2.4' fill='%23e07a5f'/%3E%3C/svg%3E">
+<link rel="apple-touch-icon" sizes="180x180" href="/kestrelattice/assets/apple-touch-icon.png">
 <link rel="preconnect" href="https://koalstin.gumroad.com">
 <link rel="dns-prefetch" href="https://koalstin.gumroad.com">
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-541TCHWW98"></script>
