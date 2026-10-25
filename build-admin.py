@@ -637,7 +637,7 @@ document.addEventListener('DOMContentLoaded', function(){
     var ok = false;
     try { ok = await _ac(code, btn, doneLabel); } catch(e){ ok = false; }
     if (btn) btn.classList.remove('loading');
-    if(!window.gcLastTapQueued) toast(ok ? (doneLabel || 'Done ✓') : 'Something failed — tap Retry', ok);
+    if(!window.gcLastTapQueued && !window.__gcSilentApprove) toast(ok ? (doneLabel || 'Done ✓') : 'Something failed — tap Retry', ok);
     return ok;
   };
   document.addEventListener('click', async function(e){

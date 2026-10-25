@@ -111,6 +111,43 @@ export default {
       return json({ ok: true, item });
     }
 
+    if (req.method === "POST" && url.pathname === "/approve-all") {
+      // Action Center "Approve All" (koalstin, 2026-10-25): flip many
+      // pending items to approved in ONE queue read+write, so a bulk
+      // approval cannot lose items to KV write races the way a rapid
+      // series of /approve calls can. Body {key, codes?}: with codes,
+      // only those codes flip; without codes, every pending item in the
+      // Action Center view (group !== "outreach" && group !== "drafts")
+      // flips — the same filter GET /taps uses.
+      let body;
+      try {
+        body = await req.json();
+      } catch {
+        return json({ ok: false, error: "bad_json" }, 400);
+      }
+      if (!body.key || body.key !== env.WRITE_KEY) {
+        const ip = req.headers.get("cf-connecting-ip") || "unknown";
+        if (!(await checkRateLimit(env, ip))) {
+          return json({ ok: false, error: "rate_limited" }, 429);
+        }
+        return json({ ok: false, error: "forbidden" }, 403);
+      }
+      const codes = Array.isArray(body.codes)
+        ? [...new Set(body.codes.map((c) => String(c)).slice(0, 1000))]
+        : null;
+      const q = await readQueue(env);
+      const approved = [];
+      for (const item of q) {
+        if (item.status !== "pending") continue;
+        if (codes ? !codes.includes(item.code)
+                  : item.group === "outreach" || item.group === "drafts") continue;
+        item.status = "approved";
+        approved.push(item.code);
+      }
+      if (approved.length) await writeQueue(env, q);
+      return json({ ok: true, count: approved.length, codes: approved });
+    }
+
     const serverKey = req.headers.get("x-server-key");
     const isServer = serverKey && serverKey === env.SERVER_KEY;
 
