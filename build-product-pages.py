@@ -527,6 +527,7 @@ try{{if(localStorage.getItem('kestrelattice_admin')!=='1'){{gtag('js', new Date(
   </a>
   <nav aria-label="Breadcrumb" class="crumb"><ol><li><a href="../../">Home</a></li><li><a id="pdp-back" href="../../products/" aria-keyshortcuts="Escape" aria-label="Back to all {n_products} products">Catalog</a><kbd class="esc-hint">Esc</kbd></li><li aria-current="page">{title}</li></ol></nav>
   </header>
+  <main id="main">
 
   <div class="hero" itemscope itemtype="https://schema.org/Product">
     {cover_img}
@@ -582,6 +583,7 @@ try{{if(localStorage.getItem('kestrelattice_admin')!=='1'){{gtag('js', new Date(
 {fbt}
 {studio}
 {next_step}
+  </main>
   <footer>
     <span>© 2026 ghostcorpnet · An independent studio</span>
     <span><a href="../../">Home</a> · <a href="../">Catalog</a> · <a href="../../changelog.html">Changelog · Oct 2026</a> · <a href="../../sitemap.html">Site index</a> · <a href="mailto:corpghost420@gmail.com">Contact</a></span>
