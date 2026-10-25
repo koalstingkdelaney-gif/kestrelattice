@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="utf-8">
+<link rel="preconnect" href="https://gumroad.com">
+<link rel="preconnect" href="https://www.googletagmanager.com">
+<meta name="viewport" content="width=device-width, initial-scale=1, interactive-widget=resizes-content, viewport-fit=cover">
+<title>AI Agent Incident Cost Estimator — Free Tool | ghostcorpnet</title>
+<meta name="description" content="Free estimator: what AI agent incidents cost you each month and year — incidents × investigation and remediation hours × your loaded hourly rate, all from your own numbers.">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<meta name="theme-color" content="#121212">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ghostcorpnet">
+<meta property="og:url" content="https://koalstingkdelaney-gif.github.io/kestrelattice/tools/ai-agent-incident-cost-estimator/">
+<meta property="og:title" content="AI Agent Incident Cost Estimator — Free Tool | ghostcorpnet">
+<meta property="og:description" content="Estimate monthly and annual AI agent incident-handling cost from your own incident counts, investigation hours, and hourly rate.">
+<link rel="canonical" href="https://koalstingkdelaney-gif.github.io/kestrelattice/tools/ai-agent-incident-cost-estimator/">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebApplication","name":"AI Agent Incident Cost Estimator","applicationCategory":"BusinessApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"description":"Estimate monthly and annual AI agent incident-handling cost from your own numbers.","url":"https://koalstingkdelaney-gif.github.io/kestrelattice/tools/ai-agent-incident-cost-estimator/"}
+</script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-541TCHWW98"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}try{if(localStorage.getItem('kestrelattice_admin')!=='1'){gtag('js',new Date());gtag('config','G-541TCHWW98');}}catch(e){gtag('js',new Date());gtag('config','G-541TCHWW98');}</script>
+<style>
+  :root{color-scheme:dark;--bg:#0f0e0d; --bg-soft:#141210; --panel:#1a1714; --panel2:#211c17;
+        --line:#2c261e; --line-soft:#221d15; --text:#f1ebdd;
+        --muted:#a89d89; --faint:#978b74; --accent:#e07a5f;
+        --accent-bright:#f09474; --accent-dim:#c06a4e; --accent-ink:#1a0f08;
+        --accent-soft:rgba(224,122,95,.1); --radius:12px;
+        --green:#7fc97f; --amber:#e8b04b; --red:#e06a5f;
+        --ease:cubic-bezier(.2,.7,.25,1)}
+  *{margin:0;padding:0;box-sizing:border-box}
+  ::selection{background:var(--accent);color:var(--accent-ink)}
+  html{scroll-behavior:smooth;scrollbar-gutter:stable}
+  html,body{overflow-x:clip}
+  body{background:var(--bg);color:var(--text);
+       font-family:ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+       line-height:1.7;-webkit-font-smoothing:antialiased}
+  a:focus-visible,button:focus-visible{outline:3px solid var(--accent-bright);outline-offset:3px;border-radius:4px}
+  header.site{border-bottom:1px solid var(--line);position:sticky;top:0;z-index:100;
+    background:rgba(15,14,13,.92);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
+  header.site .wrap{display:flex;align-items:center;justify-content:space-between;min-height:56px;max-width:1040px;margin:0 auto;padding:0 24px}
+  .brand{display:flex;align-items:center;gap:9px;font-weight:700;color:var(--text);text-decoration:none;font-size:1.02rem}
+  .brand:hover{color:var(--accent-bright)}
+  nav.main{display:flex;align-items:center;gap:20px}
+  nav.main a{color:var(--muted);font-size:.88rem;font-weight:500;text-decoration:none}
+  nav.main a:hover{color:var(--accent-bright)}
+  .wrap{max-width:68ch;margin:0 auto;padding:40px 24px 64px}
+  .crumb{color:var(--muted);font-size:.85rem;margin-bottom:24px}
+  .crumb a{color:var(--accent);text-decoration:none}
+  h1{font-size:clamp(1.6rem,3vw + .8rem,2.1rem);font-weight:800;letter-spacing:-.02em;line-height:1.25;margin-bottom:8px;text-wrap:balance}
+  .date{color:var(--muted);font-size:.85rem;margin-bottom:28px}
+  h2{font-size:1.35rem;margin:40px 0 12px;letter-spacing:-.01em}
+  h3{font-size:1.1rem;margin:24px 0 10px}
+  p{margin:0 0 16px}
+  ul,ol{margin:0 0 16px 24px}
+  li{margin:6px 0}
+  a{color:var(--accent)}
+  code{background:var(--panel);padding:2px 6px;border-radius:4px;font-size:.88em}
+  .lead{font-size:1.08rem;color:var(--muted);max-width:60ch}
+  .pill{display:inline-block;font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);border:1px solid var(--accent-dim);border-radius:999px;padding:5px 14px;margin-bottom:18px}
+  .hero-tool{border:1px solid var(--line);border-radius:var(--radius);background:linear-gradient(180deg,var(--panel2),var(--panel));padding:28px;margin:32px 0;box-shadow:0 16px 40px rgba(0,0,0,.35)}
+  .btn{display:inline-block;background:linear-gradient(180deg,var(--accent-bright),var(--accent));color:var(--accent-ink);font-weight:700;
+       padding:14px 30px;border-radius:8px;text-decoration:none;border:0;cursor:pointer;font-size:1rem;font-family:inherit;
+       transition:transform .16s var(--ease)}
+  .btn:hover{transform:translateY(-2px)}
+  .cta{background:linear-gradient(180deg,var(--panel2),var(--panel));border:1px solid var(--accent-dim);border-radius:var(--radius);
+       padding:28px;margin:48px 0;text-align:center;box-shadow:0 16px 40px rgba(0,0,0,.35)}
+  .cta h2{margin:0 0 10px;font-size:1.3rem}
+  .cta p{color:var(--muted);margin-bottom:18px}
+  .disclaimer{font-size:.82rem;color:var(--faint);border:1px dashed var(--line);border-radius:8px;padding:12px 16px;margin:32px 0}
+  footer.site{border-top:1px solid var(--line);background:var(--bg-soft);padding:22px 0;margin-top:48px}
+  footer.site .wrap{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px 16px;max-width:1040px;padding:0 24px}
+  footer.site{color:var(--muted);font-size:.82rem}
+  footer.site a{color:var(--muted);text-decoration:none;margin-left:14px}
+  footer.site a:hover{color:var(--accent-bright)}
+  #backtop{position:fixed;right:22px;bottom:22px;width:46px;height:46px;border-radius:50%;border:1px solid var(--line);background:var(--panel);color:var(--accent);font-size:1.3rem;cursor:pointer;opacity:0;pointer-events:none;transition:opacity .2s var(--ease);z-index:150}
+  #backtop.show{opacity:1;pointer-events:auto}
+  @media(max-width:640px){nav.main a:not(:last-child){display:none}footer.site .wrap{justify-content:center;text-align:center}footer.site a{margin:0 7px}}
+  @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{animation:none!important;transition:none!important}}
+  .skip{position:absolute;left:-9999px;top:0;background:var(--accent);color:var(--accent-ink);padding:10px 18px;font-weight:700;z-index:200;border-radius:0 0 8px 0}
+  .skip:focus{left:0}
+</style>
+<style>
+  .field{display:grid;gap:6px;margin:0 0 14px}
+  .field label{font-weight:600;font-size:.94rem}
+  .field .hint{color:var(--muted);font-size:.82rem}
+  .field input,.field select{background:var(--bg-soft);border:1px solid var(--line);border-radius:8px;color:var(--text);padding:10px 12px;font-size:1rem;font-family:inherit;width:100%}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:0 18px}
+  @media(max-width:640px){.grid2{grid-template-columns:1fr}}
+  .span2{grid-column:1/-1}
+  .toggle-row{display:flex;gap:12px;align-items:flex-start;border:1px solid var(--line-soft);border-radius:8px;padding:10px 14px;cursor:pointer;font-size:.94rem}
+  .toggle-row input[type=checkbox]{margin-top:5px;accent-color:var(--accent);width:17px;height:17px;flex:none}
+  .toggle-row:has(input:checked){border-color:var(--accent);background:var(--accent-soft)}
+  .field input[type=range]{padding:0;accent-color:var(--accent)}
+  .field input[type=range]:disabled{opacity:.35}
+  .out{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:8px}
+  @media(max-width:640px){.out{grid-template-columns:1fr}}
+  .stat{border:1px solid var(--line);border-radius:10px;background:var(--bg-soft);padding:14px 16px}
+  .stat .k{font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+  .stat .v{font-size:1.45rem;font-weight:800;margin-top:2px}
+  .stat .s{color:var(--muted);font-size:.85rem}
+  #verdict{border:1px solid var(--accent-dim);border-radius:10px;padding:16px 18px;margin-top:16px;background:var(--accent-soft)}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site"><div class="wrap">
+  <a class="brand" href="../../">ghostcorpnet</a>
+  <nav class="main" aria-label="Primary"><a href="../../">Home</a><a href="../../products/">Catalog</a><a href="../../brands/">Stores</a><a href="../../ecosystem/">Ecosystem</a><a href="../../articles/">Articles</a><a href="../../changelog.html">Changelog</a></nav>
+</div></header>
+<main class="wrap" id="main" tabindex="-1">
+  <p class="crumb"><a href="../../">Home</a> &middot; <a href="../">Free tools</a></p>
+  <p class="pill">Free tool &middot; 1 minute</p>
+  <h1>AI Agent Incident Cost Estimator</h1>
+  <p class="date">By ghostcorpnet Studio &middot; Runs 100% in your browser — no signup, nothing sent anywhere</p>
+  <p class="lead">Every agent incident costs investigation and remediation time — usually senior time. Enter your own numbers below: how many agents you run, how often they incident, how long one incident takes to work through, and what an hour of that work costs. You'll get your estimated monthly and annual incident-handling bill. Every number on this page is computed from your inputs — nothing here is a benchmark or a claimed statistic.</p>
+
+  <div class="hero-tool" id="calculator" aria-label="AI agent incident cost estimator">
+    <form id="calc" novalidate>
+      <div class="grid2">
+        <div class="field"><label for="agents">AI agents in production</label><input type="number" id="agents" min="0" step="1" value="5"><span class="hint">Agents whose incidents land on your team.</span></div>
+        <div class="field"><label for="incidents">Avg incidents per agent per month</label><input type="number" id="incidents" min="0" step="0.1" value="2"><span class="hint">Anything that needed a human to investigate or fix counts.</span></div>
+        <div class="field"><label for="hours">Avg hours to investigate &amp; remediate one incident</label><input type="number" id="hours" min="0" step="0.5" value="5"><span class="hint">From first alert to verified fix, including reconstructing what the agent did.</span></div>
+        <div class="field"><label for="rate">Hourly loaded cost ($)</label><input type="number" id="rate" min="0" step="5" value="75"><span class="hint">Salary + overhead for the people who handle incidents — your figure, from your payroll.</span></div>
+        <div class="field span2">
+          <label class="toggle-row" for="notrail"><input type="checkbox" id="notrail"><span><strong>Assume no usable audit trail</strong> — when an agent acts and there's no log of what it did or why, part of every investigation is spent reconstructing events instead of fixing them.</span></label>
+        </div>
+        <div class="field span2"><label for="extra">Extra investigation time when there's no audit trail: <span id="extra-val">+50%</span></label><input type="range" id="extra" min="0" max="300" step="10" value="50" disabled><span class="hint">This slider is <strong>your own assumption</strong>, not a statistic — set it to what you believe reconstruction costs your team, or leave the toggle off to ignore it.</span></div>
+      </div>
+    </form>
+    <div class="out" aria-live="polite">
+      <div class="stat"><div class="k">Incidents per month</div><div class="v" id="o-inc">0</div><div class="s">Across the whole fleet, at your incident rate</div></div>
+      <div class="stat"><div class="k">Handling hours per month</div><div class="v" id="o-hours">0</div><div class="s">Investigation + remediation time, fleet-wide</div></div>
+      <div class="stat"><div class="k">Cost per incident</div><div class="v" id="o-per">$0.00</div><div class="s">Hours per incident &times; your hourly loaded cost</div></div>
+      <div class="stat"><div class="k">Estimated monthly cost</div><div class="v" id="o-month">$0.00</div><div class="s">Your incident-handling bill, per month</div></div>
+      <div class="stat"><div class="k">Estimated annual cost</div><div class="v" id="o-year">$0.00</div><div class="s">Monthly estimate &times; 12</div></div>
+      <div class="stat"><div class="k">Added monthly cost — no audit trail</div><div class="v" id="o-added">$0.00</div><div class="s">From your no-audit-trail assumption above; $0 when the toggle is off</div></div>
+    </div>
+    <div id="verdict" role="status"></div>
+  </div>
+
+  <h2>How the math works</h2>
+  <p>Incidents per month = agents &times; incidents per agent per month. Monthly handling hours = incidents per month &times; hours per incident. Monthly cost = handling hours &times; your hourly loaded cost, and the annual figure is that &times; 12. With the no-audit-trail toggle on, hours per incident are multiplied by (1 + your extra-time slider) — the slider is your assumption about how much longer reconstruction makes an investigation, and it is labeled that way because it is one. No averages from anyone else's fleet are baked in anywhere.</p>
+  <h2>The two levers that lower this number</h2>
+  <ul>
+    <li><strong>Fewer incidents:</strong> bounds and approval gates stop agents from taking the actions that become incidents in the first place — a bounded agent can't wander into the expensive failure modes. Try lowering the incidents field above to what a bounded setup would look like for your team and compare.</li>
+    <li><strong>Faster investigations:</strong> an audit trail — a durable log of what each agent did, when, and under whose approval — turns reconstruction into reading. Flip the toggle above off and the difference is what your own assumption says the trail is worth.</li>
+    <li><strong>Cheaper hours:</strong> runbooks and a clear incident record mean the first responder doesn't have to be the most senior person on the team, which lowers the hourly rate in the last field honestly — not by paying people less, but by needing less of their time per incident.</li>
+  </ul>
+
+  <div class="cta">
+    <h2>Put incident governance into practice</h2>
+    <p>The Governed Agent Mesh Playbook — Studio Edition ($29) gives you the full system: bounds, approval gates, audit trails, and incident response for agents in production.</p>
+    <a class="btn" href="https://koalstin.gumroad.com/l/hdigmr" referrerpolicy="no-referrer">Get the Studio Edition — $29</a>
+    <p style="margin-top:12px">Start free: the <a href="https://koalstin.gumroad.com/l/lttjbc" style="color:var(--accent)">Agent Bounds Checklist</a> walks through the nine bounds every agent needs, on one page — $0.</p>
+    <p style="margin-top:12px"><a href="../../products/">Or browse the full catalog &rarr;</a></p>
+  </div>
+  <p class="disclaimer">Estimates only — every figure on this page is arithmetic on the values you entered, including the no-audit-trail assumption. Nothing here is a measured benchmark. This tool stores nothing and sends nothing.</p>
+</main>
+<footer class="site"><div class="wrap">
+  <span>&copy; <span id="yr">2026</span> ghostcorpnet &middot; An independent studio</span>
+  <span><a href="../../">Home</a><a href="../../products/">Catalog</a><a href="../../articles/">Articles</a><a href="../../sitemap.html">Site index</a><a href="../../terms.html">Terms</a><a href="../../privacy.html">Privacy</a></span>
+</div></footer>
+<button id="backtop" aria-label="Back to top">&uarr;</button>
+<script>
+(function(){
+  function n(id){var v=parseFloat(document.getElementById(id).value);return isNaN(v)||v<0?0:v;}
+  function money(x){return '$'+x.toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2});}
+  function num(x){return x.toLocaleString('en-US',{maximumFractionDigits:1});}
+  var notrail=document.getElementById('notrail'), extra=document.getElementById('extra');
+  function calc(){
+    var extraPct=n('extra');
+    document.getElementById('extra-val').textContent='+'+extraPct+'%';
+    extra.disabled=!notrail.checked;
+    var mult=notrail.checked?(1+extraPct/100):1;
+    var incMonth=n('agents')*n('incidents');
+    var effHours=n('hours')*mult;
+    var hoursMonth=incMonth*effHours;
+    var monthly=hoursMonth*n('rate');
+    var baseMonthly=incMonth*n('hours')*n('rate');
+    document.getElementById('o-inc').textContent=num(incMonth);
+    document.getElementById('o-hours').textContent=num(hoursMonth);
+    document.getElementById('o-per').textContent=money(effHours*n('rate'));
+    document.getElementById('o-month').textContent=money(monthly);
+    document.getElementById('o-year').textContent=money(monthly*12);
+    document.getElementById('o-added').textContent=money(monthly-baseMonthly);
+    var v=document.getElementById('verdict');
+    if(incMonth===0||n('rate')===0){v.innerHTML='<strong>Nothing to estimate yet:</strong> with zero incidents or a zero hourly rate the bill is $0. Enter your real figures above — rough is fine, the arithmetic is the same.';}
+    else if(notrail.checked&&extraPct>0){v.innerHTML='<strong>By your own assumption,</strong> working without an audit trail adds '+money(monthly-baseMonthly)+' a month ('+money((monthly-baseMonthly)*12)+' a year) to your incident bill — time spent reconstructing what an agent did instead of fixing what it broke. A durable audit trail is the control that removes exactly that part of the investigation.';}
+    else{v.innerHTML='<strong>Two levers move this number:</strong> bounds and approval gates cut how many incidents happen; an audit trail cuts how long each one takes to investigate. Try the toggle above with your own assumption for reconstruction time, or lower the incidents field to see what prevention is worth at your rates.';}
+  }
+  ['agents','incidents','hours','rate','extra'].forEach(function(id){document.getElementById(id).addEventListener('input',calc);});
+  notrail.addEventListener('change',calc);
+  calc();
+})();
+</script>
+<script>(function(){var b=document.getElementById('backtop');function s(){b.classList.toggle('show',window.scrollY>1200)}window.addEventListener('scroll',s,{passive:true});s();b.addEventListener('click',function(){window.scrollTo({top:0,behavior:'smooth'})});})();</script>
+<script>document.getElementById('yr').textContent=new Date().getFullYear();</script>
+<script>try{var _d=new Date().toISOString().slice(0,10);if(!localStorage.getItem("gc_pv_"+_d)){localStorage.setItem("gc_pv_"+_d,"1");fetch("https://kestrelattice-approvals.koalstin-g-k-delaney.workers.dev/pv?p="+encodeURIComponent(location.pathname),{mode:"no-cors",keepalive:true}).catch(function(){})}}catch(e){}</script>
+</body>
+</html>
