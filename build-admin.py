@@ -1471,9 +1471,9 @@ async function sbLoadSandboxes(){
 var sw=document.getElementById("sb-switcher");
 if(!sbReady()){if(sw)sw.innerHTML=SB_ERR;return;}
 try{
-var r=await fetch(WURL+"/sandbox/sandboxes?key="+encodeURIComponent(WKEY));
-var d=await r.json();
-var list=(d&&d.ok&&Array.isArray(d.sandboxes))?d.sandboxes:[];
+var d=await sbGet("/sandbox/sandboxes?key="+encodeURIComponent(WKEY),function(x){return x&&x.ok;});
+if(!d)throw 0;
+var list=Array.isArray(d.sandboxes)?d.sandboxes:[];
 sbSandboxes=list;
 if(list.length){sbSelect(String(list[0].id));}
 else if(sw){sw.innerHTML="<p class='muted'>No sandboxes yet — make one below.</p>";}
@@ -1539,29 +1539,36 @@ var q="?key="+encodeURIComponent(WKEY)+"&sandbox_id="+encodeURIComponent(sbCurre
 /* Resilient per-route fetch (2026-10-08): one failing route must never blank the others.
    Cloudflare 1101s hit KV-list() routes (/sandbox/inventions, /sandbox/chat) while
    single-get routes stay 200 — so fetch each independently. */
-async function sbFetch(path){
-try{
-var r=await fetch(WURL+path+q);
-var d=await r.json();
-return (d&&d.ok)?d:null;
-}catch(e){return null;}
-}
-/* Worker failover for /sandbox/chat reads (2026-10-09): a worker's KV .list() read path
-   1101s when its list budget burns, while writes still work — so thread reads fail over
-   across all three workers, first healthy one wins. Writes (POST) stay on WURL. */
+async function sbFetch(path){return sbGet(path+q,function(d){return d&&d.ok;});}
+/* Worker failover for sandbox reads (2026-10-09 chat; generalized 2026-10-25): a worker's
+   KV .list() read path 1101s when its list budget burns, and the /sandbox/inventions
+   enumeration can hang ~2 minutes on the busiest worker while another answers the same
+   route in under a minute — so every sandbox GET fails over across all three workers
+   with a per-try timeout, first healthy one wins. Writes (POST) stay on WURL. */
 var SB_WURLS=["", "https://kestrelattice-approvals.ghostcorpnet-c.workers.dev", "https://kestrelattice-approvals.koalstin-g-k-delaney.workers.dev"];
-async function sbChatGet(path){
+async function sbGet(path,validate){
 for(var i=0;i<SB_WURLS.length;i++){
 try{
-var r=await fetch(SB_WURLS[i]+path);
+var ctl=("AbortController" in window)?new AbortController():null;
+var to=ctl?setTimeout(function(){ctl.abort();},25000):null;
+var r=await fetch(SB_WURLS[i]+path,ctl?{signal:ctl.signal}:{});
+if(to)clearTimeout(to);
 var d=await r.json();
-if(d&&d.ok&&Array.isArray(d.thread))return d;
+if(validate(d))return d;
 }catch(e){}
 }
 return null;
 }
-var dr=await sbFetch("/sandbox/rogues"),dc=await sbFetch("/sandbox/crew"),di=await sbFetch("/sandbox/inventions");
+async function sbChatGet(path){
+return sbGet(path,function(d){return d&&d.ok&&Array.isArray(d.thread);});
+}
 var SN=(typeof SB_SNAP!=="undefined")?SB_SNAP:null;
+/* Instant paint (2026-10-25): the inventions route can take a minute-plus on a busy
+   worker — never leave the shelf sitting on "Loading…" while it crawls. Paint the
+   build-time snapshot first; live data replaces it when it lands. */
+if(SN&&Array.isArray(SN.inventions)&&SN.inventions.length){sbInvs=SN.inventions;sbRenderInventions();}
+var _sbAll=await Promise.all([sbFetch("/sandbox/rogues"),sbFetch("/sandbox/crew"),sbFetch("/sandbox/inventions")]);
+var dr=_sbAll[0],dc=_sbAll[1],di=_sbAll[2];
 sbRogues=(dr&&Array.isArray(dr.rogues))?dr.rogues:((SN&&Array.isArray(SN.rogues))?SN.rogues:[]);
 sbCrew=(dc&&Array.isArray(dc.crew))?dc.crew:((SN&&Array.isArray(SN.crew))?SN.crew:[]);
 sbInvs=(di&&Array.isArray(di.inventions))?di.inventions:((SN&&Array.isArray(SN.inventions))?SN.inventions:[]);
@@ -1675,9 +1682,9 @@ var box=document.getElementById("sb-transcript");if(!box)return;
 if(!sbReady()){box.innerHTML=SB_ERR;return;}
 if(document.hidden)return;
 try{
-var r=await fetch(WURL+"/sandbox/transcript?key="+encodeURIComponent(WKEY)+"&sandbox_id="+encodeURIComponent(sbCurrent)+"&limit=100");
-var d=await r.json();
-var entries=(d&&d.ok&&Array.isArray(d.entries))?d.entries:[];
+var d=await sbGet("/sandbox/transcript?key="+encodeURIComponent(WKEY)+"&sandbox_id="+encodeURIComponent(sbCurrent)+"&limit=100",function(x){return x&&x.ok;});
+if(!d)throw 0;
+var entries=(d&&Array.isArray(d.entries))?d.entries:[];
 var sig=sbFeedSig(entries);
 if(sig===sbTxState.sig)return;
 var newCount=Math.max(0,entries.length-sbTxState.len);
@@ -1975,7 +1982,7 @@ var sbRooms=[];
 var ROOM_COLORS={black:"#14141c",white:"#f5f5f5",red:"#e5484d",magenta:"#ff2fb3",pink:"#ff7ac6",cyan:"#22d3ee",teal:"#2dd4bf",blue:"#3b82f6",indigo:"#6366f1",violet:"#8b5cf6",purple:"#a855f7",green:"#22c55e",emerald:"#10b981",gold:"#d4af37",amber:"#f59e0b",orange:"#f97316",crimson:"#dc143c",silver:"#c0c0c0",grey:"#9aa0a6",gray:"#9aa0a6",navy:"#1e2a5a",maroon:"#6b1f2a",lime:"#a3e635",turquoise:"#40e0d0",coral:"#ff7f50",ivory:"#fffff0",charcoal:"#2b2b30",midnight:"#0b0b18",neon:"#39ff14",blood:"#8a0303",rust:"#b7410e",sand:"#e6c88a",forest:"#1d4d2b",ocean:"#0a4d68",lavender:"#c9b6f2",peach:"#ffcba4",rose:"#f43f5e",sky:"#7dd3fc",slate:"#475569",bronze:"#b08d57",copper:"#b87333",jade:"#00a86b",onyx:"#0f0f12",pearl:"#eae6df",wine:"#722f37",moss:"#5a7247",clay:"#b0703c"};
 function roomHexes(str,name){var out=[];var s=String(str||"");var hex=s.match(/#[0-9a-fA-F]{3,8}/g)||[];for(var k=0;k<hex.length;k++)out.push(hex[k]);var words=s.toLowerCase().split(/[,;|]/);for(var w=0;w<words.length;w++){var c=ROOM_COLORS[words[w].trim()];if(c)out.push(c);}if(!out.length){var h=0;var n=String(name||"?");for(var q=0;q<n.length;q++)h=(h*31+n.charCodeAt(q))%360;out.push("hsl("+h+",60%,38%)");out.push("hsl("+((h+50)%360)+",55%,28%)");}while(out.length<2)out.push(out[0]);return out.slice(0,3);}
 function roomGradient(room,name){var c=roomHexes(room&&room.colors,name);var g="linear-gradient(135deg,"+c[0]+" 0%,"+c[1]+" 70%";if(c[2])g+=", "+c[2]+" 130%";return g+")";}
-async function sbLoadRooms(){var el=document.getElementById("sb-rooms");if(!el)return;if(!sbReady()){el.innerHTML=SB_ERR;return;}try{var r=await fetch(WURL+"/sandbox/rooms?key="+encodeURIComponent(WKEY));var d=await r.json();var list=(d&&d.ok&&Array.isArray(d.rooms))?d.rooms:[];if(!list.length)throw 0;sbRooms=list;sbRenderRooms();}catch(e){var _sn=(typeof SB_SNAP!=="undefined"&&SB_SNAP&&Array.isArray(SB_SNAP.rooms))?SB_SNAP.rooms:[];if(_sn.length){sbRooms=_sn.map(function(x){return {name:x.bot_id,room:{theme:x.theme,description:x.description,motto:x.motto,colors:x.colors}};});el.innerHTML=sbSnapMsg();sbRenderRooms();}else el.innerHTML=SB_ERR;}}
+async function sbLoadRooms(){var el=document.getElementById("sb-rooms");if(!el)return;if(!sbReady()){el.innerHTML=SB_ERR;return;}try{var d=await sbGet("/sandbox/rooms?key="+encodeURIComponent(WKEY),function(x){return x&&x.ok;});var list=(d&&Array.isArray(d.rooms))?d.rooms:[];if(!list.length)throw 0;sbRooms=list;sbRenderRooms();}catch(e){var _sn=(typeof SB_SNAP!=="undefined"&&SB_SNAP&&Array.isArray(SB_SNAP.rooms))?SB_SNAP.rooms:[];if(_sn.length){sbRooms=_sn.map(function(x){return {name:x.bot_id,room:{theme:x.theme,description:x.description,motto:x.motto,colors:x.colors}};});el.innerHTML=sbSnapMsg();sbRenderRooms();}else el.innerHTML=SB_ERR;}}
 function sbRenderRooms(){var el=document.getElementById("sb-rooms");if(!el)return;if(!sbRooms.length){el.innerHTML="<p class='muted' style='padding:14px'>No rooms yet.</p>";return;}var html="<div class='room-grid'>";for(var i=0;i<sbRooms.length;i++){var b=sbRooms[i];var rm=b.room||null;var hero;if(rm){hero="<div class='room-hero' style='background:"+roomGradient(rm,b.name)+"'><div class='room-bot'>"+sbAvatar(b.name)+"<div><div style='font-weight:800'>"+escH(b.name||"?")+"</div><div style='font-size:.75rem;opacity:.85'>"+(rm.designed_at?"designed "+sbRelTime(rm.designed_at):"")+"</div></div></div><p class='room-theme'>"+escH(rm.theme||"Untitled room")+"</p></div>";}else{hero="<div class='room-undesigned'><div style='font-size:2rem;margin-bottom:8px'>&#128682;</div><div style='font-weight:700;color:var(--text)'>"+escH(b.name||"?")+"</div><p style='margin:6px 0 0'>Hasn't designed their room yet.</p></div>";}var stats="<span class='room-stat'>&#11088; "+(b.points||0)+" pts</span><span class='room-stat'>&#128193; "+(b.file_count||0)+" files</span>";if(b.last_active)stats+="<span class='room-stat'>&#128336; active "+sbRelTime(b.last_active)+"</span>";var procs="";var pl=b.processes||[];for(var p2=0;p2<Math.min(3,pl.length);p2++){procs+="<li>&#9881; "+escH(pl[p2].name||"")+" &mdash; "+escH(pl[p2].status||"")+"</li>";}var body;if(rm){var hist="";var hh=b.room_history||[];if(hh.length){hist="<details class='room-hist'><summary>&#128336; Design history ("+hh.length+")</summary>";for(var hv=hh.length-1;hv>=0;hv--){var vv=hh[hv];hist+="<div class='room-hist-v'><div class='room-hist-t'>"+escH(vv.theme||"Untitled")+" <span>"+sbRelTime(vv.designed_at)+"</span></div>";hist+="<div class='room-hist-c'>"+escH(vv.colors||"")+"</div><p>"+escH(vv.description||"")+"</p>";if(vv.motto)hist+="<p class='room-motto'>&ldquo;"+escH(vv.motto)+"&rdquo;</p>";hist+="</div>";}hist+="</details>";}body="<div class='room-body'><p class='room-desc'>"+escH(rm.description||"")+"</p>";if(rm.motto)body+="<p class='room-motto'>&ldquo;"+escH(rm.motto)+"&rdquo;</p>";body+=hist;if(procs)body+="<ul class='room-procs'>"+procs+"</ul>";body+="<div class='room-stats'>"+stats+"</div></div>";}else{body="<div class='room-body'><div class='room-stats'>"+stats+"</div></div>";}html+="<div class='room-card'>"+hero+body+"</div>";}html+="</div>";el.innerHTML=html;}
 var ngo=document.getElementById("sb-new-go");
 if(ngo)ngo.addEventListener("click",sbNewSandbox);
