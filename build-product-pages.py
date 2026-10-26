@@ -538,6 +538,7 @@ try{{if(localStorage.getItem('kestrelattice_admin')!=='1'){{gtag('js', new Date(
       {inside_mini}
       <p class="price">${price} <span class="currency-note">Prices in USD</span></p>
       {buy_html}
+      {codebot_html}
       <div class="copylink-row">
         <button type="button" class="btn copylink-btn" id="pdp-copylink">Copy link</button>
         <span class="copylink-done" id="pdp-copied" role="status" aria-live="polite" hidden>Copied</span>
@@ -561,7 +562,7 @@ try{{if(localStorage.getItem('kestrelattice_admin')!=='1'){{gtag('js', new Date(
 
   <section class="faq">
     <h2>How it works</h2>
-    <details class="faq-item"><summary>How do I receive it?</summary><div class="faq-a"><p>Checkout is handled by Gumroad. The PDF is available for instant download the moment you pay — no account setup on our side, no waiting.</p></div></details>
+    <details class="faq-item"><summary>How do I receive it?</summary><div class="faq-a"><p>Checkout is handled by Gumroad. {receive} the moment you pay — no account setup on our side, no waiting.</p></div></details>
     <details class="faq-item"><summary>Is it really ready to use?</summary><div class="faq-a"><p>Yes. Every ghostcorpnet product is written with zero placeholders — adopt it as-is, no "insert your policy here" gaps.</p></div></details>
     <details class="faq-item"><summary>Who is it for?</summary><div class="faq-a"><p>Teams shipping AI agents to production — founders, platform engineers, and anyone whose agents touch money, data, or external systems.</p></div></details>
   </section>
@@ -634,13 +635,16 @@ def main():
     products = []
     for gid, slug, title, price, tagline, inside in ORIGINALS:
         products.append(dict(gid=gid, slug=slug, title=title, price=fmt_price(price),
-                             tagline=fix_tagline(tagline), description=fix_tagline(tagline), inside=inside,
+                             tagline=fix_tagline(tagline), description=fix_tagline(tagline), inside=inside, is_code=False,
                              gumroad_url=f"https://koalstin.gumroad.com/l/{gid}"))
     for p in packs:
         url = p.get("gumroad_url", "")
         m = re.search(r"/l/([a-z0-9-]+)", url or "")
         item_code = p.get("item_code", "")
         is_pack = item_code.upper().startswith("PACK-")
+        file_path = str(p.get("file_path") or "")
+        tags = p.get("tags", []) or []
+        is_code = file_path.lower().endswith(".zip") or any(str(t).lower() == "code" for t in tags)
         if m:
             gid = m.group(1)
         elif is_pack:
@@ -663,7 +667,7 @@ def main():
             inside = ["Complete, zero-placeholder document", "Ready to adopt as-is",
                       "Grounded in production agent-governance practice"]
         products.append(dict(gid=gid, slug=slug, title=title,
-                             price=fmt_price(p.get("price_usd", 19)), is_pack=is_pack,
+                             price=fmt_price(p.get("price_usd", 19)), is_pack=is_pack, is_code=is_code,
                              tagline=fix_tagline(p.get("tagline", "")), description=p.get("description", ""),
                              inside=inside, gumroad_url=url or None,
                              file_path=p.get("file_path") or None))
@@ -789,7 +793,7 @@ def main():
                           '<span class="soon">Publishing soon</span></div>')
         page = PAGE.format(title=esc(pr["title"]), title60=esc(trunc_title(pr["title"])), meta=esc(trunc_meta(pr["tagline"] or pr["description"])),
                            page_url=page_url, jsonld=jsonld, breadcrumblist=breadcrumblist, gid=pr["gid"], cover_img=cover_img,
-                           tagline=esc(pr["tagline"]), price=pr["price"], price_num=pr["price"], buy_html=buy_html,
+                           tagline=esc(pr["tagline"]), price=pr["price"], price_num=pr["price"], buy_html=buy_html, codebot_html=codebot_html,
                            file_facts=file_facts,
                            facts_row=facts_row,
                            gumroad_url=pr["gumroad_url"] or "", description=esc(pr["description"]),
