@@ -29,14 +29,18 @@ jobs:
         run: node --input-type=module --check < worker/approvals-worker.js
       - name: Validate Python builders
         run: python -m py_compile build-admin.py build-product-pages.py
+      - name: Require deployment token
+        if: github.event_name != 'pull_request'
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+        run: |
+          test -n "$CLOUDFLARE_API_TOKEN" || {
+            echo "::error::Worker was checked but NOT deployed. Add the CLOUDFLARE_API_TOKEN repository secret and rerun this workflow."
+            exit 1
+          }
       - name: Deploy Worker
-        if: ${{ github.event_name != 'pull_request' && secrets.CLOUDFLARE_API_TOKEN != '' }}
+        if: github.event_name != 'pull_request'
         uses: cloudflare/wrangler-action@v3
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           command: deploy --config worker/wrangler.toml
-      - name: Explain skipped deployment
-        if: ${{ github.event_name != 'pull_request' && secrets.CLOUDFLARE_API_TOKEN == '' }}
-        run: |
-          echo "::error::Worker was checked but NOT deployed. Add the CLOUDFLARE_API_TOKEN repository secret and rerun this workflow."
-          exit 1
