@@ -743,6 +743,15 @@ def main():
                          f'<figcaption class="sr-only">{esc(pr["title"])} \u2014 {_edition} cover</figcaption></figure>')
         og_dims = (f'<meta property="og:image:width" content="{dims[0]}">\n'
                    f'<meta property="og:image:height" content="{dims[1]}">') if dims else ""
+        receive = "The ZIP download is available" if pr.get("is_code") else "The PDF is available for instant download"
+        codebot_html = ""
+        if pr.get("is_code") and is_live:
+            codebot_html = (
+                '<p class="trust" style="margin-top:10px"><a class="btn" '
+                'style="background:transparent;border:1px solid var(--accent);color:var(--accent)" '
+                'href="../../code-bot/?product=' + esc(pr["gid"]) + '">Get coding help — ask the bot</a></p>'
+                '<p class="trust">AI pair-programmer · 20 questions/day included with eligible code purchases</p>'
+            )
         if is_live:
             buy_html = (f'<p class="instant" id="buy-trust">One-time · Instant PDF download via Gumroad · All sales final — no refunds.</p>\n'
                         f'      <p class="instant pdp-updated">Updated October 2026</p>\n'
