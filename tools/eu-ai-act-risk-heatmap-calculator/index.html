@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="utf-8">
+<link rel="preconnect" href="https://gumroad.com">
+<link rel="preconnect" href="https://www.googletagmanager.com">
+<meta name="viewport" content="width=device-width, initial-scale=1, interactive-widget=resizes-content, viewport-fit=cover">
+<title>EU AI Act Risk Heatmap Calculator — Free Tool | ghostcorpnet</title>
+<meta name="description" content="Calculate EU AI Act compliance gaps. Visualize Article 10 and Article 14 gaps by risk category, deployment scale, and data residency — free heatmap calculator.">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<meta name="theme-color" content="#121212">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ghostcorpnet">
+<meta property="og:url" content="https://koalstingkdelaney-gif.github.io/kestrelattice/tools/eu-ai-act-risk-heatmap-calculator/">
+<meta property="og:title" content="EU AI Act Risk Heatmap Calculator — Free Tool | ghostcorpnet">
+<meta property="og:description" content="Calculate EU AI Act compliance gaps and visualize Article 10/14 gaps as a heatmap.">
+<meta property="og:image" content="https://koalstingkdelaney-gif.github.io/kestrelattice/assets/studio-edition-cover.jpg">
+<link rel="canonical" href="https://koalstingkdelaney-gif.github.io/kestrelattice/tools/eu-ai-act-risk-heatmap-calculator/">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebApplication","name":"EU AI Act Risk Heatmap Calculator","applicationCategory":"BusinessApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"description":"Calculate EU AI Act compliance gaps. Visualize Article 10 and Article 14 compliance gaps for AI teams.","url":"https://koalstingkdelaney-gif.github.io/kestrelattice/tools/eu-ai-act-risk-heatmap-calculator/"}
+</script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-541TCHWW98"></script>
+<script>(function(){try{if(new URLSearchParams(location.search).get('admin')==='1'){localStorage.setItem('kestrelattice_admin','1');}}catch(e){}})();</script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}try{if(localStorage.getItem('kestrelattice_admin')!=='1'){gtag('js',new Date());gtag('config','G-541TCHWW98');}}catch(e){gtag('js',new Date());gtag('config','G-541TCHWW98');}</script>
+<style>
+:root{color-scheme:dark;--bg:#0f0e0d;--bg-soft:#141210;--panel:#1a1714;--panel2:#211c17;--line:#2c261e;--line-soft:#221d15;--text:#f1ebdd;--muted:#a89d89;--faint:#978b74;--accent:#e07a5f;--accent-bright:#f09474;--accent-dim:#c06a4e;--accent-ink:#1a0f08;--accent-soft:rgba(224,122,95,.1);--radius:12px;--green:#7fc97f;--amber:#e8b04b;--red:#e06a5f;--ease:cubic-bezier(.2,.7,.25,1)}
+*{margin:0;padding:0;box-sizing:border-box}::selection{background:var(--accent);color:var(--accent-ink)}html{scroll-behavior:smooth}html,body{overflow-x:clip}
+body{background:var(--bg);color:var(--text);font-family:ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;line-height:1.7;-webkit-font-smoothing:antialiased}
+a:focus-visible,button:focus-visible,select:focus-visible,input:focus-visible{outline:3px solid var(--accent-bright);outline-offset:3px;border-radius:4px}
+header.site{border-bottom:1px solid var(--line);position:sticky;top:0;z-index:100;background:rgba(15,14,13,.92);backdrop-filter:blur(10px)}
+header.site .wrap{display:flex;align-items:center;justify-content:space-between;min-height:56px;max-width:1040px;margin:0 auto;padding:0 24px}
+.brand{font-weight:700;color:var(--text);text-decoration:none}nav.main{display:flex;gap:20px}nav.main a{color:var(--muted);font-size:.88rem;font-weight:500;text-decoration:none}nav.main a:hover{color:var(--accent-bright)}
+.wrap{max-width:68ch;margin:0 auto;padding:40px 24px 64px}.crumb{color:var(--muted);font-size:.85rem;margin-bottom:24px}.crumb a{color:var(--accent);text-decoration:none}
+h1{font-size:clamp(1.6rem,3vw + .8rem,2.1rem);font-weight:800;letter-spacing:-.02em;line-height:1.25;margin-bottom:8px}h2{font-size:1.35rem;margin:40px 0 12px}h3{font-size:1.1rem;margin:24px 0 10px}
+p{margin:0 0 16px}ul{margin:0 0 16px 24px}li{margin:6px 0}a{color:var(--accent)}code{background:var(--panel);padding:2px 6px;border-radius:4px;font-size:.88em}
+.lead{font-size:1.08rem;color:var(--muted)}.pill{display:inline-block;font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);border:1px solid var(--accent-dim);border-radius:999px;padding:5px 14px;margin-bottom:18px}
+.hero-tool{border:1px solid var(--line);border-radius:var(--radius);background:linear-gradient(180deg,var(--panel2),var(--panel));padding:28px;margin:32px 0}
+.field{margin:0 0 20px}.field label{display:block;font-weight:700;margin-bottom:6px}.field .hint{color:var(--muted);font-size:.86rem;margin-bottom:8px}
+select{width:100%;background:var(--bg-soft);color:var(--text);border:1px solid var(--line);border-radius:8px;padding:12px 14px;font-size:1rem;font-family:inherit}
+.checks{display:grid;gap:8px;margin:12px 0 20px}.checks label{display:flex;gap:12px;align-items:flex-start;border:1px solid var(--line-soft);border-radius:8px;padding:10px 14px;cursor:pointer;font-size:.94rem}.checks input{margin-top:5px;accent-color:var(--accent);width:17px;height:17px;flex:none}
+.btn{display:inline-block;background:linear-gradient(180deg,var(--accent-bright),var(--accent));color:var(--accent-ink);font-weight:700;padding:14px 30px;border-radius:8px;text-decoration:none;border:0;cursor:pointer;font-size:1rem;font-family:inherit}
+.btn-ghost{background:var(--panel);color:var(--muted);border:1px solid var(--line)}.btn-row{display:flex;gap:12px;flex-wrap:wrap;margin-top:16px}
+#results{display:none;border:1px solid var(--accent-dim);border-radius:var(--radius);background:linear-gradient(180deg,var(--panel2),var(--panel));padding:28px;margin-top:24px}#results.show{display:block}
+.heat{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:16px 0}.cell{border-radius:10px;padding:16px;border:1px solid var(--line)}.cell strong{display:block}.cell span{font-size:.85rem;color:rgba(255,255,255,.85)}
+.cell.low{background:rgba(127,201,127,.16)}.cell.med{background:rgba(232,176,75,.18)}.cell.high{background:rgba(224,106,95,.20)}.cell.crit{background:rgba(224,106,95,.38)}
+.score-line{display:flex;align-items:center;gap:20px;flex-wrap:wrap;margin-bottom:16px}.score-ring{width:110px;height:110px;border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;flex:none;border:5px solid var(--accent);font-weight:800}.score-ring .num{font-size:2rem;line-height:1}.score-ring .of{font-size:.7rem;color:var(--muted)}
+.fix{border:1px solid var(--line);border-radius:10px;padding:16px 18px;margin:12px 0;background:var(--bg-soft)}.fix p{color:var(--muted);font-size:.9rem;margin:6px 0 0}
+#report{width:100%;min-height:160px;background:var(--bg-soft);color:var(--text);border:1px solid var(--line);border-radius:10px;padding:14px;font-family:ui-monospace,Menlo,Consolas,monospace;font-size:.82rem}
+.cta{background:linear-gradient(180deg,var(--panel2),var(--panel));border:1px solid var(--accent-dim);border-radius:var(--radius);padding:28px;margin:48px 0;text-align:center}.cta p{color:var(--muted)}
+.disclaimer{font-size:.82rem;color:var(--faint);border:1px dashed var(--line);border-radius:8px;padding:12px 16px;margin:32px 0}
+.faq details{border:1px solid var(--line);border-radius:10px;background:var(--panel);padding:14px 18px;margin:10px 0}.faq summary{font-weight:700;cursor:pointer}.faq details p{color:var(--muted);margin:10px 0 4px;font-size:.94rem}
+footer.site{border-top:1px solid var(--line);background:var(--bg-soft);padding:22px 0;margin-top:48px}footer.site .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px 16px;max-width:1040px;padding:0 24px}footer.site{color:var(--muted);font-size:.82rem}footer.site a{color:var(--muted);text-decoration:none;margin-left:14px}
+.skip{position:absolute;left:-9999px;top:0;background:var(--accent);color:var(--accent-ink);padding:10px 18px;font-weight:700;z-index:200}.skip:focus{left:0}
+@media(max-width:640px){nav.main a:not(:last-child){display:none}.heat{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site"><div class="wrap">
+<a class="brand" href="../../">ghostcorpnet</a>
+<nav class="main" aria-label="Primary"><a href="../../">Home</a><a href="../../products/">Catalog</a><a href="../../brands/">Stores</a><a href="../../ecosystem/">Ecosystem</a><a href="../../articles/">Articles</a><a href="../../changelog.html">Changelog</a></nav>
+</div></header>
+<main class="wrap" id="main" tabindex="-1">
+<p class="crumb"><a href="../../">Home</a> · <a href="../">Free tools</a></p>
+<p class="pill">Free tool · EU AI Act compliance checklist</p>
+<h1>EU AI Act Risk Heatmap Calculator</h1>
+<p class="lead">Introduction — Pick your risk category, deployment scale, and data residency. This calculator instantly visualizes your specific Article 10 (data &amp; data governance) and Article 14 (human oversight) compliance gaps as a heatmap, with a shareable diagnostic report. Everything runs in your browser.</p>
+
+<div class="hero-tool" id="calculator" aria-label="EU AI Act Risk Heatmap Calculator">
+<h2 style="margin-top:0">Calculator</h2>
+<div class="field"><label for="risk">Risk category</label><p class="hint">How your AI system is classified under the EU AI Act's risk-based tiers.</p>
+<select id="risk"><option value="3">High-risk (Annex III — hiring, credit, education, biometrics, safety, etc.)</option><option value="2">Limited risk — transparency obligations apply</option><option value="1">Minimal risk</option><option value="4">Prohibited practice risk — classification unclear / possibly banned</option></select></div>
+<div class="field"><label for="scale">Deployment scale</label><p class="hint">Wider deployment multiplies exposure when a control is missing.</p>
+<select id="scale"><option value="1">Pilot — under 100 affected people</option><option value="2">Department — hundreds of affected people</option><option value="3">Organisation-wide — thousands</option><option value="4">Public-facing at scale — tens of thousands or more</option></select></div>
+<div class="field"><label for="residency">Data residency</label><p class="hint">Where training, input, and log data live, and what transfer safeguards exist.</p>
+<select id="residency"><option value="1">EU-only, transfers documented</option><option value="2">EU + non-EU with approved safeguards</option><option value="3">Non-EU, no documented safeguards</option><option value="4">Unknown / not documented</option></select></div>
+
+<h3>Article 10 — data controls you already have</h3>
+<div class="checks" id="checks10"></div>
+<h3>Article 14 — human-oversight controls you already have</h3>
+<div class="checks" id="checks14"></div>
+<div class="btn-row"><button type="button" class="btn" id="calc-btn">Build my heatmap</button></div>
+
+<div id="results" role="status" aria-live="polite">
+<h2 style="margin-top:0">Results</h2>
+<div class="score-line"><div class="score-ring"><span class="num" id="score-num">0</span><span class="of">/ 100 readiness</span></div><p id="tier-line" style="font-weight:800;font-size:1.15rem"></p></div>
+<div class="heat" id="heat"></div>
+<div id="fix-list"></div>
+<h3>Shareable diagnostic report</h3>
+<p style="color:var(--muted);font-size:.9rem">Copy this report, or copy the share link — it encodes your inputs (not any private data) in the URL.</p>
+<textarea id="report" readonly aria-label="Shareable diagnostic report"></textarea>
+<div class="btn-row"><button type="button" class="btn" id="copy-btn">Copy report</button><button type="button" class="btn btn-ghost" id="link-btn">Copy share link</button></div>
+</div>
+</div>
+
+<h2>Next Steps</h2>
+<p>Fix red cells first: they combine a legal duty (Article 10 or 14) with the widest exposure from your risk tier, scale, and residency. Then work the amber cells, document what you fixed, and re-run this calculator whenever the system, its scale, or its data flows change — compliance gaps reopen silently as deployments grow.</p>
+<ul>
+<li><strong>Article 10:</strong> training, validation, and test data must be relevant, representative, and examined for bias, with data-governance practices documented.</li>
+<li><strong>Article 14:</strong> high-risk systems must be effectively overseen by named humans who can monitor, interpret, override, and stop them.</li>
+</ul>
+<p class="disclaimer">This is an informational self-assessment, not legal advice. It does not determine your legal classification under the EU AI Act. For binding answers, consult qualified counsel.</p>
+
+<h2>FAQ</h2>
+<div class="faq">
+<details><summary>Is this legal advice?</summary><p>No. This tool is an informational self-assessment for operational readiness — it is not legal advice.</p></details>
+<details><summary>Does my input leave my device?</summary><p>No. The calculator runs entirely in your browser. The share link encodes only the selections you made here.</p></details>
+<details><summary>What is a heatmap cell?</summary><p>Each cell is one compliance area. Its colour combines whether the underlying control is present with your risk category, deployment scale, and data residency — missing controls hurt more at higher risk and scale.</p></details>
+</div>
+
+<div class="cta">
+<h2>Get the $29 Governed Agent Mesh Playbook for a deep-dive audit</h2>
+<p>The Playbook — Studio Edition gives you the approval-gate patterns, data-governance and audit-trail templates, override procedures, and incident runbook behind every fix on your heatmap.</p>
+<a class="btn" href="https://koalstin.gumroad.com/l/hdigmr" referrerpolicy="no-referrer">Get the Studio Edition — $29</a>
+<p style="margin-top:12px"><a href="../../products/">Or browse the full catalog &rarr;</a></p>
+</div>
+</main>
+<footer class="site"><div class="wrap">
+<span>© <span id="yr">2026</span> ghostcorpnet · An independent studio</span>
+<span><a href="../../">Home</a><a href="../../products/">Catalog</a><a href="../../articles/">Articles</a><a href="../../sitemap.html">Site index</a><a href="mailto:corpghost420@gmail.com">Contact</a><a href="../../terms.html">Terms</a><a href="../../privacy.html">Privacy</a></span>
+</div></footer>
+<script>
+(function(){
+var C10=[
+ {id:'data_gov',label:'Documented data-governance practices (Art. 10(1))'},
+ {id:'data_quality',label:'Training/validation data checked for relevance & representativeness (Art. 10(3))'},
+ {id:'bias_test',label:'Datasets examined for bias, with mitigation (Art. 10(2)(f)-(g))'},
+ {id:'data_docs',label:'Dataset provenance & characteristics documented (Art. 10(1))'}];
+var C14=[
+ {id:'oversight_roles',label:'Named human oversight roles (Art. 14(1)-(2))'},
+ {id:'monitoring',label:'Monitoring & anomaly detection in use (Art. 14(4)(b))'},
+ {id:'override',label:'Overseers can disregard / override / reverse output (Art. 14(4)(e))'},
+ {id:'kill_switch',label:'Tested stop / interrupt procedure (Art. 14(4)(e))'},
+ {id:'audit_log',label:'Audit trail of oversight actions & outputs'}];
+function render(list, el){list.forEach(function(c){var l=document.createElement('label');l.innerHTML='<input type="checkbox" id="chk-'+c.id+'"> <span>'+c.label+'</span>';el.appendChild(l);});}
+render(C10,document.getElementById('checks10'));render(C14,document.getElementById('checks14'));
+function level(score){return score>=75?['low','Low']:score>=50?['med','Medium']:score>=25?['high','High']:['crit','Critical'];}
+document.getElementById('calc-btn').addEventListener('click',function(){
+ var risk=+document.getElementById('risk').value, scale=+document.getElementById('scale').value, res=+document.getElementById('residency').value;
+ var exposure=(risk+scale)/8; // 0.25..1
+ var have10=C10.filter(function(c){return document.getElementById('chk-'+c.id).checked;}).length;
+ var have14=C14.filter(function(c){return document.getElementById('chk-'+c.id).checked;}).length;
+ var s10=Math.round((have10/C10.length)*100 - (res>=3 && have10<C10.length ? 15*exposure : 0));
+ var s14=Math.round((have14/C14.length)*100);
+ var sRes=Math.round(100 - (res-1)*28*exposure - (res===4?10:0));
+ var sScale=Math.round(100 - (scale-1)*18*(1-((have10+have14)/(C10.length+C14.length))));
+ [s10,s14,sRes,sScale].forEach(function(v,i,a){a[i]=Math.max(0,Math.min(100,v));});
+ var overall=Math.round((s10+s14+sRes+sScale)/4);
+ document.getElementById('score-num').textContent=overall;
+ document.getElementById('tier-line').textContent=overall>=75?'Lower exposure — keep evidence current':overall>=50?'Exposed in places — work the amber and red cells':overall>=25?'High exposure — core Article 10/14 controls are missing':'Critical exposure — do not scale until red cells are fixed';
+ var areas=[['Article 10 — Data & data governance',s10],['Article 14 — Human oversight',s14],['Data residency & transfers',sRes],['Deployment-scale exposure',sScale]];
+ var heat=document.getElementById('heat');heat.innerHTML='';
+ areas.forEach(function(a){var lv=level(a[1]);var d=document.createElement('div');d.className='cell '+lv[0];d.innerHTML='<strong>'+a[0]+'</strong><span>'+lv[1]+' risk · readiness '+a[1]+'/100</span>';heat.appendChild(d);});
+ var fixes=document.getElementById('fix-list');fixes.innerHTML='';
+ var missing=C10.concat(C14).filter(function(c){return !document.getElementById('chk-'+c.id).checked;});
+ if(!missing.length){fixes.innerHTML='<div class="fix"><strong>All listed controls present.</strong><p>Re-run when risk category, scale, or residency changes.</p></div>';}
+ missing.forEach(function(c){var d=document.createElement('div');d.className='fix';d.innerHTML='<strong>Gap: '+c.label+'</strong><p>Missing control, weighted by your risk tier and deployment scale. Implement it, document the evidence, and re-run this calculator.</p>';fixes.appendChild(d);});
+ var report='EU AI Act Risk Heatmap — Diagnostic Report\nReadiness: '+overall+'/100\nRisk category value: '+risk+' · Deployment scale value: '+scale+' · Data residency value: '+res+'\n'+areas.map(function(a){return '- '+a[0]+': '+a[1]+'/100 ('+level(a[1])[1]+')';}).join('\n')+'\nGaps ('+missing.length+'): '+(missing.length?missing.map(function(c){return c.label;}).join('; '):'none')+'\nNext: fix red cells first, then re-run. Not legal advice.';
+ document.getElementById('report').value=report;
+ var r=document.getElementById('results');r.classList.add('show');r.scrollIntoView({block:'start',behavior:'smooth'});
+ try{history.replaceState(null,'','#r='+risk+'&s='+scale+'&d='+res);}catch(e){}
+});
+document.getElementById('copy-btn').addEventListener('click',function(){var t=document.getElementById('report');t.select();try{navigator.clipboard.writeText(t.value);}catch(e){document.execCommand('copy');}});
+document.getElementById('link-btn').addEventListener('click',function(){try{navigator.clipboard.writeText(location.href);}catch(e){}});
+})();
+</script>
+<script>document.getElementById('yr').textContent=new Date().getFullYear();</script>
+<script>try{var _d=new Date().toISOString().slice(0,10);if(!localStorage.getItem("gc_pv_"+_d)){localStorage.setItem("gc_pv_"+_d,"1");fetch("https://kestrelattice-approvals.koalstin-g-k-delaney.workers.dev/pv?p="+encodeURIComponent(location.pathname),{mode:"no-cors",keepalive:true}).catch(function(){})}}catch(e){}</script>
+</body>
+</html>
