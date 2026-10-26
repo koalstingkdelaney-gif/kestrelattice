@@ -176,7 +176,7 @@ footer.site .wrap{display:flex;justify-content:space-between;align-items:center;
 footer.site a{color:var(--muted);margin-left:14px}
 footer.site a:hover{color:var(--accent-bright)}
 .skip{position:absolute;left:-9999px;top:0;background:var(--accent);color:var(--accent-ink);padding:10px 18px;font-weight:700;z-index:200;border-radius:0 0 8px 0}
-.skip:focus{left:0}
+.skip:focus{left:0}#main:focus{outline:3px solid var(--accent);outline-offset:-3px}
 .result-count{color:var(--muted);font-size:.86rem;text-align:center;margin:4px 0 0}
 .hidden{display:none!important}
 .reveal-row{display:flex;justify-content:center;margin:26px 0 8px}
