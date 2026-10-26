@@ -605,7 +605,7 @@ var _cb=document.getElementById('pdp-copylink');if(_cb){{_cb.addEventListener('c
   }}
   event('product_view', {{
     product_id: '{gid}',
-    product_name: '{title}',
+    product_name: {title_js},
     price: Number('{price}'),
     currency: 'USD'
   }});
@@ -832,7 +832,7 @@ def main():
             sticky_bar = (f'<div class="pdp-sticky" id="pdp-sticky" role="region" aria-label="Availability: {esc(pr["title"])}">'
                           f'<span><b>{esc(pr["title"])}</b> \u00b7 ${pr["price"]}</span>'
                           '<span class="soon">Publishing soon</span></div>')
-        page = PAGE.format(title=esc(pr["title"]), title60=esc(trunc_title(pr["title"])), meta=esc(trunc_meta(pr["tagline"] or pr["description"])),
+        page = PAGE.format(title=esc(pr["title"]), title_js=json.dumps(pr["title"]), title60=esc(trunc_title(pr["title"])), meta=esc(trunc_meta(pr["tagline"] or pr["description"])),
                            page_url=page_url, jsonld=jsonld, breadcrumblist=breadcrumblist, gid=pr["gid"], cover_img=cover_img,
                            tagline=esc(pr["tagline"]), price=pr["price"], price_num=pr["price"], buy_html=buy_html, codebot_html=codebot_html,
                            file_facts=file_facts,
