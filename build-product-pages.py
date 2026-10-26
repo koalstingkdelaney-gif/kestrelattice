@@ -596,6 +596,37 @@ document.addEventListener('keydown',function(e){{if(e.key==='Escape'&&!e.default
 var _cb=document.getElementById('pdp-copylink');if(_cb){{_cb.addEventListener('click',function(){{var done=function(){{var t=document.getElementById('pdp-copied');if(t){{t.hidden=false;setTimeout(function(){{t.hidden=true;}},2000);}}}};var fallback=function(){{var i=document.createElement('input');i.value=location.href;document.body.appendChild(i);i.select();try{{document.execCommand('copy');done();}}catch(err){{window.prompt('Copy this link:',location.href);}}document.body.removeChild(i);}};if(navigator.clipboard&&navigator.clipboard.writeText){{navigator.clipboard.writeText(location.href).then(done,fallback);}}else{{fallback();}}}});}}
 </script>
 <script>try{{var _d=new Date().toISOString().slice(0,10);if(!localStorage.getItem("gc_pv_"+_d)){{localStorage.setItem("gc_pv_"+_d,"1");fetch("https://kestrelattice-approvals.koalstin-g-k-delaney.workers.dev/pv?p="+encodeURIComponent(location.pathname),{{mode:"no-cors",keepalive:true}}).catch(function(){{}})}}}}catch(e){{}}</script>
+<script>
+(function() {{
+  // Product funnel events: checkout intent is not a confirmed sale.
+  try {{ if (localStorage.getItem('kestrelattice_admin') === '1') return; }} catch (e) {{}}
+  function event(name, params) {{
+    try {{ if (typeof gtag === 'function') gtag('event', name, params || {{}}); }} catch (e) {{}}
+  }}
+  event('product_view', {{
+    product_id: '{gid}',
+    product_name: '{title}',
+    price: Number('{price}'),
+    currency: 'USD'
+  }});
+  document.addEventListener('click', function(e) {{
+    var a = e.target && e.target.closest ? e.target.closest('a[href]') : null;
+    if (!a) return;
+    try {{
+      var u = new URL(a.href, location.href);
+      if (u.hostname === 'koalstin.gumroad.com' && /^\/l\/[a-z0-9-]+$/i.test(u.pathname)) {{
+        event('checkout_click', {{
+          product_id: '{gid}',
+          product_name: '{title}',
+          price: Number('{price}'),
+          currency: 'USD',
+          link_url: u.origin + u.pathname
+        }});
+      }}
+    }} catch (err) {{}}
+  }});
+}})();
+</script>
 </body>
 </html>
 """
