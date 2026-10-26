@@ -110,7 +110,8 @@ async function codebotSalesMap(env) {
       for (const s of sales) {
         const lk = s.license_key || s.licenseKey || s.license;
         if (lk) map[await sha256hex(String(lk))] = {
-          product_id: String(s.product_id || s.product_permalink || ""),
+          product_id: String(s.product_id || ""),
+          product_permalink: String(s.product_permalink || ""),
           product_name: String(s.product_name || s.name || ""),
         };
       }
@@ -1085,7 +1086,10 @@ if (req.method === "POST" && url.pathname === "/codebot-verify") {
   if (!licenseKey) return json({ ok: false, error: "no_key" }, 400);
 
   const ctx = await codebotContext(env);
-  const eligible = new Set((ctx.products || []).map((p) => String(p.id)));
+  const eligible = new Set((ctx.products || []).flatMap((p) =>
+    [p.id, p.product_id, p.permalink, p.gumroad_permalink, p.slug]
+      .filter((v) => v !== undefined && v !== null && String(v).trim())
+      .map((v) => String(v))));
   if (!eligible.size) {
     return json({ ok: false, error: "not_ready" }, 503);
   }
@@ -1095,7 +1099,7 @@ if (req.method === "POST" && url.pathname === "/codebot-verify") {
   const salesMap = await codebotSalesMap(env);
   if (!salesMap) return json({ ok: false, error: "sales_unavailable" }, 502);
   const sale = salesMap[await sha256hex(licenseKey)];
-  if (!sale || !eligible.has(sale.product_id)) {
+  if (!sale || !(eligible.has(sale.product_id) || eligible.has(sale.product_permalink))) {
     return json({ ok: false, error: "invalid_key" }, 403);
   }
   const tokenBytes = new Uint8Array(24);
