@@ -6,6 +6,10 @@ on:
     paths:
       - "worker/**"
       - ".github/workflows/deploy-worker.yml"
+  pull_request:
+    paths:
+      - "worker/**"
+      - ".github/workflows/deploy-worker.yml"
   workflow_dispatch:
 
 permissions:
@@ -26,13 +30,13 @@ jobs:
       - name: Validate Python builders
         run: python -m py_compile build-admin.py build-product-pages.py
       - name: Deploy Worker
-        if: ${{ secrets.CLOUDFLARE_API_TOKEN != '' }}
+        if: ${{ github.event_name != 'pull_request' && secrets.CLOUDFLARE_API_TOKEN != '' }}
         uses: cloudflare/wrangler-action@v3
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           command: deploy --config worker/wrangler.toml
       - name: Explain skipped deployment
-        if: ${{ secrets.CLOUDFLARE_API_TOKEN == '' }}
+        if: ${{ github.event_name != 'pull_request' && secrets.CLOUDFLARE_API_TOKEN == '' }}
         run: |
           echo "::error::Worker was checked but NOT deployed. Add the CLOUDFLARE_API_TOKEN repository secret and rerun this workflow."
           exit 1
