@@ -744,6 +744,7 @@ def main():
         og_dims = (f'<meta property="og:image:width" content="{dims[0]}">\n'
                    f'<meta property="og:image:height" content="{dims[1]}">') if dims else ""
         receive = "The ZIP download is available" if pr.get("is_code") else "The PDF is available for instant download"
+        download_kind = "ZIP" if pr.get("is_code") else "PDF"
         codebot_html = ""
         if pr.get("is_code") and is_live:
             codebot_html = (
@@ -753,7 +754,7 @@ def main():
                 '<p class="trust">AI pair-programmer · 20 questions/day included with eligible code purchases</p>'
             )
         if is_live:
-            buy_html = (f'<p class="instant" id="buy-trust">One-time · Instant PDF download via Gumroad · All sales final — no refunds.</p>\n'
+            buy_html = (f'<p class="instant" id="buy-trust">One-time · Instant {download_kind} download via Gumroad · All sales final — no refunds.</p>\n'
                         f'      <p class="instant pdp-updated">Updated October 2026</p>\n'
                         f'      <a class="btn" href="{pr["gumroad_url"]}" target="_blank" rel="noopener" aria-label="Buy {esc(pr["title"])} for ${pr["price"]} (opens in new tab)" aria-describedby="buy-trust">Get it now — ${pr["price"]}</a>\n'
                         f'      <p class="trust">Secure checkout via Gumroad · Sold by ghostcorpnet · <a style="color:var(--accent)" href="https://help.gumroad.com">buyer protection</a> · Single-user license · Instant delivery</p>\n'
