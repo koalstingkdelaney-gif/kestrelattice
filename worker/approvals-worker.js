@@ -1065,14 +1065,30 @@ export default {
     // ---- POST /codebot-context (server key only): upload product knowledge ----
 if (req.method === "POST" && url.pathname === "/codebot-context" && isServer) {
   const body = await req.json().catch(() => null);
-  if (!body || !Array.isArray(body.products)) {
+  // Empty or malformed uploads must never erase a previously working catalog.
+  if (!body || !Array.isArray(body.products) || body.products.length < 1 || body.products.length > 60) {
     return json({ ok: false, error: "bad_context" }, 400);
   }
+  const products = body.products.map((p) => {
+    if (!p || typeof p !== "object" || Array.isArray(p)) return null;
+    const pick = (v, max = 160) => String(v == null ? "" : v).trim().slice(0, max);
+    return {
+      id: pick(p.id || p.product_id || p.permalink || p.slug),
+      product_id: pick(p.product_id),
+      permalink: pick(p.permalink),
+      gumroad_permalink: pick(p.gumroad_permalink),
+      slug: pick(p.slug),
+      name: pick(p.name),
+      summary: pick(p.summary, 1000),
+      files: Array.isArray(p.files) ? p.files.slice(0, 30).map((f) => pick(f, 120)).filter(Boolean) : [],
+    };
+  }).filter((p) => p && p.id && p.name);
+  if (!products.length) return json({ ok: false, error: "bad_context" }, 400);
   await env.APPROVALS.put("codebot_context", JSON.stringify({
-    products: body.products.slice(0, 60),
+    products,
     generated_at: new Date().toISOString(),
   }));
-  return json({ ok: true, products: body.products.length });
+  return json({ ok: true, products: products.length });
 }
 
 // ---- POST /codebot-verify (public, rate-limited): license key -> session ----
