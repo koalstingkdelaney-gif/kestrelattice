@@ -34,12 +34,12 @@
       k.innerHTML += '<div class="card" style="margin:0;padding:14px;grid-column:1/-1"><div style="font-size:.8rem;color:var(--muted);margin-bottom:6px">Monthly quota used</div><div style="background:var(--panel2);border-radius:6px;height:10px"><div style="width:'+pct+'%;height:100%;border-radius:6px;background:var(--accent)"></div></div></div>';
       document.getElementById("cb-recent").innerHTML = (d.recent||[]).map(c =>
         '<div style="padding:8px 0;border-bottom:1px solid var(--line)"><code style="color:var(--muted)">'+
-        (c.at||"").slice(11,16)+' · '+c.key_hash+'</code> <strong>'+(c.product||"")+
+        (c.at||"").slice(11,16)+' · '+c.key_hash+'</code> <strong>'+(String(c.product||"").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;"))+
         '</strong><br><span style="color:var(--muted)">'+
-        (c.question||"").replace(/</g,"&lt;")+'</span></div>').join("") || "<p class='lede'>No questions yet.</p>";
+        String(c.question||"").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;")+'</span></div>').join("") || "<p class='lede'>No questions yet.</p>";
       document.getElementById("cb-top").innerHTML = (d.top_licenses_today||[]).map(x =>
         '<div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid var(--line)"><code>'+
-        x.key_hash+'</code><span>'+x.questions+' questions</span></div>').join("") || "<p class='lede'>—</p>";
+        String(x.key_hash||"").replace(/</g,"&lt;") + '</code><span>'+Number(x.questions||0)+' questions</span></div>').join("") || "<p class='lede'>—</p>";
     } catch(e){
       k.innerHTML = "<p class='lede'>Couldn't reach the code bot stats.</p>";
     }

@@ -686,10 +686,12 @@ _SVG = {
     "taps": '<path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>',
     "sandbox": '<path d="M21 8l-9-5-9 5v8l9 5 9-5V8z"/><path d="M3 8l9 5 9-5"/><path d="M12 13v8"/>',
     "universe": '<circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4"/><circle cx="18.5" cy="7.5" r="1.4" fill="currentColor" stroke="none"/>',
+    "chat": '<path d="M21 11.5a8.4 8.4 0 0 1-9 8.4 9.2 9.2 0 0 1-4-.9L3 20l1.2-4.2a8 8 0 1 1 16.8-4.3z"/>',
+    "codebot": '<path d="m8 8-4 4 4 4M16 8l4 4-4 4M14 5l-4 14"/>',
 }
 TABS = [("taps", "Action Center"), ("overview", "Overview"), ("universe", "Universe"), ("captain", "Captain"), ("sandbox", "Sandbox"), ("approvals", "Approvals"), ("outreach", "Outreach"),
         ("products", "Products"), ("drafts", "Drafts"), ("fleet", "Fleet"),
-        ("hive", "Hive"), ("extras", "Extras")]
+        ("hive", "Hive"), ("extras", "Extras"), ("chat", "Bot Chat"), ("codebot", "Code Bot")]
 
 
 def _svg(name):
@@ -2177,6 +2179,17 @@ def _universe_html():
     return scoped + treasury + reg_sec + worlds + flow + deals_card + jobs + stamp
 
 
+def _panel_snippet(name):
+    """Load a checked-in private-panel fragment; never embed credentials in source."""
+    path = os.path.join(SITE, "worker", name)
+    try:
+        with open(path, encoding="utf-8") as fh:
+            return fh.read()
+    except OSError:
+        return ("<div class='card'><h3>Panel fragment unavailable</h3>"
+                "<p class='muted'>Missing " + esc(name) + ".</p></div>")
+
+
 def _all_panes(products, queue, entries, title_map, omap):
     p = {}
     p["taps"] = (_sec("Live", "Action Center",
@@ -2229,6 +2242,8 @@ def _all_panes(products, queue, entries, title_map, omap):
     p["extras"] = (_sec("Everything else", "Extras",
                         "Directory, TikTok, traffic, and the policies the bots live by.")
                    + _extras_html())
+    p["chat"] = _panel_snippet("chat-ui.snippet.html")
+    p["codebot"] = _panel_snippet("codebot-panel.snippet.html")
     return p
 
 
