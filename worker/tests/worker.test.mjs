@@ -82,6 +82,20 @@ test("POST /codebot-context accepts server-keyed non-empty catalog", async () =>
   assert.equal(JSON.parse(await env.APPROVALS.get("codebot_context")).products.length, 1);
 });
 
+test("POST /codebot-context rejects an empty catalog without overwriting stored context", async () => {
+  const env = makeEnv();
+  const existing = JSON.stringify({ products: [{ id: "keep-me", name: "Existing" }] });
+  await env.APPROVALS.put("codebot_context", existing);
+  const { response, body } = await call(env, "/codebot-context", {
+    method: "POST",
+    headers: { "x-server-key": "test-server-key" },
+    body: { products: [] },
+  });
+  assert.equal(response.status, 400);
+  assert.equal(body.error, "bad_context");
+  assert.equal(await env.APPROVALS.get("codebot_context"), existing);
+});
+
 test("Code Bot refuses verification before eligible product context is loaded", async () => {
   const { response, body } = await call(makeEnv(), "/codebot-verify", {
     method: "POST", body: { license_key: "not-a-real-license" },
