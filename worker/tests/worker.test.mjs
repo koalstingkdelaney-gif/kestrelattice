@@ -36,6 +36,16 @@ async function call(env, path, options) {
   return { response, body: await response.json() };
 }
 
+test("GET /health returns a read-only liveness response", async () => {
+  const env = makeEnv();
+  const before = await env.APPROVALS.get("queue");
+  const { response, body } = await call(env, "/health");
+  assert.equal(response.status, 200);
+  assert.equal(body.ok, true);
+  assert.equal(body.service, "kestrelattice-approvals");
+  assert.equal(await env.APPROVALS.get("queue"), before);
+});
+
 test("GET /queue returns queue state without mutation", async () => {
   const env = makeEnv();
   const before = await env.APPROVALS.get("queue");
