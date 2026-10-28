@@ -1,0 +1,66 @@
+name: Scheduled service health checks
+
+on:
+  schedule:
+    - cron: "17 */6 * * *"
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/health-check.yml"
+      - "worker/approvals-worker.js"
+      - "worker/tests/**"
+
+permissions:
+  contents: read
+
+jobs:
+  public-site:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check homepage
+        run: |
+          curl --fail --silent --show-error --location --max-time 25 \
+            "https://koalstingkdelaney-gif.github.io/kestrelattice/" \
+            --output /tmp/home.html
+          grep -qi "ghostcorpnet" /tmp/home.html
+      - name: Check flagship product page
+        run: |
+          curl --fail --silent --show-error --location --max-time 25 \
+            "https://koalstingkdelaney-gif.github.io/kestrelattice/products/the-playbook-studio-edition/" \
+            --output /tmp/product.html
+          grep -qi "The Playbook" /tmp/product.html
+      - name: Check sitemap and robots
+        run: |
+          curl --fail --silent --show-error --location --max-time 25 \
+            "https://koalstingkdelaney-gif.github.io/kestrelattice/sitemap.xml" \
+            --output /tmp/sitemap.xml
+          grep -q "the-playbook-studio-edition" /tmp/sitemap.xml
+          curl --fail --silent --show-error --location --max-time 25 \
+            "https://koalstingkdelaney-gif.github.io/kestrelattice/robots.txt" \
+            --output /tmp/robots.txt
+      - name: Check flagship Gumroad checkout endpoint
+        run: |
+          status="$(curl --silent --show-error --location --max-time 25 \
+            --output /dev/null --write-out "%{http_code}" \
+            "https://koalstin.gumroad.com/l/hdigmr")"
+          case "$status" in
+            2??|3??) echo "Gumroad checkout responded with HTTP $status" ;;
+            *) echo "::error::Gumroad checkout returned HTTP $status"; exit 1 ;;
+          esac
+      - name: Check Worker liveness when configured
+        env:
+          WORKER_BASE_URL: ${{ vars.CLOUDFLARE_WORKER_URL }}
+        run: |
+          if [ -z "$WORKER_BASE_URL" ]; then
+            echo "Skipped Worker live probe: add repository variable CLOUDFLARE_WORKER_URL to enable it."
+            exit 0
+          fi
+          status="$(curl --silent --show-error --location --max-time 20 \
+            --output /tmp/worker-health.json --write-out "%{http_code}" \
+            "${WORKER_BASE_URL%/}/health")"
+          test "$status" = "200" || {
+            echo "::error::Worker health endpoint returned HTTP $status"
+            exit 1
+          }
+          grep -q '"ok":true' /tmp/worker-health.json
