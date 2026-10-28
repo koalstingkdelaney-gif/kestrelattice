@@ -153,6 +153,11 @@ export default {
 
     if (req.method === "OPTIONS") return new Response(null, { headers: CORS });
 
+    // Public, read-only liveness probe. Does not touch KV or expose configuration.
+    if (req.method === "GET" && url.pathname === "/health") {
+      return json({ ok: true, service: "kestrelattice-approvals" });
+    }
+
     if (req.method === "GET" && url.pathname === "/queue") {
       return json(await readQueue(env));
     }
