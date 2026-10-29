@@ -402,7 +402,7 @@ PAGE = """<!DOCTYPE html>
 <title>{title60} — ghostcorpnet</title>
 <meta name="description" content="{meta}">
 <link rel="canonical" href="{page_url}">
-<link rel="preconnect" href="https://koalstin.gumroad.com">
+<link rel="preconnect" href="https://ghostcorpnet.gumroad.com">
 <meta property="og:type" content="product">
 <meta property="og:title" content="{title60} — ghostcorpnet">
 <meta property="og:description" content="{meta}">
@@ -636,7 +636,7 @@ def main():
     for gid, slug, title, price, tagline, inside in ORIGINALS:
         products.append(dict(gid=gid, slug=slug, title=title, price=fmt_price(price),
                              tagline=fix_tagline(tagline), description=fix_tagline(tagline), inside=inside, is_code=False,
-                             gumroad_url=f"https://koalstin.gumroad.com/l/{gid}"))
+                             gumroad_url=f"https://ghostcorpnet.gumroad.com/l/{gid}"))
     for p in packs:
         url = p.get("gumroad_url", "")
         m = re.search(r"/l/([a-z0-9-]+)", url or "")

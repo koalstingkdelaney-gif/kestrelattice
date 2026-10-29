@@ -4,16 +4,16 @@
 
 ## Start here
 - [ghostcorpnet home](https://koalstingkdelaney-gif.github.io/kestrelattice/): what the studio sells and how buying works.
-- [Gumroad storefront](https://koalstin.gumroad.com/): all products, buy direct.
+- [Gumroad storefront](https://ghostcorpnet.gumroad.com/): all products, buy direct.
 - [Brand index](https://koalstingkdelaney-gif.github.io/kestrelattice/brands/): the 11 brand lines.
 - [Product catalog](https://koalstingkdelaney-gif.github.io/kestrelattice/products/): browsable catalog.
 
 ## Flagship products
-- [The Complete ghostcorpnet Library](https://koalstin.gumroad.com/l/yzbumc): every playbook and kit in one download, $79.
-- [The Playbook — Studio Edition](https://koalstin.gumroad.com/l/hdigmr): the governed-agent playbook: policies, schemas, rollout in one PDF, $29.
-- [AI Agent Risk Audit Kit](https://koalstin.gumroad.com/l/sahva): scored risk-tier self-assessment and 40-point audit checklist, $19.
-- [Prompt Injection Defense Field Guide](https://koalstin.gumroad.com/l/cjdkuu): 15 attack scenarios, 6 layered defenses, 20 test prompts, $19.
-- [Agent Incident Response Runbook](https://koalstin.gumroad.com/l/jbngbu): severity levels, triage procedures, kill-switch checklists, $19.
+- [The Complete ghostcorpnet Library](https://ghostcorpnet.gumroad.com/l/yzbumc): every playbook and kit in one download, $79.
+- [The Playbook — Studio Edition](https://ghostcorpnet.gumroad.com/l/hdigmr): the governed-agent playbook: policies, schemas, rollout in one PDF, $29.
+- [AI Agent Risk Audit Kit](https://ghostcorpnet.gumroad.com/l/sahva): scored risk-tier self-assessment and 40-point audit checklist, $19.
+- [Prompt Injection Defense Field Guide](https://ghostcorpnet.gumroad.com/l/cjdkuu): 15 attack scenarios, 6 layered defenses, 20 test prompts, $19.
+- [Agent Incident Response Runbook](https://ghostcorpnet.gumroad.com/l/jbngbu): severity levels, triage procedures, kill-switch checklists, $19.
 
 ## Brand lines (niche governance kits)
 - [IncidentLattice](https://koalstingkdelaney-gif.github.io/kestrelattice/brands/incidentlattice/): agent security incident response.

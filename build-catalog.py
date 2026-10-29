@@ -56,8 +56,8 @@ PAGE = """<!DOCTYPE html>
 <link rel="canonical" href="https://koalstingkdelaney-gif.github.io/kestrelattice/products/">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 26 26'%3E%3Ccircle cx='5' cy='6' r='2.4' fill='%23e07a5f'/%3E%3Ccircle cx='21' cy='6' r='2.4' fill='%23e07a5f'/%3E%3Ccircle cx='13' cy='13' r='2.4' fill='%23e07a5f'/%3E%3Ccircle cx='5' cy='20' r='2.4' fill='%23e07a5f'/%3E%3Ccircle cx='21' cy='20' r='2.4' fill='%23e07a5f'/%3E%3C/svg%3E">
 <link rel="apple-touch-icon" sizes="180x180" href="/kestrelattice/assets/apple-touch-icon.png">
-<link rel="preconnect" href="https://koalstin.gumroad.com">
-<link rel="dns-prefetch" href="https://koalstin.gumroad.com">
+<link rel="preconnect" href="https://ghostcorpnet.gumroad.com">
+<link rel="dns-prefetch" href="https://ghostcorpnet.gumroad.com">
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-541TCHWW98"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
@@ -414,7 +414,7 @@ def main():
                 '</span> <span style="color:var(--muted);font-weight:400;font-size:.85rem">one-time · instant delivery</span>'),
             price_num=float(p["price"]),
             pdate=html.escape(pdate(p, datemap)),
-            url=f"https://koalstin.gumroad.com/l/{html.escape(pid)}",
+            url=f"https://ghostcorpnet.gumroad.com/l/{html.escape(pid)}",
             tags=html.escape(tags),
             slug=SLUG_OVERRIDES.get(pid, ORIGINAL_SLUGS.get(pid, slugify(p["title"]))),
             img_attrs=img_attrs,
