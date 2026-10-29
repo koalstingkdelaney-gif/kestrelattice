@@ -2331,9 +2331,7 @@ def _tv_view(products, queue):
     rendered huge for across-the-room reading on a TV / Xbox Edge.
     Sales/orders from the live product data + the same read-only Gumroad
     sales call the Revenue section uses; tap count identical to the KPI
-    strip; activity from the same fleet logs as the Overview feed.
-    Rotwood has no data in this build, so it is a link out to the public
-    watch page only — nothing invented."""
+    strip; activity from the same fleet logs as the Overview feed."""
     total_cents = 0
     total_n = 0
     for p in products or []:
@@ -2381,9 +2379,6 @@ def _tv_view(products, queue):
         f'${total_cents / 100:,.0f} lifetime · {total_n} orders all-time</div>'
         '<div class="tv-label">Bots working</div>'
         f'<ul class="tv-feed">{rows}</ul>'
-        '<div class="tv-label">Rotwood</div>'
-        '<div class="tv-mid"><a href="https://koalstingkdelaney-gif.github.io/kestrelattice/rotwood/" '
-        'target="_blank" rel="noopener">Rotwood live</a></div>'
         '<div class="tv-label">Needs your tap</div>'
         f'<div class="tv-big">{taps}</div>'
         '</section>')
