@@ -583,6 +583,17 @@ body.tv .sidebar,body.tv .topbar,body.tv .tabbar,body.tv .foot,body.tv #toasts{d
 body.tv .main{max-width:none;margin:0;padding:30px 48px 80px}
 body.tv .bpane{display:none!important}
 body.tv #tv-view{display:block}
+#tv-talk{display:block;width:100%;margin:6px 0 18px;padding:30px 22px;min-height:110px;
+  font-size:2.1rem;font-weight:800;line-height:1.25;border-radius:22px;
+  border:2px solid var(--accent);background:var(--accent);color:#fff;cursor:pointer;
+  font-family:inherit}
+#tv-talk:hover{filter:brightness(1.1)}
+/* Big chat, entered from the TV view: controller-friendly composer + text */
+body.tvtalk #sent-input{font-size:1.6rem;padding:22px 20px;min-height:76px;border-radius:16px}
+body.tvtalk #sent-send{font-size:1.6rem;padding:18px 36px;min-height:76px;border-radius:16px}
+body.tvtalk .chat-msg{font-size:1.3rem;max-width:94%}
+body.tvtalk .chat-msg p{line-height:1.5}
+body.tvtalk #sent-thread{max-height:58vh}
 .tv-label{font-size:2rem;font-weight:800;letter-spacing:.18em;text-transform:uppercase;
   color:var(--accent);margin:46px 0 8px}
 .tv-label:first-of-type{margin-top:0}
@@ -716,6 +727,15 @@ function tvOff(){
   document.body.classList.remove('tv');
   if (__tvTimer) { clearInterval(__tvTimer); __tvTimer = null; }
   try { if (document.exitFullscreen && document.fullscreenElement) document.exitFullscreen(); } catch(e){}
+}
+function tvFleetTalk(){
+  tvOff();
+  document.body.classList.add('tvtalk');
+  switchView('all','captain');
+  setTimeout(function(){
+    var i = document.getElementById('sent-input');
+    if (i) { i.scrollIntoView({block:'center'}); try { i.focus(); } catch(e){} }
+  }, 150);
 }
 (function(){
   var on = false;
@@ -2373,6 +2393,8 @@ def _tv_view(products, queue):
     return (
         '<section id="tv-view">'
         '<button id="tv-exit" onclick="tvOff()">✕ Exit TV view</button>'
+        '<button id="tv-talk" onclick="tvFleetTalk()">🎙 Talk to the fleet'
+        ' — give the bots an order</button>'
         '<div class="tv-label">Sales today</div>'
         f'<div class="tv-big">${t_cents / 100:,.0f}</div>'
         f'<div class="tv-sub">{t_n} orders today · '
