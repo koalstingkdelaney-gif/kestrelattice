@@ -25,6 +25,11 @@
   "schedule": "On demand · hive"
  },
  {
+  "name": "Agency vertical scout — new-vertical agency leads",
+  "job": "Agency vertical scout — new-vertical agency leads",
+  "schedule": "Daily · 5:41 AM"
+ },
+ {
   "name": "AI agency daily outreach (scout + gated sends)",
   "job": "Finds local businesses and sends agency pitches",
   "schedule": "Daily · 9:16 AM"
@@ -65,6 +70,11 @@
   "schedule": "On demand · hive"
  },
  {
+  "name": "Backlink hunter — resource-page placements (drafts)",
+  "job": "Backlink hunter — resource-page placements",
+  "schedule": "Weekly · Wed 6:41 AM"
+ },
+ {
   "name": "Benchmark Compiler (hive)",
   "job": "Compile benchmark comparisons ONLY from real, measured, cited data — published eval scores, vendor-reported figures, academic papers.",
   "schedule": "On demand · hive"
@@ -98,6 +108,11 @@
   "name": "Business Foundry Runner (hive)",
   "job": "Mint exactly ONE new bot-run micro-brand per week, end to end — niche, name, spec, 12-product draft slate, hub page, site updates, weekly brand cron —…",
   "schedule": "On demand · hive"
+ },
+ {
+  "name": "Business foundry — mint one micro-brand weekly",
+  "job": "Business foundry — mint one micro-brand weekly",
+  "schedule": "Weekly · Sat 10:16 AM"
  },
  {
   "name": "Calculator Builder (hive)",
@@ -148,6 +163,11 @@
   "name": "Competitor Price Tracker (hive)",
   "job": "Maintain a machine-readable ledger of competitor public pricing over time: one JSON snapshot per vendor per run, enabling price-move detection and accurate…",
   "schedule": "On demand · hive"
+ },
+ {
+  "name": "Competitor price watch — intel only",
+  "job": "Competitor price watch — intel only",
+  "schedule": "Weekly · Sun 6:41 AM"
  },
  {
   "name": "Competitor watch",
@@ -205,6 +225,11 @@
   "schedule": "Daily · 9:16 AM"
  },
  {
+  "name": "Daily micro-forge (batch factory)",
+  "job": "Daily micro-forge",
+  "schedule": "Daily · 3:16 PM"
+ },
+ {
   "name": "Daily thread spotter",
   "job": "Daily thread spotter",
   "schedule": "Daily · 7:16 AM"
@@ -213,6 +238,11 @@
   "name": "Dashboard Refresh Runner (hive)",
   "job": "Rebuild the private admin dashboard's data so koalstin's panel shows live sales figures, the review pipeline, and what each bot last produced.",
   "schedule": "On demand · hive"
+ },
+ {
+  "name": "Directory hunter — free directory submissions",
+  "job": "Directory hunter — free directory submissions",
+  "schedule": "Weekly · Mon 6:41 AM"
  },
  {
   "name": "Directory Submitter (hive)",
@@ -263,6 +293,11 @@
   "name": "Fleet brain sync (weekly)",
   "job": "Keeps every bot's schedule and roster in sync",
   "schedule": "Weekly · Sun 9:30 AM"
+ },
+ {
+  "name": "Free tool forge — one new free site tool monthly",
+  "job": "Free tool forge — one new free site tool monthly",
+  "schedule": "Monthly · 6:41 AM"
  },
  {
   "name": "FrontierLattice daily acquisition",
@@ -560,6 +595,11 @@
   "schedule": "On demand · hive"
  },
  {
+  "name": "Product page polisher — clarity audit and fixes",
+  "job": "Product page polisher — clarity audit and fixes",
+  "schedule": "Weekly · Tue 6:41 AM"
+ },
+ {
   "name": "Provider Scout (hive)",
   "job": "Find NEW free-tier AI providers the fleet could use beyond the already-connected lanes, and prepare complete draft integrations so the human can approve a new…",
   "schedule": "On demand · hive"
@@ -568,6 +608,11 @@
   "name": "Publisher (hive)",
   "job": "Publish queued digital products to Gumroad at the maximum sustainable pace, exactly as the legacy daily publisher did.",
   "schedule": "On demand · hive"
+ },
+ {
+  "name": "Q&A answer scout — buyer-intent answer drafts",
+  "job": "Q&A answer scout — buyer-intent answer drafts",
+  "schedule": "Weekly · Thu 6:41 AM"
  },
  {
   "name": "Quiz Builder (hive)",
@@ -720,6 +765,11 @@
   "schedule": "On demand · hive"
  },
  {
+  "name": "Store expansion keeper — listing packs for other stores",
+  "job": "Store expansion keeper — listing packs for other stores",
+  "schedule": "Weekly · Fri 6:41 AM"
+ },
+ {
   "name": "SupportWarden daily acquisition",
   "job": "SupportWarden daily acquisition",
   "schedule": "Daily · 9:16 AM"
@@ -833,6 +883,11 @@
   "name": "Weekly Pinterest publisher",
   "job": "Weekly Pinterest publisher",
   "schedule": "Weekly · Wed 10:16 AM"
+ },
+ {
+  "name": "Weekly product forge",
+  "job": "Weekly product forge",
+  "schedule": "Weekly · Sat 3:16 PM"
  },
  {
   "name": "Weekly SEO article",
