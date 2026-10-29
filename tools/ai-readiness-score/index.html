@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="utf-8">
+<link rel="preconnect" href="https://gumroad.com">
+<link rel="preconnect" href="https://www.googletagmanager.com">
+<meta name="viewport" content="width=device-width, initial-scale=1, interactive-widget=resizes-content, viewport-fit=cover">
+<title>AI Readiness Score — Free Tool | ghostcorpnet</title>
+<meta name="description" content="Free 10-question self-check: score how governed your AI agents really are — identity, approval gates, spend limits, audit trails, fail-closed behavior — and see your three weakest areas.">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<meta name="theme-color" content="#121212">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ghostcorpnet">
+<meta property="og:url" content="https://koalstingkdelaney-gif.github.io/kestrelattice/tools/ai-readiness-score/">
+<meta property="og:title" content="AI Readiness Score — Free Tool | ghostcorpnet">
+<meta property="og:description" content="Answer 10 questions drawn from real agent-governance controls and get your readiness score, your band, and your three weakest areas.">
+<link rel="canonical" href="https://koalstingkdelaney-gif.github.io/kestrelattice/tools/ai-readiness-score/">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebApplication","name":"AI Readiness Score","applicationCategory":"BusinessApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"description":"A 10-question self-check that scores AI agent governance across identity, approval gates, spend limits, audit trails, and fail-closed behavior.","url":"https://koalstingkdelaney-gif.github.io/kestrelattice/tools/ai-readiness-score/"}
+</script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-541TCHWW98"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}try{if(localStorage.getItem('kestrelattice_admin')!=='1'){gtag('js',new Date());gtag('config','G-541TCHWW98');}}catch(e){gtag('js',new Date());gtag('config','G-541TCHWW98');}</script>
+<style>
+  :root{color-scheme:dark;--bg:#0f0e0d; --bg-soft:#141210; --panel:#1a1714; --panel2:#211c17;
+        --line:#2c261e; --line-soft:#221d15; --text:#f1ebdd;
+        --muted:#a89d89; --faint:#978b74; --accent:#e07a5f;
+        --accent-bright:#f09474; --accent-dim:#c06a4e; --accent-ink:#1a0f08;
+        --accent-soft:rgba(224,122,95,.1); --radius:12px;
+        --green:#7fc97f; --amber:#e8b04b; --red:#e06a5f;
+        --ease:cubic-bezier(.2,.7,.25,1)}
+  *{margin:0;padding:0;box-sizing:border-box}
+  ::selection{background:var(--accent);color:var(--accent-ink)}
+  html{scroll-behavior:smooth;scrollbar-gutter:stable}
+  html,body{overflow-x:clip}
+  body{background:var(--bg);color:var(--text);
+       font-family:ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+       line-height:1.7;-webkit-font-smoothing:antialiased}
+  a:focus-visible,button:focus-visible{outline:3px solid var(--accent-bright);outline-offset:3px;border-radius:4px}
+  header.site{border-bottom:1px solid var(--line);position:sticky;top:0;z-index:100;
+    background:rgba(15,14,13,.92);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
+  header.site .wrap{display:flex;align-items:center;justify-content:space-between;min-height:56px;max-width:1040px;margin:0 auto;padding:0 24px}
+  .brand{display:flex;align-items:center;gap:9px;font-weight:700;color:var(--text);text-decoration:none;font-size:1.02rem}
+  .brand:hover{color:var(--accent-bright)}
+  nav.main{display:flex;align-items:center;gap:20px}
+  nav.main a{color:var(--muted);font-size:.88rem;font-weight:500;text-decoration:none}
+  nav.main a:hover{color:var(--accent-bright)}
+  .wrap{max-width:68ch;margin:0 auto;padding:40px 24px 64px}
+  .crumb{color:var(--muted);font-size:.85rem;margin-bottom:24px}
+  .crumb a{color:var(--accent);text-decoration:none}
+  h1{font-size:clamp(1.6rem,3vw + .8rem,2.1rem);font-weight:800;letter-spacing:-.02em;line-height:1.25;margin-bottom:8px;text-wrap:balance}
+  .date{color:var(--muted);font-size:.85rem;margin-bottom:28px}
+  h2{font-size:1.35rem;margin:40px 0 12px;letter-spacing:-.01em}
+  h3{font-size:1.1rem;margin:24px 0 10px}
+  p{margin:0 0 16px}
+  ul,ol{margin:0 0 16px 24px}
+  li{margin:6px 0}
+  a{color:var(--accent)}
+  code{background:var(--panel);padding:2px 6px;border-radius:4px;font-size:.88em}
+  .lead{font-size:1.08rem;color:var(--muted);max-width:60ch}
+  .pill{display:inline-block;font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);border:1px solid var(--accent-dim);border-radius:999px;padding:5px 14px;margin-bottom:18px}
+  .hero-tool{border:1px solid var(--line);border-radius:var(--radius);background:linear-gradient(180deg,var(--panel2),var(--panel));padding:28px;margin:32px 0;box-shadow:0 16px 40px rgba(0,0,0,.35)}
+  .btn{display:inline-block;background:linear-gradient(180deg,var(--accent-bright),var(--accent));color:var(--accent-ink);font-weight:700;
+       padding:14px 30px;border-radius:8px;text-decoration:none;border:0;cursor:pointer;font-size:1rem;font-family:inherit;
+       transition:transform .16s var(--ease)}
+  .btn:hover{transform:translateY(-2px)}
+  .cta{background:linear-gradient(180deg,var(--panel2),var(--panel));border:1px solid var(--accent-dim);border-radius:var(--radius);
+       padding:28px;margin:48px 0;text-align:center;box-shadow:0 16px 40px rgba(0,0,0,.35)}
+  .cta h2{margin:0 0 10px;font-size:1.3rem}
+  .cta p{color:var(--muted);margin-bottom:18px}
+  .disclaimer{font-size:.82rem;color:var(--faint);border:1px dashed var(--line);border-radius:8px;padding:12px 16px;margin:32px 0}
+  footer.site{border-top:1px solid var(--line);background:var(--bg-soft);padding:22px 0;margin-top:48px}
+  footer.site .wrap{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px 16px;max-width:1040px;padding:0 24px}
+  footer.site{color:var(--muted);font-size:.82rem}
+  footer.site a{color:var(--muted);text-decoration:none;margin-left:14px}
+  footer.site a:hover{color:var(--accent-bright)}
+  #backtop{position:fixed;right:22px;bottom:22px;width:46px;height:46px;border-radius:50%;border:1px solid var(--line);background:var(--panel);color:var(--accent);font-size:1.3rem;cursor:pointer;opacity:0;pointer-events:none;transition:opacity .2s var(--ease);z-index:150}
+  #backtop.show{opacity:1;pointer-events:auto}
+  @media(max-width:640px){nav.main a:not(:last-child){display:none}footer.site .wrap{justify-content:center;text-align:center}footer.site a{margin:0 7px}}
+  @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{animation:none!important;transition:none!important}}
+  .skip{position:absolute;left:-9999px;top:0;background:var(--accent);color:var(--accent-ink);padding:10px 18px;font-weight:700;z-index:200;border-radius:0 0 8px 0}
+  .skip:focus{left:0}
+</style>
+<style>
+  .q{border:1px solid var(--line-soft);border-radius:10px;padding:16px 18px;margin:0 0 14px;background:var(--bg-soft)}
+  .q legend,.q .qt{font-weight:600;font-size:.98rem;margin-bottom:10px}
+  .q .area{font-size:.7rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);display:block;margin-bottom:4px}
+  .opts{display:flex;gap:10px;flex-wrap:wrap}
+  .opt{display:flex;align-items:center;gap:8px;border:1px solid var(--line);border-radius:8px;padding:8px 16px;cursor:pointer;font-size:.94rem}
+  .opt input{accent-color:var(--accent);width:16px;height:16px}
+  .opt:has(input:checked){border-color:var(--accent);background:var(--accent-soft)}
+  fieldset.q{border:1px solid var(--line-soft)}
+  #progress{color:var(--muted);font-size:.88rem;margin:4px 0 14px}
+  #result{display:none;border:1px solid var(--accent-dim);border-radius:10px;padding:22px;margin-top:20px;background:var(--accent-soft)}
+  #result.show{display:block}
+  #score-big{font-size:2.6rem;font-weight:800;line-height:1.1}
+  #band{font-size:1.15rem;font-weight:700}
+  .bar-row{display:grid;grid-template-columns:170px 1fr 44px;gap:10px;align-items:center;margin:8px 0;font-size:.9rem}
+  .bar{height:10px;border-radius:6px;background:var(--bg);border:1px solid var(--line);overflow:hidden}
+  .bar i{display:block;height:100%;background:var(--accent)}
+  .weak{border:1px solid var(--line);border-radius:10px;background:var(--bg-soft);padding:14px 16px;margin:10px 0}
+  .weak h3{margin:0 0 6px;font-size:1rem}
+  .weak p{margin:0;color:var(--muted);font-size:.92rem}
+  .ladder{margin-top:22px;border-top:1px solid var(--line);padding-top:18px}
+  .ladder .step{margin:0 0 14px}
+  .ladder .step .k{font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+  @media(max-width:640px){.bar-row{grid-template-columns:120px 1fr 40px}}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site"><div class="wrap">
+  <a class="brand" href="../../">ghostcorpnet</a>
+  <nav class="main" aria-label="Primary"><a href="../../">Home</a><a href="../../products/">Catalog</a><a href="../../brands/">Stores</a><a href="../../ecosystem/">Ecosystem</a><a href="../../articles/">Articles</a><a href="../../changelog.html">Changelog</a></nav>
+</div></header>
+<main class="wrap" id="main" tabindex="-1">
+  <p class="crumb"><a href="../../">Home</a> &middot; <a href="../">Free tools</a></p>
+  <p class="pill">Free tool &middot; 2 minutes</p>
+  <h1>AI Readiness Score</h1>
+  <p class="date">By ghostcorpnet Studio &middot; Runs 100% in your browser — no signup, nothing sent anywhere</p>
+  <p class="lead">Ten questions, drawn from the governance controls in the Governed Agent Mesh Playbook — identity, approval gates, spend limits, audit trails, and fail-closed behavior. Answer honestly for the agents you actually run in production, not the setup you mean to build someday. You get a score out of 20, a readiness band, and the three areas where your setup is weakest — with the fix for each.</p>
+
+  <div class="hero-tool" aria-label="AI readiness score self-check">
+    <p id="progress" role="status">0 of 10 answered</p>
+    <form id="quiz" novalidate></form>
+    <button class="btn" id="score-btn" type="button">Get my score</button>
+    <div id="result" aria-live="polite"></div>
+  </div>
+
+  <h2>What this checks — and where it comes from</h2>
+  <p>Every question maps to a control in the Governed Agent Mesh Playbook, the system ghostcorpnet runs its own agent fleet under:</p>
+  <ul>
+    <li><strong>Identity &amp; authority</strong> (Playbook &sect;3): each agent gets its own named identity, scoped permissions, and a revocation path that takes minutes, not a password reset on a shared account.</li>
+    <li><strong>Approval gates</strong> (Playbook &sect;4): risky actions — money, customer contact, production changes — pass a human gate above thresholds set in advance, enforced in the call path where code can refuse, not in a prompt the agent can argue with.</li>
+    <li><strong>Spend limits</strong> (Playbook &sect;5): hard per-agent budgets and rate caps that halt the agent automatically, plus a kill switch a human can actually reach.</li>
+    <li><strong>Audit trails</strong> (Playbook &sect;6): a durable, append-only record of what each agent did — the actual request, the time, and whose approval it ran under — so any day can be reconstructed from records alone.</li>
+    <li><strong>Fail-closed behavior &amp; testing</strong> (Playbook &sect;7): when a check fails or the agent is unsure, the default is stop and escalate — and the agent is adversarially tested before production and after every change.</li>
+  </ul>
+  <p>This is a self-check, not an audit: it scores what you tell it. If you scored yourself generously, the honest score is lower — and the weakest-area list is still the right order to fix things in.</p>
+
+  <div class="cta">
+    <h2>Close the gaps, in order</h2>
+    <p>Start with the free Playbook sample, go deeper with the full Playbook, or have your agents tested against the same failure modes this score checks for.</p>
+    <a class="btn" href="https://koalstin.gumroad.com/l/ihqce" referrerpolicy="no-referrer">Get the free Playbook sample — $0</a>
+    <p style="margin-top:12px">Then the full system: <a href="https://koalstin.gumroad.com/l/hdigmr" style="color:var(--accent)">The Governed Agent Mesh Playbook — Studio Edition ($29)</a></p>
+    <p style="margin-top:12px"><a href="../../products/">Or browse the full catalog &rarr;</a></p>
+  </div>
+  <p class="disclaimer">A self-assessment tool: your score is computed only from the answers you select on this page. It is not an audit, a certification, or a guarantee about any system. This tool stores nothing and sends nothing — answers never leave your browser.</p>
+</main>
+<footer class="site"><div class="wrap">
+  <span>&copy; <span id="yr">2026</span> ghostcorpnet &middot; An independent studio</span>
+  <span><a href="../../">Home</a><a href="../../products/">Catalog</a><a href="../../articles/">Articles</a><a href="../../sitemap.html">Site index</a><a href="../../terms.html">Terms</a><a href="../../privacy.html">Privacy</a></span>
+</div></footer>
+<button id="backtop" aria-label="Back to top">&uarr;</button>
+<script>
+(function(){
+  var AREAS=[
+    {id:'identity',name:'Identity & authority',fix:'Give every agent its own named identity with scoped permissions, and make revoking one agent a minutes-long job. Shared accounts make every incident unanswerable — nobody can say which agent acted, or stop just that one.'},
+    {id:'gates',name:'Approval gates',fix:'Move the gate into the call path: thresholds enforced by code that can refuse the action. A rule written in the agent\u2019s prompt is a request; a rule in the tool layer is a wall.'},
+    {id:'spend',name:'Spend & volume limits',fix:'Set a hard per-agent budget — money, calls, or actions per day — that halts the agent automatically when hit, and test the kill switch before you need it. Runaway loops are billed by the token.'},
+    {id:'audit',name:'Audit trail',fix:'Log the actual request or command, the timestamp, and the approver for every consequential action, in a store the agent itself cannot edit. If you can\u2019t reconstruct the worst day, you don\u2019t have a trail — you have a hope.'},
+    {id:'failclosed',name:'Fail-closed & testing',fix:'Default to stop-and-escalate whenever a check fails or confidence drops, and red-team the agent — prompt injection, runaway loops, tool misuse — before production and after every change.'}
+  ];
+  var QS=[
+    {a:0,q:'Does every AI agent you run operate under its own named identity — not a shared human login or one generic service account for all of them?'},
+    {a:0,q:'If one agent went rogue tonight, could you revoke just that agent\u2019s access within minutes, without breaking the others?'},
+    {a:1,q:'Do actions that spend money, contact customers, or change production data require a human approval above thresholds you set in advance?'},
+    {a:1,q:'Are those approval rules enforced in the tool call path itself — code that can refuse the action — rather than only written in the agent\u2019s instructions or prompt?'},
+    {a:2,q:'Does each agent have a hard budget — money, API calls, or actions per day — that stops it automatically when the limit is hit?'},
+    {a:2,q:'Is there a kill switch a human can hit that halts an agent immediately — and has anyone actually tested it?'},
+    {a:3,q:'Do you keep a durable log of what each agent did — the actual request or command, the time, and whose approval it ran under?'},
+    {a:3,q:'Could you reconstruct your agent\u2019s worst day from records alone, without asking the agent what it did?'},
+    {a:4,q:'When a check fails or the agent is unsure, does it stop and escalate by default — instead of proceeding and hoping for the best?'},
+    {a:4,q:'Have your agents been adversarially tested — prompt injection, runaway loops, tool misuse — before production, and re-tested after changes?'}
+  ];
+  var form=document.getElementById('quiz'), prog=document.getElementById('progress'), res=document.getElementById('result');
+  QS.forEach(function(item,i){
+    var fs=document.createElement('fieldset'); fs.className='q';
+    var lg=document.createElement('legend');
+    lg.innerHTML='<span class="area">'+AREAS[item.a].name+'</span>'+(i+1)+'. '+item.q;
+    fs.appendChild(lg);
+    var opts=document.createElement('div'); opts.className='opts';
+    [['Yes',2],['Partly',1],['No',0]].forEach(function(pair){
+      var lab=document.createElement('label'); lab.className='opt';
+      var inp=document.createElement('input'); inp.type='radio'; inp.name='q'+i; inp.value=pair[1];
+      inp.addEventListener('change',updateProgress);
+      lab.appendChild(inp); lab.appendChild(document.createTextNode(pair[0]));
+      opts.appendChild(lab);
+    });
+    fs.appendChild(opts); form.appendChild(fs);
+  });
+  function answers(){var out=[];for(var i=0;i<QS.length;i++){var sel=form.querySelector('input[name="q'+i+'"]:checked');out.push(sel?parseInt(sel.value,10):null);}return out;}
+  function updateProgress(){var a=answers(),n=a.filter(function(v){return v!==null;}).length;prog.textContent=n+' of 10 answered';}
+  function bandFor(s){
+    if(s<=6)return{n:'Exposed',c:'var(--red)',t:'Your agents can act, but nothing reliably bounds, gates, or records what they do. One bad run — a loop, an injection, a confident mistake — becomes an incident you can neither stop quickly nor explain afterward.'};
+    if(s<=11)return{n:'Ungoverned',c:'var(--amber)',t:'Some controls exist, but they\u2019re partial — written down rather than enforced, or covering some agents and not others. Incidents are a matter of time, and investigations will involve guesswork.'};
+    if(s<=16)return{n:'Partially governed',c:'var(--amber)',t:'The core controls are in place. What\u2019s left is the unglamorous part: closing the gaps in your weakest areas below and making sure the controls hold for every agent, not just the ones you set up carefully.'};
+    return{n:'Governed',c:'var(--green)',t:'Identity, gates, limits, trails, and fail-closed defaults are all in place. Keep it that way: re-test after every change, and re-run this check whenever a new agent or tool ships.'};
+  }
+  document.getElementById('score-btn').addEventListener('click',function(){
+    var a=answers();
+    if(a.some(function(v){return v===null;})){prog.textContent='Answer all 10 questions to get your score — your weakest areas are computed from your answers.';res.classList.remove('show');return;}
+    var total=a.reduce(function(x,y){return x+y;},0);
+    var per=AREAS.map(function(_,ai){return QS.reduce(function(s,item,i){return s+(item.a===ai?a[i]:0);},0);});
+    var order=per.map(function(v,ai){return ai;}).sort(function(x,y){return per[x]-per[y];});
+    var band=bandFor(total);
+    var html='<div class="k" style="font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)">Your AI readiness score</div>'
+      +'<div id="score-big">'+total+' <span style="font-size:1.2rem;color:var(--muted)">/ 20</span></div>'
+      +'<div id="band" style="color:'+band.c+'">'+band.n+'</div>'
+      +'<p style="margin-top:10px">'+band.t+'</p>'
+      +'<h3 style="margin-top:20px">Score by area</h3>';
+    AREAS.forEach(function(ar,ai){
+      html+='<div class="bar-row"><span>'+ar.name+'</span><span class="bar"><i style="width:'+(per[ai]/4*100)+'%"></i></span><span>'+per[ai]+' / 4</span></div>';
+    });
+    html+='<h3 style="margin-top:22px">Your 3 weakest areas — fix in this order</h3>';
+    order.slice(0,3).forEach(function(ai,rank){
+      html+='<div class="weak"><h3>'+(rank+1)+'. '+AREAS[ai].name+' — '+per[ai]+' / 4</h3><p>'+AREAS[ai].fix+'</p></div>';
+    });
+    html+='<div class="ladder">'
+      +'<div class="step"><span class="k">Step 1 — free</span><br><a href="https://koalstin.gumroad.com/l/ihqce" referrerpolicy="no-referrer"><strong>Playbook Free Sample ($0)</strong></a> — the opening sections of the Playbook: bounds, gates, and the audit habit, free.</div>'
+      +'<div class="step"><span class="k">Step 2 — the full system</span><br><a href="https://koalstin.gumroad.com/l/hdigmr" referrerpolicy="no-referrer"><strong>Governed Agent Mesh Playbook — Studio Edition ($29)</strong></a> — every control this score checks, with the templates to implement them.</div>'
+      +'<div class="step"><span class="k">Step 3 — get tested</span><br><a href="https://koalstin.gumroad.com/l/nhyvks" referrerpolicy="no-referrer"><strong>AI Break-Test — Starter ($49)</strong></a> — we attack your bot the way the failures in the wild actually happen, and hand you the report.</div>'
+      +'<div class="step"><span class="k">Step 4 — done for you</span><br><a href="../../services/ai-agency.html"><strong>AI agency services</strong></a> — websites, front-desk agents, and governed automation built for your business.</div>'
+      +'</div>';
+    res.innerHTML=html; res.classList.add('show');
+    res.scrollIntoView({behavior:'smooth',block:'start'});
+  });
+})();
+</script>
+<script>(function(){var b=document.getElementById('backtop');function s(){b.classList.toggle('show',window.scrollY>1200)}window.addEventListener('scroll',s,{passive:true});s();b.addEventListener('click',function(){window.scrollTo({top:0,behavior:'smooth'})});})();</script>
+<script>document.getElementById('yr').textContent=new Date().getFullYear();</script>
+<script>try{var _d=new Date().toISOString().slice(0,10);if(!localStorage.getItem("gc_pv_"+_d)){localStorage.setItem("gc_pv_"+_d,"1");fetch("https://kestrelattice-approvals.koalstin-g-k-delaney.workers.dev/pv?p="+encodeURIComponent(location.pathname),{mode:"no-cors",keepalive:true}).catch(function(){})}}catch(e){}</script>
+</body>
+</html>
