@@ -572,6 +572,32 @@ ul.feed li:last-child{border-bottom:0}
 @media (prefers-reduced-motion:reduce){
   *{animation:none!important;transition:none!important}
 }
+/* ---------- TV view (big screen / Xbox) ---------- */
+.tvbtn{flex:0 0 auto;border-radius:12px;border:1px solid var(--line2);background:var(--panel2);
+  color:var(--text);cursor:pointer;font-family:inherit;font-weight:700;font-size:.85rem;
+  padding:10px 14px;min-height:44px}
+.tvbtn:hover{border-color:var(--accent);color:var(--accent)}
+#tv-view{display:none}
+body.tv{background:#000}
+body.tv .sidebar,body.tv .topbar,body.tv .tabbar,body.tv .foot,body.tv #toasts{display:none!important}
+body.tv .main{max-width:none;margin:0;padding:30px 48px 80px}
+body.tv .bpane{display:none!important}
+body.tv #tv-view{display:block}
+.tv-label{font-size:2rem;font-weight:800;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--accent);margin:46px 0 8px}
+.tv-label:first-of-type{margin-top:0}
+.tv-big{font-size:6.4rem;font-weight:900;line-height:1.02}
+.tv-mid{font-size:3.1rem;font-weight:800;line-height:1.15}
+.tv-mid a{color:var(--accent)}
+.tv-sub{font-size:1.8rem;color:var(--muted);margin-top:8px}
+.tv-feed{list-style:none}
+.tv-feed li{font-size:1.6rem;line-height:1.45;padding:15px 0;
+  border-bottom:1px solid var(--line);overflow-wrap:break-word}
+.tv-bot{font-weight:800;color:var(--accent);text-transform:uppercase;letter-spacing:.06em}
+.tv-ts{color:var(--faint);font-size:1.25rem}
+#tv-exit{position:fixed;top:20px;right:24px;z-index:99;font-size:1.35rem;font-weight:700;
+  padding:16px 26px;border-radius:14px;border:1px solid var(--line2);
+  background:var(--panel2);color:var(--text);cursor:pointer;font-family:inherit}
 """
 
 JS = """
@@ -668,6 +694,35 @@ document.addEventListener('DOMContentLoaded', function(){
     }
   });
 });
+/* ---------- TV view (big screen / Xbox) ---------- */
+var __tvTimer = null;
+function tvStartRefresh(){
+  if (__tvTimer) return;
+  __tvTimer = setInterval(function(){ location.reload(); }, 60000);
+}
+function tvOn(){
+  try { localStorage.setItem('gc_tv', '1'); } catch(e){}
+  document.body.classList.add('tv');
+  try {
+    if (document.documentElement.requestFullscreen) {
+      var p = document.documentElement.requestFullscreen();
+      if (p && p.catch) p.catch(function(){});
+    }
+  } catch(e){}
+  tvStartRefresh();
+}
+function tvOff(){
+  try { localStorage.removeItem('gc_tv'); } catch(e){}
+  document.body.classList.remove('tv');
+  if (__tvTimer) { clearInterval(__tvTimer); __tvTimer = null; }
+  try { if (document.exitFullscreen && document.fullscreenElement) document.exitFullscreen(); } catch(e){}
+}
+(function(){
+  var on = false;
+  try { on = localStorage.getItem('gc_tv') === '1'; } catch(e){}
+  if (!on) { try { on = new URLSearchParams(location.search).get('tv') === '1'; } catch(e){} }
+  if (on) { document.body.classList.add('tv'); tvStartRefresh(); }
+})();
 """
 
 
@@ -2271,6 +2326,69 @@ def _brand_panes(slug, products, entries, queue, title_map, omap):
     }
 
 
+def _tv_view(products, queue):
+    """Big-screen TV view: the same numbers the panel already computes,
+    rendered huge for across-the-room reading on a TV / Xbox Edge.
+    Sales/orders from the live product data + the same read-only Gumroad
+    sales call the Revenue section uses; tap count identical to the KPI
+    strip; activity from the same fleet logs as the Overview feed.
+    Rotwood has no data in this build, so it is a link out to the public
+    watch page only — nothing invented."""
+    total_cents = 0
+    total_n = 0
+    for p in products or []:
+        total_cents += p.get("sales_usd_cents") or 0
+        total_n += p.get("sales_count") or 0
+    today = datetime.now(timezone.utc).strftime("%Y-%m-%d")
+    t_cents = 0
+    t_n = 0
+    try:
+        s = S.gumroad("sales", f"after={today}") or {}
+        sl = s.get("sales", []) if isinstance(s, dict) else []
+        t_n = len(sl)
+        t_cents = sum(x.get("price", 0) for x in sl)
+    except Exception:
+        pass
+    blocked = [i for i in queue if str(i.get("status", "")).startswith("blocked")]
+    human_pending = [i for i in queue
+                     if i.get("status") == "pending"
+                     and i.get("kind") in S.HUMAN_KINDS]
+    taps = len(blocked) + len(human_pending)
+    feeds = []
+
+    def take(rel, n, name):
+        lines = [l for l in S.read_file(os.path.join(HF, rel)).splitlines()
+                 if l.strip()]
+        for l in lines[-n:]:
+            m = re.match(r"(\d{4}-\d{2}-\d{2}T\d{2}:\d{2})", l)
+            ts = m.group(1).replace("T", " ") if m else ""
+            feeds.append((ts, name, l[:170]))
+
+    take("approvals/watcher-runs.log", 10, "watcher")
+    take("site-improvements/scout.log", 6, "ui-scout")
+    take("outreach/sync.log", 6, "outreach")
+    feeds.sort(key=lambda x: x[0], reverse=True)
+    rows = "".join(
+        f'<li><span class="tv-bot">{esc(nm)}</span> '
+        f'<span class="tv-ts">{esc(ts)}</span><br>{esc(tx)}</li>'
+        for ts, nm, tx in feeds[:15]) or "<li>No fleet activity yet.</li>"
+    return (
+        '<section id="tv-view">'
+        '<button id="tv-exit" onclick="tvOff()">✕ Exit TV view</button>'
+        '<div class="tv-label">Sales today</div>'
+        f'<div class="tv-big">${t_cents / 100:,.0f}</div>'
+        f'<div class="tv-sub">{t_n} orders today · '
+        f'${total_cents / 100:,.0f} lifetime · {total_n} orders all-time</div>'
+        '<div class="tv-label">Bots working</div>'
+        f'<ul class="tv-feed">{rows}</ul>'
+        '<div class="tv-label">Rotwood</div>'
+        '<div class="tv-mid"><a href="https://koalstingkdelaney-gif.github.io/kestrelattice/rotwood/" '
+        'target="_blank" rel="noopener">Rotwood live</a></div>'
+        '<div class="tv-label">Needs your tap</div>'
+        f'<div class="tv-big">{taps}</div>'
+        '</section>')
+
+
 def build():
     products = S.gumroad_all_products()
     queue = S.get_queue()
@@ -2310,7 +2428,8 @@ def build():
         '<div class="sbrand">ghostcorpnet <span class="admin-tag">admin</span></div>'
         '<div class="refresh-row"><span class="updated">Updated …</span>'
         '<button class="iconbtn" onclick="location.reload()" title="Refresh" '
-        'style="width:38px;height:38px">↻</button></div>'
+        'style="width:38px;height:38px">↻</button>'
+        '<button class="tvbtn" onclick="tvOn()" title="Big-screen TV view">📺 TV view</button></div>'
         '<div class="slabel">Brands</div>' + brand_btns
         + '<div class="slabel">Views</div>' + tab_btns
         + '<div class="sfoot">One URL, one app.<br>Wrong key → 404. '
@@ -2326,6 +2445,7 @@ def build():
         f'<select id="brandpick" class="brandpick" '
         'onchange="switchView(this.value,App.tab)">' + opts + "</select>"
         '<button class="iconbtn" onclick="location.reload()" title="Refresh">↻</button>'
+        '<button class="tvbtn" onclick="tvOn()" title="Big-screen TV view">📺 TV</button>'
         "</div>")
     tabbar = (
         '<nav class="tabbar"><div class="tabbar-in">' + "".join(
@@ -2342,7 +2462,7 @@ def build():
         for tid in ("overview", "approvals", "outreach", "products"):
             panes.append(f'<section class="bpane" id="pane-{b["slug"]}-{tid}">'
                          + brand_panes[b["slug"]][tid] + "</section>")
-    panes_html = "\n".join(panes)
+    panes_html = _tv_view(products, queue) + "\n" + "\n".join(panes)
 
     doc = (
         "<!DOCTYPE html><html lang='en' dir='ltr'><head><meta charset='utf-8'>"
