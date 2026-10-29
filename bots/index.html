@@ -53,7 +53,7 @@
     margin-top:.3rem;letter-spacing:.02em;
   }
 
-  /* ---- Run the fleet (command sign-in) ---- */
+  /* ---- Admin panel (private sign-in) ---- */
   .runfleet{
     background:var(--panel2);border:3px solid var(--accent2);border-radius:16px;
     padding:1.3rem 1.6rem;margin-bottom:1.6rem;
@@ -126,10 +126,11 @@
     <div id="bot-count">🟢 Loading the fleet…</div>
   </header>
 
-  <section class="runfleet" aria-labelledby="run-h">
-    <h2 id="run-h">🎙 Run it from here <span class="sub">— one sign-in, then you command the whole fleet from this Xbox</span></h2>
-    <p class="how">Tap the button and sign in once — this Xbox remembers it on this device. Then tap <strong>🎙 Talk to the fleet</strong> in TV view to give orders: answers come back in about 2 minutes, and orders are tasked to the bots in about 15 minutes.</p>
-    <a class="runbtn" href="../admin-login.html">🎙 RUN THE FLEET — Talk to the bots<span class="hint">Sign in once, then give the fleet its orders</span></a>
+  <section class="runfleet" aria-labelledby="panel-h">
+    <h2 id="panel-h">🔒 My admin panel — private</h2>
+    <p class="how">Tap the button and sign in once with your private key — this Xbox remembers it on this device, so you won't have to type it again. <strong>Don't share that key, or the panel link, with anyone.</strong></p>
+    <p class="how">Inside the panel you can see and control everything from this Xbox: the TV view shows <strong>sales today, the bots working, and what needs your tap</strong> — the approve buttons work right there — and <strong>🎙 Talk to the fleet</strong> gives the bots their orders: answers come back in about 2 minutes, and orders are tasked to the bots in about 15 minutes.</p>
+    <a class="runbtn" href="../admin-login.html">🔒 Open my admin panel<span class="hint">Private — sign in once, this Xbox remembers you</span></a>
   </section>
 
   <section aria-labelledby="money-h">
