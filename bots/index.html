@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ghostcorpnet — Bots Live</title>
+<meta name="description" content="Watch the ghostcorpnet bots work — live activity feed and the Rotwood AI survivor world, built for the big screen.">
+<meta name="robots" content="index,follow">
+<style>
+  :root{
+    --bg:#07090c;
+    --panel:#10151c;
+    --panel2:#151c26;
+    --line:#26303d;
+    --text:#f2f6fa;
+    --muted:#a9b8c6;
+    --accent:#57e6a9;
+    --accent2:#ffd257;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{font-size:20px}
+  body{
+    background:var(--bg);
+    color:var(--text);
+    font-family:"Segoe UI",system-ui,-apple-system,Roboto,Helvetica,Arial,sans-serif;
+    padding:2.2rem 2.6rem 3rem;
+    line-height:1.35;
+  }
+  .wrap{max-width:1500px;margin:0 auto}
+
+  header.top{
+    display:flex;flex-wrap:wrap;align-items:baseline;gap:1rem 2rem;
+    border-bottom:4px solid var(--accent);
+    padding-bottom:1.2rem;margin-bottom:2rem;
+  }
+  header.top h1{
+    font-size:3.4rem;letter-spacing:.04em;font-weight:800;text-transform:uppercase;
+  }
+  header.top h1 .live{color:var(--accent)}
+  .dot{
+    display:inline-block;width:1.1rem;height:1.1rem;border-radius:50%;
+    background:var(--accent);margin-right:.6rem;vertical-align:baseline;
+    animation:pulse 1.6s ease-in-out infinite;
+  }
+  @keyframes pulse{0%,100%{opacity:1}50%{opacity:.25}}
+  #clock{
+    margin-left:auto;font-size:2.4rem;font-weight:700;color:var(--accent2);
+    font-variant-numeric:tabular-nums;white-space:nowrap;
+  }
+  .tagline{font-size:1.5rem;color:var(--muted);margin-top:.4rem;width:100%}
+
+  section{margin-bottom:2.6rem}
+  h2{
+    font-size:2.3rem;font-weight:800;text-transform:uppercase;letter-spacing:.05em;
+    margin-bottom:1.1rem;color:var(--text);
+  }
+  h2 .sub{font-size:1.3rem;color:var(--muted);text-transform:none;letter-spacing:0;font-weight:600}
+
+  /* ---- Latest bot work feed ---- */
+  #feed{display:flex;flex-direction:column;gap:.8rem}
+  .item{
+    background:var(--panel);border:2px solid var(--line);border-radius:14px;
+    padding:1rem 1.4rem;display:flex;flex-wrap:wrap;gap:.4rem 1.4rem;align-items:baseline;
+  }
+  .item .msg{font-size:1.45rem;font-weight:650;flex:1 1 60%}
+  .item .when{font-size:1.25rem;color:var(--muted);white-space:nowrap;font-variant-numeric:tabular-nums}
+  .item:first-child{border-color:var(--accent);background:var(--panel2)}
+  .feed-note{font-size:1.4rem;color:var(--muted)}
+
+  /* ---- Rotwood stats ---- */
+  .stats{
+    display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1rem;
+  }
+  .stat{
+    background:var(--panel);border:2px solid var(--line);border-radius:14px;
+    padding:1.1rem 1.4rem;
+  }
+  .stat .label{font-size:1.25rem;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;font-weight:700}
+  .stat .value{font-size:3rem;font-weight:800;font-variant-numeric:tabular-nums}
+  .stat .value.small{font-size:2.2rem;text-transform:capitalize}
+
+  /* ---- Big links ---- */
+  .links{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1.2rem}
+  .biglink{
+    display:block;text-decoration:none;color:var(--text);
+    background:var(--panel2);border:3px solid var(--accent);border-radius:16px;
+    padding:1.6rem 1.6rem;font-size:2rem;font-weight:800;text-align:center;
+  }
+  .biglink .hint{display:block;font-size:1.25rem;color:var(--muted);font-weight:600;margin-top:.4rem}
+  .biglink:focus{outline:5px solid var(--accent2);outline-offset:3px}
+
+  footer{margin-top:2rem;border-top:2px solid var(--line);padding-top:1rem}
+  footer p{font-size:1.25rem;color:var(--muted)}
+  #updated{font-variant-numeric:tabular-nums}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="top">
+    <h1><span class="dot" aria-hidden="true"></span>ghostcorpnet — <span class="live">Bots Live</span></h1>
+    <div id="clock" aria-label="Current time">--:--</div>
+    <p class="tagline">The bots are working right now. This screen refreshes itself every minute.</p>
+  </header>
+
+  <section aria-labelledby="work-h">
+    <h2 id="work-h">🛠️ Latest bot work <span class="sub">— newest first</span></h2>
+    <div id="feed"><p class="feed-note">Loading the latest bot work…</p></div>
+  </section>
+
+  <section aria-labelledby="rotwood-h">
+    <h2 id="rotwood-h">🌲 Rotwood live <span class="sub">— 20 AI survivors, playing on their own</span></h2>
+    <div class="stats" id="rotwood-stats">
+      <div class="stat"><div class="label">World</div><div class="value small">Loading…</div></div>
+    </div>
+    <p style="margin-top:1.1rem;font-size:1.5rem"><a href="../rotwood/" style="color:var(--accent);font-weight:700">▶ Watch the world</a></p>
+  </section>
+
+  <section aria-labelledby="go-h">
+    <h2 id="go-h">Go</h2>
+    <div class="links">
+      <a class="biglink" href="../rotwood/watch/">🎥 Rotwood Watch<span class="hint">Follow a survivor in 3D</span></a>
+      <a class="biglink" href="../products/">🛒 Products<span class="hint">Everything the bots have made</span></a>
+      <a class="biglink" href="../services/ai-agency.html">🤝 Services<span class="hint">Websites, front desk &amp; video</span></a>
+    </div>
+  </section>
+
+  <footer>
+    <p>Public screen — live bot activity and the Rotwood world only. <span id="updated"></span></p>
+  </footer>
+
+</div>
+
+<script>
+(function(){
+  "use strict";
+
+  /* ---------- clock ---------- */
+  var clockEl = document.getElementById("clock");
+  function tickClock(){
+    var d = new Date();
+    var hh = d.getHours(), mm = d.getMinutes();
+    var ap = hh >= 12 ? "PM" : "AM";
+    hh = hh % 12; if (hh === 0) hh = 12;
+    clockEl.textContent = hh + ":" + (mm < 10 ? "0" : "") + mm + " " + ap;
+  }
+  tickClock();
+  setInterval(tickClock, 10000);
+
+  function relTime(iso){
+    var then = new Date(iso).getTime();
+    if (isNaN(then)) return "";
+    var s = Math.max(0, Math.floor((Date.now() - then) / 1000));
+    if (s < 60) return "just now";
+    var m = Math.floor(s / 60);
+    if (m < 60) return m + (m === 1 ? " min ago" : " mins ago");
+    var h = Math.floor(m / 60);
+    if (h < 24) return h + (h === 1 ? " hour ago" : " hours ago");
+    var d = Math.floor(h / 24);
+    return d + (d === 1 ? " day ago" : " days ago");
+  }
+
+  function botLabel(msg){
+    var m = msg.toLowerCase();
+    if (m.indexOf("rotwood") === 0) return "🌲 Rotwood bot";
+    if (m.indexOf("catalog update") === 0) return "🛒 Catalog bot";
+    if (m.indexOf("catalog") === 0) return "🛒 Catalog bot";
+    if (m.indexOf("cover") === 0) return "🎨 Cover bot";
+    if (m.indexOf("dashboard") === 0) return "📊 Dashboard bot";
+    if (m.indexOf("bots live") === 0) return "📺 TV page bot";
+    if (m.indexOf("stamp") === 0 || m.indexOf("freshness") === 0) return "🕒 Freshness bot";
+    return null;
+  }
+
+  /* ---------- Section 1: latest bot work (public GitHub commits) ---------- */
+  var feedEl = document.getElementById("feed");
+  var COMMITS_URL = "https://api.github.com/repos/koalstingkdelaney-gif/kestrelattice/commits?per_page=20";
+
+  function loadFeed(){
+    fetch(COMMITS_URL, {headers: {"Accept": "application/vnd.github+json"}})
+      .then(function(r){ if (!r.ok) throw new Error("http " + r.status); return r.json(); })
+      .then(function(commits){
+        if (!commits || !commits.length) throw new Error("empty");
+        feedEl.innerHTML = "";
+        commits.forEach(function(c){
+          var full = (c.commit && c.commit.message) ? c.commit.message : "";
+          var first = full.split("\n")[0].trim();
+          if (!first) return;
+          var when = c.commit && c.commit.author ? c.commit.author.date : "";
+          var label = botLabel(first);
+
+          var row = document.createElement("div");
+          row.className = "item";
+          var msg = document.createElement("span");
+          msg.className = "msg";
+          msg.textContent = label ? (label + " — " + first) : first;
+          var t = document.createElement("span");
+          t.className = "when";
+          t.textContent = relTime(when);
+          row.appendChild(msg);
+          row.appendChild(t);
+          feedEl.appendChild(row);
+        });
+        if (!feedEl.children.length) throw new Error("empty");
+        stampUpdated();
+      })
+      .catch(function(){
+        if (!feedEl.querySelector(".item")) {
+          feedEl.innerHTML = "";
+          var p = document.createElement("p");
+          p.className = "feed-note";
+          p.textContent = "The work feed is resting — it will try again in a minute.";
+          feedEl.appendChild(p);
+        }
+      });
+  }
+
+  /* ---------- Section 2: Rotwood live ---------- */
+  var statsEl = document.getElementById("rotwood-stats");
+
+  function statBox(label, value, small){
+    var box = document.createElement("div");
+    box.className = "stat";
+    var l = document.createElement("div");
+    l.className = "label";
+    l.textContent = label;
+    var v = document.createElement("div");
+    v.className = "value" + (small ? " small" : "");
+    v.textContent = value;
+    box.appendChild(l);
+    box.appendChild(v);
+    return box;
+  }
+
+  function loadRotwood(){
+    fetch("../rotwood/live.json", {cache: "no-store"})
+      .then(function(r){ if (!r.ok) throw new Error("http " + r.status); return r.json(); })
+      .then(function(d){
+        var zombies = Array.isArray(d.zombies) ? d.zombies.length : d.zombies;
+        var bases = d.stats && typeof d.stats.bases_claimed !== "undefined" ? d.stats.bases_claimed : null;
+        var kills = d.stats && typeof d.stats.kills !== "undefined" ? d.stats.kills : null;
+        var weather = d.weather && d.weather.label ? d.weather.label : null;
+
+        statsEl.innerHTML = "";
+        if (typeof d.day !== "undefined") statsEl.appendChild(statBox("Day", String(d.day)));
+        if (typeof d.alive !== "undefined") statsEl.appendChild(statBox("Survivors alive", d.alive + " / 20"));
+        if (typeof zombies !== "undefined" && zombies !== null) statsEl.appendChild(statBox("Zombies", String(zombies)));
+        if (bases !== null) statsEl.appendChild(statBox("Bases built", String(bases)));
+        if (kills !== null) statsEl.appendChild(statBox("Zombie kills", String(kills)));
+        if (weather) statsEl.appendChild(statBox("Weather", weather, true));
+        if (typeof d.tick !== "undefined") statsEl.appendChild(statBox("Tick", String(d.tick)));
+        stampUpdated();
+      })
+      .catch(function(){
+        if (!statsEl.querySelector(".stat .value") || statsEl.textContent.indexOf("Loading") !== -1) {
+          statsEl.innerHTML = "";
+          statsEl.appendChild(statBox("World", "Resting — try again in a minute", true));
+        }
+      });
+  }
+
+  var updatedEl = document.getElementById("updated");
+  function stampUpdated(){
+    var d = new Date();
+    var hh = d.getHours(), mm = d.getMinutes(), ss = d.getSeconds();
+    var ap = hh >= 12 ? "PM" : "AM";
+    hh = hh % 12; if (hh === 0) hh = 12;
+    updatedEl.textContent = "Last refreshed " + hh + ":" +
+      (mm < 10 ? "0" : "") + mm + ":" + (ss < 10 ? "0" : "") + ss + " " + ap + ".";
+  }
+
+  loadFeed();
+  loadRotwood();
+  setInterval(function(){ loadFeed(); loadRotwood(); }, 60000);
+})();
+</script>
+</body>
+</html>
