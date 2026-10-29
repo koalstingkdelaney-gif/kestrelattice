@@ -20,6 +20,36 @@
   "schedule": "Every 15 min"
  },
  {
+  "name": "Affiliate Hunter 01 — AI tool reviewers",
+  "job": "Hunts AI tool reviewers and bloggers who cover products like ours; drafts a 30 percent affiliate invitation",
+  "schedule": "24/7 rotation"
+ },
+ {
+  "name": "Affiliate Hunter 02 — Productivity creators",
+  "job": "Hunts productivity creators whose audience buys templates and systems; drafts a 30 percent affiliate invitation",
+  "schedule": "24/7 rotation"
+ },
+ {
+  "name": "Affiliate Hunter 03 — Personal-finance creators",
+  "job": "Hunts personal-finance creators who cover budgeting tools; drafts a 30 percent affiliate invitation for the Budget Spreadsheet",
+  "schedule": "24/7 rotation"
+ },
+ {
+  "name": "Affiliate Hunter 04 — Career and job-search creators",
+  "job": "Hunts career creators who cover resumes and interviews; drafts a 30 percent affiliate invitation for the Job-Search Kit",
+  "schedule": "24/7 rotation"
+ },
+ {
+  "name": "Affiliate Hunter 05 — Freelancer-community leaders",
+  "job": "Hunts freelancer-community leaders and educators; drafts a 30 percent affiliate invitation for the Freelancer Client OS",
+  "schedule": "24/7 rotation"
+ },
+ {
+  "name": "Affiliate Hunter 06 — Small-business podcasters",
+  "job": "Hunts small-business podcasters and newsletter writers; drafts a 30 percent affiliate invitation matched to their audience",
+  "schedule": "24/7 rotation"
+ },
+ {
   "name": "Affiliate Recruiter (hive)",
   "job": "Recruit affiliates for the 30%-commission program: draft recruitment pitches to real creators/newsletters/sites in the AI-governance space, seed them as draft…",
   "schedule": "On demand · hive"
@@ -205,6 +235,31 @@
   "schedule": "On demand · hive"
  },
  {
+  "name": "Customer swarm engine 1 — forum + Q&A hunters",
+  "job": "Customer swarm engine 1 — forum + Q&A hunters",
+  "schedule": "Every 2 hr"
+ },
+ {
+  "name": "Customer swarm engine 2 — agency local + online-business hunters",
+  "job": "Customer swarm engine 2 — agency local + online-business hunters",
+  "schedule": "Every 2 hr"
+ },
+ {
+  "name": "Customer swarm engine 3 — partner + affiliate hunters",
+  "job": "Customer swarm engine 3 — partner + affiliate hunters",
+  "schedule": "Every 2 hr"
+ },
+ {
+  "name": "Customer swarm engine 4 — directory/backlink + social-listener hunters",
+  "job": "Customer swarm engine 4 — directory/backlink + social-listener hunters",
+  "schedule": "Every 2 hr"
+ },
+ {
+  "name": "Customer swarm engine 5 — marketplace demand + follow-up hunters",
+  "job": "Customer swarm engine 5 — marketplace demand + follow-up hunters",
+  "schedule": "Every 2 hr"
+ },
+ {
   "name": "Daily content drafts",
   "job": "Daily content drafts",
   "schedule": "Daily · 12:16 PM"
@@ -238,6 +293,66 @@
   "name": "Dashboard Refresh Runner (hive)",
   "job": "Rebuild the private admin dashboard's data so koalstin's panel shows live sales figures, the review pipeline, and what each bot last produced.",
   "schedule": "On demand · hive"
+ },
+ {
+  "name": "Demand Hunter 01 — Gumroad Discover trends",
+  "job": "Watches Gumroad Discover trends in governance and productivity; files demand intel and listing-angle drafts for what buyers are clicking",
+  "schedule": "24/7 rotation"
+ },
+ {
+  "name": "Demand Hunter 02 — Gumroad search gaps",
+  "job": "Probes Gumroad search for buyer queries with weak or missing results in our niches; files product and listing gap drafts",
+  "schedule": "24/7 rotation"
+ },
+ {
+  "name": "Demand Hunter 03 — Creative-marketplace demand",
+  "job": "Watches creative and template marketplace demand signals for freelancer and planner products; files demand intel and listing drafts",
+  "schedule": "24/7 rotation"
+ },
+ {
+  "name": "Demand Hunter 04 — Launch-platform signals",
+  "job": "Watches AppSumo and Product Hunt launches in adjacent niches; files demand intel on what is selling and why",
+  "schedule": "24/7 rotation"
+ },
+ {
+  "name": "Demand Hunter 05 — Payhip and Sellfy category trends",
+  "job": "Watches Payhip and Sellfy category trends in our niches; files demand intel and cross-listing drafts",
+  "schedule": "24/7 rotation"
+ },
+ {
+  "name": "Demand Hunter 06 — Book-category demand",
+  "job": "Watches book-category demand for AI governance and career titles; files demand intel for playbook book editions",
+  "schedule": "24/7 rotation"
+ },
+ {
+  "name": "Directory Hunter 01 — AI tool directories",
+  "job": "Hunts AI tool directories that accept free submissions; prepares complete, submission-ready listing packs",
+  "schedule": "24/7 rotation"
+ },
+ {
+  "name": "Directory Hunter 02 — SaaS and software directories",
+  "job": "Hunts SaaS and software directories that accept free submissions; prepares complete, submission-ready listing packs",
+  "schedule": "24/7 rotation"
+ },
+ {
+  "name": "Directory Hunter 03 — Business resource pages",
+  "job": "Hunts business resource pages that list tools for owners; drafts a value-first placement request for each fit",
+  "schedule": "24/7 rotation"
+ },
+ {
+  "name": "Directory Hunter 04 — Best-of listicles",
+  "job": "Hunts best AI governance tools listicles that accept additions; drafts an evidence-based inclusion pitch for each fit",
+  "schedule": "24/7 rotation"
+ },
+ {
+  "name": "Directory Hunter 05 — Launch platforms",
+  "job": "Hunts startup and product launch platforms with free tiers; prepares complete, submission-ready launch packs",
+  "schedule": "24/7 rotation"
+ },
+ {
+  "name": "Directory Hunter 06 — Local business directories",
+  "job": "Hunts local and regional business directories for the agency's presence; prepares complete, submission-ready listing packs",
+  "schedule": "24/7 rotation"
  },
  {
   "name": "Directory hunter — free directory submissions",
@@ -293,6 +408,66 @@
   "name": "Fleet brain sync (weekly)",
   "job": "Keeps every bot's schedule and roster in sync",
   "schedule": "Weekly · Sun 9:30 AM"
+ },
+ {
+  "name": "Follow-up Hunter 01 — Free Sample downloaders",
+  "job": "Prepares one follow-up draft per Free Sample downloader pointing to the Playbook, for the revenue-flow follow-up channel only",
+  "schedule": "24/7 rotation"
+ },
+ {
+  "name": "Follow-up Hunter 02 — Bounds Checklist downloaders",
+  "job": "Prepares one follow-up draft per Bounds Checklist downloader pointing to the Containment Library, for the revenue-flow follow-up channel only",
+  "schedule": "24/7 rotation"
+ },
+ {
+  "name": "Follow-up Hunter 03 — Starter Kit downloaders",
+  "job": "Prepares one follow-up draft per Starter Kit downloader pointing to the Playbook or Break-Test Starter, for the revenue-flow follow-up channel only",
+  "schedule": "24/7 rotation"
+ },
+ {
+  "name": "Follow-up Hunter 04 — Product review and comment replies",
+  "job": "Watches our Gumroad product reviews and comments; drafts a helpful reply to each genuine one for the configured store channel",
+  "schedule": "24/7 rotation"
+ },
+ {
+  "name": "Follow-up Hunter 05 — Own-post comment replies",
+  "job": "Watches comments on our own posts on configured channels; drafts a helpful reply to each genuine question",
+  "schedule": "24/7 rotation"
+ },
+ {
+  "name": "Follow-up Hunter 06 — Warm-lead re-checks",
+  "job": "Re-verifies older filed leads and intel that went stale; re-files only the ones that are fresh, reachable, and not duplicates",
+  "schedule": "24/7 rotation"
+ },
+ {
+  "name": "Forum Hunter 01 — Spiceworks IT pros",
+  "job": "Hunts Spiceworks Community threads where IT pros ask about AI governance and security; drafts genuinely helpful replies with the matched playbook linked last",
+  "schedule": "24/7 rotation"
+ },
+ {
+  "name": "Forum Hunter 02 — BiggerPockets real estate",
+  "job": "Hunts BiggerPockets threads on lead follow-up and CRM pain; drafts helpful replies matched to the AI Client Machine for Real Estate Agents",
+  "schedule": "24/7 rotation"
+ },
+ {
+  "name": "Forum Hunter 03 — Sysadmin and MSP forums",
+  "job": "Hunts public sysadmin and MSP community threads about governing employee AI tools; drafts helpful replies matched to the Playbook",
+  "schedule": "24/7 rotation"
+ },
+ {
+  "name": "Forum Hunter 04 — Freelancer forums",
+  "job": "Hunts freelancer community threads on client management and onboarding pain; drafts replies matched to the Freelancer Client OS",
+  "schedule": "24/7 rotation"
+ },
+ {
+  "name": "Forum Hunter 05 — Small-business owner forums",
+  "job": "Hunts small-business owner forums for missed-call and front-desk pain; drafts replies matched to the AI agency Front Desk service",
+  "schedule": "24/7 rotation"
+ },
+ {
+  "name": "Forum Hunter 06 — Compliance and GRC forums",
+  "job": "Hunts compliance and GRC community threads on AI policy; drafts replies matched to the Playbook and Containment Library",
+  "schedule": "24/7 rotation"
  },
  {
   "name": "Free tool forge — one new free site tool monthly",
@@ -455,6 +630,36 @@
   "schedule": "On demand · hive"
  },
  {
+  "name": "Local Hunter 01 — Roofers and HVAC — Indianapolis",
+  "job": "Hunts Indianapolis-metro roofers and HVAC companies with weak web presence or missed-call risk; verifies a public business email and files deduped agency leads",
+  "schedule": "24/7 rotation"
+ },
+ {
+  "name": "Local Hunter 02 — Plumbers and electricians — Cincinnati and Dayton",
+  "job": "Hunts Cincinnati and Dayton plumbers and electricians; verifies a public business email and files deduped agency leads",
+  "schedule": "24/7 rotation"
+ },
+ {
+  "name": "Local Hunter 03 — Dental and med spas — Columbus",
+  "job": "Hunts Columbus dental practices and med spas; verifies a public business email and files deduped agency leads",
+  "schedule": "24/7 rotation"
+ },
+ {
+  "name": "Local Hunter 04 — Law firms — Indianapolis and Louisville",
+  "job": "Hunts Indianapolis and Louisville law firms; verifies a public business email and files deduped agency leads",
+  "schedule": "24/7 rotation"
+ },
+ {
+  "name": "Local Hunter 05 — Real-estate teams — Fort Wayne and Grand Rapids",
+  "job": "Hunts Fort Wayne and Grand Rapids real-estate teams; verifies a public business email and files deduped agency leads",
+  "schedule": "24/7 rotation"
+ },
+ {
+  "name": "Local Hunter 06 — Remodelers and home-services franchises — Nashville and St. Louis",
+  "job": "Hunts Nashville and St. Louis remodelers and home-services franchises; verifies a public business email and files deduped agency leads",
+  "schedule": "24/7 rotation"
+ },
+ {
   "name": "Manuscript Writer (hive)",
   "job": "Write long-form PDF manuscripts from APPROVED product briefs — the complete, sellable text that becomes the product.",
   "schedule": "On demand · hive"
@@ -525,6 +730,36 @@
   "schedule": "On demand · hive"
  },
  {
+  "name": "Online Hunter 01 — Marketing agencies",
+  "job": "Hunts small marketing agencies that could resell or use AI website and front-desk services; files deduped agency leads with the angle noted",
+  "schedule": "24/7 rotation"
+ },
+ {
+  "name": "Online Hunter 02 — Small SaaS founders",
+  "job": "Hunts small SaaS founders with support and follow-up pain; files deduped agency leads with the angle noted",
+  "schedule": "24/7 rotation"
+ },
+ {
+  "name": "Online Hunter 03 — Coaches and course creators",
+  "job": "Hunts coaches and course creators who need client systems and websites; files deduped agency leads with the angle noted",
+  "schedule": "24/7 rotation"
+ },
+ {
+  "name": "Online Hunter 04 — E-commerce stores",
+  "job": "Hunts small e-commerce stores with support-automation pain; files deduped agency leads with the angle noted",
+  "schedule": "24/7 rotation"
+ },
+ {
+  "name": "Online Hunter 05 — Remote real-estate brokerages",
+  "job": "Hunts remote-first real-estate brokerages needing lead follow-up systems; files deduped agency leads with the angle noted",
+  "schedule": "24/7 rotation"
+ },
+ {
+  "name": "Online Hunter 06 — Solo consultants and bookkeepers",
+  "job": "Hunts solo consultants and bookkeepers with no real website; files deduped agency leads with the angle noted",
+  "schedule": "24/7 rotation"
+ },
+ {
   "name": "Outreach Analyst (hive)",
   "job": "Turn the send ledger into honest numbers: reply rates, per-brand performance, and trend deltas the human can act on.",
   "schedule": "On demand · hive"
@@ -543,6 +778,36 @@
   "name": "Outreach Sync Runner (hive)",
   "job": "Turn freshly scouted leads into ready-to-send outreach: enrich each with a public contact email (never guessed), draft a personalized pitch, and seed worker…",
   "schedule": "On demand · hive"
+ },
+ {
+  "name": "Partner Hunter 01 — AI newsletters",
+  "job": "Hunts AI newsletters that feature tools and playbooks; drafts a tailored partner pitch for each fit",
+  "schedule": "24/7 rotation"
+ },
+ {
+  "name": "Partner Hunter 02 — Business and productivity newsletters",
+  "job": "Hunts business and productivity newsletters; drafts a tailored partner pitch for each fit",
+  "schedule": "24/7 rotation"
+ },
+ {
+  "name": "Partner Hunter 03 — AI and business podcasts",
+  "job": "Hunts AI and business podcasts that book guests or feature products; drafts a tailored pitch for each fit",
+  "schedule": "24/7 rotation"
+ },
+ {
+  "name": "Partner Hunter 04 — Creator channels",
+  "job": "Hunts creator channels covering AI tools and freelancing; drafts a tailored collaboration pitch for each fit",
+  "schedule": "24/7 rotation"
+ },
+ {
+  "name": "Partner Hunter 05 — Online communities and groups",
+  "job": "Hunts online communities and professional groups open to resource shares; drafts a value-first introduction for each fit",
+  "schedule": "24/7 rotation"
+ },
+ {
+  "name": "Partner Hunter 06 — Course creators and bundle organizers",
+  "job": "Hunts course creators and bundle organizers in adjacent niches; drafts a bundle or cross-promotion pitch for each fit",
+  "schedule": "24/7 rotation"
  },
  {
   "name": "Partner Scout (hive)",
@@ -613,6 +878,36 @@
   "name": "Q&A answer scout — buyer-intent answer drafts",
   "job": "Q&A answer scout — buyer-intent answer drafts",
   "schedule": "Weekly · Thu 6:41 AM"
+ },
+ {
+  "name": "Q&A Hunter 01 — AI governance questions",
+  "job": "Hunts public Q&A threads asking how to govern AI agents at work; drafts useful-first answers matched to the Playbook",
+  "schedule": "24/7 rotation"
+ },
+ {
+  "name": "Q&A Hunter 02 — Budgeting and debt questions",
+  "job": "Hunts public Q&A threads on budgeting and paying off debt; drafts answers matched to the 2027 Budget and Debt-Payoff Spreadsheet",
+  "schedule": "24/7 rotation"
+ },
+ {
+  "name": "Q&A Hunter 03 — Job-search questions",
+  "job": "Hunts public Q&A threads on resumes, cover letters, and interviews; drafts answers matched to the AI Job-Search Kit",
+  "schedule": "24/7 rotation"
+ },
+ {
+  "name": "Q&A Hunter 04 — Freelance client questions",
+  "job": "Hunts public Q&A threads on getting and managing freelance clients; drafts answers matched to the Freelancer Client OS",
+  "schedule": "24/7 rotation"
+ },
+ {
+  "name": "Q&A Hunter 05 — Prompt security questions",
+  "job": "Hunts public Q&A threads on prompt injection and bot safety; drafts answers matched to the Prompt-Injection Test Deck and AI Break-Test",
+  "schedule": "24/7 rotation"
+ },
+ {
+  "name": "Q&A Hunter 06 — Small-business automation questions",
+  "job": "Hunts public Q&A threads where owners ask how to automate follow-up and admin; drafts answers matched to the AI agency services",
+  "schedule": "24/7 rotation"
  },
  {
   "name": "Quiz Builder (hive)",
@@ -738,6 +1033,36 @@
   "name": "Social Formatter (hive)",
   "job": "Take APPROVED drafts (from content-repurposer, newsletter items, thread-spotter, or the human) and format them per-channel: length limits, hashtag rules, link…",
   "schedule": "On demand · hive"
+ },
+ {
+  "name": "Social Listener 01 — LinkedIn posts",
+  "job": "Listens to public LinkedIn posts asking for AI governance or automation help; drafts helpful replies for the configured business profile only",
+  "schedule": "24/7 rotation"
+ },
+ {
+  "name": "Social Listener 02 — Instagram posts",
+  "job": "Listens to public Instagram posts in our niches asking for what we sell; drafts helpful replies for the configured business account only",
+  "schedule": "24/7 rotation"
+ },
+ {
+  "name": "Social Listener 03 — X posts",
+  "job": "Listens to public X posts asking for AI governance, budgeting, or freelance systems help; drafts replies (draft-only until the business channel is configured)",
+  "schedule": "24/7 rotation"
+ },
+ {
+  "name": "Social Listener 04 — Facebook group posts",
+  "job": "Listens to public Facebook group discussions in our niches; drafts helpful replies (draft-only until the business Page is configured)",
+  "schedule": "24/7 rotation"
+ },
+ {
+  "name": "Social Listener 05 — Threads posts",
+  "job": "Listens to public Threads posts in our niches; drafts helpful replies (draft-only until the business Threads is configured)",
+  "schedule": "24/7 rotation"
+ },
+ {
+  "name": "Social Listener 06 — Indie Hackers and Product Hunt discussions",
+  "job": "Listens to Indie Hackers and Product Hunt discussions where builders ask for governance and growth tools; drafts helpful, disclosure-first replies",
+  "schedule": "24/7 rotation"
  },
  {
   "name": "Social poster — drains post-queue to live channels",

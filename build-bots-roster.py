@@ -5,6 +5,8 @@ Sources (website/business fleet ONLY):
   - cron definitions under the kestrelattice-autonomous-growth goal
   - cron definitions under the leave-the-9-to-5 goal (if present)
   - hive role files (goal hive/roles/, or hidden_files/hive/roles/)
+  - the Customer Swarm roster (hidden_files/growth/customer-swarm/roster.json):
+    60 named hunter bots whose only job is getting customers
 
 Excluded: game/sandbox/court/rogue bots, video (Shorts/TikTok) bots,
 wholesaling bots, one-off runonce jobs, and disabled jobs.
@@ -28,6 +30,8 @@ ROLE_DIRS = [
     os.path.join(GOAL, "hidden_files/hive/roles"),
 ]
 OUT = os.path.join(HOME, "workspace/kestrelattice/bots/fleet.json")
+SWARM_ROSTER = os.path.join(
+    GOAL, "hidden_files/growth/customer-swarm/roster.json")
 
 # Substrings (lowercase, matched against the job/role id) that mean
 # "not a website bot" for this roster.
@@ -230,8 +234,34 @@ def role_entries():
     return out
 
 
+def swarm_entries():
+    """Customer Swarm hunters: name -> roster entry, job -> its assignment."""
+    out = []
+    if not os.path.isfile(SWARM_ROSTER):
+        return out
+    try:
+        hunters = json.load(open(SWARM_ROSTER, encoding="utf-8"))
+    except (OSError, ValueError):
+        return out
+    for h in hunters:
+        name = scrub(h.get("name", ""))
+        job = scrub(h.get("assignment", ""))
+        if not name or not job:
+            continue
+        if len(job) > 160:
+            job = job[:160].rsplit(" ", 1)[0].rstrip(",;:") + "…"
+        slug = re.sub(r"[^a-z0-9]+", "-", name.lower()).strip("-")
+        out.append({
+            "name": name,
+            "job": job,
+            "schedule": "24/7 rotation",
+            "_id": "swarm-" + slug,
+        })
+    return out
+
+
 def main():
-    entries = cron_entries() + role_entries()
+    entries = cron_entries() + role_entries() + swarm_entries()
     seen, roster = set(), []
     for e in entries:
         if e["_id"] in seen:
