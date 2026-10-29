@@ -11,13 +11,25 @@ Sources (website/business fleet ONLY):
 Excluded: game/sandbox/court/rogue bots, video (Shorts/TikTok) bots,
 wholesaling bots, one-off runonce jobs, and disabled jobs.
 Job lines are generic duty descriptions, scrubbed of emails, URLs,
-paths, and dollar amounts. Output: bots/fleet.json [{name, job, schedule}]
+paths, and dollar amounts.
+
+Output: bots/fleet.json — an object {"generated_at", "stats", "bots"}.
+"bots" is [{name, job, schedule}]. "stats" carries the owner's money
+totals for the page's money strip, computed ONLY from verified sales
+records (the approval watcher's sales ledger under hidden_files/money/,
+cross-checked against the Gumroad API when reachable): paid totals,
+paid order counts, today's paid total, free-download count, and an
+"as_of" timestamp. Aggregates only — never buyer data. The stats live
+inside fleet.json on purpose: the daily bots-roster-refresh cron commits
+fleet.json, so the money strip stays current on the same ride.
 """
 import glob
 import json
 import os
 import re
+import subprocess
 import sys
+from datetime import datetime, timedelta, timezone
 
 HOME = os.path.expanduser("~")
 GOAL = os.path.join(HOME, "workspace/goals/kestrelattice-autonomous-growth")
@@ -30,6 +42,9 @@ ROLE_DIRS = [
     os.path.join(GOAL, "hidden_files/hive/roles"),
 ]
 OUT = os.path.join(HOME, "workspace/kestrelattice/bots/fleet.json")
+MONEY_DIR = os.path.join(GOAL, "hidden_files/money")
+GUMROAD_API = os.path.join(
+    HOME, "workspace/custom-connectors/custom.legacy-gumroad/bin/gumroad-api")
 SWARM_ROSTER = os.path.join(
     GOAL, "hidden_files/growth/customer-swarm/roster.json")
 
@@ -260,6 +275,69 @@ def swarm_entries():
     return out
 
 
+def money_stats():
+    """Owner's money totals from verified sales records only.
+
+    Base record: the approval watcher's lifetime ledger
+    hidden_files/money/sales-alerts.jsonl (one row per Gumroad sale it
+    has seen: id, price_cents, at). Cross-check: the Gumroad API's
+    recent sales (last 7 days) are merged in by sale id, so a sale the
+    watcher has not logged yet still counts. Gumroad's sale "price"
+    field is in cents, same as the ledger's price_cents. A sale counts
+    as an ORDER (and toward money made) only when price_cents > 0;
+    $0 records are free downloads, counted separately and never
+    dressed up as orders. Aggregates only — no buyer data is read
+    into the output. Any failure leaves the ledger-only totals.
+    """
+    now = datetime.now(timezone.utc)
+    today = now.strftime("%Y-%m-%d")
+    records = {}  # sale id -> (price_cents, at_iso)
+
+    alerts = os.path.join(MONEY_DIR, "sales-alerts.jsonl")
+    try:
+        with open(alerts, encoding="utf-8") as f:
+            for line in f:
+                line = line.strip()
+                if not line:
+                    continue
+                try:
+                    row = json.loads(line)
+                except ValueError:
+                    continue
+                sid = row.get("id")
+                if sid:
+                    records[sid] = (int(row.get("price_cents") or 0),
+                                    row.get("at") or "")
+    except OSError:
+        pass
+
+    try:
+        after = (now - timedelta(days=7)).strftime("%Y-%m-%d")
+        out = subprocess.run(
+            ["python3", GUMROAD_API, "sales", "after=%s" % after],
+            capture_output=True, text=True, timeout=60)
+        data = json.loads(out.stdout)
+        for sale in data.get("sales", []):
+            sid = sale.get("id")
+            if sid and sid not in records:
+                records[sid] = (int(sale.get("price") or 0),
+                                sale.get("created_at") or "")
+    except Exception:
+        pass  # API unreachable — ledger-only totals stand
+
+    paid = [(c, at) for c, at in records.values() if c > 0]
+    paid_today = [(c, at) for c, at in paid if at.startswith(today)]
+    return {
+        "money_made_usd": round(sum(c for c, _ in paid) / 100.0, 2),
+        "orders": len(paid),
+        "sales_today_usd": round(sum(c for c, _ in paid_today) / 100.0, 2),
+        "orders_today": len(paid_today),
+        "free_downloads": sum(1 for c, _ in records.values() if c == 0),
+        "as_of": now.strftime("%Y-%m-%dT%H:%M:%SZ"),
+        "source": "Verified sales ledger + Gumroad sales check",
+    }
+
+
 def main():
     entries = cron_entries() + role_entries() + swarm_entries()
     seen, roster = set(), []
@@ -270,10 +348,19 @@ def main():
         roster.append({"name": e["name"], "job": e["job"],
                        "schedule": e["schedule"]})
     roster.sort(key=lambda e: e["name"].lower())
+    stats = money_stats()
+    payload = {
+        "generated_at": stats["as_of"],
+        "stats": stats,
+        "bots": roster,
+    }
     os.makedirs(os.path.dirname(OUT), exist_ok=True)
     with open(OUT, "w", encoding="utf-8") as f:
-        json.dump(roster, f, indent=1, ensure_ascii=False)
+        json.dump(payload, f, indent=1, ensure_ascii=False)
     print("roster: %d website bots -> %s" % (len(roster), OUT))
+    print("stats: $%.2f made, %d orders, $%.2f today (as of %s)"
+          % (stats["money_made_usd"], stats["orders"],
+             stats["sales_today_usd"], stats["as_of"]))
     return 0
 
 

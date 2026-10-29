@@ -1,1272 +1,1304 @@
-[
- {
-  "name": "Accessibility Auditor (hive)",
-  "job": "Run a concrete, verifiable accessibility checklist over the site on a rotating schedule so every page gets audited weekly, and seed precise fix items the…",
-  "schedule": "On demand · hive"
- },
- {
-  "name": "ActLattice daily acquisition",
-  "job": "ActLattice daily acquisition",
-  "schedule": "Daily · 11:16 AM"
- },
- {
-  "name": "ActLattice weekly brand content",
-  "job": "ActLattice weekly brand content",
-  "schedule": "Weekly · Tue 2:16 PM"
- },
- {
-  "name": "Admin dashboard refresh",
-  "job": "Rebuilds the owner's admin dashboard so it is always current",
-  "schedule": "Every 15 min"
- },
- {
-  "name": "Affiliate Hunter 01 — AI tool reviewers",
-  "job": "Hunts AI tool reviewers and bloggers who cover products like ours; drafts a 30 percent affiliate invitation",
-  "schedule": "24/7 rotation"
- },
- {
-  "name": "Affiliate Hunter 02 — Productivity creators",
-  "job": "Hunts productivity creators whose audience buys templates and systems; drafts a 30 percent affiliate invitation",
-  "schedule": "24/7 rotation"
- },
- {
-  "name": "Affiliate Hunter 03 — Personal-finance creators",
-  "job": "Hunts personal-finance creators who cover budgeting tools; drafts a 30 percent affiliate invitation for the Budget Spreadsheet",
-  "schedule": "24/7 rotation"
- },
- {
-  "name": "Affiliate Hunter 04 — Career and job-search creators",
-  "job": "Hunts career creators who cover resumes and interviews; drafts a 30 percent affiliate invitation for the Job-Search Kit",
-  "schedule": "24/7 rotation"
- },
- {
-  "name": "Affiliate Hunter 05 — Freelancer-community leaders",
-  "job": "Hunts freelancer-community leaders and educators; drafts a 30 percent affiliate invitation for the Freelancer Client OS",
-  "schedule": "24/7 rotation"
- },
- {
-  "name": "Affiliate Hunter 06 — Small-business podcasters",
-  "job": "Hunts small-business podcasters and newsletter writers; drafts a 30 percent affiliate invitation matched to their audience",
-  "schedule": "24/7 rotation"
- },
- {
-  "name": "Affiliate Recruiter (hive)",
-  "job": "Recruit affiliates for the 30%-commission program: draft recruitment pitches to real creators/newsletters/sites in the AI-governance space, seed them as draft…",
-  "schedule": "On demand · hive"
- },
- {
-  "name": "Agency vertical scout — new-vertical agency leads",
-  "job": "Agency vertical scout — new-vertical agency leads",
-  "schedule": "Daily · 5:41 AM"
- },
- {
-  "name": "AI agency daily outreach (scout + gated sends)",
-  "job": "Finds local businesses and sends agency pitches",
-  "schedule": "Daily · 9:16 AM"
- },
- {
-  "name": "AI agency Fiverr inbox check",
-  "job": "Checks the agency's Fiverr inbox for new orders",
-  "schedule": "Daily · 10:16 AM"
- },
- {
-  "name": "AI agency reply handling (intake + order flow)",
-  "job": "Handles replies to agency pitches and books intake",
-  "schedule": "Every 2 hr"
- },
- {
-  "name": "Approval watcher",
-  "job": "Executes approved work — publishes products and applies site updates",
-  "schedule": "Every 5 min"
- },
- {
-  "name": "Approval Watcher Runner (hive)",
-  "job": "Run the approval queue the way the legacy 5-minute approval watcher does: classify every pending item, EXECUTE the AUTO kinds itself, and leave HUMAN kinds…",
-  "schedule": "On demand · hive"
- },
- {
-  "name": "Article Illustrator (hive)",
-  "job": "Generate branded cover, OG, and hero images for site articles and product pages through the media pipeline, following the established conventions so every page…",
-  "schedule": "On demand · hive"
- },
- {
-  "name": "Assessment Builder (hive)",
-  "job": "Build maturity-style self-assessments with leveled outcomes: the buyer rates their organization against statements grouped by capability area and receives a…",
-  "schedule": "On demand · hive"
- },
- {
-  "name": "Audit Tool Builder (hive)",
-  "job": "Build single-file HTML self-audit tools (and companion CSV data templates): an auditor opens the HTML file locally, answers questions, and gets a scored…",
-  "schedule": "On demand · hive"
- },
- {
-  "name": "Backlink hunter — resource-page placements (drafts)",
-  "job": "Backlink hunter — resource-page placements",
-  "schedule": "Weekly · Wed 6:41 AM"
- },
- {
-  "name": "Benchmark Compiler (hive)",
-  "job": "Compile benchmark comparisons ONLY from real, measured, cited data — published eval scores, vendor-reported figures, academic papers.",
-  "schedule": "On demand · hive"
- },
- {
-  "name": "Board Deck Outliner (hive)",
-  "job": "Turn governance products into board-ready deck outlines: full PPTX slide structure (title, bullets, layout note per slide) plus speaker notes, so a buyer can…",
-  "schedule": "On demand · hive"
- },
- {
-  "name": "Brand Content Writer (hive)",
-  "job": "Feed each of the 11 bot-run brands a weekly article: real, useful, brand-voiced content that compounds organic traffic and gives every brand a living…",
-  "schedule": "On demand · hive"
- },
- {
-  "name": "Brief Approver (hive)",
-  "job": "Keep the product forge fed.",
-  "schedule": "On demand · hive"
- },
- {
-  "name": "Broken Embed Fixer (hive)",
-  "job": "Find broken embeds across the site — iframes, , , and third-party tags that no longer load — and repair or remove the embed so no page ships a dead widget.",
-  "schedule": "On demand · hive"
- },
- {
-  "name": "Bundle Optimizer (hive)",
-  "job": "Design bundle compositions from live products, priced WITHIN the approved tiers (/// for bundles — never a new tier).",
-  "schedule": "On demand · hive"
- },
- {
-  "name": "Business Foundry Runner (hive)",
-  "job": "Mint exactly ONE new bot-run micro-brand per week, end to end — niche, name, spec, 12-product draft slate, hub page, site updates, weekly brand cron —…",
-  "schedule": "On demand · hive"
- },
- {
-  "name": "Business foundry — mint one micro-brand weekly",
-  "job": "Business foundry — mint one micro-brand weekly",
-  "schedule": "Weekly · Sat 10:16 AM"
- },
- {
-  "name": "Calculator Builder (hive)",
-  "job": "Build single-file HTML calculators (ROI calculators, risk scoring calculators, compliance-cost estimators): the buyer opens the file locally, enters their…",
-  "schedule": "On demand · hive"
- },
- {
-  "name": "Cart Abandon Email Writer (hive)",
-  "job": "Recover lost checkouts with a draft-only cart-abandon email sequence: 3 emails (1h, 24h, 72h) that remind, reassure, and close — without invented discounts…",
-  "schedule": "On demand · hive"
- },
- {
-  "name": "Catalog Architect (hive)",
-  "job": "Maintain the product ladder map (7 rungs across the 96+ product catalog) and wire the \"Next step up the ladder\" cross-sell block on every product page that…",
-  "schedule": "On demand · hive"
- },
- {
-  "name": "Catalog Builder (hive)",
-  "job": "Keep the public site catalog in sync with the live Gumroad catalog after every publish: covers, product grid, product pages, sitemap.",
-  "schedule": "On demand · hive"
- },
- {
-  "name": "Checklist Designer (hive)",
-  "job": "Design actionable checklists (compliance checks, launch readiness, incident response checks, audit prep) as designed, print-friendly PDF products: every item…",
-  "schedule": "On demand · hive"
- },
- {
-  "name": "CivicWarden daily acquisition",
-  "job": "CivicWarden daily acquisition",
-  "schedule": "Daily · 5:16 PM"
- },
- {
-  "name": "CivicWarden weekly brand content",
-  "job": "CivicWarden weekly brand content",
-  "schedule": "Weekly · Fri 2:16 PM"
- },
- {
-  "name": "ClassWarden daily acquisition",
-  "job": "ClassWarden daily acquisition",
-  "schedule": "Daily · 10:16 AM"
- },
- {
-  "name": "ClassWarden weekly brand content",
-  "job": "ClassWarden weekly brand content",
-  "schedule": "Weekly · Tue 8:16 AM"
- },
- {
-  "name": "Competitor Price Tracker (hive)",
-  "job": "Maintain a machine-readable ledger of competitor public pricing over time: one JSON snapshot per vendor per run, enabling price-move detection and accurate…",
-  "schedule": "On demand · hive"
- },
- {
-  "name": "Competitor price watch — intel only",
-  "job": "Competitor price watch — intel only",
-  "schedule": "Weekly · Sun 6:41 AM"
- },
- {
-  "name": "Competitor watch",
-  "job": "Competitor watch",
-  "schedule": "Weekly · Thu 9:16 AM"
- },
- {
-  "name": "Competitor Watch (hive)",
-  "job": "Keep ghostcorpnet's pricing and positioning claims accurate by tracking competitor moves (LangSmith, Langfuse, AgentOps, Braintrust and new entrants) and…",
-  "schedule": "On demand · hive"
- },
- {
-  "name": "Content Drafter (hive)",
-  "job": "Keep the content pipeline full: daily content drafts (social posts, thread ideas, short-form angles, article outlines) queued for the content-repurposer…",
-  "schedule": "On demand · hive"
- },
- {
-  "name": "Content Refresher (hive)",
-  "job": "Keep published articles accurate over time: update stale facts, dates, model names, and regulatory references in existing articles.",
-  "schedule": "On demand · hive"
- },
- {
-  "name": "Content Repurposer (hive)",
-  "job": "Turn each published site article into per-channel social drafts (X/LinkedIn/Reddit/HN styles) that drive traffic back to the site.",
-  "schedule": "On demand · hive"
- },
- {
-  "name": "Control Matrix Mapper (hive)",
-  "job": "Build control-to-requirement mapping matrices: each control mapped to the requirements it satisfies across 2–4 frameworks/regulations — delivered as a CSV…",
-  "schedule": "On demand · hive"
- },
- {
-  "name": "Cover Uploader (hive)",
-  "job": "Get a branded cover PNG onto every live Gumroad product.",
-  "schedule": "On demand · hive"
- },
- {
-  "name": "Customer swarm engine 1 — forum + Q&A hunters",
-  "job": "Customer swarm engine 1 — forum + Q&A hunters",
-  "schedule": "Every 2 hr"
- },
- {
-  "name": "Customer swarm engine 2 — agency local + online-business hunters",
-  "job": "Customer swarm engine 2 — agency local + online-business hunters",
-  "schedule": "Every 2 hr"
- },
- {
-  "name": "Customer swarm engine 3 — partner + affiliate hunters",
-  "job": "Customer swarm engine 3 — partner + affiliate hunters",
-  "schedule": "Every 2 hr"
- },
- {
-  "name": "Customer swarm engine 4 — directory/backlink + social-listener hunters",
-  "job": "Customer swarm engine 4 — directory/backlink + social-listener hunters",
-  "schedule": "Every 2 hr"
- },
- {
-  "name": "Customer swarm engine 5 — marketplace demand + follow-up hunters",
-  "job": "Customer swarm engine 5 — marketplace demand + follow-up hunters",
-  "schedule": "Every 2 hr"
- },
- {
-  "name": "Daily content drafts",
-  "job": "Daily content drafts",
-  "schedule": "Daily · 12:16 PM"
- },
- {
-  "name": "Daily lead scout",
-  "job": "Daily lead scout",
-  "schedule": "Daily · 9:16 AM"
- },
- {
-  "name": "Daily marketplace scout",
-  "job": "Daily marketplace scout",
-  "schedule": "Daily · 10:16 AM"
- },
- {
-  "name": "Daily mention watch",
-  "job": "Daily mention watch",
-  "schedule": "Daily · 9:16 AM"
- },
- {
-  "name": "Daily micro-forge (batch factory)",
-  "job": "Daily micro-forge",
-  "schedule": "Daily · 3:16 PM"
- },
- {
-  "name": "Daily thread spotter",
-  "job": "Daily thread spotter",
-  "schedule": "Daily · 7:16 AM"
- },
- {
-  "name": "Dashboard Refresh Runner (hive)",
-  "job": "Rebuild the private admin dashboard's data so koalstin's panel shows live sales figures, the review pipeline, and what each bot last produced.",
-  "schedule": "On demand · hive"
- },
- {
-  "name": "Demand Hunter 01 — Gumroad Discover trends",
-  "job": "Watches Gumroad Discover trends in governance and productivity; files demand intel and listing-angle drafts for what buyers are clicking",
-  "schedule": "24/7 rotation"
- },
- {
-  "name": "Demand Hunter 02 — Gumroad search gaps",
-  "job": "Probes Gumroad search for buyer queries with weak or missing results in our niches; files product and listing gap drafts",
-  "schedule": "24/7 rotation"
- },
- {
-  "name": "Demand Hunter 03 — Creative-marketplace demand",
-  "job": "Watches creative and template marketplace demand signals for freelancer and planner products; files demand intel and listing drafts",
-  "schedule": "24/7 rotation"
- },
- {
-  "name": "Demand Hunter 04 — Launch-platform signals",
-  "job": "Watches AppSumo and Product Hunt launches in adjacent niches; files demand intel on what is selling and why",
-  "schedule": "24/7 rotation"
- },
- {
-  "name": "Demand Hunter 05 — Payhip and Sellfy category trends",
-  "job": "Watches Payhip and Sellfy category trends in our niches; files demand intel and cross-listing drafts",
-  "schedule": "24/7 rotation"
- },
- {
-  "name": "Demand Hunter 06 — Book-category demand",
-  "job": "Watches book-category demand for AI governance and career titles; files demand intel for playbook book editions",
-  "schedule": "24/7 rotation"
- },
- {
-  "name": "Directory Hunter 01 — AI tool directories",
-  "job": "Hunts AI tool directories that accept free submissions; prepares complete, submission-ready listing packs",
-  "schedule": "24/7 rotation"
- },
- {
-  "name": "Directory Hunter 02 — SaaS and software directories",
-  "job": "Hunts SaaS and software directories that accept free submissions; prepares complete, submission-ready listing packs",
-  "schedule": "24/7 rotation"
- },
- {
-  "name": "Directory Hunter 03 — Business resource pages",
-  "job": "Hunts business resource pages that list tools for owners; drafts a value-first placement request for each fit",
-  "schedule": "24/7 rotation"
- },
- {
-  "name": "Directory Hunter 04 — Best-of listicles",
-  "job": "Hunts best AI governance tools listicles that accept additions; drafts an evidence-based inclusion pitch for each fit",
-  "schedule": "24/7 rotation"
- },
- {
-  "name": "Directory Hunter 05 — Launch platforms",
-  "job": "Hunts startup and product launch platforms with free tiers; prepares complete, submission-ready launch packs",
-  "schedule": "24/7 rotation"
- },
- {
-  "name": "Directory Hunter 06 — Local business directories",
-  "job": "Hunts local and regional business directories for the agency's presence; prepares complete, submission-ready listing packs",
-  "schedule": "24/7 rotation"
- },
- {
-  "name": "Directory hunter — free directory submissions",
-  "job": "Directory hunter — free directory submissions",
-  "schedule": "Weekly · Mon 6:41 AM"
- },
- {
-  "name": "Directory Submitter (hive)",
-  "job": "Submit the ghostcorpnet AI-directory submission pack to the 8 free AI tool directories, plus BetaList, via public submit forms.",
-  "schedule": "On demand · hive"
- },
- {
-  "name": "Ecosystem Expansion Runner (hive)",
-  "job": "Ship ONE niche ecosystem drop per month.",
-  "schedule": "On demand · hive"
- },
- {
-  "name": "Email Deliverability Guard (hive)",
-  "job": "The last checkpoint before any email goes out: verify caps, STOP file, sender identity, opt-out footer, and CAN-SPAM readiness.",
-  "schedule": "On demand · hive"
- },
- {
-  "name": "Evidence Checklist Writer (hive)",
-  "job": "Write audit evidence checklists per framework: for each control/requirement, exactly what evidence an auditor expects to see (document types, sample sizes…",
-  "schedule": "On demand · hive"
- },
- {
-  "name": "Exec Summary Writer (hive)",
-  "job": "Condense longer governance kits into 1–2 page executive summaries: the decision, the risk, the 5 key points, the recommended actions — written for a C-suite…",
-  "schedule": "On demand · hive"
- },
- {
-  "name": "Faq Expander (hive)",
-  "job": "Draft new FAQ entries from REAL questions people ask — support inbox, mention-watch hits, social replies, competitor reviews — and turn them into FAQ drafts…",
-  "schedule": "On demand · hive"
- },
- {
-  "name": "FAQ miner",
-  "job": "FAQ miner",
-  "schedule": "Weekly · Sun 9:16 AM"
- },
- {
-  "name": "FinLattice daily acquisition",
-  "job": "FinLattice daily acquisition",
-  "schedule": "Daily · 12:16 PM"
- },
- {
-  "name": "FinLattice weekly brand content",
-  "job": "FinLattice weekly brand content",
-  "schedule": "Weekly · Wed 8:16 AM"
- },
- {
-  "name": "Fleet brain sync (weekly)",
-  "job": "Keeps every bot's schedule and roster in sync",
-  "schedule": "Weekly · Sun 9:30 AM"
- },
- {
-  "name": "Follow-up Hunter 01 — Free Sample downloaders",
-  "job": "Prepares one follow-up draft per Free Sample downloader pointing to the Playbook, for the revenue-flow follow-up channel only",
-  "schedule": "24/7 rotation"
- },
- {
-  "name": "Follow-up Hunter 02 — Bounds Checklist downloaders",
-  "job": "Prepares one follow-up draft per Bounds Checklist downloader pointing to the Containment Library, for the revenue-flow follow-up channel only",
-  "schedule": "24/7 rotation"
- },
- {
-  "name": "Follow-up Hunter 03 — Starter Kit downloaders",
-  "job": "Prepares one follow-up draft per Starter Kit downloader pointing to the Playbook or Break-Test Starter, for the revenue-flow follow-up channel only",
-  "schedule": "24/7 rotation"
- },
- {
-  "name": "Follow-up Hunter 04 — Product review and comment replies",
-  "job": "Watches our Gumroad product reviews and comments; drafts a helpful reply to each genuine one for the configured store channel",
-  "schedule": "24/7 rotation"
- },
- {
-  "name": "Follow-up Hunter 05 — Own-post comment replies",
-  "job": "Watches comments on our own posts on configured channels; drafts a helpful reply to each genuine question",
-  "schedule": "24/7 rotation"
- },
- {
-  "name": "Follow-up Hunter 06 — Warm-lead re-checks",
-  "job": "Re-verifies older filed leads and intel that went stale; re-files only the ones that are fresh, reachable, and not duplicates",
-  "schedule": "24/7 rotation"
- },
- {
-  "name": "Forum Hunter 01 — Spiceworks IT pros",
-  "job": "Hunts Spiceworks Community threads where IT pros ask about AI governance and security; drafts genuinely helpful replies with the matched playbook linked last",
-  "schedule": "24/7 rotation"
- },
- {
-  "name": "Forum Hunter 02 — BiggerPockets real estate",
-  "job": "Hunts BiggerPockets threads on lead follow-up and CRM pain; drafts helpful replies matched to the AI Client Machine for Real Estate Agents",
-  "schedule": "24/7 rotation"
- },
- {
-  "name": "Forum Hunter 03 — Sysadmin and MSP forums",
-  "job": "Hunts public sysadmin and MSP community threads about governing employee AI tools; drafts helpful replies matched to the Playbook",
-  "schedule": "24/7 rotation"
- },
- {
-  "name": "Forum Hunter 04 — Freelancer forums",
-  "job": "Hunts freelancer community threads on client management and onboarding pain; drafts replies matched to the Freelancer Client OS",
-  "schedule": "24/7 rotation"
- },
- {
-  "name": "Forum Hunter 05 — Small-business owner forums",
-  "job": "Hunts small-business owner forums for missed-call and front-desk pain; drafts replies matched to the AI agency Front Desk service",
-  "schedule": "24/7 rotation"
- },
- {
-  "name": "Forum Hunter 06 — Compliance and GRC forums",
-  "job": "Hunts compliance and GRC community threads on AI policy; drafts replies matched to the Playbook and Containment Library",
-  "schedule": "24/7 rotation"
- },
- {
-  "name": "Free tool forge — one new free site tool monthly",
-  "job": "Free tool forge — one new free site tool monthly",
-  "schedule": "Monthly · 6:41 AM"
- },
- {
-  "name": "FrontierLattice daily acquisition",
-  "job": "FrontierLattice daily acquisition",
-  "schedule": "Daily · 6:16 AM"
- },
- {
-  "name": "FrontierLattice weekly brand content",
-  "job": "FrontierLattice weekly brand content",
-  "schedule": "Weekly · Sat 8:16 AM"
- },
- {
-  "name": "Glossary Builder (hive)",
-  "job": "Build per-brand term glossary pages () that define AI-governance terminology in plain language.",
-  "schedule": "On demand · hive"
- },
- {
-  "name": "Google Geek crew — nonstop search research",
-  "job": "Research crew — hunts leads, competitors, and answers online",
-  "schedule": "Every 2 hr"
- },
- {
-  "name": "Gumroad daily publisher (10/day cap)",
-  "job": "Gumroad daily publisher",
-  "schedule": "Daily · 9:16 AM"
- },
- {
-  "name": "Gumroad Publisher (hive)",
-  "job": "Plan publish batches for queued products via the duplicate-workaround (duplicating a live product is NOT subject to Gumroad's 10-new-products-per-day cap, and…",
-  "schedule": "On demand · hive"
- },
- {
-  "name": "HealthLattice daily acquisition",
-  "job": "HealthLattice daily acquisition",
-  "schedule": "Daily · 1:16 PM"
- },
- {
-  "name": "HealthLattice weekly brand content",
-  "job": "HealthLattice weekly brand content",
-  "schedule": "Weekly · Wed 2:16 PM"
- },
- {
-  "name": "HireWarden daily acquisition",
-  "job": "HireWarden daily acquisition",
-  "schedule": "Daily · 2:16 PM"
- },
- {
-  "name": "HireWarden weekly brand content",
-  "job": "HireWarden weekly brand content",
-  "schedule": "Weekly · Thu 8:16 AM"
- },
- {
-  "name": "Hive worker 1",
-  "job": "Hive worker 1",
-  "schedule": "Every 10 min"
- },
- {
-  "name": "Hive worker 2",
-  "job": "Hive worker 2",
-  "schedule": "Every 10 min"
- },
- {
-  "name": "Hive worker 3",
-  "job": "Hive worker 3",
-  "schedule": "Every 10 min"
- },
- {
-  "name": "Hive worker 4",
-  "job": "Hive worker 4",
-  "schedule": "Every 10 min"
- },
- {
-  "name": "Hive worker 5",
-  "job": "Hive worker 5",
-  "schedule": "Every 10 min"
- },
- {
-  "name": "Hive worker 6",
-  "job": "Hive worker 6",
-  "schedule": "Every 10 min"
- },
- {
-  "name": "HiveBrain coordinator (live)",
-  "job": "Plans the hive workers' tasks and assigns the work",
-  "schedule": "Every 10 min"
- },
- {
-  "name": "Image Alt Writer (hive)",
-  "job": "Audit every image on the site and write concise, accurate alt text wherever it is missing — for accessibility and SEO.",
-  "schedule": "On demand · hive"
- },
- {
-  "name": "Inbox Responder (hive)",
-  "job": "Keep the customer inbox human: triage incoming mail to the business Gmail, draft real replies for real people, and never auto-send anything — every reply is a…",
-  "schedule": "On demand · hive"
- },
- {
-  "name": "Inbox watch: auto-reply to customer emails",
-  "job": "Watches the business inbox and handles routine replies",
-  "schedule": "Every 10 min"
- },
- {
-  "name": "Incident Report Template Writer (hive)",
-  "job": "Write incident-report templates per governance framework: the forms buyers actually need when an AI agent fails in production — EU AI Act serious-incident…",
-  "schedule": "On demand · hive"
- },
- {
-  "name": "Incident To Playbook Writer (hive)",
-  "job": "Turn REAL, cited AI incidents (agent failures, prompt-injection cases, data leaks, model misbehavior in production) into draft playbook content for the…",
-  "schedule": "On demand · hive"
- },
- {
-  "name": "IncidentLattice daily acquisition",
-  "job": "IncidentLattice daily acquisition",
-  "schedule": "Daily · 8:16 AM"
- },
- {
-  "name": "IncidentLattice weekly brand content",
-  "job": "IncidentLattice weekly brand content",
-  "schedule": "Weekly · Mon 8:16 AM"
- },
- {
-  "name": "Internal Link Strategist (hive)",
-  "job": "Design internal cross-link plans that lift SEO and buyer flow: product-ladder \"next step up\" links (→→→→→), article→product contextual CTAs, ecosystem…",
-  "schedule": "On demand · hive"
- },
- {
-  "name": "JobLattice weekly brand content",
-  "job": "JobLattice weekly brand content",
-  "schedule": "Weekly · Thu 10:16 AM"
- },
- {
-  "name": "LawWarden daily acquisition",
-  "job": "LawWarden daily acquisition",
-  "schedule": "Daily · 3:16 PM"
- },
- {
-  "name": "LawWarden weekly brand content",
-  "job": "LawWarden weekly brand content",
-  "schedule": "Weekly · Thu 2:16 PM"
- },
- {
-  "name": "Lead Deduplicator (hive)",
-  "job": "Enforce ONE EMAIL = ONE LEAD EVER across the whole outreach system.",
-  "schedule": "On demand · hive"
- },
- {
-  "name": "Lead Scout (hive)",
-  "job": "Keep the outreach machine fed with a fresh daily supply of real, public business leads.",
-  "schedule": "On demand · hive"
- },
- {
-  "name": "Link Rot Hunter (hive)",
-  "job": "Continuously crawl the ghostcorpnet site for dead links — broken internal hrefs and dead external URLs — fix every internal one directly, and report external…",
-  "schedule": "On demand · hive"
- },
- {
-  "name": "Local Hunter 01 — Roofers and HVAC — Indianapolis",
-  "job": "Hunts Indianapolis-metro roofers and HVAC companies with weak web presence or missed-call risk; verifies a public business email and files deduped agency leads",
-  "schedule": "24/7 rotation"
- },
- {
-  "name": "Local Hunter 02 — Plumbers and electricians — Cincinnati and Dayton",
-  "job": "Hunts Cincinnati and Dayton plumbers and electricians; verifies a public business email and files deduped agency leads",
-  "schedule": "24/7 rotation"
- },
- {
-  "name": "Local Hunter 03 — Dental and med spas — Columbus",
-  "job": "Hunts Columbus dental practices and med spas; verifies a public business email and files deduped agency leads",
-  "schedule": "24/7 rotation"
- },
- {
-  "name": "Local Hunter 04 — Law firms — Indianapolis and Louisville",
-  "job": "Hunts Indianapolis and Louisville law firms; verifies a public business email and files deduped agency leads",
-  "schedule": "24/7 rotation"
- },
- {
-  "name": "Local Hunter 05 — Real-estate teams — Fort Wayne and Grand Rapids",
-  "job": "Hunts Fort Wayne and Grand Rapids real-estate teams; verifies a public business email and files deduped agency leads",
-  "schedule": "24/7 rotation"
- },
- {
-  "name": "Local Hunter 06 — Remodelers and home-services franchises — Nashville and St. Louis",
-  "job": "Hunts Nashville and St. Louis remodelers and home-services franchises; verifies a public business email and files deduped agency leads",
-  "schedule": "24/7 rotation"
- },
- {
-  "name": "Manuscript Writer (hive)",
-  "job": "Write long-form PDF manuscripts from APPROVED product briefs — the complete, sellable text that becomes the product.",
-  "schedule": "On demand · hive"
- },
- {
-  "name": "Marketplace Lister (hive)",
-  "job": "Draft Etsy/Payhip/Creative Market listings as for the human's manual paste.",
-  "schedule": "On demand · hive"
- },
- {
-  "name": "Marketplace Scout (hive)",
-  "job": "Read-only scouting of Etsy, Payhip, and Creative Market: which categories fit ghostcorpnet's self-serve digital governance products, what comparable listings…",
-  "schedule": "On demand · hive"
- },
- {
-  "name": "Maturity Model Writer (hive)",
-  "job": "Write 5-level maturity models for a governance domain (AI governance, incident response, vendor risk, data governance, etc.): level definitions, per-level…",
-  "schedule": "On demand · hive"
- },
- {
-  "name": "Medium Republisher (hive)",
-  "job": "Republish new ghostcorpnet SEO articles to Medium with canonical links back to the original, capturing Medium's discovery audience without splitting SEO equity.",
-  "schedule": "On demand · hive"
- },
- {
-  "name": "Mention Watch (hive)",
-  "job": "Catch every public mention of ghostcorpnet so none goes unanswered: search for \"ghostcorpnet\", \"governed agent mesh playbook\", and the site URL, log each real…",
-  "schedule": "On demand · hive"
- },
- {
-  "name": "Mesh sender (worker-outage failover)",
-  "job": "Delivers queued fleet messages and retries failed sends",
-  "schedule": "Every 5 min"
- },
- {
-  "name": "Micro Forge Runner (hive)",
-  "job": "Run the daily micro-product batch factory: draft up to 50 finished, sellable micro-product drafts per day (PDF checklists, worksheets, template packs, PPTX…",
-  "schedule": "On demand · hive"
- },
- {
-  "name": "Model Refresh (hive)",
-  "job": "Keep the fleet's AI models alive without human help: detect retired provider models and self-heal to the best same-family replacement, verified with a live…",
-  "schedule": "On demand · hive"
- },
- {
-  "name": "Monthly AI provider scout",
-  "job": "Scouts new free AI providers for the fleet",
-  "schedule": "Monthly · 10:16 AM"
- },
- {
-  "name": "Monthly review miner",
-  "job": "Monthly review miner",
-  "schedule": "Monthly · 11:16 AM"
- },
- {
-  "name": "Newsletter Compiler (hive)",
-  "job": "Assemble the weekly ghostcorpnet newsletter from the week's real output — new articles, trend briefs, regulation briefs, launches, ecosystem updates — into a…",
-  "schedule": "On demand · hive"
- },
- {
-  "name": "Og Image Designer (hive)",
-  "job": "Give every public page a proper social share image: generate missing OG/Twitter card images in the ghostcorpnet visual identity and wire the meta tags, so…",
-  "schedule": "On demand · hive"
- },
- {
-  "name": "One Pager Writer (hive)",
-  "job": "Produce single-page briefs: one governance topic, one page, readable in 3 minutes — the format buyers print and hand around.",
-  "schedule": "On demand · hive"
- },
- {
-  "name": "Online Hunter 01 — Marketing agencies",
-  "job": "Hunts small marketing agencies that could resell or use AI website and front-desk services; files deduped agency leads with the angle noted",
-  "schedule": "24/7 rotation"
- },
- {
-  "name": "Online Hunter 02 — Small SaaS founders",
-  "job": "Hunts small SaaS founders with support and follow-up pain; files deduped agency leads with the angle noted",
-  "schedule": "24/7 rotation"
- },
- {
-  "name": "Online Hunter 03 — Coaches and course creators",
-  "job": "Hunts coaches and course creators who need client systems and websites; files deduped agency leads with the angle noted",
-  "schedule": "24/7 rotation"
- },
- {
-  "name": "Online Hunter 04 — E-commerce stores",
-  "job": "Hunts small e-commerce stores with support-automation pain; files deduped agency leads with the angle noted",
-  "schedule": "24/7 rotation"
- },
- {
-  "name": "Online Hunter 05 — Remote real-estate brokerages",
-  "job": "Hunts remote-first real-estate brokerages needing lead follow-up systems; files deduped agency leads with the angle noted",
-  "schedule": "24/7 rotation"
- },
- {
-  "name": "Online Hunter 06 — Solo consultants and bookkeepers",
-  "job": "Hunts solo consultants and bookkeepers with no real website; files deduped agency leads with the angle noted",
-  "schedule": "24/7 rotation"
- },
- {
-  "name": "Outreach Analyst (hive)",
-  "job": "Turn the send ledger into honest numbers: reply rates, per-brand performance, and trend deltas the human can act on.",
-  "schedule": "On demand · hive"
- },
- {
-  "name": "Outreach Sender (hive)",
-  "job": "Send ready, idempotent cold-outreach pitches from the business Gmail under the human's 2026-09-30 full-auto directive.",
-  "schedule": "On demand · hive"
- },
- {
-  "name": "Outreach sync (leads → pitches → send queue)",
-  "job": "Keeps the customer outreach queue in sync and deduplicated",
-  "schedule": "Every 5 min"
- },
- {
-  "name": "Outreach Sync Runner (hive)",
-  "job": "Turn freshly scouted leads into ready-to-send outreach: enrich each with a public contact email (never guessed), draft a personalized pitch, and seed worker…",
-  "schedule": "On demand · hive"
- },
- {
-  "name": "Partner Hunter 01 — AI newsletters",
-  "job": "Hunts AI newsletters that feature tools and playbooks; drafts a tailored partner pitch for each fit",
-  "schedule": "24/7 rotation"
- },
- {
-  "name": "Partner Hunter 02 — Business and productivity newsletters",
-  "job": "Hunts business and productivity newsletters; drafts a tailored partner pitch for each fit",
-  "schedule": "24/7 rotation"
- },
- {
-  "name": "Partner Hunter 03 — AI and business podcasts",
-  "job": "Hunts AI and business podcasts that book guests or feature products; drafts a tailored pitch for each fit",
-  "schedule": "24/7 rotation"
- },
- {
-  "name": "Partner Hunter 04 — Creator channels",
-  "job": "Hunts creator channels covering AI tools and freelancing; drafts a tailored collaboration pitch for each fit",
-  "schedule": "24/7 rotation"
- },
- {
-  "name": "Partner Hunter 05 — Online communities and groups",
-  "job": "Hunts online communities and professional groups open to resource shares; drafts a value-first introduction for each fit",
-  "schedule": "24/7 rotation"
- },
- {
-  "name": "Partner Hunter 06 — Course creators and bundle organizers",
-  "job": "Hunts course creators and bundle organizers in adjacent niches; drafts a bundle or cross-promotion pitch for each fit",
-  "schedule": "24/7 rotation"
- },
- {
-  "name": "Partner Scout (hive)",
-  "job": "Find and draft partnership opportunities that compound distribution: co-marketing with complementary (non-competitor) tool makers, bundle/cross-promote…",
-  "schedule": "On demand · hive"
- },
- {
-  "name": "Performance Auditor (hive)",
-  "job": "Keep the site fast on a static-hosting budget: audit page weight, asset sizes, and Core Web Vitals hygiene on a rotating schedule; ship the trivial wins…",
-  "schedule": "On demand · hive"
- },
- {
-  "name": "Pinterest Publisher (hive)",
-  "job": "Turn every product cover and article hero image into Pinterest pins on per-brand boards, driving evergreen visual discovery traffic back to ghostcorpnet…",
-  "schedule": "On demand · hive"
- },
- {
-  "name": "Pitch Drafter (hive)",
-  "job": "Turn fresh lead briefs into ready-to-send, personalized pitch drafts — and seed them as paired worker queue items (send + forget-cancellation).",
-  "schedule": "On demand · hive"
- },
- {
-  "name": "Pitch Personalizer (hive)",
-  "job": "Draft the weekly per-brand acquisition pitches for all 11 bot-run brands — the customer-acquisition loop that keeps ~20 fresh touches/day rotating with nothing…",
-  "schedule": "On demand · hive"
- },
- {
-  "name": "Policy Template Writer (hive)",
-  "job": "Write governance policy templates (acceptable use, data handling, incident response policy, AI acceptable-use policy, access control policy): each policy is a…",
-  "schedule": "On demand · hive"
- },
- {
-  "name": "Price Integrity Auditor (hive)",
-  "job": "Audit every live Gumroad product's price against the human-approved tier set (////////).",
-  "schedule": "On demand · hive"
- },
- {
-  "name": "Pricing experiment",
-  "job": "Pricing experiment",
-  "schedule": "Monthly · 9:16 AM"
- },
- {
-  "name": "Product Brief Writer (hive)",
-  "job": "Turn trend, review-miner, and mention-watch signals into structured, build-ready product briefs — the feedstock for manuscript-writer and product-forge-runner.",
-  "schedule": "On demand · hive"
- },
- {
-  "name": "Product Forge Runner (hive)",
-  "job": "Build the weekly flagship products — premium standalone products at / deluxe editions at / mega-kits at enterprise licenses at ; non-PDF formats welcome (PPTX…",
-  "schedule": "On demand · hive"
- },
- {
-  "name": "Product page polisher — clarity audit and fixes",
-  "job": "Product page polisher — clarity audit and fixes",
-  "schedule": "Weekly · Tue 6:41 AM"
- },
- {
-  "name": "Provider Scout (hive)",
-  "job": "Find NEW free-tier AI providers the fleet could use beyond the already-connected lanes, and prepare complete draft integrations so the human can approve a new…",
-  "schedule": "On demand · hive"
- },
- {
-  "name": "Publisher (hive)",
-  "job": "Publish queued digital products to Gumroad at the maximum sustainable pace, exactly as the legacy daily publisher did.",
-  "schedule": "On demand · hive"
- },
- {
-  "name": "Q&A answer scout — buyer-intent answer drafts",
-  "job": "Q&A answer scout — buyer-intent answer drafts",
-  "schedule": "Weekly · Thu 6:41 AM"
- },
- {
-  "name": "Q&A Hunter 01 — AI governance questions",
-  "job": "Hunts public Q&A threads asking how to govern AI agents at work; drafts useful-first answers matched to the Playbook",
-  "schedule": "24/7 rotation"
- },
- {
-  "name": "Q&A Hunter 02 — Budgeting and debt questions",
-  "job": "Hunts public Q&A threads on budgeting and paying off debt; drafts answers matched to the 2027 Budget and Debt-Payoff Spreadsheet",
-  "schedule": "24/7 rotation"
- },
- {
-  "name": "Q&A Hunter 03 — Job-search questions",
-  "job": "Hunts public Q&A threads on resumes, cover letters, and interviews; drafts answers matched to the AI Job-Search Kit",
-  "schedule": "24/7 rotation"
- },
- {
-  "name": "Q&A Hunter 04 — Freelance client questions",
-  "job": "Hunts public Q&A threads on getting and managing freelance clients; drafts answers matched to the Freelancer Client OS",
-  "schedule": "24/7 rotation"
- },
- {
-  "name": "Q&A Hunter 05 — Prompt security questions",
-  "job": "Hunts public Q&A threads on prompt injection and bot safety; drafts answers matched to the Prompt-Injection Test Deck and AI Break-Test",
-  "schedule": "24/7 rotation"
- },
- {
-  "name": "Q&A Hunter 06 — Small-business automation questions",
-  "job": "Hunts public Q&A threads where owners ask how to automate follow-up and admin; drafts answers matched to the AI agency services",
-  "schedule": "24/7 rotation"
- },
- {
-  "name": "Quiz Builder (hive)",
-  "job": "Build assessment quizzes as single-file HTML products: multiple-choice/true-false questions with weighted scoring, instant per-question feedback, and a final…",
-  "schedule": "On demand · hive"
- },
- {
-  "name": "Redirect Mapper (hive)",
-  "job": "Keep renamed, moved, or deleted pages reachable: maintain a redirect map from every dead/renamed URL to its correct live target, and serve it through the…",
-  "schedule": "On demand · hive"
- },
- {
-  "name": "Regulation Brief Writer (hive)",
-  "job": "Write regulation explainers (EU AI Act, US state AI laws, NIST AI RMF, sectoral rules) for teams deploying AI agents: what the rule says, who it applies to…",
-  "schedule": "On demand · hive"
- },
- {
-  "name": "Reply learner (weekly)",
-  "job": "Reply learner",
-  "schedule": "Weekly · Mon 9:16 AM"
- },
- {
-  "name": "Research Synthesizer (hive)",
-  "job": "Produce multi-source research briefs with CITED URLs that feed product briefs, articles, and regulation explainers.",
-  "schedule": "On demand · hive"
- },
- {
-  "name": "Revenue flow — weekly funnel audit + download follow-ups",
-  "job": "Follows up free downloads and turns them toward paid products",
-  "schedule": "Weekly · Mon 9:16 AM"
- },
- {
-  "name": "Review Miner (hive)",
-  "job": "Mine public reviews of adjacent products (AI policy/governance courses, prompt-engineering guides, agent frameworks, Notion/AI template packs) for unmet needs…",
-  "schedule": "On demand · hive"
- },
- {
-  "name": "Risk Register Builder (hive)",
-  "job": "Build risk register templates with scoring rubrics: a pre-populated register of common domain risks plus a blank fillable register — delivered as a CSV (opens…",
-  "schedule": "On demand · hive"
- },
- {
-  "name": "Runbook Writer (hive)",
-  "job": "Write incident/runbook playbooks: detection signals, severity classification, step-by-step response procedures, escalation paths with time-based triggers…",
-  "schedule": "On demand · hive"
- },
- {
-  "name": "Sales Reporter (hive)",
-  "job": "Produce the daily sales digest from the Gumroad API — gross revenue, order count, per-product units — as the single honest money record.",
-  "schedule": "On demand · hive"
- },
- {
-  "name": "Sales Watch (hive)",
-  "job": "Make every new Gumroad sale visible within minutes — read-only visibility, never money movement.",
-  "schedule": "On demand · hive"
- },
- {
-  "name": "Schema Markup Writer (hive)",
-  "job": "Write and validate JSON-LD structured-data blocks (Product, Article, FAQPage, BreadcrumbList) for site pages, and seed their insertion as site_update queue…",
-  "schedule": "On demand · hive"
- },
- {
-  "name": "Scorecard Designer (hive)",
-  "job": "Design scorecard frameworks: a weighted-criteria scorecard the buyer uses to rate vendors, controls, or initiatives — delivered as a PDF scorecard pack plus a…",
-  "schedule": "On demand · hive"
- },
- {
-  "name": "Self-improvement proposals (weekly)",
-  "job": "Reviews the fleet's recent work and flags problems",
-  "schedule": "Weekly · Mon 10:00 AM"
- },
- {
-  "name": "Self-optimize",
-  "job": "Tunes the fleet's own settings to work better",
-  "schedule": "Daily · 4:00 AM"
- },
- {
-  "name": "Self-repair",
-  "job": "Watches the fleet's own machinery and repairs breakage",
-  "schedule": "Every 1 hr"
- },
- {
-  "name": "Sentience operator loop",
-  "job": "Fleet captain — coordinates the other bots' work",
-  "schedule": "Every 15 min"
- },
- {
-  "name": "Seo Meta Writer (hive)",
-  "job": "Sharpen search presence page by page: write or refresh titles, meta descriptions, and OG/social copy for articles and product pages — the highest-leverage 200…",
-  "schedule": "On demand · hive"
- },
- {
-  "name": "Seo Writer (hive)",
-  "job": "Build compounding organic search traffic with buyer-intent articles, auto-published live the same run (human approved 2026-09-29).",
-  "schedule": "On demand · hive"
- },
- {
-  "name": "Site health check",
-  "job": "Site health check",
-  "schedule": "Daily · 8:16 AM"
- },
- {
-  "name": "Site Health Checker (hive)",
-  "job": "Verify the site and checkout path are alive every run: homepage 200 with expected content, at least one live Gumroad buy link, flagship product page 200, key…",
-  "schedule": "On demand · hive"
- },
- {
-  "name": "Site Improver (hive)",
-  "job": "Make the marketing site better and SHIP the best improvement: one highest-impact change per run — conversion, SEO, copy quality, mobile, accessibility —…",
-  "schedule": "On demand · hive"
- },
- {
-  "name": "Site Updater (hive)",
-  "job": "Continuously improve the site's look, function, and freshness: the scout finds verifiable issues, the updater ships them through the standard auto-approve…",
-  "schedule": "On demand · hive"
- },
- {
-  "name": "Sitemap Surgeon (hive)",
-  "job": "Keep complete, valid, and honest: every live page listed exactly once, no dead URLs, no missing pages, well-formed XML with fresh dates.",
-  "schedule": "On demand · hive"
- },
- {
-  "name": "Social Formatter (hive)",
-  "job": "Take APPROVED drafts (from content-repurposer, newsletter items, thread-spotter, or the human) and format them per-channel: length limits, hashtag rules, link…",
-  "schedule": "On demand · hive"
- },
- {
-  "name": "Social Listener 01 — LinkedIn posts",
-  "job": "Listens to public LinkedIn posts asking for AI governance or automation help; drafts helpful replies for the configured business profile only",
-  "schedule": "24/7 rotation"
- },
- {
-  "name": "Social Listener 02 — Instagram posts",
-  "job": "Listens to public Instagram posts in our niches asking for what we sell; drafts helpful replies for the configured business account only",
-  "schedule": "24/7 rotation"
- },
- {
-  "name": "Social Listener 03 — X posts",
-  "job": "Listens to public X posts asking for AI governance, budgeting, or freelance systems help; drafts replies (draft-only until the business channel is configured)",
-  "schedule": "24/7 rotation"
- },
- {
-  "name": "Social Listener 04 — Facebook group posts",
-  "job": "Listens to public Facebook group discussions in our niches; drafts helpful replies (draft-only until the business Page is configured)",
-  "schedule": "24/7 rotation"
- },
- {
-  "name": "Social Listener 05 — Threads posts",
-  "job": "Listens to public Threads posts in our niches; drafts helpful replies (draft-only until the business Threads is configured)",
-  "schedule": "24/7 rotation"
- },
- {
-  "name": "Social Listener 06 — Indie Hackers and Product Hunt discussions",
-  "job": "Listens to Indie Hackers and Product Hunt discussions where builders ask for governance and growth tools; drafts helpful, disclosure-first replies",
-  "schedule": "24/7 rotation"
- },
- {
-  "name": "Social poster — drains post-queue to live channels",
-  "job": "Social poster — drains post-queue to live channels",
-  "schedule": "Every 2 hr"
- },
- {
-  "name": "Sop Writer (hive)",
-  "job": "Write standard operating procedures: numbered step-by-step procedures with purpose, scope, roles/responsibilities, required inputs, step tables, exception…",
-  "schedule": "On demand · hive"
- },
- {
-  "name": "SourceLattice daily acquisition",
-  "job": "SourceLattice daily acquisition",
-  "schedule": "Daily · 4:16 PM"
- },
- {
-  "name": "SourceLattice weekly brand content",
-  "job": "SourceLattice weekly brand content",
-  "schedule": "Weekly · Fri 8:16 AM"
- },
- {
-  "name": "Stale Date Sweeper (hive)",
-  "job": "Sweep the site for stale years and dates — copyright footers older than 2026, \"last updated\" stamps, any hard-coded year <2026, outdated \"© 2025\" strings — and…",
-  "schedule": "On demand · hive"
- },
- {
-  "name": "Store expansion keeper — listing packs for other stores",
-  "job": "Store expansion keeper — listing packs for other stores",
-  "schedule": "Weekly · Fri 6:41 AM"
- },
- {
-  "name": "SupportWarden daily acquisition",
-  "job": "SupportWarden daily acquisition",
-  "schedule": "Daily · 9:16 AM"
- },
- {
-  "name": "SupportWarden weekly brand content",
-  "job": "SupportWarden weekly brand content",
-  "schedule": "Weekly · Mon 2:16 PM"
- },
- {
-  "name": "Tag Sweeper (hive)",
-  "job": "Keep every live Gumroad product's tags clean and consistent via the tag-sweep path.",
-  "schedule": "On demand · hive"
- },
- {
-  "name": "Taps sync",
-  "job": "Syncs the owner's one-tap approvals to the fleet",
-  "schedule": "Every 5 min"
- },
- {
-  "name": "Template Pack Assembler (hive)",
-  "job": "Assemble template packs — collections of ready-to-customize governance templates (policy templates, email templates, meeting agendas, notice letters) — as…",
-  "schedule": "On demand · hive"
- },
- {
-  "name": "Testimonial Collector (hive)",
-  "job": "Build a library of REAL testimonials only — drawn from genuine purchase/support records — for use in product pages and outreach.",
-  "schedule": "On demand · hive"
- },
- {
-  "name": "Thread Spotter (hive)",
-  "job": "Find live Reddit/HN/Quora/X threads where people are asking genuine questions about AI governance, agent safety, or compliance — and draft genuinely helpful…",
-  "schedule": "On demand · hive"
- },
- {
-  "name": "Trend Radar (hive)",
-  "job": "Spot emerging AI regulation, agent incidents, and frontier model releases early, and convert each into product ideas + article angles while the topic is hot.",
-  "schedule": "On demand · hive"
- },
- {
-  "name": "Trend To Product Translator (hive)",
-  "job": "Convert trend-radar findings into concrete product briefs for the product forge: every hot trend becomes a titled, tiered, scoped product proposal before the…",
-  "schedule": "On demand · hive"
- },
- {
-  "name": "UI scout (continuous site improvement)",
-  "job": "Scouts the website's interface for improvements",
-  "schedule": "Every 15 min"
- },
- {
-  "name": "Universe treasury refresh",
-  "job": "Tracks the business's catalog of digital assets",
-  "schedule": "Every 1 hr"
- },
- {
-  "name": "Vendor Questionnaire Builder (hive)",
-  "job": "Produce ready-to-send vendor due-diligence questionnaires (third-party AI/vendor risk assessments) per governance domain, so buyers can vet AI vendors against…",
-  "schedule": "On demand · hive"
- },
- {
-  "name": "Watchdog (hive)",
-  "job": "Keep every autopilot loop alive permanently.",
-  "schedule": "On demand · hive"
- },
- {
-  "name": "Watchdog security monitor",
-  "job": "Watches the site and accounts for security problems",
-  "schedule": "Every 1 hr"
- },
- {
-  "name": "Watchdog — permanent autopilot guardian",
-  "job": "Watches the website and fleet for problems around the clock",
-  "schedule": "Every 30 min"
- },
- {
-  "name": "Weekly affiliate recruiter",
-  "job": "Weekly affiliate recruiter",
-  "schedule": "Weekly · Wed 11:16 AM"
- },
- {
-  "name": "Weekly AI model refresh",
-  "job": "Keeps the fleet's AI models current and working",
-  "schedule": "Weekly · Mon 7:16 AM"
- },
- {
-  "name": "Weekly content repurposer",
-  "job": "Weekly content repurposer",
-  "schedule": "Weekly · Fri 2:16 PM"
- },
- {
-  "name": "Weekly expansion prep",
-  "job": "Weekly expansion prep",
-  "schedule": "Weekly · Mon 11:16 AM"
- },
- {
-  "name": "Weekly Medium republisher",
-  "job": "Weekly Medium republisher",
-  "schedule": "Weekly · Sun 12:16 PM"
- },
- {
-  "name": "Weekly money pulse — sales, movers, one fix",
-  "job": "Weekly sales check — what sold and one thing to fix",
-  "schedule": "Weekly · Mon 8:00 AM"
- },
- {
-  "name": "Weekly partner scout",
-  "job": "Weekly partner scout",
-  "schedule": "Weekly · Wed 9:16 AM"
- },
- {
-  "name": "Weekly Pinterest publisher",
-  "job": "Weekly Pinterest publisher",
-  "schedule": "Weekly · Wed 10:16 AM"
- },
- {
-  "name": "Weekly product forge",
-  "job": "Weekly product forge",
-  "schedule": "Weekly · Sat 3:16 PM"
- },
- {
-  "name": "Weekly SEO article",
-  "job": "Weekly SEO article",
-  "schedule": "Weekly · Sun 9:16 AM"
- },
- {
-  "name": "Weekly SEO article",
-  "job": "Weekly SEO article",
-  "schedule": "Weekly · Thu 9:16 AM"
- },
- {
-  "name": "Weekly SEO article",
-  "job": "Weekly SEO article",
-  "schedule": "Weekly · Tue 9:16 AM"
- },
- {
-  "name": "Weekly site improvement",
-  "job": "Weekly site improvement",
-  "schedule": "Weekly · Fri 9:16 AM"
- },
- {
-  "name": "Weekly trend radar",
-  "job": "Weekly trend radar",
-  "schedule": "Weekly · Mon 10:16 AM"
- },
- {
-  "name": "Whitepaper Drafter (hive)",
-  "job": "Draft research whitepapers (2,500–4,000 words) with properly cited sources: the long-form authority pieces that win enterprise buyers and backlinks.",
-  "schedule": "On demand · hive"
- },
- {
-  "name": "Winback Email Writer (hive)",
-  "job": "Win back lapsed attention with a draft-only winback sequence: 3 emails (day 0, day 7, day 21) to past buyers / cold-but-legit contacts reminding them what's…",
-  "schedule": "On demand · hive"
- },
- {
-  "name": "Worker KV-write recovery watch",
-  "job": "Detects stalled fleet workers and brings them back",
-  "schedule": "Every 30 min"
- },
- {
-  "name": "Worker pool 3-way queue reconcile",
-  "job": "Reconciles the fleet's work queues so nothing is lost or doubled",
-  "schedule": "Every 15 min"
- },
- {
-  "name": "Worksheet Designer (hive)",
-  "job": "Build fillable worksheets and workbooks (risk intake forms, policy gap worksheets, readiness self-assessments, planning canvases) as print-friendly PDF…",
-  "schedule": "On demand · hive"
- },
- {
-  "name": "Workshop Kit Builder (hive)",
-  "job": "Build complete workshop kits for governance topics: facilitator guide, slide outline, and participant handouts — the format corporate trainers and consultants…",
-  "schedule": "On demand · hive"
- }
-]
+{
+ "generated_at": "2026-10-29T23:33:18Z",
+ "stats": {
+  "money_made_usd": 0.0,
+  "orders": 0,
+  "sales_today_usd": 0.0,
+  "orders_today": 0,
+  "free_downloads": 1,
+  "as_of": "2026-10-29T23:33:18Z",
+  "source": "Verified sales ledger + Gumroad sales check"
+ },
+ "bots": [
+  {
+   "name": "Accessibility Auditor (hive)",
+   "job": "Run a concrete, verifiable accessibility checklist over the site on a rotating schedule so every page gets audited weekly, and seed precise fix items the…",
+   "schedule": "On demand · hive"
+  },
+  {
+   "name": "ActLattice daily acquisition",
+   "job": "ActLattice daily acquisition",
+   "schedule": "Daily · 11:16 AM"
+  },
+  {
+   "name": "ActLattice weekly brand content",
+   "job": "ActLattice weekly brand content",
+   "schedule": "Weekly · Tue 2:16 PM"
+  },
+  {
+   "name": "Admin dashboard refresh",
+   "job": "Rebuilds the owner's admin dashboard so it is always current",
+   "schedule": "Every 15 min"
+  },
+  {
+   "name": "Affiliate Hunter 01 — AI tool reviewers",
+   "job": "Hunts AI tool reviewers and bloggers who cover products like ours; drafts a 30 percent affiliate invitation",
+   "schedule": "24/7 rotation"
+  },
+  {
+   "name": "Affiliate Hunter 02 — Productivity creators",
+   "job": "Hunts productivity creators whose audience buys templates and systems; drafts a 30 percent affiliate invitation",
+   "schedule": "24/7 rotation"
+  },
+  {
+   "name": "Affiliate Hunter 03 — Personal-finance creators",
+   "job": "Hunts personal-finance creators who cover budgeting tools; drafts a 30 percent affiliate invitation for the Budget Spreadsheet",
+   "schedule": "24/7 rotation"
+  },
+  {
+   "name": "Affiliate Hunter 04 — Career and job-search creators",
+   "job": "Hunts career creators who cover resumes and interviews; drafts a 30 percent affiliate invitation for the Job-Search Kit",
+   "schedule": "24/7 rotation"
+  },
+  {
+   "name": "Affiliate Hunter 05 — Freelancer-community leaders",
+   "job": "Hunts freelancer-community leaders and educators; drafts a 30 percent affiliate invitation for the Freelancer Client OS",
+   "schedule": "24/7 rotation"
+  },
+  {
+   "name": "Affiliate Hunter 06 — Small-business podcasters",
+   "job": "Hunts small-business podcasters and newsletter writers; drafts a 30 percent affiliate invitation matched to their audience",
+   "schedule": "24/7 rotation"
+  },
+  {
+   "name": "Affiliate Recruiter (hive)",
+   "job": "Recruit affiliates for the 30%-commission program: draft recruitment pitches to real creators/newsletters/sites in the AI-governance space, seed them as draft…",
+   "schedule": "On demand · hive"
+  },
+  {
+   "name": "Agency vertical scout — new-vertical agency leads",
+   "job": "Agency vertical scout — new-vertical agency leads",
+   "schedule": "Daily · 5:41 AM"
+  },
+  {
+   "name": "AI agency daily outreach (scout + gated sends)",
+   "job": "Finds local businesses and sends agency pitches",
+   "schedule": "Daily · 9:16 AM"
+  },
+  {
+   "name": "AI agency Fiverr inbox check",
+   "job": "Checks the agency's Fiverr inbox for new orders",
+   "schedule": "Daily · 10:16 AM"
+  },
+  {
+   "name": "AI agency reply handling (intake + order flow)",
+   "job": "Handles replies to agency pitches and books intake",
+   "schedule": "Every 2 hr"
+  },
+  {
+   "name": "Approval watcher",
+   "job": "Executes approved work — publishes products and applies site updates",
+   "schedule": "Every 5 min"
+  },
+  {
+   "name": "Approval Watcher Runner (hive)",
+   "job": "Run the approval queue the way the legacy 5-minute approval watcher does: classify every pending item, EXECUTE the AUTO kinds itself, and leave HUMAN kinds…",
+   "schedule": "On demand · hive"
+  },
+  {
+   "name": "Article Illustrator (hive)",
+   "job": "Generate branded cover, OG, and hero images for site articles and product pages through the media pipeline, following the established conventions so every page…",
+   "schedule": "On demand · hive"
+  },
+  {
+   "name": "Assessment Builder (hive)",
+   "job": "Build maturity-style self-assessments with leveled outcomes: the buyer rates their organization against statements grouped by capability area and receives a…",
+   "schedule": "On demand · hive"
+  },
+  {
+   "name": "Audit Tool Builder (hive)",
+   "job": "Build single-file HTML self-audit tools (and companion CSV data templates): an auditor opens the HTML file locally, answers questions, and gets a scored…",
+   "schedule": "On demand · hive"
+  },
+  {
+   "name": "Backlink hunter — resource-page placements (drafts)",
+   "job": "Backlink hunter — resource-page placements",
+   "schedule": "Weekly · Wed 6:41 AM"
+  },
+  {
+   "name": "Benchmark Compiler (hive)",
+   "job": "Compile benchmark comparisons ONLY from real, measured, cited data — published eval scores, vendor-reported figures, academic papers.",
+   "schedule": "On demand · hive"
+  },
+  {
+   "name": "Board Deck Outliner (hive)",
+   "job": "Turn governance products into board-ready deck outlines: full PPTX slide structure (title, bullets, layout note per slide) plus speaker notes, so a buyer can…",
+   "schedule": "On demand · hive"
+  },
+  {
+   "name": "Bots Live roster refresh — keeps the Xbox fleet page current",
+   "job": "Bots Live roster refresh — keeps the Xbox fleet page current",
+   "schedule": "Daily · 8:16 AM"
+  },
+  {
+   "name": "Brand Content Writer (hive)",
+   "job": "Feed each of the 11 bot-run brands a weekly article: real, useful, brand-voiced content that compounds organic traffic and gives every brand a living…",
+   "schedule": "On demand · hive"
+  },
+  {
+   "name": "Brief Approver (hive)",
+   "job": "Keep the product forge fed.",
+   "schedule": "On demand · hive"
+  },
+  {
+   "name": "Broken Embed Fixer (hive)",
+   "job": "Find broken embeds across the site — iframes, , , and third-party tags that no longer load — and repair or remove the embed so no page ships a dead widget.",
+   "schedule": "On demand · hive"
+  },
+  {
+   "name": "Bundle Optimizer (hive)",
+   "job": "Design bundle compositions from live products, priced WITHIN the approved tiers (/// for bundles — never a new tier).",
+   "schedule": "On demand · hive"
+  },
+  {
+   "name": "Business Foundry Runner (hive)",
+   "job": "Mint exactly ONE new bot-run micro-brand per week, end to end — niche, name, spec, 12-product draft slate, hub page, site updates, weekly brand cron —…",
+   "schedule": "On demand · hive"
+  },
+  {
+   "name": "Business foundry — mint one micro-brand weekly",
+   "job": "Business foundry — mint one micro-brand weekly",
+   "schedule": "Weekly · Sat 10:16 AM"
+  },
+  {
+   "name": "Calculator Builder (hive)",
+   "job": "Build single-file HTML calculators (ROI calculators, risk scoring calculators, compliance-cost estimators): the buyer opens the file locally, enters their…",
+   "schedule": "On demand · hive"
+  },
+  {
+   "name": "Cart Abandon Email Writer (hive)",
+   "job": "Recover lost checkouts with a draft-only cart-abandon email sequence: 3 emails (1h, 24h, 72h) that remind, reassure, and close — without invented discounts…",
+   "schedule": "On demand · hive"
+  },
+  {
+   "name": "Catalog Architect (hive)",
+   "job": "Maintain the product ladder map (7 rungs across the 96+ product catalog) and wire the \"Next step up the ladder\" cross-sell block on every product page that…",
+   "schedule": "On demand · hive"
+  },
+  {
+   "name": "Catalog Builder (hive)",
+   "job": "Keep the public site catalog in sync with the live Gumroad catalog after every publish: covers, product grid, product pages, sitemap.",
+   "schedule": "On demand · hive"
+  },
+  {
+   "name": "Checklist Designer (hive)",
+   "job": "Design actionable checklists (compliance checks, launch readiness, incident response checks, audit prep) as designed, print-friendly PDF products: every item…",
+   "schedule": "On demand · hive"
+  },
+  {
+   "name": "CivicWarden daily acquisition",
+   "job": "CivicWarden daily acquisition",
+   "schedule": "Daily · 5:16 PM"
+  },
+  {
+   "name": "CivicWarden weekly brand content",
+   "job": "CivicWarden weekly brand content",
+   "schedule": "Weekly · Fri 2:16 PM"
+  },
+  {
+   "name": "ClassWarden daily acquisition",
+   "job": "ClassWarden daily acquisition",
+   "schedule": "Daily · 10:16 AM"
+  },
+  {
+   "name": "ClassWarden weekly brand content",
+   "job": "ClassWarden weekly brand content",
+   "schedule": "Weekly · Tue 8:16 AM"
+  },
+  {
+   "name": "Competitor Price Tracker (hive)",
+   "job": "Maintain a machine-readable ledger of competitor public pricing over time: one JSON snapshot per vendor per run, enabling price-move detection and accurate…",
+   "schedule": "On demand · hive"
+  },
+  {
+   "name": "Competitor price watch — intel only",
+   "job": "Competitor price watch — intel only",
+   "schedule": "Weekly · Sun 6:41 AM"
+  },
+  {
+   "name": "Competitor watch",
+   "job": "Competitor watch",
+   "schedule": "Weekly · Thu 9:16 AM"
+  },
+  {
+   "name": "Competitor Watch (hive)",
+   "job": "Keep ghostcorpnet's pricing and positioning claims accurate by tracking competitor moves (LangSmith, Langfuse, AgentOps, Braintrust and new entrants) and…",
+   "schedule": "On demand · hive"
+  },
+  {
+   "name": "Content Drafter (hive)",
+   "job": "Keep the content pipeline full: daily content drafts (social posts, thread ideas, short-form angles, article outlines) queued for the content-repurposer…",
+   "schedule": "On demand · hive"
+  },
+  {
+   "name": "Content Refresher (hive)",
+   "job": "Keep published articles accurate over time: update stale facts, dates, model names, and regulatory references in existing articles.",
+   "schedule": "On demand · hive"
+  },
+  {
+   "name": "Content Repurposer (hive)",
+   "job": "Turn each published site article into per-channel social drafts (X/LinkedIn/Reddit/HN styles) that drive traffic back to the site.",
+   "schedule": "On demand · hive"
+  },
+  {
+   "name": "Control Matrix Mapper (hive)",
+   "job": "Build control-to-requirement mapping matrices: each control mapped to the requirements it satisfies across 2–4 frameworks/regulations — delivered as a CSV…",
+   "schedule": "On demand · hive"
+  },
+  {
+   "name": "Cover Uploader (hive)",
+   "job": "Get a branded cover PNG onto every live Gumroad product.",
+   "schedule": "On demand · hive"
+  },
+  {
+   "name": "Customer swarm engine 1 — forum + Q&A hunters",
+   "job": "Customer swarm engine 1 — forum + Q&A hunters",
+   "schedule": "Every 2 hr"
+  },
+  {
+   "name": "Customer swarm engine 2 — agency local + online-business hunters",
+   "job": "Customer swarm engine 2 — agency local + online-business hunters",
+   "schedule": "Every 2 hr"
+  },
+  {
+   "name": "Customer swarm engine 3 — partner + affiliate hunters",
+   "job": "Customer swarm engine 3 — partner + affiliate hunters",
+   "schedule": "Every 2 hr"
+  },
+  {
+   "name": "Customer swarm engine 4 — directory/backlink + social-listener hunters",
+   "job": "Customer swarm engine 4 — directory/backlink + social-listener hunters",
+   "schedule": "Every 2 hr"
+  },
+  {
+   "name": "Customer swarm engine 5 — marketplace demand + follow-up hunters",
+   "job": "Customer swarm engine 5 — marketplace demand + follow-up hunters",
+   "schedule": "Every 2 hr"
+  },
+  {
+   "name": "Daily content drafts",
+   "job": "Daily content drafts",
+   "schedule": "Daily · 12:16 PM"
+  },
+  {
+   "name": "Daily lead scout",
+   "job": "Daily lead scout",
+   "schedule": "Daily · 9:16 AM"
+  },
+  {
+   "name": "Daily marketplace scout",
+   "job": "Daily marketplace scout",
+   "schedule": "Daily · 10:16 AM"
+  },
+  {
+   "name": "Daily mention watch",
+   "job": "Daily mention watch",
+   "schedule": "Daily · 9:16 AM"
+  },
+  {
+   "name": "Daily micro-forge (batch factory)",
+   "job": "Daily micro-forge",
+   "schedule": "Daily · 3:16 PM"
+  },
+  {
+   "name": "Daily thread spotter",
+   "job": "Daily thread spotter",
+   "schedule": "Daily · 7:16 AM"
+  },
+  {
+   "name": "Dashboard Refresh Runner (hive)",
+   "job": "Rebuild the private admin dashboard's data so koalstin's panel shows live sales figures, the review pipeline, and what each bot last produced.",
+   "schedule": "On demand · hive"
+  },
+  {
+   "name": "Demand Hunter 01 — Gumroad Discover trends",
+   "job": "Watches Gumroad Discover trends in governance and productivity; files demand intel and listing-angle drafts for what buyers are clicking",
+   "schedule": "24/7 rotation"
+  },
+  {
+   "name": "Demand Hunter 02 — Gumroad search gaps",
+   "job": "Probes Gumroad search for buyer queries with weak or missing results in our niches; files product and listing gap drafts",
+   "schedule": "24/7 rotation"
+  },
+  {
+   "name": "Demand Hunter 03 — Creative-marketplace demand",
+   "job": "Watches creative and template marketplace demand signals for freelancer and planner products; files demand intel and listing drafts",
+   "schedule": "24/7 rotation"
+  },
+  {
+   "name": "Demand Hunter 04 — Launch-platform signals",
+   "job": "Watches AppSumo and Product Hunt launches in adjacent niches; files demand intel on what is selling and why",
+   "schedule": "24/7 rotation"
+  },
+  {
+   "name": "Demand Hunter 05 — Payhip and Sellfy category trends",
+   "job": "Watches Payhip and Sellfy category trends in our niches; files demand intel and cross-listing drafts",
+   "schedule": "24/7 rotation"
+  },
+  {
+   "name": "Demand Hunter 06 — Book-category demand",
+   "job": "Watches book-category demand for AI governance and career titles; files demand intel for playbook book editions",
+   "schedule": "24/7 rotation"
+  },
+  {
+   "name": "Directory Hunter 01 — AI tool directories",
+   "job": "Hunts AI tool directories that accept free submissions; prepares complete, submission-ready listing packs",
+   "schedule": "24/7 rotation"
+  },
+  {
+   "name": "Directory Hunter 02 — SaaS and software directories",
+   "job": "Hunts SaaS and software directories that accept free submissions; prepares complete, submission-ready listing packs",
+   "schedule": "24/7 rotation"
+  },
+  {
+   "name": "Directory Hunter 03 — Business resource pages",
+   "job": "Hunts business resource pages that list tools for owners; drafts a value-first placement request for each fit",
+   "schedule": "24/7 rotation"
+  },
+  {
+   "name": "Directory Hunter 04 — Best-of listicles",
+   "job": "Hunts best AI governance tools listicles that accept additions; drafts an evidence-based inclusion pitch for each fit",
+   "schedule": "24/7 rotation"
+  },
+  {
+   "name": "Directory Hunter 05 — Launch platforms",
+   "job": "Hunts startup and product launch platforms with free tiers; prepares complete, submission-ready launch packs",
+   "schedule": "24/7 rotation"
+  },
+  {
+   "name": "Directory Hunter 06 — Local business directories",
+   "job": "Hunts local and regional business directories for the agency's presence; prepares complete, submission-ready listing packs",
+   "schedule": "24/7 rotation"
+  },
+  {
+   "name": "Directory hunter — free directory submissions",
+   "job": "Directory hunter — free directory submissions",
+   "schedule": "Weekly · Mon 6:41 AM"
+  },
+  {
+   "name": "Directory Submitter (hive)",
+   "job": "Submit the ghostcorpnet AI-directory submission pack to the 8 free AI tool directories, plus BetaList, via public submit forms.",
+   "schedule": "On demand · hive"
+  },
+  {
+   "name": "Ecosystem Expansion Runner (hive)",
+   "job": "Ship ONE niche ecosystem drop per month.",
+   "schedule": "On demand · hive"
+  },
+  {
+   "name": "Email Deliverability Guard (hive)",
+   "job": "The last checkpoint before any email goes out: verify caps, STOP file, sender identity, opt-out footer, and CAN-SPAM readiness.",
+   "schedule": "On demand · hive"
+  },
+  {
+   "name": "Evidence Checklist Writer (hive)",
+   "job": "Write audit evidence checklists per framework: for each control/requirement, exactly what evidence an auditor expects to see (document types, sample sizes…",
+   "schedule": "On demand · hive"
+  },
+  {
+   "name": "Exec Summary Writer (hive)",
+   "job": "Condense longer governance kits into 1–2 page executive summaries: the decision, the risk, the 5 key points, the recommended actions — written for a C-suite…",
+   "schedule": "On demand · hive"
+  },
+  {
+   "name": "Faq Expander (hive)",
+   "job": "Draft new FAQ entries from REAL questions people ask — support inbox, mention-watch hits, social replies, competitor reviews — and turn them into FAQ drafts…",
+   "schedule": "On demand · hive"
+  },
+  {
+   "name": "FAQ miner",
+   "job": "FAQ miner",
+   "schedule": "Weekly · Sun 9:16 AM"
+  },
+  {
+   "name": "FinLattice daily acquisition",
+   "job": "FinLattice daily acquisition",
+   "schedule": "Daily · 12:16 PM"
+  },
+  {
+   "name": "FinLattice weekly brand content",
+   "job": "FinLattice weekly brand content",
+   "schedule": "Weekly · Wed 8:16 AM"
+  },
+  {
+   "name": "Fleet brain sync (weekly)",
+   "job": "Keeps every bot's schedule and roster in sync",
+   "schedule": "Weekly · Sun 9:30 AM"
+  },
+  {
+   "name": "Follow-up Hunter 01 — Free Sample downloaders",
+   "job": "Prepares one follow-up draft per Free Sample downloader pointing to the Playbook, for the revenue-flow follow-up channel only",
+   "schedule": "24/7 rotation"
+  },
+  {
+   "name": "Follow-up Hunter 02 — Bounds Checklist downloaders",
+   "job": "Prepares one follow-up draft per Bounds Checklist downloader pointing to the Containment Library, for the revenue-flow follow-up channel only",
+   "schedule": "24/7 rotation"
+  },
+  {
+   "name": "Follow-up Hunter 03 — Starter Kit downloaders",
+   "job": "Prepares one follow-up draft per Starter Kit downloader pointing to the Playbook or Break-Test Starter, for the revenue-flow follow-up channel only",
+   "schedule": "24/7 rotation"
+  },
+  {
+   "name": "Follow-up Hunter 04 — Product review and comment replies",
+   "job": "Watches our Gumroad product reviews and comments; drafts a helpful reply to each genuine one for the configured store channel",
+   "schedule": "24/7 rotation"
+  },
+  {
+   "name": "Follow-up Hunter 05 — Own-post comment replies",
+   "job": "Watches comments on our own posts on configured channels; drafts a helpful reply to each genuine question",
+   "schedule": "24/7 rotation"
+  },
+  {
+   "name": "Follow-up Hunter 06 — Warm-lead re-checks",
+   "job": "Re-verifies older filed leads and intel that went stale; re-files only the ones that are fresh, reachable, and not duplicates",
+   "schedule": "24/7 rotation"
+  },
+  {
+   "name": "Forum Hunter 01 — Spiceworks IT pros",
+   "job": "Hunts Spiceworks Community threads where IT pros ask about AI governance and security; drafts genuinely helpful replies with the matched playbook linked last",
+   "schedule": "24/7 rotation"
+  },
+  {
+   "name": "Forum Hunter 02 — BiggerPockets real estate",
+   "job": "Hunts BiggerPockets threads on lead follow-up and CRM pain; drafts helpful replies matched to the AI Client Machine for Real Estate Agents",
+   "schedule": "24/7 rotation"
+  },
+  {
+   "name": "Forum Hunter 03 — Sysadmin and MSP forums",
+   "job": "Hunts public sysadmin and MSP community threads about governing employee AI tools; drafts helpful replies matched to the Playbook",
+   "schedule": "24/7 rotation"
+  },
+  {
+   "name": "Forum Hunter 04 — Freelancer forums",
+   "job": "Hunts freelancer community threads on client management and onboarding pain; drafts replies matched to the Freelancer Client OS",
+   "schedule": "24/7 rotation"
+  },
+  {
+   "name": "Forum Hunter 05 — Small-business owner forums",
+   "job": "Hunts small-business owner forums for missed-call and front-desk pain; drafts replies matched to the AI agency Front Desk service",
+   "schedule": "24/7 rotation"
+  },
+  {
+   "name": "Forum Hunter 06 — Compliance and GRC forums",
+   "job": "Hunts compliance and GRC community threads on AI policy; drafts replies matched to the Playbook and Containment Library",
+   "schedule": "24/7 rotation"
+  },
+  {
+   "name": "Free tool forge — one new free site tool monthly",
+   "job": "Free tool forge — one new free site tool monthly",
+   "schedule": "Monthly · 6:41 AM"
+  },
+  {
+   "name": "FrontierLattice daily acquisition",
+   "job": "FrontierLattice daily acquisition",
+   "schedule": "Daily · 6:16 AM"
+  },
+  {
+   "name": "FrontierLattice weekly brand content",
+   "job": "FrontierLattice weekly brand content",
+   "schedule": "Weekly · Sat 8:16 AM"
+  },
+  {
+   "name": "Glossary Builder (hive)",
+   "job": "Build per-brand term glossary pages () that define AI-governance terminology in plain language.",
+   "schedule": "On demand · hive"
+  },
+  {
+   "name": "Google Geek crew — nonstop search research",
+   "job": "Research crew — hunts leads, competitors, and answers online",
+   "schedule": "Every 2 hr"
+  },
+  {
+   "name": "Gumroad daily publisher (10/day cap)",
+   "job": "Gumroad daily publisher",
+   "schedule": "Daily · 9:16 AM"
+  },
+  {
+   "name": "Gumroad Publisher (hive)",
+   "job": "Plan publish batches for queued products via the duplicate-workaround (duplicating a live product is NOT subject to Gumroad's 10-new-products-per-day cap, and…",
+   "schedule": "On demand · hive"
+  },
+  {
+   "name": "HealthLattice daily acquisition",
+   "job": "HealthLattice daily acquisition",
+   "schedule": "Daily · 1:16 PM"
+  },
+  {
+   "name": "HealthLattice weekly brand content",
+   "job": "HealthLattice weekly brand content",
+   "schedule": "Weekly · Wed 2:16 PM"
+  },
+  {
+   "name": "HireWarden daily acquisition",
+   "job": "HireWarden daily acquisition",
+   "schedule": "Daily · 2:16 PM"
+  },
+  {
+   "name": "HireWarden weekly brand content",
+   "job": "HireWarden weekly brand content",
+   "schedule": "Weekly · Thu 8:16 AM"
+  },
+  {
+   "name": "Hive worker 1",
+   "job": "Hive worker 1",
+   "schedule": "Every 10 min"
+  },
+  {
+   "name": "Hive worker 2",
+   "job": "Hive worker 2",
+   "schedule": "Every 10 min"
+  },
+  {
+   "name": "Hive worker 3",
+   "job": "Hive worker 3",
+   "schedule": "Every 10 min"
+  },
+  {
+   "name": "Hive worker 4",
+   "job": "Hive worker 4",
+   "schedule": "Every 10 min"
+  },
+  {
+   "name": "Hive worker 5",
+   "job": "Hive worker 5",
+   "schedule": "Every 10 min"
+  },
+  {
+   "name": "Hive worker 6",
+   "job": "Hive worker 6",
+   "schedule": "Every 10 min"
+  },
+  {
+   "name": "HiveBrain coordinator (live)",
+   "job": "Plans the hive workers' tasks and assigns the work",
+   "schedule": "Every 10 min"
+  },
+  {
+   "name": "Image Alt Writer (hive)",
+   "job": "Audit every image on the site and write concise, accurate alt text wherever it is missing — for accessibility and SEO.",
+   "schedule": "On demand · hive"
+  },
+  {
+   "name": "Inbox Responder (hive)",
+   "job": "Keep the customer inbox human: triage incoming mail to the business Gmail, draft real replies for real people, and never auto-send anything — every reply is a…",
+   "schedule": "On demand · hive"
+  },
+  {
+   "name": "Inbox watch: auto-reply to customer emails",
+   "job": "Watches the business inbox and handles routine replies",
+   "schedule": "Every 10 min"
+  },
+  {
+   "name": "Incident Report Template Writer (hive)",
+   "job": "Write incident-report templates per governance framework: the forms buyers actually need when an AI agent fails in production — EU AI Act serious-incident…",
+   "schedule": "On demand · hive"
+  },
+  {
+   "name": "Incident To Playbook Writer (hive)",
+   "job": "Turn REAL, cited AI incidents (agent failures, prompt-injection cases, data leaks, model misbehavior in production) into draft playbook content for the…",
+   "schedule": "On demand · hive"
+  },
+  {
+   "name": "IncidentLattice daily acquisition",
+   "job": "IncidentLattice daily acquisition",
+   "schedule": "Daily · 8:16 AM"
+  },
+  {
+   "name": "IncidentLattice weekly brand content",
+   "job": "IncidentLattice weekly brand content",
+   "schedule": "Weekly · Mon 8:16 AM"
+  },
+  {
+   "name": "Insight answer bot — value-first Q&A drafts (never posts)",
+   "job": "Insight answer bot — value-first Q&A drafts",
+   "schedule": "Daily · 7:23 AM"
+  },
+  {
+   "name": "Internal Link Strategist (hive)",
+   "job": "Design internal cross-link plans that lift SEO and buyer flow: product-ladder \"next step up\" links (→→→→→), article→product contextual CTAs, ecosystem…",
+   "schedule": "On demand · hive"
+  },
+  {
+   "name": "JobLattice weekly brand content",
+   "job": "JobLattice weekly brand content",
+   "schedule": "Weekly · Thu 10:16 AM"
+  },
+  {
+   "name": "LawWarden daily acquisition",
+   "job": "LawWarden daily acquisition",
+   "schedule": "Daily · 3:16 PM"
+  },
+  {
+   "name": "LawWarden weekly brand content",
+   "job": "LawWarden weekly brand content",
+   "schedule": "Weekly · Thu 2:16 PM"
+  },
+  {
+   "name": "Lead Deduplicator (hive)",
+   "job": "Enforce ONE EMAIL = ONE LEAD EVER across the whole outreach system.",
+   "schedule": "On demand · hive"
+  },
+  {
+   "name": "Lead Scout (hive)",
+   "job": "Keep the outreach machine fed with a fresh daily supply of real, public business leads.",
+   "schedule": "On demand · hive"
+  },
+  {
+   "name": "Link Rot Hunter (hive)",
+   "job": "Continuously crawl the ghostcorpnet site for dead links — broken internal hrefs and dead external URLs — fix every internal one directly, and report external…",
+   "schedule": "On demand · hive"
+  },
+  {
+   "name": "Local Hunter 01 — Roofers and HVAC — Indianapolis",
+   "job": "Hunts Indianapolis-metro roofers and HVAC companies with weak web presence or missed-call risk; verifies a public business email and files deduped agency leads",
+   "schedule": "24/7 rotation"
+  },
+  {
+   "name": "Local Hunter 02 — Plumbers and electricians — Cincinnati and Dayton",
+   "job": "Hunts Cincinnati and Dayton plumbers and electricians; verifies a public business email and files deduped agency leads",
+   "schedule": "24/7 rotation"
+  },
+  {
+   "name": "Local Hunter 03 — Dental and med spas — Columbus",
+   "job": "Hunts Columbus dental practices and med spas; verifies a public business email and files deduped agency leads",
+   "schedule": "24/7 rotation"
+  },
+  {
+   "name": "Local Hunter 04 — Law firms — Indianapolis and Louisville",
+   "job": "Hunts Indianapolis and Louisville law firms; verifies a public business email and files deduped agency leads",
+   "schedule": "24/7 rotation"
+  },
+  {
+   "name": "Local Hunter 05 — Real-estate teams — Fort Wayne and Grand Rapids",
+   "job": "Hunts Fort Wayne and Grand Rapids real-estate teams; verifies a public business email and files deduped agency leads",
+   "schedule": "24/7 rotation"
+  },
+  {
+   "name": "Local Hunter 06 — Remodelers and home-services franchises — Nashville and St. Louis",
+   "job": "Hunts Nashville and St. Louis remodelers and home-services franchises; verifies a public business email and files deduped agency leads",
+   "schedule": "24/7 rotation"
+  },
+  {
+   "name": "Manuscript Writer (hive)",
+   "job": "Write long-form PDF manuscripts from APPROVED product briefs — the complete, sellable text that becomes the product.",
+   "schedule": "On demand · hive"
+  },
+  {
+   "name": "Marketplace Lister (hive)",
+   "job": "Draft Etsy/Payhip/Creative Market listings as for the human's manual paste.",
+   "schedule": "On demand · hive"
+  },
+  {
+   "name": "Marketplace Scout (hive)",
+   "job": "Read-only scouting of Etsy, Payhip, and Creative Market: which categories fit ghostcorpnet's self-serve digital governance products, what comparable listings…",
+   "schedule": "On demand · hive"
+  },
+  {
+   "name": "Maturity Model Writer (hive)",
+   "job": "Write 5-level maturity models for a governance domain (AI governance, incident response, vendor risk, data governance, etc.): level definitions, per-level…",
+   "schedule": "On demand · hive"
+  },
+  {
+   "name": "Medium Republisher (hive)",
+   "job": "Republish new ghostcorpnet SEO articles to Medium with canonical links back to the original, capturing Medium's discovery audience without splitting SEO equity.",
+   "schedule": "On demand · hive"
+  },
+  {
+   "name": "Mention Watch (hive)",
+   "job": "Catch every public mention of ghostcorpnet so none goes unanswered: search for \"ghostcorpnet\", \"governed agent mesh playbook\", and the site URL, log each real…",
+   "schedule": "On demand · hive"
+  },
+  {
+   "name": "Mesh sender (worker-outage failover)",
+   "job": "Delivers queued fleet messages and retries failed sends",
+   "schedule": "Every 5 min"
+  },
+  {
+   "name": "Micro Forge Runner (hive)",
+   "job": "Run the daily micro-product batch factory: draft up to 50 finished, sellable micro-product drafts per day (PDF checklists, worksheets, template packs, PPTX…",
+   "schedule": "On demand · hive"
+  },
+  {
+   "name": "Model Refresh (hive)",
+   "job": "Keep the fleet's AI models alive without human help: detect retired provider models and self-heal to the best same-family replacement, verified with a live…",
+   "schedule": "On demand · hive"
+  },
+  {
+   "name": "Monthly review miner",
+   "job": "Monthly review miner",
+   "schedule": "Monthly · 11:16 AM"
+  },
+  {
+   "name": "Newsletter Compiler (hive)",
+   "job": "Assemble the weekly ghostcorpnet newsletter from the week's real output — new articles, trend briefs, regulation briefs, launches, ecosystem updates — into a…",
+   "schedule": "On demand · hive"
+  },
+  {
+   "name": "Og Image Designer (hive)",
+   "job": "Give every public page a proper social share image: generate missing OG/Twitter card images in the ghostcorpnet visual identity and wire the meta tags, so…",
+   "schedule": "On demand · hive"
+  },
+  {
+   "name": "One Pager Writer (hive)",
+   "job": "Produce single-page briefs: one governance topic, one page, readable in 3 minutes — the format buyers print and hand around.",
+   "schedule": "On demand · hive"
+  },
+  {
+   "name": "Online Hunter 01 — Marketing agencies",
+   "job": "Hunts small marketing agencies that could resell or use AI website and front-desk services; files deduped agency leads with the angle noted",
+   "schedule": "24/7 rotation"
+  },
+  {
+   "name": "Online Hunter 02 — Small SaaS founders",
+   "job": "Hunts small SaaS founders with support and follow-up pain; files deduped agency leads with the angle noted",
+   "schedule": "24/7 rotation"
+  },
+  {
+   "name": "Online Hunter 03 — Coaches and course creators",
+   "job": "Hunts coaches and course creators who need client systems and websites; files deduped agency leads with the angle noted",
+   "schedule": "24/7 rotation"
+  },
+  {
+   "name": "Online Hunter 04 — E-commerce stores",
+   "job": "Hunts small e-commerce stores with support-automation pain; files deduped agency leads with the angle noted",
+   "schedule": "24/7 rotation"
+  },
+  {
+   "name": "Online Hunter 05 — Remote real-estate brokerages",
+   "job": "Hunts remote-first real-estate brokerages needing lead follow-up systems; files deduped agency leads with the angle noted",
+   "schedule": "24/7 rotation"
+  },
+  {
+   "name": "Online Hunter 06 — Solo consultants and bookkeepers",
+   "job": "Hunts solo consultants and bookkeepers with no real website; files deduped agency leads with the angle noted",
+   "schedule": "24/7 rotation"
+  },
+  {
+   "name": "Outreach Analyst (hive)",
+   "job": "Turn the send ledger into honest numbers: reply rates, per-brand performance, and trend deltas the human can act on.",
+   "schedule": "On demand · hive"
+  },
+  {
+   "name": "Outreach Sender (hive)",
+   "job": "Send ready, idempotent cold-outreach pitches from the business Gmail under the human's 2026-09-30 full-auto directive.",
+   "schedule": "On demand · hive"
+  },
+  {
+   "name": "Outreach sync (leads → pitches → send queue)",
+   "job": "Keeps the customer outreach queue in sync and deduplicated",
+   "schedule": "Every 5 min"
+  },
+  {
+   "name": "Outreach Sync Runner (hive)",
+   "job": "Turn freshly scouted leads into ready-to-send outreach: enrich each with a public contact email (never guessed), draft a personalized pitch, and seed worker…",
+   "schedule": "On demand · hive"
+  },
+  {
+   "name": "Partner Hunter 01 — AI newsletters",
+   "job": "Hunts AI newsletters that feature tools and playbooks; drafts a tailored partner pitch for each fit",
+   "schedule": "24/7 rotation"
+  },
+  {
+   "name": "Partner Hunter 02 — Business and productivity newsletters",
+   "job": "Hunts business and productivity newsletters; drafts a tailored partner pitch for each fit",
+   "schedule": "24/7 rotation"
+  },
+  {
+   "name": "Partner Hunter 03 — AI and business podcasts",
+   "job": "Hunts AI and business podcasts that book guests or feature products; drafts a tailored pitch for each fit",
+   "schedule": "24/7 rotation"
+  },
+  {
+   "name": "Partner Hunter 04 — Creator channels",
+   "job": "Hunts creator channels covering AI tools and freelancing; drafts a tailored collaboration pitch for each fit",
+   "schedule": "24/7 rotation"
+  },
+  {
+   "name": "Partner Hunter 05 — Online communities and groups",
+   "job": "Hunts online communities and professional groups open to resource shares; drafts a value-first introduction for each fit",
+   "schedule": "24/7 rotation"
+  },
+  {
+   "name": "Partner Hunter 06 — Course creators and bundle organizers",
+   "job": "Hunts course creators and bundle organizers in adjacent niches; drafts a bundle or cross-promotion pitch for each fit",
+   "schedule": "24/7 rotation"
+  },
+  {
+   "name": "Partner Scout (hive)",
+   "job": "Find and draft partnership opportunities that compound distribution: co-marketing with complementary (non-competitor) tool makers, bundle/cross-promote…",
+   "schedule": "On demand · hive"
+  },
+  {
+   "name": "Performance Auditor (hive)",
+   "job": "Keep the site fast on a static-hosting budget: audit page weight, asset sizes, and Core Web Vitals hygiene on a rotating schedule; ship the trivial wins…",
+   "schedule": "On demand · hive"
+  },
+  {
+   "name": "Pinterest Publisher (hive)",
+   "job": "Turn every product cover and article hero image into Pinterest pins on per-brand boards, driving evergreen visual discovery traffic back to ghostcorpnet…",
+   "schedule": "On demand · hive"
+  },
+  {
+   "name": "Pitch Drafter (hive)",
+   "job": "Turn fresh lead briefs into ready-to-send, personalized pitch drafts — and seed them as paired worker queue items (send + forget-cancellation).",
+   "schedule": "On demand · hive"
+  },
+  {
+   "name": "Pitch Personalizer (hive)",
+   "job": "Draft the weekly per-brand acquisition pitches for all 11 bot-run brands — the customer-acquisition loop that keeps ~20 fresh touches/day rotating with nothing…",
+   "schedule": "On demand · hive"
+  },
+  {
+   "name": "Policy Template Writer (hive)",
+   "job": "Write governance policy templates (acceptable use, data handling, incident response policy, AI acceptable-use policy, access control policy): each policy is a…",
+   "schedule": "On demand · hive"
+  },
+  {
+   "name": "Price Integrity Auditor (hive)",
+   "job": "Audit every live Gumroad product's price against the human-approved tier set (////////).",
+   "schedule": "On demand · hive"
+  },
+  {
+   "name": "Pricing experiment",
+   "job": "Pricing experiment",
+   "schedule": "Monthly · 9:16 AM"
+  },
+  {
+   "name": "Product Brief Writer (hive)",
+   "job": "Turn trend, review-miner, and mention-watch signals into structured, build-ready product briefs — the feedstock for manuscript-writer and product-forge-runner.",
+   "schedule": "On demand · hive"
+  },
+  {
+   "name": "Product Forge Runner (hive)",
+   "job": "Build the weekly flagship products — premium standalone products at / deluxe editions at / mega-kits at enterprise licenses at ; non-PDF formats welcome (PPTX…",
+   "schedule": "On demand · hive"
+  },
+  {
+   "name": "Product page polisher — clarity audit and fixes",
+   "job": "Product page polisher — clarity audit and fixes",
+   "schedule": "Weekly · Tue 6:41 AM"
+  },
+  {
+   "name": "Provider Scout (hive)",
+   "job": "Find NEW free-tier AI providers the fleet could use beyond the already-connected lanes, and prepare complete draft integrations so the human can approve a new…",
+   "schedule": "On demand · hive"
+  },
+  {
+   "name": "Publisher (hive)",
+   "job": "Publish queued digital products to Gumroad at the maximum sustainable pace, exactly as the legacy daily publisher did.",
+   "schedule": "On demand · hive"
+  },
+  {
+   "name": "Q&A answer scout — buyer-intent answer drafts",
+   "job": "Q&A answer scout — buyer-intent answer drafts",
+   "schedule": "Weekly · Thu 6:41 AM"
+  },
+  {
+   "name": "Q&A Hunter 01 — AI governance questions",
+   "job": "Hunts public Q&A threads asking how to govern AI agents at work; drafts useful-first answers matched to the Playbook",
+   "schedule": "24/7 rotation"
+  },
+  {
+   "name": "Q&A Hunter 02 — Budgeting and debt questions",
+   "job": "Hunts public Q&A threads on budgeting and paying off debt; drafts answers matched to the 2027 Budget and Debt-Payoff Spreadsheet",
+   "schedule": "24/7 rotation"
+  },
+  {
+   "name": "Q&A Hunter 03 — Job-search questions",
+   "job": "Hunts public Q&A threads on resumes, cover letters, and interviews; drafts answers matched to the AI Job-Search Kit",
+   "schedule": "24/7 rotation"
+  },
+  {
+   "name": "Q&A Hunter 04 — Freelance client questions",
+   "job": "Hunts public Q&A threads on getting and managing freelance clients; drafts answers matched to the Freelancer Client OS",
+   "schedule": "24/7 rotation"
+  },
+  {
+   "name": "Q&A Hunter 05 — Prompt security questions",
+   "job": "Hunts public Q&A threads on prompt injection and bot safety; drafts answers matched to the Prompt-Injection Test Deck and AI Break-Test",
+   "schedule": "24/7 rotation"
+  },
+  {
+   "name": "Q&A Hunter 06 — Small-business automation questions",
+   "job": "Hunts public Q&A threads where owners ask how to automate follow-up and admin; drafts answers matched to the AI agency services",
+   "schedule": "24/7 rotation"
+  },
+  {
+   "name": "Quiz Builder (hive)",
+   "job": "Build assessment quizzes as single-file HTML products: multiple-choice/true-false questions with weighted scoring, instant per-question feedback, and a final…",
+   "schedule": "On demand · hive"
+  },
+  {
+   "name": "Redirect Mapper (hive)",
+   "job": "Keep renamed, moved, or deleted pages reachable: maintain a redirect map from every dead/renamed URL to its correct live target, and serve it through the…",
+   "schedule": "On demand · hive"
+  },
+  {
+   "name": "Regulation Brief Writer (hive)",
+   "job": "Write regulation explainers (EU AI Act, US state AI laws, NIST AI RMF, sectoral rules) for teams deploying AI agents: what the rule says, who it applies to…",
+   "schedule": "On demand · hive"
+  },
+  {
+   "name": "Reply learner (weekly)",
+   "job": "Reply learner",
+   "schedule": "Weekly · Mon 9:16 AM"
+  },
+  {
+   "name": "Research Synthesizer (hive)",
+   "job": "Produce multi-source research briefs with CITED URLs that feed product briefs, articles, and regulation explainers.",
+   "schedule": "On demand · hive"
+  },
+  {
+   "name": "Revenue flow — weekly funnel audit + download follow-ups",
+   "job": "Follows up free downloads and turns them toward paid products",
+   "schedule": "Weekly · Mon 9:16 AM"
+  },
+  {
+   "name": "Review Miner (hive)",
+   "job": "Mine public reviews of adjacent products (AI policy/governance courses, prompt-engineering guides, agent frameworks, Notion/AI template packs) for unmet needs…",
+   "schedule": "On demand · hive"
+  },
+  {
+   "name": "Risk Register Builder (hive)",
+   "job": "Build risk register templates with scoring rubrics: a pre-populated register of common domain risks plus a blank fillable register — delivered as a CSV (opens…",
+   "schedule": "On demand · hive"
+  },
+  {
+   "name": "Runbook Writer (hive)",
+   "job": "Write incident/runbook playbooks: detection signals, severity classification, step-by-step response procedures, escalation paths with time-based triggers…",
+   "schedule": "On demand · hive"
+  },
+  {
+   "name": "Sales Reporter (hive)",
+   "job": "Produce the daily sales digest from the Gumroad API — gross revenue, order count, per-product units — as the single honest money record.",
+   "schedule": "On demand · hive"
+  },
+  {
+   "name": "Sales Watch (hive)",
+   "job": "Make every new Gumroad sale visible within minutes — read-only visibility, never money movement.",
+   "schedule": "On demand · hive"
+  },
+  {
+   "name": "Schema Markup Writer (hive)",
+   "job": "Write and validate JSON-LD structured-data blocks (Product, Article, FAQPage, BreadcrumbList) for site pages, and seed their insertion as site_update queue…",
+   "schedule": "On demand · hive"
+  },
+  {
+   "name": "Scorecard Designer (hive)",
+   "job": "Design scorecard frameworks: a weighted-criteria scorecard the buyer uses to rate vendors, controls, or initiatives — delivered as a PDF scorecard pack plus a…",
+   "schedule": "On demand · hive"
+  },
+  {
+   "name": "Self-improvement proposals (weekly)",
+   "job": "Reviews the fleet's recent work and flags problems",
+   "schedule": "Weekly · Mon 10:00 AM"
+  },
+  {
+   "name": "Self-optimize",
+   "job": "Tunes the fleet's own settings to work better",
+   "schedule": "Daily · 4:00 AM"
+  },
+  {
+   "name": "Self-repair",
+   "job": "Watches the fleet's own machinery and repairs breakage",
+   "schedule": "Every 1 hr"
+  },
+  {
+   "name": "Self-scaling AI provider scout (twice weekly)",
+   "job": "Scouts new free AI providers for the fleet",
+   "schedule": "Weekly · Tue, Fri 6:16 AM"
+  },
+  {
+   "name": "Selfheal guardian — restores the self-healing daemon after VM damage",
+   "job": "Selfheal guardian — restores the self-healing daemon after VM damage",
+   "schedule": "Every 15 min"
+  },
+  {
+   "name": "Sentience operator loop",
+   "job": "Fleet captain — coordinates the other bots' work",
+   "schedule": "Every 15 min"
+  },
+  {
+   "name": "Seo Meta Writer (hive)",
+   "job": "Sharpen search presence page by page: write or refresh titles, meta descriptions, and OG/social copy for articles and product pages — the highest-leverage 200…",
+   "schedule": "On demand · hive"
+  },
+  {
+   "name": "Seo Writer (hive)",
+   "job": "Build compounding organic search traffic with buyer-intent articles, auto-published live the same run (human approved 2026-09-29).",
+   "schedule": "On demand · hive"
+  },
+  {
+   "name": "Site health check",
+   "job": "Site health check",
+   "schedule": "Daily · 8:16 AM"
+  },
+  {
+   "name": "Site Health Checker (hive)",
+   "job": "Verify the site and checkout path are alive every run: homepage 200 with expected content, at least one live Gumroad buy link, flagship product page 200, key…",
+   "schedule": "On demand · hive"
+  },
+  {
+   "name": "Site Improver (hive)",
+   "job": "Make the marketing site better and SHIP the best improvement: one highest-impact change per run — conversion, SEO, copy quality, mobile, accessibility —…",
+   "schedule": "On demand · hive"
+  },
+  {
+   "name": "Site Updater (hive)",
+   "job": "Continuously improve the site's look, function, and freshness: the scout finds verifiable issues, the updater ships them through the standard auto-approve…",
+   "schedule": "On demand · hive"
+  },
+  {
+   "name": "Sitemap Surgeon (hive)",
+   "job": "Keep complete, valid, and honest: every live page listed exactly once, no dead URLs, no missing pages, well-formed XML with fresh dates.",
+   "schedule": "On demand · hive"
+  },
+  {
+   "name": "Social Formatter (hive)",
+   "job": "Take APPROVED drafts (from content-repurposer, newsletter items, thread-spotter, or the human) and format them per-channel: length limits, hashtag rules, link…",
+   "schedule": "On demand · hive"
+  },
+  {
+   "name": "Social Listener 01 — LinkedIn posts",
+   "job": "Listens to public LinkedIn posts asking for AI governance or automation help; drafts helpful replies for the configured business profile only",
+   "schedule": "24/7 rotation"
+  },
+  {
+   "name": "Social Listener 02 — Instagram posts",
+   "job": "Listens to public Instagram posts in our niches asking for what we sell; drafts helpful replies for the configured business account only",
+   "schedule": "24/7 rotation"
+  },
+  {
+   "name": "Social Listener 03 — X posts",
+   "job": "Listens to public X posts asking for AI governance, budgeting, or freelance systems help; drafts replies (draft-only until the business channel is configured)",
+   "schedule": "24/7 rotation"
+  },
+  {
+   "name": "Social Listener 04 — Facebook group posts",
+   "job": "Listens to public Facebook group discussions in our niches; drafts helpful replies (draft-only until the business Page is configured)",
+   "schedule": "24/7 rotation"
+  },
+  {
+   "name": "Social Listener 05 — Threads posts",
+   "job": "Listens to public Threads posts in our niches; drafts helpful replies (draft-only until the business Threads is configured)",
+   "schedule": "24/7 rotation"
+  },
+  {
+   "name": "Social Listener 06 — Indie Hackers and Product Hunt discussions",
+   "job": "Listens to Indie Hackers and Product Hunt discussions where builders ask for governance and growth tools; drafts helpful, disclosure-first replies",
+   "schedule": "24/7 rotation"
+  },
+  {
+   "name": "Social poster — drains post-queue to live channels",
+   "job": "Social poster — drains post-queue to live channels",
+   "schedule": "Every 2 hr"
+  },
+  {
+   "name": "Sop Writer (hive)",
+   "job": "Write standard operating procedures: numbered step-by-step procedures with purpose, scope, roles/responsibilities, required inputs, step tables, exception…",
+   "schedule": "On demand · hive"
+  },
+  {
+   "name": "SourceLattice daily acquisition",
+   "job": "SourceLattice daily acquisition",
+   "schedule": "Daily · 4:16 PM"
+  },
+  {
+   "name": "SourceLattice weekly brand content",
+   "job": "SourceLattice weekly brand content",
+   "schedule": "Weekly · Fri 8:16 AM"
+  },
+  {
+   "name": "Stale Date Sweeper (hive)",
+   "job": "Sweep the site for stale years and dates — copyright footers older than 2026, \"last updated\" stamps, any hard-coded year <2026, outdated \"© 2025\" strings — and…",
+   "schedule": "On demand · hive"
+  },
+  {
+   "name": "Store expansion keeper — listing packs for other stores",
+   "job": "Store expansion keeper — listing packs for other stores",
+   "schedule": "Weekly · Fri 6:41 AM"
+  },
+  {
+   "name": "SupportWarden daily acquisition",
+   "job": "SupportWarden daily acquisition",
+   "schedule": "Daily · 9:16 AM"
+  },
+  {
+   "name": "SupportWarden weekly brand content",
+   "job": "SupportWarden weekly brand content",
+   "schedule": "Weekly · Mon 2:16 PM"
+  },
+  {
+   "name": "Tag Sweeper (hive)",
+   "job": "Keep every live Gumroad product's tags clean and consistent via the tag-sweep path.",
+   "schedule": "On demand · hive"
+  },
+  {
+   "name": "Taps sync",
+   "job": "Syncs the owner's one-tap approvals to the fleet",
+   "schedule": "Every 5 min"
+  },
+  {
+   "name": "Template Pack Assembler (hive)",
+   "job": "Assemble template packs — collections of ready-to-customize governance templates (policy templates, email templates, meeting agendas, notice letters) — as…",
+   "schedule": "On demand · hive"
+  },
+  {
+   "name": "Testimonial Collector (hive)",
+   "job": "Build a library of REAL testimonials only — drawn from genuine purchase/support records — for use in product pages and outreach.",
+   "schedule": "On demand · hive"
+  },
+  {
+   "name": "Thread Spotter (hive)",
+   "job": "Find live Reddit/HN/Quora/X threads where people are asking genuine questions about AI governance, agent safety, or compliance — and draft genuinely helpful…",
+   "schedule": "On demand · hive"
+  },
+  {
+   "name": "Trend Radar (hive)",
+   "job": "Spot emerging AI regulation, agent incidents, and frontier model releases early, and convert each into product ideas + article angles while the topic is hot.",
+   "schedule": "On demand · hive"
+  },
+  {
+   "name": "Trend To Product Translator (hive)",
+   "job": "Convert trend-radar findings into concrete product briefs for the product forge: every hot trend becomes a titled, tiered, scoped product proposal before the…",
+   "schedule": "On demand · hive"
+  },
+  {
+   "name": "UI scout (continuous site improvement)",
+   "job": "Scouts the website's interface for improvements",
+   "schedule": "Every 15 min"
+  },
+  {
+   "name": "Universe treasury refresh",
+   "job": "Tracks the business's catalog of digital assets",
+   "schedule": "Every 1 hr"
+  },
+  {
+   "name": "Vendor Questionnaire Builder (hive)",
+   "job": "Produce ready-to-send vendor due-diligence questionnaires (third-party AI/vendor risk assessments) per governance domain, so buyers can vet AI vendors against…",
+   "schedule": "On demand · hive"
+  },
+  {
+   "name": "Watchdog (hive)",
+   "job": "Keep every autopilot loop alive permanently.",
+   "schedule": "On demand · hive"
+  },
+  {
+   "name": "Watchdog security monitor",
+   "job": "Watches the site and accounts for security problems",
+   "schedule": "Every 1 hr"
+  },
+  {
+   "name": "Watchdog — permanent autopilot guardian",
+   "job": "Watches the website and fleet for problems around the clock",
+   "schedule": "Every 30 min"
+  },
+  {
+   "name": "Weekly affiliate recruiter",
+   "job": "Weekly affiliate recruiter",
+   "schedule": "Weekly · Wed 11:16 AM"
+  },
+  {
+   "name": "Weekly AI model refresh",
+   "job": "Keeps the fleet's AI models current and working",
+   "schedule": "Weekly · Mon 7:16 AM"
+  },
+  {
+   "name": "Weekly content repurposer",
+   "job": "Weekly content repurposer",
+   "schedule": "Weekly · Fri 2:16 PM"
+  },
+  {
+   "name": "Weekly expansion prep",
+   "job": "Weekly expansion prep",
+   "schedule": "Weekly · Mon 11:16 AM"
+  },
+  {
+   "name": "Weekly Medium republisher",
+   "job": "Weekly Medium republisher",
+   "schedule": "Weekly · Sun 12:16 PM"
+  },
+  {
+   "name": "Weekly money pulse — sales, movers, one fix",
+   "job": "Weekly sales check — what sold and one thing to fix",
+   "schedule": "Weekly · Mon 8:00 AM"
+  },
+  {
+   "name": "Weekly partner scout",
+   "job": "Weekly partner scout",
+   "schedule": "Weekly · Wed 9:16 AM"
+  },
+  {
+   "name": "Weekly Pinterest publisher",
+   "job": "Weekly Pinterest publisher",
+   "schedule": "Weekly · Wed 10:16 AM"
+  },
+  {
+   "name": "Weekly product forge",
+   "job": "Weekly product forge",
+   "schedule": "Weekly · Sat 3:16 PM"
+  },
+  {
+   "name": "Weekly SEO article",
+   "job": "Weekly SEO article",
+   "schedule": "Weekly · Sun 9:16 AM"
+  },
+  {
+   "name": "Weekly SEO article",
+   "job": "Weekly SEO article",
+   "schedule": "Weekly · Thu 9:16 AM"
+  },
+  {
+   "name": "Weekly SEO article",
+   "job": "Weekly SEO article",
+   "schedule": "Weekly · Tue 9:16 AM"
+  },
+  {
+   "name": "Weekly site improvement",
+   "job": "Weekly site improvement",
+   "schedule": "Weekly · Fri 9:16 AM"
+  },
+  {
+   "name": "Weekly trend radar",
+   "job": "Weekly trend radar",
+   "schedule": "Weekly · Mon 10:16 AM"
+  },
+  {
+   "name": "Whitepaper Drafter (hive)",
+   "job": "Draft research whitepapers (2,500–4,000 words) with properly cited sources: the long-form authority pieces that win enterprise buyers and backlinks.",
+   "schedule": "On demand · hive"
+  },
+  {
+   "name": "Winback Email Writer (hive)",
+   "job": "Win back lapsed attention with a draft-only winback sequence: 3 emails (day 0, day 7, day 21) to past buyers / cold-but-legit contacts reminding them what's…",
+   "schedule": "On demand · hive"
+  },
+  {
+   "name": "Worker KV-write recovery watch",
+   "job": "Detects stalled fleet workers and brings them back",
+   "schedule": "Every 30 min"
+  },
+  {
+   "name": "Worker pool 3-way queue reconcile",
+   "job": "Reconciles the fleet's work queues so nothing is lost or doubled",
+   "schedule": "Every 15 min"
+  },
+  {
+   "name": "Worksheet Designer (hive)",
+   "job": "Build fillable worksheets and workbooks (risk intake forms, policy gap worksheets, readiness self-assessments, planning canvases) as print-friendly PDF…",
+   "schedule": "On demand · hive"
+  },
+  {
+   "name": "Workshop Kit Builder (hive)",
+   "job": "Build complete workshop kits for governance topics: facilitator guide, slide outline, and participant handouts — the format corporate trainers and consultants…",
+   "schedule": "On demand · hive"
+  },
+  {
+   "name": "Xbox answer bot — free Jarvis replies on the ghostcorpnet gamertag",
+   "job": "Xbox answer bot — free Jarvis replies on the ghostcorpnet gamertag",
+   "schedule": "Every 2 min"
+  }
+ ]
+}

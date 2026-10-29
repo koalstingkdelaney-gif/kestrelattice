@@ -23,18 +23,18 @@
     background:var(--bg);
     color:var(--text);
     font-family:"Segoe UI",system-ui,-apple-system,Roboto,Helvetica,Arial,sans-serif;
-    padding:2.2rem 2.6rem 3rem;
+    padding:1.3rem 2.6rem 3rem;
     line-height:1.35;
   }
   .wrap{max-width:1500px;margin:0 auto}
 
   header.top{
-    display:flex;flex-wrap:wrap;align-items:baseline;gap:1rem 2rem;
+    display:flex;flex-wrap:wrap;align-items:baseline;gap:.5rem 2rem;
     border-bottom:4px solid var(--accent);
-    padding-bottom:1.2rem;margin-bottom:2rem;
+    padding-bottom:.7rem;margin-bottom:1.4rem;
   }
   header.top h1{
-    font-size:3.4rem;letter-spacing:.04em;font-weight:800;text-transform:uppercase;
+    font-size:2.7rem;letter-spacing:.04em;font-weight:800;text-transform:uppercase;
   }
   header.top h1 .live{color:var(--accent)}
   .dot{
@@ -47,11 +47,38 @@
     margin-left:auto;font-size:2.4rem;font-weight:700;color:var(--accent2);
     font-variant-numeric:tabular-nums;white-space:nowrap;
   }
-  .tagline{font-size:1.5rem;color:var(--muted);margin-top:.4rem;width:100%}
+  .tagline{font-size:1.3rem;color:var(--muted);margin-top:.2rem;width:100%}
   #bot-count{
-    width:100%;font-size:2rem;font-weight:800;color:var(--accent);
-    margin-top:.6rem;letter-spacing:.02em;
+    width:100%;font-size:1.8rem;font-weight:800;color:var(--accent);
+    margin-top:.3rem;letter-spacing:.02em;
   }
+
+  /* ---- Run the fleet (command sign-in) ---- */
+  .runfleet{
+    background:var(--panel2);border:3px solid var(--accent2);border-radius:16px;
+    padding:1.3rem 1.6rem;margin-bottom:1.6rem;
+  }
+  .runfleet h2{color:var(--accent2);margin-bottom:.6rem}
+  .runfleet .how{font-size:1.45rem;color:var(--text);margin-bottom:1rem;max-width:60ch}
+  .runbtn{
+    display:block;text-decoration:none;color:#0a0f14;background:var(--accent2);
+    border-radius:16px;padding:1.4rem 1.6rem;font-size:2.3rem;font-weight:800;text-align:center;
+  }
+  .runbtn .hint{display:block;font-size:1.3rem;font-weight:650;margin-top:.4rem}
+  .runbtn:focus{outline:5px solid var(--accent);outline-offset:3px}
+
+  /* ---- Money strip ---- */
+  .money{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.2rem}
+  .tile{
+    background:var(--panel);border:3px solid var(--accent);border-radius:16px;
+    padding:1.2rem 1.5rem;text-align:center;
+  }
+  .tile .tlabel{font-size:1.4rem;font-weight:750;text-transform:uppercase;letter-spacing:.05em;color:var(--muted)}
+  .tile .tvalue{font-size:3.2rem;font-weight:800;color:var(--accent);font-variant-numeric:tabular-nums;line-height:1.15}
+  .tile .tnote{font-size:1.2rem;color:var(--muted)}
+  #money-asof{font-size:1.25rem;color:var(--muted);margin-top:.8rem}
+  .screen-note{font-size:1.45rem;color:var(--text);margin-bottom:1.1rem;max-width:75ch}
+  .screen-note strong{color:var(--accent)}
 
   section{margin-bottom:2.6rem}
   h2{
@@ -99,13 +126,30 @@
     <div id="bot-count">🟢 Loading the fleet…</div>
   </header>
 
+  <section class="runfleet" aria-labelledby="run-h">
+    <h2 id="run-h">🎙 Run it from here <span class="sub">— one sign-in, then you command the whole fleet from this Xbox</span></h2>
+    <p class="how">Tap the button and sign in once — this Xbox remembers it on this device. Then tap <strong>🎙 Talk to the fleet</strong> in TV view to give orders: answers come back in about 2 minutes, and orders are tasked to the bots in about 15 minutes.</p>
+    <a class="runbtn" href="../admin-login.html">🎙 RUN THE FLEET — Talk to the bots<span class="hint">Sign in once, then give the fleet its orders</span></a>
+  </section>
+
+  <section aria-labelledby="money-h">
+    <h2 id="money-h">💰 Money made</h2>
+    <div class="money">
+      <div class="tile"><div class="tlabel">Money made</div><div class="tvalue" id="money-total">$0.00</div><div class="tnote">total, all time</div></div>
+      <div class="tile"><div class="tlabel">Orders</div><div class="tvalue" id="money-orders">0</div><div class="tnote">paid orders, all time</div></div>
+      <div class="tile"><div class="tlabel">Sales today</div><div class="tvalue" id="money-today">$0.00</div><div class="tnote">paid sales today</div></div>
+    </div>
+    <p id="money-asof">Loading the money figures…</p>
+  </section>
+
   <section aria-labelledby="fleet-h">
-    <h2 id="fleet-h">🤖 The website bots <span class="sub">— every bot, and what it is working on</span></h2>
+    <h2 id="fleet-h">🟢 Working now — the live bot list <span class="sub">— every website bot, and what it is working on</span></h2>
+    <p class="screen-note">Most bots are programs, not people sitting at desks — they have no screen of their own. They work <strong>through this website, the stores, and the business inbox</strong>. This list is each bot's current job, and the feed below is their screen: everything they have just done, as it happens.</p>
     <div id="fleet"><p class="feed-note">Loading the website bots…</p></div>
   </section>
 
   <section aria-labelledby="work-h">
-    <h2 id="work-h">🛠️ Latest bot work <span class="sub">— newest first</span></h2>
+    <h2 id="work-h">🛠️ Latest bot work — the bots' screen <span class="sub">— newest first</span></h2>
     <div id="feed"><p class="feed-note">Loading the latest bot work…</p></div>
   </section>
 
@@ -171,14 +215,40 @@
     return null;
   }
 
-  /* ---------- The website bots (fleet roster) ---------- */
+  /* ---------- The website bots (fleet roster) + money strip ---------- */
   var fleetEl = document.getElementById("fleet");
   var countEl = document.getElementById("bot-count");
+
+  function money(n){
+    return "$" + Number(n || 0).toFixed(2);
+  }
+
+  function renderStats(stats){
+    if (!stats) return;
+    document.getElementById("money-total").textContent = money(stats.money_made_usd);
+    document.getElementById("money-orders").textContent = String(stats.orders || 0);
+    document.getElementById("money-today").textContent = money(stats.sales_today_usd);
+    var asof = document.getElementById("money-asof");
+    var when = stats.as_of ? new Date(stats.as_of) : null;
+    var txt = "From the verified sales records";
+    if (when && !isNaN(when.getTime())) {
+      txt += ", as of " + when.toLocaleDateString() + " " + when.toLocaleTimeString();
+    }
+    if (stats.free_downloads) {
+      txt += ". Plus " + stats.free_downloads + (stats.free_downloads === 1
+        ? " free download" : " free downloads") + " — free downloads are not paid orders.";
+    }
+    asof.textContent = txt + ".";
+  }
 
   function loadFleet(){
     fetch("fleet.json", {cache: "no-store"})
       .then(function(r){ if (!r.ok) throw new Error("http " + r.status); return r.json(); })
-      .then(function(bots){
+      .then(function(data){
+        /* fleet.json is {"stats": {...}, "bots": [...]}; tolerate the
+           old bare-array format too. */
+        var bots = (data && data.bots) ? data.bots : data;
+        renderStats(data && data.stats ? data.stats : null);
         if (!bots || !bots.length) throw new Error("empty");
         countEl.textContent = "🟢 " + bots.length + " WEBSITE BOTS WORKING FOR GHOSTCORPNET";
         fleetEl.innerHTML = "";
