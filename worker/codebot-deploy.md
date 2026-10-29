@@ -1,7 +1,7 @@
 # Code Bot — deploy steps
 
 Everything below is built and staged. Going live needs ONE human step
-(koalstin's 2-minute Cloudflare re-auth — same pending tap as the directory +
+(the owner's 2-minute Cloudflare re-auth — same pending tap as the directory +
 chat worker endpoints), then a deployer run.
 
 ## What the human does (phone, ~2 minutes)

@@ -14,7 +14,7 @@ hardening: it makes the two hot read paths list-free, so even a future
 sweep-heavy client can't burn the budget again.
 
 ## Deploy
-Needs koalstin's Cloudflare re-auth tap (no stored API token on the VM),
+Needs the owner's Cloudflare re-auth tap (no stored API token on the VM),
 then `wrangler deploy` (see codebot-deploy.md for the tap flow).
 
 ## Patch 1 — per-thread blob cache for /sandbox/chat

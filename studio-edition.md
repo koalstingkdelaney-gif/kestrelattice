@@ -244,8 +244,8 @@ Example instance:
 // Strip // comments before validating.
 {
   "plan_id": "plan_9f2c-7a1b-research-01",   // unique per plan; never reused
-  "owner_identity": "owner:koalstin",
-  "agent_identity": "agent:koalstin/researcher",
+  "owner_identity": "owner:ghostcorpnet",
+  "agent_identity": "agent:ghostcorpnet/researcher",
   "workload": "Nightly competitor pricing scrape and summary",
   "data_class": "internal",                  // highest class the workload touches
   "resources": {
@@ -321,7 +321,7 @@ Example instance:
   "row_id": "row_9f2c-7a1b-000142",          // unique per row
   "seq": 142,                                 // increments by exactly 1 per row
   "ts": "2026-10-01T02:14:33Z",               // RFC 3339, UTC
-  "actor": "agent:koalstin/researcher",
+  "actor": "agent:ghostcorpnet/researcher",
   "action": "http.get",
   "target": "https://competitor-a.com/pricing",
   "outcome": "executed",

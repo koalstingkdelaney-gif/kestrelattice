@@ -97,6 +97,8 @@ DOW3 = {"Mon": "Mon", "Tue": "Tue", "Wed": "Wed", "Thu": "Thu",
 
 
 def scrub(text):
+    text = re.sub(r"(?i)\bkoalstin'?s\b", "the owner's", text)  # owner's name (possessive)
+    text = re.sub(r"(?i)\bkoalstin\b|\bdelaney\b", "ghostcorpnet", text)  # owner's name
     text = re.sub(r"\S+@\S+", "", text)                    # emails
     text = re.sub(r"https?://\S+", "", text)               # urls
     text = re.sub(r"(~/|/home/)\S*", "", text)             # paths

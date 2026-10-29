@@ -307,7 +307,7 @@
   },
   {
    "name": "Dashboard Refresh Runner (hive)",
-   "job": "Rebuild the private admin dashboard's data so koalstin's panel shows live sales figures, the review pipeline, and what each bot last produced.",
+   "job": "Rebuild the private admin dashboard's data so the owner's panel shows live sales figures, the review pipeline, and what each bot last produced.",
    "schedule": "On demand · hive"
   },
   {
