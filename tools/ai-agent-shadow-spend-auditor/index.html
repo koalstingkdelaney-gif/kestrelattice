@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="utf-8">
+<link rel="preconnect" href="https://gumroad.com">
+<link rel="preconnect" href="https://www.googletagmanager.com">
+<meta name="viewport" content="width=device-width, initial-scale=1, interactive-widget=resizes-content, viewport-fit=cover">
+<title>AI Agent Shadow-Spend Auditor — Free Tool | ghostcorpnet</title>
+<meta name="description" content="Calculate hidden AI agent spending: compare anticipated vs actual agent-mesh operational overhead and reveal ghost spending from retries, orchestration and inter-agent calls.">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<meta name="theme-color" content="#121212">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ghostcorpnet">
+<meta property="og:url" content="https://koalstingkdelaney-gif.github.io/kestrelattice/tools/ai-agent-shadow-spend-auditor/">
+<meta property="og:title" content="AI Agent Shadow-Spend Auditor — Free Tool | ghostcorpnet">
+<meta property="og:description" content="Forecast LLM token spend for agentic loops, model a runaway-loop spike, and get circuit-breaker thresholds.">
+<link rel="canonical" href="https://koalstingkdelaney-gif.github.io/kestrelattice/tools/ai-agent-shadow-spend-auditor/">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebApplication","name":"AI Agent Token & Cost Overrun Calculator","applicationCategory":"BusinessApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"description":"Forecast LLM token spend for agentic loops and set circuit-breaker thresholds.","url":"https://koalstingkdelaney-gif.github.io/kestrelattice/tools/ai-agent-shadow-spend-auditor/"}
+</script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-541TCHWW98"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}try{if(localStorage.getItem('kestrelattice_admin')!=='1'){gtag('js',new Date());gtag('config','G-541TCHWW98');}}catch(e){gtag('js',new Date());gtag('config','G-541TCHWW98');}</script>
+<style>
+  :root{color-scheme:dark;--bg:#0f0e0d; --bg-soft:#141210; --panel:#1a1714; --panel2:#211c17;
+        --line:#2c261e; --line-soft:#221d15; --text:#f1ebdd;
+        --muted:#a89d89; --faint:#978b74; --accent:#e07a5f;
+        --accent-bright:#f09474; --accent-dim:#c06a4e; --accent-ink:#1a0f08;
+        --accent-soft:rgba(224,122,95,.1); --radius:12px;
+        --green:#7fc97f; --amber:#e8b04b; --red:#e06a5f;
+        --ease:cubic-bezier(.2,.7,.25,1)}
+  *{margin:0;padding:0;box-sizing:border-box}
+  ::selection{background:var(--accent);color:var(--accent-ink)}
+  html{scroll-behavior:smooth;scrollbar-gutter:stable}
+  html,body{overflow-x:clip}
+  body{background:var(--bg);color:var(--text);
+       font-family:ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+       line-height:1.7;-webkit-font-smoothing:antialiased}
+  a:focus-visible,button:focus-visible{outline:3px solid var(--accent-bright);outline-offset:3px;border-radius:4px}
+  header.site{border-bottom:1px solid var(--line);position:sticky;top:0;z-index:100;
+    background:rgba(15,14,13,.92);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
+  header.site .wrap{display:flex;align-items:center;justify-content:space-between;min-height:56px;max-width:1040px;margin:0 auto;padding:0 24px}
+  .brand{display:flex;align-items:center;gap:9px;font-weight:700;color:var(--text);text-decoration:none;font-size:1.02rem}
+  .brand:hover{color:var(--accent-bright)}
+  nav.main{display:flex;align-items:center;gap:20px}
+  nav.main a{color:var(--muted);font-size:.88rem;font-weight:500;text-decoration:none}
+  nav.main a:hover{color:var(--accent-bright)}
+  .wrap{max-width:68ch;margin:0 auto;padding:40px 24px 64px}
+  .crumb{color:var(--muted);font-size:.85rem;margin-bottom:24px}
+  .crumb a{color:var(--accent);text-decoration:none}
+  h1{font-size:clamp(1.6rem,3vw + .8rem,2.1rem);font-weight:800;letter-spacing:-.02em;line-height:1.25;margin-bottom:8px;text-wrap:balance}
+  .date{color:var(--muted);font-size:.85rem;margin-bottom:28px}
+  h2{font-size:1.35rem;margin:40px 0 12px;letter-spacing:-.01em}
+  h3{font-size:1.1rem;margin:24px 0 10px}
+  p{margin:0 0 16px}
+  ul,ol{margin:0 0 16px 24px}
+  li{margin:6px 0}
+  a{color:var(--accent)}
+  code{background:var(--panel);padding:2px 6px;border-radius:4px;font-size:.88em}
+  .lead{font-size:1.08rem;color:var(--muted);max-width:60ch}
+  .pill{display:inline-block;font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);border:1px solid var(--accent-dim);border-radius:999px;padding:5px 14px;margin-bottom:18px}
+  .hero-tool{border:1px solid var(--line);border-radius:var(--radius);background:linear-gradient(180deg,var(--panel2),var(--panel));padding:28px;margin:32px 0;box-shadow:0 16px 40px rgba(0,0,0,.35)}
+  .progress-wrap{height:8px;background:var(--bg-soft);border:1px solid var(--line);border-radius:999px;overflow:hidden;margin:0 0 24px}
+  #progress-fill{height:100%;width:0;background:linear-gradient(90deg,var(--accent-dim),var(--accent-bright));transition:width .3s var(--ease)}
+  .q{border:1px solid var(--line);border-radius:10px;background:var(--bg-soft);padding:18px 20px;margin:0 0 16px}
+  .q legend,.q .q-title{font-weight:700;font-size:1rem;margin-bottom:4px}
+  .q .q-hint{color:var(--muted);font-size:.86rem;margin-bottom:12px}
+  .opts{display:grid;gap:8px}
+  .opts label{display:flex;gap:12px;align-items:flex-start;border:1px solid var(--line-soft);border-radius:8px;padding:10px 14px;cursor:pointer;font-size:.94rem;transition:border-color .15s var(--ease)}
+  .opts label:hover{border-color:var(--accent-dim)}
+  .opts input[type=radio]{margin-top:5px;accent-color:var(--accent);width:17px;height:17px;flex:none}
+  .opts label:has(input:checked){border-color:var(--accent);background:var(--accent-soft)}
+  .btn-row{display:flex;gap:12px;flex-wrap:wrap;margin-top:20px}
+  .btn{display:inline-block;background:linear-gradient(180deg,var(--accent-bright),var(--accent));color:var(--accent-ink);font-weight:700;
+       padding:14px 30px;border-radius:8px;text-decoration:none;border:0;cursor:pointer;font-size:1rem;font-family:inherit;
+       transition:transform .16s var(--ease)}
+  .btn:hover{transform:translateY(-2px)}
+  .btn-ghost{background:var(--panel);color:var(--muted);border:1px solid var(--line)}
+  .btn-ghost:hover{color:var(--text);border-color:var(--accent-dim)}
+  .error-note{display:none;color:var(--red);font-size:.9rem;margin-top:12px;font-weight:600}
+  .error-note.show{display:block}
+  #results{display:none;border:1px solid var(--accent-dim);border-radius:var(--radius);background:linear-gradient(180deg,var(--panel2),var(--panel));padding:28px;margin-top:24px}
+  #results.show{display:block}
+  .score-line{display:flex;align-items:center;gap:20px;flex-wrap:wrap;margin-bottom:16px}
+  .score-ring{width:110px;height:110px;border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;flex:none;
+    border:5px solid var(--accent);font-weight:800}
+  .score-ring .num{font-size:2rem;line-height:1}
+  .score-ring .of{font-size:.7rem;color:var(--muted)}
+  .tier{font-size:1.15rem;font-weight:800;margin:0}
+  .tier small{display:block;font-weight:400;color:var(--muted);font-size:.9rem;margin-top:6px;max-width:46ch}
+  .fix{border:1px solid var(--line);border-radius:10px;padding:16px 18px;margin:12px 0;background:var(--bg-soft)}
+  .fix .prio{font-size:.7rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;margin-bottom:6px}
+  .prio.crit{color:var(--red)} .prio.high{color:var(--amber)} .prio.med{color:var(--accent-bright)}
+  .fix strong{font-size:1rem}
+  .fix p{color:var(--muted);font-size:.9rem;margin:6px 0 0}
+  .cta{background:linear-gradient(180deg,var(--panel2),var(--panel));border:1px solid var(--accent-dim);border-radius:var(--radius);
+       padding:28px;margin:48px 0;text-align:center;box-shadow:0 16px 40px rgba(0,0,0,.35)}
+  .cta h2{margin:0 0 10px;font-size:1.3rem}
+  .cta p{color:var(--muted);margin-bottom:18px}
+  .disclaimer{font-size:.82rem;color:var(--faint);border:1px dashed var(--line);border-radius:8px;padding:12px 16px;margin:32px 0}
+  .faq details{border:1px solid var(--line);border-radius:10px;background:var(--panel);padding:14px 18px;margin:10px 0}
+  .faq summary{font-weight:700;cursor:pointer}
+  .faq summary::marker{color:var(--accent)}
+  .faq details p{color:var(--muted);margin:10px 0 4px;font-size:.94rem}
+  footer.site{border-top:1px solid var(--line);background:var(--bg-soft);padding:22px 0;margin-top:48px}
+  footer.site .wrap{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px 16px;max-width:1040px;padding:0 24px}
+  footer.site{color:var(--muted);font-size:.82rem}
+  footer.site a{color:var(--muted);text-decoration:none;margin-left:14px}
+  footer.site a:hover{color:var(--accent-bright)}
+  #backtop{position:fixed;right:22px;bottom:22px;width:46px;height:46px;border-radius:50%;border:1px solid var(--line);background:var(--panel);color:var(--accent);font-size:1.3rem;cursor:pointer;opacity:0;pointer-events:none;transition:opacity .2s var(--ease);z-index:150}
+  #backtop.show{opacity:1;pointer-events:auto}
+  @media(max-width:640px){nav.main a:not(:last-child){display:none}footer.site .wrap{justify-content:center;text-align:center}footer.site a{margin:0 7px}}
+  @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{animation:none!important;transition:none!important}}
+  .skip{position:absolute;left:-9999px;top:0;background:var(--accent);color:var(--accent-ink);padding:10px 18px;font-weight:700;z-index:200;border-radius:0 0 8px 0}
+  .skip:focus{left:0}
+</style>
+<style>
+  .field{display:grid;gap:6px;margin:0 0 14px}
+  .field label{font-weight:600;font-size:.94rem}
+  .field .hint{color:var(--muted);font-size:.82rem}
+  .field input,.field select{background:var(--bg-soft);border:1px solid var(--line);border-radius:8px;color:var(--text);padding:10px 12px;font-size:1rem;font-family:inherit;width:100%}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:0 18px}
+  @media(max-width:640px){.grid2{grid-template-columns:1fr}}
+  .out{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:8px}
+  @media(max-width:640px){.out{grid-template-columns:1fr}}
+  .stat{border:1px solid var(--line);border-radius:10px;background:var(--bg-soft);padding:14px 16px}
+  .stat .k{font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+  .stat .v{font-size:1.45rem;font-weight:800;margin-top:2px}
+  .stat .s{color:var(--muted);font-size:.85rem}
+  #verdict{border:1px solid var(--accent-dim);border-radius:10px;padding:16px 18px;margin-top:16px;background:var(--accent-soft)}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site"><div class="wrap">
+  <a class="brand" href="../../">ghostcorpnet</a>
+  <nav class="main" aria-label="Primary"><a href="../../">Home</a><a href="../../products/">Catalog</a><a href="../../brands/">Stores</a><a href="../../ecosystem/">Ecosystem</a><a href="../../articles/">Articles</a><a href="../../changelog.html">Changelog</a></nav>
+</div></header>
+<main class="wrap" id="main" tabindex="-1">
+  <p class="crumb"><a href="../../">Home</a> &middot; <a href="../">Free tools</a></p>
+  <p class="pill">Free tool &middot; Agent mesh cost calculator</p>
+  <h1>AI Agent Shadow-Spend Auditor</h1>
+  <p class="date">By ghostcorpnet Studio &middot; Runs 100% in your browser — no signup, nothing sent anywhere</p>
+  <h2>Introduction</h2>
+  <p class="lead">Your agent mesh costs more than the invoice line you planned for. Retries, orchestration calls, inter-agent handoffs, logging and monitoring all bill quietly in the background. Enter your anticipated invocation counts and API costs below: this auditor shows anticipated vs actual operational overhead and the hidden &lsquo;ghost&rsquo; spending delta between them.</p>
+
+  <h2>Calculator</h2>
+  <div class="hero-tool" id="calculator" aria-label="AI agent shadow-spend auditor">
+    <form id="calc" novalidate>
+      <div class="grid2">
+        <div class="field"><label for="agents">Agents in the mesh</label><input type="number" id="agents" min="1" step="1" value="10"><span class="hint">Agents running in production.</span></div>
+        <div class="field"><label for="inv">Anticipated invocations per agent per day</label><input type="number" id="inv" min="0" step="10" value="500"><span class="hint">The invocation count in your budget plan.</span></div>
+        <div class="field"><label for="cost">Average API cost per invocation ($)</label><input type="number" id="cost" min="0" step="0.001" value="0.02"><span class="hint">Blended model + tool API cost for one invocation.</span></div>
+        <div class="field"><label for="retry">Retry / failure overhead (%)</label><input type="number" id="retry" min="0" max="500" step="5" value="20"><span class="hint">Failed calls, retries and re-prompts still bill.</span></div>
+        <div class="field"><label for="handoff">Inter-agent handoff overhead (%)</label><input type="number" id="handoff" min="0" max="500" step="5" value="15"><span class="hint">Extra invocations when agents call other agents.</span></div>
+        <div class="field"><label for="orch">Orchestration / logging / monitoring overhead (%)</label><input type="number" id="orch" min="0" max="500" step="5" value="10"><span class="hint">Router, tracing, evaluation and observability calls.</span></div>
+      </div>
+    </form>
+    <h2>Results</h2>
+    <div class="out" aria-live="polite">
+      <div class="stat"><div class="k">Anticipated daily overhead</div><div class="v" id="o-ant-day">$0.00</div><div class="s">Planned invocations &times; API cost, all agents</div></div>
+      <div class="stat"><div class="k">Actual daily overhead</div><div class="v" id="o-act-day">$0.00</div><div class="s">Anticipated plus retry, handoff and orchestration overhead</div></div>
+      <div class="stat"><div class="k">Ghost spending per day</div><div class="v" id="o-ghost-day">$0.00</div><div class="s">Hidden delta: actual minus anticipated</div></div>
+      <div class="stat"><div class="k">Ghost spending per month</div><div class="v" id="o-ghost-month">$0.00</div><div class="s">30 days at the actual daily rate</div></div>
+      <div class="stat"><div class="k">Ghost spending per year</div><div class="v" id="o-ghost-year">$0.00</div><div class="s">365 days at the actual daily rate</div></div>
+      <div class="stat"><div class="k">Ghost share of actual spend</div><div class="v" id="o-ghost-pct">0%</div><div class="s">Share of actual overhead not in the plan</div></div>
+      <div class="stat"><div class="k">Anticipated monthly overhead</div><div class="v" id="o-ant-month">$0.00</div><div class="s">30 days at the anticipated daily rate</div></div>
+      <div class="stat"><div class="k">Actual monthly overhead</div><div class="v" id="o-act-month">$0.00</div><div class="s">30 days at the actual daily rate</div></div>
+    </div>
+    <div id="verdict" role="status"></div>
+  </div>
+
+  <h2>How the math works</h2>
+  <p>Anticipated daily overhead = agents &times; anticipated invocations per agent per day &times; average API cost per invocation. Actual overhead applies the three overhead factors on top: retries, inter-agent handoffs, and orchestration / logging / monitoring. The ghost spending delta is actual minus anticipated — the spend no budget line named, which is exactly the delta a CTO can take to a CFO to justify governance and budget controls.</p>
+  <h2>What to do with the ghost number</h2>
+  <ul>
+    <li><strong>Cap retries:</strong> set a maximum retry count per invocation and log every retry as spend, not as noise.</li>
+    <li><strong>Count handoffs:</strong> instrument inter-agent calls so mesh chatter is billed to the task that caused it.</li>
+    <li><strong>Budget the overhead:</strong> put orchestration, logging and monitoring in the plan explicitly — hidden only means unowned.</li>
+  </ul>
+
+  <div class="cta">
+    <h2>Get the $29 Governed Agent Mesh Playbook to optimize your agent mesh costs</h2>
+    <p>The Governed Agent Mesh Playbook — Studio Edition ($29) gives you the full system: spend controls, approval gates, audit trails, and incident response for agents in production.</p>
+    <a class="btn" href="https://koalstin.gumroad.com/l/hdigmr" referrerpolicy="no-referrer">Get the $29 Governed Agent Mesh Playbook</a>
+    <p style="margin-top:12px"><a href="../../products/">Or browse the full catalog &rarr;</a></p>
+  </div>
+  <p class="disclaimer">Estimates only — actual billing depends on your provider pricing, retry behavior and mesh topology. This tool stores nothing and sends nothing.</p>
+</main>
+</main>
+<footer class="site"><div class="wrap">
+  <span>&copy; <span id="yr">2026</span> ghostcorpnet &middot; An independent studio</span>
+  <span><a href="../../">Home</a><a href="../../products/">Catalog</a><a href="../../articles/">Articles</a><a href="../../sitemap.html">Site index</a><a href="../../terms.html">Terms</a><a href="../../privacy.html">Privacy</a></span>
+</div></footer>
+<button id="backtop" aria-label="Back to top">&uarr;</button>
+
+<script>(function(){var b=document.getElementById('backtop');function s(){b.classList.toggle('show',window.scrollY>1200)}window.addEventListener('scroll',s,{passive:true});s();b.addEventListener('click',function(){window.scrollTo({top:0,behavior:'smooth'})});})();</script>
+<script>document.getElementById('yr').textContent=new Date().getFullYear();</script>
+<script>try{var _d=new Date().toISOString().slice(0,10);if(!localStorage.getItem("gc_pv_"+_d)){localStorage.setItem("gc_pv_"+_d,"1");fetch("https://kestrelattice-approvals.koalstin-g-k-delaney.workers.dev/pv?p="+encodeURIComponent(location.pathname),{mode:"no-cors",keepalive:true}).catch(function(){})}}catch(e){}</script>
+<script>
+(function(){
+  var ids=['agents','inv','cost','retry','handoff','orch'];
+  function n(id){var v=parseFloat(document.getElementById(id).value);return isNaN(v)||v<0?0:v;}
+  function money(x){return '$'+x.toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2});}
+  function calc(){
+    var ant=n('agents')*n('inv')*n('cost');
+    var factor=1+n('retry')/100+n('handoff')/100+n('orch')/100;
+    var act=ant*factor;
+    var ghost=act-ant;
+    document.getElementById('o-ant-day').textContent=money(ant);
+    document.getElementById('o-act-day').textContent=money(act);
+    document.getElementById('o-ghost-day').textContent=money(ghost);
+    document.getElementById('o-ghost-month').textContent=money(ghost*30);
+    document.getElementById('o-ghost-year').textContent=money(ghost*365);
+    document.getElementById('o-ghost-pct').textContent=(act>0?Math.round(ghost/act*100):0)+'%';
+    document.getElementById('o-ant-month').textContent=money(ant*30);
+    document.getElementById('o-act-month').textContent=money(act*30);
+    var v=document.getElementById('verdict');
+    if(ghost<=0){v.innerHTML='<strong>No ghost spending at these inputs</strong> — add the retry, handoff and orchestration overhead you actually see in production to reveal the hidden delta.';}
+    else{v.innerHTML='<strong>Ghost spending found:</strong> '+money(ghost)+' per day ('+money(ghost*30)+' per month) sits outside your anticipated agent-mesh overhead. Name it, cap retries and handoffs, and budget it explicitly.';}
+  }
+  ids.forEach(function(id){document.getElementById(id).addEventListener('input',calc);});
+  calc();
+})();
+</script>
+</body>
+</html>
