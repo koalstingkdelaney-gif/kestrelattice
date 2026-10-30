@@ -791,7 +791,7 @@ def _extras_html():
         '<script>'
         'async function loadTraffic(){'
         'var el=document.getElementById(\"traffic-card\");'
-        'if(!el||typeof WURL===\"undefined\"||!WURL||!WKEY)'
+        'if(!el||typeof WURL===\"undefined\"||!WKEY)'
         '{if(el)el.innerHTML=\"<p class=\'muted\'>Not connected: no admin key on this device.</p>\";return;}'
         'try{var r=await fetch(WURL+\"/traffic?key=\"+encodeURIComponent(WKEY));var d=await r.json();'
         'if(!d.ok||!d.days)throw 0;'
@@ -1409,7 +1409,7 @@ into its inbox. Talk to the same Sentience right here:</p>
 function escH(s){var d=document.createElement("div");d.appendChild(document.createTextNode(s));return d.innerHTML;}
 async function sentLoad(){
 var thread=document.getElementById("sent-thread");
-if(!thread||typeof WURL==="undefined"||!WURL||!WKEY){if(thread)thread.innerHTML="<p class='muted'>Not connected: no admin key on this device.</p>";return;}
+if(!thread||typeof WURL==="undefined"||!WKEY){if(thread)thread.innerHTML="<p class='muted'>Not connected: no admin key on this device.</p>";return;}
 if(document.hidden)return;
 try{
 var r=await fetch(WURL+"/sentience-chat?key="+encodeURIComponent(WKEY));
@@ -1432,7 +1432,7 @@ else{thread.scrollTop=st;}
 async function sentSend(){
 var input=document.getElementById("sent-input"),btn=document.getElementById("sent-send");
 var text=input.value.trim();
-if(!text||typeof WURL==="undefined"||!WURL||!WKEY)return;
+if(!text||typeof WURL==="undefined"||!WKEY)return;
 btn.disabled=true;
 try{
 await fetch(WURL+"/sentience-chat",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({key:WKEY,text:text})});
@@ -1536,7 +1536,7 @@ var SB_ERR="<p class='muted'>"+SB_DOWN+"</p>";
 function sbSnapMsg(){var t=(typeof SB_SNAP!=="undefined"&&SB_SNAP&&SB_SNAP.built_at)?SB_SNAP.built_at:"earlier";return "<p class='muted'>Live feed unreachable — showing snapshot from "+escH(t)+". It refreshes when the worker recovers.</p>";}
 function escH(s){var d=document.createElement("div");d.appendChild(document.createTextNode(s===null||s===undefined?"":String(s)));return d.innerHTML;}
 function escA(s){return escH(s).replace(/'/g,"&#39;").replace(/"/g,"&quot;");}
-function sbReady(){return !(typeof WURL==="undefined"||!WURL||!WKEY);}
+function sbReady(){return !(typeof WURL==="undefined"||!WKEY);}
 function sbTime(ts){if(!ts)return "";try{var d=new Date(ts);if(isNaN(d.getTime()))return escH(String(ts));return d.toLocaleString();}catch(e){return escH(String(ts));}}
 function sbTimeShort(ts){try{var d=new Date(ts);if(isNaN(d.getTime()))return "";return d.toLocaleTimeString([],{hour:"numeric",minute:"2-digit"});}catch(e){return "";}}
 function sbRelTime(ts){try{var d=new Date(ts).getTime();if(isNaN(d))return "";var s=Math.max(0,Math.floor((Date.now()-d)/1000));if(s<60)return "now";var m=Math.floor(s/60);if(m<60)return m+"m";var h=Math.floor(m/60);if(h<24)return h+"h";return Math.floor(h/24)+"d";}catch(e){return "";}}
