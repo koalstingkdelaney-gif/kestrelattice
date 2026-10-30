@@ -429,7 +429,7 @@ a,button,summary,[role="button"]{touch-action:manipulation}
   s.setAttribute('aria-expanded',d.open?'true':'false');
   d.addEventListener('toggle',function(){s.setAttribute('aria-expanded',d.open?'true':'false');});});})();
   // Sticky buy bar: suppress it while the final #buy CTA section or the footer is in view.
-  (function(){var mq=window.matchMedia('(prefers-reduced-motion: reduce)');if(mq.matches)return;
+  (function(){
   if(!('IntersectionObserver' in window))return;
   var bar=document.querySelector('.sticky-buy'),buy=document.getElementById('buy'),foot=document.querySelector('footer.site');
   if(!bar||!buy)return;
