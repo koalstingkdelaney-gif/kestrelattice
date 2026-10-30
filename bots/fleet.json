@@ -1,12 +1,12 @@
 {
- "generated_at": "2026-10-29T23:33:18Z",
+ "generated_at": "2026-10-30T12:16:14Z",
  "stats": {
   "money_made_usd": 0.0,
   "orders": 0,
   "sales_today_usd": 0.0,
   "orders_today": 0,
   "free_downloads": 1,
-  "as_of": "2026-10-29T23:33:18Z",
+  "as_of": "2026-10-30T12:16:14Z",
   "source": "Verified sales ledger + Gumroad sales check"
  },
  "bots": [
@@ -1294,11 +1294,6 @@
    "name": "Workshop Kit Builder (hive)",
    "job": "Build complete workshop kits for governance topics: facilitator guide, slide outline, and participant handouts — the format corporate trainers and consultants…",
    "schedule": "On demand · hive"
-  },
-  {
-   "name": "Xbox answer bot — free Jarvis replies on the ghostcorpnet gamertag",
-   "job": "Xbox answer bot — free Jarvis replies on the ghostcorpnet gamertag",
-   "schedule": "Every 2 min"
   }
  ]
 }
