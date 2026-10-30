@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="utf-8">
+<link rel="preconnect" href="https://gumroad.com">
+<link rel="preconnect" href="https://www.googletagmanager.com">
+<meta name="viewport" content="width=device-width, initial-scale=1, interactive-widget=resizes-content, viewport-fit=cover">
+<title>EU AI Act Agent-Risk Heatmap Generator — Free Tool | ghostcorpnet</title>
+<meta name="description" content="Map your agent-mesh configuration against high-risk EU AI Act criteria. Get a risk-exposure score and a heatmap of oversight, delegation, data, and logging gaps — free, in your browser.">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<meta name="theme-color" content="#121212">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ghostcorpnet">
+<meta property="og:url" content="https://koalstingkdelaney-gif.github.io/kestrelattice/tools/eu-ai-act-agent-risk-heatmap-generator/">
+<meta property="og:title" content="EU AI Act Agent-Risk Heatmap Generator — Free Tool | ghostcorpnet">
+<meta property="og:description" content="Score your agent mesh against high-risk EU AI Act criteria and see your exposure as a heatmap.">
+<meta property="og:image" content="https://koalstingkdelaney-gif.github.io/kestrelattice/assets/studio-edition-cover.jpg">
+<link rel="canonical" href="https://koalstingkdelaney-gif.github.io/kestrelattice/tools/eu-ai-act-agent-risk-heatmap-generator/">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebApplication","name":"EU AI Act Agent-Risk Heatmap Generator","applicationCategory":"BusinessApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"description":"Map agent-mesh configurations against high-risk EU AI Act compliance criteria and generate a risk-exposure heatmap.","url":"https://koalstingkdelaney-gif.github.io/kestrelattice/tools/eu-ai-act-agent-risk-heatmap-generator/"}
+</script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-541TCHWW98"></script>
+<script>(function(){try{if(new URLSearchParams(location.search).get('admin')==='1'){localStorage.setItem('kestrelattice_admin','1');}}catch(e){}})();</script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}try{if(localStorage.getItem('kestrelattice_admin')!=='1'){gtag('js',new Date());gtag('config','G-541TCHWW98');}}catch(e){gtag('js',new Date());gtag('config','G-541TCHWW98');}</script>
+<style>
+:root{color-scheme:dark;--bg:#0f0e0d;--bg-soft:#141210;--panel:#1a1714;--panel2:#211c17;--line:#2c261e;--line-soft:#221d15;--text:#f1ebdd;--muted:#a89d89;--faint:#978b74;--accent:#e07a5f;--accent-bright:#f09474;--accent-dim:#c06a4e;--accent-ink:#1a0f08;--radius:12px}
+*{margin:0;padding:0;box-sizing:border-box}::selection{background:var(--accent);color:var(--accent-ink)}html{scroll-behavior:smooth}html,body{overflow-x:clip}
+body{background:var(--bg);color:var(--text);font-family:ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;line-height:1.7;-webkit-font-smoothing:antialiased}
+a:focus-visible,button:focus-visible,select:focus-visible,input:focus-visible{outline:3px solid var(--accent-bright);outline-offset:3px;border-radius:4px}
+header.site{border-bottom:1px solid var(--line);position:sticky;top:0;z-index:100;background:rgba(15,14,13,.92);backdrop-filter:blur(10px)}
+header.site .wrap{display:flex;align-items:center;justify-content:space-between;min-height:56px;max-width:1040px;margin:0 auto;padding:0 24px}
+.brand{font-weight:700;color:var(--text);text-decoration:none}nav.main{display:flex;gap:20px}nav.main a{color:var(--muted);font-size:.88rem;font-weight:500;text-decoration:none}nav.main a:hover{color:var(--accent-bright)}
+.wrap{max-width:68ch;margin:0 auto;padding:40px 24px 64px}.crumb{color:var(--muted);font-size:.85rem;margin-bottom:24px}.crumb a{color:var(--accent);text-decoration:none}
+h1{font-size:clamp(1.6rem,3vw + .8rem,2.1rem);font-weight:800;letter-spacing:-.02em;line-height:1.25;margin-bottom:8px}h2{font-size:1.35rem;margin:40px 0 12px}h3{font-size:1.1rem;margin:24px 0 10px}
+p{margin:0 0 16px}ul{margin:0 0 16px 24px}li{margin:6px 0}a{color:var(--accent)}
+.lead{font-size:1.08rem;color:var(--muted)}.pill{display:inline-block;font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);border:1px solid var(--accent-dim);border-radius:999px;padding:5px 14px;margin-bottom:18px}
+.hero-tool{border:1px solid var(--line);border-radius:var(--radius);background:linear-gradient(180deg,var(--panel2),var(--panel));padding:28px;margin:32px 0}
+.field{margin:0 0 20px}.field label{display:block;font-weight:700;margin-bottom:6px}.field .hint{color:var(--muted);font-size:.86rem;margin-bottom:8px}
+select{width:100%;background:var(--bg-soft);color:var(--text);border:1px solid var(--line);border-radius:8px;padding:12px 14px;font-size:1rem;font-family:inherit}
+.checks{display:grid;gap:8px;margin:12px 0 20px}.checks label{display:flex;gap:12px;align-items:flex-start;border:1px solid var(--line-soft);border-radius:8px;padding:10px 14px;cursor:pointer;font-size:.94rem}.checks input{margin-top:5px;accent-color:var(--accent);width:17px;height:17px;flex:none}
+.btn{display:inline-block;background:linear-gradient(180deg,var(--accent-bright),var(--accent));color:var(--accent-ink);font-weight:700;padding:14px 30px;border-radius:8px;text-decoration:none;border:0;cursor:pointer;font-size:1rem;font-family:inherit}
+.btn-ghost{background:var(--panel);color:var(--muted);border:1px solid var(--line)}.btn-row{display:flex;gap:12px;flex-wrap:wrap;margin-top:16px}
+#results{display:none;border:1px solid var(--accent-dim);border-radius:var(--radius);background:linear-gradient(180deg,var(--panel2),var(--panel));padding:28px;margin-top:24px}#results.show{display:block}
+.heat{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:16px 0}.cell{border-radius:10px;padding:16px;border:1px solid var(--line)}.cell strong{display:block}.cell span{font-size:.85rem;color:rgba(255,255,255,.85)}
+.cell.low{background:rgba(127,201,127,.16)}.cell.med{background:rgba(232,176,75,.18)}.cell.high{background:rgba(224,106,95,.20)}.cell.crit{background:rgba(224,106,95,.38)}
+.score-line{display:flex;align-items:center;gap:20px;flex-wrap:wrap;margin-bottom:16px}.score-ring{width:110px;height:110px;border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;flex:none;border:5px solid var(--accent);font-weight:800}.score-ring .num{font-size:2rem;line-height:1}.score-ring .of{font-size:.7rem;color:var(--muted)}
+.fix{border:1px solid var(--line);border-radius:10px;padding:16px 18px;margin:12px 0;background:var(--bg-soft)}.fix p{color:var(--muted);font-size:.9rem;margin:6px 0 0}
+#report{width:100%;min-height:160px;background:var(--bg-soft);color:var(--text);border:1px solid var(--line);border-radius:10px;padding:14px;font-family:ui-monospace,Menlo,Consolas,monospace;font-size:.82rem}
+.cta{background:linear-gradient(180deg,var(--panel2),var(--panel));border:1px solid var(--accent-dim);border-radius:var(--radius);padding:28px;margin:48px 0;text-align:center}.cta p{color:var(--muted)}
+.disclaimer{font-size:.82rem;color:var(--faint);border:1px dashed var(--line);border-radius:8px;padding:12px 16px;margin:32px 0}
+.faq details{border:1px solid var(--line);border-radius:10px;background:var(--panel);padding:14px 18px;margin:10px 0}.faq summary{font-weight:700;cursor:pointer}.faq details p{color:var(--muted);margin:10px 0 4px;font-size:.94rem}
+footer.site{border-top:1px solid var(--line);background:var(--bg-soft);padding:22px 0;margin-top:48px}footer.site .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px 16px;max-width:1040px;padding:0 24px}footer.site{color:var(--muted);font-size:.82rem}footer.site a{color:var(--muted);text-decoration:none;margin-left:14px}
+.skip{position:absolute;left:-9999px;top:0;background:var(--accent);color:var(--accent-ink);padding:10px 18px;font-weight:700;z-index:200}.skip:focus{left:0}
+@media(max-width:640px){nav.main a:not(:last-child){display:none}.heat{grid-template-columns:1fr}}
+@media print{#results{display:block}header.site,.cta,.btn-row{display:none}}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site"><div class="wrap">
+<a class="brand" href="../../">ghostcorpnet</a>
+<nav class="main" aria-label="Primary"><a href="../../">Home</a><a href="../../products/">Catalog</a><a href="../../brands/">Stores</a><a href="../../ecosystem/">Ecosystem</a><a href="../../articles/">Articles</a><a href="../../changelog.html">Changelog</a></nav>
+</div></header>
+<main class="wrap" id="main" tabindex="-1">
+<p class="crumb"><a href="../../">Home</a> · <a href="../">Free tools</a></p>
+<p class="pill">Free tool · Agent mesh · EU AI Act</p>
+<h1>EU AI Act Agent-Risk Heatmap Generator</h1>
+<p class="lead">Describe your agent-mesh configuration — how many agents, how autonomous they are, what they can delegate, and what data they touch. This generator maps that configuration against the EU AI Act's high-risk criteria and returns a risk-exposure score with a heatmap of the gaps that drive it. Everything runs in your browser.</p>
+
+<div class="hero-tool" id="calculator" aria-label="EU AI Act Agent-Risk Heatmap Generator">
+<h2 style="margin-top:0">Generator</h2>
+<div class="field"><label for="domain">Decision domain</label><p class="hint">What the mesh's outputs decide or influence. Annex III domains carry the Act's high-risk duties.</p>
+<select id="domain"><option value="4">Annex III high-risk — hiring, credit, education access, biometrics, safety, law enforcement, or similar</option><option value="3">Customer-facing decisions — pricing, eligibility, support outcomes, content moderation</option><option value="2">Internal operations — drafting, summarising, coding, research with a human publisher</option><option value="1">Low-stakes assistance — no decision about any person</option></select></div>
+<div class="field"><label for="mesh">Mesh size &amp; delegation</label><p class="hint">Delegation chains multiply exposure: each hand-off is a place oversight and logging can silently drop.</p>
+<select id="mesh"><option value="1">Single agent, no delegation</option><option value="2">A few agents (2–5), chained tasks, shared context</option><option value="3">Mesh (6–20 agents) with shared memory and tool / write access</option><option value="4">Large or open mesh (20+ agents), agents can invoke other agents or external actors</option></select></div>
+<div class="field"><label for="autonomy">Autonomy level</label><p class="hint">How far an agent can act before a human sees the action.</p>
+<select id="autonomy"><option value="1">Human approves every consequential action before it runs</option><option value="2">Human-on-the-loop — actions run, a human reviews and can reverse them</option><option value="3">Guardrailed autonomy — agents act freely inside set bounds, exceptions escalate</option><option value="4">Fully autonomous — agents act and delegate without routine human review</option></select></div>
+<div class="field"><label for="data">Data sensitivity</label><p class="hint">The most sensitive data any agent in the mesh can read, store in shared memory, or pass to another agent.</p>
+<select id="data"><option value="1">Public or synthetic data only</option><option value="2">Internal business data, no personal data</option><option value="3">Personal data (names, contacts, behaviour, employment or financial records)</option><option value="4">Special-category or biometric data, or data about children</option></select></div>
+
+<h3>Controls you already have</h3>
+<p class="hint" style="color:var(--muted);font-size:.86rem">Tick only controls that exist today and would survive an audit — not planned ones.</p>
+<div class="checks" id="checks"></div>
+<div class="btn-row"><button type="button" class="btn" id="calc-btn">Generate my heatmap</button></div>
+
+<div id="results" role="status" aria-live="polite">
+<h2 style="margin-top:0">Results</h2>
+<div class="score-line"><div class="score-ring"><span class="num" id="score-num">0</span><span class="of">/ 100 exposure</span></div><p id="tier-line" style="font-weight:800;font-size:1.15rem"></p></div>
+<div class="heat" id="heat"></div>
+<div id="fix-list"></div>
+<h3>Shareable report</h3>
+<p style="color:var(--muted);font-size:.9rem">Copy this report for your risk register, or use Print / Save as PDF. It is built only from the selections above — no private data leaves your device.</p>
+<textarea id="report" readonly aria-label="Shareable report"></textarea>
+<div class="btn-row"><button type="button" class="btn" id="copy-btn">Copy report</button><button type="button" class="btn btn-ghost" id="print-btn">Print / Save PDF</button></div>
+</div>
+</div>
+
+<h2>How to read the heatmap</h2>
+<p>Each cell is one exposure driver. Its colour combines your configuration (domain, mesh, autonomy, data) with whether the matching control exists. A missing control hurts most where the configuration is hottest — a fully autonomous mesh making Annex III decisions with no tested stop procedure is the reddest cell this generator can produce.</p>
+<ul>
+<li><strong>Human oversight (Art. 14):</strong> high-risk systems need named humans who can monitor, interpret, override, and stop them — across every agent, not just the first one.</li>
+<li><strong>Record-keeping (Art. 12):</strong> logs must reconstruct what the mesh did, including which agent delegated what to whom.</li>
+<li><strong>Risk management (Art. 9) &amp; data governance (Art. 10):</strong> shared memory and delegation do not dilute these duties — they extend them to every agent that touches the data.</li>
+<li><strong>Transparency (Art. 13 &amp; 50):</strong> deployers and affected people need to know an agent mesh is acting, what it can do, and where its limits are.</li>
+</ul>
+<p class="disclaimer">This is an informational self-assessment, not legal advice. It does not determine your legal classification under the EU AI Act. For binding answers, consult qualified counsel.</p>
+
+<h2>FAQ</h2>
+<div class="faq">
+<details><summary>Is this legal advice?</summary><p>No. This tool is an informational self-assessment for operational readiness — it is not legal advice and does not classify your system.</p></details>
+<details><summary>Does my input leave my device?</summary><p>No. The generator runs entirely in your browser and stores nothing.</p></details>
+<details><summary>Why does mesh size matter?</summary><p>Because duties attach to the system, while failures happen at hand-offs. Every delegation is a point where oversight, logging, and data controls can drop — larger, more open meshes have more of those points.</p></details>
+<details><summary>What should I fix first?</summary><p>Red and critical cells first, in heatmap order. Then document the fix, keep the evidence, and re-run this generator whenever the mesh, its autonomy, or its data changes.</p></details>
+</div>
+
+<div class="cta">
+<h2>Close the red cells with the Playbook — Studio Edition</h2>
+<p>The $29 Studio Edition gives you the approval-gate patterns, oversight and audit-trail templates, delegation bounds, and incident runbook behind every fix on your heatmap.</p>
+<a class="btn" href="https://ghostcorpnet.gumroad.com/l/hdigmr" referrerpolicy="no-referrer">Get the Studio Edition — $29</a>
+<p style="margin-top:12px"><a href="../../products/">Or browse the full catalog &rarr;</a></p>
+</div>
+</main>
+<footer class="site"><div class="wrap">
+<span>© <span id="yr">2026</span> ghostcorpnet · An independent studio</span>
+<span><a href="../../">Home</a><a href="../../products/">Catalog</a><a href="../../articles/">Articles</a><a href="../../sitemap.html">Site index</a><a href="mailto:corpghost420@gmail.com">Contact</a><a href="../../terms.html">Terms</a><a href="../../privacy.html">Privacy</a></span>
+</div></footer>
+<script>
+(function(){
+var CONTROLS=[
+ {id:'oversight',area:'Human oversight (Art. 14)',label:'Named human overseers who can override and stop any agent in the mesh (Art. 14)'},
+ {id:'logging',area:'Logging & traceability (Art. 12)',label:'End-to-end logs that reconstruct agent actions and delegation chains (Art. 12)'},
+ {id:'riskdoc',area:'Risk management (Art. 9)',label:'Documented risk-management system for the mesh, reviewed when it changes (Art. 9)'},
+ {id:'datagov',area:'Data governance (Art. 10)',label:'Data-governance rules for shared memory, training, and inter-agent data passing (Art. 10)'},
+ {id:'transparency',area:'Transparency (Art. 13/50)',label:'Deployers and affected people are told an agent mesh is acting, and its limits (Art. 13/50)'},
+ {id:'testing',area:'Robustness & security (Art. 15)',label:'Accuracy, robustness, and cybersecurity testing across the mesh, not per-agent only (Art. 15)'},
+ {id:'incident',area:'Incident readiness',label:'Incident monitoring, escalation, and reporting plan covering mesh-wide failures'},
+ {id:'bounds',area:'Delegation bounds',label:'Hard bounds on what agents may delegate, spend, write, or delete without approval'}];
+var box=document.getElementById('checks');
+CONTROLS.forEach(function(c){var l=document.createElement('label');l.innerHTML='<input type="checkbox" id="chk-'+c.id+'"> <span>'+c.label+'</span>';box.appendChild(l);});
+function band(v){return v>=75?['crit','Critical']:v>=50?['high','High']:v>=25?['med','Medium']:['low','Low'];}
+document.getElementById('calc-btn').addEventListener('click',function(){
+ var domain=+document.getElementById('domain').value, mesh=+document.getElementById('mesh').value, auto=+document.getElementById('autonomy').value, data=+document.getElementById('data').value;
+ var heatCfg=(domain+mesh+auto+data)/16; // 0.25..1 configuration heat
+ function has(id){return document.getElementById('chk-'+id).checked;}
+ // Per-area exposure 0..100 (higher = worse), driven by the relevant config axes and its control.
+ var areas=[
+  ['Human oversight (Art. 14)', Math.round((auto*16 + domain*9) * (has('oversight')?0.25:1))],
+  ['Delegation & mesh bounds', Math.round((mesh*17 + auto*8) * (has('bounds')?0.25:1))],
+  ['Data exposure (Art. 10)', Math.round((data*17 + mesh*8) * (has('datagov')?0.3:1))],
+  ['Logging & traceability (Art. 12)', Math.round(((mesh+auto)*12) * (has('logging')?0.25:1))],
+  ['Transparency (Art. 13/50)', Math.round((domain*14 + auto*8) * (has('transparency')?0.3:1))],
+  ['Robustness, risk & incidents (Art. 9/15)', Math.round(((domain+data)*11) * ((has('riskdoc')&&has('testing')&&has('incident'))?0.25:(has('riskdoc')||has('testing')||has('incident'))?0.6:1))]
+ ];
+ areas.forEach(function(a){a[1]=Math.max(2,Math.min(100,a[1]));});
+ var exposure=Math.round(areas.reduce(function(s,a){return s+a[1];},0)/areas.length * (0.7+0.3*heatCfg));
+ exposure=Math.max(2,Math.min(100,exposure));
+ document.getElementById('score-num').textContent=exposure;
+ document.getElementById('tier-line').textContent=exposure>=75?'Critical exposure — do not scale this mesh until the red cells are fixed':exposure>=50?'High exposure — core high-risk controls are missing or unproven':exposure>=25?'Moderate exposure — close the amber gaps and keep evidence current':'Lower exposure — keep controls evidenced and re-run on change';
+ var heat=document.getElementById('heat');heat.innerHTML='';
+ areas.forEach(function(a){var b=band(a[1]);var d=document.createElement('div');d.className='cell '+b[0];d.innerHTML='<strong>'+a[0]+'</strong><span>'+b[1]+' exposure · '+a[1]+'/100</span>';heat.appendChild(d);});
+ var fixes=document.getElementById('fix-list');fixes.innerHTML='';
+ var missing=CONTROLS.filter(function(c){return !has(c.id);});
+ if(!missing.length){fixes.innerHTML='<div class="fix"><strong>All listed controls present.</strong><p>Exposure now comes from the configuration itself. Re-run when domain, mesh size, autonomy, or data changes.</p></div>';}
+ missing.forEach(function(c){var d=document.createElement('div');d.className='fix';d.innerHTML='<strong>Gap: '+c.area+'</strong><p>'+c.label+' — not in place. Weighted by your domain, mesh, autonomy, and data selections. Implement it, document the evidence, and re-run this generator.</p>';fixes.appendChild(d);});
+ var report='EU AI Act Agent-Risk Heatmap — Report\nRisk-exposure score: '+exposure+'/100\nConfiguration values (1=lowest, 4=highest): domain '+domain+' · mesh/delegation '+mesh+' · autonomy '+auto+' · data sensitivity '+data+'\n'+areas.map(function(a){return '- '+a[0]+': '+a[1]+'/100 ('+band(a[1])[1]+' exposure)';}).join('\n')+'\nGaps ('+missing.length+'): '+(missing.length?missing.map(function(c){return c.label;}).join('; '):'none')+'\nNext: fix critical/high cells first, then re-run. Not legal advice.';
+ document.getElementById('report').value=report;
+ var r=document.getElementById('results');r.classList.add('show');r.scrollIntoView({block:'start',behavior:'smooth'});
+});
+document.getElementById('copy-btn').addEventListener('click',function(){var t=document.getElementById('report');t.select();try{navigator.clipboard.writeText(t.value);}catch(e){document.execCommand('copy');}});
+document.getElementById('print-btn').addEventListener('click',function(){window.print();});
+})();
+</script>
+<script>document.getElementById('yr').textContent=new Date().getFullYear();</script>
+<script>try{var _d=new Date().toISOString().slice(0,10);if(!localStorage.getItem("gc_pv_"+_d)){localStorage.setItem("gc_pv_"+_d,"1");fetch("https://kestrelattice-approvals.koalstin-g-k-delaney.workers.dev/pv?p="+encodeURIComponent(location.pathname),{mode:"no-cors",keepalive:true}).catch(function(){})}}catch(e){}</script>
+</body>
+</html>
