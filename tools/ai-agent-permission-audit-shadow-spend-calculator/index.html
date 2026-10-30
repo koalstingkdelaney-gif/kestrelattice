@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, interactive-widget=resizes-content, viewport-fit=cover">
+<title>AI Agent Permission Audit &amp; Shadow-Spend Calculator — Free Tool | ghostcorpnet</title>
+<meta name="description" content="Map your agents' API keys and permissions against their activity, estimate shadow spend from unused and over-privileged keys, and get a shareable ROI report. Runs in your browser.">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<meta name="theme-color" content="#121212">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ghostcorpnet">
+<meta property="og:url" content="https://koalstingkdelaney-gif.github.io/kestrelattice/tools/ai-agent-permission-audit-shadow-spend-calculator/">
+<meta property="og:title" content="AI Agent Permission Audit &amp; Shadow-Spend Calculator — Free Tool | ghostcorpnet">
+<meta property="og:description" content="Audit agent API-key permissions, estimate shadow spend, and get a shareable ROI report for SaaS AI governance and agent spend optimization.">
+<link rel="canonical" href="https://koalstingkdelaney-gif.github.io/kestrelattice/tools/ai-agent-permission-audit-shadow-spend-calculator/">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebApplication","name":"AI Agent Permission Audit & Shadow-Spend Calculator","applicationCategory":"BusinessApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"description":"Map agent API key usage against activity, audit permissions, and estimate shadow spend from unused and over-privileged keys.","url":"https://koalstingkdelaney-gif.github.io/kestrelattice/tools/ai-agent-permission-audit-shadow-spend-calculator/"}
+</script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-541TCHWW98"></script>
+<script>(function(){try{if(new URLSearchParams(location.search).get('admin')==='1'){localStorage.setItem('kestrelattice_admin','1');}}catch(e){}})();</script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}try{if(localStorage.getItem('kestrelattice_admin')!=='1'){gtag('js',new Date());gtag('config','G-541TCHWW98');}}catch(e){gtag('js',new Date());gtag('config','G-541TCHWW98');}</script>
+<style>
+:root{color-scheme:dark;--bg:#0f0e0d;--bg-soft:#141210;--panel:#1a1714;--panel2:#211c17;--line:#2c261e;--line-soft:#221d15;--text:#f1ebdd;--muted:#a89d89;--faint:#978b74;--accent:#e07a5f;--accent-bright:#f09474;--accent-dim:#c06a4e;--accent-ink:#1a0f08;--accent-soft:rgba(224,122,95,.1);--radius:12px;--green:#7fc97f;--amber:#e8b04b;--red:#e06a5f;--ease:cubic-bezier(.2,.7,.25,1)}
+*{margin:0;padding:0;box-sizing:border-box}::selection{background:var(--accent);color:var(--accent-ink)}html{scroll-behavior:smooth}html,body{overflow-x:clip}
+body{background:var(--bg);color:var(--text);font-family:ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;line-height:1.7;-webkit-font-smoothing:antialiased}
+a:focus-visible,button:focus-visible,select:focus-visible,input:focus-visible{outline:3px solid var(--accent-bright);outline-offset:3px;border-radius:4px}
+header.site{border-bottom:1px solid var(--line);position:sticky;top:0;z-index:100;background:rgba(15,14,13,.92);backdrop-filter:blur(10px)}
+header.site .wrap{display:flex;align-items:center;justify-content:space-between;min-height:56px;max-width:1040px;margin:0 auto;padding:0 24px}
+.brand{font-weight:700;color:var(--text);text-decoration:none}nav.main{display:flex;gap:20px}nav.main a{color:var(--muted);font-size:.88rem;font-weight:500;text-decoration:none}nav.main a:hover{color:var(--accent-bright)}
+.wrap{max-width:68ch;margin:0 auto;padding:40px 24px 64px}.crumb{color:var(--muted);font-size:.85rem;margin-bottom:24px}.crumb a{color:var(--accent);text-decoration:none}
+h1{font-size:clamp(1.6rem,3vw + .8rem,2.1rem);font-weight:800;letter-spacing:-.02em;line-height:1.25;margin-bottom:8px}h2{font-size:1.35rem;margin:40px 0 12px}h3{font-size:1.1rem;margin:24px 0 10px}
+p{margin:0 0 16px}ul{margin:0 0 16px 24px}li{margin:6px 0}a{color:var(--accent)}code{background:var(--panel);padding:2px 6px;border-radius:4px;font-size:.88em}
+.lead{font-size:1.08rem;color:var(--muted)}.pill{display:inline-block;font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);border:1px solid var(--accent-dim);border-radius:999px;padding:5px 14px;margin-bottom:18px}
+.hero-tool{border:1px solid var(--line);border-radius:var(--radius);background:linear-gradient(180deg,var(--panel2),var(--panel));padding:28px;margin:32px 0}
+.field{margin:0 0 20px}.field label{display:block;font-weight:700;margin-bottom:6px}.field .hint{color:var(--muted);font-size:.86rem;margin-bottom:8px}
+select,input[type=number]{width:100%;background:var(--bg-soft);color:var(--text);border:1px solid var(--line);border-radius:8px;padding:12px 14px;font-size:1rem;font-family:inherit}
+.btn{display:inline-block;background:linear-gradient(180deg,var(--accent-bright),var(--accent));color:var(--accent-ink);font-weight:700;padding:14px 30px;border-radius:8px;text-decoration:none;border:0;cursor:pointer;font-size:1rem;font-family:inherit}
+.btn-ghost{background:var(--panel);color:var(--muted);border:1px solid var(--line)}.btn-row{display:flex;gap:12px;flex-wrap:wrap;margin-top:16px}
+#results{display:none;border:1px solid var(--accent-dim);border-radius:var(--radius);background:linear-gradient(180deg,var(--panel2),var(--panel));padding:28px;margin-top:24px}#results.show{display:block}
+.heat{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:16px 0}.cell{border-radius:10px;padding:16px;border:1px solid var(--line)}.cell strong{display:block}.cell span{font-size:.85rem;color:rgba(255,255,255,.85)}
+.cell.low{background:rgba(127,201,127,.16)}.cell.med{background:rgba(232,176,75,.18)}.cell.high{background:rgba(224,106,95,.20)}.cell.crit{background:rgba(224,106,95,.38)}
+.score-line{display:flex;align-items:center;gap:20px;flex-wrap:wrap;margin-bottom:16px}.score-ring{width:110px;height:110px;border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;flex:none;border:5px solid var(--accent);font-weight:800}.score-ring .num{font-size:2rem;line-height:1}.score-ring .of{font-size:.7rem;color:var(--muted)}
+.fix{border:1px solid var(--line);border-radius:10px;padding:16px 18px;margin:12px 0;background:var(--bg-soft)}.fix p{color:var(--muted);font-size:.9rem;margin:6px 0 0}
+#report{width:100%;min-height:180px;background:var(--bg-soft);color:var(--text);border:1px solid var(--line);border-radius:10px;padding:14px;font-family:ui-monospace,Menlo,Consolas,monospace;font-size:.82rem}
+.cta{background:linear-gradient(180deg,var(--panel2),var(--panel));border:1px solid var(--accent-dim);border-radius:var(--radius);padding:28px;margin:48px 0;text-align:center}.cta p{color:var(--muted)}
+.disclaimer{font-size:.82rem;color:var(--faint);border:1px dashed var(--line);border-radius:8px;padding:12px 16px;margin:32px 0}
+.faq details{border:1px solid var(--line);border-radius:10px;background:var(--panel);padding:14px 18px;margin:10px 0}.faq summary{font-weight:700;cursor:pointer}.faq details p{color:var(--muted);margin:10px 0 4px;font-size:.94rem}
+footer.site{border-top:1px solid var(--line);background:var(--bg-soft);padding:22px 0;margin-top:48px}footer.site .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px 16px;max-width:1040px;padding:0 24px}footer.site{color:var(--muted);font-size:.82rem}footer.site a{color:var(--muted);text-decoration:none;margin-left:14px}
+.skip{position:absolute;left:-9999px;top:0;background:var(--accent);color:var(--accent-ink);padding:10px 18px;font-weight:700;z-index:200}.skip:focus{left:0}
+@media(max-width:640px){nav.main a:not(:last-child){display:none}.heat{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site"><div class="wrap">
+<a class="brand" href="../../">ghostcorpnet</a>
+<nav class="main" aria-label="Primary"><a href="../../">Home</a><a href="../../products/">Catalog</a><a href="../../brands/">Stores</a><a href="../../ecosystem/">Ecosystem</a><a href="../../articles/">Articles</a><a href="../../changelog.html">Changelog</a></nav>
+</div></header>
+<main class="wrap" id="main" tabindex="-1">
+<p class="crumb"><a href="../../">Home</a> · <a href="../">Free tools</a></p>
+<p class="pill">Free tool · SaaS AI governance · Agent spend optimization</p>
+<h1>AI Agent Permission Audit &amp; Shadow-Spend Calculator</h1>
+<p class="lead">For CTOs and finance leads: map the API keys your agents hold against what they actually do, see how much permission is excess, and estimate the shadow spend sitting in unused and over-privileged keys. Everything runs in your browser; no input leaves your device.</p>
+
+<div class="hero-tool" id="calculator" aria-label="AI Agent Permission Audit and Shadow-Spend Calculator">
+<h2 style="margin-top:0">Permission &amp; shadow-spend audit</h2>
+<div class="field"><label for="agents">Agents in production</label><p class="hint">How many distinct agents or agent services are live today.</p>
+<input type="number" id="agents" min="1" max="10000" step="1" value="10"></div>
+<div class="field"><label for="keys">API keys / service accounts per agent</label><p class="hint">Average keys, tokens, and service accounts each agent can use — model providers, SaaS tools, databases, payment and messaging APIs.</p>
+<input type="number" id="keys" min="0" max="200" step="1" value="6"></div>
+<div class="field"><label for="spend">Average monthly API &amp; SaaS spend per agent ($)</label><p class="hint">Your own number from billing — model tokens plus the SaaS tools the agent calls. This tool invents no benchmarks; every dollar figure below is arithmetic on your inputs.</p>
+<input type="number" id="spend" min="0" max="1000000" step="1" value="400"></div>
+<div class="field"><label for="write-share">Keys with write, delete, or payment power</label><p class="hint">Share of keys that can change data, delete records, send messages, or move money — not just read.</p>
+<select id="write-share"><option value="10">Under 10% — almost all keys are read-only</option><option value="30" selected>About a third</option><option value="55">About half</option><option value="80">Most keys (over 75%)</option><option value="100">Nearly all — keys are broadly full-access</option></select></div>
+<div class="field"><label for="unused-share">Keys unused in the last 30 days</label><p class="hint">From your provider consoles or activity logs: keys with no calls in 30 days are dormant — they still carry their permissions.</p>
+<select id="unused-share"><option value="0">None — every key is active</option><option value="15" selected>Some — roughly 1 in 7</option><option value="35">Many — roughly 1 in 3</option><option value="60">Most — over half look dormant</option><option value="90">Almost all — the fleet shrank, the keys did not</option></select></div>
+<div class="field"><label for="logging">Activity logging per key</label><p class="hint">Could you answer, for one key, exactly which agent used it, when, and to do what?</p>
+<select id="logging"><option value="1">Full — every call is logged per key and per agent, and reviewed</option><option value="2" selected>Partial — provider logs exist, but no per-agent mapping or review</option><option value="3">Low — spend is visible in billing, activity is not</option><option value="4">None — shared keys, no usable activity trail</option></select></div>
+<div class="btn-row"><button type="button" class="btn" id="calc-btn">Audit my permissions &amp; shadow spend</button></div>
+
+<div id="results" role="status" aria-live="polite">
+<h2 style="margin-top:0">Audit Summary</h2>
+<div class="score-line"><div class="score-ring"><span class="num" id="score-num">0</span><span class="of">/ 100 risk</span></div><p id="tier-line" style="font-weight:800;font-size:1.15rem"></p></div>
+<div class="heat" id="heat"></div>
+<div id="fix-list"></div>
+<h3>Shareable ROI report</h3>
+<p style="color:var(--muted);font-size:.9rem">Copy this report for your CTO / finance review, or use Download PDF to print / save it. It states the formula used, so anyone can re-run your numbers.</p>
+<textarea id="report" readonly aria-label="Shareable ROI report"></textarea>
+<div class="btn-row"><button type="button" class="btn" id="copy-btn">Copy report</button><button type="button" class="btn btn-ghost" id="pdf-btn">Download PDF</button></div>
+</div>
+</div>
+
+<h2>How the numbers work</h2>
+<p>Total keys = agents &times; keys per agent. Shadow spend is the slice of your monthly spend attributable to dormant keys: total monthly spend &times; dormant-key share. That is spend capacity provisioned to keys nobody used — the first place to cut, and the first place an auditor will look. Permission risk rises with the share of keys holding write, delete, or payment power and falls as per-key logging improves: an over-privileged key you cannot trace is exposure without evidence.</p>
+<p>The audit order that works: inventory every key per agent, revoke dormant keys, downgrade write keys to the narrowest scope the agent's logged activity proves it needs, split shared keys so every call maps to one agent, and put a monthly per-key spend ceiling in place so a single key cannot silently become the budget.</p>
+<p class="disclaimer">This is an informational self-assessment based only on the numbers you enter — not a security audit and not financial advice. Verify key usage in your providers' own consoles before revoking anything a production agent may still need.</p>
+
+<h2>FAQ</h2>
+<div class="faq">
+<details><summary>What is shadow spend for AI agents?</summary><p>Here it means spend capacity tied to dormant or forgotten API keys — provisioned, permissioned, and billable, but unused in the last 30 days. It is calculated only from your own spend and dormant-share inputs.</p></details>
+<details><summary>Does my input leave my device?</summary><p>No. The calculator runs entirely in your browser, and the PDF is generated by your browser's print function.</p></details>
+<details><summary>Why does permission breadth matter if spend is low?</summary><p>Spend measures cost; permissions measure blast radius. A low-spend key with delete or payment power can still cause the expensive incident — the audit scores both, separately.</p></details>
+</div>
+
+<div class="cta">
+<h2>Get the $29 Governed Agent Mesh Playbook to fix the audit findings</h2>
+<p>The Playbook — Studio Edition gives you the permission-tiering patterns, approval gates, per-key spend ceilings, audit-trail templates, and incident runbook behind every fix in your report.</p>
+<a class="btn" href="https://ghostcorpnet.gumroad.com/l/hdigmr" referrerpolicy="no-referrer">Get the Studio Edition — $29</a>
+<p style="margin-top:12px"><a href="../../products/">Or browse the full catalog &rarr;</a></p>
+</div>
+</main>
+<footer class="site"><div class="wrap">
+<span>© <span id="yr">2026</span> ghostcorpnet · An independent studio</span>
+<span><a href="../../">Home</a><a href="../../products/">Catalog</a><a href="../../articles/">Articles</a><a href="../../sitemap.html">Site index</a><a href="mailto:corpghost420@gmail.com">Contact</a><a href="../../terms.html">Terms</a><a href="../../privacy.html">Privacy</a></span>
+</div></footer>
+<script>
+(function(){
+function lvl(s){return s>=75?['crit','Critical']:s>=50?['high','High']:s>=25?['med','Medium']:['low','Low'];}
+function money(n){return '$'+Math.round(n).toLocaleString('en-US');}
+function num(id,fallback){var v=parseFloat(document.getElementById(id).value);return isFinite(v)&&v>=0?v:fallback;}
+document.getElementById('calc-btn').addEventListener('click',function(){
+ var agents=Math.max(1,Math.round(num('agents',10))), keys=num('keys',6), spend=num('spend',400);
+ var writeShare=+document.getElementById('write-share').value, unusedShare=+document.getElementById('unused-share').value, logging=+document.getElementById('logging').value;
+ var totalKeys=agents*keys, totalSpend=agents*spend, shadowMonthly=totalSpend*(unusedShare/100), shadowYearly=shadowMonthly*12;
+ var writeKeys=Math.round(totalKeys*(writeShare/100)), dormantKeys=Math.round(totalKeys*(unusedShare/100));
+ var permRisk=writeShare, dormancyRisk=unusedShare, loggingRisk=logging*25;
+ var overall=Math.max(0,Math.min(100,Math.round((permRisk+dormancyRisk+loggingRisk)/3)));
+ document.getElementById('score-num').textContent=overall;
+ document.getElementById('tier-line').textContent=overall>=75?'Critical permission exposure — revoke dormant and downgrade write keys before scaling':overall>=50?'High exposure — excess permissions and shadow spend need a cleanup pass':overall>=25?'Medium exposure — close the amber gaps and document the key inventory':'Lower exposure — keep the inventory, logging, and ceilings current';
+ var areas=[['Excess-permission risk',permRisk,'~'+writeKeys+' of '+totalKeys+' keys hold write / delete / payment power'],['Dormant-key risk',dormancyRisk,'~'+dormantKeys+' of '+totalKeys+' keys unused in 30 days'],['Logging gap risk',loggingRisk,logging===1?'Per-key, per-agent logs, reviewed':logging===2?'Provider logs only — no per-agent mapping':logging===3?'Billing visibility only':'No usable activity trail'],['Shadow spend',Math.min(100,unusedShare),money(shadowMonthly)+'/mo · '+money(shadowYearly)+'/yr on dormant keys']];
+ var heat=document.getElementById('heat');heat.innerHTML='';
+ areas.forEach(function(a){var v=Math.max(0,Math.min(100,a[1]));var lv=lvl(v);var d=document.createElement('div');d.className='cell '+lv[0];d.innerHTML='<strong>'+a[0]+'</strong><span>'+lv[1]+' · '+v+'/100 — '+a[2]+'</span>';heat.appendChild(d);});
+ var fixes=[];
+ if(unusedShare>0)fixes.push('Revoke or rotate the ~'+dormantKeys+' dormant keys first — they carry full permissions at zero benefit, and removing them cuts an estimated '+money(shadowMonthly)+'/mo of shadow spend capacity.');
+ if(writeShare>=30)fixes.push('Downgrade write / delete / payment keys to the narrowest scope proven by logged activity; gate the rest behind human approval.');
+ if(logging>=3)fixes.push('Split shared keys and turn on per-key activity logging — without a per-agent trail, no permission audit can be evidenced.');
+ if(logging===2)fixes.push('Map provider logs to individual agents and review them on a schedule; unreviewed logs are not oversight.');
+ fixes.push('Set a monthly per-key spend ceiling so no single key can silently consume the fleet budget.');
+ var fl=document.getElementById('fix-list');fl.innerHTML='';
+ fixes.forEach(function(f){var d=document.createElement('div');d.className='fix';d.innerHTML='<strong>Next action</strong><p>'+f+'</p>';fl.appendChild(d);});
+ document.getElementById('report').value='AI Agent Permission Audit & Shadow-Spend Report\nOverall permission risk: '+overall+'/100\nAgents: '+agents+' · Keys per agent: '+keys+' · Total keys: '+totalKeys+'\nWrite/delete/payment keys: ~'+writeKeys+' ('+writeShare+'%) · Dormant keys: ~'+dormantKeys+' ('+unusedShare+'%)\nMonthly spend (your input): '+money(totalSpend)+' · Shadow spend on dormant keys: '+money(shadowMonthly)+'/mo ('+money(shadowYearly)+'/yr)\nFormula: shadow spend = total monthly spend x dormant-key share. All figures are arithmetic on your inputs; no external benchmarks used.\nActions:\n- '+fixes.join('\n- ')+'\nNot a security audit or financial advice.';
+ var r=document.getElementById('results');r.classList.add('show');r.scrollIntoView({block:'start',behavior:'smooth'});
+});
+document.getElementById('copy-btn').addEventListener('click',function(){var t=document.getElementById('report');t.select();try{navigator.clipboard.writeText(t.value);}catch(e){document.execCommand('copy');}});
+document.getElementById('pdf-btn').addEventListener('click',function(){window.print();});
+})();
+</script>
+<script>document.getElementById('yr').textContent=new Date().getFullYear();</script>
+</body>
+</html>
