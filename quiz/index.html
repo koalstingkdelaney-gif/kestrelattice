@@ -50,7 +50,10 @@ gtag('config', 'G-541TCHWW98');
   .prog{height:6px;background:var(--line);border-radius:3px;margin-bottom:4px;overflow:hidden}
   .prog div{height:100%;background:var(--accent);width:0;transition:width .3s}
   .q-count{font-size:.82rem;color:var(--muted);margin:0 0 18px;text-align:right}
-  #result{display:none}
+  /* SU-quiz-result-dialog: result panel is a native <dialog> (focus trap + Esc) */
+  dialog#result{border:0;background:transparent;color:var(--text);width:100%;max-width:680px;margin:auto;padding:0}
+  dialog#result:not([open]){display:none}
+  dialog#result::backdrop{background:rgba(0,0,0,.65)}
   .tier{font-size:1.4rem;font-weight:700;color:var(--accent);margin:12px 0}
   .rec{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:18px;margin:12px 0}
   .rec a{color:var(--text);text-decoration:none;font-weight:700}
@@ -105,8 +108,8 @@ gtag('config', 'G-541TCHWW98');
       </div>
     </noscript>
   </div>
-  <div id="result" role="status">
-    <h2>Your result</h2>
+  <dialog id="result" aria-labelledby="result-heading">
+    <h2 id="result-heading">Your result</h2>
     <div class="tier" id="tier"></div>
     <p id="blurb" style="color:var(--muted)"></p>
     <h3 style="margin:24px 0 8px">Start here</h3>
@@ -114,7 +117,7 @@ gtag('config', 'G-541TCHWW98');
     <p class="note">Every ghostcorpnet product is complete and ready to use — instant download via Gumroad, no placeholders.</p>
     <p><button id="restart" class="opt" type="button" style="max-width:280px;text-align:center;margin:8px auto 0" onclick="restart()">↻ Restart quiz</button></p>
     <p><button id="share-result" class="opt" type="button" style="max-width:280px;text-align:center;margin:8px auto 0">Share my result</button></p>
-  </div>
+  </dialog>
   </main>
   <footer><a href="../">Home</a> · <a href="../products/">Catalog</a> · © 2026 ghostcorpnet · <a href="../terms.html">Terms</a> · <a href="../privacy.html">Privacy</a></footer>
 </div>
@@ -217,13 +220,14 @@ function render(){
 function restart(){
   clearProgress();
   qi = 0; score = 0; worry = "start";
-  document.getElementById('result').style.display='none';
+  var _r=document.getElementById('result'); _r.style.display='none'; if(_r.open) _r.close();
   document.getElementById('quiz').style.display='block';
   try{history.replaceState(null,'',location.pathname);}catch(e){}
   render();
   var h = document.querySelector('#qbox h3');
   if(h){ h.setAttribute('tabindex','-1'); h.focus(); }
 }
+document.getElementById('result').addEventListener('close',function(){ if(document.getElementById('quiz').style.display==='none'){ restart(); } });
 /* SU-quiz-progress-localstorage: persist quiz state so a refresh resumes mid-quiz */
 var QUIZ_KEY='ghostcorpnet-quiz-progress';
 function saveProgress(){try{localStorage.setItem(QUIZ_KEY,JSON.stringify({qi:qi,score:score,worry:worry}));}catch(e){}}
@@ -263,6 +267,7 @@ function finish(tierOverride){
   document.getElementById('quiz').style.display='none';
   const r = document.getElementById('result');
   r.style.display='block';
+  if(typeof r.showModal==='function' && !r.open){ try{r.showModal();}catch(e){} }
   const tier = (typeof tierOverride==='number'&&tierOverride>=0&&tierOverride<4)?tierOverride:(score<=2?0:score<=5?1:score<=8?2:3);
   document.getElementById('tier').textContent = TIERS[tier].t;
   document.getElementById('blurb').textContent = TIERS[tier].b;
