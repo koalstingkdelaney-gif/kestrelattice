@@ -124,6 +124,10 @@ nav.main a[aria-current="page"]::after{transform:scaleX(1)}
 .chip:hover{border-color:var(--accent-dim);color:var(--text)}
 .chip.active{background:var(--accent);border-color:var(--accent);color:var(--accent-ink);font-weight:700}.chip:active{transform:scale(.96)}\n.chip-count{font-size:.72em;color:var(--muted);opacity:.85;margin-left:2px;font-weight:400;letter-spacing:0}
 .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:24px;padding:8px 0 64px;list-style:none;margin:0}
+/* SU-products-container-grid: card grid responds to its container width, not the viewport */
+.catalog .wrap{container-type:inline-size;container-name:catalog}
+@container catalog (max-width:760px){.grid{grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:16px}}
+@container catalog (max-width:480px){.grid{grid-template-columns:1fr;gap:14px}}
 .card{background:linear-gradient(180deg,var(--panel),var(--bg-soft));border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;display:flex;flex-direction:column;content-visibility:auto;contain-intrinsic-size:auto 480px;transition:border-color .18s var(--ease),transform .18s var(--ease),box-shadow .18s var(--ease)}.card{position:relative}.card>a:first-of-type::after{content:"";position:absolute;inset:0}.card .row .btn{position:relative;z-index:1}@media (prefers-reduced-motion: no-preference){.card{view-transition-name:card}}
 @media (hover:hover) and (pointer:fine){
 .card:hover{border-color:var(--accent-dim);transform:translateY(-3px);box-shadow:0 14px 34px rgba(0,0,0,.4)}
